@@ -65,7 +65,6 @@
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x92, 0x79, 0x71, 0x67, 0x68, 0x89 })]
         private Date getAdjustedSunsetDate(Date date1, Date date2)
         {
             if (((date1 != null) && (date2 != null)) && (date2.compareTo(date1) >= 0))
@@ -83,19 +82,16 @@
             return this.astronomicalCalculator;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0xd6)]
         public virtual Date getBeginAstronomicalTwilight()
         {
             return this.getSunriseOffsetByDegrees(108.0);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0xbc)]
         public virtual Date getBeginCivilTwilight()
         {
             return this.getSunriseOffsetByDegrees(96.0);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0xc9)]
         public virtual Date getBeginNauticalTwilight()
         {
             return this.getSunriseOffsetByDegrees(102.0);
@@ -106,10 +102,6 @@
             return this.calendar;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            0xa1, 0xd6, 0x6c, 130, 0x6b, 0x99, 0x66, 0x66, 0x73, 0x73, 0xd3, 0x88, 0x68, 0x76, 0x68, 0x76, 
-            0x88, 0x69, 0x69, 0x69, 0x79
-         })]
         protected internal virtual Date getDateFromTime(double time)
         {
             if (java.lang.Double.isNaN(time))
@@ -140,19 +132,16 @@
             return calendar.getTime();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)330)]
         public virtual Date getEndAstronomicalTwilight()
         {
             return this.getSunsetOffsetByDegrees(108.0);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x130)]
         public virtual Date getEndCivilTwilight()
         {
             return this.getSunsetOffsetByDegrees(96.0);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x13d)]
         public virtual Date getEndNauticalTwilight()
         {
             return this.getSunsetOffsetByDegrees(102.0);
@@ -163,7 +152,6 @@
             return this.geoLocation;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0x90, 0x9c, 0x86, 0x9a, 0x66, 0xba })]
         private double getOffsetTime(double num1)
         {
             int num = (int)this.getCalendar().getTimeZone().inDaylightTime(this.getCalendar().getTime());
@@ -176,7 +164,6 @@
             return ((num1 + num3) + num2);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 120, 0x71, 0x6b, 130 })]
         public virtual Date getSeaLevelSunrise()
         {
             double v = this.getUTCSeaLevelSunrise(90.0);
@@ -187,7 +174,6 @@
             return this.getDateFromTime(v);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0xab, 0x71, 0x6b, 130 })]
         public virtual Date getSeaLevelSunset()
         {
             double v = this.getUTCSeaLevelSunset(90.0);
@@ -198,7 +184,6 @@
             return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSeaLevelSunrise());
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x61, 0x71, 0x6b, 130 })]
         public virtual Date getSunrise()
         {
             double v = this.getUTCSunrise(90.0);
@@ -209,7 +194,6 @@
             return this.getDateFromTime(v);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 7, 0x6a, 0x6b, 130 })]
         public virtual Date getSunriseOffsetByDegrees(double offsetZenith)
         {
             double v = this.getUTCSunrise(offsetZenith);
@@ -220,7 +204,6 @@
             return this.getDateFromTime(v);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 0, 0x67, 0x9a, 0x67, 0x8b, 0x77, 0x68, 0x99 })]
         public virtual double getSunriseSolarDipFromOffset(double minutes)
         {
             Date date = this.getSeaLevelSunrise();
@@ -235,7 +218,6 @@
             return num.doubleValue();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x7c, 0x71, 0x6b, 130 })]
         public virtual Date getSunset()
         {
             double v = this.getUTCSunset(90.0);
@@ -246,7 +228,6 @@
             return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSunrise());
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0x1b, 0x6a, 0x6b, 130 })]
         public virtual Date getSunsetOffsetByDegrees(double offsetZenith)
         {
             double v = this.getUTCSunset(offsetZenith);
@@ -257,7 +238,6 @@
             return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSunriseOffsetByDegrees(offsetZenith));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 0x1a, 0x67, 0x99, 0x67, 0x8b, 0x77, 0x68, 0x99 })]
         public virtual double getSunsetSolarDipFromOffset(double minutes)
         {
             Date date = this.getSeaLevelSunset();
@@ -272,19 +252,16 @@
             return num.doubleValue();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x23c)]
         public virtual Date getSunTransit()
         {
             return this.getTimeOffset(this.getSunrise(), (long)(this.getTemporalHour() * 6L));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x218)]
         public virtual long getTemporalHour()
         {
             return this.getTemporalHour(this.getSunrise(), this.getSunset());
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0xb7, 0x6c, 0x8a })]
         public virtual long getTemporalHour(Date sunrise, Date sunset)
         {
             if ((sunrise != null) && (sunset != null))
@@ -294,13 +271,11 @@
             return -9223372036854775808L;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x159)]
         public virtual Date getTimeOffset(Date time, double offset)
         {
             return this.getTimeOffset(time, ByteCodeHelper.d2l(offset));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0xf5, 0x75, 130 })]
         public virtual Date getTimeOffset(Date time, long offset)
         {
             if ((time == null) || (offset == -9223372036854775808L))
@@ -311,31 +286,26 @@
             return new Date(time.getTime() + offset);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x1cf)]
         public virtual double getUTCSeaLevelSunrise(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunrise(this, zenith, false);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x1f5)]
         public virtual double getUTCSeaLevelSunset(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunset(this, zenith, false);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x1b9)]
         public virtual double getUTCSunrise(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunrise(this, zenith, true);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x1df)]
         public virtual double getUTCSunset(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunset(this, zenith, true);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 70, 0x63, 0x71, 0x73, 0x73, 0x73 })]
         public override int hashCode()
         {
             int num = 0x11;
@@ -358,7 +328,6 @@
             this.astronomicalCalculator = astronomicalCalculator;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 0x91, 0x67, 0xab, 150 })]
         public virtual void setCalendar(Calendar calendar)
         {
             this.calendar = calendar;
@@ -368,14 +337,12 @@
             }
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 0x5f, 0xa7, 0x71 })]
         public virtual void setGeoLocation(GeoLocation geoLocation)
         {
             this.geoLocation = geoLocation;
             this.getCalendar().setTimeZone(geoLocation.getTimeZone());
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort)0x2a2)]
         public override string toString()
         {
             return ZmanimFormatter.toXML(this);
