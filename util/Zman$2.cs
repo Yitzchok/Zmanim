@@ -6,15 +6,12 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    [Implements(new string[] { "java.util.Comparator" }), SourceFile("Zman.java"), InnerClass(null, Modifiers.Static)]
-    internal sealed class Zman$2 : java.lang.Object, Comparator
+    internal sealed class Zman2 : java.lang.Object, Comparator
     {
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x4d)]
-        internal Zman$2()
+        internal Zman2()
         {
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x1d, 0x67, 0x67 })]
         public virtual int compare(object obj1, object obj2)
         {
             Zman zman = (Zman) obj1;

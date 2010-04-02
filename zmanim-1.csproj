@@ -111,15 +111,6 @@
     <Compile Include="util\Time.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\Zman%241.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="util\Zman%242.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="util\Zman%243.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="util\Zman.cs">
       <SubType>Code</SubType>
     </Compile>
