@@ -7,7 +7,6 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    [Implements(new string[] { "java.lang.Cloneable" })]
     public class GeoLocation : java.lang.Object, Cloneable.__Interface
     {
         private int DISTANCE;
@@ -21,7 +20,6 @@
         private const long MINUTE_MILLIS = 0xea60L;
         private java.util.TimeZone timeZone;
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 80, 0xe8, 0x9f, 0xa3, 0x67, 0x67, 0xe7, 160, 0x5c, 0x6b, 0x6b, 0x6f, 0x70 })]
         public GeoLocation()
         {
             this.DISTANCE = 0;
@@ -33,12 +31,10 @@
             this.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 40, 0x72 })]
         public GeoLocation(string name, double latitude, double longitude, java.util.TimeZone timeZone) : this(name, latitude, longitude, 0f, timeZone)
         {
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x41, 0xe8, 0x9f, 0xb2, 0x67, 0x67, 0xe7, 160, 0x4d, 0x67, 0x68, 0x68, 0x69, 0x68 })]
         public GeoLocation(string name, double latitude, double longitude, double elevation, java.util.TimeZone timeZone)
         {
             this.DISTANCE = 0;
@@ -51,7 +47,6 @@
             this.setTimeZone(timeZone);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa2, 9, 130, 0xdf, 2, 0xe5, 0x3d, 0x61, 0xaf, 0x76, 0x6c })]
         public override object clone()
         {
             GeoLocation location = null;
@@ -68,7 +63,6 @@
             return location;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0xbf, 0x67, 0x62, 0x6b, 0x62, 0x67 })]
         public override bool equals(object @object)
         {
             if (this == @object)
@@ -106,19 +100,16 @@
             return this.elevation;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x16b)]
         public virtual double getGeodesicDistance(GeoLocation location)
         {
             return this.vincentyFormula(location, this.DISTANCE);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x159)]
         public virtual double getGeodesicFinalBearing(GeoLocation location)
         {
             return this.vincentyFormula(location, this.FINAL_BEARING);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x148)]
         public virtual double getGeodesicInitialBearing(GeoLocation location)
         {
             return this.vincentyFormula(location, this.INITIAL_BEARING);
@@ -129,7 +120,6 @@
             return this.latitude;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 310)]
         public virtual long getLocalMeanTimeOffset()
         {
             return ByteCodeHelper.d2l(((this.getLongitude() * 4.0) * 60000.0) - this.getTimeZone().getRawOffset());
@@ -145,7 +135,6 @@
             return this.longitude;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0x6a, 0x74, 0xbf, 0x31, 0x74, 0x7f, 10 })]
         public virtual double getRhumbLineBearing(GeoLocation location)
         {
             double a = java.lang.Math.toRadians(location.getLongitude() - this.getLongitude());
@@ -157,7 +146,6 @@
             return java.lang.Math.toDegrees(java.lang.Math.atan2(a, x));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0x7c, 0x6a, 0x74, 0x99, 0xbf, 0x31, 0xbf, 0x10, 0x6f, 0x6d, 0x75 })]
         public virtual double getRhumbLineDistance(GeoLocation location)
         {
             double num = 6371.0;
@@ -178,10 +166,6 @@
             return this.timeZone;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            0xa1, 0xd4, 0x63, 0x6c, 0x6c, 0x6c, 0x69, 0x69, 0x69, 0x71, 0x6a, 0x6a, 0x6a, 0x9f, 5, 0x7f, 
-            5
-         })]
         public override int hashCode()
         {
             int num = 0x11;
@@ -207,7 +191,6 @@
             return cloneable;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 14, 0x6c, 0x90, 0x69 })]
         public virtual void setElevation(double elevation)
         {
             if (elevation < 0f)
@@ -218,7 +201,6 @@
             this.elevation = elevation;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x62, 0x7f, 1, 0xb0, 0x69 })]
         public virtual void setLatitude(double latitude)
         {
             if ((latitude > 90.0) || (latitude < -90.0))
@@ -229,7 +211,6 @@
             this.latitude = latitude;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 120, 0x7e, 0x7a, 0xb0, 0x71, 0x72, 0x71, 0xb0, 0x68 })]
         public virtual void setLatitude(int degrees, int minutes, double seconds, string direction)
         {
             double num = degrees + ((minutes + (seconds / 60.0)) / 60.0);
@@ -255,7 +236,6 @@
             this.locationName = name;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 90, 0x7f, 1, 0xb0, 0x69 })]
         public virtual void setLongitude(double longitude)
         {
             if ((longitude > 180.0) || (longitude < -180.0))
@@ -266,7 +246,6 @@
             this.longitude = longitude;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x74, 0x7e, 0x7f, 0, 0xb0, 0x71, 0x72, 0x71, 0xb0, 0x68 })]
         public virtual void setLongitude(int degrees, int minutes, double seconds, string direction)
         {
             double num = degrees + ((minutes + (seconds / 60.0)) / 60.0);
@@ -292,7 +271,6 @@
             this.timeZone = timeZone;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0xa1, 0xe9, 0x66, 0x77, 0x7f, 2, 0x7f, 2, 0x9f, 2, 0xfc, 0x45, 0x9f, 5, 0x9f, 5 })]
         public override string toString()
         {
             StringBuffer buffer = new StringBuffer();
@@ -306,10 +284,6 @@
             return buffer.toString();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            0xa1, 0xa2, 0x66, 0x6c, 0x9f, 2, 0x9f, 12, 0x9f, 12, 0x9f, 12, 0x9f, 7, 0xbf, 7, 
-            0xbf, 15, 0xbf, 15, 0x6c
-         })]
         public virtual string toXML()
         {
             StringBuffer buffer = new StringBuffer();
@@ -326,13 +300,6 @@
             return buffer.toString();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            0xa1, 14, 0x6a, 0x6a, 0x6a, 0x74, 0x9f, 1, 0x9f, 1, 0x74, 0x94, 0x63, 0x6b, 0x6b, 0x67, 
-            0x67, 0x67, 0x67, 0x67, 0x66, 0x67, 0x87, 0x7f, 15, 0x6a, 0x6a, 0xbf, 0x12, 0x6c, 0x66, 0x71, 
-            0x6c, 110, 110, 120, 0x6c, 0x67, 0x7f, 0x15, 100, 0xff, 0x24, 0x49, 0x6c, 0x8a, 0x71, 0x9f, 
-            0x27, 0x7f, 0x21, 0xff, 90, 0x48, 0xad, 0xbf, 1, 0x9f, 2, 0x6c, 0x63, 0x6c, 0x63, 0x6c, 
-            0x83
-         })]
         private double vincentyFormula(GeoLocation location1, int num30)
         {
             double num = 6378137.0;

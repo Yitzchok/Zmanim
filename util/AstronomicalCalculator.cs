@@ -6,13 +6,11 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    [Implements(new string[] { "java.lang.Cloneable" })]
     public abstract class AstronomicalCalculator : java.lang.Object, Cloneable.__Interface
     {
         private double refraction = 0.56666666666666665;
         private double solarRadius = 0.26666666666666666;
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x40, 0x70, 220 })]
         internal virtual double adjustZenith(double num1, double num2)
         {
             if (num1 == 90.0)
@@ -22,7 +20,6 @@
             return num1;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x91, 130, 0xdf, 2, 0xe5, 0x3d, 0x61, 0xaf })]
         public override object clone()
         {
             AstronomicalCalculator calculator = null;
@@ -39,13 +36,11 @@
         }
 
         public abstract string getCalculatorName();
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x2b)]
         public static AstronomicalCalculator getDefault()
         {
             return new SunTimesCalculator();
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x5e, 0x8a, 0x9c })]
         internal virtual double getElevationAdjustment(double num1)
         {
             double num = 6356.9;

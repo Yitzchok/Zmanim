@@ -11,25 +11,21 @@
         private static int FINAL_BEARING = 2;
         private static int INITIAL_BEARING = 1;
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x51)]
         public static double getGeodesicDistance(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, DISTANCE);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x3f)]
         public static double getGeodesicFinalBearing(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, FINAL_BEARING);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x2e)]
         public static double getGeodesicInitialBearing(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, INITIAL_BEARING);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 80, 0x74, 0xbf, 0x31, 0x74, 0x7f, 10 })]
         public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
             double a = java.lang.Math.toRadians(destination.getLongitude() - location.getLongitude());
@@ -41,7 +37,6 @@
             return java.lang.Math.toDegrees(java.lang.Math.atan2(a, x));
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 160, 0x63, 0x6a, 0x74, 0x99, 0xbf, 0x31, 0xbf, 0x10, 0x6f, 0x6d, 0x75 })]
         public static double getRhumbLineDistance(GeoLocation location, GeoLocation destination)
         {
             double num = 6371.0;
@@ -57,12 +52,6 @@
             return (num6 * num);
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            0x34, 0x6a, 0x6a, 0x6a, 0x74, 0x9f, 1, 0x9f, 1, 0x74, 0x94, 0x63, 0x6b, 0x6b, 0x67, 0x67, 
-            0x67, 0x67, 0x67, 0x66, 0x67, 0x87, 0x7f, 15, 0x6a, 0x6a, 0xbf, 0x12, 0x6c, 0x66, 0x71, 0x6c, 
-            110, 110, 120, 0x6c, 0x67, 0x7f, 0x15, 100, 0xff, 0x24, 0x49, 0x6c, 0x8a, 0x71, 0x9f, 0x27, 
-            0x7f, 0x21, 0xff, 90, 0x48, 0xad, 0xbf, 1, 0x9f, 2, 0x6b, 0x63, 0x6b, 0x63, 0x6b, 0x83
-         })]
         private static double vincentyFormula(GeoLocation location2, GeoLocation location1, int num30)
         {
             double num = 6378137.0;
