@@ -15,7 +15,7 @@
     <OutputType>Library</OutputType>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
@@ -34,6 +34,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -65,12 +66,15 @@
   <ItemGroup>
     <Reference Include="IKVM.OpenJDK.Core">
       <Name>IKVM.OpenJDK.Core</Name>
+      <HintPath>lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="IKVM.OpenJDK.Text">
       <Name>IKVM.OpenJDK.Text</Name>
+      <HintPath>lib\ikvm\IKVM.OpenJDK.Text.dll</HintPath>
     </Reference>
     <Reference Include="IKVM.Runtime">
       <Name>IKVM.Runtime</Name>
+      <HintPath>lib\ikvm\IKVM.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -80,56 +84,54 @@
     <Compile Include="Global.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\AstronomicalCalendar.cs">
+    <Compile Include="AstronomicalCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\ComplexZmanimCalendar.cs">
+    <Compile Include="ComplexZmanimCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\AstronomicalCalculator.cs">
+    <Compile Include="util\AstronomicalCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\GeoLocation.cs">
+    <Compile Include="util\GeoLocation.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\GeoLocationUtils.cs">
+    <Compile Include="util\GeoLocationUtils.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\JSuntimeCalculator.cs">
+    <Compile Include="util\JSuntimeCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\NOAACalculator.cs">
+    <Compile Include="util\NOAACalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\SunTimesCalculator.cs">
+    <Compile Include="util\SunTimesCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\Time.cs">
+    <Compile Include="util\Time.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\Zman%241.cs">
+    <Compile Include="util\Zman%241.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\Zman%242.cs">
+    <Compile Include="util\Zman%242.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\Zman%243.cs">
+    <Compile Include="util\Zman%243.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\Zman.cs">
+    <Compile Include="util\Zman.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\ZmanimCalculator.cs">
+    <Compile Include="util\ZmanimCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\util\ZmanimFormatter.cs">
+    <Compile Include="util\ZmanimFormatter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="net\sourceforge\zmanim\ZmanimCalendar.cs">
+    <Compile Include="ZmanimCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="ikvm.exports" />
-    <EmbeddedResource Include="ikvm__META-INF!MANIFEST.MF" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
