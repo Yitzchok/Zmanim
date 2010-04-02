@@ -98,20 +98,20 @@
             calendar.set(1, this.getCalendar().get(1));
             calendar.set(2, this.getCalendar().get(2));
             calendar.set(5, this.getCalendar().get(5));
-            int num = ByteCodeHelper.d2i(time);
+            int num = (int)time;
             time -= num;
             double d = time * 60.0;
             time = d;
-            int num2 = ByteCodeHelper.d2i(d);
+            int num2 = (int)d;
             time -= num2;
             double num4 = time * 60.0;
             time = num4;
-            int num3 = ByteCodeHelper.d2i(num4);
+            int num3 = (int)num4;
             time -= num3;
             calendar.set(11, num);
             calendar.set(12, num2);
             calendar.set(13, num3);
-            calendar.set(14, ByteCodeHelper.d2i(time * 1000.0));
+            calendar.set(14, (int)(time * 1000.0));
             return calendar.getTime();
         }
 
@@ -256,7 +256,7 @@
 
         public virtual Date getTimeOffset(Date time, double offset)
         {
-            return this.getTimeOffset(time, ByteCodeHelper.d2l(offset));
+            return this.getTimeOffset(time, (long)offset);
         }
 
         public virtual Date getTimeOffset(Date time, long offset)

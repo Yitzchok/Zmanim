@@ -31,7 +31,8 @@
             this.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
         }
 
-        public GeoLocation(string name, double latitude, double longitude, java.util.TimeZone timeZone) : this(name, latitude, longitude, 0f, timeZone)
+        public GeoLocation(string name, double latitude, double longitude, java.util.TimeZone timeZone)
+            : this(name, latitude, longitude, 0f, timeZone)
         {
         }
 
@@ -105,7 +106,7 @@
 
         public virtual long getLocalMeanTimeOffset()
         {
-            return ByteCodeHelper.d2l(((this.getLongitude() * 4.0) * 60000.0) - this.getTimeZone().getRawOffset());
+            return (long)((this.getLongitude() * 4.0) * 60000.0) - this.getTimeZone().getRawOffset();
         }
 
         public virtual string getLocationName()
@@ -133,7 +134,7 @@
         {
             double num = 6371.0;
             double a = java.lang.Math.toRadians(location.getLatitude() - this.getLatitude());
-            double num3 = java.lang.Math.toRadians(java.lang.Math.abs((double) (location.getLongitude() - this.getLongitude())));
+            double num3 = java.lang.Math.toRadians(java.lang.Math.abs((double)(location.getLongitude() - this.getLongitude())));
             double num4 = java.lang.Math.log(java.lang.Math.tan((java.lang.Math.toRadians(location.getLongitude()) / 2.0) + 0.78539816339744828) / java.lang.Math.tan((java.lang.Math.toRadians(this.getLatitude()) / 2.0) + 0.78539816339744828));
             double num5 = (java.lang.Math.abs(a) <= 1E-10) ? java.lang.Math.cos(java.lang.Math.toRadians(this.getLatitude())) : (a / num4);
             if (num3 > 3.1415926535897931)
@@ -148,16 +149,16 @@
         {
             return this.timeZone;
         }
-        
+
         public override int GetHashCode()
         {
             int num = 0x11;
             long num2 = java.lang.Double.doubleToLongBits(this.latitude);
             long num3 = java.lang.Double.doubleToLongBits(this.longitude);
             long num4 = java.lang.Double.doubleToLongBits(this.elevation);
-            int num5 = (int) (num2 ^ (num2 >> 0x20));
-            int num6 = (int) (num3 ^ (num3 >> 0x20));
-            int num7 = (int) (num4 ^ (num4 >> 0x20));
+            int num5 = (int)(num2 ^ (num2 >> 0x20));
+            int num6 = (int)(num3 ^ (num3 >> 0x20));
+            int num7 = (int)(num4 ^ (num4 >> 0x20));
             num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
             num += (0x25 * num) + num5;
             num += (0x25 * num) + num6;
@@ -247,8 +248,8 @@
             buffer.append("\nLongitude:\t\t\t").append(this.getLongitude()).append("&deg;");
             buffer.append("\nElevation:\t\t\t").append(this.getElevation()).append(" Meters");
             buffer.append("\nTimezone Name:\t\t\t").append(this.getTimeZone().getID());
-            buffer.append("\nTimezone GMT Offset:\t\t").append((long) (((long) this.getTimeZone().getRawOffset()) / 0x36ee80L));
-            buffer.append("\nTimezone DST Offset:\t\t").append((long) (((long) this.getTimeZone().getDSTSavings()) / 0x36ee80L));
+            buffer.append("\nTimezone GMT Offset:\t\t").append((long)(((long)this.getTimeZone().getRawOffset()) / 0x36ee80L));
+            buffer.append("\nTimezone DST Offset:\t\t").append((long)(((long)this.getTimeZone().getDSTSavings()) / 0x36ee80L));
             return buffer.toString();
         }
 
@@ -262,8 +263,8 @@
             buffer.append("\t<Elevation>").append(this.getElevation()).append(" Meters").append("</Elevation>\n");
             buffer.append("\t<TimezoneName>").append(this.getTimeZone().getID()).append("</TimezoneName>\n");
             buffer.append("\t<TimeZoneDisplayName>").append(this.getTimeZone().getDisplayName()).append("</TimeZoneDisplayName>\n");
-            buffer.append("\t<TimezoneGMTOffset>").append((long) (((long) this.getTimeZone().getRawOffset()) / 0x36ee80L)).append("</TimezoneGMTOffset>\n");
-            buffer.append("\t<TimezoneDSTOffset>").append((long) (((long) this.getTimeZone().getDSTSavings()) / 0x36ee80L)).append("</TimezoneDSTOffset>\n");
+            buffer.append("\t<TimezoneGMTOffset>").append((long)(((long)this.getTimeZone().getRawOffset()) / 0x36ee80L)).append("</TimezoneGMTOffset>\n");
+            buffer.append("\t<TimezoneDSTOffset>").append((long)(((long)this.getTimeZone().getDSTSavings()) / 0x36ee80L)).append("</TimezoneDSTOffset>\n");
             buffer.append("</GeoLocation>");
             return buffer.toString();
         }
@@ -292,7 +293,7 @@
             double v = 0f;
             while (true)
             {
-                if (java.lang.Math.abs((double) (num11 - num12)) <= 1E-12)
+                if (java.lang.Math.abs((double)(num11 - num12)) <= 1E-12)
                 {
                     break;
                 }

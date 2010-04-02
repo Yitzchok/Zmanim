@@ -19,7 +19,8 @@
             this.candleLightingOffset = 18.0;
         }
 
-        public ZmanimCalendar(GeoLocation location) : base(location)
+        public ZmanimCalendar(GeoLocation location)
+            : base(location)
         {
             this.candleLightingOffset = 18.0;
         }
@@ -34,13 +35,13 @@
             {
                 return false;
             }
-            ZmanimCalendar calendar = (ZmanimCalendar) obj;
+            ZmanimCalendar calendar = (ZmanimCalendar)obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
         public virtual Date getAlos72()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long) (-4320000L));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(-4320000L));
         }
 
         public virtual Date getAlosHashachar()
@@ -50,32 +51,33 @@
 
         public virtual Date getCandelLighting()
         {
-            return this.getTimeOffset(this.getSunset(), (double) (-this.getCandleLightingOffset() * 60000.0));
+            var candleLightingOffset = -getCandleLightingOffset() * 60000.0;
+            return getTimeOffset(getSunset(), candleLightingOffset);
         }
 
         public virtual double getCandleLightingOffset()
         {
-            return this.candleLightingOffset;
+            return candleLightingOffset;
         }
 
         public virtual Date getChatzos()
         {
-            return this.getSunTransit();
+            return getSunTransit();
         }
 
         public virtual Date getMinchaGedola()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double) (this.getShaahZmanisGra() * 6.5));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 6.5));
         }
 
         public virtual Date getMinchaKetana()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double) (this.getShaahZmanisGra() * 9.5));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 9.5));
         }
 
         public virtual Date getPlagHamincha()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double) (this.getShaahZmanisGra() * 10.75));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 10.75));
         }
 
         public virtual long getShaahZmanisGra()
@@ -90,31 +92,31 @@
 
         public virtual Date getSofZmanShmaGRA()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long) (this.getShaahZmanisGra() * 3L));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(this.getShaahZmanisGra() * 3L));
         }
 
         public virtual Date getSofZmanShmaMGA()
         {
-            return this.getTimeOffset(this.getAlos72(), (long) (this.getShaahZmanisMGA() * 3L));
+            return this.getTimeOffset(this.getAlos72(), (long)(this.getShaahZmanisMGA() * 3L));
         }
 
         public virtual Date getSofZmanTfilaGRA()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long) (this.getShaahZmanisGra() * 4L));
+            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(this.getShaahZmanisGra() * 4L));
         }
 
         public virtual Date getSofZmanTfilaMGA()
         {
-            return this.getTimeOffset(this.getAlos72(), (long) (this.getShaahZmanisMGA() * 4L));
+            return this.getTimeOffset(this.getAlos72(), (long)(this.getShaahZmanisMGA() * 4L));
         }
 
-       public virtual Date getSolarMidnight()
+        public virtual Date getSolarMidnight()
         {
-            ZmanimCalendar calendar = (ZmanimCalendar) this.Clone();
+            ZmanimCalendar calendar = (ZmanimCalendar)this.Clone();
             calendar.getCalendar().add(5, 1);
             Date time = this.getSunset();
             Date sunset = calendar.getSunrise();
-            return this.getTimeOffset(time, (long) (this.getTemporalHour(time, sunset) * 6L));
+            return this.getTimeOffset(time, (long)(this.getTemporalHour(time, sunset) * 6L));
         }
 
         public virtual Date getTzais()
@@ -124,7 +126,7 @@
 
         public virtual Date getTzais72()
         {
-            return this.getTimeOffset(this.getSeaLevelSunset(), (long) 0x41eb00L);
+            return this.getTimeOffset(this.getSeaLevelSunset(), (long)0x41eb00L);
         }
 
         public override int GetHashCode()
