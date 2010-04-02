@@ -35,7 +35,7 @@
                 return false;
             }
             ZmanimCalendar calendar = (ZmanimCalendar) obj;
-            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
+            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
         public virtual Date getAlos72()
@@ -110,7 +110,7 @@
 
        public virtual Date getSolarMidnight()
         {
-            ZmanimCalendar calendar = (ZmanimCalendar) this.clone();
+            ZmanimCalendar calendar = (ZmanimCalendar) this.Clone();
             calendar.getCalendar().add(5, 1);
             Date time = this.getSunset();
             Date sunset = calendar.getSunrise();

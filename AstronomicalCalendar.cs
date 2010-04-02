@@ -45,7 +45,7 @@
                 return false;
             }
             AstronomicalCalendar calendar = (AstronomicalCalendar)obj;
-            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
+            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
         private Date getAdjustedSunsetDate(Date date1, Date date2)
@@ -137,10 +137,10 @@
 
         private double getOffsetTime(double num1)
         {
-            int num = (int)this.getCalendar().getTimeZone().inDaylightTime(this.getCalendar().getTime());
+            bool isInDaylightTime = this.getCalendar().getTimeZone().inDaylightTime(this.getCalendar().getTime());
             double num2 = 0f;
             double num3 = ((long)this.getCalendar().getTimeZone().getRawOffset()) / 0x36ee80L;
-            if (num != 0)
+            if (isInDaylightTime)
             {
                 num2 = ((long)this.getCalendar().getTimeZone().getDSTSavings()) / 0x36ee80L;
             }
