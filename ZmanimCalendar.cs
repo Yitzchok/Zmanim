@@ -24,17 +24,17 @@
             this.candleLightingOffset = 18.0;
         }
 
-        public override bool equals(object @object)
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
             {
                 return true;
             }
-            if (!(@object is ZmanimCalendar))
+            if (!(obj is ZmanimCalendar))
             {
                 return false;
             }
-            ZmanimCalendar calendar = (ZmanimCalendar) @object;
+            ZmanimCalendar calendar = (ZmanimCalendar) obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
@@ -127,12 +127,12 @@
             return this.getTimeOffset(this.getSeaLevelSunset(), (long) 0x41eb00L);
         }
 
-        public override int hashCode()
+        public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getClass());
+            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
             num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().hashCode();
+            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
             return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
         }
 

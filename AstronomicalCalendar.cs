@@ -34,17 +34,17 @@
             this.setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
 
-        public override bool equals(object @object)
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
             {
                 return true;
             }
-            if (!(@object is AstronomicalCalendar))
+            if (!(obj is AstronomicalCalendar))
             {
                 return false;
             }
-            AstronomicalCalendar calendar = (AstronomicalCalendar)@object;
+            AstronomicalCalendar calendar = (AstronomicalCalendar)obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
@@ -265,7 +265,6 @@
             {
                 return null;
             }
-            Date.__<clinit>();
             return new Date(time.getTime() + offset);
         }
 
@@ -289,12 +288,12 @@
             return this.getAstronomicalCalculator().getUTCSunset(this, zenith, true);
         }
 
-        public override int hashCode()
+        public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getClass());
+            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
             num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().hashCode();
+            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
             return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
         }
 

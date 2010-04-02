@@ -32,17 +32,17 @@
             this.ateretTorahSunsetOffset = 40.0;
         }
 
-        public override bool equals(object @object)
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
             {
                 return true;
             }
-            if (!(@object is ComplexZmanimCalendar))
+            if (!(obj is ComplexZmanimCalendar))
             {
                 return false;
             }
-            ComplexZmanimCalendar calendar = (ComplexZmanimCalendar) @object;
+            ComplexZmanimCalendar calendar = (ComplexZmanimCalendar) obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
@@ -616,12 +616,12 @@
             return this.getSunsetOffsetByDegrees(98.5);
         }
 
-        public override int hashCode()
+        public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getClass());
+            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getTemporalHour());
             num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().hashCode();
+            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
             return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
         }
 
