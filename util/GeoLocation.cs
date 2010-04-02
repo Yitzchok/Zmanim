@@ -47,22 +47,6 @@
             this.setTimeZone(timeZone);
         }
 
-        public override object clone()
-        {
-            GeoLocation location = null;
-            try
-            {
-                location = (GeoLocation) base.clone();
-            }
-            catch (CloneNotSupportedException)
-            {
-                System.@out.print("Required by the compiler. Should never be reached since we implement clone()");
-            }
-            location.timeZone = (java.util.TimeZone) this.getTimeZone().clone();
-            location.locationName = this.getLocationName();
-            return location;
-        }
-
         public override bool equals(object @object)
         {
             if (this == @object)
@@ -181,14 +165,6 @@
             num += (0x25 * num) + num7;
             num += (0x25 * num) + ((this.locationName != null) ? java.lang.String.instancehelper_hashCode(this.locationName) : 0);
             return (num + ((0x25 * num) + ((this.timeZone != null) ? java.lang.Object.instancehelper_hashCode(this.timeZone) : 0)));
-        }
-
-        [HideFromJava]
-        public static implicit operator Cloneable(GeoLocation location1)
-        {
-            Cloneable cloneable;
-            cloneable.__<ref> = location1;
-            return cloneable;
         }
 
         public virtual void setElevation(double elevation)

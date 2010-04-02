@@ -315,14 +315,6 @@
             return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
         }
 
-        [HideFromJava]
-        public static implicit operator Cloneable(AstronomicalCalendar calendar1)
-        {
-            Cloneable cloneable;
-            cloneable.__<ref> = calendar1;
-            return cloneable;
-        }
-
         public virtual void setAstronomicalCalculator(AstronomicalCalculator astronomicalCalculator)
         {
             this.astronomicalCalculator = astronomicalCalculator;

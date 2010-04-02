@@ -20,21 +20,6 @@
             return num1;
         }
 
-        public override object clone()
-        {
-            AstronomicalCalculator calculator = null;
-            try
-            {
-                calculator = (AstronomicalCalculator) base.clone();
-            }
-            catch (CloneNotSupportedException)
-            {
-                System.@out.print("Required by the compiler. Should never be reached since we implement clone()");
-                return calculator;
-            }
-            return calculator;
-        }
-
         public abstract string getCalculatorName();
         public static AstronomicalCalculator getDefault()
         {
@@ -59,14 +44,7 @@
 
         public abstract double getUTCSunrise(AstronomicalCalendar ac, double d, bool b);
         public abstract double getUTCSunset(AstronomicalCalendar ac, double d, bool b);
-        [HideFromJava]
-        public static implicit operator Cloneable(AstronomicalCalculator calculator1)
-        {
-            Cloneable cloneable;
-            cloneable.__<ref> = calculator1;
-            return cloneable;
-        }
-
+       
         public virtual void setRefraction(double refraction)
         {
             this.refraction = refraction;
