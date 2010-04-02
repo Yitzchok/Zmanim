@@ -1,9 +1,11 @@
-﻿namespace net.sourceforge.zmanim.util
+﻿using IKVM.Runtime;
+using IKVM.Attributes;
+using java.lang;
+using System;
+using System.Runtime.CompilerServices;
+
+namespace net.sourceforge.zmanim.util
 {
-    using IKVM.Attributes;
-    using java.lang;
-    using System;
-    using System.Runtime.CompilerServices;
 
     public class Time : java.lang.Object
     {
@@ -16,15 +18,11 @@
         private const int SECOND_MILLIS = 0x3e8;
         private int seconds;
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 4, 0x6d })]
-        public Time(double millis) : this(ByteCodeHelper.d2i(millis))
+        public Time(double millis)
+            : this((int)millis)
         {
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 
-            7, 0xe8, 0x2b, 0x87, 0x87, 0x87, 0x87, 0xe7, 0x4e, 0x67, 0x67, 0x88, 0x6d, 0x90, 0x6d, 0x90, 
-            0x6d, 0x90, 0x67
-         })]
         public Time(int millis)
         {
             this.hours = 0;
@@ -46,7 +44,6 @@
             this.milliseconds = millis;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable(new byte[] { 0x9f, 0xbc, 0xe8, 0x36, 0x87, 0x87, 0x87, 0x87, 0xa7, 0x67, 0x67, 0x67, 0x68 })]
         public Time(int hours, int minutes, int seconds, int milliseconds)
         {
             this.hours = 0;
@@ -82,10 +79,10 @@
 
         public virtual double getTime()
         {
-            return (double) ((((this.hours * 0x36ee80) + (this.minutes * 0xea60)) + (this.seconds * 0x3e8)) + this.milliseconds);
+            return (double)((((this.hours * 0x36ee80) + (this.minutes * 0xea60)) + (this.seconds * 0x3e8)) + this.milliseconds);
         }
 
-        public virtual bool isNegative()
+        public virtual bool IsNegative()
         {
             return this.isNegative;
         }
@@ -97,8 +94,7 @@
 
         public virtual void setIsNegative(bool isNegative)
         {
-            int num = (int) isNegative;
-            this.isNegative = (bool) num;
+            this.isNegative = isNegative;
         }
 
         public virtual void setMilliseconds(int milliseconds)
@@ -116,7 +112,6 @@
             this.seconds = seconds;
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining), LineNumberTable((ushort) 0x93)]
         public override string toString()
         {
             return new ZmanimFormatter().format(this);
