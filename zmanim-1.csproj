@@ -117,9 +117,6 @@
     <Compile Include="util\ZmanimCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\ZmanimFormatter.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ZmanimCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
