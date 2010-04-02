@@ -46,18 +46,17 @@
             this.setElevation(elevation);
             this.setTimeZone(timeZone);
         }
-
-        public override bool equals(object @object)
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
             {
                 return true;
             }
-            if (!(@object is GeoLocation))
+            if (!(obj is GeoLocation))
             {
                 return false;
             }
-            GeoLocation location = (GeoLocation) @object;
+            GeoLocation location = (GeoLocation)obj;
             if (((java.lang.Double.doubleToLongBits(this.latitude) == java.lang.Double.doubleToLongBits(location.latitude)) && (java.lang.Double.doubleToLongBits(this.longitude) == java.lang.Double.doubleToLongBits(location.longitude))) && (this.elevation == location.elevation))
             {
                 if (this.locationName == null)
@@ -149,8 +148,8 @@
         {
             return this.timeZone;
         }
-
-        public override int hashCode()
+        
+        public override int GetHashCode()
         {
             int num = 0x11;
             long num2 = java.lang.Double.doubleToLongBits(this.latitude);
@@ -159,7 +158,7 @@
             int num5 = (int) (num2 ^ (num2 >> 0x20));
             int num6 = (int) (num3 ^ (num3 >> 0x20));
             int num7 = (int) (num4 ^ (num4 >> 0x20));
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getClass());
+            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
             num += (0x25 * num) + num5;
             num += (0x25 * num) + num6;
             num += (0x25 * num) + num7;
@@ -171,7 +170,6 @@
         {
             if (elevation < 0f)
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Elevation cannot be negative");
             }
             this.elevation = elevation;
@@ -181,7 +179,6 @@
         {
             if ((latitude > 90.0) || (latitude < -90.0))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Latitude must be between -90 and  90");
             }
             this.latitude = latitude;
@@ -192,7 +189,6 @@
             double num = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if ((num > 90.0) || (num < 0f))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Latitude must be between 0 and  90. Use direction of S instead of negative.");
             }
             if (java.lang.String.instancehelper_equals(direction, "S"))
@@ -201,7 +197,6 @@
             }
             else if (!java.lang.String.instancehelper_equals(direction, "N"))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Latitude direction must be N or S");
             }
             this.latitude = num;
@@ -216,7 +211,6 @@
         {
             if ((longitude > 180.0) || (longitude < -180.0))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Longitude must be between -180 and  180");
             }
             this.longitude = longitude;
@@ -227,7 +221,6 @@
             double num = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if ((num > 180.0) || (this.longitude < 0f))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Longitude must be between 0 and  180. Use the ");
             }
             if (java.lang.String.instancehelper_equals(direction, "W"))
@@ -236,7 +229,6 @@
             }
             else if (!java.lang.String.instancehelper_equals(direction, "E"))
             {
-                Throwable.__<suppressFillInStackTrace>();
                 throw new IllegalArgumentException("Longitude direction must be E or W");
             }
             this.longitude = num;
@@ -247,7 +239,7 @@
             this.timeZone = timeZone;
         }
 
-        public override string toString()
+        public override string ToString()
         {
             StringBuffer buffer = new StringBuffer();
             buffer.append("\nLocation Name:\t\t\t").append(this.getLocationName());

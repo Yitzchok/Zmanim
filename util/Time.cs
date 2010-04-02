@@ -111,11 +111,6 @@ namespace net.sourceforge.zmanim.util
         {
             this.seconds = seconds;
         }
-
-        public override string toString()
-        {
-            return new ZmanimFormatter().format(this);
-        }
     }
 }
 
