@@ -6,7 +6,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    public abstract class AstronomicalCalculator : java.lang.Object, Cloneable.__Interface
+    public abstract class AstronomicalCalculator
     {
         private double refraction = 0.56666666666666665;
         private double solarRadius = 0.26666666666666666;

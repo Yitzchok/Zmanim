@@ -7,7 +7,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    public class GeoLocation : java.lang.Object, Cloneable.__Interface
+    public class GeoLocation
     {
         private int DISTANCE;
         private double elevation;

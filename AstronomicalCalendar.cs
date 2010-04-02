@@ -34,23 +34,6 @@
             this.setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
 
-        public override object clone()
-        {
-            AstronomicalCalendar calendar = null;
-            try
-            {
-                calendar = (AstronomicalCalendar)base.clone();
-            }
-            catch (CloneNotSupportedException)
-            {
-                System.@out.print("Required by the compiler. Should never be reached since we implement clone()");
-            }
-            calendar.setGeoLocation((GeoLocation)this.getGeoLocation().clone());
-            calendar.setCalendar((Calendar)this.getCalendar().clone());
-            calendar.setAstronomicalCalculator((AstronomicalCalculator)this.getAstronomicalCalculator().clone());
-            return calendar;
-        }
-
         public override bool equals(object @object)
         {
             if (this == @object)
@@ -335,9 +318,27 @@
             this.getCalendar().setTimeZone(geoLocation.getTimeZone());
         }
 
-        public override string toString()
+        public object Clone()
         {
-            return ZmanimFormatter.toXML(this);
+            /*
+             * 
+             * 
+            AstronomicalCalendar calendar = null;
+            try
+            {
+                calendar = (AstronomicalCalendar)base.clone();
+            }
+            catch (CloneNotSupportedException)
+            {
+                System.@out.print("Required by the compiler. Should never be reached since we implement clone()");
+            }
+            calendar.setGeoLocation((GeoLocation)this.getGeoLocation().clone());
+            calendar.setCalendar((Calendar)this.getCalendar().clone());
+            calendar.setAstronomicalCalculator((AstronomicalCalculator)this.getAstronomicalCalculator().clone());
+            return calendar;
+             * 
+             * */
+            return this.MemberwiseClone();
         }
     }
 }

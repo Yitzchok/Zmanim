@@ -5,7 +5,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    public class GeoLocationUtils : java.lang.Object
+    public class GeoLocationUtils
     {
         private static int DISTANCE = 0;
         private static int FINAL_BEARING = 2;
