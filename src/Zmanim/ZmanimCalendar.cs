@@ -1,11 +1,9 @@
-﻿namespace net.sourceforge.zmanim
+﻿using java.lang;
+
+namespace net.sourceforge.zmanim
 {
-    using IKVM.Attributes;
-    using java.lang;
     using java.util;
-    using net.sourceforge.zmanim.util;
-    using System;
-    using System.Runtime.CompilerServices;
+    using util;
 
     public class ZmanimCalendar : AstronomicalCalendar
     {
@@ -16,13 +14,13 @@
 
         public ZmanimCalendar()
         {
-            this.candleLightingOffset = 18.0;
+            candleLightingOffset = 18.0;
         }
 
         public ZmanimCalendar(GeoLocation location)
             : base(location)
         {
-            this.candleLightingOffset = 18.0;
+            candleLightingOffset = 18.0;
         }
 
         public override bool Equals(object obj)
@@ -36,17 +34,18 @@
                 return false;
             }
             ZmanimCalendar calendar = (ZmanimCalendar)obj;
-            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
+            return ((getCalendar().equals(calendar.getCalendar()) && getGeoLocation().Equals(calendar.getGeoLocation())) &&
+                    Object.instancehelper_equals(getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }
 
         public virtual Date getAlos72()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(-4320000L));
+            return getTimeOffset(getSeaLevelSunrise(), (-4320000L));
         }
 
         public virtual Date getAlosHashachar()
         {
-            return this.getSunriseOffsetByDegrees(106.1);
+            return getSunriseOffsetByDegrees(106.1);
         }
 
         public virtual Date getCandelLighting()
@@ -67,75 +66,75 @@
 
         public virtual Date getMinchaGedola()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 6.5));
+            return getTimeOffset(getSeaLevelSunrise(), (getShaahZmanisGra() * 6.5));
         }
 
         public virtual Date getMinchaKetana()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 9.5));
+            return getTimeOffset(getSeaLevelSunrise(), (getShaahZmanisGra() * 9.5));
         }
 
         public virtual Date getPlagHamincha()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (double)(this.getShaahZmanisGra() * 10.75));
+            return getTimeOffset(getSeaLevelSunrise(), (getShaahZmanisGra() * 10.75));
         }
 
         public virtual long getShaahZmanisGra()
         {
-            return this.getTemporalHour(this.getSeaLevelSunrise(), this.getSeaLevelSunset());
+            return getTemporalHour(getSeaLevelSunrise(), getSeaLevelSunset());
         }
 
         public virtual long getShaahZmanisMGA()
         {
-            return this.getTemporalHour(this.getAlos72(), this.getTzais72());
+            return getTemporalHour(getAlos72(), getTzais72());
         }
 
         public virtual Date getSofZmanShmaGRA()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(this.getShaahZmanisGra() * 3L));
+            return getTimeOffset(getSeaLevelSunrise(), (getShaahZmanisGra() * 3L));
         }
 
         public virtual Date getSofZmanShmaMGA()
         {
-            return this.getTimeOffset(this.getAlos72(), (long)(this.getShaahZmanisMGA() * 3L));
+            return getTimeOffset(getAlos72(), (getShaahZmanisMGA() * 3L));
         }
 
         public virtual Date getSofZmanTfilaGRA()
         {
-            return this.getTimeOffset(this.getSeaLevelSunrise(), (long)(this.getShaahZmanisGra() * 4L));
+            return getTimeOffset(getSeaLevelSunrise(), (getShaahZmanisGra() * 4L));
         }
 
         public virtual Date getSofZmanTfilaMGA()
         {
-            return this.getTimeOffset(this.getAlos72(), (long)(this.getShaahZmanisMGA() * 4L));
+            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 4L);
         }
 
         public virtual Date getSolarMidnight()
         {
-            ZmanimCalendar calendar = (ZmanimCalendar)this.Clone();
-            calendar.getCalendar().add(5, 1);
-            Date time = this.getSunset();
-            Date sunset = calendar.getSunrise();
-            return this.getTimeOffset(time, (long)(this.getTemporalHour(time, sunset) * 6L));
+            ZmanimCalendar clonedCal = (ZmanimCalendar)Clone();
+            clonedCal.getCalendar().add(Calendar.DAY_OF_MONTH, 1);
+            Date sunsetTime = getSunset();
+            Date sunrise = clonedCal.getSunrise();
+            return getTimeOffset(sunsetTime, getTemporalHour(sunsetTime, sunrise) * 6);
         }
 
         public virtual Date getTzais()
         {
-            return this.getSunsetOffsetByDegrees(98.5);
+            return getSunsetOffsetByDegrees(98.5);
         }
 
         public virtual Date getTzais72()
         {
-            return this.getTimeOffset(this.getSeaLevelSunset(), (long)0x41eb00L);
+            return getTimeOffset(getSeaLevelSunset(), 0x41eb00L);
         }
 
         public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
-            num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
-            return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
+            num = (0x25 * num) + Object.instancehelper_hashCode(base.GetType());
+            num += (0x25 * num) + getCalendar().hashCode();
+            num += (0x25 * num) + getGeoLocation().GetHashCode();
+            return (num + ((0x25 * num) + Object.instancehelper_hashCode(getAstronomicalCalculator())));
         }
 
         public virtual void setCandleLightingOffset(double candleLightingOffset)
@@ -144,4 +143,3 @@
         }
     }
 }
-

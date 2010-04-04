@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZemaningTests.cs" />
+    <Compile Include="ZmanMethodGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zmanim\Zmanim.csproj">
