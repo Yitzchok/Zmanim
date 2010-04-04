@@ -44,25 +44,31 @@ namespace ZmanimTests
         [Test]
         public void Check_getSunset()
         {
-            Date sunset = calendar.getSunset();
+            var sunset = calendar.getSunset().ToDateTime();
 
-            Assert.That(sunset.toString(), Is.EqualTo("Fri Apr 02 19:21:28 EDT 2010"));
+            Assert.That(sunset, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 21, 28)
+                ));
         }
 
         [Test]
-        public void Can_get_CandelLighting_time()
+        public void Check_getCandelLighting()
         {
-            Date candle = calendar.getCandelLighting();
+            var candleLighting = calendar.getCandelLighting().ToDateTime();
 
-            Assert.That(candle.toString(), Is.EqualTo("Fri Apr 02 19:03:28 EDT 2010"));
+            Assert.That(candleLighting, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 03, 28)
+                ));
         }
 
         [Test]
-        public void Can_get_time_for_shma_acording_to_the_magen_avrahom()
+        public void Check_getSofZmanShmaMGA()
         {
-            Date shma = calendar.getSofZmanShmaMGA();
+            var sofZmanShmaMGA = calendar.getSofZmanShmaMGA().ToDateTime();
 
-            Assert.That(shma.toString(), Is.EqualTo("Fri Apr 02 09:13:10 EDT 2010"));
+            Assert.That(sofZmanShmaMGA, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 9, 13, 10)
+                ));
         }
     }
 }
