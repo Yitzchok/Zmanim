@@ -1,14 +1,20 @@
+using System;
 using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Zmanim.Extensions;
+using TimeZone = java.util.TimeZone;
 
 namespace ZmanimTests
 {
     [TestFixture]
     public class ZemaningTests
     {
+        //We can use these test when removing the depenency to Java (IKVM)
+        //To make sure that the code stayes the same.
+
         private ComplexZmanimCalendar calendar;
 
         [SetUp]
@@ -26,15 +32,17 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Can_get_sunrise_time()
+        public void Check_getSunrise()
         {
-            Date sunrise = calendar.getSunrise();
+            var sunrise = calendar.getSunrise().ToDateTime();
 
-            Assert.That(sunrise.toString(), Is.EqualTo("Fri Apr 02 06:38:24 EDT 2010"));
+            Assert.That(sunrise, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 6, 38, 24)
+                ));
         }
 
         [Test]
-        public void Can_get_sunset_time()
+        public void Check_getSunset()
         {
             Date sunset = calendar.getSunset();
 
