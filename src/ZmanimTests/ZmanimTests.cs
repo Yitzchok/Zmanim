@@ -10,7 +10,7 @@ using TimeZone = java.util.TimeZone;
 namespace ZmanimTests
 {
     [TestFixture]
-    public class ZemaningTests
+    public class ZmanimTests
     {
         //We can use these test when removing the depenency to Java (IKVM)
         //To make sure that the code stayes the same.
@@ -1017,7 +1017,7 @@ namespace ZmanimTests
             var zman = calendar.getSolarMidnight().ToDateTime();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 3, 5, 4, 46, 42)
+                    new DateTime(2010, 4, 3, 0, 59, 07)
                 ));
         }
 
