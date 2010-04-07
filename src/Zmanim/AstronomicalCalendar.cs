@@ -48,7 +48,7 @@ namespace net.sourceforge.zmanim
     /// Here is a simple example of how to use the API to calculate sunrise: <br />
     /// First create the Calendar for the location you would like to calculate:
     /// 
-    /// <example>
+    /// <code>
     /// String locationName = &quot;Lakewood, NJ&quot;
     /// double latitude = 40.0828; //Lakewood, NJ
     /// double longitude = -74.2094; //Lakewood, NJ
@@ -58,20 +58,21 @@ namespace net.sourceforge.zmanim
     /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
     /// 		elevation, timeZone);
     /// AstronomicalCalendar ac = new AstronomicalCalendar(location);
-    /// </example>
+    /// </code>
     /// 
     /// To get the time of sunrise, first set the date (if not set, the date will
     /// default to today):
     /// 
-    /// <example>
+    /// <code>
     /// ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
     /// ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
     /// Date sunrise = ac.getSunrise();
-    /// </example>
-    /// 
-    /// 
+    /// </code>
+    /// </summary> 
+    /// <remarks>
     /// @author &copy; Eliyahu Hershfeld 2004 - 2010
-    /// @version 1.2 </summary>
+    /// @version 1.2
+    /// </remarks>
     public class AstronomicalCalendar : ICloneable
     {
         private const long serialVersionUID = 1;
@@ -190,7 +191,7 @@ namespace net.sourceforge.zmanim
         ///	 </summary>
         ///	<returns> the <code>Date</code> representing the exact sunrise time. If
         ///	        the calculation can not be computed null will be returned. </returns>
-        ///	<seealso cref= AstronomicalCalculator#adjustZenith </seealso>
+        ///	<seealso cref="AstronomicalCalculator#adjustZenith"/>
         public virtual Date getSunrise()
         {
             double v = this.getUTCSunrise(90.0);
@@ -231,7 +232,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The <code>Date</code> of the beginning of civil twilight using
         ///	        a zenith of 96&deg;. If the calculation can not be computed null
         ///	        will be returned. </returns>
-        ///	<seealso cref= #CIVIL_ZENITH </seealso>
+        ///	<seealso cref="#CIVIL_ZENITH"/>
         public virtual Date getBeginCivilTwilight()
         {
             return this.getSunriseOffsetByDegrees(96.0);
@@ -244,7 +245,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The <code>Date</code> of the beginning of nautical twilight
         ///	        using a zenith of 102&deg;. If the calculation can not be
         ///	        computed null will be returned. </returns>
-        ///	<seealso cref= #NAUTICAL_ZENITH </seealso>
+        ///	<seealso cref="#NAUTICAL_ZENITH"/>
         public virtual Date getBeginNauticalTwilight()
         {
             return this.getSunriseOffsetByDegrees(102.0);
@@ -325,8 +326,8 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the exact sea-level sunset
         ///	        time. If the calculation can not be computed null will be
         ///	        returned. </returns>
-        ///	<seealso cref= AstronomicalCalendar#getSunset </seealso>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSeaLevelSunset </seealso>
+        ///	<seealso cref="AstronomicalCalendar#getSunset"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
         public virtual Date getSeaLevelSunset()
         {
             double v = this.getUTCSeaLevelSunset(90.0);
@@ -344,7 +345,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The <code>Date</code> of the end of civil twilight using a
         ///	        zenith of <seealso cref="#CIVIL_ZENITH 96&deg;"/>. If the calculation can
         ///	        not be computed null will be returned. </returns>
-        ///	<seealso cref= #CIVIL_ZENITH </seealso>
+        ///	<seealso cref="#CIVIL_ZENITH"/>
         public virtual Date getEndCivilTwilight()
         {
             return this.getSunsetOffsetByDegrees(96.0);
@@ -357,7 +358,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The <code>Date</code> of the end of nautical twilight using a
         ///	        zenith of <seealso cref="#NAUTICAL_ZENITH 102&deg;"/>. If the calculation
         ///	        can not be computed null will be returned. </returns>
-        ///	<seealso cref= #NAUTICAL_ZENITH </seealso>
+        ///	<seealso cref="#NAUTICAL_ZENITH"/>
         public virtual Date getEndNauticalTwilight()
         {
             return this.getSunsetOffsetByDegrees(102.0);
@@ -370,7 +371,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The The <code>Date</code> of the end of astronomical twilight
         ///	        using a zenith of <seealso cref="#ASTRONOMICAL_ZENITH 108&deg;"/>. If the
         ///	        calculation can not be computed null will be returned. </returns>
-        ///	<seealso cref= #ASTRONOMICAL_ZENITH </seealso>
+        ///	<seealso cref="#ASTRONOMICAL_ZENITH"/>
         public virtual Date getEndAstronomicalTwilight()
         {
             return this.getSunsetOffsetByDegrees(108.0);
@@ -443,7 +444,7 @@ namespace net.sourceforge.zmanim
         /// A method to return the current AstronomicalCalculator set.
         ///	 </summary>
         ///	<returns> Returns the astronimicalCalculator. </returns>
-        ///	<seealso cref= #setAstronomicalCalculator(AstronomicalCalculator) </seealso>
+        ///	<seealso cref="#setAstronomicalCalculator(AstronomicalCalculator)"/>
         public virtual AstronomicalCalculator  getAstronomicalCalculator()
         {
             return this.astronomicalCalculator;
@@ -571,7 +572,7 @@ namespace net.sourceforge.zmanim
         ///	<param name="minutes"> offset </param>
         ///	<returns> the degrees below the horizon that match the offset on the
         ///	        equinox in Jerusalem at sea level. </returns>
-        ///	<seealso cref= #getSunriseSolarDipFromOffset(double) </seealso>
+        ///	<seealso cref="#getSunriseSolarDipFromOffset(double)"/>
         public virtual double getSunsetSolarDipFromOffset(double minutes)
         {
             Date offsetByDegrees = this.getSeaLevelSunset();
@@ -622,7 +623,7 @@ namespace net.sourceforge.zmanim
         ///	           The start of the day. </param>
         ///	<param name="sunset">
         ///	           The end of the day. </param>
-        ///	<seealso cref= #getTemporalHour() </seealso>
+        ///	<seealso cref="#getTemporalHour()"/>
         ///	<returns> the <code>long</code> millisecond length of the temporal hour.
         ///	        If the calculation can not be computed <seealso cref="Long#MIN_VALUE"/>
         ///	        will be returned. </returns>
@@ -650,8 +651,8 @@ namespace net.sourceforge.zmanim
         ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
         ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
         ///	        returned. </returns>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSunrise </seealso>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSeaLevelSunset </seealso>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSunrise"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
         public virtual double getUTCSeaLevelSunrise(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunrise(this, zenith, false);
@@ -672,8 +673,8 @@ namespace net.sourceforge.zmanim
         ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
         ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
         ///	        returned. </returns>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSunset </seealso>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSeaLevelSunrise </seealso>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSunset"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunrise"/>
         public virtual double getUTCSeaLevelSunset(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunset(this, zenith, false);
@@ -704,7 +705,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
         ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
         ///	        returned. </returns>
-        ///	<seealso cref= AstronomicalCalendar#getUTCSeaLevelSunset </seealso>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
         public virtual double getUTCSunset(double zenith)
         {
             return this.getAstronomicalCalculator().getUTCSunset(this, zenith, true);
@@ -752,8 +753,7 @@ namespace net.sourceforge.zmanim
         ///	<summary>
         /// Set the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
         ///	 </summary>
-        ///	<param name="geoLocation">
-        ///	           The geoLocation to set. </param>
+        ///	<param name="geoLocation">The geoLocation to set. </param>
         public virtual void setGeoLocation(GeoLocation geoLocation)
         {
             this.geoLocation = geoLocation;
@@ -771,7 +771,6 @@ namespace net.sourceforge.zmanim
         ///	be called in order for the AstronomicalCalendar to output times in the
         ///	expected offset after being cloned.
         ///	 </summary>
-        ///	<seealso cref= java.lang.Object#clone() @since 1.1 </seealso>
         public object Clone()
         {
             var clonedCalendar = (AstronomicalCalendar)this.MemberwiseClone();
