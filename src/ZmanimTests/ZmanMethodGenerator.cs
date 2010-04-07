@@ -29,7 +29,8 @@ namespace ZmanimTests
         public void GenerateMethods()
         {
             //IList<string> methods = new List<string>();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder testStringBuilder = new StringBuilder();
+            StringBuilder csvStringBuilder = new StringBuilder("MethodName,DateCalculated");
             Type type = typeof(ComplexZmanimCalendar);
             var calendar = new GregorianCalendar();
 
@@ -42,8 +43,8 @@ namespace ZmanimTests
                 Date date = (Date)method.Invoke(GetCalendar(), null);
                 calendar.setTime(date);
 
-
-                sb.AppendFormat(@"
+                csvStringBuilder.AppendFormat("{0},{1}", method.Name, date.toString());
+                testStringBuilder.AppendFormat(@"
         [Test]
         public void Check_{0}()
         {{
@@ -65,7 +66,7 @@ namespace ZmanimTests
 
             }
 
-            string finalTestMethods = sb.ToString();
+            string finalTestMethods = testStringBuilder.ToString();
         }
     }
 }

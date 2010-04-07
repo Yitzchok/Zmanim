@@ -1,27 +1,120 @@
 ﻿namespace net.sourceforge.zmanim
 {
-    using IKVM.Attributes;
-    using IKVM.Runtime;
-    using java.lang;
     using java.math;
     using java.util;
     using net.sourceforge.zmanim.util;
     using System;
-    using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// A Java calendar that calculates astronomical time calculations such as
+    /// {@link #getSunrise() sunrise} and {@link #getSunset() sunset} times. This
+    /// class contains a Calendar <see cref="getCalendar" /> and can therefore use the
+    /// standard Calendar functionality to change dates etc. The calculation engine
+    /// used to calculate the astronomical times can be changed to a different
+    /// implementation by implementing the <see cref="AstronomicalCalculator"/> and setting
+    /// it with the {@link #setAstronomicalCalculator(AstronomicalCalculator)}. A
+    /// number of different implementations are included in the util package <br />
+    /// <b>Note:</b> There are times when the algorithms can't calculate proper
+    /// values for sunrise and sunset. This is usually caused by trying to calculate
+    /// times for areas either very far North or South, where sunrise / sunset never
+    /// happen on that date. This is common when calculating twilight with a deep dip
+    /// below the horizon for locations as south of the North Pole as London in the
+    /// northern hemisphere. When the calculations encounter this condition a null
+    /// will be returned when a <code>{@link java.util.Date}</code> is expected and
+    /// {@link Double#NaN} when a double is expected. The reason that
+    /// <code>Exception</code>s are not thrown in these cases is because the lack
+    /// of a rise/set are not exceptions, but expected in many parts of the world.
+    /// 
+    /// Here is a simple example of how to use the API to calculate sunrise: <br />
+    /// First create the Calendar for the location you would like to calculate:
+    /// <example>
+    /// String locationName = &quot;Lakewood, NJ&quot;;
+    /// double latitude = 40.0828; //Lakewood, NJ
+    /// double longitude = -74.2094; //Lakewood, NJ
+    /// double elevation = 20; // optional elevation correction in Meters
+    /// //the String parameter in getTimeZone() has to be a valid timezone listed in {@link java.util.TimeZone#getAvailableIDs()}
+    /// TimeZone timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
+    /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
+    /// 		elevation, timeZone);
+    /// AstronomicalCalendar ac = new AstronomicalCalendar(location);
+    /// </example>
+    /// To get the time of sunrise, first set the date (if not set, the date will
+    /// default to today):
+    /// <example>
+    /// ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
+    /// ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
+    /// Date sunrise = ac.getSunrise();
+    /// </example>
+    /// @author &copy; Eliyahu Hershfeld 2004 - 2010
+    /// @version 1.2
+    /// </summary>
     public class AstronomicalCalendar : ICloneable
     {
+        private const long serialVersionUID = 1;
+
+        ///<summary>
+        /// 90&deg; below the vertical. Used for certain calculations.<br />
+        /// <b>Note </b>: it is important to note the distinction between this zenith
+        /// and the <see cref="adjustZenith"/> used
+        /// for some solar calculations. This 90 zenith is only used because some
+        /// calculations in some subclasses are historically calculated as an offset
+        /// in reference to 90.
+        /// </summary>
+        public const double GEOMETRIC_ZENITH = 90.0;
+
+        /// <summary>
+        /// Sun's zenith at astronomical twilight (108&deg;).
+        /// </summary>
         public const double ASTRONOMICAL_ZENITH = 108.0;
+
+
+        /// <summary>
+        /// Default value for Sun's zenith and true rise/set Zenith (used in this
+        /// class and subclasses) is the angle that the center of the Sun makes to a
+        /// line perpendicular to the Earth's surface. If the Sun were a point and
+        /// the Earth were without an atmosphere, true sunset and sunrise would
+        /// correspond to a 90&deg; zenith. Because the Sun is not a point, and
+        /// because the atmosphere refracts light, this 90&deg; zenith does not, in
+        /// fact, correspond to true sunset or sunrise, instead the center of the
+        /// Sun's disk must lie just below the horizon for the upper edge to be
+        /// obscured. This means that a zenith of just above 90&deg; must be used.
+        /// The Sun subtends an angle of 16 minutes of arc (this can be changed via
+        /// the {@link #setSunRadius(double)} method , and atmospheric refraction
+        /// accounts for 34 minutes or so (this can be changed via the
+        /// {@link #setRefraction(double)} method), giving a total of 50 arcminutes.
+        /// The total value for ZENITH is 90+(5/6) or 90.8333333&deg; for true
+        /// sunrise/sunset.
+        /// </summary>
+        //public static double ZENITH = GEOMETRIC_ZENITH + 5.0 / 6.0;
+
+        /// <summary>
+        /// Sun's zenith at civil twilight (96&deg;).
+        /// </summary>
+        public const double CIVIL_ZENITH = 96.0;
+
+
+        /// <summary>
+        /// constant for milliseconds in an hour (3,600,000)
+        /// </summary>
+        internal const long HOUR_MILLIS = 0x36ee80L;
+
+        /// <summary>
+        /// constant for milliseconds in a minute (60,000)
+        /// </summary>
+        internal const long MINUTE_MILLIS = 0xea60L;
+
+        /// <summary>
+        /// Sun's zenith at nautical twilight (102&deg;).
+        /// </summary>
+        public const double NAUTICAL_ZENITH = 102.0;
+
+        /// <summary>
+        /// The Java Calendar encapsulated by this class to track the current date
+        /// used by the class
+        /// </summary>
         private AstronomicalCalculator astronomicalCalculator;
         private Calendar calendar;
-        public const double CIVIL_ZENITH = 96.0;
         private GeoLocation geoLocation;
-        public const double GEOMETRIC_ZENITH = 90.0;
-        internal const long HOUR_MILLIS = 0x36ee80L;
-        internal const long MINUTE_MILLIS = 0xea60L;
-        public const double NAUTICAL_ZENITH = 102.0;
-        private const long serialVersionUID = 1L;
-
         public AstronomicalCalendar()
             : this(new GeoLocation())
         {
@@ -46,6 +139,31 @@
             }
             AstronomicalCalendar calendar = (AstronomicalCalendar)obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
+        }
+
+        /// <summary>
+        /// The getSunrise method Returns a <code>Date</code> representing the
+        /// sunrise time. The zenith used for the calculation uses
+        /// {@link #GEOMETRIC_ZENITH geometric zenith} of 90&deg;. This is adjusted
+        /// by the {@link AstronomicalCalculator} that adds approximately 50/60 of a
+        /// degree to account for 34 archminutes of refraction and 16 archminutes for
+        /// the sun's radius for a total of
+        /// {@link AstronomicalCalculator#adjustZenith 90.83333&deg;}. See
+        /// documentation for the specific implementation of the
+        /// {@link AstronomicalCalculator} that you are using.
+        /// <see cref="adjustZenith"/>
+        /// </summary>
+        /// <returns>
+        /// the <code>Date</code> representing the exact sunrise time. If
+        /// the calculation can not be computed null will be returned.</returns>
+        public virtual Date getSunrise()
+        {
+            double v = this.getUTCSunrise(90.0);
+            if (java.lang.Double.isNaN(v))
+            {
+                return null;
+            }
+            return this.getDateFromTime(v);
         }
 
         private Date getAdjustedSunsetDate(Date date1, Date date2)
@@ -165,16 +283,6 @@
                 return null;
             }
             return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSeaLevelSunrise());
-        }
-
-        public virtual Date getSunrise()
-        {
-            double v = this.getUTCSunrise(90.0);
-            if (java.lang.Double.isNaN(v))
-            {
-                return null;
-            }
-            return this.getDateFromTime(v);
         }
 
         public virtual Date getSunriseOffsetByDegrees(double offsetZenith)
