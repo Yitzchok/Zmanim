@@ -167,13 +167,11 @@ namespace net.sourceforge.zmanim
         public override bool Equals(object obj)
         {
             if (this == obj)
-            {
                 return true;
-            }
+            
             if (!(obj is AstronomicalCalendar))
-            {
                 return false;
-            }
+            
             AstronomicalCalendar calendar = (AstronomicalCalendar)obj;
             return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
         }

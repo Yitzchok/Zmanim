@@ -1,7 +1,5 @@
 ﻿namespace net.sourceforge.zmanim
 {
-
-
     using java.util;
     using util;
 

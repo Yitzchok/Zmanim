@@ -1,10 +1,7 @@
 ﻿namespace net.sourceforge.zmanim.util
 {
-    using IKVM.Attributes;
-    using java.lang;
     using net.sourceforge.zmanim;
     using System;
-    using System.Runtime.CompilerServices;
 
     public abstract class AstronomicalCalculator : ICloneable
     {
