@@ -1,12 +1,7 @@
 ﻿namespace net.sourceforge.zmanim
 {
-    using IKVM.Attributes;
-    using IKVM.Runtime;
-    using java.lang;
     using java.util;
     using net.sourceforge.zmanim.util;
-    using System;
-    using System.Runtime.CompilerServices;
 
     public class ComplexZmanimCalendar : ZmanimCalendar
     {
