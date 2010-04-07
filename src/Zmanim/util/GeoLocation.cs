@@ -7,7 +7,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    public class GeoLocation
+    public class GeoLocation : ICloneable
     {
         private int DISTANCE;
         private double elevation;
@@ -165,6 +165,11 @@
             num += (0x25 * num) + num7;
             num += (0x25 * num) + ((this.locationName != null) ? java.lang.String.instancehelper_hashCode(this.locationName) : 0);
             return (num + ((0x25 * num) + ((this.timeZone != null) ? java.lang.Object.instancehelper_hashCode(this.timeZone) : 0)));
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         public virtual void setElevation(double elevation)

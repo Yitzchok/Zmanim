@@ -427,26 +427,12 @@
 
         public object Clone()
         {
-            /*
-             * 
-             * 
-            AstronomicalCalendar calendar = null;
-            try
-            {
-                calendar = (AstronomicalCalendar)base.clone();
-            }
-            catch (CloneNotSupportedException)
-            {
-                System.@out.print("Required by the compiler. Should never be reached since we implement clone()");
-            }
-            calendar.setGeoLocation((GeoLocation)this.getGeoLocation().clone());
-            calendar.setCalendar((Calendar)this.getCalendar().clone());
-            calendar.setAstronomicalCalculator((AstronomicalCalculator)this.getAstronomicalCalculator().clone());
-            return calendar;
-             * 
-             * */
-            return this.MemberwiseClone();
+            var clonedCalendar = (AstronomicalCalendar)this.MemberwiseClone();
+            clonedCalendar.setGeoLocation((GeoLocation)this.getGeoLocation().Clone());
+            clonedCalendar.setCalendar((Calendar)this.getCalendar().clone());
+            clonedCalendar.setAstronomicalCalculator((AstronomicalCalculator)this.getAstronomicalCalculator().Clone());
+
+            return clonedCalendar;
         }
     }
 }
-

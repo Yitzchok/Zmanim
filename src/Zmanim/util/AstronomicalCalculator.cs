@@ -6,7 +6,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-    public abstract class AstronomicalCalculator
+    public abstract class AstronomicalCalculator : ICloneable
     {
         private double refraction = 0.56666666666666665;
         private double solarRadius = 0.26666666666666666;
@@ -44,7 +44,7 @@
 
         public abstract double getUTCSunrise(AstronomicalCalendar ac, double d, bool b);
         public abstract double getUTCSunset(AstronomicalCalendar ac, double d, bool b);
-       
+
         public virtual void setRefraction(double refraction)
         {
             this.refraction = refraction;
@@ -53,6 +53,11 @@
         public virtual void setSolarRadius(double solarRadius)
         {
             this.solarRadius = solarRadius;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
