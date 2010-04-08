@@ -1,12 +1,8 @@
 ﻿namespace net.sourceforge.zmanim.util
 {
-    using IKVM.Attributes;
-    using java.lang;
     using java.util;
-    using System;
-    using System.Runtime.CompilerServices;
 
-    public class Zman : java.lang.Object
+    public class Zman
     {
         private long duration;
         private Date zman;
@@ -23,10 +19,6 @@
         {
             this.zmanLabel = label;
             this.duration = duration;
-        }
-
-        public static void __<clinit>()
-        {
         }
 
         public virtual long getDuration()

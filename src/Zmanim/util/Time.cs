@@ -1,22 +1,40 @@
-﻿using IKVM.Runtime;
-using IKVM.Attributes;
-using java.lang;
-using System;
-using System.Runtime.CompilerServices;
-
-namespace net.sourceforge.zmanim.util
+﻿namespace net.sourceforge.zmanim.util
 {
 
-    public class Time : java.lang.Object
+    /// <summary>
+    /// A class that represents a numeric time. Times that represent a time of day
+    /// are stored as <seealso cref="java.util.Date"/>s in this API. The time class is used to
+    /// represent numeric time such as the time in hours, minutes, seconds and
+    /// milliseconds of a
+    /// <seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour"/>.
+    ///
+    /// @author &copy; Eliyahu Hershfeld 2004 - 2007
+    /// @version 0.9.0 </summary>
+    public class Time
     {
-        private const int HOUR_MILLIS = 0x36ee80;
-        private int hours;
-        private bool isNegative;
-        private int milliseconds;
-        private const int MINUTE_MILLIS = 0xea60;
-        private int minutes;
-        private const int SECOND_MILLIS = 0x3e8;
-        private int seconds;
+        private const int SECOND_MILLIS = 1000;
+
+        private const int MINUTE_MILLIS = SECOND_MILLIS * 60;
+
+        private const int HOUR_MILLIS = MINUTE_MILLIS * 60;
+
+        private int hours = 0;
+
+        private int minutes = 0;
+
+        private int seconds = 0;
+
+        private int milliseconds = 0;
+
+        private bool isNegative = false;
+
+        public Time(int hours, int minutes, int seconds, int milliseconds)
+        {
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
+            this.milliseconds = milliseconds;
+        }
 
         public Time(double millis)
             : this((int)millis)
@@ -25,71 +43,26 @@ namespace net.sourceforge.zmanim.util
 
         public Time(int millis)
         {
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.milliseconds = 0;
-            this.isNegative = false;
             if (millis < 0)
             {
-                this.isNegative = true;
-                millis = java.lang.Math.abs(millis);
+                isNegative = true;
+                millis = System.Math.Abs(millis);
             }
-            this.hours = millis / 0x36ee80;
-            millis -= this.hours * 0x36ee80;
-            this.minutes = millis / 0xea60;
-            millis -= this.minutes * 0xea60;
-            this.seconds = millis / 0x3e8;
-            millis -= this.seconds * 0x3e8;
-            this.milliseconds = millis;
-        }
+            hours = millis / HOUR_MILLIS;
+            millis = millis - hours * HOUR_MILLIS;
 
-        public Time(int hours, int minutes, int seconds, int milliseconds)
-        {
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.milliseconds = 0;
-            this.isNegative = false;
-            this.hours = hours;
-            this.minutes = minutes;
-            this.seconds = seconds;
-            this.milliseconds = milliseconds;
-        }
+            minutes = millis / MINUTE_MILLIS;
+            millis = millis - minutes * MINUTE_MILLIS;
 
-        public virtual int getHours()
-        {
-            return this.hours;
-        }
+            seconds = millis / SECOND_MILLIS;
+            millis = millis - seconds * SECOND_MILLIS;
 
-        public virtual int getMilliseconds()
-        {
-            return this.milliseconds;
-        }
-
-        public virtual int getMinutes()
-        {
-            return this.minutes;
-        }
-
-        public virtual int getSeconds()
-        {
-            return this.seconds;
-        }
-
-        public virtual double getTime()
-        {
-            return (double)((((this.hours * 0x36ee80) + (this.minutes * 0xea60)) + (this.seconds * 0x3e8)) + this.milliseconds);
+            milliseconds = millis;
         }
 
         public virtual bool IsNegative()
         {
-            return this.isNegative;
-        }
-
-        public virtual void setHours(int hours)
-        {
-            this.hours = hours;
+            return isNegative;
         }
 
         public virtual void setIsNegative(bool isNegative)
@@ -97,20 +70,74 @@ namespace net.sourceforge.zmanim.util
             this.isNegative = isNegative;
         }
 
-        public virtual void setMilliseconds(int milliseconds)
+ 
+        /// <returns> Returns the hour. </returns>
+         public virtual int getHours()
         {
-            this.milliseconds = milliseconds;
+            return hours;
         }
 
-        public virtual void setMinutes(int minutes)
+ 
+        /// <param name="hours">
+        ///            The hours to set. </param>
+         public virtual void setHours(int hours)
+        {
+            this.hours = hours;
+        }
+
+ 
+        /// <returns> Returns the minutes. </returns>
+         public virtual int getMinutes()
+        {
+            return minutes;
+        }
+
+ 
+        /// <param name="minutes">
+        ///            The minutes to set. </param>
+         public virtual void setMinutes(int minutes)
         {
             this.minutes = minutes;
         }
 
-        public virtual void setSeconds(int seconds)
+ 
+        /// <returns> Returns the seconds. </returns>
+         public virtual int getSeconds()
+        {
+            return seconds;
+        }
+
+ 
+        /// <param name="seconds">
+        ///            The seconds to set. </param>
+         public virtual void setSeconds(int seconds)
         {
             this.seconds = seconds;
         }
+
+ 
+        /// <returns> Returns the milliseconds. </returns>
+         public virtual int getMilliseconds()
+        {
+            return milliseconds;
+        }
+
+ 
+        /// <param name="milliseconds">
+        ///            The milliseconds to set. </param>
+         public virtual void setMilliseconds(int milliseconds)
+        {
+            this.milliseconds = milliseconds;
+        }
+
+        public virtual double getTime()
+        {
+            return hours * HOUR_MILLIS + minutes * MINUTE_MILLIS + seconds * SECOND_MILLIS + milliseconds;
+        }
+
+        public override string ToString()
+        {
+            return new ZmanimFormatter().format(this);
+        }
     }
 }
-
