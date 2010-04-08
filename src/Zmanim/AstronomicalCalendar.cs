@@ -24,77 +24,70 @@ namespace net.sourceforge.zmanim
     using net.sourceforge.zmanim.util;
     using System;
 
+
     ///
-    /// <summary>
-    /// A Java calendar that calculates astronomical time calculations such as
-    /// <seealso cref="#getSunrise() sunrise"/> and <seealso cref="#getSunset() sunset"/> times. This
-    /// class contains a <seealso cref="#getCalendar() Calendar"/> and can therefore use the
-    /// standard Calendar functionality to change dates etc. The calculation engine
-    /// used to calculate the astronomical times can be changed to a different
-    /// implementation by implementing the <seealso cref="AstronomicalCalculator"/> and setting
-    /// it with the <seealso cref="#setAstronomicalCalculator(AstronomicalCalculator)"/>. A
-    /// number of different implementations are included in the util package <br />
-    /// <b>Note:</b> There are times when the algorithms can't calculate proper
-    /// values for sunrise and sunset. This is usually caused by trying to calculate
-    /// times for areas either very far North or South, where sunrise / sunset never
-    /// happen on that date. This is common when calculating twilight with a deep dip
-    /// below the horizon for locations as south of the North Pole as London in the
-    /// northern hemisphere. When the calculations encounter this condition a null
-    /// will be returned when a <code><seealso cref="java.util.Date"/></code> is expected and
-    /// <seealso cref="Double#NaN"/> when a double is expected. The reason that
-    /// <code>Exception</code>s are not thrown in these cases is because the lack
-    /// of a rise/set are not exceptions, but expected in many parts of the world.
+    /// <summary> * A Java calendar that calculates astronomical time calculations such as
+    /// * <seealso cref="#getSunrise() sunrise"/> and <seealso cref="#getSunset() sunset"/> times. This
+    /// * class contains a <seealso cref="#getCalendar() Calendar"/> and can therefore use the
+    /// * standard Calendar functionality to change dates etc. The calculation engine
+    /// * used to calculate the astronomical times can be changed to a different
+    /// * implementation by implementing the <seealso cref="AstronomicalCalculator"/> and setting
+    /// * it with the <seealso cref="#setAstronomicalCalculator(AstronomicalCalculator)"/>. A
+    /// * number of different implementations are included in the util package <br />
+    /// * <b>Note:</b> There are times when the algorithms can't calculate proper
+    /// * values for sunrise and sunset. This is usually caused by trying to calculate
+    /// * times for areas either very far North or South, where sunrise / sunset never
+    /// * happen on that date. This is common when calculating twilight with a deep dip
+    /// * below the horizon for locations as south of the North Pole as London in the
+    /// * northern hemisphere. When the calculations encounter this condition a null
+    /// * will be returned when a <code><seealso cref="java.util.Date"/></code> is expected and
+    /// * <seealso cref="Double#NaN"/> when a double is expected. The reason that
+    /// * <code>Exception</code>s are not thrown in these cases is because the lack
+    /// * of a rise/set are not exceptions, but expected in many parts of the world.
+    /// * 
+    /// * Here is a simple example of how to use the API to calculate sunrise: <br />
+    /// * First create the Calendar for the location you would like to calculate:
+    /// * 
+    /// * <pre>
+    /// * String locationName = &quot;Lakewood, NJ&quot;
+    /// * double latitude = 40.0828; //Lakewood, NJ
+    /// * double longitude = -74.2094; //Lakewood, NJ
+    /// * double elevation = 20; // optional elevation correction in Meters
+    /// * //the String parameter in getTimeZone() has to be a valid timezone listed in <seealso cref="java.util.TimeZone#getAvailableIDs()"/>
+    /// * TimeZone timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
+    /// * GeoLocation location = new GeoLocation(locationName, latitude, longitude,
+    /// * 		elevation, timeZone);
+    /// * AstronomicalCalendar ac = new AstronomicalCalendar(location);
+    /// * </pre>
+    /// * 
+    /// * To get the time of sunrise, first set the date (if not set, the date will
+    /// * default to today):
+    /// * 
+    /// * <pre>
+    /// * ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
+    /// * ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
+    /// * Date sunrise = ac.getSunrise();
+    /// * </pre>
+    /// * 
+    /// * 
+    /// * @author &copy; Eliyahu Hershfeld 2004 - 2010
+    /// * @version 1.2 </summary>
     /// 
-    /// Here is a simple example of how to use the API to calculate sunrise: <br />
-    /// First create the Calendar for the location you would like to calculate:
-    /// 
-    /// <code>
-    /// String locationName = &quot;Lakewood, NJ&quot;
-    /// double latitude = 40.0828; //Lakewood, NJ
-    /// double longitude = -74.2094; //Lakewood, NJ
-    /// double elevation = 20; // optional elevation correction in Meters
-    /// //the String parameter in getTimeZone() has to be a valid timezone listed in <seealso cref="java.util.TimeZone#getAvailableIDs()"/>
-    /// TimeZone timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
-    /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
-    /// 		elevation, timeZone);
-    /// AstronomicalCalendar ac = new AstronomicalCalendar(location);
-    /// </code>
-    /// 
-    /// To get the time of sunrise, first set the date (if not set, the date will
-    /// default to today):
-    /// 
-    /// <code>
-    /// ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
-    /// ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
-    /// Date sunrise = ac.getSunrise();
-    /// </code>
-    /// </summary> 
-    /// <remarks>
-    /// @author &copy; Eliyahu Hershfeld 2004 - 2010
-    /// @version 1.2
-    /// </remarks>
     public class AstronomicalCalendar : ICloneable
     {
         private const long serialVersionUID = 1;
 
-        ///	<summary>
-        /// 90&deg; below the vertical. Used for certain calculations.<br />
+        ///	 <summary> 
+        ///	90&deg; below the vertical. Used for certain calculations.<br />
         ///	<b>Note </b>: it is important to note the distinction between this zenith
         ///	and the <seealso cref="AstronomicalCalculator#adjustZenith adjusted zenith"/> used
         ///	for some solar calculations. This 90 zenith is only used because some
         ///	calculations in some subclasses are historically calculated as an offset
-        ///	in reference to 90.
-        /// </summary>
-        public const double GEOMETRIC_ZENITH = 90.0;
+        ///	in reference to 90. </summary>
+        public const double GEOMETRIC_ZENITH = 90;
 
-        /// <summary>
-        /// Sun's zenith at astronomical twilight (108&deg;).
-        /// </summary>
-        public const double ASTRONOMICAL_ZENITH = 108.0;
-
-
-        ///	<summary>
-        /// Default value for Sun's zenith and true rise/set Zenith (used in this
+        ///	 <summary> 
+        ///	Default value for Sun's zenith and true rise/set Zenith (used in this
         ///	class and subclasses) is the angle that the center of the Sun makes to a
         ///	line perpendicular to the Earth's surface. If the Sun were a point and
         ///	the Earth were without an atmosphere, true sunset and sunrise would
@@ -108,76 +101,36 @@ namespace net.sourceforge.zmanim
         ///	accounts for 34 minutes or so (this can be changed via the
         ///	<seealso cref="#setRefraction(double)"/> method), giving a total of 50 arcminutes.
         ///	The total value for ZENITH is 90+(5/6) or 90.8333333&deg; for true
-        ///	sunrise/sunset.
-        /// </summary>
-        //public static double ZENITH = GEOMETRIC_ZENITH + 5.0 / 6.0;
+        ///	sunrise/sunset. </summary>
+        ///	 
+        // public static double ZENITH = GEOMETRIC_ZENITH + 5.0 / 6.0;
+        /// <summary> Sun's zenith at civil twilight (96&deg;).  </summary>
+        public const double CIVIL_ZENITH = 96;
 
-        /// <summary>
-        /// Sun's zenith at civil twilight (96&deg;).
-        /// </summary>
-        public const double CIVIL_ZENITH = 96.0;
+        /// <summary> Sun's zenith at nautical twilight (102&deg;).  </summary>
+        public const double NAUTICAL_ZENITH = 102;
 
+        /// <summary> Sun's zenith at astronomical twilight (108&deg;).  </summary>
+        public const double ASTRONOMICAL_ZENITH = 108;
 
-        /// <summary>
-        /// constant for milliseconds in an hour (3,600,000)
-        /// </summary>
-        internal const long HOUR_MILLIS = 0x36ee80L;
+        /// <summary> constant for milliseconds in a minute (60,000)  </summary>
+        internal const long MINUTE_MILLIS = 60 * 1000;
 
-        /// <summary>
-        /// constant for milliseconds in a minute (60,000)
-        /// </summary>
-        internal const long MINUTE_MILLIS = 0xea60L;
+        /// <summary> constant for milliseconds in an hour (3,600,000)  </summary>
+        internal const long HOUR_MILLIS = MINUTE_MILLIS * 60;
 
-        /// <summary>
-        /// Sun's zenith at nautical twilight (102&deg;).
-        /// </summary>
-        public const double NAUTICAL_ZENITH = 102.0;
-
-        /// <summary>
-        /// The Java Calendar encapsulated by this class to track the current date
-        /// used by the class
-        /// </summary>
-        private AstronomicalCalculator astronomicalCalculator;
+        ///	 <summary> 
+        ///	The Java Calendar encapsulated by this class to track the current date
+        ///	used by the class </summary>
+        ///	 
         private Calendar calendar;
+
         private GeoLocation geoLocation;
 
-        ///	<summary>
-        /// Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
-        ///	a default
-        ///	<seealso cref="AstronomicalCalculator#getDefault() AstronomicalCalculator"/> and
-        ///	default the calendar to the current date. </summary>
-        public AstronomicalCalendar()
-            : this(new GeoLocation())
-        {
-        }
+        private AstronomicalCalculator astronomicalCalculator;
 
-        ///	<summary>
-        /// A constructor that takes in as a parameter geolocation information
-        ///	 </summary>
-        ///	<param name="geoLocation">
-        ///	           The location information used for astronomical calculating sun
-        ///	           times. </param>
-        public AstronomicalCalendar(GeoLocation geoLocation)
-        {
-            this.setCalendar(Calendar.getInstance(geoLocation.getTimeZone()));
-            this.setGeoLocation(geoLocation);
-            this.setAstronomicalCalculator(AstronomicalCalculator.getDefault());
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-                return true;
-            
-            if (!(obj is AstronomicalCalendar))
-                return false;
-            
-            AstronomicalCalendar calendar = (AstronomicalCalendar)obj;
-            return ((this.getCalendar().equals(calendar.getCalendar()) && this.getGeoLocation().Equals(calendar.getGeoLocation())) && java.lang.Object.instancehelper_equals(this.getAstronomicalCalculator(), calendar.getAstronomicalCalculator()));
-        }
-
-        ///	<summary>
-        /// The getSunrise method Returns a <code>Date</code> representing the
+        ///	 <summary> 
+        ///	The getSunrise method Returns a <code>Date</code> representing the
         ///	sunrise time. The zenith used for the calculation uses
         ///	<seealso cref="#GEOMETRIC_ZENITH geometric zenith"/> of 90&deg;. This is adjusted
         ///	by the <seealso cref="AstronomicalCalculator"/> that adds approximately 50/60 of a
@@ -192,16 +145,15 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="AstronomicalCalculator#adjustZenith"/>
         public virtual Date getSunrise()
         {
-            double v = this.getUTCSunrise(90.0);
-            if (java.lang.Double.isNaN(v))
-            {
+            double sunrise = getUTCSunrise(GEOMETRIC_ZENITH);
+            if (double.IsNaN(sunrise))
                 return null;
-            }
-            return this.getDateFromTime(v);
+
+            return getDateFromTime(sunrise);
         }
 
-        ///	<summary>
-        /// Method that returns the sunrise without correction for elevation.
+        ///	 <summary> 
+        ///	Method that returns the sunrise without correction for elevation.
         ///	Non-sunrise and sunset calculations such as dawn and dusk, depend on the
         ///	amount of visible light, something that is not affected by elevation.
         ///	This method returns sunrise calculated at sea level. This forms the base
@@ -212,32 +164,31 @@ namespace net.sourceforge.zmanim
         ///	        time. If the calculation can not be computed null will be
         ///	        returned. </returns>
         ///	<seealso cref="AstronomicalCalendar#getSunrise"/>
-        ///	<seealso cref="stronomicalCalendar#getUTCSeaLevelSunrise"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunrise"/>
         public virtual Date getSeaLevelSunrise()
         {
-            double v = this.getUTCSeaLevelSunrise(90.0);
-            if (java.lang.Double.isNaN(v))
-            {
+            double sunrise = getUTCSeaLevelSunrise(GEOMETRIC_ZENITH);
+            if (double.IsNaN(sunrise))
                 return null;
-            }
-            return this.getDateFromTime(v);
+
+            return getDateFromTime(sunrise);
         }
 
-        ///	<summary>
-        /// A method to return the the beginning of civil twilight (dawn) using a
+        ///	 <summary> 
+        ///	A method to return the the beginning of civil twilight (dawn) using a
         ///	zenith of <seealso cref="#CIVIL_ZENITH 96&deg;"/>.
-        ///	</summary>
+        ///	 </summary>
         ///	<returns> The <code>Date</code> of the beginning of civil twilight using
         ///	        a zenith of 96&deg;. If the calculation can not be computed null
         ///	        will be returned. </returns>
         ///	<seealso cref="#CIVIL_ZENITH"/>
         public virtual Date getBeginCivilTwilight()
         {
-            return this.getSunriseOffsetByDegrees(96.0);
+            return getSunriseOffsetByDegrees(CIVIL_ZENITH);
         }
 
-        ///	<summary>
-        /// A method to return the the beginning of nautical twilight using a zenith
+        ///	 <summary> 
+        ///	A method to return the the beginning of nautical twilight using a zenith
         ///	of <seealso cref="#NAUTICAL_ZENITH 102&deg;"/>.
         ///	 </summary>
         ///	<returns> The <code>Date</code> of the beginning of nautical twilight
@@ -246,23 +197,24 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#NAUTICAL_ZENITH"/>
         public virtual Date getBeginNauticalTwilight()
         {
-            return this.getSunriseOffsetByDegrees(102.0);
+            return getSunriseOffsetByDegrees(NAUTICAL_ZENITH);
         }
 
-        ///	<summary>
-        /// A method that returns the the beginning of astronomical twilight using a
+        ///	 <summary> 
+        ///	A method that returns the the beginning of astronomical twilight using a
         ///	zenith of <seealso cref="#ASTRONOMICAL_ZENITH 108&deg;"/>.
         ///	 </summary>
         ///	<returns> The <code>Date</code> of the beginning of astronomical twilight
         ///	        using a zenith of 108&deg;. If the calculation can not be
         ///	        computed null will be returned. </returns>
+        ///	<seealso cref="#ASTRONOMICAL_ZENITH"/>
         public virtual Date getBeginAstronomicalTwilight()
         {
-            return this.getSunriseOffsetByDegrees(108.0);
+            return getSunriseOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
 
-        ///	<summary>
-        /// The getSunset method Returns a <code>Date</code> representing the
+        ///	 <summary> 
+        ///	The getSunset method Returns a <code>Date</code> representing the
         ///	sunset time. The zenith used for the calculation uses
         ///	<seealso cref="#GEOMETRIC_ZENITH geometric zenith"/> of 90&deg;. This is adjusted
         ///	by the <seealso cref="AstronomicalCalculator"/> that adds approximately 50/60 of a
@@ -279,18 +231,18 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the exact sunset time. If
         ///	        the calculation can not be computed null will be returned. If the
         ///	        time calculation </returns>
+        ///	<seealso cref="AstronomicalCalculator#adjustZenith"/>
         public virtual Date getSunset()
         {
-            double v = this.getUTCSunset(90.0);
-            if (java.lang.Double.isNaN(v))
-            {
+            double sunset = getUTCSunset(GEOMETRIC_ZENITH);
+            if (double.IsNaN(sunset))
                 return null;
-            }
-            return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSunrise());
+
+            return getAdjustedSunsetDate(getDateFromTime(sunset), getSunrise());
         }
 
-        ///	<summary>
-        /// A method that will roll the sunset time forward a day if sunset occurs
+        ///	 <summary> 
+        ///	A method that will roll the sunset time forward a day if sunset occurs
         ///	before sunrise. This will typically happen when a timezone other than the
         ///	local timezone is used (calculating Los Angeles sunset using a GMT
         ///	timezone for example). In this case the sunset date will be incremented
@@ -301,20 +253,24 @@ namespace net.sourceforge.zmanim
         ///	<param name="sunrise">
         ///	           the sunrise to compare to the sunset </param>
         ///	<returns> the adjusted sunset date </returns>
-        private Date getAdjustedSunsetDate(Date date1, Date date2)
+        ///	 
+        private Date getAdjustedSunsetDate(Date sunset, Date sunrise)
         {
-            if (((date1 != null) && (date2 != null)) && (date2.compareTo(date1) >= 0))
+            if (sunset != null && sunrise != null && sunrise.compareTo(sunset) >= 0)
             {
-                GregorianCalendar calendar = (GregorianCalendar)this.getCalendar().clone();
-                calendar.setTime(date1);
-                calendar.add(5, 1);
-                return calendar.getTime();
+                Calendar clonedCalendar = (GregorianCalendar)getCalendar().clone();
+                clonedCalendar.setTime(sunset);
+                clonedCalendar.add(Calendar.DAY_OF_MONTH, 1);
+                return clonedCalendar.getTime();
             }
-            return date1;
+            else
+            {
+                return sunset;
+            }
         }
 
-        ///	<summary>
-        /// Method that returns the sunset without correction for elevation.
+        ///	 <summary> 
+        ///	Method that returns the sunset without correction for elevation.
         ///	Non-sunrise and sunset calculations such as dawn and dusk, depend on the
         ///	amount of visible light, something that is not affected by elevation.
         ///	This method returns sunset calculated at sea level. This forms the base
@@ -328,16 +284,16 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
         public virtual Date getSeaLevelSunset()
         {
-            double v = this.getUTCSeaLevelSunset(90.0);
-            if (java.lang.Double.isNaN(v))
-            {
+            double sunset = getUTCSeaLevelSunset(GEOMETRIC_ZENITH);
+            if (double.IsNaN(sunset))
                 return null;
-            }
-            return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSeaLevelSunrise());
+
+            return getAdjustedSunsetDate(getDateFromTime(sunset), getSeaLevelSunrise());
+
         }
 
-        ///	<summary>
-        /// A method to return the the end of civil twilight using a zenith of
+        ///	 <summary> 
+        ///	A method to return the the end of civil twilight using a zenith of
         ///	<seealso cref="#CIVIL_ZENITH 96&deg;"/>.
         ///	 </summary>
         ///	<returns> The <code>Date</code> of the end of civil twilight using a
@@ -346,11 +302,11 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#CIVIL_ZENITH"/>
         public virtual Date getEndCivilTwilight()
         {
-            return this.getSunsetOffsetByDegrees(96.0);
+            return getSunsetOffsetByDegrees(CIVIL_ZENITH);
         }
 
-        ///	<summary>
-        /// A method to return the the end of nautical twilight using a zenith of
+        ///	 <summary> 
+        ///	A method to return the the end of nautical twilight using a zenith of
         ///	<seealso cref="#NAUTICAL_ZENITH 102&deg;"/>.
         ///	 </summary>
         ///	<returns> The <code>Date</code> of the end of nautical twilight using a
@@ -359,11 +315,11 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#NAUTICAL_ZENITH"/>
         public virtual Date getEndNauticalTwilight()
         {
-            return this.getSunsetOffsetByDegrees(102.0);
+            return getSunsetOffsetByDegrees(NAUTICAL_ZENITH);
         }
 
-        ///	<summary>
-        /// A method to return the the end of astronomical twilight using a zenith of
+        ///	 <summary> 
+        ///	A method to return the the end of astronomical twilight using a zenith of
         ///	<seealso cref="#ASTRONOMICAL_ZENITH 108&deg;"/>.
         ///	 </summary>
         ///	<returns> The The <code>Date</code> of the end of astronomical twilight
@@ -372,11 +328,11 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#ASTRONOMICAL_ZENITH"/>
         public virtual Date getEndAstronomicalTwilight()
         {
-            return this.getSunsetOffsetByDegrees(108.0);
+            return getSunsetOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
 
-        ///	<summary>
-        /// Utility method that returns a date offset by the offset time passed in.
+        ///	 <summary> 
+        ///	Utility method that returns a date offset by the offset time passed in.
         ///	This method casts the offset as a <code>long</code> and calls
         ///	<seealso cref="#getTimeOffset(Date, long)"/>.
         ///	 </summary>
@@ -387,11 +343,11 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <seealso cref="java.util.Date"/>with the offset added to it </returns>
         public virtual Date getTimeOffset(Date time, double offset)
         {
-            return this.getTimeOffset(time, (long)offset);
+            return getTimeOffset(time, (long)offset);
         }
 
-        ///	<summary>
-        /// A utility method to return a date offset by the offset time passed in.
+        ///	 <summary> 
+        ///	A utility method to return a date offset by the offset time passed in.
         ///	 </summary>
         ///	<param name="time">
         ///	           the start time </param>
@@ -401,75 +357,232 @@ namespace net.sourceforge.zmanim
         ///	        to it </returns>
         public virtual Date getTimeOffset(Date time, long offset)
         {
-            if ((time == null) || (offset == -9223372036854775808L))
+            if (time == null || offset == long.MinValue)
             {
                 return null;
             }
             return new Date(time.getTime() + offset);
         }
 
-        ///	<summary> 
-        /// A method that returns the currently set <seealso cref="GeoLocation"/> that contains
-        ///	location information used for the astronomical calculations.
-        ///	</summary>
-        ///	<returns> Returns the geoLocation. </returns>
-        public virtual GeoLocation getGeoLocation()
+        ///	 <summary> 
+        ///	A utility method to return the time of an offset by degrees below or
+        ///	above the horizon of <seealso cref="#getSunrise() sunrise"/>.
+        ///	 </summary>
+        ///	<param name="offsetZenith">
+        ///	           the degrees before <seealso cref="#getSunrise()"/> to use in the
+        ///	           calculation. For time after sunrise use negative numbers. </param>
+        ///	<returns> The <seealso cref="java.util.Date"/> of the offset after (or before)
+        ///	        <seealso cref="#getSunrise()"/>. If the calculation can not be computed
+        ///	        null will be returned. </returns>
+        public virtual Date getSunriseOffsetByDegrees(double offsetZenith)
         {
-            return this.geoLocation;
+            double alos = getUTCSunrise(offsetZenith);
+            if (double.IsNaN(alos))
+                return null;
+
+            return getDateFromTime(alos);
         }
 
-        ///	<summary>
-        /// A method that adds time zone offset and daylight savings time to the raw
+        ///	 <summary> 
+        ///	A utility method to return the time of an offset by degrees below or
+        ///	above the horizon of <seealso cref="#getSunset() sunset"/>.
+        ///	 </summary>
+        ///	<param name="offsetZenith">
+        ///	           the degrees after <seealso cref="#getSunset()"/> to use in the
+        ///	           calculation. For time before sunset use negative numbers. </param>
+        ///	<returns> The <seealso cref="java.util.Date"/>of the offset after (or before)
+        ///	        <seealso cref="#getSunset()"/>. If the calculation can not be computed
+        ///	        null will be returned. </returns>
+        public virtual Date getSunsetOffsetByDegrees(double offsetZenith)
+        {
+            double sunset = getUTCSunset(offsetZenith);
+            if (double.IsNaN(sunset))
+                return null;
+
+            return getAdjustedSunsetDate(getDateFromTime(sunset), getSunriseOffsetByDegrees(offsetZenith));
+        }
+
+        ///	 <summary> 
+        ///	Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
+        ///	a default
+        ///	<seealso cref="AstronomicalCalculator#getDefault() AstronomicalCalculator"/> and
+        ///	default the calendar to the current date. </summary>
+        public AstronomicalCalendar()
+            : this(new GeoLocation())
+        {
+        }
+
+        ///	 <summary> 
+        ///	A constructor that takes in as a parameter geolocation information
+        ///	 </summary>
+        ///	<param name="geoLocation">
+        ///	           The location information used for astronomical calculating sun
+        ///	           times. </param>
+        public AstronomicalCalendar(GeoLocation geoLocation)
+        {
+            setCalendar(Calendar.getInstance(geoLocation.getTimeZone()));
+            setGeoLocation(geoLocation); // duplicate call
+            setAstronomicalCalculator(AstronomicalCalculator.getDefault());
+        }
+
+        ///	 <summary> 
+        ///	Method that returns the sunrise in UTC time without correction for time
+        ///	zone offset from GMT and without using daylight savings time.
+        ///	 </summary>
+        ///	<param name="zenith">
+        ///	           the degrees below the horizon. For time after sunrise use
+        ///	           negative numbers. </param>
+        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
+        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
+        ///	        returned. </returns>
+        public virtual double getUTCSunrise(double zenith)
+        {
+            return getAstronomicalCalculator().getUTCSunrise(this, zenith, true);
+        }
+
+        ///	 <summary> 
+        ///	Method that returns the sunrise in UTC time without correction for time
+        ///	zone offset from GMT and without using daylight savings time. Non-sunrise
+        ///	and sunset calculations such as dawn and dusk, depend on the amount of
+        ///	visible light, something that is not affected by elevation. This method
+        ///	returns UTC sunrise calculated at sea level. This forms the base for dawn
+        ///	calculations that are calculated as a dip below the horizon before
+        ///	sunrise.
+        ///	 </summary>
+        ///	<param name="zenith">
+        ///	           the degrees below the horizon. For time after sunrise use
+        ///	           negative numbers. </param>
+        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
+        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
+        ///	        returned. </returns>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSunrise"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
+        public virtual double getUTCSeaLevelSunrise(double zenith)
+        {
+            return getAstronomicalCalculator().getUTCSunrise(this, zenith, false);
+        }
+
+        ///	 <summary> 
+        ///	Method that returns the sunset in UTC time without correction for time
+        ///	zone offset from GMT and without using daylight savings time.
+        ///	 </summary>
+        ///	<param name="zenith">
+        ///	           the degrees below the horizon. For time after before sunset
+        ///	           use negative numbers. </param>
+        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
+        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
+        ///	        returned. </returns>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
+        public virtual double getUTCSunset(double zenith)
+        {
+            return getAstronomicalCalculator().getUTCSunset(this, zenith, true);
+        }
+
+        ///	 <summary> 
+        ///	Method that returns the sunset in UTC time without correction for
+        ///	elevation, time zone offset from GMT and without using daylight savings
+        ///	time. Non-sunrise and sunset calculations such as dawn and dusk, depend
+        ///	on the amount of visible light, something that is not affected by
+        ///	elevation. This method returns UTC sunset calculated at sea level. This
+        ///	forms the base for dusk calculations that are calculated as a dip below
+        ///	the horizon after sunset.
+        ///	 </summary>
+        ///	<param name="zenith">
+        ///	           the degrees below the horizon. For time before sunset use
+        ///	           negative numbers. </param>
+        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
+        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
+        ///	        returned. </returns>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSunset"/>
+        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunrise"/>
+        public virtual double getUTCSeaLevelSunset(double zenith)
+        {
+            return getAstronomicalCalculator().getUTCSunset(this, zenith, false);
+        }
+
+        ///	 <summary> 
+        ///	A method that adds time zone offset and daylight savings time to the raw
         ///	UTC time.
         ///	 </summary>
         ///	<param name="time">
         ///	           The UTC time to be adjusted. </param>
         ///	<returns> The time adjusted for the time zone offset and daylight savings
         ///	        time. </returns>
-        private double getOffsetTime(double num1)
+        ///	 
+        private double getOffsetTime(double time)
         {
-            bool isInDaylightTime = this.getCalendar().getTimeZone().inDaylightTime(this.getCalendar().getTime());
-            double num2 = 0f;
-            double num3 = ((long)this.getCalendar().getTimeZone().getRawOffset()) / 0x36ee80L;
-            if (isInDaylightTime)
+            bool dst = getCalendar().getTimeZone().inDaylightTime(getCalendar().getTime());
+            double dstOffset = 0;
+            // be nice to Newfies and use a double
+            double gmtOffset = getCalendar().getTimeZone().getRawOffset() / (60 * MINUTE_MILLIS);
+            if (dst)
             {
-                num2 = ((long)this.getCalendar().getTimeZone().getDSTSavings()) / 0x36ee80L;
+                dstOffset = getCalendar().getTimeZone().getDSTSavings() / (60 * MINUTE_MILLIS);
             }
-            return ((num1 + num3) + num2);
+            return time + gmtOffset + dstOffset;
         }
 
-        ///	<summary>
-        /// A method to return the current AstronomicalCalculator set.
+        ///	 <summary> 
+        ///	Method to return a temporal (solar) hour. The day from sunrise to sunset
+        ///	is split into 12 equal parts with each one being a temporal hour.
         ///	 </summary>
-        ///	<returns> Returns the astronimicalCalculator. </returns>
-        ///	<seealso cref="#setAstronomicalCalculator(AstronomicalCalculator)"/>
-        public virtual AstronomicalCalculator  getAstronomicalCalculator()
+        ///	<returns> the <code>long</code> millisecond length of a temporal hour. If
+        ///	        the calculation can not be computed <seealso cref="Long#MIN_VALUE"/> will
+        ///	        be returned. </returns>
+        public virtual long getTemporalHour()
         {
-            return this.astronomicalCalculator;
+            return getTemporalHour(getSunrise(), getSunset());
         }
 
-        ///	<summary>
-        /// returns the Calendar object encapsulated in this class.
+        ///	 <summary> 
+        ///	Utility method that will allow the calculation of a temporal (solar) hour
+        ///	based on the sunrise and sunset passed to this method.
         ///	 </summary>
-        ///	<returns> Returns the calendar. </returns>
-        public virtual Calendar getCalendar()
+        ///	<param name="sunrise">
+        ///	           The start of the day. </param>
+        ///	<param name="sunset">
+        ///	           The end of the day. </param>
+        ///	<seealso cref="#getTemporalHour()"/>
+        ///	<returns> the <code>long</code> millisecond length of the temporal hour.
+        ///	        If the calculation can not be computed <seealso cref="Long#MIN_VALUE"/>
+        ///	        will be returned. </returns>
+        public virtual long getTemporalHour(Date sunrise, Date sunset)
         {
-            return this.calendar;
+            if (sunrise == null || sunset == null)
+            {
+                return long.MinValue;
+            }
+            return (sunset.getTime() - sunrise.getTime()) / 12;
         }
 
-        ///	<summary>
-        /// A method that returns a <code>Date</code> from the time passed in
+        ///	 <summary> 
+        ///	A method that returns sundial or solar noon. It occurs when the Sun is <a
+        ///	href="http://en.wikipedia.org/wiki/Transit_%28astronomy%29">transitting</a>
+        ///	the <a
+        ///	href="http://en.wikipedia.org/wiki/Meridian_%28astronomy%29">celestial
+        ///	meridian</a>. In this class it is calculated as halfway between sunrise
+        ///	and sunset, which can be slightly off the real transit time due to the
+        ///	lengthening or shortening day.
+        ///	 </summary>
+        ///	<returns> the <code>Date</code> representing Sun's transit. If the
+        ///	        calculation can not be computed null will be returned. </returns>
+        public virtual Date getSunTransit()
+        {
+            return getTimeOffset(getSunrise(), getTemporalHour() * 6);
+        }
+
+        ///	 <summary> 
+        ///	A method that returns a <code>Date</code> from the time passed in
         ///	 </summary>
         ///	<param name="time">
         ///	           The time to be set as the time for the <code>Date</code>.
         ///	           The time expected is in the format: 18.75 for 6:45:00 PM </param>
         ///	<returns> The Date. </returns>
+        ///	 
         protected internal virtual Date getDateFromTime(double time)
         {
-            if (java.lang.Double.isNaN(time))
-            {
+            if (double.IsNaN(time))
                 return null;
-            }
 
             time = getOffsetTime(time);
             time = (time + 240) % 24; // the calculators sometimes return a double
@@ -495,43 +608,24 @@ namespace net.sourceforge.zmanim
             return cal.getTime();
         }
 
-        ///	<summary>
-        /// A utility method to return the time of an offset by degrees below or
-        ///	above the horizon of <seealso cref="#getSunrise() sunrise"/>.
-        ///	 </summary>
-        ///	<param name="offsetZenith">
-        ///	           the degrees before <seealso cref="#getSunrise()"/> to use in the
-        ///	           calculation. For time after sunrise use negative numbers. </param>
-        ///	<returns> The <seealso cref="java.util.Date"/> of the offset after (or before)
-        ///	        <seealso cref="#getSunrise()"/>. If the calculation can not be computed
-        ///	        null will be returned. </returns>
-        public virtual Date getSunriseOffsetByDegrees(double offsetZenith)
-        {
-            double v = this.getUTCSunrise(offsetZenith);
-            if (java.lang.Double.isNaN(v))
-            {
-                return null;
-            }
-            return this.getDateFromTime(v);
-        }
-
-        ///	<summary>
-        /// Will return the dip below the horizon before sunrise that matches the
+        ///	 <summary> 
+        ///	Will return the dip below the horizon before sunrise that matches the
         ///	offset minutes on passed in. For example passing in 72 minutes for a
         ///	calendar set to the equinox in Jerusalem returns a value close to
         ///	16.1&deg;
         ///	Please note that this method is very slow and inefficient and should NEVER be used in a loop.
         ///	TODO: Improve efficiency. </summary>
-        ///	<param name="minutes">offset </param>
+        ///	<param name="minutes">
+        ///	           offset </param>
         ///	<returns> the degrees below the horizon that match the offset on the
         ///	        equinox in Jerusalem at sea level. </returns>
         public virtual double getSunriseSolarDipFromOffset(double minutes)
         {
-            Date offsetByDegrees = this.getSeaLevelSunrise();
-            Date offsetByTime = this.getTimeOffset(this.getSeaLevelSunrise(), -(minutes * 60000.0));
+            Date offsetByDegrees = getSeaLevelSunrise();
+            Date offsetByTime = getTimeOffset(getSeaLevelSunrise(), -(minutes * MINUTE_MILLIS));
 
-            var degrees = new BigDecimal(0);
-            var incrementor = new BigDecimal("0.0001");
+            BigDecimal degrees = new BigDecimal(0);
+            BigDecimal incrementor = new BigDecimal("0.0001");
             while (offsetByDegrees == null || offsetByDegrees.getTime() > offsetByTime.getTime())
             {
                 degrees = degrees.add(incrementor);
@@ -540,28 +634,8 @@ namespace net.sourceforge.zmanim
             return degrees.doubleValue();
         }
 
-        ///	<summary>
-        /// A utility method to return the time of an offset by degrees below or
-        ///	above the horizon of <seealso cref="#getSunset() sunset"/>.
-        ///	 </summary>
-        ///	<param name="offsetZenith">
-        ///	           the degrees after <seealso cref="#getSunset()"/> to use in the
-        ///	           calculation. For time before sunset use negative numbers. </param>
-        ///	<returns> The <seealso cref="java.util.Date"/>of the offset after (or before)
-        ///	        <seealso cref="#getSunset()"/>. If the calculation can not be computed
-        ///	        null will be returned. </returns>
-        public virtual Date getSunsetOffsetByDegrees(double offsetZenith)
-        {
-            double v = this.getUTCSunset(offsetZenith);
-            if (java.lang.Double.isNaN(v))
-            {
-                return null;
-            }
-            return this.getAdjustedSunsetDate(this.getDateFromTime(v), this.getSunriseOffsetByDegrees(offsetZenith));
-        }
-
-        ///	<summary>
-        /// Will return the dip below the horizon after sunset that matches the
+        ///	 <summary> 
+        ///	Will return the dip below the horizon after sunset that matches the
         ///	offset minutes on passed in. For example passing in 72 minutes for a
         ///	calendar set to the equinox in Jerusalem returns a value close to
         ///	16.1&deg;
@@ -573,11 +647,11 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getSunriseSolarDipFromOffset(double)"/>
         public virtual double getSunsetSolarDipFromOffset(double minutes)
         {
-            Date offsetByDegrees = this.getSeaLevelSunset();
-            Date offsetByTime = this.getTimeOffset(this.getSeaLevelSunset(), (double)(minutes * 60000.0));
+            Date offsetByDegrees = getSeaLevelSunset();
+            Date offsetByTime = getTimeOffset(getSeaLevelSunset(), minutes * MINUTE_MILLIS);
+
             BigDecimal degrees = new BigDecimal(0);
             BigDecimal incrementor = new BigDecimal("0.0001");
-
             while (offsetByDegrees == null || offsetByDegrees.getTime() < offsetByTime.getTime())
             {
                 degrees = degrees.add(incrementor);
@@ -586,140 +660,77 @@ namespace net.sourceforge.zmanim
             return degrees.doubleValue();
         }
 
-        ///	<summary>
-        /// A method that returns sundial or solar noon. It occurs when the Sun is 
-        /// <a href="http://en.wikipedia.org/wiki/Transit_%28astronomy%29">transitting</a>
-        ///	the <a href="http://en.wikipedia.org/wiki/Meridian_%28astronomy%29">celestial
-        ///	meridian</a>. In this class it is calculated as halfway between sunrise
-        ///	and sunset, which can be slightly off the real transit time due to the
-        ///	lengthening or shortening day.
-        ///	 </summary>
-        ///	<returns> the <code>Date</code> representing Sun's transit. If the
-        ///	        calculation can not be computed null will be returned. </returns>
-        public virtual Date getSunTransit()
+        ///    
+        ///	<returns> an XML formatted representation of the class. It returns the
+        ///	        default output of the
+        ///	        <seealso cref="net.sourceforge.zmanim.util.ZmanimFormatter#toXML(AstronomicalCalendar) toXML"/>
+        ///	        method. </returns>
+        ///	<seealso cref="net.sourceforge.zmanim.util.ZmanimFormatter#toXML(AstronomicalCalendar)"/>
+        ///	<seealso cref="java.lang.Object#toString()"/>
+        public override string ToString()
         {
-            return getTimeOffset(getSunrise(), getTemporalHour() * 6);
+            return ZmanimFormatter.toXML(this);
         }
 
-        ///	<summary>
-        /// Method to return a temporal (solar) hour. The day from sunrise to sunset
-        ///	is split into 12 equal parts with each one being a temporal hour.
-        ///	 </summary>
-        ///	<returns> the <code>long</code> millisecond length of a temporal hour. If
-        ///	        the calculation can not be computed <seealso cref="Long#MIN_VALUE"/> will
-        ///	        be returned. </returns>
-        public virtual long getTemporalHour()
+        ///    
+        ///	<seealso cref="java.lang.Object#equals(Object)"/>
+        public override bool Equals(object @object)
         {
-            return this.getTemporalHour(this.getSunrise(), this.getSunset());
+            if (this == @object)
+                return true;
+            if (!(@object is AstronomicalCalendar))
+                return false;
+            AstronomicalCalendar aCal = (AstronomicalCalendar)@object;
+            return getCalendar().Equals(aCal.getCalendar()) && getGeoLocation().Equals(aCal.getGeoLocation()) && getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
         }
 
-        ///	<summary>
-        /// Utility method that will allow the calculation of a temporal (solar) hour
-        ///	based on the sunrise and sunset passed to this method.
-        ///	 </summary>
-        ///	<param name="sunrise">
-        ///	           The start of the day. </param>
-        ///	<param name="sunset">
-        ///	           The end of the day. </param>
-        ///	<seealso cref="#getTemporalHour()"/>
-        ///	<returns> the <code>long</code> millisecond length of the temporal hour.
-        ///	        If the calculation can not be computed <seealso cref="Long#MIN_VALUE"/>
-        ///	        will be returned. </returns>
-        public virtual long getTemporalHour(Date sunrise, Date sunset)
-        {
-            if (sunrise == null || sunset == null)
-            {
-                return long.MinValue;
-            }
-            return (sunset.getTime() - sunrise.getTime()) / 12;
-        }
-
-        ///	<summary>
-        /// Method that returns the sunrise in UTC time without correction for time
-        ///	zone offset from GMT and without using daylight savings time. Non-sunrise
-        ///	and sunset calculations such as dawn and dusk, depend on the amount of
-        ///	visible light, something that is not affected by elevation. This method
-        ///	returns UTC sunrise calculated at sea level. This forms the base for dawn
-        ///	calculations that are calculated as a dip below the horizon before
-        ///	sunrise.
-        ///	 </summary>
-        ///	<param name="zenith">
-        ///	           the degrees below the horizon. For time after sunrise use
-        ///	           negative numbers. </param>
-        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
-        ///	        returned. </returns>
-        ///	<seealso cref="AstronomicalCalendar#getUTCSunrise"/>
-        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
-        public virtual double getUTCSeaLevelSunrise(double zenith)
-        {
-            return this.getAstronomicalCalculator().getUTCSunrise(this, zenith, false);
-        }
-
-        ///	<summary>
-        /// Method that returns the sunset in UTC time without correction for
-        ///	elevation, time zone offset from GMT and without using daylight savings
-        ///	time. Non-sunrise and sunset calculations such as dawn and dusk, depend
-        ///	on the amount of visible light, something that is not affected by
-        ///	elevation. This method returns UTC sunset calculated at sea level. This
-        ///	forms the base for dusk calculations that are calculated as a dip below
-        ///	the horizon after sunset.
-        ///	 </summary>
-        ///	<param name="zenith">
-        ///	           the degrees below the horizon. For time before sunset use
-        ///	           negative numbers. </param>
-        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
-        ///	        returned. </returns>
-        ///	<seealso cref="AstronomicalCalendar#getUTCSunset"/>
-        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunrise"/>
-        public virtual double getUTCSeaLevelSunset(double zenith)
-        {
-            return this.getAstronomicalCalculator().getUTCSunset(this, zenith, false);
-        }
-
-        ///	<summary>
-        /// Method that returns the sunrise in UTC time without correction for time
-        ///	zone offset from GMT and without using daylight savings time.
-        ///	 </summary>
-        ///	<param name="zenith">
-        ///	           the degrees below the horizon. For time after sunrise use
-        ///	           negative numbers. </param>
-        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
-        ///	        returned. </returns>
-        public virtual double getUTCSunrise(double zenith)
-        {
-            return this.getAstronomicalCalculator().getUTCSunrise(this, zenith, true);
-        }
-
-        ///	<summary>
-        /// Method that returns the sunset in UTC time without correction for time
-        ///	zone offset from GMT and without using daylight savings time.
-        ///	 </summary>
-        ///	<param name="zenith">
-        ///	           the degrees below the horizon. For time after before sunset
-        ///	           use negative numbers. </param>
-        ///	<returns> The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        ///	        calculation can not be computed <seealso cref="Double#NaN"/> will be
-        ///	        returned. </returns>
-        ///	<seealso cref="AstronomicalCalendar#getUTCSeaLevelSunset"/>
-        public virtual double getUTCSunset(double zenith)
-        {
-            return this.getAstronomicalCalculator().getUTCSunset(this, zenith, true);
-        }
-
+        ///    
+        ///	<seealso cref="java.lang.Object#hashCode()"/>
         public override int GetHashCode()
         {
-            int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.GetType());
-            num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
-            return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
+            int result = 17;
+            result = 37 * result + this.GetType().GetHashCode(); // needed or this and subclasses will return identical hash
+            result += 37 * result + getCalendar().GetHashCode();
+            result += 37 * result + getGeoLocation().GetHashCode();
+            result += 37 * result + getAstronomicalCalculator().GetHashCode();
+            return result;
         }
 
-        ///	<summary>
-        /// A method to set the <seealso cref="AstronomicalCalculator"/> used for astronomical
+        ///	 <summary> 
+        ///	A method that returns the currently set <seealso cref="GeoLocation"/> that contains
+        ///	location information used for the astronomical calculations.
+        ///	 </summary>
+        ///	<returns> Returns the geoLocation. </returns>
+        public virtual GeoLocation getGeoLocation()
+        {
+            return geoLocation;
+        }
+
+        ///	 <summary> 
+        ///	Set the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
+        ///	 </summary>
+        ///	<param name="geoLocation">
+        ///	           The geoLocation to set. </param>
+        public virtual void setGeoLocation(GeoLocation geoLocation)
+        {
+            this.geoLocation = geoLocation;
+            // if not set the output will be in the original timezone. The call
+            // below is also in the constructor
+            getCalendar().setTimeZone(geoLocation.getTimeZone());
+        }
+
+        ///	 <summary> 
+        ///	A method to return the current AstronomicalCalculator set.
+        ///	 </summary>
+        ///	<returns> Returns the astronimicalCalculator. </returns>
+        ///	<seealso cref="#setAstronomicalCalculator(AstronomicalCalculator)"/>
+        public virtual AstronomicalCalculator getAstronomicalCalculator()
+        {
+            return astronomicalCalculator;
+        }
+
+        ///	 <summary> 
+        ///	A method to set the <seealso cref="AstronomicalCalculator"/> used for astronomical
         ///	calculations. The Zmanim package ships with a number of different
         ///	implementations of the <code>abstract</code>
         ///	<seealso cref="AstronomicalCalculator"/> based on different algorithms, including
@@ -737,30 +748,31 @@ namespace net.sourceforge.zmanim
             this.astronomicalCalculator = astronomicalCalculator;
         }
 
+        ///	 <summary> 
+        ///	returns the Calendar object encapsulated in this class.
+        ///	 </summary>
+        ///	<returns> Returns the calendar. </returns>
+        public virtual Calendar getCalendar()
+        {
+            return calendar;
+        }
+
+        ///    
         ///	<param name="calendar">
         ///	           The calendar to set. </param>
         public virtual void setCalendar(Calendar calendar)
         {
             this.calendar = calendar;
-            if (this.getGeoLocation() != null)
+            if (getGeoLocation() != null) // set the timezone if possible
             {
-                this.getCalendar().setTimeZone(this.getGeoLocation().getTimeZone());
+                // Always set the Calendar's timezone to match the GeoLocation
+                // TimeZone
+                getCalendar().setTimeZone(getGeoLocation().getTimeZone());
             }
         }
 
-        ///	<summary>
-        /// Set the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
-        ///	 </summary>
-        ///	<param name="geoLocation">The geoLocation to set. </param>
-        public virtual void setGeoLocation(GeoLocation geoLocation)
-        {
-            this.geoLocation = geoLocation;
-            this.getCalendar().setTimeZone(geoLocation.getTimeZone());
-        }
-
-        ///	 <summary>
-        /// A method that creates a <a
-        ///	href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
+        ///	 <summary> 
+        ///	A method that creates a <a href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
         ///	of the object. <br />
         ///	<b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in the cloned
         ///	<seealso cref="net.sourceforge.zmanim.util.GeoLocation"/> will be changed from the
@@ -769,14 +781,15 @@ namespace net.sourceforge.zmanim
         ///	be called in order for the AstronomicalCalendar to output times in the
         ///	expected offset after being cloned.
         ///	 </summary>
-        public object Clone()
+        ///	<seealso cref="java.lang.Object#clone() @since 1.1"/>
+        public virtual object Clone()
         {
-            var clonedCalendar = (AstronomicalCalendar)this.MemberwiseClone();
-            clonedCalendar.setGeoLocation((GeoLocation)this.getGeoLocation().Clone());
-            clonedCalendar.setCalendar((Calendar)this.getCalendar().clone());
-            clonedCalendar.setAstronomicalCalculator((AstronomicalCalculator)this.getAstronomicalCalculator().Clone());
+            AstronomicalCalendar clone = (AstronomicalCalendar)MemberwiseClone();
 
-            return clonedCalendar;
+            clone.setGeoLocation((GeoLocation)getGeoLocation().Clone());
+            clone.setCalendar((Calendar)getCalendar().clone());
+            clone.setAstronomicalCalculator((AstronomicalCalculator)getAstronomicalCalculator().Clone());
+            return clone;
         }
     }
 }

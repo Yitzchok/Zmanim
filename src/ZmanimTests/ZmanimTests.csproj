@@ -46,8 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestGeneration\TestFormatters\JavaTestFormatter.cs" />
+    <Compile Include="TestGeneration\TestFormatters\DotNetTestFormatter.cs" />
+    <Compile Include="TestGeneration\TestFormatters\ITestFormatter.cs" />
+    <Compile Include="TestGeneration\TestMethodGenerators\DateTestMethodGenerator.cs" />
+    <Compile Include="TestGeneration\TestMethodGenerators\ITestMethodGenerator.cs" />
     <Compile Include="ZmanimTests.cs" />
     <Compile Include="ZmanMethodGenerator.cs" />
+    <Compile Include="ZmanMiscTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zmanim\Zmanim.csproj">
@@ -55,6 +61,7 @@
       <Name>Zmanim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
