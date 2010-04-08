@@ -201,6 +201,49 @@
         ///	<seealso cref="#getTzais120()"/>
         protected internal const double ZENITH_26_DEGREES = GEOMETRIC_ZENITH + 26.0;
 
+        ///	 NOTE: Experimental and may not make the final 1.3 cut
+
+        ///	 <summary>
+        /// The zenith of 4.37&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
+        ///	(90&deg;). This calculation is used for calculating <em>tzais</em>
+        ///	(nightfall) according to some opinions. This calculation is based on the
+        ///	position of the sun {@link #getTzaisGeonim4Point37Degrees() 16 7/8
+        ///	minutes} after sunset (3/4 of a 22.5 minute Mil) in Jerusalem on March
+        ///	16, about 4 days before the equinox, the day that a solar hour is one
+        ///	hour which calculates to 4.37&deg; below {@link #GEOMETRIC_ZENITH
+        ///	geometric zenith}
+        ///	 </summary>
+        ///	<seealso cref="#getTzaisGeonim4Point37Degrees()"/>
+        protected internal const double ZENITH_4_POINT_37 = GEOMETRIC_ZENITH + 4.37;
+
+        ///	 <summary>
+        /// The zenith of 4.61&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
+        ///	(90&deg;). This calculation is used for calculating <em>tzais</em>
+        ///	(nightfall) according to some opinions. This calculation is based on the
+        ///	position of the sun <seealso cref="#getTzaisGeonim4Point37Degrees() 18 minutes"/>
+        ///	after sunset (3/4 of a 24 minute Mil) in Jerusalem on March 16, about 4
+        ///	days before the equinox, the day that a solar hour is one hour which
+        ///	calculates to 4.61&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
+        ///	 </summary>
+        ///	<seealso cref="#getTzaisGeonim4Point61Degrees()"/>
+        protected internal const double ZENITH_4_POINT_61 = GEOMETRIC_ZENITH + 4.61;
+
+        protected internal const double ZENITH_4_POINT_8 = GEOMETRIC_ZENITH + 4.8;
+
+        ///	 <summary>
+        /// The zenith of 3.65&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
+        ///	(90&deg;). This calculation is used for calculating <em>tzais</em>
+        ///	(nightfall) according to some opinions. This calculation is based on the
+        ///	position of the sun <seealso cref="#getTzaisGeonim3Point65Degrees() 13.5 minutes"/>
+        ///	after sunset (3/4 of an 18 minute Mil) in Jerusalem on March 16, about 4
+        ///	days before the equinox, the day that a solar hour is one hour which
+        ///	calculates to 3.65&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
+        ///	 </summary>
+        ///	<seealso cref="#getTzaisGeonim3Point65Degrees()"/>
+        protected internal const double ZENITH_3_POINT_65 = GEOMETRIC_ZENITH + 3.65;
+
+        protected internal const double ZENITH_5_POINT_88 = GEOMETRIC_ZENITH + 5.88;
+
         private double ateretTorahSunsetOffset = 40;
 
         public ComplexZmanimCalendar(GeoLocation location)
@@ -477,24 +520,25 @@
             return getTemporalHour(getAlos120Zmanis(), getTzais120Zmanis());
         }
 
-        ///	 <summary> 
-        ///	This method returns the time of <em>plag hamincha</em>. This is
-        ///	calculated as 10.75 hours after <seealso cref="#getAlos96Zmanis() dawn"/>. The
+        ///	<summary>
+        /// This method returns the time of <em>plag hamincha</em>. This is
+        ///	calculated as 10.75 hours after <seealso cref="#getAlos120Zmanis() dawn"/>. The
         ///	formula used is:<br/>
-        ///	10.75 * <seealso cref="#getShaahZmanis96MinutesZmanis()"/> after
-        ///	<seealso cref="#getAlos96Zmanis() dawn"/>.
-        ///	 </summary>
+        ///	10.75 * <seealso cref="#getShaahZmanis120MinutesZmanis()"/> after
+        ///	<seealso cref="#getAlos120Zmanis() dawn"/>.
+        ///	</summary>
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha120MinutesZmanis()
         {
             return getTimeOffset(getAlos120Zmanis(), getShaahZmanis120MinutesZmanis() * 10.75);
         }
 
-        ///	 <summary> 
-        ///	This method returns the time of <em>plag hamincha</em>. This is
-        ///	calculated as 10.75 hours after <seealso cref="#getAlos72() dawn"/>. The formula
+
+        ///	 <summary>
+        /// This method returns the time of <em>plag hamincha</em>. This is
+        ///	calculated as 10.75 hours after <seealso cref="#getAlos120() dawn"/>. The formula
         ///	used is:<br/>
-        ///	10.75 <seealso cref="#getShaahZmanis72Minutes()"/> after <seealso cref="#getAlos72()"/>.
+        ///	10.75 <seealso cref="#getShaahZmanis120Minutes()"/> after <seealso cref="#getAlos120()"/>.
         ///	 </summary>
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha120Minutes()
@@ -1308,25 +1352,21 @@
             return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 6.5);
         }
 
-        ///	 <summary> 
-        ///	This is a conveniance methd that returns the later of
-        ///	<seealso cref="#getMinchaGedola()"/> and <seealso cref="#getMinchaGedola30Minutes()"/>. In the
-        ///	winter when a <em><seealso cref="#getShaahZmanisGra() shaah zmanis"/></em> is less
-        ///	than 30 minutes <seealso cref="#getMinchaGedola30Minutes()"/> will be returned,
-        ///	otherwise <seealso cref="#getMinchaGedola()"/> will be returned.
+        ///	<summary>
+        /// This is a conveniance methd that returns the later of
+        ///	<seealso cref="#getMinchaGedola()"/> and <seealso cref="#getMinchaGedola30Minutes()"/>. In
+        ///	the winter when a <em><seealso cref="#getShaahZmanisGra() shaah zmanis"/></em> is
+        ///	less than 30 minutes <seealso cref="#getMinchaGedola30Minutes()"/> will be
+        ///	returned, otherwise <seealso cref="#getMinchaGedola()"/> will be returned.
         ///	 </summary>
         ///	<returns> the <code>Date</code> of the later of <seealso cref="#getMinchaGedola()"/>
         ///	        and <seealso cref="#getMinchaGedola30Minutes()"/> </returns>
         public virtual Date getMinchaGedolaGreaterThan30()
         {
             if (getMinchaGedola30Minutes() == null || getMinchaGedola() == null)
-            {
                 return null;
-            }
-            else
-            {
-                return getMinchaGedola30Minutes().compareTo(getMinchaGedola()) > 0 ? getMinchaGedola30Minutes() : getMinchaGedola();
-            }
+
+            return getMinchaGedola30Minutes().compareTo(getMinchaGedola()) > 0 ? getMinchaGedola30Minutes() : getMinchaGedola();
         }
 
         ///	 <summary> 
@@ -1369,11 +1409,11 @@
             return getTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 9.5);
         }
 
-        ///	 <summary> 
-        ///	This method returns the time of <em>plag hamincha</em>. This is
-        ///	calculated as 10.75 hours after <seealso cref="#getAlos72() dawn"/>. The formula
+        ///	 <summary>
+        /// This method returns the time of <em>plag hamincha</em>. This is
+        ///	calculated as 10.75 hours after <seealso cref="#getAlos60() dawn"/>. The formula
         ///	used is:<br/>
-        ///	10.75 <seealso cref="#getShaahZmanis72Minutes()"/> after <seealso cref="#getAlos72()"/>.
+        ///	10.75 <seealso cref="#getShaahZmanis60Minutes()"/> after <seealso cref="#getAlos60()"/>.
         ///	 </summary>
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha60Minutes()
@@ -1655,6 +1695,92 @@
         public virtual Date getTzaisGeonim5Point95Degrees()
         {
             return getSunsetOffsetByDegrees(ZENITH_5_POINT_95);
+        }
+
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated calculated as 3/4 of a <a
+        /// href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement"
+        /// >Mil</a> based on an 18 minute Mil, or 13.5 minutes. It is the sun's
+        /// position at <seealso cref="#ZENITH_3_POINT_65 3.65&deg;"/> below the western
+        /// horizon. This is a very early zman and should not be relied on without
+        /// Rabbinical guidance.
+        ///  </summary>
+        /// <returns> the <code>Date</code> representing the time when the sun is
+        ///         3.65&deg; below sea level. </returns>
+        /// <seealso cref="#ZENITH_3_POINT_65"/>
+        public virtual Date getTzaisGeonim3Point65Degrees()
+        {
+            return getSunsetOffsetByDegrees(ZENITH_3_POINT_65);
+        }
+
+        ///	 <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        ///	of the <em>Geonim</em> calculated as 3/4 of a <a
+        ///	href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement"
+        ///	>Mil</a> based on a 24 minute Mil, or 18 minutes. It is the sun's
+        ///	position at <seealso cref="#ZENITH_4_POINT_61 4.61&deg;"/> below the western
+        ///	horizon. This is a very early zman and should not be relied on without
+        ///	Rabbinical guidance.
+        ///	 </summary>
+        ///	<returns> the <code>Date</code> representing the time when the sun is
+        ///	        4.61&deg; below sea level. </returns>
+        ///	<seealso cref="#ZENITH_4_POINT_61"/>
+        public virtual Date getTzaisGeonim4Point61Degrees()
+        {
+            return getSunsetOffsetByDegrees(ZENITH_4_POINT_61);
+        }
+
+        ///	 <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated as 3/4 of a <a
+        /// href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement"
+        /// >Mil</a>, based on a 22.5 minute Mil, or 16 7/8 minutes. It is the sun's
+        /// position at <seealso cref="#ZENITH_4_POINT_37 4.37&deg;"/> below the western
+        /// horizon. This is a very early zman and should not be relied on without
+        /// Rabbinical guidance.
+        ///  </summary>
+        /// <returns> the <code>Date</code> representing the time when the sun is
+        ///         4.37&deg; below sea level. </returns>
+        /// <seealso cref="#ZENITH_4_POINT_37"/>
+        public virtual Date getTzaisGeonim4Point37Degrees()
+        {
+            return getSunsetOffsetByDegrees(ZENITH_4_POINT_37);
+        }
+
+        ///	 <summary>
+        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
+        ///	 of the <em>Geonim</em> calculated as 3/4 of a <a
+        ///	 href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement"
+        ///	 >Mil</a>. It is based on the Baal Hatanya based on a Mil being 24
+        ///	 minutes, and is calculated as 18 +2 + 4 for a total of 24 minutes (FIXME:
+        ///	 additional details needed). It is the sun's position at
+        ///	 <seealso cref="#ZENITH_5_POINT_88 5.88&deg;"/> below the western horizon. This is a
+        ///	 very early zman and should not be relied on without Rabbinical guidance.
+        ///	  </summary>
+        ///	 <returns> the <code>Date</code> representing the time when the sun is
+        ///	         5.88&deg; below sea level. </returns>
+        ///	 <seealso cref="#ZENITH_5_POINT_88"/>
+        public virtual Date getTzaisGeonim5Point88Degrees()
+        {
+            return getSunsetOffsetByDegrees(ZENITH_5_POINT_88);
+        }
+
+        ///	 <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        ///	of the <em>Geonim</em> calculated as 3/4 of a <a
+        ///	href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement"
+        ///	>Mil</a>. It is the sun's position at <seealso cref="#ZENITH_4_POINT_8 4.8&deg;"/>
+        ///	below the western horizon based on Rabbi Leo Levi's calculations. (FIXME:
+        ///	additional documentation needed) This is the This is a very early zman
+        ///	and should not be relied on without Rabbinical guidance.
+        ///	 </summary>
+        ///	<returns> the <code>Date</code> representing the time when the sun is
+        ///	        4.8&deg; below sea level. </returns>
+        ///	<seealso cref="#ZENITH_4_POINT_8"/>
+        public virtual Date getTzaisGeonim4Point8Degrees()
+        {
+            return getSunsetOffsetByDegrees(ZENITH_4_POINT_8);
         }
 
         ///	 <summary> 

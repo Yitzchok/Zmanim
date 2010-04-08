@@ -676,6 +676,56 @@ namespace ZmanimTests
         }
 
         [Test]
+        public void Check_getTzaisGeonim3Point65Degrees()
+        {
+            var zman = calendar.getTzaisGeonim3Point65Degrees().ToDateTime();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 36, 57)
+                ));
+        }
+
+        [Test]
+        public void Check_getTzaisGeonim4Point61Degrees()
+        {
+            var zman = calendar.getTzaisGeonim4Point61Degrees().ToDateTime();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 42, 3)
+                ));
+        }
+
+        [Test]
+        public void Check_getTzaisGeonim4Point37Degrees()
+        {
+            var zman = calendar.getTzaisGeonim4Point37Degrees().ToDateTime();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 40, 46)
+                ));
+        }
+
+        [Test]
+        public void Check_getTzaisGeonim5Point88Degrees()
+        {
+            var zman = calendar.getTzaisGeonim5Point88Degrees().ToDateTime();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 48, 49)
+                ));
+        }
+
+        [Test]
+        public void Check_getTzaisGeonim4Point8Degrees()
+        {
+            var zman = calendar.getTzaisGeonim4Point8Degrees().ToDateTime();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 43, 4)
+                ));
+        }
+
+        [Test]
         public void Check_getTzaisGeonim7Point083Degrees()
         {
             var zman = calendar.getTzaisGeonim7Point083Degrees().ToDateTime();
