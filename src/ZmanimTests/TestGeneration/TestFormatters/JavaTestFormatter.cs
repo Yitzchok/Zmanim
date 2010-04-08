@@ -35,7 +35,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
             ClassName = name;
             return this;
         }
-        
+
         public ITestFormatter AddTestMethod(string methodName, string testBody)
         {
             TestMethods.Add(string.Format(@"
@@ -65,6 +65,14 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                     calendar.get(Calendar.SECOND)
                 /*,calender.get(Calendar.MILLISECOND)*/
                     ));
+            return this;
+        }
+
+        public ITestFormatter AddLongTestMethod(string methodName, long testResult)
+        {
+            AddTestMethod(methodName,
+                 string.Format(@"Assert.assertEquals({1}, calendar.{0}());",
+                     methodName, testResult));
             return this;
         }
 

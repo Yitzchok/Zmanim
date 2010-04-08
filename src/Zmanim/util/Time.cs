@@ -1,4 +1,6 @@
-﻿namespace net.sourceforge.zmanim.util
+﻿using System;
+
+namespace net.sourceforge.zmanim.util
 {
 
     /// <summary>
@@ -43,21 +45,19 @@
 
         public Time(int millis)
         {
+            TimeSpan timeSpan = TimeSpan.FromMilliseconds(millis);
             if (millis < 0)
             {
                 isNegative = true;
                 millis = System.Math.Abs(millis);
             }
-            hours = millis / HOUR_MILLIS;
-            millis = millis - hours * HOUR_MILLIS;
+            hours = timeSpan.Hours;
 
-            minutes = millis / MINUTE_MILLIS;
-            millis = millis - minutes * MINUTE_MILLIS;
+            minutes = timeSpan.Minutes;
 
-            seconds = millis / SECOND_MILLIS;
-            millis = millis - seconds * SECOND_MILLIS;
+            seconds = timeSpan.Seconds;
 
-            milliseconds = millis;
+            milliseconds = timeSpan.Milliseconds;
         }
 
         public virtual bool IsNegative()
@@ -70,62 +70,62 @@
             this.isNegative = isNegative;
         }
 
- 
+
         /// <returns> Returns the hour. </returns>
-         public virtual int getHours()
+        public virtual int getHours()
         {
             return hours;
         }
 
- 
+
         /// <param name="hours">
         ///            The hours to set. </param>
-         public virtual void setHours(int hours)
+        public virtual void setHours(int hours)
         {
             this.hours = hours;
         }
 
- 
+
         /// <returns> Returns the minutes. </returns>
-         public virtual int getMinutes()
+        public virtual int getMinutes()
         {
             return minutes;
         }
 
- 
+
         /// <param name="minutes">
         ///            The minutes to set. </param>
-         public virtual void setMinutes(int minutes)
+        public virtual void setMinutes(int minutes)
         {
             this.minutes = minutes;
         }
 
- 
+
         /// <returns> Returns the seconds. </returns>
-         public virtual int getSeconds()
+        public virtual int getSeconds()
         {
             return seconds;
         }
 
- 
+
         /// <param name="seconds">
         ///            The seconds to set. </param>
-         public virtual void setSeconds(int seconds)
+        public virtual void setSeconds(int seconds)
         {
             this.seconds = seconds;
         }
 
- 
+
         /// <returns> Returns the milliseconds. </returns>
-         public virtual int getMilliseconds()
+        public virtual int getMilliseconds()
         {
             return milliseconds;
         }
 
- 
+
         /// <param name="milliseconds">
         ///            The milliseconds to set. </param>
-         public virtual void setMilliseconds(int milliseconds)
+        public virtual void setMilliseconds(int milliseconds)
         {
             this.milliseconds = milliseconds;
         }

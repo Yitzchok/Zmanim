@@ -76,6 +76,15 @@ namespace ZmanimTests.TestGeneration.TestFormatters
             return this;
         }
 
+        public ITestFormatter AddLongTestMethod(string methodName, long testResult)
+        {
+            AddTestMethod(methodName,
+                string.Format(@"Assert.That(calendar.{0}(), Is.EqualTo({1}));",
+                    methodName, testResult));
+
+            return this;
+        }
+
         public IList<string> TestMethods { get; set; }
 
         public string BuildTestClass()

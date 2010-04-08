@@ -1155,5 +1155,107 @@ namespace ZmanimTests
                 ));
         }
 
+        [Test]
+        public void Check_getShaahZmanis19Point8Degrees()
+        {
+            Assert.That(calendar.getShaahZmanis19Point8Degrees(), Is.EqualTo(4847270));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis18Degrees()
+        {
+            Assert.That(calendar.getShaahZmanis18Degrees(), Is.EqualTo(4744143));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis26Degrees()
+        {
+            Assert.That(calendar.getShaahZmanis26Degrees(), Is.EqualTo(5217225));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis16Point1Degrees()
+        {
+            Assert.That(calendar.getShaahZmanis16Point1Degrees(), Is.EqualTo(4636860));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis60Minutes()
+        {
+            Assert.That(calendar.getShaahZmanis60Minutes(), Is.EqualTo(4411823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis72Minutes()
+        {
+            Assert.That(calendar.getShaahZmanis72Minutes(), Is.EqualTo(4531823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis72MinutesZmanis()
+        {
+            Assert.That(calendar.getShaahZmanis72MinutesZmanis(), Is.EqualTo(4574187));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis90Minutes()
+        {
+            Assert.That(calendar.getShaahZmanis90Minutes(), Is.EqualTo(4711823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis90MinutesZmanis()
+        {
+            Assert.That(calendar.getShaahZmanis90MinutesZmanis(), Is.EqualTo(4764778));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis96MinutesZmanis()
+        {
+            Assert.That(calendar.getShaahZmanis96MinutesZmanis(), Is.EqualTo(4828309));
+        }
+
+        [Test]
+        public void Check_getShaahZmanisAteretTorah()
+        {
+            Assert.That(calendar.getShaahZmanisAteretTorah(), Is.EqualTo(4393005));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis96Minutes()
+        {
+            Assert.That(calendar.getShaahZmanis96Minutes(), Is.EqualTo(4771823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis120Minutes()
+        {
+            Assert.That(calendar.getShaahZmanis120Minutes(), Is.EqualTo(5011823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanis120MinutesZmanis()
+        {
+            Assert.That(calendar.getShaahZmanis120MinutesZmanis(), Is.EqualTo(5082430));
+        }
+
+        [Test]
+        public void Check_getShaahZmanisGra()
+        {
+            Assert.That(calendar.getShaahZmanisGra(), Is.EqualTo(3811823));
+        }
+
+        [Test]
+        public void Check_getShaahZmanisMGA()
+        {
+            Assert.That(calendar.getShaahZmanisMGA(), Is.EqualTo(4531823));
+        }
+
+        [Test]
+        public void Check_getTemporalHour()
+        {
+            Assert.That(calendar.getTemporalHour(), Is.EqualTo(3811823));
+        }
+
     }
 }

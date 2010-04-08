@@ -51,6 +51,7 @@
     <Compile Include="TestGeneration\TestFormatters\ITestFormatter.cs" />
     <Compile Include="TestGeneration\TestMethodGenerators\DateTestMethodGenerator.cs" />
     <Compile Include="TestGeneration\TestMethodGenerators\ITestMethodGenerator.cs" />
+    <Compile Include="TestGeneration\TestMethodGenerators\LongTestMethodGenerator.cs" />
     <Compile Include="ZmanimTests.cs" />
     <Compile Include="ZmanMethodGenerator.cs" />
     <Compile Include="ZmanMiscTests.cs" />

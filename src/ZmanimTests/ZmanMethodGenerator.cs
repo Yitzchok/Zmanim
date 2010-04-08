@@ -46,7 +46,11 @@ namespace ZmanimTests
                                          new JavaTestFormatter{ClassName = "ZmanimTest"}
                                      };
 
-            var testMethodGenerators = new List<ITestMethodGenerator> { new DateTestMethodGenerator() };
+            var testMethodGenerators = new List<ITestMethodGenerator>
+                                           {
+                                               new DateTestMethodGenerator(),
+                                               new LongTestMethodGenerator()
+                                           };
 
             Type type = typeof(ComplexZmanimCalendar);
             testMethodGenerators.ForEach(generator =>
