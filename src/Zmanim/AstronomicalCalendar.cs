@@ -1,5 +1,4 @@
-﻿//
-// * Zmanim Java API
+﻿// * Zmanim Java API
 // * Copyright (C) 2004-2010 Eliyahu Hershfeld
 // *
 // * Converted to C# by AdminJew
@@ -15,7 +14,6 @@
 // * You should have received a copy of the GNU General Public License along with this program; if
 // * not, write to the Free Software Foundation, Inc. 59 Temple Place - Suite 330, Boston, MA
 // * 02111-1307, USA or connect to: http://www.fsf.org/copyleft/gpl.html
-// 
 
 namespace net.sourceforge.zmanim
 {
