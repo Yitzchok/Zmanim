@@ -95,10 +95,7 @@ namespace net.sourceforge.zmanim
     /// <h2>Disclaimer:</h2> While I did my best to get accurate results please do
     /// not rely on these zmanim for <em>halacha lemaaseh</em>
     /// </summary>
-    /// <remarks>
-    /// @author &copy; Eliyahu Hershfeld 2004 - 2010
-    /// @version 1.2
-    /// </remarks>
+    /// <author>Eliyahu Hershfeld</author>
     public class ComplexZmanimCalendar : ZmanimCalendar
     {
         private const long serialVersionUID = 1;

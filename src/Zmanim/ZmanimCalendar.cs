@@ -34,9 +34,8 @@ namespace net.sourceforge.zmanim
     /// examples on using the API. <h2>Disclaimer:</h2> While I did my best to get
     /// accurate results please do not rely on these zmanim for
     /// <em>halacha lemaaseh</em>
-    /// 
-    /// @author &copy; Eliyahu Hershfeld 2004 - 2010
-    /// @version 1.2 </summary>
+    /// </summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class ZmanimCalendar : AstronomicalCalendar
     {
         private const long serialVersionUID = 1;
