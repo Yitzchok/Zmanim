@@ -26,9 +26,8 @@ namespace net.sourceforge.zmanim.util
     /// A class for various location calculations
     /// Most of the code in this class is ported from <a href="http://www.movable-type.co.uk/">Chris Veness'</a>
     /// <a href="http://www.fsf.org/licensing/licenses/lgpl.html">LGPL</a> Javascript Implementation
-    ///
-    /// @author &copy; Eliyahu Hershfeld 2009
-    /// @version 0.1 </summary>
+    /// </summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class GeoLocationUtils
     {
         private static int DISTANCE;
@@ -39,8 +38,7 @@ namespace net.sourceforge.zmanim.util
         /// Calculate the initial <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
         ///	between this Object and a second Object passed to this method using <a
         ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975.
         ///	</summary>
@@ -52,12 +50,10 @@ namespace net.sourceforge.zmanim.util
         }
 
         ///	 <summary>
-        ///  Calculate the final <a
-        ///	 href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        ///  Calculate the final <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
         ///	 between this Object and a second Object passed to this method using <a
         ///	 href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	 inverse formula See T Vincenty, "<a
-        ///	 href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	 inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	 Solutions of Geodesics on the Ellipsoid with application of nested
         ///	 equations</a>", Survey Review, vol XXII no 176, 1975.
         ///	 </summary>
@@ -69,13 +65,10 @@ namespace net.sourceforge.zmanim.util
         }
 
         ///	 <summary>
-        /// Calculate <a
-        ///	href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        /// Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
         ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975.
         ///	</summary>
@@ -87,21 +80,18 @@ namespace net.sourceforge.zmanim.util
         }
 
         ///	 <summary>
-        /// Calculate <a
-        ///	href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        /// Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
         ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975.
         ///	</summary>
         ///	<param name="location">
         ///	           the destination location </param>
         ///	<param name="formula">
-        ///	           This formula calculates initial bearing (<seealso cref="#INITIAL_BEARING"/>),
-        ///	           final bearing (<seealso cref="#FINAL_BEARING"/>) and distance (<seealso cref="#DISTANCE"/>). </param>
+        ///	           This formula calculates initial bearing (<seealso cref="INITIAL_BEARING"/>),
+        ///	           final bearing (<seealso cref="FINAL_BEARING"/>) and distance (<seealso cref="DISTANCE"/>). </param>
         private static double vincentyFormula(GeoLocation location, GeoLocation destination, int formula)
         {
             double a = 6378137;
@@ -175,14 +165,13 @@ namespace net.sourceforge.zmanim.util
             return double.NaN;
         }
 
-        ///    
-        ///	 <summary> * Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
-        ///	 * bearing from the current location to the GeoLocation passed in.
-        ///	 * </summary>
-        ///	 * <param name="location">
-        ///	 *            destination location </param>
-        ///	 * <returns> the bearing in degrees </returns>
-        ///	 
+        ///	 <summary>
+        /// Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
+        ///	bearing from the current location to the GeoLocation passed in.
+        ///	</summary>
+        ///	<param name="location">
+        ///	           destination location </param>
+        ///	<returns> the bearing in degrees </returns>
         public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
             double dLon = Math.toRadians(destination.getLongitude() - location.getLongitude());

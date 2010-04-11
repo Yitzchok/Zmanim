@@ -27,10 +27,9 @@ namespace net.sourceforge.zmanim.util
     /// are stored as <seealso cref="java.util.Date"/>s in this API. The time class is used to
     /// represent numeric time such as the time in hours, minutes, seconds and
     /// milliseconds of a
-    /// <seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour"/>.
-    ///
-    /// @author &copy; Eliyahu Hershfeld 2004 - 2007
-    /// @version 0.9.0 </summary>
+    /// <see cref="net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
+    /// <summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class Time
     {
         private const int SECOND_MILLIS = 1000;

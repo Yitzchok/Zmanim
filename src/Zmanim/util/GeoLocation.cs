@@ -32,9 +32,8 @@ namespace net.sourceforge.zmanim.util
     /// most calculation engines and would be ignored if set. Check the documentation
     /// for specific implementations of the <seealso cref="AstronomicalCalculator"/> to see if
     /// elevation is calculated as part o the algorithm.
-    /// 
-    /// @author &copy; Eliyahu Hershfeld 2004 - 2008
-    /// @version 1.1 </summary>
+    /// </summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class GeoLocation : ICloneable
     {
         /// <summary>constant for milliseconds in a minute (60,000)</summary>
@@ -69,7 +68,7 @@ namespace net.sourceforge.zmanim.util
         ///	           <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
         ///	           Meridian </a> (Greenwich), a negative value should be used. </param>
         ///	<param name="timeZone">
-        ///	           the <code>TimeZone</code> for the location. </param>
+        ///	           the <c>TimeZone</c> for the location. </param>
         public GeoLocation(string name, double latitude, double longitude, TimeZone timeZone)
             : this(name, latitude, longitude, 0, timeZone)
         {
@@ -94,7 +93,7 @@ namespace net.sourceforge.zmanim.util
         ///	           the elevation above sea level in Meters. Elevation is not used
         ///	           in most algorithms used for calculating sunrise and set. </param>
         ///	<param name="timeZone">
-        ///	           the <code>TimeZone</code> for the location. </param>
+        ///	           the <c>TimeZone</c> for the location. </param>
         public GeoLocation(string name, double latitude, double longitude, double elevation, TimeZone timeZone)
         {
             setLocationName(name);
@@ -107,8 +106,8 @@ namespace net.sourceforge.zmanim.util
 
         ///	 <summary> Default GeoLocation constructor will set location to the Prime Meridian
         ///	at Greenwich, England and a TimeZone of GMT. The longitude will be set to
-        ///	0 and the latitude will be 51.4772 to match the location of the <a
-        ///	href="http://www.rog.nmm.ac.uk">Royal Observatory, Greenwich </a>. No
+        ///	0 and the latitude will be 51.4772 to match the location of the
+        /// <a href="http://www.rog.nmm.ac.uk">Royal Observatory, Greenwich </a>. No
         ///	daylight savings time will be used. </summary>
         public GeoLocation()
         {
@@ -120,17 +119,16 @@ namespace net.sourceforge.zmanim.util
 
         #region ICloneable Members
 
-        ///	 <summary> An implementation of the <seealso cref="java.lang.Object#clone()"/> method that
+        ///	 <summary> An implementation of the <seealso cref="java.lang.Object.clone()"/> method that
         ///	creates a <a
         ///	href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
         ///	of the object. <br/><b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in
         ///	the clone will be changed from the original, it is critical that
-        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
+        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()"/>.
+        /// <see cref="java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
         ///	is called after cloning in order for the AstronomicalCalendar to output
         ///	times in the expected offset.
         ///	 </summary>
-        ///	<seealso cref= java.lang.Object#clone()
-        ///	@since 1.1 </seealso>
         public virtual object Clone()
         {
             var clone = (GeoLocation) MemberwiseClone();
@@ -169,7 +167,7 @@ namespace net.sourceforge.zmanim.util
         ///	 </summary>
         ///	<param name="latitude">
         ///	           The degrees of latitude to set. The values should be between
-        ///	           -90&deg; and 90&deg;. An IllegalArgumentException will be
+        ///	           -90° and 90°. An IllegalArgumentException will be
         ///	           thrown if the value exceeds the limit. For example 40.095965
         ///	           would be used for Lakewood, NJ. <b>Note: </b> For latitudes south of the
         ///	           equator, a negative value should be used. </param>
@@ -225,7 +223,7 @@ namespace net.sourceforge.zmanim.util
         ///	 </summary>
         ///	<param name="longitude">
         ///	           The degrees of longitude to set in a double format between
-        ///	           -180&deg; and 180&deg;. An IllegalArgumentException will be
+        ///	           -180° and 180°. An IllegalArgumentException will be
         ///	           thrown if the value exceeds the limit. For example -74.2094
         ///	           would be used for Lakewood, NJ. Note: for longitudes east of
         ///	           the <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
@@ -240,14 +238,14 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Method to set the longitude in degrees, minutes and seconds.
-        ///	 </summary>
+        ///	<summary> 
+        /// Method to set the longitude in degrees, minutes and seconds.
+        ///	</summary>
         ///	<param name="degrees">
         ///	           The degrees of longitude to set between -180 and 180. An
         ///	           IllegalArgumentException will be thrown if the value exceeds
         ///	           the limit. For example -74 would be used for Lakewood, NJ.
-        ///	           Note: for longitudes east of the <a
-        ///	           href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///	           Note: for longitudes east of the <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
         ///	           Meridian </a> (Greenwich) a negative value should be used. </param>
         ///	<param name="minutes"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a> </param>
         ///	<param name="seconds"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a> </param>
@@ -302,14 +300,14 @@ namespace net.sourceforge.zmanim.util
             return timeZone;
         }
 
-
         ///	 <summary> Method to set the TimeZone. If this is ever set after the GeoLocation is
-        ///	set in the <seealso cref="net.sourceforge.zmanim.AstronomicalCalendar"/>, it is
+        ///	set in the <see cref="net.sourceforge.zmanim.AstronomicalCalendar"/>, it is
         ///	critical that
-        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
-        ///	be called in order for the AstronomicalCalendar to output times in the
+        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()"/>.
+        /// <see cref="java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
+        /// be called in order for the AstronomicalCalendar to output times in the
         ///	expected offset. This situation will arise if the AstronomicalCalendar is
-        ///	ever <seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#clone() cloned"/>.
+        ///	ever <see cref="net.sourceforge.zmanim.AstronomicalCalendar.clone()">cloned</see>.
         ///	 </summary>
         ///	<param name="timeZone">
         ///	           The timeZone to set. </param>
@@ -318,37 +316,32 @@ namespace net.sourceforge.zmanim.util
             this.timeZone = timeZone;
         }
 
-
         ///	 <summary> A method that will return the location's local mean time offset in
-        ///	milliseconds from local standard time. The globe is split into 360&deg;,
-        ///	with 15&deg; per hour of the day. For a local that is at a longitude that
+        ///	milliseconds from local standard time. The globe is split into 360°,
+        ///	with 15° per hour of the day. For a local that is at a longitude that
         ///	is evenly divisible by 15 (longitude % 15 == 0), at solar
-        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getSunTransit() noon"/>
-        ///	(with adjustment for the <a
-        ///	href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
-        ///	the sun should be directly overhead, so a user who is 1&deg; west of this
+        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
+        ///	(with adjustment for the <a href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
+        ///	the sun should be directly overhead, so a user who is 1° west of this
         ///	will have noon at 4 minutes after standard time noon, and conversely, a
-        ///	user who is 1&deg; east of the 15&deg longitude will have noon at 11:56
-        ///	AM. The offset returned does not account for the <a
-        ///	href="http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
+        ///	user who is 1° east of the 15&deg longitude will have noon at 11:56
+        ///	AM. The offset returned does not account for the <a href="http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
         ///	time</a> offset since this class is unaware of dates.
         ///	 </summary>
         ///	<returns> the offset in milliseconds not accounting for Daylight saving
         ///	        time. A positive value will be returned East of the timezone
         ///	        line, and a negative value West of it.
-        ///	@since 1.1 </returns>
+        /// </returns>
         public virtual long getLocalMeanTimeOffset()
         {
             return (long) (getLongitude()*4*MINUTE_MILLIS - getTimeZone().getRawOffset());
         }
 
 
-        ///	 <summary> Calculate the initial <a
-        ///	href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///	between this Object and a second Object passed to this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	 <summary> Calculate the initial <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        ///	between this Object and a second Object passed to this method using
+        /// <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975
         ///	 </summary>
@@ -360,12 +353,10 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Calculate the final <a
-        ///	href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///	between this Object and a second Object passed to this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	 <summary> Calculate the final <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        ///	between this Object and a second Object passed to this method using
+        /// <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975
         ///	 </summary>
@@ -376,14 +367,10 @@ namespace net.sourceforge.zmanim.util
             return vincentyFormula(location, FINAL_BEARING);
         }
 
-
-        ///	 <summary> Calculate <a
-        ///	href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        ///	 <summary> Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
         ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975
         ///	 </summary>
@@ -394,22 +381,18 @@ namespace net.sourceforge.zmanim.util
             return vincentyFormula(location, DISTANCE);
         }
 
-
-        ///	 <summary> Calculate <a
-        ///	href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        ///	 <summary> Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
         ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a
-        ///	href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a
-        ///	href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
         ///	Solutions of Geodesics on the Ellipsoid with application of nested
         ///	equations</a>", Survey Review, vol XXII no 176, 1975
         ///	 </summary>
         ///	<param name="location">
         ///	           the destination location </param>
         ///	<param name="formula">
-        ///	           This formula calculates initial bearing (<seealso cref="#INITIAL_BEARING"/>),
-        ///	           final bearing (<seealso cref="#FINAL_BEARING"/>) and distance (<seealso cref="#DISTANCE"/>). </param>
+        ///	           This formula calculates initial bearing (<seealso cref="INITIAL_BEARING"/>),
+        ///	           final bearing (<seealso cref="FINAL_BEARING"/>) and distance (<seealso cref="DISTANCE"/>). </param>
         private double vincentyFormula(GeoLocation location, int formula)
         {
             double a = 6378137;
@@ -532,12 +515,12 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> A method that returns an XML formatted <code>String</code> representing
-        ///	the serialized <code>Object</code>. Very similar to the toString
+        ///	 <summary> A method that returns an XML formatted <c>String</c> representing
+        ///	the serialized <c>Object</c>. Very similar to the toString
         ///	method but the return value is in an xml format. The format currently
         ///	used (subject to change) is:
         ///	
-        ///	<pre>
+        ///	<code>
         ///	  &lt;GeoLocation&gt;
         ///	  	 &lt;LocationName&gt;Lakewood, NJ&lt;/LocationName&gt;
         ///	  	 &lt;Latitude&gt;40.0828&amp;deg&lt;/Latitude&gt;
@@ -548,7 +531,7 @@ namespace net.sourceforge.zmanim.util
         ///	  	 &lt;TimezoneGMTOffset&gt;-5&lt;/TimezoneGMTOffset&gt;
         ///	  	 &lt;TimezoneDSTOffset&gt;1&lt;/TimezoneDSTOffset&gt;
         ///	  &lt;/GeoLocation&gt;
-        ///	</pre>
+        ///	</code>
         ///	 </summary>
         ///	<returns> The XML formatted <code>String</code>. </returns>
         public virtual string toXML()
@@ -556,8 +539,8 @@ namespace net.sourceforge.zmanim.util
             var sb = new StringBuilder();
             sb.Append("<GeoLocation>\n");
             sb.Append("\t<LocationName>").Append(getLocationName()).Append("</LocationName>\n");
-            sb.Append("\t<Latitude>").Append(getLatitude()).Append("&deg;").Append("</Latitude>\n");
-            sb.Append("\t<Longitude>").Append(getLongitude()).Append("&deg;").Append("</Longitude>\n");
+            sb.Append("\t<Latitude>").Append(getLatitude()).Append("°").Append("</Latitude>\n");
+            sb.Append("\t<Longitude>").Append(getLongitude()).Append("°").Append("</Longitude>\n");
             sb.Append("\t<Elevation>").Append(getElevation()).Append(" Meters").Append("</Elevation>\n");
             sb.Append("\t<TimezoneName>").Append(getTimeZone().getID()).Append("</TimezoneName>\n");
             sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append(
@@ -570,15 +553,13 @@ namespace net.sourceforge.zmanim.util
             return sb.ToString();
         }
 
-
-        ///	<seealso cref="java.lang.Object#equals(Object)"/>
-        public override bool Equals(object @object)
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
                 return true;
-            if (!(@object is GeoLocation))
+            if (!(obj is GeoLocation))
                 return false;
-            var geo = (GeoLocation) @object;
+            var geo = (GeoLocation) obj;
             return Double.doubleToLongBits(latitude) == Double.doubleToLongBits(geo.latitude) &&
                    Double.doubleToLongBits(longitude) == Double.doubleToLongBits(geo.longitude) &&
                    elevation == geo.elevation &&
@@ -586,8 +567,6 @@ namespace net.sourceforge.zmanim.util
                    (timeZone == null ? geo.timeZone == null : timeZone.Equals(geo.timeZone));
         }
 
-
-        ///	<seealso cref="java.lang.Object#hashCode()"/>
         public override int GetHashCode()
         {
             int result = 17;
@@ -606,14 +585,12 @@ namespace net.sourceforge.zmanim.util
             return result;
         }
 
-
-        ///	<seealso cref="java.lang.Object#toString()"/>
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append("\nLocation Name:\t\t\t").Append(getLocationName());
-            sb.Append("\nLatitude:\t\t\t").Append(getLatitude()).Append("&deg;");
-            sb.Append("\nLongitude:\t\t\t").Append(getLongitude()).Append("&deg;");
+            sb.Append("\nLatitude:\t\t\t").Append(getLatitude()).Append("°");
+            sb.Append("\nLongitude:\t\t\t").Append(getLongitude()).Append("°");
             sb.Append("\nElevation:\t\t\t").Append(getElevation()).Append(" Meters");
             sb.Append("\nTimezone Name:\t\t\t").Append(getTimeZone().getID());
             //        
