@@ -18,10 +18,10 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using java.util;
+
 namespace net.sourceforge.zmanim.util
 {
-    using java.util;
-
     public class Zman
     {
         private long duration;
@@ -31,34 +31,34 @@ namespace net.sourceforge.zmanim.util
 
         public Zman(Date date, string label)
         {
-            this.zmanLabel = label;
-            this.zman = date;
+            zmanLabel = label;
+            zman = date;
         }
 
         public Zman(long duration, string label)
         {
-            this.zmanLabel = label;
+            zmanLabel = label;
             this.duration = duration;
         }
 
         public virtual long getDuration()
         {
-            return this.duration;
+            return duration;
         }
 
         public virtual Date getZman()
         {
-            return this.zman;
+            return zman;
         }
 
         public virtual Date getZmanDescription()
         {
-            return this.zmanDescription;
+            return zmanDescription;
         }
 
         public virtual string getZmanLabel()
         {
-            return this.zmanLabel;
+            return zmanLabel;
         }
 
         public virtual void setDuration(long duration)
@@ -68,7 +68,7 @@ namespace net.sourceforge.zmanim.util
 
         public virtual void setZman(Date date)
         {
-            this.zman = date;
+            zman = date;
         }
 
         public virtual void setZmanDescription(Date zmanDescription)
@@ -78,8 +78,7 @@ namespace net.sourceforge.zmanim.util
 
         public virtual void setZmanLabel(string label)
         {
-            this.zmanLabel = label;
+            zmanLabel = label;
         }
     }
 }
-

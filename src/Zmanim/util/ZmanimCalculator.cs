@@ -18,13 +18,11 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
-using System;
+using java.lang;
 using java.util;
 
 namespace net.sourceforge.zmanim.util
 {
-    using AstronomicalCalendar = net.sourceforge.zmanim.AstronomicalCalendar;
-
     /// <summary>
     /// Implementation of sunrise and sunset methods to calculate astronomical times.
     /// This implementation is a port of the C++ algorithm written by Ken Bloom for
@@ -43,10 +41,11 @@ namespace net.sourceforge.zmanim.util
 
         public override string getCalculatorName()
         {
-            return this.calculatorName;
+            return calculatorName;
         }
 
-        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
+        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
+                                             bool adjustForElevation)
         {
             // zenith = adjustZenithForElevation(astronomicalCalendar, zenith,
             // geoLocation.getElevation());
@@ -68,17 +67,18 @@ namespace net.sourceforge.zmanim.util
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time
-            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude() / 15;
+            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude()/15;
 
-            double t = astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_YEAR) + ((6 - lngHour) / 24); // use 18 for
+            double t = astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_YEAR) + ((6 - lngHour)/24); // use 18 for
             // sunset instead
             // of 6
 
             // step 3: calculate the sun's mean anomaly
-            double m = (0.9856 * t) - 3.289;
+            double m = (0.9856*t) - 3.289;
 
             // step 4: calculate the sun's true longitude
-            double l = m + (1.916 * Math.Sin(java.lang.Math.toRadians(m))) + (0.020 * Math.Sin(java.lang.Math.toRadians(2 * m))) + 282.634;
+            double l = m + (1.916*System.Math.Sin(Math.toRadians(m))) + (0.020*System.Math.Sin(Math.toRadians(2*m))) +
+                       282.634;
             while (l < 0)
             {
                 double Lx = l + 360;
@@ -91,7 +91,7 @@ namespace net.sourceforge.zmanim.util
             }
 
             // step 5a: calculate the sun's right ascension
-            double RA = java.lang.Math.toDegrees(Math.Atan(0.91764 * Math.Tan(java.lang.Math.toRadians(l))));
+            double RA = Math.toDegrees(System.Math.Atan(0.91764*System.Math.Tan(Math.toRadians(l))));
 
             while (RA < 0)
             {
@@ -105,19 +105,21 @@ namespace net.sourceforge.zmanim.util
             }
 
             // step 5b: right ascension value needs to be in the same quadrant as L
-            double lQuadrant = Math.Floor(l / 90) * 90;
-            double raQuadrant = Math.Floor(RA / 90) * 90;
+            double lQuadrant = System.Math.Floor(l/90)*90;
+            double raQuadrant = System.Math.Floor(RA/90)*90;
             RA = RA + (lQuadrant - raQuadrant);
 
             // step 5c: right ascension value needs to be converted into hours
             RA /= 15;
 
             // step 6: calculate the sun's declination
-            double sinDec = 0.39782 * Math.Sin(java.lang.Math.toRadians(l));
-            double cosDec = Math.Cos(Math.Asin(sinDec));
+            double sinDec = 0.39782*System.Math.Sin(Math.toRadians(l));
+            double cosDec = System.Math.Cos(System.Math.Asin(sinDec));
 
             // step 7a: calculate the sun's local hour angle
-            double cosH = (Math.Cos(java.lang.Math.toRadians(zenith)) - (sinDec * Math.Sin(java.lang.Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())))) / (cosDec * Math.Cos(java.lang.Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
+            double cosH = (System.Math.Cos(Math.toRadians(zenith)) -
+                           (sinDec*System.Math.Sin(Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude()))))/
+                          (cosDec*System.Math.Cos(Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
 
             // the following line would throw an Exception if the sun never rose.
             // this is not needed since the calculation will return a Double.NaN
@@ -127,15 +129,15 @@ namespace net.sourceforge.zmanim.util
             // if (cosH < -1)
 
             // step 7b: finish calculating H and convert into hours
-            double H = 360 - java.lang.Math.toDegrees(Math.Acos(cosH));
+            double H = 360 - Math.toDegrees(System.Math.Acos(cosH));
 
             // FOR SUNSET remove "360 - " from the above
 
-            H = H / 15;
+            H = H/15;
 
             // step 8: calculate local mean time
 
-            double T = H + RA - (0.06571 * t) - 6.622;
+            double T = H + RA - (0.06571*t) - 6.622;
 
             // step 9: convert to UTC
             double UT = T - lngHour;
@@ -152,7 +154,8 @@ namespace net.sourceforge.zmanim.util
             return UT;
         }
 
-        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
+        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
+                                            bool adjustForElevation)
         {
             // zenith = adjustZenithForElevation(astronomicalCalendar, zenith,
             // geoLocation.getElevation());
@@ -178,15 +181,16 @@ namespace net.sourceforge.zmanim.util
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time
-            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude() / 15;
+            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude()/15;
 
-            double t = N + ((18 - lngHour) / 24);
+            double t = N + ((18 - lngHour)/24);
 
             // step 3: calculate the sun's mean anomaly
-            double M = (0.9856 * t) - 3.289;
+            double M = (0.9856*t) - 3.289;
 
             // step 4: calculate the sun's true longitude
-            double L = M + (1.916 * Math.Sin(java.lang.Math.toRadians(M))) + (0.020 * Math.Sin(java.lang.Math.toRadians(2 * M))) + 282.634;
+            double L = M + (1.916*System.Math.Sin(Math.toRadians(M))) + (0.020*System.Math.Sin(Math.toRadians(2*M))) +
+                       282.634;
             while (L < 0)
             {
                 double Lx = L + 360;
@@ -199,7 +203,7 @@ namespace net.sourceforge.zmanim.util
             }
 
             // step 5a: calculate the sun's right ascension
-            double RA = java.lang.Math.toDegrees(Math.Atan(0.91764 * Math.Tan(java.lang.Math.toRadians(L))));
+            double RA = Math.toDegrees(System.Math.Atan(0.91764*System.Math.Tan(Math.toRadians(L))));
             while (RA < 0)
             {
                 double RAx = RA + 360;
@@ -212,31 +216,33 @@ namespace net.sourceforge.zmanim.util
             }
 
             // step 5b: right ascension value needs to be in the same quadrant as L
-            double Lquadrant = Math.Floor(L / 90) * 90;
-            double RAquadrant = Math.Floor(RA / 90) * 90;
+            double Lquadrant = System.Math.Floor(L/90)*90;
+            double RAquadrant = System.Math.Floor(RA/90)*90;
             RA = RA + (Lquadrant - RAquadrant);
 
             // step 5c: right ascension value needs to be converted into hours
             RA /= 15;
 
             // step 6: calculate the sun's declination
-            double sinDec = 0.39782 * Math.Sin(java.lang.Math.toRadians(L));
-            double cosDec = Math.Cos(Math.Asin(sinDec));
+            double sinDec = 0.39782*System.Math.Sin(Math.toRadians(L));
+            double cosDec = System.Math.Cos(System.Math.Asin(sinDec));
 
             // step 7a: calculate the sun's local hour angle
-            double cosH = (Math.Cos(java.lang.Math.toRadians(zenith)) - (sinDec * Math.Sin(java.lang.Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())))) / (cosDec * Math.Cos(java.lang.Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
+            double cosH = (System.Math.Cos(Math.toRadians(zenith)) -
+                           (sinDec*System.Math.Sin(Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude()))))/
+                          (cosDec*System.Math.Cos(Math.toRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
 
             // the following line would throw an Exception if the sun never set.
             // this is not needed since the calculation will return a Double.NaN
             // if (cosH < -1) throw new ZmanimException("doesnthappen");
 
             // step 7b: finish calculating H and convert into hours
-            double H = java.lang.Math.toDegrees(Math.Acos(cosH));
-            H = H / 15;
+            double H = Math.toDegrees(System.Math.Acos(cosH));
+            H = H/15;
 
             // step 8: calculate local mean time
 
-            double T = H + RA - (0.06571 * t) - 6.622;
+            double T = H + RA - (0.06571*t) - 6.622;
 
             // step 9: convert to UTC
             double UT = T - lngHour;
@@ -254,4 +260,3 @@ namespace net.sourceforge.zmanim.util
         }
     }
 }
-

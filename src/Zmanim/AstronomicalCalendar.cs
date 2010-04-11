@@ -18,14 +18,13 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using System;
+using java.math;
+using java.util;
+using net.sourceforge.zmanim.util;
+
 namespace net.sourceforge.zmanim
 {
-    using java.math;
-    using java.util;
-    using net.sourceforge.zmanim.util;
-    using System;
-
-
     ///
     /// <summary> * A Java calendar that calculates astronomical time calculations such as
     /// * <seealso cref="#getSunrise() sunrise"/> and <seealso cref="#getSunset() sunset"/> times. This
@@ -42,7 +41,7 @@ namespace net.sourceforge.zmanim
     /// * below the horizon for locations as south of the North Pole as London in the
     /// * northern hemisphere. When the calculations encounter this condition a null
     /// * will be returned when a <code><seealso cref="java.util.Date"/></code> is expected and
-    /// * <seealso cref="Double#NaN"/> when a double is expected. The reason that
+    /// * <seealso cref="double#NaN"/> when a double is expected. The reason that
     /// * <code>Exception</code>s are not thrown in these cases is because the lack
     /// * of a rise/set are not exceptions, but expected in many parts of the world.
     /// * 
@@ -115,10 +114,12 @@ namespace net.sourceforge.zmanim
         public const double ASTRONOMICAL_ZENITH = 108;
 
         /// <summary> constant for milliseconds in a minute (60,000)  </summary>
-        internal const long MINUTE_MILLIS = 60 * 1000;
+        internal const long MINUTE_MILLIS = 60*1000;
 
         /// <summary> constant for milliseconds in an hour (3,600,000)  </summary>
-        internal const long HOUR_MILLIS = MINUTE_MILLIS * 60;
+        internal const long HOUR_MILLIS = MINUTE_MILLIS*60;
+
+        private AstronomicalCalculator astronomicalCalculator;
 
         ///	 <summary> 
         ///	The Java Calendar encapsulated by this class to track the current date
@@ -128,7 +129,53 @@ namespace net.sourceforge.zmanim
 
         private GeoLocation geoLocation;
 
-        private AstronomicalCalculator astronomicalCalculator;
+        ///	 <summary> 
+        ///	Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
+        ///	a default
+        ///	<seealso cref="AstronomicalCalculator#getDefault() AstronomicalCalculator"/> and
+        ///	default the calendar to the current date. </summary>
+        public AstronomicalCalendar()
+            : this(new GeoLocation())
+        {
+        }
+
+        ///	 <summary> 
+        ///	A constructor that takes in as a parameter geolocation information
+        ///	 </summary>
+        ///	<param name="geoLocation">
+        ///	           The location information used for astronomical calculating sun
+        ///	           times. </param>
+        public AstronomicalCalendar(GeoLocation geoLocation)
+        {
+            setCalendar(Calendar.getInstance(geoLocation.getTimeZone()));
+            setGeoLocation(geoLocation); // duplicate call
+            setAstronomicalCalculator(AstronomicalCalculator.getDefault());
+        }
+
+        #region ICloneable Members
+
+        ///	 <summary> 
+        ///	A method that creates a <a href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
+        ///	of the object. <br />
+        ///	<b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in the cloned
+        ///	<seealso cref="net.sourceforge.zmanim.util.GeoLocation"/> will be changed from the
+        ///	original, it is critical that
+        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
+        ///	be called in order for the AstronomicalCalendar to output times in the
+        ///	expected offset after being cloned.
+        ///	 </summary>
+        ///	<seealso cref="java.lang.Object#clone() @since 1.1"/>
+        public virtual object Clone()
+        {
+            var clone = (AstronomicalCalendar) MemberwiseClone();
+
+            clone.setGeoLocation((GeoLocation) getGeoLocation().Clone());
+            clone.setCalendar((Calendar) getCalendar().clone());
+            clone.setAstronomicalCalculator((AstronomicalCalculator) getAstronomicalCalculator().Clone());
+            return clone;
+        }
+
+        #endregion
 
         ///	 <summary> 
         ///	The getSunrise method Returns a <code>Date</code> representing the
@@ -259,7 +306,7 @@ namespace net.sourceforge.zmanim
         {
             if (sunset != null && sunrise != null && sunrise.compareTo(sunset) >= 0)
             {
-                Calendar clonedCalendar = (GregorianCalendar)getCalendar().clone();
+                Calendar clonedCalendar = (GregorianCalendar) getCalendar().clone();
                 clonedCalendar.setTime(sunset);
                 clonedCalendar.add(Calendar.DAY_OF_MONTH, 1);
                 return clonedCalendar.getTime();
@@ -290,7 +337,6 @@ namespace net.sourceforge.zmanim
                 return null;
 
             return getAdjustedSunsetDate(getDateFromTime(sunset), getSeaLevelSunrise());
-
         }
 
         ///	 <summary> 
@@ -344,7 +390,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <seealso cref="java.util.Date"/>with the offset added to it </returns>
         public virtual Date getTimeOffset(Date time, double offset)
         {
-            return getTimeOffset(time, (long)offset);
+            return getTimeOffset(time, (long) offset);
         }
 
         ///	 <summary> 
@@ -401,29 +447,6 @@ namespace net.sourceforge.zmanim
                 return null;
 
             return getAdjustedSunsetDate(getDateFromTime(sunset), getSunriseOffsetByDegrees(offsetZenith));
-        }
-
-        ///	 <summary> 
-        ///	Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
-        ///	a default
-        ///	<seealso cref="AstronomicalCalculator#getDefault() AstronomicalCalculator"/> and
-        ///	default the calendar to the current date. </summary>
-        public AstronomicalCalendar()
-            : this(new GeoLocation())
-        {
-        }
-
-        ///	 <summary> 
-        ///	A constructor that takes in as a parameter geolocation information
-        ///	 </summary>
-        ///	<param name="geoLocation">
-        ///	           The location information used for astronomical calculating sun
-        ///	           times. </param>
-        public AstronomicalCalendar(GeoLocation geoLocation)
-        {
-            setCalendar(Calendar.getInstance(geoLocation.getTimeZone()));
-            setGeoLocation(geoLocation); // duplicate call
-            setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
 
         ///	 <summary> 
@@ -515,10 +538,10 @@ namespace net.sourceforge.zmanim
             bool dst = getCalendar().getTimeZone().inDaylightTime(getCalendar().getTime());
             double dstOffset = 0;
             // be nice to Newfies and use a double
-            double gmtOffset = getCalendar().getTimeZone().getRawOffset() / (60 * MINUTE_MILLIS);
+            double gmtOffset = getCalendar().getTimeZone().getRawOffset()/(60*MINUTE_MILLIS);
             if (dst)
             {
-                dstOffset = getCalendar().getTimeZone().getDSTSavings() / (60 * MINUTE_MILLIS);
+                dstOffset = getCalendar().getTimeZone().getDSTSavings()/(60*MINUTE_MILLIS);
             }
             return time + gmtOffset + dstOffset;
         }
@@ -553,7 +576,7 @@ namespace net.sourceforge.zmanim
             {
                 return long.MinValue;
             }
-            return (sunset.getTime() - sunrise.getTime()) / 12;
+            return (sunset.getTime() - sunrise.getTime())/12;
         }
 
         ///	 <summary> 
@@ -569,7 +592,7 @@ namespace net.sourceforge.zmanim
         ///	        calculation can not be computed null will be returned. </returns>
         public virtual Date getSunTransit()
         {
-            return getTimeOffset(getSunrise(), getTemporalHour() * 6);
+            return getTimeOffset(getSunrise(), getTemporalHour()*6);
         }
 
         ///	 <summary> 
@@ -586,7 +609,7 @@ namespace net.sourceforge.zmanim
                 return null;
 
             time = getOffsetTime(time);
-            time = (time + 240) % 24; // the calculators sometimes return a double
+            time = (time + 240)%24; // the calculators sometimes return a double
             // that is negative or slightly greater than 24
             Calendar cal = new GregorianCalendar();
             cal.clear();
@@ -594,18 +617,18 @@ namespace net.sourceforge.zmanim
             cal.set(Calendar.MONTH, getCalendar().get(Calendar.MONTH));
             cal.set(Calendar.DAY_OF_MONTH, getCalendar().get(Calendar.DAY_OF_MONTH));
 
-            int hours = (int)time; // cut off minutes
+            var hours = (int) time; // cut off minutes
 
             time -= hours;
-            int minutes = (int)(time *= 60);
+            var minutes = (int) (time *= 60);
             time -= minutes;
-            int seconds = (int)(time *= 60);
+            var seconds = (int) (time *= 60);
             time -= seconds; // milliseconds
 
             cal.set(Calendar.HOUR_OF_DAY, hours);
             cal.set(Calendar.MINUTE, minutes);
             cal.set(Calendar.SECOND, seconds);
-            cal.set(Calendar.MILLISECOND, (int)(time * 1000));
+            cal.set(Calendar.MILLISECOND, (int) (time*1000));
             return cal.getTime();
         }
 
@@ -623,10 +646,10 @@ namespace net.sourceforge.zmanim
         public virtual double getSunriseSolarDipFromOffset(double minutes)
         {
             Date offsetByDegrees = getSeaLevelSunrise();
-            Date offsetByTime = getTimeOffset(getSeaLevelSunrise(), -(minutes * MINUTE_MILLIS));
+            Date offsetByTime = getTimeOffset(getSeaLevelSunrise(), -(minutes*MINUTE_MILLIS));
 
-            BigDecimal degrees = new BigDecimal(0);
-            BigDecimal incrementor = new BigDecimal("0.0001");
+            var degrees = new BigDecimal(0);
+            var incrementor = new BigDecimal("0.0001");
             while (offsetByDegrees == null || offsetByDegrees.getTime() > offsetByTime.getTime())
             {
                 degrees = degrees.add(incrementor);
@@ -649,10 +672,10 @@ namespace net.sourceforge.zmanim
         public virtual double getSunsetSolarDipFromOffset(double minutes)
         {
             Date offsetByDegrees = getSeaLevelSunset();
-            Date offsetByTime = getTimeOffset(getSeaLevelSunset(), minutes * MINUTE_MILLIS);
+            Date offsetByTime = getTimeOffset(getSeaLevelSunset(), minutes*MINUTE_MILLIS);
 
-            BigDecimal degrees = new BigDecimal(0);
-            BigDecimal incrementor = new BigDecimal("0.0001");
+            var degrees = new BigDecimal(0);
+            var incrementor = new BigDecimal("0.0001");
             while (offsetByDegrees == null || offsetByDegrees.getTime() < offsetByTime.getTime())
             {
                 degrees = degrees.add(incrementor);
@@ -681,8 +704,9 @@ namespace net.sourceforge.zmanim
                 return true;
             if (!(@object is AstronomicalCalendar))
                 return false;
-            AstronomicalCalendar aCal = (AstronomicalCalendar)@object;
-            return getCalendar().Equals(aCal.getCalendar()) && getGeoLocation().Equals(aCal.getGeoLocation()) && getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
+            var aCal = (AstronomicalCalendar) @object;
+            return getCalendar().Equals(aCal.getCalendar()) && getGeoLocation().Equals(aCal.getGeoLocation()) &&
+                   getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
         }
 
         ///    
@@ -690,10 +714,10 @@ namespace net.sourceforge.zmanim
         public override int GetHashCode()
         {
             int result = 17;
-            result = 37 * result + this.GetType().GetHashCode(); // needed or this and subclasses will return identical hash
-            result += 37 * result + getCalendar().GetHashCode();
-            result += 37 * result + getGeoLocation().GetHashCode();
-            result += 37 * result + getAstronomicalCalculator().GetHashCode();
+            result = 37*result + GetType().GetHashCode(); // needed or this and subclasses will return identical hash
+            result += 37*result + getCalendar().GetHashCode();
+            result += 37*result + getGeoLocation().GetHashCode();
+            result += 37*result + getAstronomicalCalculator().GetHashCode();
             return result;
         }
 
@@ -770,27 +794,6 @@ namespace net.sourceforge.zmanim
                 // TimeZone
                 getCalendar().setTimeZone(getGeoLocation().getTimeZone());
             }
-        }
-
-        ///	 <summary> 
-        ///	A method that creates a <a href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
-        ///	of the object. <br />
-        ///	<b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in the cloned
-        ///	<seealso cref="net.sourceforge.zmanim.util.GeoLocation"/> will be changed from the
-        ///	original, it is critical that
-        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
-        ///	be called in order for the AstronomicalCalendar to output times in the
-        ///	expected offset after being cloned.
-        ///	 </summary>
-        ///	<seealso cref="java.lang.Object#clone() @since 1.1"/>
-        public virtual object Clone()
-        {
-            AstronomicalCalendar clone = (AstronomicalCalendar)MemberwiseClone();
-
-            clone.setGeoLocation((GeoLocation)getGeoLocation().Clone());
-            clone.setCalendar((Calendar)getCalendar().clone());
-            clone.setAstronomicalCalculator((AstronomicalCalculator)getAstronomicalCalculator().Clone());
-            return clone;
         }
     }
 }

@@ -19,7 +19,9 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using java.util;
+using System.Text;
+using Double = java.lang.Double;
+using Math = java.lang.Math;
 using TimeZone = java.util.TimeZone;
 
 namespace net.sourceforge.zmanim.util
@@ -35,45 +37,21 @@ namespace net.sourceforge.zmanim.util
     /// @version 1.1 </summary>
     public class GeoLocation : ICloneable
     {
-        private double latitude;
-        private double longitude;
-        private string locationName;
-        private java.util.TimeZone timeZone;
-        private double elevation;
-        private int DISTANCE = 0;
-        private int INITIAL_BEARING = 1;
-        private int FINAL_BEARING = 2;
-
         /// <summary>constant for milliseconds in a minute (60,000)</summary>
-        private const long MINUTE_MILLIS = 60 * 1000;
+        private const long MINUTE_MILLIS = 60*1000;
 
         /// <summary>constant for milliseconds in an hour (3,600,000)</summary>
-        private const long HOUR_MILLIS = MINUTE_MILLIS * 60;
+        private const long HOUR_MILLIS = MINUTE_MILLIS*60;
 
+        private int DISTANCE;
+        private int FINAL_BEARING = 2;
+        private int INITIAL_BEARING = 1;
+        private double elevation;
 
-
-        ///	 <summary> Method to get the elevation in Meters.
-        ///	 </summary>
-        ///	<returns> Returns the elevation in Meters. </returns>
-        public virtual double getElevation()
-        {
-            return elevation;
-        }
-
-
-        ///	 <summary> Method to set the elevation in Meters <b>above </b> sea level.
-        ///	 </summary>
-        ///	<param name="elevation">
-        ///	           The elevation to set in Meters. An IllegalArgumentException
-        ///	           will be thrown if the value is a negative. </param>
-        public virtual void setElevation(double elevation)
-        {
-            if (elevation < 0)
-            {
-                throw new System.ArgumentException("Elevation cannot be negative");
-            }
-            this.elevation = elevation;
-        }
+        private double latitude;
+        private string locationName;
+        private double longitude;
+        private TimeZone timeZone;
 
 
         ///	 <summary> GeoLocation constructor with parameters for all required fields.
@@ -140,6 +118,52 @@ namespace net.sourceforge.zmanim.util
             setTimeZone(TimeZone.getTimeZone("GMT"));
         }
 
+        #region ICloneable Members
+
+        ///	 <summary> An implementation of the <seealso cref="java.lang.Object#clone()"/> method that
+        ///	creates a <a
+        ///	href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
+        ///	of the object. <br/><b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in
+        ///	the clone will be changed from the original, it is critical that
+        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
+        ///	is called after cloning in order for the AstronomicalCalendar to output
+        ///	times in the expected offset.
+        ///	 </summary>
+        ///	<seealso cref= java.lang.Object#clone()
+        ///	@since 1.1 </seealso>
+        public virtual object Clone()
+        {
+            var clone = (GeoLocation) MemberwiseClone();
+            clone.timeZone = (TimeZone) getTimeZone().clone();
+            clone.locationName = getLocationName();
+            return clone;
+        }
+
+        #endregion
+
+        ///	 <summary> Method to get the elevation in Meters.
+        ///	 </summary>
+        ///	<returns> Returns the elevation in Meters. </returns>
+        public virtual double getElevation()
+        {
+            return elevation;
+        }
+
+
+        ///	 <summary> Method to set the elevation in Meters <b>above </b> sea level.
+        ///	 </summary>
+        ///	<param name="elevation">
+        ///	           The elevation to set in Meters. An IllegalArgumentException
+        ///	           will be thrown if the value is a negative. </param>
+        public virtual void setElevation(double elevation)
+        {
+            if (elevation < 0)
+            {
+                throw new ArgumentException("Elevation cannot be negative");
+            }
+            this.elevation = elevation;
+        }
+
 
         ///	 <summary> Method to set the latitude.
         ///	 </summary>
@@ -153,7 +177,7 @@ namespace net.sourceforge.zmanim.util
         {
             if (latitude > 90 || latitude < -90)
             {
-                throw new System.ArgumentException("Latitude must be between -90 and  90");
+                throw new ArgumentException("Latitude must be between -90 and  90");
             }
             this.latitude = latitude;
         }
@@ -172,10 +196,11 @@ namespace net.sourceforge.zmanim.util
         ///	           be thrown if the value is not S or N. </param>
         public virtual void setLatitude(int degrees, int minutes, double seconds, string direction)
         {
-            double tempLat = degrees + ((minutes + (seconds / 60.0)) / 60.0);
+            double tempLat = degrees + ((minutes + (seconds/60.0))/60.0);
             if (tempLat > 90 || tempLat < 0)
             {
-                throw new System.ArgumentException("Latitude must be between 0 and  90. Use direction of S instead of negative.");
+                throw new ArgumentException(
+                    "Latitude must be between 0 and  90. Use direction of S instead of negative.");
             }
             if (direction.Equals("S"))
             {
@@ -183,9 +208,9 @@ namespace net.sourceforge.zmanim.util
             }
             else if (!direction.Equals("N"))
             {
-                throw new System.ArgumentException("Latitude direction must be N or S");
+                throw new ArgumentException("Latitude direction must be N or S");
             }
-            this.latitude = tempLat;
+            latitude = tempLat;
         }
 
 
@@ -209,7 +234,7 @@ namespace net.sourceforge.zmanim.util
         {
             if (longitude > 180 || longitude < -180)
             {
-                throw new System.ArgumentException("Longitude must be between -180 and  180");
+                throw new ArgumentException("Longitude must be between -180 and  180");
             }
             this.longitude = longitude;
         }
@@ -232,10 +257,10 @@ namespace net.sourceforge.zmanim.util
         ///	           or W. </param>
         public virtual void setLongitude(int degrees, int minutes, double seconds, string direction)
         {
-            double longTemp = degrees + ((minutes + (seconds / 60.0)) / 60.0);
+            double longTemp = degrees + ((minutes + (seconds/60.0))/60.0);
             if (longTemp > 180 || longitude < 0)
             {
-                throw new System.ArgumentException("Longitude must be between 0 and  180. Use the ");
+                throw new ArgumentException("Longitude must be between 0 and  180. Use the ");
             }
             if (direction.Equals("W"))
             {
@@ -243,9 +268,9 @@ namespace net.sourceforge.zmanim.util
             }
             else if (!direction.Equals("E"))
             {
-                throw new System.ArgumentException("Longitude direction must be E or W");
+                throw new ArgumentException("Longitude direction must be E or W");
             }
-            this.longitude = longTemp;
+            longitude = longTemp;
         }
 
 
@@ -267,7 +292,7 @@ namespace net.sourceforge.zmanim.util
         ///	           The setter method for the display name. </param>
         public virtual void setLocationName(string name)
         {
-            this.locationName = name;
+            locationName = name;
         }
 
 
@@ -314,7 +339,7 @@ namespace net.sourceforge.zmanim.util
         ///	@since 1.1 </returns>
         public virtual long getLocalMeanTimeOffset()
         {
-            return (long)(getLongitude() * 4 * MINUTE_MILLIS - getTimeZone().getRawOffset());
+            return (long) (getLongitude()*4*MINUTE_MILLIS - getTimeZone().getRawOffset());
         }
 
 
@@ -389,15 +414,15 @@ namespace net.sourceforge.zmanim.util
         {
             double a = 6378137;
             double b = 6356752.3142;
-            double f = 1 / 298.257223563; // WGS-84 ellipsiod
-            double L = java.lang.Math.toRadians(location.getLongitude() - getLongitude());
-            double U1 = Math.Atan((1 - f) * Math.Tan(java.lang.Math.toRadians(getLatitude())));
-            double U2 = Math.Atan((1 - f) * Math.Tan(java.lang.Math.toRadians(location.getLatitude())));
-            double sinU1 = Math.Sin(U1), cosU1 = Math.Cos(U1);
-            double sinU2 = Math.Sin(U2), cosU2 = Math.Cos(U2);
+            double f = 1/298.257223563; // WGS-84 ellipsiod
+            double L = Math.toRadians(location.getLongitude() - getLongitude());
+            double U1 = System.Math.Atan((1 - f)*System.Math.Tan(Math.toRadians(getLatitude())));
+            double U2 = System.Math.Atan((1 - f)*System.Math.Tan(Math.toRadians(location.getLatitude())));
+            double sinU1 = System.Math.Sin(U1), cosU1 = System.Math.Cos(U1);
+            double sinU2 = System.Math.Sin(U2), cosU2 = System.Math.Cos(U2);
 
             double lambda = L;
-            double lambdaP = 2 * Math.PI;
+            double lambdaP = 2*System.Math.PI;
             double iterLimit = 20;
             double sinLambda = 0;
             double cosLambda = 0;
@@ -408,37 +433,45 @@ namespace net.sourceforge.zmanim.util
             double cosSqAlpha = 0;
             double cos2SigmaM = 0;
             double C;
-            while (Math.Abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0)
+            while (System.Math.Abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0)
             {
-                sinLambda = Math.Sin(lambda);
-                cosLambda = Math.Cos(lambda);
-                sinSigma = Math.Sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda) + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
+                sinLambda = System.Math.Sin(lambda);
+                cosLambda = System.Math.Cos(lambda);
+                sinSigma =
+                    System.Math.Sqrt((cosU2*sinLambda)*(cosU2*sinLambda) +
+                                     (cosU1*sinU2 - sinU1*cosU2*cosLambda)*(cosU1*sinU2 - sinU1*cosU2*cosLambda));
                 if (sinSigma == 0)
                     return 0; // co-incident points
-                cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-                sigma = Math.Atan2(sinSigma, cosSigma);
-                sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
-                cosSqAlpha = 1 - sinAlpha * sinAlpha;
-                cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
+                cosSigma = sinU1*sinU2 + cosU1*cosU2*cosLambda;
+                sigma = System.Math.Atan2(sinSigma, cosSigma);
+                sinAlpha = cosU1*cosU2*sinLambda/sinSigma;
+                cosSqAlpha = 1 - sinAlpha*sinAlpha;
+                cos2SigmaM = cosSigma - 2*sinU1*sinU2/cosSqAlpha;
                 if (double.IsNaN(cos2SigmaM))
                     cos2SigmaM = 0; // equatorial line: cosSqAlpha=0 (§6)
-                C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
+                C = f/16*cosSqAlpha*(4 + f*(4 - 3*cosSqAlpha));
                 lambdaP = lambda;
-                lambda = L + (1 - C) * f * sinAlpha * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
+                lambda = L +
+                         (1 - C)*f*sinAlpha*
+                         (sigma + C*sinSigma*(cos2SigmaM + C*cosSigma*(-1 + 2*cos2SigmaM*cos2SigmaM)));
             }
             if (iterLimit == 0)
                 return double.NaN; // formula failed to converge
 
-            double uSq = cosSqAlpha * (a * a - b * b) / (b * b);
-            double A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
-            double B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
-            double deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
-            double distance = b * A * (sigma - deltaSigma);
+            double uSq = cosSqAlpha*(a*a - b*b)/(b*b);
+            double A = 1 + uSq/16384*(4096 + uSq*(-768 + uSq*(320 - 175*uSq)));
+            double B = uSq/1024*(256 + uSq*(-128 + uSq*(74 - 47*uSq)));
+            double deltaSigma = B*sinSigma*
+                                (cos2SigmaM +
+                                 B/4*
+                                 (cosSigma*(-1 + 2*cos2SigmaM*cos2SigmaM) -
+                                  B/6*cos2SigmaM*(-3 + 4*sinSigma*sinSigma)*(-3 + 4*cos2SigmaM*cos2SigmaM)));
+            double distance = b*A*(sigma - deltaSigma);
 
             // initial bearing
-            double fwdAz = java.lang.Math.toDegrees(Math.Atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
+            double fwdAz = Math.toDegrees(System.Math.Atan2(cosU2*sinLambda, cosU1*sinU2 - sinU1*cosU2*cosLambda));
             // final bearing
-            double revAz = java.lang.Math.toDegrees(Math.Atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda));
+            double revAz = Math.toDegrees(System.Math.Atan2(cosU1*sinLambda, -sinU1*cosU2 + cosU1*sinU2*cosLambda));
             if (formula == DISTANCE)
             {
                 return distance;
@@ -466,11 +499,13 @@ namespace net.sourceforge.zmanim.util
         ///	<returns> the bearing in degrees </returns>
         public virtual double getRhumbLineBearing(GeoLocation location)
         {
-            double dLon = java.lang.Math.toRadians(location.getLongitude() - getLongitude());
-            double dPhi = Math.Log(Math.Tan(java.lang.Math.toRadians(location.getLatitude()) / 2 + Math.PI / 4) / Math.Tan(java.lang.Math.toRadians(getLatitude()) / 2 + Math.PI / 4));
-            if (Math.Abs(dLon) > Math.PI)
-                dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
-            return java.lang.Math.toDegrees(Math.Atan2(dLon, dPhi));
+            double dLon = Math.toRadians(location.getLongitude() - getLongitude());
+            double dPhi =
+                System.Math.Log(System.Math.Tan(Math.toRadians(location.getLatitude())/2 + System.Math.PI/4)/
+                                System.Math.Tan(Math.toRadians(getLatitude())/2 + System.Math.PI/4));
+            if (System.Math.Abs(dLon) > System.Math.PI)
+                dLon = dLon > 0 ? -(2*System.Math.PI - dLon) : (2*System.Math.PI + dLon);
+            return Math.toDegrees(System.Math.Atan2(dLon, dPhi));
         }
 
 
@@ -483,15 +518,17 @@ namespace net.sourceforge.zmanim.util
         public virtual double getRhumbLineDistance(GeoLocation location)
         {
             double R = 6371; // earth's mean radius in km
-            double dLat = java.lang.Math.toRadians(location.getLatitude() - getLatitude());
-            double dLon = java.lang.Math.toRadians(Math.Abs(location.getLongitude() - getLongitude()));
-            double dPhi = Math.Log(Math.Tan(java.lang.Math.toRadians(location.getLongitude()) / 2 + Math.PI / 4) / Math.Tan(java.lang.Math.toRadians(getLatitude()) / 2 + Math.PI / 4));
-            double q = (Math.Abs(dLat) > 1e-10) ? dLat / dPhi : Math.Cos(java.lang.Math.toRadians(getLatitude()));
+            double dLat = Math.toRadians(location.getLatitude() - getLatitude());
+            double dLon = Math.toRadians(System.Math.Abs(location.getLongitude() - getLongitude()));
+            double dPhi =
+                System.Math.Log(System.Math.Tan(Math.toRadians(location.getLongitude())/2 + System.Math.PI/4)/
+                                System.Math.Tan(Math.toRadians(getLatitude())/2 + System.Math.PI/4));
+            double q = (System.Math.Abs(dLat) > 1e-10) ? dLat/dPhi : System.Math.Cos(Math.toRadians(getLatitude()));
             // if dLon over 180° take shorter rhumb across 180° meridian:
-            if (dLon > Math.PI)
-                dLon = 2 * Math.PI - dLon;
-            double d = Math.Sqrt(dLat * dLat + q * q * dLon * dLon);
-            return d * R;
+            if (dLon > System.Math.PI)
+                dLon = 2*System.Math.PI - dLon;
+            double d = System.Math.Sqrt(dLat*dLat + q*q*dLon*dLon);
+            return d*R;
         }
 
 
@@ -516,16 +553,19 @@ namespace net.sourceforge.zmanim.util
         ///	<returns> The XML formatted <code>String</code>. </returns>
         public virtual string toXML()
         {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             sb.Append("<GeoLocation>\n");
             sb.Append("\t<LocationName>").Append(getLocationName()).Append("</LocationName>\n");
             sb.Append("\t<Latitude>").Append(getLatitude()).Append("&deg;").Append("</Latitude>\n");
             sb.Append("\t<Longitude>").Append(getLongitude()).Append("&deg;").Append("</Longitude>\n");
             sb.Append("\t<Elevation>").Append(getElevation()).Append(" Meters").Append("</Elevation>\n");
             sb.Append("\t<TimezoneName>").Append(getTimeZone().getID()).Append("</TimezoneName>\n");
-            sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append("</TimeZoneDisplayName>\n");
-            sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset() / HOUR_MILLIS).Append("</TimezoneGMTOffset>\n");
-            sb.Append("\t<TimezoneDSTOffset>").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS).Append("</TimezoneDSTOffset>\n");
+            sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append(
+                "</TimeZoneDisplayName>\n");
+            sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset()/HOUR_MILLIS).Append(
+                "</TimezoneGMTOffset>\n");
+            sb.Append("\t<TimezoneDSTOffset>").Append(getTimeZone().getDSTSavings()/HOUR_MILLIS).Append(
+                "</TimezoneDSTOffset>\n");
             sb.Append("</GeoLocation>");
             return sb.ToString();
         }
@@ -538,8 +578,12 @@ namespace net.sourceforge.zmanim.util
                 return true;
             if (!(@object is GeoLocation))
                 return false;
-            GeoLocation geo = (GeoLocation)@object;
-            return java.lang.Double.doubleToLongBits(latitude) == java.lang.Double.doubleToLongBits(geo.latitude) && java.lang.Double.doubleToLongBits(longitude) == java.lang.Double.doubleToLongBits(geo.longitude) && elevation == geo.elevation && (locationName == null ? geo.locationName == null : locationName.Equals(geo.locationName)) && (timeZone == null ? geo.timeZone == null : timeZone.Equals(geo.timeZone));
+            var geo = (GeoLocation) @object;
+            return Double.doubleToLongBits(latitude) == Double.doubleToLongBits(geo.latitude) &&
+                   Double.doubleToLongBits(longitude) == Double.doubleToLongBits(geo.longitude) &&
+                   elevation == geo.elevation &&
+                   (locationName == null ? geo.locationName == null : locationName.Equals(geo.locationName)) &&
+                   (timeZone == null ? geo.timeZone == null : timeZone.Equals(geo.timeZone));
         }
 
 
@@ -547,18 +591,18 @@ namespace net.sourceforge.zmanim.util
         public override int GetHashCode()
         {
             int result = 17;
-            long latLong = java.lang.Double.doubleToLongBits(latitude);
-            long lonLong = java.lang.Double.doubleToLongBits(longitude);
-            long elevLong = java.lang.Double.doubleToLongBits(elevation);
-            int latInt = (int)(latLong ^ (latLong >> 32));
-            int lonInt = (int)(lonLong ^ (lonLong >> 32));
-            int elevInt = (int)(elevLong ^ (elevLong >> 32));
-            result = 37 * result + this.GetType().GetHashCode();
-            result += 37 * result + latInt;
-            result += 37 * result + lonInt;
-            result += 37 * result + elevInt;
-            result += 37 * result + (locationName == null ? 0 : locationName.GetHashCode());
-            result += 37 * result + (timeZone == null ? 0 : timeZone.GetHashCode());
+            long latLong = Double.doubleToLongBits(latitude);
+            long lonLong = Double.doubleToLongBits(longitude);
+            long elevLong = Double.doubleToLongBits(elevation);
+            var latInt = (int) (latLong ^ (latLong >> 32));
+            var lonInt = (int) (lonLong ^ (lonLong >> 32));
+            var elevInt = (int) (elevLong ^ (elevLong >> 32));
+            result = 37*result + GetType().GetHashCode();
+            result += 37*result + latInt;
+            result += 37*result + lonInt;
+            result += 37*result + elevInt;
+            result += 37*result + (locationName == null ? 0 : locationName.GetHashCode());
+            result += 37*result + (timeZone == null ? 0 : timeZone.GetHashCode());
             return result;
         }
 
@@ -566,7 +610,7 @@ namespace net.sourceforge.zmanim.util
         ///	<seealso cref="java.lang.Object#toString()"/>
         public override string ToString()
         {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             sb.Append("\nLocation Name:\t\t\t").Append(getLocationName());
             sb.Append("\nLatitude:\t\t\t").Append(getLatitude()).Append("&deg;");
             sb.Append("\nLongitude:\t\t\t").Append(getLongitude()).Append("&deg;");
@@ -576,31 +620,9 @@ namespace net.sourceforge.zmanim.util
             //		 * sb.append("\nTimezone Display Name:\t\t").append(
             //		 * getTimeZone().getDisplayName());
             //		 
-            sb.Append("\nTimezone GMT Offset:\t\t").Append(getTimeZone().getRawOffset() / HOUR_MILLIS);
-            sb.Append("\nTimezone DST Offset:\t\t").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS);
+            sb.Append("\nTimezone GMT Offset:\t\t").Append(getTimeZone().getRawOffset()/HOUR_MILLIS);
+            sb.Append("\nTimezone DST Offset:\t\t").Append(getTimeZone().getDSTSavings()/HOUR_MILLIS);
             return sb.ToString();
         }
-
-
-        ///	 <summary> An implementation of the <seealso cref="java.lang.Object#clone()"/> method that
-        ///	creates a <a
-        ///	href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
-        ///	of the object. <br/><b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in
-        ///	the clone will be changed from the original, it is critical that
-        ///	<seealso cref="net.sourceforge.zmanim.AstronomicalCalendar#getCalendar()"/>.<seealso cref="java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)"/>
-        ///	is called after cloning in order for the AstronomicalCalendar to output
-        ///	times in the expected offset.
-        ///	 </summary>
-        ///	<seealso cref= java.lang.Object#clone()
-        ///	@since 1.1 </seealso>
-        public virtual object Clone()
-        {
-            GeoLocation clone = (GeoLocation)MemberwiseClone();
-            clone.timeZone = (TimeZone)getTimeZone().clone();
-            clone.locationName = getLocationName();
-            return clone;
-        }
-
     }
 }
-

@@ -18,12 +18,12 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using System;
+using java.util;
+using Math = java.lang.Math;
+
 namespace net.sourceforge.zmanim.util
 {
-    using java.util;
-    using zmanim;
-    using System;
-
     [Obsolete]
     public class JSuntimeCalculator : AstronomicalCalculator
     {
@@ -37,19 +37,23 @@ namespace net.sourceforge.zmanim.util
             int num4 = calendar1.get(11);
             int num5 = calendar1.get(12);
             int num6 = calendar1.get(13);
-            double a = ((100.0 * num) + num2) - 190002.5;
-            return ((((((((367.0 * num) - java.lang.Math.floor((7.0 * (num + java.lang.Math.floor((num2 + 9.0) / 12.0))) / 4.0)) + java.lang.Math.floor((275.0 * num2) / 9.0)) + num3) + ((num4 + ((num5 + (((double) num6) / 60.0)) / 60.0)) / 24.0)) + 1721013.5) - ((0.5 * a) / java.lang.Math.abs(a))) + 0.5);
+            double a = ((100.0*num) + num2) - 190002.5;
+            return ((((((((367.0*num) - Math.floor((7.0*(num + Math.floor((num2 + 9.0)/12.0)))/4.0)) +
+                         Math.floor((275.0*num2)/9.0)) + num3) + ((num4 + ((num5 + ((num6)/60.0))/60.0))/24.0)) +
+                      1721013.5) - ((0.5*a)/Math.abs(a))) + 0.5);
         }
 
         private static double eccentricityOfEarthsOrbit(double num1)
         {
-            return (0.016708634 - (num1 * (4.2037E-05 + (1.267E-07 * num1))));
+            return (0.016708634 - (num1*(4.2037E-05 + (1.267E-07*num1))));
         }
 
         private static double equationOfCentreForSun(double num1)
         {
             double angdeg = geometricMeanAnomalyOfSun(num1);
-            return (((java.lang.Math.sin(java.lang.Math.toRadians(angdeg)) * (1.914602 - (num1 * (0.004817 + (1.4E-05 * num1))))) + (java.lang.Math.sin(2.0 * java.lang.Math.toRadians(angdeg)) * (0.019993 - (0.000101 * num1)))) + (java.lang.Math.sin(3.0 * java.lang.Math.toRadians(angdeg)) * 0.000289));
+            return (((Math.sin(Math.toRadians(angdeg))*(1.914602 - (num1*(0.004817 + (1.4E-05*num1))))) +
+                     (Math.sin(2.0*Math.toRadians(angdeg))*(0.019993 - (0.000101*num1)))) +
+                    (Math.sin(3.0*Math.toRadians(angdeg))*0.000289));
         }
 
         private static double equationOfTime(double num1)
@@ -58,9 +62,12 @@ namespace net.sourceforge.zmanim.util
             double num2 = geomMeanLongSun(num1);
             double num3 = eccentricityOfEarthsOrbit(num1);
             double num4 = geometricMeanAnomalyOfSun(num1);
-            double num5 = java.lang.Math.pow(java.lang.Math.tan(java.lang.Math.toRadians(angdeg) / 2.0), 2.0);
-            double angrad = ((((num5 * java.lang.Math.sin(2.0 * java.lang.Math.toRadians(num2))) - ((2.0 * num3) * java.lang.Math.sin(java.lang.Math.toRadians(num4)))) + ((((4.0 * num3) * num5) * java.lang.Math.sin(java.lang.Math.toRadians(num4))) * java.lang.Math.cos(2.0 * java.lang.Math.toRadians(num2)))) - (((0.5 * num5) * num5) * java.lang.Math.sin(4.0 * java.lang.Math.toRadians(num2)))) - (((1.25 * num3) * num3) * java.lang.Math.sin(2.0 * java.lang.Math.toRadians(num4)));
-            return (java.lang.Math.toDegrees(angrad) * 4.0);
+            double num5 = Math.pow(Math.tan(Math.toRadians(angdeg)/2.0), 2.0);
+            double angrad = ((((num5*Math.sin(2.0*Math.toRadians(num2))) - ((2.0*num3)*Math.sin(Math.toRadians(num4)))) +
+                              ((((4.0*num3)*num5)*Math.sin(Math.toRadians(num4)))*Math.cos(2.0*Math.toRadians(num2)))) -
+                             (((0.5*num5)*num5)*Math.sin(4.0*Math.toRadians(num2)))) -
+                            (((1.25*num3)*num3)*Math.sin(2.0*Math.toRadians(num4)));
+            return (Math.toDegrees(angrad)*4.0);
         }
 
         private static double eveningPhenomenon(double num1, double num10, double num12, double num11)
@@ -69,26 +76,26 @@ namespace net.sourceforge.zmanim.util
             double num2 = equationOfTime(num);
             double num3 = sunDeclination(num);
             double angrad = hourAngleEvening(num10, num3, num11);
-            double num5 = num12 - java.lang.Math.toDegrees(angrad);
-            double num6 = 4.0 * num5;
+            double num5 = num12 - Math.toDegrees(angrad);
+            double num6 = 4.0*num5;
             double num7 = (720.0 + num6) - num2;
-            double num8 = julianDayToJulianCenturies(julianCenturiesToJulianDay(num) + (num7 / 1440.0));
+            double num8 = julianDayToJulianCenturies(julianCenturiesToJulianDay(num) + (num7/1440.0));
             num2 = equationOfTime(num8);
             num3 = sunDeclination(num8);
             angrad = hourAngleEvening(num10, num3, num11);
-            num5 = num12 - java.lang.Math.toDegrees(angrad);
-            num6 = 4.0 * num5;
+            num5 = num12 - Math.toDegrees(angrad);
+            num6 = 4.0*num5;
             return ((720.0 + num6) - num2);
         }
 
         private static double geometricMeanAnomalyOfSun(double num1)
         {
-            return (357.52911 + (num1 * (35999.05029 - (0.0001537 * num1))));
+            return (357.52911 + (num1*(35999.05029 - (0.0001537*num1))));
         }
 
         private static double geomMeanLongSun(double num1)
         {
-            double num = 280.46646 + (num1 * (36000.76983 + (0.0003032 * num1)));
+            double num = 280.46646 + (num1*(36000.76983 + (0.0003032*num1)));
             while ((num >= 0f) && (num <= 360.0))
             {
                 if (num > 360.0)
@@ -106,35 +113,41 @@ namespace net.sourceforge.zmanim.util
         [Obsolete]
         public override string getCalculatorName()
         {
-            return this.calculatorName;
+            return calculatorName;
         }
 
-        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
+        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
+                                             bool adjustForElevation)
         {
             if (adjustForElevation)
             {
-                zenith = this.adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
             }
             else
             {
-                zenith = this.adjustZenith(zenith, 0f);
+                zenith = adjustZenith(zenith, 0f);
             }
-            double num2 = morningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()), astronomicalCalendar.getGeoLocation().getLatitude(), -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
-            return (num2 / 60.0);
+            double num2 = morningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()),
+                                            astronomicalCalendar.getGeoLocation().getLatitude(),
+                                            -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
+            return (num2/60.0);
         }
 
-        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
+        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
+                                            bool adjustForElevation)
         {
             if (adjustForElevation)
             {
-                zenith = this.adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
             }
             else
             {
-                zenith = this.adjustZenith(zenith, 0f);
+                zenith = adjustZenith(zenith, 0f);
             }
-            double num2 = eveningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()), astronomicalCalendar.getGeoLocation().getLatitude(), -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
-            return (num2 / 60.0);
+            double num2 = eveningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()),
+                                            astronomicalCalendar.getGeoLocation().getLatitude(),
+                                            -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
+            return (num2/60.0);
         }
 
         private static double hourAngleEvening(double num1, double num2, double num3)
@@ -144,22 +157,25 @@ namespace net.sourceforge.zmanim.util
 
         private static double hourAngleMorning(double num2, double num3, double num1)
         {
-            return java.lang.Math.acos((java.lang.Math.cos(java.lang.Math.toRadians(num1)) / (java.lang.Math.cos(java.lang.Math.toRadians(num2)) * java.lang.Math.cos(java.lang.Math.toRadians(num3)))) - (java.lang.Math.tan(java.lang.Math.toRadians(num2)) * java.lang.Math.tan(java.lang.Math.toRadians(num3))));
+            return
+                Math.acos((Math.cos(Math.toRadians(num1))/
+                           (Math.cos(Math.toRadians(num2))*Math.cos(Math.toRadians(num3)))) -
+                          (Math.tan(Math.toRadians(num2))*Math.tan(Math.toRadians(num3))));
         }
 
         private static double julianCenturiesToJulianDay(double num1)
         {
-            return ((num1 * 36525.0) + 2451545.0);
+            return ((num1*36525.0) + 2451545.0);
         }
 
         private static double julianDayToJulianCenturies(double num1)
         {
-            return ((num1 - 2451545.0) / 36525.0);
+            return ((num1 - 2451545.0)/36525.0);
         }
 
         private static double meanObliquityOfEcliptic(double num1)
         {
-            return (23.0 + ((26.0 + (21.448 - ((num1 * (46.815 + (num1 * (0.00059 - (num1 * 0.001813))))) / 60.0))) / 60.0));
+            return (23.0 + ((26.0 + (21.448 - ((num1*(46.815 + (num1*(0.00059 - (num1*0.001813)))))/60.0)))/60.0));
         }
 
         private static double morningPhenomenon(double num1, double num10, double num12, double num11)
@@ -168,34 +184,34 @@ namespace net.sourceforge.zmanim.util
             double num2 = equationOfTime(num);
             double num3 = sunDeclination(num);
             double angrad = hourAngleMorning(num10, num3, num11);
-            double num5 = num12 - java.lang.Math.toDegrees(angrad);
-            double num6 = 4.0 * num5;
+            double num5 = num12 - Math.toDegrees(angrad);
+            double num6 = 4.0*num5;
             double num7 = (720.0 + num6) - num2;
-            double num8 = julianDayToJulianCenturies(julianCenturiesToJulianDay(num) + (num7 / 1440.0));
+            double num8 = julianDayToJulianCenturies(julianCenturiesToJulianDay(num) + (num7/1440.0));
             num2 = equationOfTime(num8);
             num3 = sunDeclination(num8);
             angrad = hourAngleMorning(num10, num3, num11);
-            num5 = num12 - java.lang.Math.toDegrees(angrad);
-            num6 = 4.0 * num5;
+            num5 = num12 - Math.toDegrees(angrad);
+            num6 = 4.0*num5;
             return ((720.0 + num6) - num2);
         }
 
         private static double obliquityCorrection(double num1)
         {
-            return (meanObliquityOfEcliptic(num1) + (0.00256 * java.lang.Math.cos(java.lang.Math.toRadians(125.04 - (1934.136 * num1)))));
+            return (meanObliquityOfEcliptic(num1) + (0.00256*Math.cos(Math.toRadians(125.04 - (1934.136*num1)))));
         }
 
         private static double sunDeclination(double num1)
         {
             double angdeg = obliquityCorrection(num1);
             double num2 = sunsApparentLongitude(num1);
-            double a = java.lang.Math.sin(java.lang.Math.toRadians(angdeg)) * java.lang.Math.sin(java.lang.Math.toRadians(num2));
-            return java.lang.Math.toDegrees(java.lang.Math.asin(a));
+            double a = Math.sin(Math.toRadians(angdeg))*Math.sin(Math.toRadians(num2));
+            return Math.toDegrees(Math.asin(a));
         }
 
         private static double sunsApparentLongitude(double num1)
         {
-            return ((sunsTrueLongitude(num1) - 0.00569) - (0.00478 * java.lang.Math.sin(java.lang.Math.toRadians(125.04 - (1934.136 * num1)))));
+            return ((sunsTrueLongitude(num1) - 0.00569) - (0.00478*Math.sin(Math.toRadians(125.04 - (1934.136*num1)))));
         }
 
         private static double sunsTrueLongitude(double num1)
@@ -204,4 +220,3 @@ namespace net.sourceforge.zmanim.util
         }
     }
 }
-

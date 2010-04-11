@@ -18,26 +18,36 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using System;
+using Math = java.lang.Math;
+
 namespace net.sourceforge.zmanim.util
 {
-    using net.sourceforge.zmanim;
-    using System;
-
     public abstract class AstronomicalCalculator : ICloneable
     {
         private double refraction = 0.56666666666666665;
         private double solarRadius = 0.26666666666666666;
 
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+
+        #endregion
+
         internal virtual double adjustZenith(double num1, double num2)
         {
             if (num1 == 90.0)
             {
-                num1 += (this.getSolarRadius() + this.getRefraction()) + this.getElevationAdjustment(num2);
+                num1 += (getSolarRadius() + getRefraction()) + getElevationAdjustment(num2);
             }
             return num1;
         }
 
         public abstract string getCalculatorName();
+
         public static AstronomicalCalculator getDefault()
         {
             return new SunTimesCalculator();
@@ -46,17 +56,17 @@ namespace net.sourceforge.zmanim.util
         internal virtual double getElevationAdjustment(double num1)
         {
             double num = 6356.9;
-            return java.lang.Math.toDegrees(java.lang.Math.acos(num / (num + (num1 / 1000.0))));
+            return Math.toDegrees(Math.acos(num/(num + (num1/1000.0))));
         }
 
         internal virtual double getRefraction()
         {
-            return this.refraction;
+            return refraction;
         }
 
         internal virtual double getSolarRadius()
         {
-            return this.solarRadius;
+            return solarRadius;
         }
 
         public abstract double getUTCSunrise(AstronomicalCalendar ac, double d, bool b);
@@ -71,11 +81,5 @@ namespace net.sourceforge.zmanim.util
         {
             this.solarRadius = solarRadius;
         }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
     }
 }
-

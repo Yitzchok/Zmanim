@@ -22,7 +22,6 @@ using System;
 
 namespace net.sourceforge.zmanim.util
 {
-
     /// <summary>
     /// A class that represents a numeric time. Times that represent a time of day
     /// are stored as <seealso cref="java.util.Date"/>s in this API. The time class is used to
@@ -36,19 +35,17 @@ namespace net.sourceforge.zmanim.util
     {
         private const int SECOND_MILLIS = 1000;
 
-        private const int MINUTE_MILLIS = SECOND_MILLIS * 60;
+        private const int MINUTE_MILLIS = SECOND_MILLIS*60;
 
-        private const int HOUR_MILLIS = MINUTE_MILLIS * 60;
+        private const int HOUR_MILLIS = MINUTE_MILLIS*60;
 
-        private int hours = 0;
+        private int hours;
+        private bool isNegative;
+        private int milliseconds;
 
-        private int minutes = 0;
+        private int minutes;
 
-        private int seconds = 0;
-
-        private int milliseconds = 0;
-
-        private bool isNegative = false;
+        private int seconds;
 
         public Time(int hours, int minutes, int seconds, int milliseconds)
         {
@@ -59,7 +56,7 @@ namespace net.sourceforge.zmanim.util
         }
 
         public Time(double millis)
-            : this((int)millis)
+            : this((int) millis)
         {
         }
 
@@ -69,7 +66,7 @@ namespace net.sourceforge.zmanim.util
             if (millis < 0)
             {
                 isNegative = true;
-                millis = System.Math.Abs(millis);
+                millis = Math.Abs(millis);
             }
             hours = timeSpan.Hours;
 
@@ -152,7 +149,7 @@ namespace net.sourceforge.zmanim.util
 
         public virtual double getTime()
         {
-            return hours * HOUR_MILLIS + minutes * MINUTE_MILLIS + seconds * SECOND_MILLIS + milliseconds;
+            return hours*HOUR_MILLIS + minutes*MINUTE_MILLIS + seconds*SECOND_MILLIS + milliseconds;
         }
 
         public override string ToString()

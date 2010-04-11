@@ -18,11 +18,12 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using java.lang;
+using java.util;
+using net.sourceforge.zmanim.util;
+
 namespace net.sourceforge.zmanim
 {
-    using java.util;
-    using util;
-
     /// <summary>
     /// This class extends ZmanimCalendar and provides many more zmanim than
     /// available in the ZmanimCalendar. The basis for most zmanim in this class are
@@ -142,7 +143,7 @@ namespace net.sourceforge.zmanim
         ///	 </summary>
         ///	<seealso cref="#getTzaisGeonim7Point083Degrees()"/>
         ///	<seealso cref="#getBainHasmashosRT13Point5MinutesBefore7Point083Degrees()"/>
-        protected internal const double ZENITH_7_POINT_083 = GEOMETRIC_ZENITH + 7 + (5 / 60);
+        protected internal const double ZENITH_7_POINT_083 = GEOMETRIC_ZENITH + 7 + (5/60);
 
         ///	 <summary> 
         ///	The zenith of 10.2&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
@@ -222,7 +223,6 @@ namespace net.sourceforge.zmanim
         protected internal const double ZENITH_26_DEGREES = GEOMETRIC_ZENITH + 26.0;
 
         ///	 NOTE: Experimental and may not make the final 1.3 cut
-
         ///	 <summary>
         /// The zenith of 4.37&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>
         ///	(90&deg;). This calculation is used for calculating <em>tzais</em>
@@ -278,7 +278,6 @@ namespace net.sourceforge.zmanim
         ///	 </summary>
         ///	<seealso cref="AstronomicalCalendar#AstronomicalCalendar()"/>
         public ComplexZmanimCalendar()
-            : base()
         {
         }
 
@@ -550,7 +549,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha120MinutesZmanis()
         {
-            return getTimeOffset(getAlos120Zmanis(), getShaahZmanis120MinutesZmanis() * 10.75);
+            return getTimeOffset(getAlos120Zmanis(), getShaahZmanis120MinutesZmanis()*10.75);
         }
 
 
@@ -563,7 +562,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha120Minutes()
         {
-            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes() * 10.75);
+            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes()*10.75);
         }
 
         ///	 <summary> 
@@ -579,7 +578,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the time. </returns>
         public virtual Date getAlos60()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -60 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -60*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -603,7 +602,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunrise(), (long)(shaahZmanis * -1.2));
+            return getTimeOffset(getSeaLevelSunrise(), (long) (shaahZmanis*-1.2));
         }
 
         ///	 <summary> 
@@ -618,7 +617,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the time. </returns>
         public virtual Date getAlos96()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -96 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -96*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -640,7 +639,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunrise(), (long)(shaahZmanis * -1.5));
+            return getTimeOffset(getSeaLevelSunrise(), (long) (shaahZmanis*-1.5));
         }
 
         ///	 <summary> 
@@ -662,7 +661,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunrise(), (long)(shaahZmanis * -1.6));
+            return getTimeOffset(getSeaLevelSunrise(), (long) (shaahZmanis*-1.6));
         }
 
         ///	 <summary> 
@@ -677,7 +676,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the time. </returns>
         public virtual Date getAlos90()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -90 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -90*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -693,7 +692,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the time. </returns>
         public virtual Date getAlos120()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -120 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -120*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -715,7 +714,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunrise(), shaahZmanis * -2);
+            return getTimeOffset(getSeaLevelSunrise(), shaahZmanis*-2);
         }
 
         ///	 <summary> 
@@ -844,7 +843,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos19Point8Degrees()"/>
         public virtual Date getSofZmanShmaMGA19Point8Degrees()
         {
-            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees() * 3);
+            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees()*3);
         }
 
         ///	 <summary> 
@@ -864,7 +863,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos16Point1Degrees()"/>
         public virtual Date getSofZmanShmaMGA16Point1Degrees()
         {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 3);
+            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees()*3);
         }
 
         ///	 <summary> 
@@ -910,7 +909,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos72Zmanis()"/>
         public virtual Date getSofZmanShmaMGA72MinutesZmanis()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis() * 3);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis()*3);
         }
 
         ///	 <summary> 
@@ -930,7 +929,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90()"/>
         public virtual Date getSofZmanShmaMGA90Minutes()
         {
-            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes() * 3);
+            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes()*3);
         }
 
         ///	 <summary> 
@@ -952,7 +951,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90Zmanis()"/>
         public virtual Date getSofZmanShmaMGA90MinutesZmanis()
         {
-            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis() * 3);
+            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis()*3);
         }
 
         ///	 <summary> 
@@ -972,7 +971,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos96()"/>
         public virtual Date getSofZmanShmaMGA96Minutes()
         {
-            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes() * 3);
+            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes()*3);
         }
 
         ///	 <summary> 
@@ -994,7 +993,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos96Zmanis()"/>
         public virtual Date getSofZmanShmaMGA96MinutesZmanis()
         {
-            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis() * 3);
+            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis()*3);
         }
 
         ///	 <summary> 
@@ -1011,7 +1010,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getSofZmanTfila2HoursBeforeChatzos()"/>
         public virtual Date getSofZmanShma3HoursBeforeChatzos()
         {
-            return getTimeOffset(getChatzos(), -180 * MINUTE_MILLIS);
+            return getTimeOffset(getChatzos(), -180*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1031,7 +1030,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos120()"/>
         public virtual Date getSofZmanShmaMGA120Minutes()
         {
-            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes() * 3);
+            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes()*3);
         }
 
         ///	 <summary> 
@@ -1054,7 +1053,7 @@ namespace net.sourceforge.zmanim
         public virtual Date getSofZmanShmaAlos16Point1ToSunset()
         {
             long shaahZmanis = getTemporalHour(getAlos16Point1Degrees(), getSeaLevelSunset());
-            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis * 3);
+            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis*3);
         }
 
         ///	 <summary> 
@@ -1079,7 +1078,7 @@ namespace net.sourceforge.zmanim
         public virtual Date getSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             long shaahZmanis = getTemporalHour(getAlos16Point1Degrees(), getTzaisGeonim7Point083Degrees());
-            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis * 3);
+            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis*3);
         }
 
         ///	 <summary> 
@@ -1100,7 +1099,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            long diff = (chatzos.getTime() - getSeaLevelSunrise().getTime()) / 2;
+            long diff = (chatzos.getTime() - getSeaLevelSunrise().getTime())/2;
             return getTimeOffset(chatzos, -diff);
         }
 
@@ -1122,7 +1121,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos19Point8Degrees()"/>
         public virtual Date getSofZmanTfilaMGA19Point8Degrees()
         {
-            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees() * 4);
+            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees()*4);
         }
 
         ///	 <summary> 
@@ -1143,7 +1142,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos16Point1Degrees()"/>
         public virtual Date getSofZmanTfilaMGA16Point1Degrees()
         {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 4);
+            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees()*4);
         }
 
         ///	 <summary> 
@@ -1187,7 +1186,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos72Zmanis()"/>
         public virtual Date getSofZmanTfilaMGA72MinutesZmanis()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis() * 4);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis()*4);
         }
 
         ///	 <summary> 
@@ -1207,7 +1206,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90()"/>
         public virtual Date getSofZmanTfilaMGA90Minutes()
         {
-            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes() * 4);
+            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes()*4);
         }
 
         ///	 <summary> 
@@ -1229,7 +1228,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90Zmanis()"/>
         public virtual Date getSofZmanTfilaMGA90MinutesZmanis()
         {
-            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis() * 4);
+            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis()*4);
         }
 
         ///	 <summary> 
@@ -1249,7 +1248,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos96()"/>
         public virtual Date getSofZmanTfilaMGA96Minutes()
         {
-            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes() * 4);
+            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes()*4);
         }
 
         ///	 <summary> 
@@ -1271,7 +1270,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90Zmanis()"/>
         public virtual Date getSofZmanTfilaMGA96MinutesZmanis()
         {
-            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis() * 4);
+            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis()*4);
         }
 
         ///	 <summary> 
@@ -1291,7 +1290,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos120()"/>
         public virtual Date getSofZmanTfilaMGA120Minutes()
         {
-            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes() * 4);
+            return getTimeOffset(getAlos120(), getShaahZmanis120Minutes()*4);
         }
 
         ///	 <summary> 
@@ -1307,7 +1306,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getSofZmanShma3HoursBeforeChatzos()"/>
         public virtual Date getSofZmanTfila2HoursBeforeChatzos()
         {
-            return getTimeOffset(getChatzos(), -120 * MINUTE_MILLIS);
+            return getTimeOffset(getChatzos(), -120*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1330,7 +1329,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getMinchaGedolaGreaterThan30()"/>
         public virtual Date getMinchaGedola30Minutes()
         {
-            return getTimeOffset(getChatzos(), MINUTE_MILLIS * 30);
+            return getTimeOffset(getChatzos(), MINUTE_MILLIS*30);
         }
 
         ///	 <summary> 
@@ -1350,7 +1349,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedola72Minutes()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 6.5);
+            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes()*6.5);
         }
 
         ///	 <summary> 
@@ -1369,7 +1368,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedola16Point1Degrees()
         {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 6.5);
+            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees()*6.5);
         }
 
         ///	<summary>
@@ -1386,7 +1385,9 @@ namespace net.sourceforge.zmanim
             if (getMinchaGedola30Minutes() == null || getMinchaGedola() == null)
                 return null;
 
-            return getMinchaGedola30Minutes().compareTo(getMinchaGedola()) > 0 ? getMinchaGedola30Minutes() : getMinchaGedola();
+            return getMinchaGedola30Minutes().compareTo(getMinchaGedola()) > 0
+                       ? getMinchaGedola30Minutes()
+                       : getMinchaGedola();
         }
 
         ///	 <summary> 
@@ -1406,7 +1407,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha ketana. </returns>
         public virtual Date getMinchaKetana16Point1Degrees()
         {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 9.5);
+            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees()*9.5);
         }
 
         ///	 <summary> 
@@ -1426,7 +1427,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha ketana. </returns>
         public virtual Date getMinchaKetana72Minutes()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 9.5);
+            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes()*9.5);
         }
 
         ///	 <summary>
@@ -1438,7 +1439,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha60Minutes()
         {
-            return getTimeOffset(getAlos60(), getShaahZmanis60Minutes() * 10.75);
+            return getTimeOffset(getAlos60(), getShaahZmanis60Minutes()*10.75);
         }
 
         ///	 <summary> 
@@ -1450,7 +1451,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha72Minutes()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 10.75);
+            return getTimeOffset(getAlos72(), getShaahZmanis72Minutes()*10.75);
         }
 
         ///	 <summary> 
@@ -1462,7 +1463,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha90Minutes()
         {
-            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes() * 10.75);
+            return getTimeOffset(getAlos90(), getShaahZmanis90Minutes()*10.75);
         }
 
         ///	 <summary> 
@@ -1474,7 +1475,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha96Minutes()
         {
-            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes() * 10.75);
+            return getTimeOffset(getAlos96(), getShaahZmanis96Minutes()*10.75);
         }
 
         ///	 <summary> 
@@ -1487,7 +1488,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha96MinutesZmanis()
         {
-            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis() * 10.75);
+            return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis()*10.75);
         }
 
         ///	 <summary> 
@@ -1500,7 +1501,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha90MinutesZmanis()
         {
-            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis() * 10.75);
+            return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis()*10.75);
         }
 
         ///	 <summary> 
@@ -1513,7 +1514,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha72MinutesZmanis()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis() * 10.75);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis()*10.75);
         }
 
         ///	 <summary> 
@@ -1529,7 +1530,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha16Point1Degrees()
         {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 10.75);
+            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees()*10.75);
         }
 
         ///	 <summary> 
@@ -1545,7 +1546,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha19Point8Degrees()
         {
-            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees() * 10.75);
+            return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees()*10.75);
         }
 
         ///	 <summary> 
@@ -1561,7 +1562,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha26Degrees()
         {
-            return getTimeOffset(getAlos26Degrees(), getShaahZmanis26Degrees() * 10.75);
+            return getTimeOffset(getAlos26Degrees(), getShaahZmanis26Degrees()*10.75);
         }
 
         ///	 <summary> 
@@ -1577,7 +1578,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha18Degrees()
         {
-            return getTimeOffset(getAlos18Degrees(), getShaahZmanis18Degrees() * 10.75);
+            return getTimeOffset(getAlos18Degrees(), getShaahZmanis18Degrees()*10.75);
         }
 
         ///	 <summary> 
@@ -1599,7 +1600,7 @@ namespace net.sourceforge.zmanim
         public virtual Date getPlagAlosToSunset()
         {
             long shaahZmanis = getTemporalHour(getAlos16Point1Degrees(), getSeaLevelSunset());
-            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis * 10.75);
+            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis*10.75);
         }
 
         ///	 <summary> 
@@ -1622,7 +1623,7 @@ namespace net.sourceforge.zmanim
         public virtual Date getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             long shaahZmanis = getTemporalHour(getAlos16Point1Degrees(), getTzaisGeonim7Point083Degrees());
-            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis * 10.75);
+            return getTimeOffset(getAlos16Point1Degrees(), shaahZmanis*10.75);
         }
 
         ///	 <summary> 
@@ -1656,7 +1657,7 @@ namespace net.sourceforge.zmanim
         ///	 </returns>
         public virtual Date getBainHasmashosRT58Point5Minutes()
         {
-            return getTimeOffset(getSeaLevelSunset(), 58.5 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 58.5*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1669,7 +1670,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getTzaisGeonim7Point083Degrees()"/>
         public virtual Date getBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
         {
-            return getTimeOffset(getSunsetOffsetByDegrees(ZENITH_7_POINT_083), -13.5 * MINUTE_MILLIS);
+            return getTimeOffset(getSunsetOffsetByDegrees(ZENITH_7_POINT_083), -13.5*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1689,7 +1690,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunset(), (sunrise.getTime() - alos19Point8.getTime()) * (5 / 18d));
+            return getTimeOffset(getSeaLevelSunset(), (sunrise.getTime() - alos19Point8.getTime())*(5/18d));
         }
 
         ///	 <summary> 
@@ -1823,7 +1824,7 @@ namespace net.sourceforge.zmanim
         ///	 </summary>
         ///	<returns> the <code>Date</code> representing the time when the sun is
         ///	        8.5&deg; below sea level. </returns>
-        ///	<seealso cref="#ZENITH_8_POINT_5"/>
+        ///	<seealso cref="ZENITH_8_POINT_5"/>
         public virtual Date getTzaisGeonim8Point5Degrees()
         {
             return getSunsetOffsetByDegrees(ZENITH_8_POINT_5);
@@ -1840,7 +1841,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos60()"/>
         public virtual Date getTzais60()
         {
-            return getTimeOffset(getSeaLevelSunset(), 60 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 60*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1859,7 +1860,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#setAteretTorahSunsetOffset(double)"/>
         public virtual Date getTzaisAteretTorah()
         {
-            return getTimeOffset(getSeaLevelSunset(), getAteretTorahSunsetOffset() * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), getAteretTorahSunsetOffset()*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -1913,7 +1914,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getShaahZmanisAteretTorah()"/>
         public virtual Date getSofZmanShmaAteretTorah()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 3);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah()*3);
         }
 
         ///	 <summary> 
@@ -1937,7 +1938,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#setAteretTorahSunsetOffset(double)"/>
         public virtual Date getSofZmanTfilahAteretTorah()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 4);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah()*4);
         }
 
         ///	 <summary> 
@@ -1962,7 +1963,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedolaAteretTorah()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 6.5);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah()*6.5);
         }
 
         ///	 <summary> 
@@ -1987,7 +1988,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha ketana. </returns>
         public virtual Date getMinchaKetanaAteretTorah()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 9.5);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah()*9.5);
         }
 
         ///	 <summary> 
@@ -2007,7 +2008,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getShaahZmanisAteretTorah()"/>
         public virtual Date getPlagHaminchaAteretTorah()
         {
-            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 10.75);
+            return getTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah()*10.75);
         }
 
         ///	 <summary> 
@@ -2044,7 +2045,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunset(), shaahZmanis * 1.2);
+            return getTimeOffset(getSeaLevelSunset(), shaahZmanis*1.2);
         }
 
         ///	 <summary> 
@@ -2061,7 +2062,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunset(), shaahZmanis * 1.5);
+            return getTimeOffset(getSeaLevelSunset(), shaahZmanis*1.5);
         }
 
         ///	 <summary> 
@@ -2078,7 +2079,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunset(), shaahZmanis * 1.6);
+            return getTimeOffset(getSeaLevelSunset(), shaahZmanis*1.6);
         }
 
         ///	 <summary> 
@@ -2096,7 +2097,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos90()"/>
         public virtual Date getTzais90()
         {
-            return getTimeOffset(getSeaLevelSunset(), 90 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 90*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -2113,7 +2114,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos120()"/>
         public virtual Date getTzais120()
         {
-            return getTimeOffset(getSeaLevelSunset(), 120 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 120*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -2130,7 +2131,7 @@ namespace net.sourceforge.zmanim
             {
                 return null;
             }
-            return getTimeOffset(getSeaLevelSunset(), shaahZmanis * 2.0);
+            return getTimeOffset(getSeaLevelSunset(), shaahZmanis*2.0);
         }
 
         ///	 <summary> 
@@ -2189,7 +2190,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos96()"/>
         public virtual Date getTzais96()
         {
-            return getTimeOffset(getSeaLevelSunset(), 96 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 96*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -2209,7 +2210,8 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="GeoLocation#getLocalMeanTimeOffset()"/>
         public virtual Date getFixedLocalChatzos()
         {
-            return getTimeOffset(getDateFromTime(12.0 - getGeoLocation().getTimeZone().getRawOffset() / HOUR_MILLIS), -getGeoLocation().getLocalMeanTimeOffset());
+            return getTimeOffset(getDateFromTime(12.0 - getGeoLocation().getTimeZone().getRawOffset()/HOUR_MILLIS),
+                                 -getGeoLocation().getLocalMeanTimeOffset());
         }
 
         ///	 <summary> 
@@ -2222,7 +2224,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getSofZmanTfilaFixedLocal()"/>
         public virtual Date getSofZmanShmaFixedLocal()
         {
-            return getTimeOffset(getFixedLocalChatzos(), -180 * MINUTE_MILLIS);
+            return getTimeOffset(getFixedLocalChatzos(), -180*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -2235,16 +2237,16 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getSofZmanShmaFixedLocal()"/>
         public virtual Date getSofZmanTfilaFixedLocal()
         {
-            return getTimeOffset(getFixedLocalChatzos(), -120 * MINUTE_MILLIS);
+            return getTimeOffset(getFixedLocalChatzos(), -120*MINUTE_MILLIS);
         }
+
         public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + java.lang.Object.instancehelper_hashCode(base.getTemporalHour());
-            num += (0x25 * num) + this.getCalendar().hashCode();
-            num += (0x25 * num) + this.getGeoLocation().GetHashCode();
-            return (num + ((0x25 * num) + java.lang.Object.instancehelper_hashCode(this.getAstronomicalCalculator())));
+            num = (0x25*num) + Object.instancehelper_hashCode(base.getTemporalHour());
+            num += (0x25*num) + getCalendar().hashCode();
+            num += (0x25*num) + getGeoLocation().GetHashCode();
+            return (num + ((0x25*num) + Object.instancehelper_hashCode(getAstronomicalCalculator())));
         }
     }
 }
-

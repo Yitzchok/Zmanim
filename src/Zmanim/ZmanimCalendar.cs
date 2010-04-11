@@ -18,11 +18,11 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using java.util;
+using net.sourceforge.zmanim.util;
+
 namespace net.sourceforge.zmanim
 {
-    using java.util;
-    using util;
-
     /// <summary> * <p>
     /// * Description: A Java library for calculating zmanim.
     /// * </p>
@@ -38,7 +38,6 @@ namespace net.sourceforge.zmanim
     /// * 
     /// * @author &copy; Eliyahu Hershfeld 2004 - 2010
     /// * @version 1.2 </summary>
-    /// 
     public class ZmanimCalendar : AstronomicalCalendar
     {
         private const long serialVersionUID = 1;
@@ -53,16 +52,16 @@ namespace net.sourceforge.zmanim
         ///	before <seealso cref="#getSunrise sunrise"/> in Jerusalem on the equinox is
         ///	16.1&deg; below <seealso cref="#GEOMETRIC_ZENITH geometric zenith"/>.
         ///	 </summary>
-        ///	<seealso cref="#getAlosHashachar()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getAlos16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getTzais16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getSofZmanShmaMGA16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getSofZmanTfilaMGA16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getMinchaGedola16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getMinchaKetana16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getPlagHamincha16Point1Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getSofZmanShmaAlos16Point1ToSunset()"/>
+        ///	<seealso cref="getAlosHashachar()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getAlos16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getTzais16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getSofZmanShmaMGA16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getSofZmanTfilaMGA16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getMinchaGedola16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getMinchaKetana16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getPlagHamincha16Point1Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getSofZmanShmaAlos16Point1ToSunset()"/>
         protected internal const double ZENITH_16_POINT_1 = GEOMETRIC_ZENITH + 16.1;
 
         ///	 <summary> 
@@ -75,8 +74,8 @@ namespace net.sourceforge.zmanim
         ///	zenith}. The Ohr Meir considers this the time that 3 small starts are
         ///	visible, later than the required 3 medium stars.
         ///	 </summary>
-        ///	<seealso cref="#getTzais()"/>
-        ///	<seealso cref="ComplexZmanimCalendar#getTzaisGeonim8Point5Degrees()"/>
+        ///	<seealso cref="getTzais"/>
+        ///	<seealso cref="ComplexZmanimCalendar.getTzaisGeonim8Point5Degrees"/>
         protected internal const double ZENITH_8_POINT_5 = GEOMETRIC_ZENITH + 8.5;
 
         ///	 <summary> 
@@ -84,6 +83,26 @@ namespace net.sourceforge.zmanim
         ///	changed via the <seealso cref="#setCandleLightingOffset(double)"/> and retrieved by
         ///	the <seealso cref="#getCandleLightingOffset()"/>. </summary>
         private double candleLightingOffset = 18;
+
+        ///	 <summary> 
+        ///	Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
+        ///	a default {@link AstronomicalCalculator#getDefault()
+        ///	AstronomicalCalculator} and default the calendar to the current date.
+        ///	 </summary>
+        ///	<seealso cref="AstronomicalCalendar#AstronomicalCalendar()"/>
+        public ZmanimCalendar()
+        {
+        }
+
+        ///	 <summary> 
+        ///	A constructor that takes a <seealso cref="GeoLocation"/> as a parameter.
+        ///	 </summary>
+        ///	<param name="location">
+        ///	           the location </param>
+        public ZmanimCalendar(GeoLocation location)
+            : base(location)
+        {
+        }
 
         ///	 <summary> 
         ///	Returns <em>tzais</em> (nightfall) when the sun is 8.5&deg; below the
@@ -95,14 +114,14 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#ZENITH_8_POINT_5"/>
         public virtual Date getTzais()
         {
-            return this.getSunsetOffsetByDegrees(ZENITH_8_POINT_5);
+            return getSunsetOffsetByDegrees(ZENITH_8_POINT_5);
         }
 
         ///	 <summary> 
         ///	Returns <em>alos</em> (dawn) based on the time when the sun is 16.1&deg;
-        ///	below the eastern <seealso cref="#GEOMETRIC_ZENITH geometric horizon"/> before
-        ///	<seealso cref="#getSunrise sunrise"/>. For more information the source of 16.1&deg;
-        ///	see <seealso cref="#ZENITH_16_POINT_1"/>.
+        ///	below the eastern <seealso cref="GEOMETRIC_ZENITH">geometric horizon</seealso> before
+        ///	<seealso cref="getSunrise">sunrise</seealso>. For more information the source of 16.1&deg;
+        ///	see <seealso cref="ZENITH_16_POINT_1"/>.
         ///	 </summary>
         ///	<seealso cref="net.sourceforge.zmanim.ZmanimCalendar#ZENITH_16_POINT_1"/>
         ///	<returns> The <code>Date</code> of dawn. </returns>
@@ -124,7 +143,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> representing the time. </returns>
         public virtual Date getAlos72()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -72 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -72*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -149,11 +168,11 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of Solar Midnight (chatzos layla). </returns>
         public virtual Date getSolarMidnight()
         {
-            ZmanimCalendar clonedCal = (ZmanimCalendar)Clone();
+            var clonedCal = (ZmanimCalendar) Clone();
             clonedCal.getCalendar().add(Calendar.DAY_OF_MONTH, 1);
             Date sunset = getSunset();
             Date sunrise = clonedCal.getSunrise();
-            return getTimeOffset(sunset, getTemporalHour(sunset, sunrise) * 6);
+            return getTimeOffset(sunset, getTemporalHour(sunset, sunrise)*6);
         }
 
         // public Date getChatzosLaylaRSZ() {
@@ -178,7 +197,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the latest zman shema. </returns>
         public virtual Date getSofZmanShmaGRA()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 3);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*3);
         }
 
         ///	 <summary> 
@@ -196,7 +215,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="ComplexZmanimCalendar#getSofZmanShmaMGA72Minutes()"/>
         public virtual Date getSofZmanShmaMGA()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 3);
+            return getTimeOffset(getAlos72(), getShaahZmanisMGA()*3);
         }
 
         ///	 <summary> 
@@ -211,7 +230,7 @@ namespace net.sourceforge.zmanim
         ///	        sunset. </returns>
         public virtual Date getTzais72()
         {
-            return getTimeOffset(getSeaLevelSunset(), 72 * MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 72*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -225,7 +244,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#setCandleLightingOffset(double)"/>
         public virtual Date getCandelLighting()
         {
-            return getTimeOffset(getSunset(), -getCandleLightingOffset() * MINUTE_MILLIS);
+            return getTimeOffset(getSunset(), -getCandleLightingOffset()*MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -240,7 +259,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the latest zman tefilah. </returns>
         public virtual Date getSofZmanTfilaGRA()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 4);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*4);
         }
 
         ///	 <summary> 
@@ -260,7 +279,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="#getAlos72()"/>
         public virtual Date getSofZmanTfilaMGA()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 4);
+            return getTimeOffset(getAlos72(), getShaahZmanisMGA()*4);
         }
 
         ///	 <summary> 
@@ -283,7 +302,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedola()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 6.5);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*6.5);
         }
 
         ///	 <summary> 
@@ -303,7 +322,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaKetana()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 9.5);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*9.5);
         }
 
         ///	 <summary> 
@@ -317,7 +336,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 10.75);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*10.75);
         }
 
         ///	 <summary> 
@@ -337,7 +356,7 @@ namespace net.sourceforge.zmanim
         ///	 </summary>
         ///	<returns> the <code>long</code> millisecond length of a
         ///	        <em>shaah zmanis</em>. </returns>
-        ///	<seealso cref="#getTemporalHour(Date, Date)"/>
+        ///	<seealso cref="getTemporalHour(Date, Date)"/>
         public virtual long getShaahZmanisGra()
         {
             return getTemporalHour(getSeaLevelSunrise(), getSeaLevelSunset());
@@ -360,27 +379,6 @@ namespace net.sourceforge.zmanim
             return getTemporalHour(getAlos72(), getTzais72());
         }
 
-        ///	 <summary> 
-        ///	Default constructor will set a default <seealso cref="GeoLocation#GeoLocation()"/>,
-        ///	a default {@link AstronomicalCalculator#getDefault()
-        ///	AstronomicalCalculator} and default the calendar to the current date.
-        ///	 </summary>
-        ///	<seealso cref="AstronomicalCalendar#AstronomicalCalendar()"/>
-        public ZmanimCalendar()
-            : base()
-        {
-        }
-
-        ///	 <summary> 
-        ///	A constructor that takes a <seealso cref="GeoLocation"/> as a parameter.
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the location </param>
-        public ZmanimCalendar(GeoLocation location)
-            : base(location)
-        {
-        }
-
         ///    
         ///	<seealso cref="java.lang.Object#equals(Object)"/>
         public override bool Equals(object @object)
@@ -393,22 +391,21 @@ namespace net.sourceforge.zmanim
             {
                 return false;
             }
-            ZmanimCalendar zCal = (ZmanimCalendar)@object;
+            var zCal = (ZmanimCalendar) @object;
             // return getCalendar().getTime().equals(zCal.getCalendar().getTime())
-            return getCalendar().Equals(zCal.getCalendar()) && getGeoLocation().Equals(zCal.getGeoLocation()) && getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
+            return getCalendar().Equals(zCal.getCalendar()) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
+                   getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
         }
 
-        ///    
-        ///	<seealso cref="java.lang.Object#hashCode()"/>
         public override int GetHashCode()
         {
             int result = 17;
-            result = 37 * result + this.GetType().GetHashCode(); // needed or this and
+            result = 37*result + GetType().GetHashCode(); // needed or this and
             // subclasses will
             // return identical hash
-            result += 37 * result + getCalendar().GetHashCode();
-            result += 37 * result + getGeoLocation().GetHashCode();
-            result += 37 * result + getAstronomicalCalculator().GetHashCode();
+            result += 37*result + getCalendar().GetHashCode();
+            result += 37*result + getGeoLocation().GetHashCode();
+            result += 37*result + getAstronomicalCalculator().GetHashCode();
             return result;
         }
 
