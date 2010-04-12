@@ -141,7 +141,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <c>Date</c> representing the time. </returns>
         public virtual Date getAlos72()
         {
-            return getTimeOffset(getSeaLevelSunrise(), -72*MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunrise(), -72 * MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -166,11 +166,11 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <c>Date</c> of Solar Midnight (chatzos layla). </returns>
         public virtual Date getSolarMidnight()
         {
-            var clonedCal = (ZmanimCalendar) Clone();
+            var clonedCal = (ZmanimCalendar)Clone();
             clonedCal.getCalendar().add(Calendar.DAY_OF_MONTH, 1);
             Date sunset = getSunset();
             Date sunrise = clonedCal.getSunrise();
-            return getTimeOffset(sunset, getTemporalHour(sunset, sunrise)*6);
+            return getTimeOffset(sunset, getTemporalHour(sunset, sunrise) * 6);
         }
 
         // public Date getChatzosLaylaRSZ() {
@@ -194,7 +194,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <c>Date</c> of the latest zman shema. </returns>
         public virtual Date getSofZmanShmaGRA()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*3);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 3);
         }
 
         ///	 <summary> 
@@ -212,7 +212,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="ComplexZmanimCalendar.getSofZmanShmaMGA72Minutes()"/>
         public virtual Date getSofZmanShmaMGA()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanisMGA()*3);
+            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 3);
         }
 
         ///	 <summary> 
@@ -227,7 +227,7 @@ namespace net.sourceforge.zmanim
         ///	        sunset. </returns>
         public virtual Date getTzais72()
         {
-            return getTimeOffset(getSeaLevelSunset(), 72*MINUTE_MILLIS);
+            return getTimeOffset(getSeaLevelSunset(), 72 * MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -241,7 +241,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="setCandleLightingOffset(double)"/>
         public virtual Date getCandelLighting()
         {
-            return getTimeOffset(getSunset(), -getCandleLightingOffset()*MINUTE_MILLIS);
+            return getTimeOffset(getSunset(), -getCandleLightingOffset() * MINUTE_MILLIS);
         }
 
         ///	 <summary> 
@@ -256,7 +256,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the latest zman tefilah. </returns>
         public virtual Date getSofZmanTfilaGRA()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*4);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 4);
         }
 
         ///	 <summary> 
@@ -276,7 +276,7 @@ namespace net.sourceforge.zmanim
         ///	<seealso cref="getAlos72()"/>
         public virtual Date getSofZmanTfilaMGA()
         {
-            return getTimeOffset(getAlos72(), getShaahZmanisMGA()*4);
+            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 4);
         }
 
         ///	 <summary> 
@@ -299,7 +299,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedola()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*6.5);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 6.5);
         }
 
         ///	 <summary> 
@@ -319,7 +319,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <code>Date</code> of the time of mincha gedola. </returns>
         public virtual Date getMinchaKetana()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*9.5);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 9.5);
         }
 
         ///	 <summary> 
@@ -332,7 +332,7 @@ namespace net.sourceforge.zmanim
         ///	<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual Date getPlagHamincha()
         {
-            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*10.75);
+            return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 10.75);
         }
 
         ///	 <summary> 
@@ -385,7 +385,7 @@ namespace net.sourceforge.zmanim
             {
                 return false;
             }
-            var zCal = (ZmanimCalendar) @object;
+            var zCal = (ZmanimCalendar)@object;
             // return getCalendar().getTime().equals(zCal.getCalendar().getTime())
             return getCalendar().Equals(zCal.getCalendar()) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
                    getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
@@ -394,12 +394,12 @@ namespace net.sourceforge.zmanim
         public override int GetHashCode()
         {
             int result = 17;
-            result = 37*result + GetType().GetHashCode(); // needed or this and
+            result = 37 * result + GetType().GetHashCode(); // needed or this and
             // subclasses will
             // return identical hash
-            result += 37*result + getCalendar().GetHashCode();
-            result += 37*result + getGeoLocation().GetHashCode();
-            result += 37*result + getAstronomicalCalculator().GetHashCode();
+            result += 37 * result + getCalendar().GetHashCode();
+            result += 37 * result + getGeoLocation().GetHashCode();
+            result += 37 * result + getAstronomicalCalculator().GetHashCode();
             return result;
         }
 
