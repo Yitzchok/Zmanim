@@ -19,183 +19,314 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using java.lang;
+using java.util;
 
 namespace net.sourceforge.zmanim.util
 {
+
+    /// <summary>
+    /// Implementation of sunrise and sunset methods to calculate astronomical times.
+    /// This calculator uses the Java algorithm written by <a
+    /// href="http://www.kevinboone.com/suntimes.html">Kevin Boone</a> that is based
+    /// on the <a href="http://aa.usno.navy.mil/">US Naval Observatory's</a><a
+    /// href="http://aa.usno.navy.mil/publications/docs/asa.php">Almanac</a> for
+    /// Computer algorithm ( <a
+    /// href="http://www.amazon.com/exec/obidos/tg/detail/-/0160515106/">Amazon</a>,
+    /// <a
+    /// href="http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?isbn=0160515106">Barnes
+    /// &amp; Noble</a>) and is used with his permission. Added to Kevin's code is
+    /// adjustment of the zenith to account for elevation.
+    /// </summary>
+    /// <author>Kevin Boone</author>
+    /// <author>Eliyahu Hershfeld</author>
     public class SunTimesCalculator : AstronomicalCalculator
     {
-        private const double DEG_PER_HOUR = 15.0;
-        private const int TYPE_SUNRISE = 0;
-        private const int TYPE_SUNSET = 1;
-        public const double ZENITH = 90.833333333333329;
         private string calculatorName = "US Naval Almanac Algorithm";
-
-        private static double acosDeg(double num1)
-        {
-            return ((Math.acos(num1)*360.0)/6.2831853071795862);
-        }
-
-        private static double asinDeg(double num1)
-        {
-            return ((Math.asin(num1)*360.0)/6.2831853071795862);
-        }
-
-        private static double cosDeg(double num1)
-        {
-            return Math.cos(((num1*2.0)*3.1415926535897931)/360.0);
-        }
-
-        private static double getApproxTimeDays(int num2, double num3, int num1)
-        {
-            if (num1 == 0)
-            {
-                return (num2 + ((6.0 - num3)/24.0));
-            }
-            return (num2 + ((18.0 - num3)/24.0));
-        }
-
         public override string getCalculatorName()
         {
             return calculatorName;
         }
 
-        private static double getCosLocalHourAngle(double num1, double num5, double num4)
+        ///    
+        ///	 * <seealso cref= net.sourceforge.zmanim.util.AstronomicalCalculator#getUTCSunrise(AstronomicalCalendar,
+        ///	 *      double, boolean) </seealso>
+        ///	 
+        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
         {
-            double num = 0.39782*sinDeg(num1);
-            double num2 = cosDeg(asinDeg(num));
-            return ((cosDeg(num4) - (num*sinDeg(num5)))/(num2*cosDeg(num5)));
-        }
+            double doubleTime = double.NaN;
 
-        private static int getDayOfYear(int num5, int num1, int num6)
-        {
-            int num = (0x113*num1)/9;
-            int num2 = (num1 + 9)/12;
-            int num3 = 1 + (((num5 - (4*(num5/4))) + 2)/3);
-            return (((num - (num2*num3)) + num6) - 30);
-        }
-
-        private static double getHoursFromMeridian(double num1)
-        {
-            return (num1/15.0);
-        }
-
-        private static double getLocalMeanTime(double num1, double num2, double num3)
-        {
-            return (((num1 + num2) - (0.06571*num3)) - 6.622);
-        }
-
-        private static double getMeanAnomaly(int num1, double num2, int num3)
-        {
-            return ((0.9856*getApproxTimeDays(num1, getHoursFromMeridian(num2), num3)) - 3.289);
-        }
-
-        private static double getSunRightAscensionHours(double num1)
-        {
-            double a = 0.91764*tanDeg(num1);
-            double num2 = 57.295779513082323*Math.atan(a);
-            double num3 = Math.floor(num1/90.0)*90.0;
-            double num4 = Math.floor(num2/90.0)*90.0;
-            num2 += num3 - num4;
-            return (num2/15.0);
-        }
-
-        private static double getSunTrueLongitude(double num1)
-        {
-            double num = ((num1 + (1.916*sinDeg(num1))) + (0.02*sinDeg(2.0*num1))) + 282.634;
-            if (num >= 360.0)
-            {
-                num -= 360.0;
-            }
-            if (num < 0f)
-            {
-                num += 360.0;
-            }
-            return num;
-        }
-
-        private static double getTimeUTC(int num1, int num10, int num11, double num12, double num14, double num15,
-                                         int num13)
-        {
-            double num6;
-            int num = getDayOfYear(num1, num10, num11);
-            double num2 = getMeanAnomaly(num, num12, num13);
-            double num3 = getSunTrueLongitude(num2);
-            double num4 = getSunRightAscensionHours(num3);
-            double num5 = getCosLocalHourAngle(num3, num14, num15);
-            if (num13 == 0)
-            {
-                if (num5 > 1f)
-                {
-                }
-                num6 = 360.0 - acosDeg(num5);
-            }
-            else
-            {
-                if (num5 < -1.0)
-                {
-                }
-                num6 = acosDeg(num5);
-            }
-            double num7 = num6/15.0;
-            double num8 = getLocalMeanTime(num7, num4, getApproxTimeDays(num, getHoursFromMeridian(num12), num13));
-            double num9 = num8 - getHoursFromMeridian(num12);
-            while (true)
-            {
-                if (num9 >= 0f)
-                {
-                    break;
-                }
-                num9 += 24.0;
-            }
-            while (num9 >= 24.0)
-            {
-                num9 -= 24.0;
-            }
-            return num9;
-        }
-
-        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
-                                             bool adjustForElevation)
-        {
             if (adjustForElevation)
             {
                 zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
             }
             else
             {
-                zenith = adjustZenith(zenith, 0f);
+                zenith = adjustZenith(zenith, 0);
             }
-            return getTimeUTC(astronomicalCalendar.getCalendar().get(1), astronomicalCalendar.getCalendar().get(2) + 1,
-                              astronomicalCalendar.getCalendar().get(5),
-                              astronomicalCalendar.getGeoLocation().getLongitude(),
-                              astronomicalCalendar.getGeoLocation().getLatitude(), zenith, 0);
+            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().get(Calendar.YEAR), astronomicalCalendar.getCalendar().get(Calendar.MONTH) + 1, astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_MONTH), astronomicalCalendar.getGeoLocation().getLongitude(), astronomicalCalendar.getGeoLocation().getLatitude(), zenith, TYPE_SUNRISE);
+            return doubleTime;
         }
 
-        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
-                                            bool adjustForElevation)
+        ///    
+        ///	 * <seealso cref= net.sourceforge.zmanim.util.AstronomicalCalculator#getUTCSunset(AstronomicalCalendar,
+        ///	 *      double, boolean) </seealso>
+        ///	 
+        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation)
         {
+            double doubleTime = double.NaN;
+
             if (adjustForElevation)
             {
                 zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
             }
             else
             {
-                zenith = adjustZenith(zenith, 0f);
+                zenith = adjustZenith(zenith, 0);
             }
-            return getTimeUTC(astronomicalCalendar.getCalendar().get(1), astronomicalCalendar.getCalendar().get(2) + 1,
-                              astronomicalCalendar.getCalendar().get(5),
-                              astronomicalCalendar.getGeoLocation().getLongitude(),
-                              astronomicalCalendar.getGeoLocation().getLatitude(), zenith, 1);
+            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().get(Calendar.YEAR), astronomicalCalendar.getCalendar().get(Calendar.MONTH) + 1, astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_MONTH), astronomicalCalendar.getGeoLocation().getLongitude(), astronomicalCalendar.getGeoLocation().getLatitude(), zenith, TYPE_SUNSET);
+            return doubleTime;
         }
 
-        private static double sinDeg(double num1)
+        ///    
+        ///	 <summary> * Default value for Sun's zenith and true rise/set </summary>
+        ///	 
+        public const double ZENITH = 90 + 50.0 / 60.0;
+
+        private const int TYPE_SUNRISE = 0;
+
+        private const int TYPE_SUNSET = 1;
+
+        // DEG_PER_HOUR is the number of degrees of longitude
+        // that corresponds to one hour time difference.
+        private const double DEG_PER_HOUR = 360.0 / 24.0;
+
+        ///    
+        ///	 <summary> * sin of an angle in degrees </summary>
+        ///	 
+        private static double sinDeg(double deg)
         {
-            return Math.sin(((num1*2.0)*3.1415926535897931)/360.0);
+            return System.Math.Sin(deg * 2.0 * Math.PI / 360.0);
         }
 
-        private static double tanDeg(double num1)
+        ///    
+        ///	 <summary> * acos of an angle, result in degrees </summary>
+        ///	 
+        private static double acosDeg(double x)
         {
-            return Math.tan(((num1*2.0)*3.1415926535897931)/360.0);
+            return System.Math.Acos(x) * 360.0 / (2 * Math.PI);
         }
+
+        ///    
+        ///	 <summary> * asin of an angle, result in degrees </summary>
+        ///	 
+        private static double asinDeg(double x)
+        {
+            return System.Math.Asin(x) * 360.0 / (2 * Math.PI);
+        }
+
+        ///    
+        ///	 <summary> * tan of an angle in degrees </summary>
+        ///	 
+        private static double tanDeg(double deg)
+        {
+            return System.Math.Tan(deg * 2.0 * Math.PI / 360.0);
+        }
+
+        ///    
+        ///	 <summary> * cos of an angle in degrees </summary>
+        ///	 
+        private static double cosDeg(double deg)
+        {
+            return System.Math.Cos(deg * 2.0 * Math.PI / 360.0);
+        }
+
+        ///    
+        ///	 <summary> * Calculate the day of the year, where Jan 1st is day 1. Note that this
+        ///	 * method needs to know the year, because leap years have an impact here </summary>
+        ///	 
+        private static int getDayOfYear(int year, int month, int day)
+        {
+            int n1 = 275 * month / 9;
+            int n2 = (month + 9) / 12;
+            int n3 = (1 + ((year - 4 * (year / 4) + 2) / 3));
+            int n = n1 - (n2 * n3) + day - 30;
+            return n;
+        }
+
+        ///    
+        ///	 <summary> * Get time difference between location's longitude and the Meridian, in
+        ///	 * hours. West of Meridian has a negative time difference </summary>
+        ///	 
+        private static double getHoursFromMeridian(double longitude)
+        {
+            return longitude / DEG_PER_HOUR;
+        }
+
+        ///    
+        ///	 <summary> * Gets the approximate time of sunset or sunrise In _days_ since midnight
+        ///	 * Jan 1st, assuming 6am and 6pm events. We need this figure to derive the
+        ///	 * Sun's mean anomaly </summary>
+        ///	 
+        private static double getApproxTimeDays(int dayOfYear, double hoursFromMeridian, int type)
+        {
+            if (type == TYPE_SUNRISE)
+            {
+                return dayOfYear + ((6.0 - hoursFromMeridian) / 24);
+            } // if (type == TYPE_SUNSET) 
+            else
+            {
+                return dayOfYear + ((18.0 - hoursFromMeridian) / 24);
+            }
+        }
+
+        ///    
+        ///	 <summary> * Calculate the Sun's mean anomaly in degrees, at sunrise or sunset, given
+        ///	 * the longitude in degrees </summary>
+        ///	 
+        private static double getMeanAnomaly(int dayOfYear, double longitude, int type)
+        {
+            return (0.9856 * getApproxTimeDays(dayOfYear, getHoursFromMeridian(longitude), type)) - 3.289;
+        }
+
+        ///    
+        ///	 <summary> * Calculates the Sun's true longitude in degrees. The result is an angle
+        ///	 * gte 0 and lt 360. Requires the Sun's mean anomaly, also in degrees </summary>
+        ///	 
+        private static double getSunTrueLongitude(double sunMeanAnomaly)
+        {
+            double l = sunMeanAnomaly + (1.916 * sinDeg(sunMeanAnomaly)) + (0.020 * sinDeg(2 * sunMeanAnomaly)) + 282.634;
+
+            // get longitude into 0-360 degree range
+            if (l >= 360.0)
+            {
+                l = l - 360.0;
+            }
+            if (l < 0)
+            {
+                l = l + 360.0;
+            }
+            return l;
+        }
+
+        ///    
+        ///	 <summary> * Calculates the Sun's right ascension in hours, given the Sun's true
+        ///	 * longitude in degrees. Input and output are angles gte 0 and lt 360. </summary>
+        ///	 
+        private static double getSunRightAscensionHours(double sunTrueLongitude)
+        {
+            double a = 0.91764 * tanDeg(sunTrueLongitude);
+            double ra = 360.0 / (2.0 * Math.PI) * System.Math.Atan(a);
+            // get result into 0-360 degree range
+            // if (ra >= 360.0) ra = ra - 360.0;
+            // if (ra < 0) ra = ra + 360.0;
+
+            double lQuadrant = System.Math.Floor(sunTrueLongitude / 90.0) * 90.0;
+            double raQuadrant = System.Math.Floor(ra / 90.0) * 90.0;
+            ra = ra + (lQuadrant - raQuadrant);
+
+            return ra / DEG_PER_HOUR; // convert to hours
+        }
+
+        ///    
+        ///	 <summary> * Gets the cosine of the Sun's local hour angle </summary>
+        ///	 
+        private static double getCosLocalHourAngle(double sunTrueLongitude, double latitude, double zenith)
+        {
+            double sinDec = 0.39782 * sinDeg(sunTrueLongitude);
+            double cosDec = cosDeg(asinDeg(sinDec));
+
+            double cosH = (cosDeg(zenith) - (sinDec * sinDeg(latitude))) / (cosDec * cosDeg(latitude));
+
+            // Check bounds
+
+            return cosH;
+        }
+
+        ///    
+        ///	 <summary> * Gets the cosine of the Sun's local hour angle for default zenith </summary>
+        ///	 
+        //	private static double getCosLocalHourAngle(double sunTrueLongitude,
+        //			double latitude) {
+        //		return getCosLocalHourAngle(sunTrueLongitude, latitude, ZENITH);
+        //	}
+
+        ///    
+        ///	 <summary> * Calculate local mean time of rising or setting. By `local' is meant the
+        ///	 * exact time at the location, assuming that there were no time zone. That
+        ///	 * is, the time difference between the location and the Meridian depended
+        ///	 * entirely on the longitude. We can't do anything with this time directly;
+        ///	 * we must convert it to UTC and then to a local time. The result is
+        ///	 * expressed as a fractional number of hours since midnight </summary>
+        ///	 
+        private static double getLocalMeanTime(double localHour, double sunRightAscensionHours, double approxTimeDays)
+        {
+            return localHour + sunRightAscensionHours - (0.06571 * approxTimeDays) - 6.622;
+        }
+
+        ///    
+        ///	 <summary> * Get sunrise or sunset time in UTC, according to flag.
+        ///	 * </summary>
+        ///	 * <param name="year">
+        ///	 *            4-digit year </param>
+        ///	 * <param name="month">
+        ///	 *            month, 1-12 (not the zero based Java month </param>
+        ///	 * <param name="day">
+        ///	 *            day of month, 1-31 </param>
+        ///	 * <param name="longitude">
+        ///	 *            in degrees, longitudes west of Meridian are negative </param>
+        ///	 * <param name="latitude">
+        ///	 *            in degrees, latitudes south of equator are negative </param>
+        ///	 * <param name="zenith">
+        ///	 *            Sun's zenith, in degrees </param>
+        ///	 * <param name="type">
+        ///	 *            type of calculation to carry out <seealso cref="#TYPE_SUNRISE"/> or
+        ///	 *            <seealso cref="#TYPE_SUNRISE"/>.
+        ///	 * </param>
+        ///	 * <returns> the time as a double. If an error was encountered in the
+        ///	 *         calculation (expected behavior for some locations such as near
+        ///	 *         the poles, <seealso cref="Double.NaN"/> will be returned. </returns>
+        ///	 
+        private static double getTimeUTC(int year, int month, int day, double longitude, double latitude, double zenith, int type)
+        {
+            int dayOfYear = getDayOfYear(year, month, day);
+            double sunMeanAnomaly = getMeanAnomaly(dayOfYear, longitude, type);
+            double sunTrueLong = getSunTrueLongitude(sunMeanAnomaly);
+            double sunRightAscensionHours = getSunRightAscensionHours(sunTrueLong);
+            double cosLocalHourAngle = getCosLocalHourAngle(sunTrueLong, latitude, zenith);
+
+            double localHourAngle = 0;
+            if (type == TYPE_SUNRISE)
+            {
+                if (cosLocalHourAngle > 1) // no rise. No need for an Exception
+                {
+                    // since the calculation
+                    // will return Double.NaN
+                }
+                localHourAngle = 360.0 - acosDeg(cosLocalHourAngle);
+            } // if (type == TYPE_SUNSET) 
+            else
+            {
+                if (cosLocalHourAngle < -1) // no SET. No need for an Exception
+                {
+                    // since the calculation
+                    // will return Double.NaN
+                }
+                localHourAngle = acosDeg(cosLocalHourAngle);
+            }
+            double localHour = localHourAngle / DEG_PER_HOUR;
+
+            double localMeanTime = getLocalMeanTime(localHour, sunRightAscensionHours, getApproxTimeDays(dayOfYear, getHoursFromMeridian(longitude), type));
+            double pocessedTime = localMeanTime - getHoursFromMeridian(longitude);
+            while (pocessedTime < 0.0)
+            {
+                pocessedTime += 24.0;
+            }
+            while (pocessedTime >= 24.0)
+            {
+                pocessedTime -= 24.0;
+            }
+            return pocessedTime;
+        }
+
     }
 }
