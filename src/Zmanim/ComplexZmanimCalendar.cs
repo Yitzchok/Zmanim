@@ -1164,16 +1164,15 @@ namespace net.sourceforge.zmanim
         ///<summary>
         ///  This method returns the latest <em>zman tfila</em> (time to the morning
         ///  prayers) in the opinion of the <em>MG"A</em> based on <em>alos</em> being
-        ///  <seealso cref = "getAlos72Zmanis">72</seealso> minutes <em>zmaniyos</em> before
-        ///  <seealso cref = "getSunrise">sunrise</seealso>. This time is 4
+        ///  <see cref = "getAlos72Zmanis">72</see> minutes <em>zmaniyos</em> before
+        ///  <see cref = "getSunrise">sunrise</see>. This time is 4
         ///  <em><seealso cref = "getShaahZmanis72MinutesZmanis">shaos zmaniyos</seealso></em> (solar
         ///  hours) after <seealso cref = "getAlos72Zmanis">dawn</seealso> based on the opinion of the
         ///  <em>MG"A</em> that the day is calculated from a
         ///  <seealso cref = "getAlos72Zmanis">dawn</seealso> of 72 minutes <em>zmaniyos</em> before
-        ///  sunrise to <seealso cref = "getTzais72Zmanis">nightfall</seealso> of 72 minutes
+        ///  sunrise to <see cref = "getTzais72Zmanis">nightfall</see> of 72 minutes
         ///  <em>zmaniyos</em> after sunset. This returns the time of 4 *
-        ///  <seealso cref = "getShaahZmanis72MinutesZmanis()" /> after <see cref = "getAlos72Zmanis()"> dawn</see>
-        ///  .
+        ///  <seealso cref = "getShaahZmanis72MinutesZmanis()" /> after <see cref = "getAlos72Zmanis()"> dawn</see>.
         ///</summary>
         ///<returns> the <c>Date</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis72MinutesZmanis()" />
@@ -1206,15 +1205,15 @@ namespace net.sourceforge.zmanim
         ///<summary>
         ///  This method returns the latest <em>zman tfila</em> (time to the morning
         ///  prayers) in the opinion of the <em>MG"A</em> based on <em>alos</em> being
-        ///  <seealso cref = "getAlos90Zmanis">90</seealso> minutes <em>zmaniyos</em> before
-        ///  <seealso cref = "getSunrise">sunrise</seealso>. This time is 4
-        ///  <em><seealso cref = "getShaahZmanis90MinutesZmanis">shaos zmaniyos</seealso></em> (solar
-        ///  hours) after <seealso cref = "getAlos90Zmanis">dawn</seealso> based on the opinion of the
+        ///  <see cref = "getAlos90Zmanis">90</seealso> minutes <em>zmaniyos</em> before
+        ///  <see cref = "getSunrise">sunrise</seealso>. This time is 4
+        ///  <em><see cref = "getShaahZmanis90MinutesZmanis">shaos zmaniyos</see></em> (solar
+        ///  hours) after <seealso cref = "getAlos90Zmanis">dawn</see> based on the opinion of the
         ///  <em>MG"A</em> that the day is calculated from a
-        ///  <seealso cref = "getAlos90Zmanis">dawn</seealso> of 90 minutes <em>zmaniyos</em> before
+        ///  <see cref = "getAlos90Zmanis">dawn</see> of 90 minutes <em>zmaniyos</em> before
         ///  sunrise to <seealso cref = "getTzais90Zmanis">nightfall</seealso> of 90 minutes
         ///  <em>zmaniyos</em> after sunset. This returns the time of 4 *
-        ///  <seealso cref = "getShaahZmanis90MinutesZmanis()" /> after <see cref = "getAlos90Zmanis()"> dawn</see>
+        ///  <see cref = "getShaahZmanis90MinutesZmanis()" /> after <see cref = "getAlos90Zmanis()"> dawn</see>
         ///  .
         ///</summary>
         ///<returns> the <c>Date</c> of the latest zman shema. </returns>
@@ -1228,14 +1227,14 @@ namespace net.sourceforge.zmanim
         ///<summary>
         ///  This method returns the latest <em>zman tfila</em> (time to say the
         ///  morning prayers) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <seealso cref = "getAlos96">96</seealso> minutes before
-        ///  <seealso cref = "getSunrise">sunrise</seealso>. This time is 4
-        ///  <em><seealso cref = "getShaahZmanis96Minutes">shaos zmaniyos</seealso></em> (solar hours)
-        ///  after <seealso cref = "getAlos96">dawn</seealso> based on the opinion of the <em>MG"A</em>
-        ///  that the day is calculated from a <seealso cref = "getAlos96">dawn</seealso> of 96 minutes
-        ///  before sunrise to <seealso cref = "getTzais96">nightfall</seealso> of 96 minutes after
-        ///  sunset. This returns the time of 4 * <seealso cref = "getShaahZmanis96Minutes()" />
-        ///  after <seealso cref = "getAlos96">dawn</seealso>.
+        ///  <em>alos</em> being <see cref = "getAlos96">96</see> minutes before
+        ///  <see cref = "getSunrise">sunrise</see>. This time is 4
+        ///  <em><see cref = "getShaahZmanis96Minutes">shaos zmaniyos</see></em> (solar hours)
+        ///  after <see cref = "getAlos96">dawn</see> based on the opinion of the <em>MG"A</em>
+        ///  that the day is calculated from a <see cref = "getAlos96">dawn</see> of 96 minutes
+        ///  before sunrise to <see cref = "getTzais96">nightfall</see> of 96 minutes after
+        ///  sunset. This returns the time of 4 * <see cref = "getShaahZmanis96Minutes()" />
+        ///  after <see cref = "getAlos96">dawn</see>.
         ///</summary>
         ///<returns> the <c>Date</c> of the latest zman tfila. </returns>
         ///<seealso cref = "getShaahZmanis96Minutes()" />

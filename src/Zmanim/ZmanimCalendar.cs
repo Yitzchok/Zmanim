@@ -109,7 +109,7 @@ namespace net.sourceforge.zmanim
         ///  information on the source of this calculation see
         ///  <seealso cref = "ZENITH_8_POINT_5" />.
         ///</summary>
-        ///<returns> The <code>Date</code> of nightfall. </returns>
+        ///<returns> The <c>Date</c> of nightfall. </returns>
         ///<seealso cref = "ZENITH_8_POINT_5" />
         public virtual Date getTzais()
         {
@@ -152,7 +152,7 @@ namespace net.sourceforge.zmanim
         ///  returned value is identical to <see cref = "AstronomicalCalendar.getSunTransit()" />
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar.getSunTransit()" />
-        ///<returns> the <code>Date</code> of chatzos. </returns>
+        ///<returns> the <c>Date</c> of chatzos. </returns>
         public virtual Date getChatzos()
         {
             return getSunTransit();
@@ -207,7 +207,7 @@ namespace net.sourceforge.zmanim
         ///  minutes before sunrise to nightfall of 72 minutes after sunset. This
         ///  returns the time of 3 * <em>shaos zmaniyos</em> after dawn.
         ///</summary>
-        ///<returns> the <code>Date</code> of the latest zman shema. </returns>
+        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
         ///<seealso cref = "ComplexZmanimCalendar.getShaahZmanis72Minutes()" />
         ///<seealso cref = "getAlos72()" />
         ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaMGA72Minutes()" />
@@ -224,7 +224,7 @@ namespace net.sourceforge.zmanim
         ///  level, this is calculated at sea level, since the darkness level is not
         ///  affected by elevation.
         ///</summary>
-        ///<returns> the <code>Date</code> representing 72 minutes after sea level
+        ///<returns> the <c>Date</c> representing 72 minutes after sea level
         ///  sunset. </returns>
         public virtual Date getTzais72()
         {
@@ -254,7 +254,7 @@ namespace net.sourceforge.zmanim
         ///  <seealso cref = "AstronomicalCalendar.getSeaLevelSunrise">sea level sunrise</seealso>.
         ///</summary>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
-        ///<returns> the <code>Date</code> of the latest zman tefilah. </returns>
+        ///<returns> the <c>Date</c> of the latest zman tefilah. </returns>
         public virtual Date getSofZmanTfilaGRA()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*4);
@@ -272,7 +272,7 @@ namespace net.sourceforge.zmanim
         ///  sunset. This returns the time of 4 * <seealso cref = "getShaahZmanisMGA()" /> after
         ///  <seealso cref = "getAlos72">dawn</seealso>.
         ///</summary>
-        ///<returns> the <code>Date</code> of the latest zman tfila. </returns>
+        ///<returns> the <c>Date</c> of the latest zman tfila. </returns>
         ///<seealso cref = "getShaahZmanisMGA()" />
         ///<seealso cref = "getAlos72()" />
         public virtual Date getSofZmanTfilaMGA()
@@ -297,7 +297,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaKetana()" />
-        ///<returns> the <code>Date</code> of the time of mincha gedola. </returns>
+        ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
         public virtual Date getMinchaGedola()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*6.5);
@@ -317,7 +317,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaGedola()" />
-        ///<returns> the <code>Date</code> of the time of mincha gedola. </returns>
+        ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
         public virtual Date getMinchaKetana()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*9.5);
