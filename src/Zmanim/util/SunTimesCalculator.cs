@@ -24,23 +24,21 @@ using java.util;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    /// Implementation of sunrise and sunset methods to calculate astronomical times.
-    /// This calculator uses the Java algorithm written by <a
-    /// href="http://www.kevinboone.com/suntimes.html">Kevin Boone</a> that is based
-    /// on the <a href="http://aa.usno.navy.mil/">US Naval Observatory's</a><a
-    /// href="http://aa.usno.navy.mil/publications/docs/asa.php">Almanac</a> for
-    /// Computer algorithm ( <a
-    /// href="http://www.amazon.com/exec/obidos/tg/detail/-/0160515106/">Amazon</a>,
-    /// <a
-    /// href="http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?isbn=0160515106">Barnes
-    /// &amp; Noble</a>) and is used with his permission. Added to Kevin's code is
-    /// adjustment of the zenith to account for elevation.
+    ///   Implementation of sunrise and sunset methods to calculate astronomical times.
+    ///   This calculator uses the Java algorithm written by <a href = "http://www.kevinboone.com/suntimes.html">Kevin Boone</a> that is based
+    ///   on the <a href = "http://aa.usno.navy.mil/">US Naval Observatory's</a><a href = "http://aa.usno.navy.mil/publications/docs/asa.php">Almanac</a> for
+    ///   Computer algorithm ( <a href = "http://www.amazon.com/exec/obidos/tg/detail/-/0160515106/">Amazon</a>,
+    ///   <a href = "http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?isbn=0160515106">Barnes
+    ///     &amp; Noble</a>) and is used with his permission. Added to Kevin's code is
+    ///   adjustment of the zenith to account for elevation.
     /// </summary>
     /// <author>Kevin Boone</author>
     /// <author>Eliyahu Hershfeld</author>
     public class SunTimesCalculator : AstronomicalCalculator
     {
-        ///	 <summary> Default value for Sun's zenith and true rise/set </summary>
+        ///<summary>
+        ///  Default value for Sun's zenith and true rise/set
+        ///</summary>
         public const double ZENITH = 90 + 50.0/60.0;
 
         private const int TYPE_SUNRISE = 0;
@@ -57,7 +55,7 @@ namespace net.sourceforge.zmanim.util
             return calculatorName;
         }
 
-        ///	<seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)"/>
+        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)" />
         public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
@@ -79,7 +77,7 @@ namespace net.sourceforge.zmanim.util
             return doubleTime;
         }
 
-        ///	<seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)"/>
+        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)" />
         public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
@@ -101,42 +99,50 @@ namespace net.sourceforge.zmanim.util
             return doubleTime;
         }
 
-        ///	 <summary> sin of an angle in degrees </summary>
+        ///<summary>
+        ///  sin of an angle in degrees
+        ///</summary>
         private static double sinDeg(double deg)
         {
             return System.Math.Sin(deg*2.0*Math.PI/360.0);
         }
 
-        ///	 <summary> acos of an angle, result in degrees </summary>
+        ///<summary>
+        ///  acos of an angle, result in degrees
+        ///</summary>
         private static double acosDeg(double x)
         {
             return System.Math.Acos(x)*360.0/(2*Math.PI);
         }
 
-        ///    
-        ///	 <summary> * asin of an angle, result in degrees </summary>
-        ///	 
+        ///<summary>
+        ///  * asin of an angle, result in degrees
+        ///</summary>
         private static double asinDeg(double x)
         {
             return System.Math.Asin(x)*360.0/(2*Math.PI);
         }
 
-        ///	 <summary> tan of an angle in degrees </summary>
+        ///<summary>
+        ///  tan of an angle in degrees
+        ///</summary>
         private static double tanDeg(double deg)
         {
             return System.Math.Tan(deg*2.0*Math.PI/360.0);
         }
 
-        ///	 <summary> cos of an angle in degrees </summary>
+        ///<summary>
+        ///  cos of an angle in degrees
+        ///</summary>
         private static double cosDeg(double deg)
         {
             return System.Math.Cos(deg*2.0*Math.PI/360.0);
         }
 
-        ///    
-        ///	 <summary> * Calculate the day of the year, where Jan 1st is day 1. Note that this
-        ///	 * method needs to know the year, because leap years have an impact here </summary>
-        ///	 
+        ///<summary>
+        ///  * Calculate the day of the year, where Jan 1st is day 1. Note that this
+        ///  * method needs to know the year, because leap years have an impact here
+        ///</summary>
         private static int getDayOfYear(int year, int month, int day)
         {
             int n1 = 275*month/9;
@@ -146,18 +152,20 @@ namespace net.sourceforge.zmanim.util
             return n;
         }
 
-        ///	 <summary>
-        /// Get time difference between location's longitude and the Meridian, in
-        ///	hours. West of Meridian has a negative time difference </summary>
+        ///<summary>
+        ///  Get time difference between location's longitude and the Meridian, in
+        ///  hours. West of Meridian has a negative time difference
+        ///</summary>
         private static double getHoursFromMeridian(double longitude)
         {
             return longitude/DEG_PER_HOUR;
         }
 
-        ///	 <summary>
-        /// Gets the approximate time of sunset or sunrise In _days_ since midnight
-        ///	Jan 1st, assuming 6am and 6pm events. We need this figure to derive the
-        ///	Sun's mean anomaly </summary>
+        ///<summary>
+        ///  Gets the approximate time of sunset or sunrise In _days_ since midnight
+        ///  Jan 1st, assuming 6am and 6pm events. We need this figure to derive the
+        ///  Sun's mean anomaly
+        ///</summary>
         private static double getApproxTimeDays(int dayOfYear, double hoursFromMeridian, int type)
         {
             if (type == TYPE_SUNRISE)
@@ -170,17 +178,19 @@ namespace net.sourceforge.zmanim.util
             }
         }
 
-        ///	 <summary>
-        /// Calculate the Sun's mean anomaly in degrees, at sunrise or sunset, given
-        ///	the longitude in degrees </summary>
+        ///<summary>
+        ///  Calculate the Sun's mean anomaly in degrees, at sunrise or sunset, given
+        ///  the longitude in degrees
+        ///</summary>
         private static double getMeanAnomaly(int dayOfYear, double longitude, int type)
         {
             return (0.9856*getApproxTimeDays(dayOfYear, getHoursFromMeridian(longitude), type)) - 3.289;
         }
 
-        ///	 <summary>
-        /// Calculates the Sun's true longitude in degrees. The result is an angle
-        ///	gte 0 and lt 360. Requires the Sun's mean anomaly, also in degrees </summary>
+        ///<summary>
+        ///  Calculates the Sun's true longitude in degrees. The result is an angle
+        ///  gte 0 and lt 360. Requires the Sun's mean anomaly, also in degrees
+        ///</summary>
         private static double getSunTrueLongitude(double sunMeanAnomaly)
         {
             double l = sunMeanAnomaly + (1.916*sinDeg(sunMeanAnomaly)) + (0.020*sinDeg(2*sunMeanAnomaly)) + 282.634;
@@ -197,10 +207,10 @@ namespace net.sourceforge.zmanim.util
             return l;
         }
 
-        ///	 <summary>
-        /// Calculates the Sun's right ascension in hours, given the Sun's true
-        ///	longitude in degrees. Input and output are angles gte 0 and lt 360.
-        ///  </summary>
+        ///<summary>
+        ///  Calculates the Sun's right ascension in hours, given the Sun's true
+        ///  longitude in degrees. Input and output are angles gte 0 and lt 360.
+        ///</summary>
         private static double getSunRightAscensionHours(double sunTrueLongitude)
         {
             double a = 0.91764*tanDeg(sunTrueLongitude);
@@ -216,7 +226,9 @@ namespace net.sourceforge.zmanim.util
             return ra/DEG_PER_HOUR; // convert to hours
         }
 
-        ///	 <summary> Gets the cosine of the Sun's local hour angle </summary>
+        ///<summary>
+        ///  Gets the cosine of the Sun's local hour angle
+        ///</summary>
         private static double getCosLocalHourAngle(double sunTrueLongitude, double latitude, double zenith)
         {
             double sinDec = 0.39782*sinDeg(sunTrueLongitude);
@@ -237,34 +249,34 @@ namespace net.sourceforge.zmanim.util
         //	}
         */
 
-        ///	 <summary>
-        /// Calculate local mean time of rising or setting. By `local' is meant the
-        ///	exact time at the location, assuming that there were no time zone. That
-        ///	is, the time difference between the location and the Meridian depended
-        ///	entirely on the longitude. We can't do anything with this time directly;
-        ///	we must convert it to UTC and then to a local time. The result is
-        ///	expressed as a fractional number of hours since midnight
-        /// </summary>
+        ///<summary>
+        ///  Calculate local mean time of rising or setting. By `local' is meant the
+        ///  exact time at the location, assuming that there were no time zone. That
+        ///  is, the time difference between the location and the Meridian depended
+        ///  entirely on the longitude. We can't do anything with this time directly;
+        ///  we must convert it to UTC and then to a local time. The result is
+        ///  expressed as a fractional number of hours since midnight
+        ///</summary>
         private static double getLocalMeanTime(double localHour, double sunRightAscensionHours, double approxTimeDays)
         {
             return localHour + sunRightAscensionHours - (0.06571*approxTimeDays) - 6.622;
         }
 
-        ///	 <summary>
-        /// Get sunrise or sunset time in UTC, according to flag.
-        ///	</summary>
-        ///	<param name="year">4-digit year </param>
-        ///	<param name="month">month, 1-12 (not the zero based Java month </param>
-        ///	<param name="day">day of month, 1-31 </param>
-        ///	<param name="longitude">in degrees, longitudes west of Meridian are negative </param>
-        ///	<param name="latitude">in degrees, latitudes south of equator are negative </param>
-        ///	<param name="zenith">Sun's zenith, in degrees </param>
-        ///	<param name="type">type of calculation to carry out <see cref="TYPE_SUNRISE"/> or
-        /// <see cref="TYPE_SUNRISE"/>.
-        ///	</param>
-        ///	<returns> the time as a double. If an error was encountered in the
-        ///	        calculation (expected behavior for some locations such as near
-        ///	        the poles, <see cref="Double.NaN"/> will be returned. </returns>
+        ///<summary>
+        ///  Get sunrise or sunset time in UTC, according to flag.
+        ///</summary>
+        ///<param name = "year">4-digit year </param>
+        ///<param name = "month">month, 1-12 (not the zero based Java month </param>
+        ///<param name = "day">day of month, 1-31 </param>
+        ///<param name = "longitude">in degrees, longitudes west of Meridian are negative </param>
+        ///<param name = "latitude">in degrees, latitudes south of equator are negative </param>
+        ///<param name = "zenith">Sun's zenith, in degrees </param>
+        ///<param name = "type">type of calculation to carry out <see cref = "TYPE_SUNRISE" /> or
+        ///  <see cref = "TYPE_SUNRISE" />.
+        ///</param>
+        ///<returns> the time as a double. If an error was encountered in the
+        ///  calculation (expected behavior for some locations such as near
+        ///  the poles, <see cref = "Double.NaN" /> will be returned. </returns>
         private static double getTimeUTC(int year, int month, int day, double longitude, double latitude, double zenith,
                                          int type)
         {

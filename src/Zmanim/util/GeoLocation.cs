@@ -27,19 +27,23 @@ using TimeZone = java.util.TimeZone;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    /// A class that contains location information such as latitude and longitude
-    /// required for astronomical calculations. The elevation field is not used by
-    /// most calculation engines and would be ignored if set. Check the documentation
-    /// for specific implementations of the <seealso cref="AstronomicalCalculator"/> to see if
-    /// elevation is calculated as part o the algorithm.
+    ///   A class that contains location information such as latitude and longitude
+    ///   required for astronomical calculations. The elevation field is not used by
+    ///   most calculation engines and would be ignored if set. Check the documentation
+    ///   for specific implementations of the <seealso cref = "AstronomicalCalculator" /> to see if
+    ///   elevation is calculated as part o the algorithm.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class GeoLocation : ICloneable
     {
-        /// <summary>constant for milliseconds in a minute (60,000)</summary>
+        /// <summary>
+        ///   constant for milliseconds in a minute (60,000)
+        /// </summary>
         private const long MINUTE_MILLIS = 60*1000;
 
-        /// <summary>constant for milliseconds in an hour (3,600,000)</summary>
+        /// <summary>
+        ///   constant for milliseconds in an hour (3,600,000)
+        /// </summary>
         private const long HOUR_MILLIS = MINUTE_MILLIS*60;
 
         private int DISTANCE;
@@ -53,47 +57,49 @@ namespace net.sourceforge.zmanim.util
         private TimeZone timeZone;
 
 
-        ///	 <summary> GeoLocation constructor with parameters for all required fields.
-        ///	 </summary>
-        ///	<param name="name">
-        ///	           The location name for display use such as &quot;Lakewood,
-        ///	           NJ&quot; </param>
-        ///	<param name="latitude">
-        ///	           the latitude in a double format such as 40.095965 for
-        ///	           Lakewood, NJ <br/> <b>Note: </b> For latitudes south of the
-        ///	           equator, a negative value should be used. </param>
-        ///	<param name="longitude">
-        ///	           double the longitude in a double format such as -74.222130 for
-        ///	           Lakewood, NJ. <br/> <b>Note: </b> For longitudes east of the
-        ///	           <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
-        ///	           Meridian </a> (Greenwich), a negative value should be used. </param>
-        ///	<param name="timeZone">
-        ///	           the <c>TimeZone</c> for the location. </param>
+        ///<summary>
+        ///  GeoLocation constructor with parameters for all required fields.
+        ///</summary>
+        ///<param name = "name">
+        ///  The location name for display use such as &quot;Lakewood,
+        ///  NJ&quot; </param>
+        ///<param name = "latitude">
+        ///  the latitude in a double format such as 40.095965 for
+        ///  Lakewood, NJ <br /> <b>Note: </b> For latitudes south of the
+        ///  equator, a negative value should be used. </param>
+        ///<param name = "longitude">
+        ///  double the longitude in a double format such as -74.222130 for
+        ///  Lakewood, NJ. <br /> <b>Note: </b> For longitudes east of the
+        ///  <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///    Meridian </a> (Greenwich), a negative value should be used. </param>
+        ///<param name = "timeZone">
+        ///  the <c>TimeZone</c> for the location. </param>
         public GeoLocation(string name, double latitude, double longitude, TimeZone timeZone)
             : this(name, latitude, longitude, 0, timeZone)
         {
         }
 
 
-        ///	 <summary> GeoLocation constructor with parameters for all required fields.
-        ///	 </summary>
-        ///	<param name="name">
-        ///	           The location name for display use such as &quot;Lakewood,
-        ///	           NJ&quot; </param>
-        ///	<param name="latitude">
-        ///	           the latitude in a double format such as 40.095965 for
-        ///	           Lakewood, NJ <br/> <b>Note: </b> For latitudes south of the
-        ///	           equator, a negative value should be used. </param>
-        ///	<param name="longitude">
-        ///	           double the longitude in a double format such as -74.222130 for
-        ///	           Lakewood, NJ. <br/> <b>Note: </b> For longitudes east of the
-        ///	           <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
-        ///	           Meridian </a> (Greenwich), a negative value should be used. </param>
-        ///	<param name="elevation">
-        ///	           the elevation above sea level in Meters. Elevation is not used
-        ///	           in most algorithms used for calculating sunrise and set. </param>
-        ///	<param name="timeZone">
-        ///	           the <c>TimeZone</c> for the location. </param>
+        ///<summary>
+        ///  GeoLocation constructor with parameters for all required fields.
+        ///</summary>
+        ///<param name = "name">
+        ///  The location name for display use such as &quot;Lakewood,
+        ///  NJ&quot; </param>
+        ///<param name = "latitude">
+        ///  the latitude in a double format such as 40.095965 for
+        ///  Lakewood, NJ <br /> <b>Note: </b> For latitudes south of the
+        ///  equator, a negative value should be used. </param>
+        ///<param name = "longitude">
+        ///  double the longitude in a double format such as -74.222130 for
+        ///  Lakewood, NJ. <br /> <b>Note: </b> For longitudes east of the
+        ///  <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///    Meridian </a> (Greenwich), a negative value should be used. </param>
+        ///<param name = "elevation">
+        ///  the elevation above sea level in Meters. Elevation is not used
+        ///  in most algorithms used for calculating sunrise and set. </param>
+        ///<param name = "timeZone">
+        ///  the <c>TimeZone</c> for the location. </param>
         public GeoLocation(string name, double latitude, double longitude, double elevation, TimeZone timeZone)
         {
             setLocationName(name);
@@ -104,11 +110,13 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Default GeoLocation constructor will set location to the Prime Meridian
-        ///	at Greenwich, England and a TimeZone of GMT. The longitude will be set to
-        ///	0 and the latitude will be 51.4772 to match the location of the
-        /// <a href="http://www.rog.nmm.ac.uk">Royal Observatory, Greenwich </a>. No
-        ///	daylight savings time will be used. </summary>
+        ///<summary>
+        ///  Default GeoLocation constructor will set location to the Prime Meridian
+        ///  at Greenwich, England and a TimeZone of GMT. The longitude will be set to
+        ///  0 and the latitude will be 51.4772 to match the location of the
+        ///  <a href = "http://www.rog.nmm.ac.uk">Royal Observatory, Greenwich </a>. No
+        ///  daylight savings time will be used.
+        ///</summary>
         public GeoLocation()
         {
             setLocationName("Greenwich, England");
@@ -119,16 +127,16 @@ namespace net.sourceforge.zmanim.util
 
         #region ICloneable Members
 
-        ///	 <summary> An implementation of the <seealso cref="java.lang.Object.clone()"/> method that
-        ///	creates a <a
-        ///	href="http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
-        ///	of the object. <br/><b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in
-        ///	the clone will be changed from the original, it is critical that
-        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()"/>.
-        /// <see cref="java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
-        ///	is called after cloning in order for the AstronomicalCalendar to output
-        ///	times in the expected offset.
-        ///	 </summary>
+        ///<summary>
+        ///  An implementation of the <seealso cref = "java.lang.Object.clone()" /> method that
+        ///  creates a <a href = "http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
+        ///  of the object. <br /><b>Note:</b> If the <seealso cref = "java.util.TimeZone" /> in
+        ///  the clone will be changed from the original, it is critical that
+        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
+        ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
+        ///  is called after cloning in order for the AstronomicalCalendar to output
+        ///  times in the expected offset.
+        ///</summary>
         public virtual object Clone()
         {
             var clone = (GeoLocation) MemberwiseClone();
@@ -139,20 +147,22 @@ namespace net.sourceforge.zmanim.util
 
         #endregion
 
-        ///	 <summary> Method to get the elevation in Meters.
-        ///	 </summary>
-        ///	<returns> Returns the elevation in Meters. </returns>
+        ///<summary>
+        ///  Method to get the elevation in Meters.
+        ///</summary>
+        ///<returns> Returns the elevation in Meters. </returns>
         public virtual double getElevation()
         {
             return elevation;
         }
 
 
-        ///	 <summary> Method to set the elevation in Meters <b>above </b> sea level.
-        ///	 </summary>
-        ///	<param name="elevation">
-        ///	           The elevation to set in Meters. An IllegalArgumentException
-        ///	           will be thrown if the value is a negative. </param>
+        ///<summary>
+        ///  Method to set the elevation in Meters <b>above </b> sea level.
+        ///</summary>
+        ///<param name = "elevation">
+        ///  The elevation to set in Meters. An IllegalArgumentException
+        ///  will be thrown if the value is a negative. </param>
         public virtual void setElevation(double elevation)
         {
             if (elevation < 0)
@@ -163,14 +173,15 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Method to set the latitude.
-        ///	 </summary>
-        ///	<param name="latitude">
-        ///	           The degrees of latitude to set. The values should be between
-        ///	           -90° and 90°. An IllegalArgumentException will be
-        ///	           thrown if the value exceeds the limit. For example 40.095965
-        ///	           would be used for Lakewood, NJ. <b>Note: </b> For latitudes south of the
-        ///	           equator, a negative value should be used. </param>
+        ///<summary>
+        ///  Method to set the latitude.
+        ///</summary>
+        ///<param name = "latitude">
+        ///  The degrees of latitude to set. The values should be between
+        ///  -90° and 90°. An IllegalArgumentException will be
+        ///  thrown if the value exceeds the limit. For example 40.095965
+        ///  would be used for Lakewood, NJ. <b>Note: </b> For latitudes south of the
+        ///  equator, a negative value should be used. </param>
         public virtual void setLatitude(double latitude)
         {
             if (latitude > 90 || latitude < -90)
@@ -181,17 +192,18 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Method to set the latitude in degrees, minutes and seconds.
-        ///	 </summary>
-        ///	<param name="degrees">
-        ///	           The degrees of latitude to set between -90 and 90. An
-        ///	           IllegalArgumentException will be thrown if the value exceeds
-        ///	           the limit. For example 40 would be used for Lakewood, NJ. </param>
-        ///	<param name="minutes"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a> </param>
-        ///	<param name="seconds"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a> </param>
-        ///	<param name="direction">
-        ///	           N for north and S for south. An IllegalArgumentException will
-        ///	           be thrown if the value is not S or N. </param>
+        ///<summary>
+        ///  Method to set the latitude in degrees, minutes and seconds.
+        ///</summary>
+        ///<param name = "degrees">
+        ///  The degrees of latitude to set between -90 and 90. An
+        ///  IllegalArgumentException will be thrown if the value exceeds
+        ///  the limit. For example 40 would be used for Lakewood, NJ. </param>
+        ///<param name = "minutes"> <a href = "http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a> </param>
+        ///<param name = "seconds"> <a href = "http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a> </param>
+        ///<param name = "direction">
+        ///  N for north and S for south. An IllegalArgumentException will
+        ///  be thrown if the value is not S or N. </param>
         public virtual void setLatitude(int degrees, int minutes, double seconds, string direction)
         {
             double tempLat = degrees + ((minutes + (seconds/60.0))/60.0);
@@ -212,22 +224,23 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	<returns> Returns the latitude. </returns>
+        ///<returns> Returns the latitude. </returns>
         public virtual double getLatitude()
         {
             return latitude;
         }
 
 
-        ///	 <summary> Method to set the longitude in a double format.
-        ///	 </summary>
-        ///	<param name="longitude">
-        ///	           The degrees of longitude to set in a double format between
-        ///	           -180° and 180°. An IllegalArgumentException will be
-        ///	           thrown if the value exceeds the limit. For example -74.2094
-        ///	           would be used for Lakewood, NJ. Note: for longitudes east of
-        ///	           the <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
-        ///	           Meridian</a> (Greenwich) a negative value should be used. </param>
+        ///<summary>
+        ///  Method to set the longitude in a double format.
+        ///</summary>
+        ///<param name = "longitude">
+        ///  The degrees of longitude to set in a double format between
+        ///  -180° and 180°. An IllegalArgumentException will be
+        ///  thrown if the value exceeds the limit. For example -74.2094
+        ///  would be used for Lakewood, NJ. Note: for longitudes east of
+        ///  the <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///        Meridian</a> (Greenwich) a negative value should be used. </param>
         public virtual void setLongitude(double longitude)
         {
             if (longitude > 180 || longitude < -180)
@@ -238,21 +251,21 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	<summary> 
-        /// Method to set the longitude in degrees, minutes and seconds.
-        ///	</summary>
-        ///	<param name="degrees">
-        ///	           The degrees of longitude to set between -180 and 180. An
-        ///	           IllegalArgumentException will be thrown if the value exceeds
-        ///	           the limit. For example -74 would be used for Lakewood, NJ.
-        ///	           Note: for longitudes east of the <a href="http://en.wikipedia.org/wiki/Prime_Meridian">Prime
-        ///	           Meridian </a> (Greenwich) a negative value should be used. </param>
-        ///	<param name="minutes"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a> </param>
-        ///	<param name="seconds"> <a href="http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a> </param>
-        ///	<param name="direction">
-        ///	           E for east of the Prime Meridian or W for west of it. An
-        ///	           IllegalArgumentException will be thrown if the value is not E
-        ///	           or W. </param>
+        ///<summary>
+        ///  Method to set the longitude in degrees, minutes and seconds.
+        ///</summary>
+        ///<param name = "degrees">
+        ///  The degrees of longitude to set between -180 and 180. An
+        ///  IllegalArgumentException will be thrown if the value exceeds
+        ///  the limit. For example -74 would be used for Lakewood, NJ.
+        ///  Note: for longitudes east of the <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///                                     Meridian </a> (Greenwich) a negative value should be used. </param>
+        ///<param name = "minutes"> <a href = "http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a> </param>
+        ///<param name = "seconds"> <a href = "http://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a> </param>
+        ///<param name = "direction">
+        ///  E for east of the Prime Meridian or W for west of it. An
+        ///  IllegalArgumentException will be thrown if the value is not E
+        ///  or W. </param>
         public virtual void setLongitude(int degrees, int minutes, double seconds, string direction)
         {
             double longTemp = degrees + ((minutes + (seconds/60.0))/60.0);
@@ -272,127 +285,133 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	<returns> Returns the longitude. </returns>
+        ///<returns> Returns the longitude. </returns>
         public virtual double getLongitude()
         {
             return longitude;
         }
 
 
-        ///	<returns> Returns the location name. </returns>
+        ///<returns> Returns the location name. </returns>
         public virtual string getLocationName()
         {
             return locationName;
         }
 
 
-        ///	<param name="name">
-        ///	           The setter method for the display name. </param>
+        ///<param name = "name">
+        ///  The setter method for the display name. </param>
         public virtual void setLocationName(string name)
         {
             locationName = name;
         }
 
 
-        ///	<returns> Returns the timeZone. </returns>
+        ///<returns> Returns the timeZone. </returns>
         public virtual TimeZone getTimeZone()
         {
             return timeZone;
         }
 
-        ///	 <summary> Method to set the TimeZone. If this is ever set after the GeoLocation is
-        ///	set in the <see cref="net.sourceforge.zmanim.AstronomicalCalendar"/>, it is
-        ///	critical that
-        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()"/>.
-        /// <see cref="java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
-        /// be called in order for the AstronomicalCalendar to output times in the
-        ///	expected offset. This situation will arise if the AstronomicalCalendar is
-        ///	ever <see cref="net.sourceforge.zmanim.AstronomicalCalendar.clone()">cloned</see>.
-        ///	 </summary>
-        ///	<param name="timeZone">
-        ///	           The timeZone to set. </param>
+        ///<summary>
+        ///  Method to set the TimeZone. If this is ever set after the GeoLocation is
+        ///  set in the <see cref = "net.sourceforge.zmanim.AstronomicalCalendar" />, it is
+        ///  critical that
+        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
+        ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
+        ///  be called in order for the AstronomicalCalendar to output times in the
+        ///  expected offset. This situation will arise if the AstronomicalCalendar is
+        ///  ever <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.clone()">cloned</see>.
+        ///</summary>
+        ///<param name = "timeZone">
+        ///  The timeZone to set. </param>
         public virtual void setTimeZone(TimeZone timeZone)
         {
             this.timeZone = timeZone;
         }
 
-        ///	 <summary> A method that will return the location's local mean time offset in
-        ///	milliseconds from local standard time. The globe is split into 360°,
-        ///	with 15° per hour of the day. For a local that is at a longitude that
-        ///	is evenly divisible by 15 (longitude % 15 == 0), at solar
-        ///	<see cref="net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
-        ///	(with adjustment for the <a href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
-        ///	the sun should be directly overhead, so a user who is 1° west of this
-        ///	will have noon at 4 minutes after standard time noon, and conversely, a
-        ///	user who is 1° east of the 15&deg longitude will have noon at 11:56
-        ///	AM. The offset returned does not account for the <a href="http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
-        ///	time</a> offset since this class is unaware of dates.
-        ///	 </summary>
-        ///	<returns> the offset in milliseconds not accounting for Daylight saving
-        ///	        time. A positive value will be returned East of the timezone
-        ///	        line, and a negative value West of it.
-        /// </returns>
+        ///<summary>
+        ///  A method that will return the location's local mean time offset in
+        ///  milliseconds from local standard time. The globe is split into 360°,
+        ///  with 15° per hour of the day. For a local that is at a longitude that
+        ///  is evenly divisible by 15 (longitude % 15 == 0), at solar
+        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
+        ///  (with adjustment for the <a href = "http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
+        ///  the sun should be directly overhead, so a user who is 1° west of this
+        ///  will have noon at 4 minutes after standard time noon, and conversely, a
+        ///  user who is 1° east of the 15&deg longitude will have noon at 11:56
+        ///  AM. The offset returned does not account for the <a href = "http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
+        ///                                                     time</a> offset since this class is unaware of dates.
+        ///</summary>
+        ///<returns> the offset in milliseconds not accounting for Daylight saving
+        ///  time. A positive value will be returned East of the timezone
+        ///  line, and a negative value West of it.
+        ///</returns>
         public virtual long getLocalMeanTimeOffset()
         {
             return (long) (getLongitude()*4*MINUTE_MILLIS - getTimeZone().getRawOffset());
         }
 
 
-        ///	 <summary> Calculate the initial <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///	between this Object and a second Object passed to this method using
-        /// <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///	Solutions of Geodesics on the Ellipsoid with application of nested
-        ///	equations</a>", Survey Review, vol XXII no 176, 1975
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the destination location </param>
+        ///<summary>
+        ///  Calculate the initial <a href = "http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        ///  between this Object and a second Object passed to this method using
+        ///  <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
+        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975
+        ///</summary>
+        ///<param name = "location">
+        ///  the destination location </param>
         public virtual double getGeodesicInitialBearing(GeoLocation location)
         {
             return vincentyFormula(location, INITIAL_BEARING);
         }
 
 
-        ///	 <summary> Calculate the final <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///	between this Object and a second Object passed to this method using
-        /// <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///	Solutions of Geodesics on the Ellipsoid with application of nested
-        ///	equations</a>", Survey Review, vol XXII no 176, 1975
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the destination location </param>
+        ///<summary>
+        ///  Calculate the final <a href = "http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        ///  between this Object and a second Object passed to this method using
+        ///  <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
+        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975
+        ///</summary>
+        ///<param name = "location">
+        ///  the destination location </param>
         public virtual double getGeodesicFinalBearing(GeoLocation location)
         {
             return vincentyFormula(location, FINAL_BEARING);
         }
 
-        ///	 <summary> Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
-        ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///	Solutions of Geodesics on the Ellipsoid with application of nested
-        ///	equations</a>", Survey Review, vol XXII no 176, 1975
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the destination location </param>
+        ///<summary>
+        ///  Calculate <a href = "http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        ///              distance</a> in Meters between this Object and a second Object passed to
+        ///  this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
+        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975
+        ///</summary>
+        ///<param name = "location">
+        ///  the destination location </param>
         public virtual double getGeodesicDistance(GeoLocation location)
         {
             return vincentyFormula(location, DISTANCE);
         }
 
-        ///	 <summary> Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
-        ///	distance</a> in Meters between this Object and a second Object passed to
-        ///	this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///	inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///	Solutions of Geodesics on the Ellipsoid with application of nested
-        ///	equations</a>", Survey Review, vol XXII no 176, 1975
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the destination location </param>
-        ///	<param name="formula">
-        ///	           This formula calculates initial bearing (<seealso cref="INITIAL_BEARING"/>),
-        ///	           final bearing (<seealso cref="FINAL_BEARING"/>) and distance (<seealso cref="DISTANCE"/>). </param>
+        ///<summary>
+        ///  Calculate <a href = "http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        ///              distance</a> in Meters between this Object and a second Object passed to
+        ///  this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
+        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975
+        ///</summary>
+        ///<param name = "location">
+        ///  the destination location </param>
+        ///<param name = "formula">
+        ///  This formula calculates initial bearing (<seealso cref = "INITIAL_BEARING" />),
+        ///  final bearing (<seealso cref = "FINAL_BEARING" />) and distance (<seealso cref = "DISTANCE" />). </param>
         private double vincentyFormula(GeoLocation location, int formula)
         {
             double a = 6378137;
@@ -474,12 +493,13 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
-        ///	bearing from the current location to the GeoLocation passed in.
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           destination location </param>
-        ///	<returns> the bearing in degrees </returns>
+        ///<summary>
+        ///  Returns the <a href = "http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
+        ///  bearing from the current location to the GeoLocation passed in.
+        ///</summary>
+        ///<param name = "location">
+        ///  destination location </param>
+        ///<returns> the bearing in degrees </returns>
         public virtual double getRhumbLineBearing(GeoLocation location)
         {
             double dLon = Math.toRadians(location.getLongitude() - getLongitude());
@@ -492,12 +512,13 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
-        ///	distance from the current location to the GeoLocation passed in.
-        ///	 </summary>
-        ///	<param name="location">
-        ///	           the destination location </param>
-        ///	<returns> the distance in Meters </returns>
+        ///<summary>
+        ///  Returns the <a href = "http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
+        ///  distance from the current location to the GeoLocation passed in.
+        ///</summary>
+        ///<param name = "location">
+        ///  the destination location </param>
+        ///<returns> the distance in Meters </returns>
         public virtual double getRhumbLineDistance(GeoLocation location)
         {
             double R = 6371; // earth's mean radius in km
@@ -515,25 +536,26 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        ///	 <summary> A method that returns an XML formatted <c>String</c> representing
-        ///	the serialized <c>Object</c>. Very similar to the toString
-        ///	method but the return value is in an xml format. The format currently
-        ///	used (subject to change) is:
+        ///<summary>
+        ///  A method that returns an XML formatted <c>String</c> representing
+        ///  the serialized <c>Object</c>. Very similar to the toString
+        ///  method but the return value is in an xml format. The format currently
+        ///  used (subject to change) is:
         ///	
-        ///	<code>
-        ///	  &lt;GeoLocation&gt;
-        ///	  	 &lt;LocationName&gt;Lakewood, NJ&lt;/LocationName&gt;
-        ///	  	 &lt;Latitude&gt;40.0828&amp;deg&lt;/Latitude&gt;
-        ///	  	 &lt;Longitude&gt;-74.2094&amp;deg&lt;/Longitude&gt;
-        ///	  	 &lt;Elevation&gt;0 Meters&lt;/Elevation&gt;
-        ///	  	 &lt;TimezoneName&gt;America/New_York&lt;/TimezoneName&gt;
-        ///	  	 &lt;TimeZoneDisplayName&gt;Eastern Standard Time&lt;/TimeZoneDisplayName&gt;
-        ///	  	 &lt;TimezoneGMTOffset&gt;-5&lt;/TimezoneGMTOffset&gt;
-        ///	  	 &lt;TimezoneDSTOffset&gt;1&lt;/TimezoneDSTOffset&gt;
-        ///	  &lt;/GeoLocation&gt;
-        ///	</code>
-        ///	 </summary>
-        ///	<returns> The XML formatted <code>String</code>. </returns>
+        ///  <code>
+        ///    &lt;GeoLocation&gt;
+        ///    &lt;LocationName&gt;Lakewood, NJ&lt;/LocationName&gt;
+        ///    &lt;Latitude&gt;40.0828&amp;deg&lt;/Latitude&gt;
+        ///    &lt;Longitude&gt;-74.2094&amp;deg&lt;/Longitude&gt;
+        ///    &lt;Elevation&gt;0 Meters&lt;/Elevation&gt;
+        ///    &lt;TimezoneName&gt;America/New_York&lt;/TimezoneName&gt;
+        ///    &lt;TimeZoneDisplayName&gt;Eastern Standard Time&lt;/TimeZoneDisplayName&gt;
+        ///    &lt;TimezoneGMTOffset&gt;-5&lt;/TimezoneGMTOffset&gt;
+        ///    &lt;TimezoneDSTOffset&gt;1&lt;/TimezoneDSTOffset&gt;
+        ///    &lt;/GeoLocation&gt;
+        ///  </code>
+        ///</summary>
+        ///<returns> The XML formatted <code>String</code>. </returns>
         public virtual string toXML()
         {
             var sb = new StringBuilder();

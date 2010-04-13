@@ -24,21 +24,23 @@ using java.util;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    /// Implementation of sunrise and sunset methods to calculate astronomical times.
-    /// This implementation is a port of the C++ algorithm written by Ken Bloom for
-    /// the sourceforge.net <a href="http://sourceforge.net/projects/zmanim/">Zmanim</a>
-    /// project. Ken's algorithm is based on the US Naval Almanac algorithm. Added to
-    /// Ken's code is adjustment of the zenith to account for elevation.
+    ///   Implementation of sunrise and sunset methods to calculate astronomical times.
+    ///   This implementation is a port of the C++ algorithm written by Ken Bloom for
+    ///   the sourceforge.net <a href = "http://sourceforge.net/projects/zmanim/">Zmanim</a>
+    ///   project. Ken's algorithm is based on the US Naval Almanac algorithm. Added to
+    ///   Ken's code is adjustment of the zenith to account for elevation.
     /// </summary>
     /// <author>Ken Bloom</author>
     /// <author>Eliyahu Hershfeld</author>
-    /// <remarks>Changed to LGPL with permission from the authors.</remarks>
+    /// <remarks>
+    ///   Changed to LGPL with permission from the authors.
+    /// </remarks>
     public class ZmanimCalculator : AstronomicalCalculator
     {
         private string calculatorName = "US Naval Almanac Algorithm";
 
         /// <summary>
-        /// Gets the name of the calculator/.
+        ///   Gets the name of the calculator/.
         /// </summary>
         /// <returns></returns>
         public override string getCalculatorName()
@@ -59,7 +61,7 @@ namespace net.sourceforge.zmanim.util
                 zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
             else
                 zenith = adjustZenith(zenith, 0);
-            
+
 
             // step 1: First calculate the day of the year
             // NOT NEEDED in this implementation

@@ -23,13 +23,13 @@ using System;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    /// A class that represents a numeric time. Times that represent a time of day
-    /// are stored as <seealso cref="java.util.Date"/>s in this API. The time class is used to
-    /// represent numeric time such as the time in hours, minutes, seconds and
-    /// milliseconds of a
-    /// <see cref="net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
-    /// <summary>
-    /// <author>Eliyahu Hershfeld</author>
+    ///   A class that represents a numeric time. Times that represent a time of day
+    ///   are stored as <seealso cref = "java.util.Date" />s in this API. The time class is used to
+    ///   represent numeric time such as the time in hours, minutes, seconds and
+    ///   milliseconds of a
+    ///   <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
+    ///   <summary>
+    ///     <author>Eliyahu Hershfeld</author>
     public class Time
     {
         private const int SECOND_MILLIS = 1000;
@@ -94,8 +94,8 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        /// <param name="hours">
-        ///            The hours to set. </param>
+        /// <param name = "hours">
+        ///   The hours to set. </param>
         public virtual void setHours(int hours)
         {
             this.hours = hours;
@@ -109,8 +109,8 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        /// <param name="minutes">
-        ///            The minutes to set. </param>
+        /// <param name = "minutes">
+        ///   The minutes to set. </param>
         public virtual void setMinutes(int minutes)
         {
             this.minutes = minutes;
@@ -124,8 +124,8 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        /// <param name="seconds">
-        ///            The seconds to set. </param>
+        /// <param name = "seconds">
+        ///   The seconds to set. </param>
         public virtual void setSeconds(int seconds)
         {
             this.seconds = seconds;
@@ -139,8 +139,8 @@ namespace net.sourceforge.zmanim.util
         }
 
 
-        /// <param name="milliseconds">
-        ///            The milliseconds to set. </param>
+        /// <param name = "milliseconds">
+        ///   The milliseconds to set. </param>
         public virtual void setMilliseconds(int milliseconds)
         {
             this.milliseconds = milliseconds;

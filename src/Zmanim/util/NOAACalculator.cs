@@ -24,17 +24,13 @@ using java.util;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    /// Implementation of sunrise and sunset methods to calculate astronomical times based on the <a href="http://noaa.gov">NOAA</a> algorithm.
-    /// This calculator uses the Java algorithm based on the implementation by <a
-    /// href="http://noaa.gov">NOAA - National Oceanic and Atmospheric
-    /// Administration</a>'s <a href =
-    /// "http://www.srrb.noaa.gov/highlights/sunrise/sunrisehtml">Surface Radiation
-    /// Research Branch</a>. NOAA's <a
-    /// href="http://www.srrb.noaa.gov/highlights/sunrise/solareqns.PDF">implementation</a>
-    /// is based on equations from <a
-    /// href="http://www.willbell.com/math/mc1.htm">Astronomical Algorithms</a> by
-    /// <a href="http://en.wikipedia.org/wiki/Jean_Meeus">Jean Meeus</a>. Added to
-    /// the algorithm is an adjustment of the zenith to account for elevation.
+    ///   Implementation of sunrise and sunset methods to calculate astronomical times based on the <a href = "http://noaa.gov">NOAA</a> algorithm.
+    ///   This calculator uses the Java algorithm based on the implementation by <a href = "http://noaa.gov">NOAA - National Oceanic and Atmospheric
+    ///                                                                            Administration</a>'s <a href = "http://www.srrb.noaa.gov/highlights/sunrise/sunrisehtml">Surface Radiation
+    ///                                                                                                   Research Branch</a>. NOAA's <a href = "http://www.srrb.noaa.gov/highlights/sunrise/solareqns.PDF">implementation</a>
+    ///   is based on equations from <a href = "http://www.willbell.com/math/mc1.htm">Astronomical Algorithms</a> by
+    ///   <a href = "http://en.wikipedia.org/wiki/Jean_Meeus">Jean Meeus</a>. Added to
+    ///   the algorithm is an adjustment of the zenith to account for elevation.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class NOAACalculator : AstronomicalCalculator
@@ -46,7 +42,7 @@ namespace net.sourceforge.zmanim.util
             return calculatorName;
         }
 
-        ///	<seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)"/>
+        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)" />
         public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
@@ -70,11 +66,11 @@ namespace net.sourceforge.zmanim.util
             return sunRise/60;
         }
 
-        ///	 <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)"/>
-        ///	 <exception cref="ZmanimException">
-        /// If the year entered is lt 2001.
-        /// This calculator can't properly deal with the year 2000.
-        /// It can properly calculate times for years gt 2000. </exception>
+        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)" />
+        ///<exception cref = "ZmanimException">
+        ///  If the year entered is lt 2001.
+        ///  This calculator can't properly deal with the year 2000.
+        ///  It can properly calculate times for years gt 2000. </exception>
         public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
@@ -99,13 +95,13 @@ namespace net.sourceforge.zmanim.util
             return sunSet/60;
         }
 
-        ///	 <summary>
-        /// Generate a Julian day from Java Calendar
-        ///	</summary>
-        ///	<param name="date">
-        ///	           Java Calendar </param>
-        ///	<returns> the Julian day corresponding to the date Note: Number is returned
-        ///	        for start of day. Fractional days should be added later. </returns>
+        ///<summary>
+        ///  Generate a Julian day from Java Calendar
+        ///</summary>
+        ///<param name = "date">
+        ///  Java Calendar </param>
+        ///<returns> the Julian day corresponding to the date Note: Number is returned
+        ///  for start of day. Fractional days should be added later. </returns>
         private static double calcJD(Calendar date)
         {
             int year = date.get(Calendar.YEAR);
@@ -122,34 +118,34 @@ namespace net.sourceforge.zmanim.util
             return Math.Floor(365.25*(year + 4716)) + Math.Floor(30.6001*(month + 1)) + day + B - 1524.5;
         }
 
-        ///	 <summary>
-        /// convert Julian Day to centuries since J2000.0.
-        ///	</summary>
-        ///	<param name="jd">
-        ///	           the Julian Day to convert </param>
-        ///	<returns> the T value corresponding to the Julian Day </returns>
+        ///<summary>
+        ///  convert Julian Day to centuries since J2000.0.
+        ///</summary>
+        ///<param name = "jd">
+        ///  the Julian Day to convert </param>
+        ///<returns> the T value corresponding to the Julian Day </returns>
         private static double calcTimeJulianCent(double jd)
         {
             return (jd - 2451545.0)/36525.0;
         }
 
-        ///	 <summary>
-        /// Convert centuries since J2000.0 to Julian Day.
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the Julian Day corresponding to the t value </returns>
+        ///<summary>
+        ///  Convert centuries since J2000.0 to Julian Day.
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the Julian Day corresponding to the t value </returns>
         private static double calcJDFromJulianCent(double t)
         {
             return t*36525.0 + 2451545.0;
         }
 
-        ///	 <summary>
-        /// calculates the Geometric Mean Longitude of the Sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the Geometric Mean Longitude of the Sun in degrees </returns>
+        ///<summary>
+        ///  calculates the Geometric Mean Longitude of the Sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the Geometric Mean Longitude of the Sun in degrees </returns>
         private static double calcGeomMeanLongSun(double t)
         {
             double L0 = 280.46646 + t*(36000.76983 + 0.0003032*t);
@@ -165,36 +161,36 @@ namespace net.sourceforge.zmanim.util
             return L0; // in degrees
         }
 
-        ///	 <summary>
-        /// Calculate the Geometric Mean Anomaly of the Sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the Geometric Mean Anomaly of the Sun in degrees </returns>
+        ///<summary>
+        ///  Calculate the Geometric Mean Anomaly of the Sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the Geometric Mean Anomaly of the Sun in degrees </returns>
         private static double calcGeomMeanAnomalySun(double t)
         {
             double M = 357.52911 + t*(35999.05029 - 0.0001537*t);
             return M; // in degrees
         }
 
-        ///	 <summary>
-        /// calculate the eccentricity of earth's orbit
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the unitless eccentricity </returns>
+        ///<summary>
+        ///  calculate the eccentricity of earth's orbit
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the unitless eccentricity </returns>
         private static double calcEccentricityEarthOrbit(double t)
         {
             double e = 0.016708634 - t*(0.000042037 + 0.0000001267*t);
             return e; // unitless
         }
 
-        ///	 <summary>
-        /// Calculate the equation of center for the sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the equation of center for the sun in degrees </returns>
+        ///<summary>
+        ///  Calculate the equation of center for the sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the equation of center for the sun in degrees </returns>
         private static double calcSunEqOfCenter(double t)
         {
             double m = calcGeomMeanAnomalySun(t);
@@ -208,12 +204,12 @@ namespace net.sourceforge.zmanim.util
             return C; // in degrees
         }
 
-        ///	 <summary>
-        /// Calculate the true longitude of the sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the sun's true longitude in degrees </returns>
+        ///<summary>
+        ///  Calculate the true longitude of the sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the sun's true longitude in degrees </returns>
         private static double calcSunTrueLong(double t)
         {
             double l0 = calcGeomMeanLongSun(t);
@@ -238,12 +234,12 @@ namespace net.sourceforge.zmanim.util
         //		return v; // in degrees
         //	}
 
-        ///	 <summary>
-        /// calculate the apparent longitude of the sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> sun's apparent longitude in degrees </returns>
+        ///<summary>
+        ///  calculate the apparent longitude of the sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> sun's apparent longitude in degrees </returns>
         private static double calcSunApparentLong(double t)
         {
             double o = calcSunTrueLong(t);
@@ -253,12 +249,12 @@ namespace net.sourceforge.zmanim.util
             return lambda; // in degrees
         }
 
-        ///	 <summary>
-        /// Calculate the mean obliquity of the ecliptic
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the mean obliquity in degrees </returns>
+        ///<summary>
+        ///  Calculate the mean obliquity of the ecliptic
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the mean obliquity in degrees </returns>
         private static double calcMeanObliquityOfEcliptic(double t)
         {
             double seconds = 21.448 - t*(46.8150 + t*(0.00059 - t*(0.001813)));
@@ -266,12 +262,12 @@ namespace net.sourceforge.zmanim.util
             return e0; // in degrees
         }
 
-        ///	 <summary>
-        /// calculate the corrected obliquity of the ecliptic
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> the corrected obliquity in degrees </returns>
+        ///<summary>
+        ///  calculate the corrected obliquity of the ecliptic
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> the corrected obliquity in degrees </returns>
         private static double calcObliquityCorrection(double t)
         {
             double e0 = calcMeanObliquityOfEcliptic(t);
@@ -281,11 +277,11 @@ namespace net.sourceforge.zmanim.util
             return e; // in degrees
         }
 
-        ///	 <summary>
-        /// Calculate the declination of the sun
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
+        ///<summary>
+        ///  Calculate the declination of the sun
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
         private static double calcSunDeclination(double t)
         {
             double e = calcObliquityCorrection(t);
@@ -296,12 +292,12 @@ namespace net.sourceforge.zmanim.util
             return theta; // in degrees
         }
 
-        ///	 <summary>
-        /// calculate the difference between true solar time and mean solar time
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<returns> equation of time in minutes of time </returns>
+        ///<summary>
+        ///  calculate the difference between true solar time and mean solar time
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<returns> equation of time in minutes of time </returns>
         private static double calcEquationOfTime(double t)
         {
             double epsilon = calcObliquityCorrection(t);
@@ -322,14 +318,14 @@ namespace net.sourceforge.zmanim.util
             return java.lang.Math.toDegrees(Etime)*4.0; // in minutes of time
         }
 
-        ///	 <summary>
-        /// Calculate the hour angle of the sun at sunrise for the latitude
-        ///	</summary>
-        ///	<param name="lat">,
-        ///	           the latitude of observer in degrees </param>
-        ///	<param name="solarDec">
-        ///	           the declination angle of sun in degrees </param>
-        ///	<returns> hour angle of sunrise in radians </returns>
+        ///<summary>
+        ///  Calculate the hour angle of the sun at sunrise for the latitude
+        ///</summary>
+        ///<param name = "lat">,
+        ///  the latitude of observer in degrees </param>
+        ///<param name = "solarDec">
+        ///  the declination angle of sun in degrees </param>
+        ///<returns> hour angle of sunrise in radians </returns>
         private static double calcHourAngleSunrise(double lat, double solarDec, double zenith)
         {
             double latRad = java.lang.Math.toRadians(lat);
@@ -345,15 +341,15 @@ namespace net.sourceforge.zmanim.util
             return HA; // in radians
         }
 
-        ///	 <summary>
-        /// Calculate the hour angle of the sun at sunset for the latitude
-        ///	</summary>
-        ///	<param name="lat">
-        ///	           the latitude of observer in degrees </param>
-        ///	<param name="solarDec">
-        ///	           the declination angle of sun in degrees </param>
-        ///	<returns> the hour angle of sunset in radians
-        ///	TODO: use - calcHourAngleSunrise implementation </returns>
+        ///<summary>
+        ///  Calculate the hour angle of the sun at sunset for the latitude
+        ///</summary>
+        ///<param name = "lat">
+        ///  the latitude of observer in degrees </param>
+        ///<param name = "solarDec">
+        ///  the declination angle of sun in degrees </param>
+        ///<returns> the hour angle of sunset in radians
+        ///  TODO: use - calcHourAngleSunrise implementation </returns>
         private static double calcHourAngleSunset(double lat, double solarDec, double zenith)
         {
             double latRad = java.lang.Math.toRadians(lat);
@@ -369,17 +365,17 @@ namespace net.sourceforge.zmanim.util
             return -HA; // in radians
         }
 
-        ///	 <summary>
-        /// Calculate the Universal Coordinated Time (UTC) of sunrise for the given
-        ///	day at the given location on earth
-        ///	</summary>
-        ///	<param name="JD">
-        ///	           the julian day </param>
-        ///	<param name="latitude">
-        ///	           the latitude of observer in degrees </param>
-        ///	<param name="longitude">
-        ///	           the longitude of observer in degrees </param>
-        ///	<returns> the time in minutes from zero Z </returns>
+        ///<summary>
+        ///  Calculate the Universal Coordinated Time (UTC) of sunrise for the given
+        ///  day at the given location on earth
+        ///</summary>
+        ///<param name = "JD">
+        ///  the julian day </param>
+        ///<param name = "latitude">
+        ///  the latitude of observer in degrees </param>
+        ///<param name = "longitude">
+        ///  the longitude of observer in degrees </param>
+        ///<returns> the time in minutes from zero Z </returns>
         private static double calcSunriseUTC(double JD, double latitude, double longitude, double zenith)
         {
             double t = calcTimeJulianCent(JD);
@@ -413,15 +409,15 @@ namespace net.sourceforge.zmanim.util
             return timeUTC;
         }
 
-        ///	 <summary>
-        /// calculate the Universal Coordinated Time (UTC) of solar noon for the
-        ///	given day at the given location on earth
-        ///	</summary>
-        ///	<param name="t">
-        ///	           the number of Julian centuries since J2000.0 </param>
-        ///	<param name="longitude">
-        ///	           the longitude of observer in degrees </param>
-        ///	<returns> the time in minutes from zero Z </returns>
+        ///<summary>
+        ///  calculate the Universal Coordinated Time (UTC) of solar noon for the
+        ///  given day at the given location on earth
+        ///</summary>
+        ///<param name = "t">
+        ///  the number of Julian centuries since J2000.0 </param>
+        ///<param name = "longitude">
+        ///  the longitude of observer in degrees </param>
+        ///<returns> the time in minutes from zero Z </returns>
         private static double calcSolNoonUTC(double t, double longitude)
         {
             // First pass uses approximate solar noon to calculate eqtime
@@ -435,18 +431,18 @@ namespace net.sourceforge.zmanim.util
             return 720 + (longitude*4) - eqTime; // min
         }
 
-        ///	 <summary>
-        /// calculate the Universal Coordinated Time (UTC) of sunset for the given
-        ///	day at the given location on earth
-        ///	</summary>
-        ///	<param name="JD">
-        ///	           the julian day </param>
-        ///	<param name="latitude">
-        ///	           the latitude of observer in degrees </param>
-        ///	<param name="longitude"> :
-        ///	           longitude of observer in degrees </param>
-        ///	<param name="zenith"> </param>
-        ///	<returns> the time in minutes from zero Z </returns>
+        ///<summary>
+        ///  calculate the Universal Coordinated Time (UTC) of sunset for the given
+        ///  day at the given location on earth
+        ///</summary>
+        ///<param name = "JD">
+        ///  the julian day </param>
+        ///<param name = "latitude">
+        ///  the latitude of observer in degrees </param>
+        ///<param name = "longitude"> :
+        ///  longitude of observer in degrees </param>
+        ///<param name = "zenith"> </param>
+        ///<returns> the time in minutes from zero Z </returns>
         private static double calcSunsetUTC(double JD, double latitude, double longitude, double zenith)
         {
             double t = calcTimeJulianCent(JD);
