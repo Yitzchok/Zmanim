@@ -22,6 +22,11 @@ using java.util;
 
 namespace net.sourceforge.zmanim.util
 {
+    /// <summary>
+    ///   Wrapper class for an astronomical time, mostly used to sort collections of
+    ///   astronomical times.
+    /// </summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class Zman
     {
         private long duration;

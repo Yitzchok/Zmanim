@@ -28,8 +28,8 @@ namespace net.sourceforge.zmanim.util
     ///   represent numeric time such as the time in hours, minutes, seconds and
     ///   milliseconds of a
     ///   <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
-    ///   <summary>
-    ///     <author>Eliyahu Hershfeld</author>
+    /// </summary>
+    /// <author>Eliyahu Hershfeld</author>
     public class Time
     {
         private const int SECOND_MILLIS = 1000;
