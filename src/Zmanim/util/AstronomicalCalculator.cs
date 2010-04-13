@@ -35,6 +35,12 @@ namespace net.sourceforge.zmanim.util
         // private double refraction = 34.478885263888294 / 60d;
         private double solarRadius = 16/60d;
 
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
         public object Clone()
         {
             return MemberwiseClone();

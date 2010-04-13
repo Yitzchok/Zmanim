@@ -18,8 +18,16 @@ using java.util;
 
 namespace Zmanim.Extensions
 {
+    /// <summary>
+    /// Date extensions.
+    /// </summary>
     public static class DateExtensions
     {
+        /// <summary>
+        /// Converts a Date to DateTime with milliseconds.
+        /// </summary>
+        /// <param name="javaDate">The java date.</param>
+        /// <returns></returns>
         public static DateTime ToDateTimeWithMilliseconds(this Date javaDate)
         {
             var calender = new GregorianCalendar();
@@ -36,6 +44,11 @@ namespace Zmanim.Extensions
                 );
         }
 
+        /// <summary>
+        /// Converts a Date to DateTime. (no milliseconds)
+        /// </summary>
+        /// <param name="javaDate">The java date.</param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this Date javaDate)
         {
             var calender = new GregorianCalendar();

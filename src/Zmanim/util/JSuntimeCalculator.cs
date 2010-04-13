@@ -390,7 +390,7 @@ namespace net.sourceforge.zmanim.util
         ///<summary>
         ///  Calculate the equation of centre for the Sun
         ///</summary>
-        ///<param name = "centuries">
+        ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The equation of centre for the Sun in degrees </returns>
         private static double equationOfCentreForSun(double t)

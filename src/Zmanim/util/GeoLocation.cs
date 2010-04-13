@@ -321,7 +321,7 @@ namespace net.sourceforge.zmanim.util
         ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
         ///  be called in order for the AstronomicalCalendar to output times in the
         ///  expected offset. This situation will arise if the AstronomicalCalendar is
-        ///  ever <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.clone()">cloned</see>.
+        ///  ever <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.Clone()">cloned</see>.
         ///</summary>
         ///<param name = "timeZone">
         ///  The timeZone to set. </param>
@@ -339,7 +339,7 @@ namespace net.sourceforge.zmanim.util
         ///  (with adjustment for the <a href = "http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
         ///  the sun should be directly overhead, so a user who is 1° west of this
         ///  will have noon at 4 minutes after standard time noon, and conversely, a
-        ///  user who is 1° east of the 15&deg longitude will have noon at 11:56
+        ///  user who is 1° east of the 15° longitude will have noon at 11:56
         ///  AM. The offset returned does not account for the <a href = "http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
         ///                                                     time</a> offset since this class is unaware of dates.
         ///</summary>
@@ -575,6 +575,16 @@ namespace net.sourceforge.zmanim.util
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="T:System.NullReferenceException">
+        /// The <paramref name="obj"/> parameter is null.
+        /// </exception>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -589,6 +599,12 @@ namespace net.sourceforge.zmanim.util
                    (timeZone == null ? geo.timeZone == null : timeZone.Equals(geo.timeZone));
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             int result = 17;
@@ -607,6 +623,12 @@ namespace net.sourceforge.zmanim.util
             return result;
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             var sb = new StringBuilder();

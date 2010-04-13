@@ -165,18 +165,19 @@ namespace net.sourceforge.zmanim
             setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
 
-        #region ICloneable Members
 
-        ///<summary>
-        ///  A method that creates a <a href = "http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
-        ///  of the object. <br />
-        ///  <b>Note:</b> If the <seealso cref = "java.util.TimeZone" /> in the cloned
-        ///  <see cref = "GeoLocation" /> will be changed from the
-        ///  original, it is critical that
-        ///  <see cref = "AstronomicalCalendar.getCalendar()" />.<see cref = "java.util.Calendar.setTimeZone(java.util.TimeZone)">setTimeZone(TimeZone)</see>
-        ///  be called in order for the AstronomicalCalendar to output times in the
-        ///  expected offset after being cloned.
-        ///</summary>
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// <b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in the cloned
+        /// <see cref="GeoLocation"/> will be changed from the
+        /// original, it is critical that
+        /// <see cref="AstronomicalCalendar.getCalendar()"/>.<see cref="java.util.Calendar.setTimeZone(java.util.TimeZone)">setTimeZone(TimeZone)</see>
+        /// be called in order for the AstronomicalCalendar to output times in the
+        /// expected offset after being cloned.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
         public virtual object Clone()
         {
             var clone = (AstronomicalCalendar) MemberwiseClone();
@@ -187,7 +188,6 @@ namespace net.sourceforge.zmanim
             return clone;
         }
 
-        #endregion
 
         ///<summary>
         ///  The getSunrise method Returns a <c>Date</c> representing the
@@ -703,17 +703,33 @@ namespace net.sourceforge.zmanim
             return ZmanimFormatter.toXML(this);
         }
 
-        public override bool Equals(object @object)
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="T:System.NullReferenceException">
+        /// The <paramref name="obj"/> parameter is null.
+        /// </exception>
+        public override bool Equals(object obj)
         {
-            if (this == @object)
+            if (this == obj)
                 return true;
-            if (!(@object is AstronomicalCalendar))
+            if (!(obj is AstronomicalCalendar))
                 return false;
-            var aCal = (AstronomicalCalendar) @object;
+            var aCal = (AstronomicalCalendar) obj;
             return getCalendar().Equals(aCal.getCalendar()) && getGeoLocation().Equals(aCal.getGeoLocation()) &&
                    getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             int result = 17;

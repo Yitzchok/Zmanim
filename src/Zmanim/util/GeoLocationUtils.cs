@@ -34,62 +34,65 @@ namespace net.sourceforge.zmanim.util
         private static int INITIAL_BEARING = 1;
         private static int FINAL_BEARING = 2;
 
-        ///<summary>
-        ///  Calculate the initial <a href = "http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///  between this Object and a second Object passed to this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
-        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975.
-        ///</summary>
-        ///<param name = "location">
-        ///  the destination location </param>
+        /// <summary>
+        /// Calculate the initial <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        /// between this Object and a second Object passed to this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        /// inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        /// Solutions of Geodesics on the Ellipsoid with application of nested
+        /// equations</a>", Survey Review, vol XXII no 176, 1975.
+        /// </summary>
+        /// <param name="location">the destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns></returns>
         public static double getGeodesicInitialBearing(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, INITIAL_BEARING);
         }
 
-        ///<summary>
-        ///  Calculate the final <a href = "http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
-        ///  between this Object and a second Object passed to this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
-        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975.
-        ///</summary>
-        ///<param name = "location">
-        ///  the destination location </param>
+        /// <summary>
+        /// Calculate the final <a href="http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
+        /// between this Object and a second Object passed to this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        /// inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        /// Solutions of Geodesics on the Ellipsoid with application of nested
+        /// equations</a>", Survey Review, vol XXII no 176, 1975.
+        /// </summary>
+        /// <param name="location">the destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns></returns>
         public static double getGeodesicFinalBearing(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, FINAL_BEARING);
         }
 
-        ///<summary>
-        ///  Calculate <a href = "http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
-        ///              distance</a> in Meters between this Object and a second Object passed to
-        ///  this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
-        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975.
-        ///</summary>
-        ///<param name = "location">
-        ///  the destination location </param>
+        /// <summary>
+        /// Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        /// distance</a> in Meters between this Object and a second Object passed to
+        /// this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        /// inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        /// Solutions of Geodesics on the Ellipsoid with application of nested
+        /// equations</a>", Survey Review, vol XXII no 176, 1975.
+        /// </summary>
+        /// <param name="location">the destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns></returns>
         public static double getGeodesicDistance(GeoLocation location, GeoLocation destination)
         {
             return vincentyFormula(location, destination, DISTANCE);
         }
 
-        ///<summary>
-        ///  Calculate <a href = "http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
-        ///              distance</a> in Meters between this Object and a second Object passed to
-        ///  this method using <a href = "http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
-        ///  inverse formula See T Vincenty, "<a href = "http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
-        ///                                     Solutions of Geodesics on the Ellipsoid with application of nested
-        ///                                     equations</a>", Survey Review, vol XXII no 176, 1975.
-        ///</summary>
-        ///<param name = "location">
-        ///  the destination location </param>
-        ///<param name = "formula">
-        ///  This formula calculates initial bearing (<seealso cref = "INITIAL_BEARING" />),
-        ///  final bearing (<seealso cref = "FINAL_BEARING" />) and distance (<seealso cref = "DISTANCE" />). </param>
+        /// <summary>
+        /// Calculate <a href="http://en.wikipedia.org/wiki/Great-circle_distance">geodesic
+        /// distance</a> in Meters between this Object and a second Object passed to
+        /// this method using <a href="http://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus Vincenty's</a>
+        /// inverse formula See T Vincenty, "<a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse
+        /// Solutions of Geodesics on the Ellipsoid with application of nested
+        /// equations</a>", Survey Review, vol XXII no 176, 1975.
+        /// </summary>
+        /// <param name="location">the destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <param name="formula">This formula calculates initial bearing (<seealso cref="INITIAL_BEARING"/>),
+        /// final bearing (<seealso cref="FINAL_BEARING"/>) and distance (<seealso cref="DISTANCE"/>).</param>
+        /// <returns></returns>
         private static double vincentyFormula(GeoLocation location, GeoLocation destination, int formula)
         {
             double a = 6378137;
@@ -163,13 +166,13 @@ namespace net.sourceforge.zmanim.util
             return double.NaN;
         }
 
-        ///<summary>
-        ///  Returns the <a href = "http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
-        ///  bearing from the current location to the GeoLocation passed in.
-        ///</summary>
-        ///<param name = "location">
-        ///  destination location </param>
-        ///<returns> the bearing in degrees </returns>
+        /// <summary>
+        /// Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
+        /// bearing from the current location to the GeoLocation passed in.
+        /// </summary>
+        /// <param name="location">destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns>the bearing in degrees</returns>
         public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
             double dLon = Math.toRadians(destination.getLongitude() - location.getLongitude());
@@ -181,14 +184,14 @@ namespace net.sourceforge.zmanim.util
             return Math.toDegrees(System.Math.Atan2(dLon, dPhi));
         }
 
-        ///<summary>
-        ///  Returns the <a href = "http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
-        ///  distance from the current location to the GeoLocation passed in.
-        ///  Ported from <a href = "http://www.movable-type.co.uk/">Chris Veness'</a> Javascript Implementation
-        ///</summary>
-        ///<param name = "location">
-        ///  the destination location </param>
-        ///<returns> the distance in Meters </returns>
+        /// <summary>
+        /// Returns the <a href="http://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a>
+        /// distance from the current location to the GeoLocation passed in.
+        /// Ported from <a href="http://www.movable-type.co.uk/">Chris Veness'</a> Javascript Implementation
+        /// </summary>
+        /// <param name="location">the destination location</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns>the distance in Meters</returns>
         public static double getRhumbLineDistance(GeoLocation location, GeoLocation destination)
         {
             double R = 6371; // earth's mean radius in km

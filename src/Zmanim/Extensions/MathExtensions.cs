@@ -17,6 +17,10 @@ using System;
 
 namespace Zmanim.Extensions
 {
+
+    /// <summary>
+    /// Math helpers.
+    /// </summary>
     public static class MathExtensions
     {
         /// <summary>

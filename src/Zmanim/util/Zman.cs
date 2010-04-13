@@ -23,8 +23,8 @@ using java.util;
 namespace net.sourceforge.zmanim.util
 {
     /// <summary>
-    ///   Wrapper class for an astronomical time, mostly used to sort collections of
-    ///   astronomical times.
+    /// Wrapper class for an astronomical time, mostly used to sort collections of
+    /// astronomical times.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class Zman
@@ -34,53 +34,95 @@ namespace net.sourceforge.zmanim.util
         private Date zmanDescription;
         private string zmanLabel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Zman"/> class.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="label">The label.</param>
         public Zman(Date date, string label)
         {
             zmanLabel = label;
             zman = date;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Zman"/> class.
+        /// </summary>
+        /// <param name="duration">The duration.</param>
+        /// <param name="label">The label.</param>
         public Zman(long duration, string label)
         {
             zmanLabel = label;
             this.duration = duration;
         }
 
+        /// <summary>
+        /// Gets the duration.
+        /// </summary>
+        /// <returns></returns>
         public virtual long getDuration()
         {
             return duration;
         }
 
+        /// <summary>
+        /// Gets the zman.
+        /// </summary>
+        /// <returns></returns>
         public virtual Date getZman()
         {
             return zman;
         }
 
+        /// <summary>
+        /// Gets the zman description.
+        /// </summary>
+        /// <returns></returns>
         public virtual Date getZmanDescription()
         {
             return zmanDescription;
         }
 
+        /// <summary>
+        /// Gets the zman label.
+        /// </summary>
+        /// <returns></returns>
         public virtual string getZmanLabel()
         {
             return zmanLabel;
         }
 
+        /// <summary>
+        /// Sets the duration.
+        /// </summary>
+        /// <param name="duration">The duration.</param>
         public virtual void setDuration(long duration)
         {
             this.duration = duration;
         }
 
+        /// <summary>
+        /// Sets the zman.
+        /// </summary>
+        /// <param name="date">The date.</param>
         public virtual void setZman(Date date)
         {
             zman = date;
         }
 
+        /// <summary>
+        /// Sets the zman description.
+        /// </summary>
+        /// <param name="zmanDescription">The zman description.</param>
         public virtual void setZmanDescription(Date zmanDescription)
         {
             this.zmanDescription = zmanDescription;
         }
 
+        /// <summary>
+        /// Sets the zman label.
+        /// </summary>
+        /// <param name="label">The label.</param>
         public virtual void setZmanLabel(string label)
         {
             zmanLabel = label;

@@ -6,6 +6,7 @@ bin
 *resharper*
 *.suo
 *.cache
+*.Cache
 * Thumbs.db
 
 # Other useful stuff
