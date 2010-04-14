@@ -41,12 +41,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="src\Zmanim\Zmanim.csproj">
-      <Name>Zmanim</Name>
-      <Project>{7629E910-1996-448E-B344-AA925F23EEE6}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
 </Project>
