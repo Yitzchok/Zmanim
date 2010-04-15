@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using java.util;
 using net.sourceforge.zmanim;
 using NUnit.Framework;
+using GregorianCalendar = java.util.GregorianCalendar;
 
 namespace ZmanimTests
 {

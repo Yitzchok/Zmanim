@@ -40,7 +40,7 @@ namespace Zmanim.Extensions
                                 calender.get(Calendar.MINUTE),
                                 calender.get(Calendar.SECOND),
                                 calender.get(Calendar.MILLISECOND),
-                                DateTimeKind.Utc
+                                DateTimeKind.Local
                 );
         }
 
@@ -60,7 +60,7 @@ namespace Zmanim.Extensions
                                 calender.get(Calendar.HOUR_OF_DAY),
                                 calender.get(Calendar.MINUTE),
                                 calender.get(Calendar.SECOND),
-                                DateTimeKind.Utc
+                                DateTimeKind.Local
                 );
         }
     }

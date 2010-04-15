@@ -93,6 +93,8 @@ namespace Zmanim.Cli
             p.WriteOptionDescriptions(Console.Out);
 
             Console.WriteLine("Example:");
+            Console.WriteLine("sunrise");
+            Console.WriteLine("sunrise sunset alos60");
             Console.WriteLine("--latitude=31.7780 --longitude=35.235149 --elevation=600 --timezone=Israel Sunrise");
 
             Console.Write("Press any key to exit.");
