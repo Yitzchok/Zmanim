@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Examples.Console", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Cli", "src\Zmanim.Cli\Zmanim.Cli.csproj", "{59F368C0-13A3-4687-BCE9-63DEC91A68F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Examples.QuartzScheduling", "src\Examples\Zmanim.Examples.QuartzScheduling\Zmanim.Examples.QuartzScheduling.csproj", "{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,11 +63,22 @@ Global
 		{59F368C0-13A3-4687-BCE9-63DEC91A68F9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{59F368C0-13A3-4687-BCE9-63DEC91A68F9}.Release|x86.ActiveCfg = Release|x86
 		{59F368C0-13A3-4687-BCE9-63DEC91A68F9}.Release|x86.Build.0 = Release|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Debug|x86.ActiveCfg = Debug|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Debug|x86.Build.0 = Debug|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Release|Any CPU.ActiveCfg = Release|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Release|x86.ActiveCfg = Release|x86
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EC254D65-BF82-44C6-A280-4A0F4FFF81DE} = {073DE665-8B3C-465D-90CE-C02DC8BD89FA}
+		{34E54D25-BA2A-4460-A1B9-39924F5C9AC6} = {073DE665-8B3C-465D-90CE-C02DC8BD89FA}
 	EndGlobalSection
 EndGlobal
