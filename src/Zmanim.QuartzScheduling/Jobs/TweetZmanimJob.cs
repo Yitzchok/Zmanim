@@ -11,14 +11,14 @@ namespace Zmanim.QuartzScheduling.Jobs
         public void Execute(JobExecutionContext context)
         {
             var reminderServiceJobDetail = (ReminderServiceJobDetail)context.JobDetail;
-            
+
             DateTime zmanSunset = SchedulerHelper.GetZman(DateTime.UtcNow,
                                                           reminderServiceJobDetail.ReminderService.LocationProperties,
-                                                          reminderServiceJobDetail.ReminderService.JobToRun)
+                                                          reminderServiceJobDetail.ReminderService.ZmanName)
                 .ToLocalTime();
 
             TwitterResult twitter = FluentTwitter.CreateRequest()
-                .AuthenticateAs(Settings.Default.TWITTER_USERNAME, Settings.Default.TWITTER_PASSWORD)
+                .AuthenticateAs(reminderServiceJobDetail.Account.UserName, reminderServiceJobDetail.Account.Password)
                 .Statuses().Update(
                     string.Format(
                         reminderServiceJobDetail.ReminderService.JobOptions["Message"],

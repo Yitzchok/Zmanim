@@ -17,8 +17,6 @@ namespace Zmanim.QuartzScheduling.Configuration
         public string ZmanName { get; set; }
         public double AddSeconds { get; set; }
         public bool SkipIfPassedRunBeforeZmanSeconds { get; set; }
-        public bool SkipFriday { get; set; }
-        public bool SkipShabbos { get; set; }
         public IDictionary<string, string> JobOptions { get; set; }
     }
 }
