@@ -3,7 +3,7 @@ using Quartz;
 using TweetSharp.Fluent;
 using Zmanim.Examples.QuartzScheduling.Properties;
 
-namespace Zmanim.Examples.QuartzScheduling
+namespace Zmanim.Examples.QuartzScheduling.Jobs
 {
     public class TweetZmanimJob : IJob
     {

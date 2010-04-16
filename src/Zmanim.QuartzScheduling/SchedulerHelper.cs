@@ -5,6 +5,7 @@ using net.sourceforge.zmanim.util;
 using Quartz;
 using Quartz.Impl.Calendar;
 using Zmanim.Examples.QuartzScheduling.Configuration;
+using Zmanim.Examples.QuartzScheduling.Jobs;
 using Zmanim.Extensions;
 using TimeZone = java.util.TimeZone;
 using System.Linq;
