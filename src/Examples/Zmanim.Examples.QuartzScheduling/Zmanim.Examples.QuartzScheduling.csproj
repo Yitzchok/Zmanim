@@ -74,7 +74,7 @@
     </Compile>
     <Compile Include="Scheduler.cs" />
     <Compile Include="SchedulerHelper.cs" />
-    <Compile Include="TweetZmanimJob.cs" />
+    <Compile Include="Jobs\TweetZmanimJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zmanim\Zmanim.csproj">
@@ -89,9 +89,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Jobs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
