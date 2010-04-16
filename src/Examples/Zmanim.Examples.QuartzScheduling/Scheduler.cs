@@ -1,24 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Calendar;
+using Zmanim.Examples.QuartzScheduling.Configuration;
+using System.Linq;
 
 namespace Zmanim.Examples.QuartzScheduling
 {
     public class Scheduler
     {
         readonly IScheduler scheduler;
+        private readonly ISettingProvider SettingProvider = new JsonSettingProvider();
 
         public Scheduler()
         {
-            var cal = new WeeklyCalendar();
-            cal.SetDayExcluded(DayOfWeek.Saturday, true);
+            var applicationSettings = SettingProvider.LoadApplicationSettings();
+            if (applicationSettings == null)
+            {
+                SettingProvider.Save(new ApplicationSettings());
+                Environment.Exit(1);
+            }
 
-            ISchedulerFactory schedFact = new StdSchedulerFactory();
-            scheduler = schedFact.GetScheduler();
-            scheduler.AddCalendar("Shabbos", cal, true, true);
-            SchedulerHelper.ScheduleZmanJob(scheduler);
+            scheduler = new StdSchedulerFactory().GetScheduler();
+
+            foreach (var service in applicationSettings.Services)
+            {
+                SchedulerHelper.ScheduleZmanJob(scheduler, service,
+                    applicationSettings.Accounts.Where(a => a.Id == service.AccountId).First()
+                    );
+            }
+
+            //scheduler.AddCalendar("Shabbos", SetupCalendar(DayOfWeek.Saturday), true, true);
         }
+
 
         public void Start() { scheduler.Start(); }
 

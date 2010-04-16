@@ -59,6 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ApplicationSettings.cs" />
+    <Compile Include="Configuration\Account.cs" />
+    <Compile Include="Configuration\ISettingProvider.cs" />
+    <Compile Include="Configuration\JsonSettingProvider.cs" />
+    <Compile Include="Configuration\ReminderService.cs" />
+    <Compile Include="Configuration\ZmanimLocationProperties.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -82,6 +88,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Jobs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

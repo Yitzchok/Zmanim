@@ -9,10 +9,15 @@ namespace Zmanim.Examples.QuartzScheduling
     {
         public void Execute(JobExecutionContext context)
         {
-            var simpleTrigger = ((SimpleTrigger)context.Trigger);
-            simpleTrigger.StartTimeUtc = SchedulerHelper.GetZman(DateTime.Now.AddDays(1)).AddMinutes(-30);
+            var reminderServiceJobDetail = (ReminderServiceJobDetail)context.JobDetail;
 
-            DateTime zmanSunset = SchedulerHelper.GetZman(DateTime.Now).ToLocalTime();
+            var simpleTrigger = ((SimpleTrigger)context.Trigger);
+            simpleTrigger.StartTimeUtc =
+                SchedulerHelper.GetZman(DateTime.Now.AddDays(1),
+                reminderServiceJobDetail.ReminderService.LocationProperties, reminderServiceJobDetail.ReminderService.JobToRun).AddMinutes(-30);
+
+            DateTime zmanSunset = SchedulerHelper.GetZman(DateTime.Now,
+                 reminderServiceJobDetail.ReminderService.LocationProperties, reminderServiceJobDetail.ReminderService.JobToRun).ToLocalTime();
 
             var twitter = FluentTwitter.CreateRequest()
                 .AuthenticateAs(Settings.Default.TWITTER_USERNAME, Settings.Default.TWITTER_PASSWORD)
