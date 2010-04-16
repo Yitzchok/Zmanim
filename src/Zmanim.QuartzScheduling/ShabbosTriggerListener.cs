@@ -14,11 +14,12 @@ namespace Zmanim.QuartzScheduling
         public bool VetoJobExecution(Trigger trigger, JobExecutionContext context)
         {
             var reminderServiceJobDetail = context.JobDetail as ReminderServiceJobDetail;
-            if (IsShabbos(DateTime.UtcNow, reminderServiceJobDetail.ReminderService.LocationProperties))
-            {
-                ReSchedule(context, trigger, reminderServiceJobDetail);
-                return true;
-            }
+            if (reminderServiceJobDetail != null)
+                if (IsShabbos(DateTime.UtcNow, reminderServiceJobDetail.ReminderService.LocationProperties))
+                {
+                    ReSchedule(context, trigger, reminderServiceJobDetail);
+                    return true;
+                }
 
             return false;
         }
