@@ -65,6 +65,7 @@
     <Compile Include="Configuration\JsonSettingProvider.cs" />
     <Compile Include="Configuration\ReminderService.cs" />
     <Compile Include="Configuration\ZmanimLocationProperties.cs" />
+    <Compile Include="Jobs\IZmanJob.cs" />
     <Compile Include="Jobs\TweetZmanimJob.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="Scheduler.cs" />
     <Compile Include="SchedulerHelper.cs" />
     <Compile Include="Jobs\ConsoleZmanimJob.cs" />
+    <Compile Include="ShabbosCalendar.cs" />
+    <Compile Include="ShabbosTriggerListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zmanim\Zmanim.csproj">

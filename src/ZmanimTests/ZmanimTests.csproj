@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JewishDatesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGeneration\TestFormatters\JavaTestFormatter.cs" />
     <Compile Include="TestGeneration\TestFormatters\DotNetTestFormatter.cs" />

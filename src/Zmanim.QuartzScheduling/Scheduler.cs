@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Quartz;
 using Quartz.Impl;
@@ -13,22 +14,26 @@ namespace Zmanim.QuartzScheduling
 
         public Scheduler()
         {
-            ApplicationSettings applicationSettings = SettingProvider.LoadApplicationSettings();
-            if (applicationSettings == null) {
-                SettingProvider.Save(new ApplicationSettings());
+            var applicationSettings = SettingProvider.LoadApplicationSettings();
+            if (applicationSettings == null)
+            {
+                SettingProvider.Save(new ApplicationSettings
+                {
+                    Accounts = new List<Account> { new Account() },
+                    Services = new List<ReminderService> { new ReminderService() }
+                });
+
                 Environment.Exit(1);
             }
 
             scheduler = new StdSchedulerFactory().GetScheduler();
 
-            foreach (ReminderService service in applicationSettings.Services) {
+            foreach (var service in applicationSettings.Services)
+            {
                 SchedulerHelper.ScheduleZmanJob(scheduler, service,
-                                                applicationSettings.Accounts.Where(a => a.Id == service.AccountId).First
-                                                    ()
+                              applicationSettings.Accounts.Where(a => a.Id == service.AccountId).First()
                     );
             }
-
-            //scheduler.AddCalendar("Shabbos", SetupCalendar(DayOfWeek.Saturday), true, true);
         }
 
 

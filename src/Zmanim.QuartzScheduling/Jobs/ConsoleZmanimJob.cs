@@ -3,19 +3,13 @@ using Quartz;
 
 namespace Zmanim.QuartzScheduling.Jobs
 {
-    public class ConsoleZmanimJob : IJob
+    public class ConsoleZmanimJob : IZmanJob
     {
         public void Execute(JobExecutionContext context)
         {
             var reminderServiceJobDetail = (ReminderServiceJobDetail)context.JobDetail;
 
-            var simpleTrigger = ((SimpleTrigger)context.Trigger);
-            simpleTrigger.StartTimeUtc =
-                SchedulerHelper.GetZman(DateTime.Now.AddDays(1),
-                                        reminderServiceJobDetail.ReminderService.LocationProperties,
-                                        reminderServiceJobDetail.ReminderService.ZmanName).AddMinutes(-30);
-
-            var zmanSunset = SchedulerHelper.GetZman(DateTime.Now,
+            var zmanSunset = SchedulerHelper.GetZman(DateTime.UtcNow,
                                                         reminderServiceJobDetail.ReminderService.LocationProperties,
                                                         reminderServiceJobDetail.ReminderService.ZmanName)
                                                         .ToLocalTime();
@@ -24,6 +18,11 @@ namespace Zmanim.QuartzScheduling.Jobs
                     reminderServiceJobDetail.ReminderService.JobOptions["Message"],
                     zmanSunset.ToShortTimeString())
                 );
+        }
+
+        public DateTime RunNextJobAt()
+        {
+            return DateTime.UtcNow.AddDays(1);
         }
     }
 }
