@@ -8,8 +8,6 @@ namespace Zmanim.QuartzScheduling.Jobs
 {
     public class TweetZmanimJob : IJob
     {
-        #region IJob Members
-
         public void Execute(JobExecutionContext context)
         {
             var reminderServiceJobDetail = (ReminderServiceJobDetail) context.JobDetail;
@@ -22,19 +20,17 @@ namespace Zmanim.QuartzScheduling.Jobs
 
             DateTime zmanSunset = SchedulerHelper.GetZman(DateTime.Now,
                                                           reminderServiceJobDetail.ReminderService.LocationProperties,
-                                                          reminderServiceJobDetail.ReminderService.JobToRun).ToLocalTime
-                ();
+                                                          reminderServiceJobDetail.ReminderService.JobToRun)
+                .ToLocalTime();
 
             TwitterResult twitter = FluentTwitter.CreateRequest()
                 .AuthenticateAs(Settings.Default.TWITTER_USERNAME, Settings.Default.TWITTER_PASSWORD)
                 .Statuses().Update(
                     string.Format(
-                        "The Shekiat Hachama today for Brooklyn, NY will be at: {0}. Please remember to daven Mincha. #Mincha #Jewish #Torah #Daven",
+                        reminderServiceJobDetail.ReminderService.JobOptions["Message"],
                         zmanSunset.ToShortTimeString())
                 )
                 .AsJson().Request();
         }
-
-        #endregion
     }
 }

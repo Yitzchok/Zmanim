@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
@@ -12,27 +13,14 @@ using TimeZone = java.util.TimeZone;
 
 namespace Zmanim.QuartzScheduling
 {
-    public class ReminderServiceJobDetail : JobDetail
-    {
-        public ReminderServiceJobDetail() {}
-        public ReminderServiceJobDetail(string name, Type jobType) : base(name, jobType) {}
-        public ReminderServiceJobDetail(string name, string group, Type jobType) : base(name, group, jobType) {}
-
-        public ReminderServiceJobDetail(string name, string group, Type jobType, bool isVolatile, bool isDurable,
-                                        bool requestsRecovery)
-            : base(name, group, jobType, isVolatile, isDurable, requestsRecovery) {}
-
-        public ReminderService ReminderService { get; set; }
-        public Account Account { get; set; }
-    }
-
     public class SchedulerHelper
     {
         public static void ScheduleZmanJob(IScheduler scheduler, ReminderService reminderService, Account account)
         {
-            DateTime date = GetNextZmanDateTime(reminderService.LocationProperties, reminderService.JobToRun);
+            DateTime date = GetNextZmanDateTime(reminderService.LocationProperties, reminderService.ZmanName);
 
-            var jobDetail = new ReminderServiceJobDetail(reminderService.ZmanName, null, typeof (TweetZmanimJob))
+            var jobDetail = new ReminderServiceJobDetail(reminderService.ZmanName, null,
+               GetJobType(reminderService.JobToRun))
                                 {
                                     ReminderService = reminderService,
                                     Account = account
@@ -42,12 +30,15 @@ namespace Zmanim.QuartzScheduling
             var trigger = new SimpleTrigger(reminderService.ZmanName,
                                             date.AddMinutes(reminderService.AddSeconds), null, 0, TimeSpan.Zero);
 
-            if (reminderService.SkipFriday) {
+            if (reminderService.SkipFriday)
+            {
                 if (!scheduler.GetCalendarNames().Contains("Friday"))
                     scheduler.AddCalendar("Friday", SetupCalendar(DayOfWeek.Friday), false, false);
 
                 trigger.CalendarName = "Friday";
-            } else if (reminderService.SkipShabbos) {
+            }
+            else if (reminderService.SkipShabbos)
+            {
                 if (!scheduler.GetCalendarNames().Contains("Saturday"))
                     scheduler.AddCalendar("Saturday", SetupCalendar(DayOfWeek.Saturday), false, false);
 
@@ -57,6 +48,11 @@ namespace Zmanim.QuartzScheduling
             scheduler.ScheduleJob(jobDetail, trigger);
         }
 
+        private static Type GetJobType(string jobName)
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetType("Zmanim.QuartzScheduling.Jobs" + jobName, true, true);
+        }
 
         private static WeeklyCalendar SetupCalendar(DayOfWeek dayOfWeek)
         {
