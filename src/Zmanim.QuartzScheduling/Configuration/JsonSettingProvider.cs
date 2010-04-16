@@ -2,11 +2,14 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Zmanim.Examples.QuartzScheduling.Configuration
+namespace Zmanim.QuartzScheduling.Configuration
 {
     public class JsonSettingProvider : ISettingProvider
     {
-        const string AccountSettingJson = "ApplicationSettings.json";
+        private const string AccountSettingJson = "ApplicationSettings.json";
+
+        #region ISettingProvider Members
+
         public void Save(ApplicationSettings applicationSettings)
         {
             File.WriteAllText(AccountSettingJson,
@@ -20,23 +23,23 @@ namespace Zmanim.Examples.QuartzScheduling.Configuration
             if (!File.Exists(AccountSettingJson))
                 return null;
 
-            var readAllText = File.ReadAllText(AccountSettingJson);
+            string readAllText = File.ReadAllText(AccountSettingJson);
 
             if (string.IsNullOrEmpty(readAllText))
                 return null;
 
             ApplicationSettings loadAccounts;
-            try
-            {
+            try {
                 loadAccounts = JsonConvert.DeserializeObject<ApplicationSettings>(readAllText);
             }
-            catch
-            {
+            catch {
                 return null;
             }
 
 
             return loadAccounts;
         }
+
+        #endregion
     }
 }

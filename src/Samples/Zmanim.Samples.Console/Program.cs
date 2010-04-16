@@ -1,8 +1,7 @@
-﻿using System;
-using net.sourceforge.zmanim;
+﻿using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 
-namespace Zmanim.Examples
+namespace Zmanim.Samples.Console
 {
     class Program
     {
@@ -16,14 +15,14 @@ namespace Zmanim.Examples
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar zc = new ComplexZmanimCalendar(location);
 
-            Console.WriteLine("Today's Zmanim for " + locationName);
-            Console.WriteLine("Sunrise: " + zc.getSunrise()); //output sunrise
-            Console.WriteLine("Sof Zman Shema MGA: " + zc.getSofZmanShmaMGA()); //output Sof Zman Shema MGA
-            Console.WriteLine("Sof Zman Shema GRA: " + zc.getSofZmanShmaGRA()); //output Sof Zman Shema GRA
-            Console.WriteLine("Sunset: " + zc.getSunset()); //output sunset
+            System.Console.WriteLine("Today's Zmanim for " + locationName);
+            System.Console.WriteLine("Sunrise: " + zc.getSunrise()); //output sunrise
+            System.Console.WriteLine("Sof Zman Shema MGA: " + zc.getSofZmanShmaMGA()); //output Sof Zman Shema MGA
+            System.Console.WriteLine("Sof Zman Shema GRA: " + zc.getSofZmanShmaGRA()); //output Sof Zman Shema GRA
+            System.Console.WriteLine("Sunset: " + zc.getSunset()); //output sunset
 
-            Console.WriteLine("Press enter to exit.");
-            Console.ReadLine();
+            System.Console.WriteLine("Press enter to exit.");
+            System.Console.ReadLine();
         }
     }
 }

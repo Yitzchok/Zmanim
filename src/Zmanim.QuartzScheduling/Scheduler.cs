@@ -1,33 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using Quartz;
 using Quartz.Impl;
-using Quartz.Impl.Calendar;
-using Zmanim.Examples.QuartzScheduling.Configuration;
-using System.Linq;
+using Zmanim.QuartzScheduling.Configuration;
 
-namespace Zmanim.Examples.QuartzScheduling
+namespace Zmanim.QuartzScheduling
 {
     public class Scheduler
     {
-        readonly IScheduler scheduler;
         private readonly ISettingProvider SettingProvider = new JsonSettingProvider();
+        private readonly IScheduler scheduler;
 
         public Scheduler()
         {
-            var applicationSettings = SettingProvider.LoadApplicationSettings();
-            if (applicationSettings == null)
-            {
+            ApplicationSettings applicationSettings = SettingProvider.LoadApplicationSettings();
+            if (applicationSettings == null) {
                 SettingProvider.Save(new ApplicationSettings());
                 Environment.Exit(1);
             }
 
             scheduler = new StdSchedulerFactory().GetScheduler();
 
-            foreach (var service in applicationSettings.Services)
-            {
+            foreach (ReminderService service in applicationSettings.Services) {
                 SchedulerHelper.ScheduleZmanJob(scheduler, service,
-                    applicationSettings.Accounts.Where(a => a.Id == service.AccountId).First()
+                                                applicationSettings.Accounts.Where(a => a.Id == service.AccountId).First
+                                                    ()
                     );
             }
 
@@ -35,11 +32,19 @@ namespace Zmanim.Examples.QuartzScheduling
         }
 
 
-        public void Start() { scheduler.Start(); }
+        public void Start()
+        {
+            scheduler.Start();
+        }
 
-        public void Pause() { scheduler.Standby(); }
+        public void Pause()
+        {
+            scheduler.Standby();
+        }
 
-        public void Stop() { scheduler.Shutdown(); }
-
+        public void Stop()
+        {
+            scheduler.Shutdown();
+        }
     }
 }

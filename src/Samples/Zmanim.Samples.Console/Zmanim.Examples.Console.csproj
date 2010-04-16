@@ -8,8 +8,8 @@
     <ProjectGuid>{EC254D65-BF82-44C6-A280-4A0F4FFF81DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zmanim.Examples</RootNamespace>
-    <AssemblyName>Zmanim.Examples.Console</AssemblyName>
+    <RootNamespace>Zmanim.Samples.Console</RootNamespace>
+    <AssemblyName>Zmanim.Samples.Console</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

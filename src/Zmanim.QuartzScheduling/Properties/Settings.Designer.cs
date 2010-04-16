@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zmanim.Examples.QuartzScheduling.Properties {
+namespace Zmanim.QuartzScheduling.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,7 +25,7 @@ namespace Zmanim.Examples.QuartzScheduling.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MinchaReminder")]
+        [global::System.Configuration.DefaultSettingValueAttribute("USERNAME")]
         public string TWITTER_USERNAME {
             get {
                 return ((string)(this["TWITTER_USERNAME"]));
@@ -37,7 +37,7 @@ namespace Zmanim.Examples.QuartzScheduling.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("PASSWORD")]
         public string TWITTER_PASSWORD {
             get {
                 return ((string)(this["TWITTER_PASSWORD"]));

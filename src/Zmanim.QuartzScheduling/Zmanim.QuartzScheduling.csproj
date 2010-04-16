@@ -8,8 +8,8 @@
     <ProjectGuid>{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zmanim.Examples.QuartzScheduling</RootNamespace>
-    <AssemblyName>Zmanim.Examples.QuartzScheduling</AssemblyName>
+    <RootNamespace>Zmanim.QuartzScheduling</RootNamespace>
+    <AssemblyName>Zmanim.QuartzScheduling</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,16 +34,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\..\..\lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
+      <HintPath>..\..\lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="Magnum">
-      <HintPath>..\..\..\lib\Magnum.dll</HintPath>
+      <HintPath>..\..\lib\Magnum.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Quartz">
-      <HintPath>..\..\..\lib\Quartz.dll</HintPath>
+      <HintPath>..\..\lib\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,10 +52,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Topshelf">
-      <HintPath>..\..\..\lib\Topshelf.dll</HintPath>
+      <HintPath>..\..\lib\Topshelf.dll</HintPath>
     </Reference>
     <Reference Include="TweetSharp">
-      <HintPath>..\..\..\lib\TweetSharp.dll</HintPath>
+      <HintPath>..\..\lib\TweetSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-namespace Zmanim.Examples.QuartzScheduling.Configuration
+namespace Zmanim.QuartzScheduling.Configuration
 {
     public interface ISettingProvider
     {

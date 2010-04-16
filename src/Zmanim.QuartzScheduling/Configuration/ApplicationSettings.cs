@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Zmanim.Examples.QuartzScheduling.Configuration
+namespace Zmanim.QuartzScheduling.Configuration
 {
     public class ApplicationSettings
     {

@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using Topshelf;
+﻿using Topshelf;
 using Topshelf.Configuration.Dsl;
 
-namespace Zmanim.Examples.QuartzScheduling
+namespace Zmanim.QuartzScheduling
 {
     class Program
     {

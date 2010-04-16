@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="TWITTER_USERNAME" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MinchaReminder</Value>
+      <Value Profile="(Default)">USERNAME</Value>
     </Setting>
     <Setting Name="TWITTER_PASSWORD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">PASSWORD</Value>
     </Setting>
   </Settings>
 </SettingsFile>
