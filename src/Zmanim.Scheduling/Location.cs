@@ -1,6 +1,6 @@
-﻿namespace Zmanim.QuartzScheduling.Configuration
+﻿namespace Zmanim.Scheduling
 {
-    public class ZmanimLocationProperties
+    public class Location
     {
         public string LocationName { get; set; }
         public double Latitude { get; set; }

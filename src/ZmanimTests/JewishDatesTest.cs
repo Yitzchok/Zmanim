@@ -1,7 +1,12 @@
 using System;
 using System.Globalization;
+using System.Linq.Expressions;
+using java.util;
+using net.sourceforge.zmanim;
+using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using GregorianCalendar = System.Globalization.GregorianCalendar;
 
 namespace ZmanimTests
 {

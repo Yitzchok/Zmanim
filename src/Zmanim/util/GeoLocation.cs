@@ -34,7 +34,8 @@ namespace net.sourceforge.zmanim.util
     ///   elevation is calculated as part o the algorithm.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
-    public class GeoLocation : ICloneable
+    public class 
+        GeoLocation : ICloneable
     {
         /// <summary>
         ///   constant for milliseconds in a minute (60,000)
@@ -56,6 +57,24 @@ namespace net.sourceforge.zmanim.util
         private double longitude;
         private TimeZone timeZone;
 
+        ///<summary>
+        ///  GeoLocation constructor with parameters for all required fields.
+        ///</summary>
+        ///<param name = "latitude">
+        ///  the latitude in a double format such as 40.095965 for
+        ///  Lakewood, NJ <br /> <b>Note: </b> For latitudes south of the
+        ///  equator, a negative value should be used. </param>
+        ///<param name = "longitude">
+        ///  double the longitude in a double format such as -74.222130 for
+        ///  Lakewood, NJ. <br /> <b>Note: </b> For longitudes east of the
+        ///  <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
+        ///    Meridian </a> (Greenwich), a negative value should be used. </param>
+        ///<param name = "timeZone">
+        ///  the <c>TimeZone</c> for the location. </param>
+        public GeoLocation(double latitude, double longitude, TimeZone timeZone)
+            : this(string.Empty, latitude, longitude, 0, timeZone)
+        {
+        }
 
         ///<summary>
         ///  GeoLocation constructor with parameters for all required fields.

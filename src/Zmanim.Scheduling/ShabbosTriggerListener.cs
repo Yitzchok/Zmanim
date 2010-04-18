@@ -1,10 +1,7 @@
 ﻿using System;
 using Quartz;
-using Zmanim.Extensions;
-using Zmanim.QuartzScheduling.Configuration;
-using Zmanim.QuartzScheduling.Jobs;
 
-namespace Zmanim.QuartzScheduling
+namespace Zmanim.Scheduling
 {
     public class ShabbosTriggerListener : ITriggerListener
     {
@@ -13,6 +10,7 @@ namespace Zmanim.QuartzScheduling
 
         public bool VetoJobExecution(Trigger trigger, JobExecutionContext context)
         {
+
             var reminderServiceJobDetail = context.JobDetail as ReminderServiceJobDetail;
             if (reminderServiceJobDetail != null)
                 if (IsShabbos(DateTime.UtcNow, reminderServiceJobDetail.ReminderService.LocationProperties))
@@ -24,17 +22,9 @@ namespace Zmanim.QuartzScheduling
             return false;
         }
 
-        private bool IsShabbos(DateTime timeUtc, ZmanimLocationProperties locationProperties)
+        private bool IsShabbos(DateTime timeUtc, Location location)
         {
-            var calendar = SchedulerHelper.GetComplexZmanimCalendar(locationProperties, timeUtc);
-            bool isShabbos = false;
-
-            if (timeUtc.DayOfWeek == DayOfWeek.Friday)
-                isShabbos = timeUtc > calendar.getCandelLighting().ToDateTime().ToUniversalTime();
-            if (timeUtc.DayOfWeek == DayOfWeek.Saturday)
-                isShabbos = timeUtc <= calendar.getTzais().ToDateTime().ToUniversalTime();
-
-            return isShabbos;
+            return timeUtc.IsShabbos(location);
         }
 
         public void TriggerComplete(Trigger trigger, JobExecutionContext context, SchedulerInstruction triggerInstructionCode)

@@ -9,6 +9,7 @@ using Quartz;
 using Quartz.Impl.Calendar;
 using Zmanim.Extensions;
 using Zmanim.QuartzScheduling.Configuration;
+using Zmanim.Scheduling;
 using TimeZone = java.util.TimeZone;
 
 namespace Zmanim.QuartzScheduling
@@ -31,16 +32,14 @@ namespace Zmanim.QuartzScheduling
         public static void ScheduleZmanJob(string name, DateTime dateToStart, IScheduler scheduler, ReminderService reminderService, Account account)
         {
             DateTime date = GetNextZmanDateTime(dateToStart,
-                reminderService.LocationProperties,
+                reminderService.Location,
                 reminderService.ZmanName,
                 reminderService.SkipIfPassedRunBeforeZmanSeconds ? reminderService.AddSeconds : 0);
 
-            var jobDetail = new ReminderServiceJobDetail(name, null,
-               GetJobType(reminderService.JobToRun))
-                                {
-                                    ReminderService = reminderService,
-                                    Account = account
-                                };
+            var jobDetail = new JobDetail(name, null,
+                GetJobType(reminderService.JobToRun));
+            jobDetail.JobDataMap["ReminderService"] = reminderService;
+            jobDetail.JobDataMap["Account"] = account;
 
             var trigger = new SimpleTrigger(name, date.AddSeconds(reminderService.AddSeconds), date, 0, TimeSpan.Zero);
             scheduler.AddGlobalTriggerListener(new ShabbosTriggerListener());
@@ -62,25 +61,25 @@ namespace Zmanim.QuartzScheduling
         }
 
         public static DateTime GetNextZmanDateTime(DateTime dateToStart,
-            ZmanimLocationProperties locationProperties, string methodName, double addSeconds)
+            Location location, string methodName, double addSeconds)
         {
-            DateTime date = GetZman(dateToStart, locationProperties, methodName);
+            DateTime date = GetZman(dateToStart, location, methodName);
 
             if (date.AddSeconds(addSeconds) < DateTime.UtcNow)
-                date = GetZman(dateToStart.AddDays(1), locationProperties, methodName);
+                date = GetZman(dateToStart.AddDays(1), location, methodName);
 
             return date;
         }
 
         public static DateTime GetZman(
-            DateTime date, ZmanimLocationProperties locationProperties, string methodName)
+            DateTime date, Location location, string methodName)
         {
-            ComplexZmanimCalendar czc = GetComplexZmanimCalendar(locationProperties, date);
+            ComplexZmanimCalendar czc = GetComplexZmanimCalendar(location, date);
 
             return GetZmanMethodFormName(methodName, czc).ToUniversalTime();
         }
 
-        public static ComplexZmanimCalendar GetComplexZmanimCalendar(ZmanimLocationProperties locationProperties, DateTime date)
+        public static ComplexZmanimCalendar GetComplexZmanimCalendar(Location location, DateTime date)
         {
             TimeZone timeZone = TimeZone.getTimeZone(locationProperties.TimeZone);
             var location = new GeoLocation(locationProperties.LocationName,

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{34E54D25-BA2A-4460-A1B9-39924F5C9AC6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C3866745-0DAC-4B06-8B30-D56CD7471A0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zmanim.QuartzScheduling</RootNamespace>
-    <AssemblyName>Zmanim.QuartzScheduling</AssemblyName>
+    <RootNamespace>Zmanim.Scheduling</RootNamespace>
+    <AssemblyName>Zmanim.Scheduling</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,15 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="IKVM.OpenJDK.Core">
       <HintPath>..\..\lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Magnum">
-      <HintPath>..\..\lib\Magnum.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Quartz">
       <HintPath>..\..\lib\Quartz.dll</HintPath>
@@ -51,49 +48,22 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\..\lib\Topshelf.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp">
-      <HintPath>..\..\lib\TweetSharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ApplicationSettings.cs" />
-    <Compile Include="Configuration\Account.cs" />
-    <Compile Include="Configuration\ISettingProvider.cs" />
-    <Compile Include="Configuration\JsonSettingProvider.cs" />
-    <Compile Include="Configuration\ReminderService.cs" />
-    <Compile Include="Jobs\TweetZmanimJob.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="INextRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Scheduler.cs" />
-    <Compile Include="SchedulerHelper.cs" />
-    <Compile Include="Jobs\ConsoleZmanimJob.cs" />
+    <Compile Include="ShabbosCalendar.cs" />
+    <Compile Include="ShabbosTriggerListener.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="ZmanimHelper.cs" />
+    <Compile Include="ZmanimTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zmanim.Scheduling\Zmanim.Scheduling.csproj">
-      <Project>{C3866745-0DAC-4B06-8B30-D56CD7471A0B}</Project>
-      <Name>Zmanim.Scheduling</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zmanim\Zmanim.csproj">
       <Project>{7629E910-1996-448E-B344-AA925F23EEE6}</Project>
       <Name>Zmanim</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

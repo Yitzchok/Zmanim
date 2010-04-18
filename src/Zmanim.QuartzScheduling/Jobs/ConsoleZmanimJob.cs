@@ -1,21 +1,23 @@
 ﻿using System;
 using Quartz;
+using Zmanim.QuartzScheduling.Configuration;
+using Zmanim.Scheduling;
 
 namespace Zmanim.QuartzScheduling.Jobs
 {
-    public class ConsoleZmanimJob : IZmanJob
+    public class ConsoleZmanimJob : INextRun, IJob
     {
         public void Execute(JobExecutionContext context)
         {
-            var reminderServiceJobDetail = (ReminderServiceJobDetail)context.JobDetail;
+            var reminderService = context.MergedJobDataMap["ReminderService"] as ReminderService;
 
             var zmanSunset = SchedulerHelper.GetZman(DateTime.UtcNow,
-                                                        reminderServiceJobDetail.ReminderService.LocationProperties,
-                                                        reminderServiceJobDetail.ReminderService.ZmanName)
+                                                        reminderService.Location,
+                                                        reminderService.ZmanName)
                                                         .ToLocalTime();
 
             Console.WriteLine(string.Format(
-                    reminderServiceJobDetail.ReminderService.JobOptions["Message"],
+                    reminderService.JobOptions["Message"],
                     zmanSunset.ToShortTimeString())
                 );
         }
