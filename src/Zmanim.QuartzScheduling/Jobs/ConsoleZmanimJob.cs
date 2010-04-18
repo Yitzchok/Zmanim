@@ -9,8 +9,8 @@ namespace Zmanim.QuartzScheduling.Jobs
     {
         public void Execute(JobExecutionContext context)
         {
-            var reminderService = context.MergedJobDataMap["ReminderService"] as ReminderService;
-
+            var reminderService = context.Get("ReminderService") as ReminderService;
+            
             var zmanSunset = SchedulerHelper.GetZman(DateTime.UtcNow,
                                                         reminderService.Location,
                                                         reminderService.ZmanName)

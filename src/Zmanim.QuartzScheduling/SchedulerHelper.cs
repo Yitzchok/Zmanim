@@ -40,6 +40,7 @@ namespace Zmanim.QuartzScheduling
                 GetJobType(reminderService.JobToRun));
             jobDetail.JobDataMap["ReminderService"] = reminderService;
             jobDetail.JobDataMap["Account"] = account;
+            jobDetail.JobDataMap["Location"] = reminderService.Location;
 
             var trigger = new SimpleTrigger(name, date.AddSeconds(reminderService.AddSeconds), date, 0, TimeSpan.Zero);
             scheduler.AddGlobalTriggerListener(new ShabbosTriggerListener());
@@ -81,12 +82,12 @@ namespace Zmanim.QuartzScheduling
 
         public static ComplexZmanimCalendar GetComplexZmanimCalendar(Location location, DateTime date)
         {
-            TimeZone timeZone = TimeZone.getTimeZone(locationProperties.TimeZone);
-            var location = new GeoLocation(locationProperties.LocationName,
-                                           locationProperties.Latitude, locationProperties.Longitude,
-                                           locationProperties.Elevation, timeZone);
+            TimeZone timeZone = TimeZone.getTimeZone(location.TimeZone);
+            var geoLocation = new GeoLocation(location.LocationName,
+                                           location.Latitude, location.Longitude,
+                                           location.Elevation, timeZone);
 
-            var czc = new ComplexZmanimCalendar(location);
+            var czc = new ComplexZmanimCalendar(geoLocation);
 
             czc.setCalendar(new GregorianCalendar(date.Year, date.Month - 1, date.Day));
             return czc;
