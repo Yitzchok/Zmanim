@@ -1,0 +1,6 @@
+The Zmanim Project is making use of the following Open Source projects:
+
+* Port from Zmanim Java API (http://www.kosherjava.com/zmanim-project/)
+* IKVM.NET is an implementation of Java for Mono and the Microsoft .NET Framework. (http://www.ikvm.net/)
+* Newtonsoft.Json from James Newton-King (http://james.newtonking.com/pages/json-net.aspx)
+* Quartz.NET is a full-featured, open source job scheduling system that can be used from smallest apps to large scale enterprise systems. (http://quartznet.sourceforge.net/)

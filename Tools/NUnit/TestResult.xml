@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Projects\Zmanim\build\ZmanimTests.dll" total="137" errors="0" failures="1" not-run="4" inconclusive="0" ignored="4" skipped="0" invalid="0" date="2010-04-18" time="23:26:54">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Projects\Zmanim\Tools\NUnit" machine-name="ADMINJEW-PC" user="Adminjew" user-domain="Adminjew-PC" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite name="D:\Projects\Zmanim\build\ZmanimTests.dll" executed="True" success="False" time="3.342" asserts="0">
+    <results>
+      <test-suite name="ZmanimTests" executed="True" success="False" time="3.319" asserts="0">
+        <results>
+          <test-suite name="JewishDatesTest" executed="True" success="True" time="0.124" asserts="0">
+            <results>
+              <test-case name="ZmanimTests.JewishDatesTest.Can_convert_Gregorian_date_to_Jewish_Date" executed="True" success="True" time="0.082" asserts="3" />
+              <test-case name="ZmanimTests.JewishDatesTest.Jewish_leap_year_test" executed="True" success="True" time="0.001" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite name="ZmanimTest" executed="True" success="True" time="3.079" asserts="0">
+            <results>
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos120" executed="True" success="True" time="2.663" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos120Zmanis" executed="True" success="True" time="0.008" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos16Point1Degrees" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos18Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos19Point8Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos26Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos60" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos72" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos72Zmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos90" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos90Zmanis" executed="True" success="True" time="0.016" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos96" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlos96Zmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getAlosHashachar" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBainHasmashosRT13Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBainHasmashosRT13Point5MinutesBefore7Point083Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBainHasmashosRT2Stars" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBainHasmashosRT58Point5Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBeginAstronomicalTwilight" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBeginCivilTwilight" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getBeginNauticalTwilight" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getCandelLighting" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getChatzos" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getEndAstronomicalTwilight" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getEndCivilTwilight" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getEndNauticalTwilight" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getFixedLocalChatzos" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedola" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedola16Point1Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedola30Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedola72Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedolaAteretTorah" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaGedolaGreaterThan30" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaKetana" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaKetana16Point1Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaKetana72Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMinchaKetanaAteretTorah" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMisheyakir10Point2Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMisheyakir11Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getMisheyakir11Point5Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagAlos16Point1ToTzaisGeonim7Point083Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagAlosToSunset" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha120Minutes" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha120MinutesZmanis" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha16Point1Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha18Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha19Point8Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha26Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha60Minutes" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha72Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha72MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha90Minutes" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha90MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha96Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHamincha96MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getPlagHaminchaAteretTorah" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSeaLevelSunrise" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSeaLevelSunset" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis120Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis120MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis16Point1Degrees" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis18Degrees" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis19Point8Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis26Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis60Minutes" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis72Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis72MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis90Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis90MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis96Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanis96MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanisAteretTorah" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanisGra" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getShaahZmanisMGA" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShma3HoursBeforeChatzos" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaAlos16Point1ToSunset" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaAteretTorah" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaFixedLocal" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaGRA" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaKolEliyahu" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA120Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA16Point1Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA19Point8Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA72Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA72MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA90Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA90MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA96Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanShmaMGA96MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfila2HoursBeforeChatzos" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaFixedLocal" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaGRA" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilahAteretTorah" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA120Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA16Point1Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA19Point8Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA72Minutes" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA72MinutesZmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA90Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA90MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA96Minutes" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSofZmanTfilaMGA96MinutesZmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSolarMidnight" executed="True" success="True" time="0.018" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSunrise" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSunset" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getSunTransit" executed="True" success="True" time="0.015" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTemporalHour" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais120" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais120Zmanis" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais16Point1Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais18Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais19Point8Degrees" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais26Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais60" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais72" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais72Zmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais90" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais90Zmanis" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais96" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzais96Zmanis" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisAteretTorah" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim3Point65Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim4Point37Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim4Point61Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim4Point8Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim5Point88Degrees" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim5Point95Degrees" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim7Point083Degrees" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="ZmanimTests.ZmanimTest.Check_getTzaisGeonim8Point5Degrees" executed="True" success="True" time="0.001" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="ZmanMethodGenerator" executed="True" success="False" time="0.001" asserts="0">
+            <results>
+              <test-case name="ZmanimTests.ZmanMethodGenerator.GenerateTestsFixtures" executed="False">
+                <reason>
+                  <message><![CDATA[]]></message>
+                </reason>
+              </test-case>
+            </results>
+          </test-suite>
+          <test-suite name="ZmanMiscTests" executed="True" success="False" time="0.049" asserts="0">
+            <results>
+              <test-case name="ZmanimTests.ZmanMiscTests.GenerateTestsFixtures" executed="False">
+                <reason>
+                  <message><![CDATA[]]></message>
+                </reason>
+              </test-case>
+              <test-case name="ZmanimTests.ZmanMiscTests.ShaosZmainot" executed="True" success="False" time="0.036" asserts="4">
+                <failure>
+                  <message><![CDATA[  Expected: 21
+  But was:  0
+]]></message>
+                  <stack-trace><![CDATA[at ZmanimTests.ZmanMiscTests.ShaosZmainot() in d:\Projects\Zmanim\src\ZmanimTests\ZmanMiscTests.cs:line 35
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="ZmanimTests.ZmanMiscTests.TestsMethodsToCsv" executed="False">
+                <reason>
+                  <message><![CDATA[]]></message>
+                </reason>
+              </test-case>
+              <test-case name="ZmanimTests.ZmanMiscTests.ZmanimCalendarToXml" executed="False">
+                <reason>
+                  <message><![CDATA[]]></message>
+                </reason>
+              </test-case>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

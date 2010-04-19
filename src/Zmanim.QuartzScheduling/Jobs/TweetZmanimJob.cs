@@ -3,7 +3,6 @@ using Quartz;
 using TweetSharp.Fluent;
 using TweetSharp.Model;
 using Zmanim.QuartzScheduling.Configuration;
-using Zmanim.QuartzScheduling.Properties;
 using Zmanim.Scheduling;
 
 namespace Zmanim.QuartzScheduling.Jobs
