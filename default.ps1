@@ -41,6 +41,24 @@ task Init -depends Clean {
 		-version $version `
 		-copyright "Copyright © Adminjew 2010"
 			
+	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.Scheduling\Properties\AssemblyInfo.cs" `
+		-title "Zmanim Scheduling $version" `
+		-description "Zmanim Scheduling Library" `
+		-company "" `
+		-product "Zmanim Scheduling $version" `
+		-version $version `
+		-copyright "Copyright © Adminjew 2010"
+		
+	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.QuartzScheduling\Properties\AssemblyInfo.cs" `
+		-title "Zmanim Quartz Scheduling $version" `
+		-description "Zmanim Quartz Scheduling Library" `
+		-company "" `
+		-product "Zmanim Quartz Scheduling $version" `
+		-version $version `
+		-copyright "Copyright © Adminjew 2010"
+
 	new-item $release_dir -itemType directory 
 	new-item $buildartifacts_dir -itemType directory 
 #	cp $tools_dir\NUnit\*.* $build_dir
