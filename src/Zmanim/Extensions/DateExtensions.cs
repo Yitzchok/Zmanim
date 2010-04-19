@@ -23,6 +23,16 @@ namespace Zmanim.Extensions
     /// </summary>
     public static class DateExtensions
     {
+        public static DateTime ToDateTime(this long fromEpoch)
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(fromEpoch);
+        }
+
+        public static long ToMillisecondsFromEpoch(this DateTime dateTime)
+        {
+            return (long) (new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) - dateTime).TotalMilliseconds;
+        }
+
         /// <summary>
         /// Converts a Date to DateTime with milliseconds.
         /// </summary>

@@ -18,6 +18,7 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+using System;
 using java.util;
 using net.sourceforge.zmanim.util;
 
@@ -111,7 +112,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<returns> The <c>Date</c> of nightfall. </returns>
         ///<seealso cref = "ZENITH_8_POINT_5" />
-        public virtual Date getTzais()
+        public virtual DateTime getTzais()
         {
             return getSunsetOffsetByDegrees(ZENITH_8_POINT_5);
         }
@@ -124,7 +125,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "net.sourceforge.zmanim.ZmanimCalendar.ZENITH_16_POINT_1" />
         ///<returns> The <c>Date</c> of dawn. </returns>
-        public virtual Date getAlosHashachar()
+        public virtual DateTime getAlosHashachar()
         {
             return getSunriseOffsetByDegrees(ZENITH_16_POINT_1);
         }
@@ -140,7 +141,7 @@ namespace net.sourceforge.zmanim
         ///  <em>Mil</em>.
         ///</summary>
         ///<returns> the <c>Date</c> representing the time. </returns>
-        public virtual Date getAlos72()
+        public virtual DateTime getAlos72()
         {
             return getTimeOffset(getSeaLevelSunrise(), -72*MINUTE_MILLIS);
         }
@@ -153,7 +154,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar.getSunTransit()" />
         ///<returns> the <c>Date</c> of chatzos. </returns>
-        public virtual Date getChatzos()
+        public virtual DateTime getChatzos()
         {
             return getSunTransit();
         }
@@ -165,12 +166,12 @@ namespace net.sourceforge.zmanim
         ///  <b>Note:</b> this method is experimental and might be removed (or moved)
         ///</summary>
         ///<returns> the <c>Date</c> of Solar Midnight (chatzos layla). </returns>
-        public virtual Date getSolarMidnight()
+        public virtual DateTime getSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar) Clone();
             clonedCal.getCalendar().add(Calendar.DAY_OF_MONTH, 1);
-            Date sunset = getSunset();
-            Date sunrise = clonedCal.getSunrise();
+            DateTime sunset = getSunset();
+            DateTime sunrise = clonedCal.getSunrise();
             return getTimeOffset(sunset, getTemporalHour(sunset, sunrise)*6);
         }
 
@@ -193,7 +194,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "net.sourceforge.zmanim.ZmanimCalendar.getShaahZmanisGra()" />
         ///<returns> the <c>Date</c> of the latest zman shema. </returns>
-        public virtual Date getSofZmanShmaGRA()
+        public virtual DateTime getSofZmanShmaGRA()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*3);
         }
@@ -211,7 +212,7 @@ namespace net.sourceforge.zmanim
         ///<seealso cref = "ComplexZmanimCalendar.getShaahZmanis72Minutes()" />
         ///<seealso cref = "getAlos72()" />
         ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaMGA72Minutes()" />
-        public virtual Date getSofZmanShmaMGA()
+        public virtual DateTime getSofZmanShmaMGA()
         {
             return getTimeOffset(getAlos72(), getShaahZmanisMGA()*3);
         }
@@ -226,7 +227,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<returns> the <c>Date</c> representing 72 minutes after sea level
         ///  sunset. </returns>
-        public virtual Date getTzais72()
+        public virtual DateTime getTzais72()
         {
             return getTimeOffset(getSeaLevelSunset(), 72*MINUTE_MILLIS);
         }
@@ -240,7 +241,7 @@ namespace net.sourceforge.zmanim
         ///<returns> candle lighting time. </returns>
         ///<seealso cref = "getCandleLightingOffset()" />
         ///<seealso cref = "setCandleLightingOffset(double)" />
-        public virtual Date getCandelLighting()
+        public virtual DateTime getCandelLighting()
         {
             return getTimeOffset(getSunset(), -getCandleLightingOffset()*MINUTE_MILLIS);
         }
@@ -255,7 +256,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
         ///<returns> the <c>Date</c> of the latest zman tefilah. </returns>
-        public virtual Date getSofZmanTfilaGRA()
+        public virtual DateTime getSofZmanTfilaGRA()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*4);
         }
@@ -275,7 +276,7 @@ namespace net.sourceforge.zmanim
         ///<returns> the <c>Date</c> of the latest zman tfila. </returns>
         ///<seealso cref = "getShaahZmanisMGA()" />
         ///<seealso cref = "getAlos72()" />
-        public virtual Date getSofZmanTfilaMGA()
+        public virtual DateTime getSofZmanTfilaMGA()
         {
             return getTimeOffset(getAlos72(), getShaahZmanisMGA()*4);
         }
@@ -298,7 +299,7 @@ namespace net.sourceforge.zmanim
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaKetana()" />
         ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
-        public virtual Date getMinchaGedola()
+        public virtual DateTime getMinchaGedola()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*6.5);
         }
@@ -318,7 +319,7 @@ namespace net.sourceforge.zmanim
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaGedola()" />
         ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
-        public virtual Date getMinchaKetana()
+        public virtual DateTime getMinchaKetana()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*9.5);
         }
@@ -331,7 +332,7 @@ namespace net.sourceforge.zmanim
         ///  <see cref = "getShaahZmanisGra()" /> after <see cref = "AstronomicalCalendar.getSeaLevelSunrise()">sea level sunrise</see>.
         ///</summary>
         ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual Date getPlagHamincha()
+        public virtual DateTime getPlagHamincha()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra()*10.75);
         }
@@ -397,7 +398,7 @@ namespace net.sourceforge.zmanim
                 return false;
             }
             var zCal = (ZmanimCalendar) obj;
-            // return getCalendar().getTime().equals(zCal.getCalendar().getTime())
+            // return getCalendar().ToMillisecondsFromEpoch().equals(zCal.getCalendar().ToMillisecondsFromEpoch())
             return getCalendar().Equals(zCal.getCalendar()) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
                    getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
         }
