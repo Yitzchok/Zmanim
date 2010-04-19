@@ -81,6 +81,7 @@ task Release -depends Test {
 	$build_dir\Zmanim.dll `
 	$build_dir\Zmanim.xml `
 	$build_dir\IKVM.*.dll `
+	$base_dir\docs\Documentation.chm `
 	lgpl.txt `
 	acknowledgements.txt
 	

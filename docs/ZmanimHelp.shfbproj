@@ -19,8 +19,9 @@
     <PresentationStyle>Prototype</PresentationStyle>
     <HelpTitle>Zmanim .NET API</HelpTitle>
     <DocumentationSources>
-      <DocumentationSource sourceFile="src\Zmanim\Zmanim.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\src\Zmanim\Zmanim.csproj" />
     </DocumentationSources>
+    <CopyrightHref>http://www.kosherjava.com/zmanim-project/</CopyrightHref>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional

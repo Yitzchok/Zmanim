@@ -29,7 +29,7 @@ namespace Zmanim.Scheduling
 
         public static DateTime GetZman(this Location location, DateTime date, Func<ComplexZmanimCalendar, DateTime> zman)
         {
-            return zman.Invoke(GetCalendar(location, date)).ToDateTime().ToUniversalTime();
+            return zman.Invoke(GetCalendar(location, date)).ToUniversalTime();
         }
 
         public static ComplexZmanimCalendar GetCalendar(this Location location, DateTime date)
