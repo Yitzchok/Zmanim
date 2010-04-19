@@ -24,8 +24,10 @@ httpd.parse.errors
 ~$* 
 
 # If you have a deploy folder
-deploy
-deploy/*
+Release
+Release/*
+build
+build/*
 
 SVN
 .svn
