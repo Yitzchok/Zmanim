@@ -64,6 +64,8 @@
     <Compile Include="Configuration\ISettingProvider.cs" />
     <Compile Include="Configuration\JsonSettingProvider.cs" />
     <Compile Include="Configuration\ReminderService.cs" />
+    <Compile Include="JobScheduler\IJobScheduler.cs" />
+    <Compile Include="JobScheduler\ZmanimJobScheduler.cs" />
     <Compile Include="Jobs\TweetZmanimJob.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

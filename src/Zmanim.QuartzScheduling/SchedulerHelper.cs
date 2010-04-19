@@ -16,13 +16,6 @@ namespace Zmanim.QuartzScheduling
 {
     public class SchedulerHelper
     {
-        public static void ReScheduleZmanJob(string lastTriggerName, DateTime date, IScheduler scheduler, ReminderService reminderService, Account account)
-        {
-            if (lastTriggerName.EndsWith("__1"))
-                ScheduleZmanJob(reminderService.Name, date, scheduler, reminderService, account);
-            else
-                ScheduleZmanJob(reminderService.Name + "__1", date, scheduler, reminderService, account);
-        }
 
         public static void ScheduleZmanJob(IScheduler scheduler, ReminderService reminderService, Account account)
         {
@@ -43,12 +36,11 @@ namespace Zmanim.QuartzScheduling
             jobDetail.JobDataMap["Location"] = reminderService.Location;
 
             var trigger = new SimpleTrigger(name, date.AddSeconds(reminderService.AddSeconds), date, 0, TimeSpan.Zero);
-            scheduler.AddGlobalTriggerListener(new ShabbosTriggerListener());
 
             scheduler.ScheduleJob(jobDetail, trigger);
         }
 
-        private static Type GetJobType(string jobName)
+        public static Type GetJobType(string jobName)
         {
             return Assembly.GetExecutingAssembly()
                 .GetType("Zmanim.QuartzScheduling.Jobs." + jobName, true, true);
@@ -94,7 +86,8 @@ namespace Zmanim.QuartzScheduling
         }
 
         private static IEnumerable<MethodInfo> ZmainMethods;
-        private static DateTime GetZmanMethodFormName(string methodName, ComplexZmanimCalendar zmanimCalendar)
+
+        public static DateTime GetZmanMethodFormName(string methodName, ComplexZmanimCalendar zmanimCalendar)
         {
             if (ZmainMethods == null)
             {
@@ -112,6 +105,28 @@ namespace Zmanim.QuartzScheduling
                 .Where(z => z.Name.ToLowerInvariant() == "get" + methodName.ToLowerInvariant()).First();
 
             return ((Date)methodInfo.Invoke(zmanimCalendar, null)).ToDateTime();
+        }
+
+
+        public static MethodInfo GetMethodInfo(string methodName)
+        {
+            if (ZmainMethods == null)
+            {
+                var dateType = typeof(Date);
+
+                ZmainMethods = typeof(ComplexZmanimCalendar).GetMethods()
+                    .Where(m => (m.ReturnType == dateType /*|| m.ReturnType == longType*/)
+                                && m.Name.StartsWith("get")
+                                && m.IsPublic
+                                && m.GetParameters().Count() == 0).ToList();
+            }
+
+            var methodInfo = ZmainMethods
+                .Where(z => z.Name.ToLowerInvariant() == "get" + methodName.ToLowerInvariant()).First();
+
+            return methodInfo;
+
+            //return ((Date)methodInfo.Invoke(zmanimCalendar, null)).ToDateTime();
         }
     }
 }

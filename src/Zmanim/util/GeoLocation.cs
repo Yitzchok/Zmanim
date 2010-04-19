@@ -145,16 +145,19 @@ namespace net.sourceforge.zmanim.util
 
         #region ICloneable Members
 
-        ///<summary>
-        ///  An implementation of the <seealso cref = "java.lang.Object.clone()" /> method that
-        ///  creates a <a href = "http://en.wikipedia.org/wiki/Object_copy#Deep_copy">deep copy</a>
-        ///  of the object. <br /><b>Note:</b> If the <seealso cref = "java.util.TimeZone" /> in
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// <b>Note:</b> If the <seealso cref = "java.util.TimeZone" /> in
         ///  the clone will be changed from the original, it is critical that
         ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
         ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
         ///  is called after cloning in order for the AstronomicalCalendar to output
         ///  times in the expected offset.
-        ///</summary>
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
         public virtual object Clone()
         {
             var clone = (GeoLocation)MemberwiseClone();
@@ -436,13 +439,13 @@ namespace net.sourceforge.zmanim.util
             double b = 6356752.3142;
             double f = 1 / 298.257223563; // WGS-84 ellipsiod
             double L = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
-            double U1 = System.Math.Atan((1 - f) * System.Math.Tan(MathExtensions.ToRadians(getLatitude())));
-            double U2 = System.Math.Atan((1 - f) * System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
-            double sinU1 = System.Math.Sin(U1), cosU1 = System.Math.Cos(U1);
-            double sinU2 = System.Math.Sin(U2), cosU2 = System.Math.Cos(U2);
+            double U1 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(getLatitude())));
+            double U2 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
+            double sinU1 = Math.Sin(U1), cosU1 = Math.Cos(U1);
+            double sinU2 = Math.Sin(U2), cosU2 = Math.Cos(U2);
 
             double lambda = L;
-            double lambdaP = 2 * System.Math.PI;
+            double lambdaP = 2 * Math.PI;
             double iterLimit = 20;
             double sinLambda = 0;
             double cosLambda = 0;
@@ -453,17 +456,17 @@ namespace net.sourceforge.zmanim.util
             double cosSqAlpha = 0;
             double cos2SigmaM = 0;
             double C;
-            while (System.Math.Abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0)
+            while (Math.Abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0)
             {
-                sinLambda = System.Math.Sin(lambda);
-                cosLambda = System.Math.Cos(lambda);
+                sinLambda = Math.Sin(lambda);
+                cosLambda = Math.Cos(lambda);
                 sinSigma =
-                    System.Math.Sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda) +
+                    Math.Sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda) +
                                      (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
                 if (sinSigma == 0)
                     return 0; // co-incident points
                 cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-                sigma = System.Math.Atan2(sinSigma, cosSigma);
+                sigma = Math.Atan2(sinSigma, cosSigma);
                 sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
                 cosSqAlpha = 1 - sinAlpha * sinAlpha;
                 cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
@@ -489,9 +492,9 @@ namespace net.sourceforge.zmanim.util
             double distance = b * A * (sigma - deltaSigma);
 
             // initial bearing
-            double fwdAz = MathExtensions.ToDegree(System.Math.Atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
+            double fwdAz = MathExtensions.ToDegree(Math.Atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
             // final bearing
-            double revAz = MathExtensions.ToDegree(System.Math.Atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda));
+            double revAz = MathExtensions.ToDegree(Math.Atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda));
             if (formula == DISTANCE)
             {
                 return distance;
@@ -522,11 +525,11 @@ namespace net.sourceforge.zmanim.util
         {
             double dLon = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
             double dPhi =
-                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLatitude()) / 2 + System.Math.PI / 4) /
-                                System.Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + System.Math.PI / 4));
-            if (System.Math.Abs(dLon) > System.Math.PI)
-                dLon = dLon > 0 ? -(2 * System.Math.PI - dLon) : (2 * System.Math.PI + dLon);
-            return MathExtensions.ToDegree(System.Math.Atan2(dLon, dPhi));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(location.getLatitude()) / 2 + Math.PI / 4) /
+                                Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + Math.PI / 4));
+            if (Math.Abs(dLon) > Math.PI)
+                dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
+            return MathExtensions.ToDegree(Math.Atan2(dLon, dPhi));
         }
 
 
@@ -541,15 +544,15 @@ namespace net.sourceforge.zmanim.util
         {
             double R = 6371; // earth's mean radius in km
             double dLat = MathExtensions.ToRadians(location.getLatitude() - getLatitude());
-            double dLon = MathExtensions.ToRadians(System.Math.Abs(location.getLongitude() - getLongitude()));
+            double dLon = MathExtensions.ToRadians(Math.Abs(location.getLongitude() - getLongitude()));
             double dPhi =
-                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLongitude()) / 2 + System.Math.PI / 4) /
-                                System.Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + System.Math.PI / 4));
-            double q = (System.Math.Abs(dLat) > 1e-10) ? dLat / dPhi : System.Math.Cos(MathExtensions.ToRadians(getLatitude()));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(location.getLongitude()) / 2 + Math.PI / 4) /
+                                Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + Math.PI / 4));
+            double q = (Math.Abs(dLat) > 1e-10) ? dLat / dPhi : Math.Cos(MathExtensions.ToRadians(getLatitude()));
             // if dLon over 180° take shorter rhumb across 180° meridian:
-            if (dLon > System.Math.PI)
-                dLon = 2 * System.Math.PI - dLon;
-            double d = System.Math.Sqrt(dLat * dLat + q * q * dLon * dLon);
+            if (dLon > Math.PI)
+                dLon = 2 * Math.PI - dLon;
+            double d = Math.Sqrt(dLat * dLat + q * q * dLon * dLon);
             return d * R;
         }
 

@@ -18,7 +18,7 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
-using java.lang;
+using System;
 using java.util;
 
 namespace net.sourceforge.zmanim.util
@@ -104,7 +104,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         private static double sinDeg(double deg)
         {
-            return System.Math.Sin(deg*2.0*Math.PI/360.0);
+            return Math.Sin(deg*2.0*Math.PI/360.0);
         }
 
         ///<summary>
@@ -112,7 +112,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         private static double acosDeg(double x)
         {
-            return System.Math.Acos(x)*360.0/(2*Math.PI);
+            return Math.Acos(x)*360.0/(2*Math.PI);
         }
 
         ///<summary>
@@ -120,7 +120,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         private static double asinDeg(double x)
         {
-            return System.Math.Asin(x)*360.0/(2*Math.PI);
+            return Math.Asin(x)*360.0/(2*Math.PI);
         }
 
         ///<summary>
@@ -128,7 +128,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         private static double tanDeg(double deg)
         {
-            return System.Math.Tan(deg*2.0*Math.PI/360.0);
+            return Math.Tan(deg*2.0*Math.PI/360.0);
         }
 
         ///<summary>
@@ -136,7 +136,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         private static double cosDeg(double deg)
         {
-            return System.Math.Cos(deg*2.0*Math.PI/360.0);
+            return Math.Cos(deg*2.0*Math.PI/360.0);
         }
 
         ///<summary>
@@ -214,13 +214,13 @@ namespace net.sourceforge.zmanim.util
         private static double getSunRightAscensionHours(double sunTrueLongitude)
         {
             double a = 0.91764*tanDeg(sunTrueLongitude);
-            double ra = 360.0/(2.0*Math.PI)*System.Math.Atan(a);
+            double ra = 360.0/(2.0*Math.PI)*Math.Atan(a);
             // get result into 0-360 degree range
             // if (ra >= 360.0) ra = ra - 360.0;
             // if (ra < 0) ra = ra + 360.0;
 
-            double lQuadrant = System.Math.Floor(sunTrueLongitude/90.0)*90.0;
-            double raQuadrant = System.Math.Floor(ra/90.0)*90.0;
+            double lQuadrant = Math.Floor(sunTrueLongitude/90.0)*90.0;
+            double raQuadrant = Math.Floor(ra/90.0)*90.0;
             ra = ra + (lQuadrant - raQuadrant);
 
             return ra/DEG_PER_HOUR; // convert to hours

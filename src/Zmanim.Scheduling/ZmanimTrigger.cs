@@ -49,7 +49,7 @@ namespace Zmanim.Scheduling
         /// Gets or sets the execute on zman.
         /// </summary>
         /// <value>The execute on zman.</value>
-        public Func<ComplexZmanimCalendar, Date> ExecuteOnZman { get; set; }
+        public Func<ComplexZmanimCalendar, DateTime> ExecuteOnZman { get; set; }
 
         /// <summary>
         /// Create a <see cref="ZmanimTrigger" /> with no settings.
@@ -65,7 +65,7 @@ namespace Zmanim.Scheduling
         /// <param name="name">The name.</param>
         /// <param name="location">The location.</param>
         /// <param name="executeOnZman">The execute on zman.</param>
-        public ZmanimTrigger(string name, Location location, Func<ComplexZmanimCalendar, Date> executeOnZman)
+        public ZmanimTrigger(string name, Location location, Func<ComplexZmanimCalendar, DateTime> executeOnZman)
             : this(name, null, location, executeOnZman)
         {
         }
@@ -78,7 +78,7 @@ namespace Zmanim.Scheduling
         /// <param name="location">The location.</param>
         /// <param name="startTimeUtc">The start time UTC.</param>
         /// <param name="executeOnZman">The execute on zman.</param>
-        public ZmanimTrigger(string name, Location location, DateTime startTimeUtc, Func<ComplexZmanimCalendar, Date> executeOnZman)
+        public ZmanimTrigger(string name, Location location, DateTime startTimeUtc, Func<ComplexZmanimCalendar, DateTime> executeOnZman)
             : this(name, null, location, startTimeUtc, executeOnZman)
         {
         }
@@ -91,7 +91,7 @@ namespace Zmanim.Scheduling
         /// <param name="group">The group.</param>
         /// <param name="location">The location.</param>
         /// <param name="executeOnZman">The execute on zman.</param>
-        public ZmanimTrigger(string name, string group, Location location, Func<ComplexZmanimCalendar, Date> executeOnZman)
+        public ZmanimTrigger(string name, string group, Location location, Func<ComplexZmanimCalendar, DateTime> executeOnZman)
             : this(name, group, location, executeOnZman, null, 0, TimeSpan.Zero)
         {
         }
@@ -105,7 +105,7 @@ namespace Zmanim.Scheduling
         /// <param name="location">The location.</param>
         /// <param name="startTimeUtc">The start time UTC.</param>
         /// <param name="executeOnZman">The execute on zman.</param>
-        public ZmanimTrigger(string name, string group, Location location, DateTime startTimeUtc, Func<ComplexZmanimCalendar, Date> executeOnZman)
+        public ZmanimTrigger(string name, string group, Location location, DateTime startTimeUtc, Func<ComplexZmanimCalendar, DateTime> executeOnZman)
             : this(name, group, location, startTimeUtc, executeOnZman, null, 0, TimeSpan.Zero)
         {
         }
@@ -124,7 +124,7 @@ namespace Zmanim.Scheduling
         /// firing, use <see cref="RepeatIndefinitely "/> for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, Location location,
-            Func<ComplexZmanimCalendar, Date> executeOnZman,
+            Func<ComplexZmanimCalendar, DateTime> executeOnZman,
             DateTime? endTimeUtc, int repeatCount, TimeSpan repeatInterval)
             : this(name, null, location, executeOnZman, endTimeUtc, repeatCount, repeatInterval)
         {
@@ -145,7 +145,7 @@ namespace Zmanim.Scheduling
         /// firing, use <see cref="RepeatIndefinitely "/> for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, Location location, DateTime startTimeUtc,
-            Func<ComplexZmanimCalendar, Date> executeOnZman,
+            Func<ComplexZmanimCalendar, DateTime> executeOnZman,
             DateTime? endTimeUtc, int repeatCount, TimeSpan repeatInterval)
             : this(name, null, location, startTimeUtc, executeOnZman, endTimeUtc, repeatCount, repeatInterval)
         {
@@ -167,7 +167,7 @@ namespace Zmanim.Scheduling
         /// firing, use <see cref="RepeatIndefinitely "/> for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, string group, Location location,
-            Func<ComplexZmanimCalendar, Date> executeOnZman,
+            Func<ComplexZmanimCalendar, DateTime> executeOnZman,
             DateTime? endTimeUtc,
             int repeatCount, TimeSpan repeatInterval)
             : base(name, group)
@@ -195,7 +195,7 @@ namespace Zmanim.Scheduling
         /// firing, use <see cref="RepeatIndefinitely "/> for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, string group, Location location, DateTime startTimeUtc,
-            Func<ComplexZmanimCalendar, Date> executeOnZman,
+            Func<ComplexZmanimCalendar, DateTime> executeOnZman,
             DateTime? endTimeUtc,
             int repeatCount, TimeSpan repeatInterval)
             : base(name, group)
@@ -223,7 +223,7 @@ namespace Zmanim.Scheduling
         /// firing, use RepeatIndefinitely for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, string group, string jobName, string jobGroup, Location location,
-                 Func<ComplexZmanimCalendar, Date> executeOnZman,
+                 Func<ComplexZmanimCalendar, DateTime> executeOnZman,
                  DateTime? endTimeUtc,
                  int repeatCount, TimeSpan repeatInterval)
             : base(name, group, jobName, jobGroup)
@@ -255,7 +255,7 @@ namespace Zmanim.Scheduling
         /// firing, use RepeatIndefinitely for unlimited times.</param>
         /// <param name="repeatInterval">The time span to pause between the repeat firing.</param>
         public ZmanimTrigger(string name, string group, string jobName, string jobGroup, Location location, DateTime startTimeUtc,
-                 Func<ComplexZmanimCalendar, Date> executeOnZman,
+                 Func<ComplexZmanimCalendar, DateTime> executeOnZman,
                  DateTime? endTimeUtc,
                  int repeatCount, TimeSpan repeatInterval)
             : base(name, group, jobName, jobGroup)

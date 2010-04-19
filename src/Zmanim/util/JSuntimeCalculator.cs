@@ -200,9 +200,9 @@ namespace net.sourceforge.zmanim.util
             int second = date.get(Calendar.SECOND);
 
             double extra = (100.0*year) + month - 190002.5;
-            double JD = (367.0*year) - (System.Math.Floor(7.0*(year + System.Math.Floor((month + 9.0)/12.0))/4.0)) +
-                        System.Math.Floor((275.0*month)/9.0) + day + ((hour + ((minute + (second/60.0))/60.0))/24.0) +
-                        1721013.5 - ((0.5*extra)/System.Math.Abs(extra)) + 0.5;
+            double JD = (367.0*year) - (Math.Floor(7.0*(year + Math.Floor((month + 9.0)/12.0))/4.0)) +
+                        Math.Floor((275.0*month)/9.0) + day + ((hour + ((minute + (second/60.0))/60.0))/24.0) +
+                        1721013.5 - ((0.5*extra)/Math.Abs(extra)) + 0.5;
             return JD;
         }
 
@@ -238,11 +238,11 @@ namespace net.sourceforge.zmanim.util
             double l0 = geomMeanLongSun(t);
             double e = eccentricityOfEarthsOrbit(t);
             double m = geometricMeanAnomalyOfSun(t);
-            double y = System.Math.Pow((System.Math.Tan(MathExtensions.ToRadians(epsilon)/2)), 2);
+            double y = Math.Pow((Math.Tan(MathExtensions.ToRadians(epsilon)/2)), 2);
 
-            double eTime = y*System.Math.Sin(2*MathExtensions.ToRadians(l0)) - 2*e*System.Math.Sin(MathExtensions.ToRadians(m)) +
-                           4*e*y*System.Math.Sin(MathExtensions.ToRadians(m))*System.Math.Cos(2*MathExtensions.ToRadians(l0)) -
-                           0.5*y*y*System.Math.Sin(4*MathExtensions.ToRadians(l0)) - 1.25*e*e*System.Math.Sin(2*MathExtensions.ToRadians(m));
+            double eTime = y*Math.Sin(2*MathExtensions.ToRadians(l0)) - 2*e*Math.Sin(MathExtensions.ToRadians(m)) +
+                           4*e*y*Math.Sin(MathExtensions.ToRadians(m))*Math.Cos(2*MathExtensions.ToRadians(l0)) -
+                           0.5*y*y*Math.Sin(4*MathExtensions.ToRadians(l0)) - 1.25*e*e*Math.Sin(2*MathExtensions.ToRadians(m));
             return MathExtensions.ToDegree(eTime)*4;
         }
 
@@ -257,8 +257,8 @@ namespace net.sourceforge.zmanim.util
             double e = obliquityCorrection(t);
             double lambda = sunsApparentLongitude(t);
 
-            double sint = System.Math.Sin(MathExtensions.ToRadians(e))*System.Math.Sin(MathExtensions.ToRadians(lambda));
-            return MathExtensions.ToDegree(System.Math.Asin(sint));
+            double sint = Math.Sin(MathExtensions.ToRadians(e))*Math.Sin(MathExtensions.ToRadians(lambda));
+            return MathExtensions.ToDegree(Math.Asin(sint));
         }
 
         ///<summary>
@@ -275,9 +275,9 @@ namespace net.sourceforge.zmanim.util
         private static double hourAngleMorning(double lat, double solarDec, double zenithDistance)
         {
             return
-                (System.Math.Acos(System.Math.Cos(MathExtensions.ToRadians(zenithDistance))/
-                                  (System.Math.Cos(MathExtensions.ToRadians(lat))*System.Math.Cos(MathExtensions.ToRadians(solarDec))) -
-                                  System.Math.Tan(MathExtensions.ToRadians(lat))*System.Math.Tan(MathExtensions.ToRadians(solarDec))));
+                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenithDistance))/
+                                  (Math.Cos(MathExtensions.ToRadians(lat))*Math.Cos(MathExtensions.ToRadians(solarDec))) -
+                                  Math.Tan(MathExtensions.ToRadians(lat))*Math.Tan(MathExtensions.ToRadians(solarDec))));
         }
 
         ///<summary>
@@ -304,7 +304,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> Corrected obliquity in degrees </returns>
         private static double obliquityCorrection(double t)
         {
-            return meanObliquityOfEcliptic(t) + 0.00256*System.Math.Cos(MathExtensions.ToRadians(125.04 - 1934.136*t));
+            return meanObliquityOfEcliptic(t) + 0.00256*Math.Cos(MathExtensions.ToRadians(125.04 - 1934.136*t));
         }
 
         ///<summary>
@@ -373,7 +373,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> The apparent longitude of the Sun in degrees </returns>
         private static double sunsApparentLongitude(double t)
         {
-            return sunsTrueLongitude(t) - 0.00569 - 0.00478*System.Math.Sin(MathExtensions.ToRadians(125.04 - 1934.136*t));
+            return sunsTrueLongitude(t) - 0.00569 - 0.00478*Math.Sin(MathExtensions.ToRadians(125.04 - 1934.136*t));
         }
 
         ///<summary>
@@ -397,9 +397,9 @@ namespace net.sourceforge.zmanim.util
         {
             double m = geometricMeanAnomalyOfSun(t);
 
-            return System.Math.Sin(MathExtensions.ToRadians(m))*(1.914602 - t*(0.004817 + 0.000014*t)) +
-                   System.Math.Sin(2*MathExtensions.ToRadians(m))*(0.019993 - 0.000101*t) +
-                   System.Math.Sin(3*MathExtensions.ToRadians(m))*0.000289;
+            return Math.Sin(MathExtensions.ToRadians(m))*(1.914602 - t*(0.004817 + 0.000014*t)) +
+                   Math.Sin(2*MathExtensions.ToRadians(m))*(0.019993 - 0.000101*t) +
+                   Math.Sin(3*MathExtensions.ToRadians(m))*0.000289;
         }
     }
 }

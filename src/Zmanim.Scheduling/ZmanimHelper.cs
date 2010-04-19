@@ -27,7 +27,7 @@ namespace Zmanim.Scheduling
             return IsShabbos(GetCalendar(location, date));
         }
 
-        public static DateTime GetZman(this Location location, DateTime date, Func<ComplexZmanimCalendar, Date> zman)
+        public static DateTime GetZman(this Location location, DateTime date, Func<ComplexZmanimCalendar, DateTime> zman)
         {
             return zman.Invoke(GetCalendar(location, date)).ToDateTime().ToUniversalTime();
         }

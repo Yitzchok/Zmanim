@@ -4,6 +4,7 @@ using System.Linq;
 using Quartz;
 using Quartz.Impl;
 using Zmanim.QuartzScheduling.Configuration;
+using Zmanim.Scheduling;
 
 namespace Zmanim.QuartzScheduling
 {
@@ -27,7 +28,7 @@ namespace Zmanim.QuartzScheduling
             }
 
             scheduler = new StdSchedulerFactory().GetScheduler();
-
+            scheduler.AddGlobalTriggerListener(new ShabbosTriggerListener());
             foreach (var service in applicationSettings.Services)
             {
                 SchedulerHelper.ScheduleZmanJob(scheduler, service,
