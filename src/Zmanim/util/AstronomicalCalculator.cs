@@ -19,6 +19,7 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using Zmanim.Extensions;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -133,7 +134,7 @@ namespace net.sourceforge.zmanim.util
         ///  The algorithm used is:
         ///	
         ///  <code>
-        ///    elevationAdjustment = Math.toDegrees(Math.acos(earthRadiusInMeters
+        ///    elevationAdjustment = MathExtensions.ToDegree(Math.acos(earthRadiusInMeters
         ///    / (earthRadiusInMeters + elevationMeters)));
         ///  </code>
         ///	
@@ -154,7 +155,7 @@ namespace net.sourceforge.zmanim.util
             double earthRadius = 6356.9;
             // double elevationAdjustment = 0.0347 * Math.sqrt(elevation);
             double elevationAdjustment =
-                java.lang.Math.toDegrees(Math.Acos(earthRadius/(earthRadius + (elevation/1000))));
+                MathExtensions.ToDegree(Math.Acos(earthRadius/(earthRadius + (elevation/1000))));
             return elevationAdjustment;
         }
 

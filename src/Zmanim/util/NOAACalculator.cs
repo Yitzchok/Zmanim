@@ -20,6 +20,7 @@
 
 using System;
 using java.util;
+using Zmanim.Extensions;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -195,7 +196,7 @@ namespace net.sourceforge.zmanim.util
         {
             double m = calcGeomMeanAnomalySun(t);
 
-            double mrad = java.lang.Math.toRadians(m);
+            double mrad = MathExtensions.ToRadians(m);
             double sinm = Math.Sin(mrad);
             double sin2m = Math.Sin(mrad + mrad);
             double sin3m = Math.Sin(mrad + mrad + mrad);
@@ -245,7 +246,7 @@ namespace net.sourceforge.zmanim.util
             double o = calcSunTrueLong(t);
 
             double omega = 125.04 - 1934.136*t;
-            double lambda = o - 0.00569 - 0.00478*Math.Sin(java.lang.Math.toRadians(omega));
+            double lambda = o - 0.00569 - 0.00478*Math.Sin(MathExtensions.ToRadians(omega));
             return lambda; // in degrees
         }
 
@@ -273,7 +274,7 @@ namespace net.sourceforge.zmanim.util
             double e0 = calcMeanObliquityOfEcliptic(t);
 
             double omega = 125.04 - 1934.136*t;
-            double e = e0 + 0.00256*Math.Cos(java.lang.Math.toRadians(omega));
+            double e = e0 + 0.00256*Math.Cos(MathExtensions.ToRadians(omega));
             return e; // in degrees
         }
 
@@ -287,8 +288,8 @@ namespace net.sourceforge.zmanim.util
             double e = calcObliquityCorrection(t);
             double lambda = calcSunApparentLong(t);
 
-            double sint = Math.Sin(java.lang.Math.toRadians(e))*Math.Sin(java.lang.Math.toRadians(lambda));
-            double theta = java.lang.Math.toDegrees(Math.Asin(sint));
+            double sint = Math.Sin(MathExtensions.ToRadians(e))*Math.Sin(MathExtensions.ToRadians(lambda));
+            double theta = MathExtensions.ToDegree(Math.Asin(sint));
             return theta; // in degrees
         }
 
@@ -305,17 +306,17 @@ namespace net.sourceforge.zmanim.util
             double e = calcEccentricityEarthOrbit(t);
             double m = calcGeomMeanAnomalySun(t);
 
-            double y = Math.Tan(java.lang.Math.toRadians(epsilon)/2.0);
+            double y = Math.Tan(MathExtensions.ToRadians(epsilon)/2.0);
             y *= y;
 
-            double sin2l0 = Math.Sin(2.0*java.lang.Math.toRadians(l0));
-            double sinm = Math.Sin(java.lang.Math.toRadians(m));
-            double cos2l0 = Math.Cos(2.0*java.lang.Math.toRadians(l0));
-            double sin4l0 = Math.Sin(4.0*java.lang.Math.toRadians(l0));
-            double sin2m = Math.Sin(2.0*java.lang.Math.toRadians(m));
+            double sin2l0 = Math.Sin(2.0*MathExtensions.ToRadians(l0));
+            double sinm = Math.Sin(MathExtensions.ToRadians(m));
+            double cos2l0 = Math.Cos(2.0*MathExtensions.ToRadians(l0));
+            double sin4l0 = Math.Sin(4.0*MathExtensions.ToRadians(l0));
+            double sin2m = Math.Sin(2.0*MathExtensions.ToRadians(m));
 
             double Etime = y*sin2l0 - 2.0*e*sinm + 4.0*e*y*sinm*cos2l0 - 0.5*y*y*sin4l0 - 1.25*e*e*sin2m;
-            return java.lang.Math.toDegrees(Etime)*4.0; // in minutes of time
+            return MathExtensions.ToDegree(Etime)*4.0; // in minutes of time
         }
 
         ///<summary>
@@ -328,15 +329,15 @@ namespace net.sourceforge.zmanim.util
         ///<returns> hour angle of sunrise in radians </returns>
         private static double calcHourAngleSunrise(double lat, double solarDec, double zenith)
         {
-            double latRad = java.lang.Math.toRadians(lat);
-            double sdRad = java.lang.Math.toRadians(solarDec);
+            double latRad = MathExtensions.ToRadians(lat);
+            double sdRad = MathExtensions.ToRadians(solarDec);
 
             // double HAarg =
-            // (Math.cos(Math.toRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
+            // (Math.cos(MathExtensions.ToRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
             // * Math.tan(sdRad));
 
             double HA =
-                (Math.Acos(Math.Cos(java.lang.Math.toRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
+                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
                            Math.Tan(latRad)*Math.Tan(sdRad)));
             return HA; // in radians
         }
@@ -352,15 +353,15 @@ namespace net.sourceforge.zmanim.util
         ///  TODO: use - calcHourAngleSunrise implementation </returns>
         private static double calcHourAngleSunset(double lat, double solarDec, double zenith)
         {
-            double latRad = java.lang.Math.toRadians(lat);
-            double sdRad = java.lang.Math.toRadians(solarDec);
+            double latRad = MathExtensions.ToRadians(lat);
+            double sdRad = MathExtensions.ToRadians(solarDec);
 
             // double HAarg =
-            // (Math.cos(Math.toRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
+            // (Math.cos(MathExtensions.ToRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
             // * Math.tan(sdRad));
 
             double HA =
-                (Math.Acos(Math.Cos(java.lang.Math.toRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
+                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
                            Math.Tan(latRad)*Math.Tan(sdRad)));
             return -HA; // in radians
         }
@@ -393,7 +394,7 @@ namespace net.sourceforge.zmanim.util
             double solarDec = calcSunDeclination(tnoon);
             double hourAngle = calcHourAngleSunrise(latitude, solarDec, zenith);
 
-            double delta = longitude - java.lang.Math.toDegrees(hourAngle);
+            double delta = longitude - MathExtensions.ToDegree(hourAngle);
             double timeDiff = 4*delta; // in minutes of time
             double timeUTC = 720 + timeDiff - eqTime; // in minutes
 
@@ -403,7 +404,7 @@ namespace net.sourceforge.zmanim.util
             eqTime = calcEquationOfTime(newt);
             solarDec = calcSunDeclination(newt);
             hourAngle = calcHourAngleSunrise(latitude, solarDec, zenith);
-            delta = longitude - java.lang.Math.toDegrees(hourAngle);
+            delta = longitude - MathExtensions.ToDegree(hourAngle);
             timeDiff = 4*delta;
             timeUTC = 720 + timeDiff - eqTime; // in minutes
             return timeUTC;
@@ -460,7 +461,7 @@ namespace net.sourceforge.zmanim.util
             double solarDec = calcSunDeclination(tnoon);
             double hourAngle = calcHourAngleSunset(latitude, solarDec, zenith);
 
-            double delta = longitude - java.lang.Math.toDegrees(hourAngle);
+            double delta = longitude - MathExtensions.ToDegree(hourAngle);
             double timeDiff = 4*delta;
             double timeUTC = 720 + timeDiff - eqTime;
 
@@ -471,7 +472,7 @@ namespace net.sourceforge.zmanim.util
             solarDec = calcSunDeclination(newt);
             hourAngle = calcHourAngleSunset(latitude, solarDec, zenith);
 
-            delta = longitude - java.lang.Math.toDegrees(hourAngle);
+            delta = longitude - MathExtensions.ToDegree(hourAngle);
             timeDiff = 4*delta;
             return 720 + timeDiff - eqTime; // in minutes
         }

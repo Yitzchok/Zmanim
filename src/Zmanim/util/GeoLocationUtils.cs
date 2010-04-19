@@ -19,6 +19,7 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using java.lang;
+using Zmanim.Extensions;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -98,9 +99,9 @@ namespace net.sourceforge.zmanim.util
             double a = 6378137;
             double b = 6356752.3142;
             double f = 1/298.257223563; // WGS-84 ellipsiod
-            double L = Math.toRadians(destination.getLongitude() - location.getLongitude());
-            double U1 = System.Math.Atan((1 - f)*System.Math.Tan(Math.toRadians(location.getLatitude())));
-            double U2 = System.Math.Atan((1 - f)*System.Math.Tan(Math.toRadians(destination.getLatitude())));
+            double L = MathExtensions.ToRadians(destination.getLongitude() - location.getLongitude());
+            double U1 = System.Math.Atan((1 - f)*System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
+            double U2 = System.Math.Atan((1 - f)*System.Math.Tan(MathExtensions.ToRadians(destination.getLatitude())));
             double sinU1 = System.Math.Sin(U1), cosU1 = System.Math.Cos(U1);
             double sinU2 = System.Math.Sin(U2), cosU2 = System.Math.Cos(U2);
 
@@ -152,9 +153,9 @@ namespace net.sourceforge.zmanim.util
             double distance = b*A*(sigma - deltaSigma);
 
             // initial bearing
-            double fwdAz = Math.toDegrees(System.Math.Atan2(cosU2*sinLambda, cosU1*sinU2 - sinU1*cosU2*cosLambda));
+            double fwdAz = MathExtensions.ToDegree(System.Math.Atan2(cosU2*sinLambda, cosU1*sinU2 - sinU1*cosU2*cosLambda));
             // final bearing
-            double revAz = Math.toDegrees(System.Math.Atan2(cosU1*sinLambda, -sinU1*cosU2 + cosU1*sinU2*cosLambda));
+            double revAz = MathExtensions.ToDegree(System.Math.Atan2(cosU1*sinLambda, -sinU1*cosU2 + cosU1*sinU2*cosLambda));
             if (formula == DISTANCE)
                 return distance;
             if (formula == INITIAL_BEARING)
@@ -175,13 +176,13 @@ namespace net.sourceforge.zmanim.util
         /// <returns>the bearing in degrees</returns>
         public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
-            double dLon = Math.toRadians(destination.getLongitude() - location.getLongitude());
+            double dLon = MathExtensions.ToRadians(destination.getLongitude() - location.getLongitude());
             double dPhi =
-                System.Math.Log(System.Math.Tan(Math.toRadians(destination.getLatitude())/2 + System.Math.PI/4)/
-                                System.Math.Tan(Math.toRadians(location.getLatitude())/2 + System.Math.PI/4));
+                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(destination.getLatitude())/2 + System.Math.PI/4)/
+                                System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())/2 + System.Math.PI/4));
             if (System.Math.Abs(dLon) > System.Math.PI)
                 dLon = dLon > 0 ? -(2*System.Math.PI - dLon) : (2*System.Math.PI + dLon);
-            return Math.toDegrees(System.Math.Atan2(dLon, dPhi));
+            return MathExtensions.ToDegree(System.Math.Atan2(dLon, dPhi));
         }
 
         /// <summary>
@@ -195,14 +196,14 @@ namespace net.sourceforge.zmanim.util
         public static double getRhumbLineDistance(GeoLocation location, GeoLocation destination)
         {
             double R = 6371; // earth's mean radius in km
-            double dLat = Math.toRadians(destination.getLatitude() - location.getLatitude());
-            double dLon = Math.toRadians(System.Math.Abs(destination.getLongitude() - location.getLongitude()));
+            double dLat = MathExtensions.ToRadians(destination.getLatitude() - location.getLatitude());
+            double dLon = MathExtensions.ToRadians(System.Math.Abs(destination.getLongitude() - location.getLongitude()));
             double dPhi =
-                System.Math.Log(System.Math.Tan(Math.toRadians(destination.getLongitude())/2 + System.Math.PI/4)/
-                                System.Math.Tan(Math.toRadians(location.getLatitude())/2 + System.Math.PI/4));
+                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(destination.getLongitude())/2 + System.Math.PI/4)/
+                                System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())/2 + System.Math.PI/4));
             double q = (System.Math.Abs(dLat) > 1e-10)
                            ? dLat/dPhi
-                           : System.Math.Cos(Math.toRadians(location.getLatitude()));
+                           : System.Math.Cos(MathExtensions.ToRadians(location.getLatitude()));
             // if dLon over 180° take shorter rhumb across 180° meridian:
             if (dLon > System.Math.PI)
                 dLon = 2*System.Math.PI - dLon;
