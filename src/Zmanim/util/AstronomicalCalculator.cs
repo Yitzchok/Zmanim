@@ -93,7 +93,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> The UTC time of sunrise in 24 hour format. 5:45:00 AM will return
         ///  5.75.0. If an error was encountered in the calculation (expected
         ///  behavior for some locations such as near the poles,
-        ///  <see cref = "java.lang.Double.NaN" /> will be returned. </returns>
+        ///  <see cref = "Double.NaN" /> will be returned. </returns>
         public abstract double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation);
 
@@ -116,7 +116,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> The UTC time of sunset in 24 hour format. 5:45:00 AM will return
         ///  5.75.0. If an error was encountered in the calculation (expected
         ///  behavior for some locations such as near the poles,
-        ///  <seealso cref = "java.lang.Double.NaN" /> will be returned. </returns>
+        ///  <seealso cref = "Double.NaN" /> will be returned. </returns>
         public abstract double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation);
 

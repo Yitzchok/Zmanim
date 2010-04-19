@@ -21,7 +21,6 @@
 using System;
 using System.Text;
 using Zmanim.Extensions;
-using Double = java.lang.Double;
 using TimeZone = java.util.TimeZone;
 
 namespace net.sourceforge.zmanim.util
@@ -34,18 +33,18 @@ namespace net.sourceforge.zmanim.util
     ///   elevation is calculated as part o the algorithm.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
-    public class 
+    public class
         GeoLocation : ICloneable
     {
         /// <summary>
         ///   constant for milliseconds in a minute (60,000)
         /// </summary>
-        private const long MINUTE_MILLIS = 60*1000;
+        private const long MINUTE_MILLIS = 60 * 1000;
 
         /// <summary>
         ///   constant for milliseconds in an hour (3,600,000)
         /// </summary>
-        private const long HOUR_MILLIS = MINUTE_MILLIS*60;
+        private const long HOUR_MILLIS = MINUTE_MILLIS * 60;
 
         private int DISTANCE;
         private int FINAL_BEARING = 2;
@@ -158,8 +157,8 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         public virtual object Clone()
         {
-            var clone = (GeoLocation) MemberwiseClone();
-            clone.timeZone = (TimeZone) getTimeZone().clone();
+            var clone = (GeoLocation)MemberwiseClone();
+            clone.timeZone = (TimeZone)getTimeZone().clone();
             clone.locationName = getLocationName();
             return clone;
         }
@@ -225,7 +224,7 @@ namespace net.sourceforge.zmanim.util
         ///  be thrown if the value is not S or N. </param>
         public virtual void setLatitude(int degrees, int minutes, double seconds, string direction)
         {
-            double tempLat = degrees + ((minutes + (seconds/60.0))/60.0);
+            double tempLat = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if (tempLat > 90 || tempLat < 0)
             {
                 throw new ArgumentException(
@@ -287,7 +286,7 @@ namespace net.sourceforge.zmanim.util
         ///  or W. </param>
         public virtual void setLongitude(int degrees, int minutes, double seconds, string direction)
         {
-            double longTemp = degrees + ((minutes + (seconds/60.0))/60.0);
+            double longTemp = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if (longTemp > 180 || longitude < 0)
             {
                 throw new ArgumentException("Longitude must be between 0 and  180. Use the ");
@@ -368,7 +367,7 @@ namespace net.sourceforge.zmanim.util
         ///</returns>
         public virtual long getLocalMeanTimeOffset()
         {
-            return (long) (getLongitude()*4*MINUTE_MILLIS - getTimeZone().getRawOffset());
+            return (long)(getLongitude() * 4 * MINUTE_MILLIS - getTimeZone().getRawOffset());
         }
 
 
@@ -435,15 +434,15 @@ namespace net.sourceforge.zmanim.util
         {
             double a = 6378137;
             double b = 6356752.3142;
-            double f = 1/298.257223563; // WGS-84 ellipsiod
+            double f = 1 / 298.257223563; // WGS-84 ellipsiod
             double L = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
-            double U1 = System.Math.Atan((1 - f)*System.Math.Tan(MathExtensions.ToRadians(getLatitude())));
-            double U2 = System.Math.Atan((1 - f)*System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
+            double U1 = System.Math.Atan((1 - f) * System.Math.Tan(MathExtensions.ToRadians(getLatitude())));
+            double U2 = System.Math.Atan((1 - f) * System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
             double sinU1 = System.Math.Sin(U1), cosU1 = System.Math.Cos(U1);
             double sinU2 = System.Math.Sin(U2), cosU2 = System.Math.Cos(U2);
 
             double lambda = L;
-            double lambdaP = 2*System.Math.PI;
+            double lambdaP = 2 * System.Math.PI;
             double iterLimit = 20;
             double sinLambda = 0;
             double cosLambda = 0;
@@ -459,40 +458,40 @@ namespace net.sourceforge.zmanim.util
                 sinLambda = System.Math.Sin(lambda);
                 cosLambda = System.Math.Cos(lambda);
                 sinSigma =
-                    System.Math.Sqrt((cosU2*sinLambda)*(cosU2*sinLambda) +
-                                     (cosU1*sinU2 - sinU1*cosU2*cosLambda)*(cosU1*sinU2 - sinU1*cosU2*cosLambda));
+                    System.Math.Sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda) +
+                                     (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
                 if (sinSigma == 0)
                     return 0; // co-incident points
-                cosSigma = sinU1*sinU2 + cosU1*cosU2*cosLambda;
+                cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
                 sigma = System.Math.Atan2(sinSigma, cosSigma);
-                sinAlpha = cosU1*cosU2*sinLambda/sinSigma;
-                cosSqAlpha = 1 - sinAlpha*sinAlpha;
-                cos2SigmaM = cosSigma - 2*sinU1*sinU2/cosSqAlpha;
+                sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
+                cosSqAlpha = 1 - sinAlpha * sinAlpha;
+                cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
                 if (double.IsNaN(cos2SigmaM))
                     cos2SigmaM = 0; // equatorial line: cosSqAlpha=0 (§6)
-                C = f/16*cosSqAlpha*(4 + f*(4 - 3*cosSqAlpha));
+                C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
                 lambdaP = lambda;
                 lambda = L +
-                         (1 - C)*f*sinAlpha*
-                         (sigma + C*sinSigma*(cos2SigmaM + C*cosSigma*(-1 + 2*cos2SigmaM*cos2SigmaM)));
+                         (1 - C) * f * sinAlpha *
+                         (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
             }
             if (iterLimit == 0)
                 return double.NaN; // formula failed to converge
 
-            double uSq = cosSqAlpha*(a*a - b*b)/(b*b);
-            double A = 1 + uSq/16384*(4096 + uSq*(-768 + uSq*(320 - 175*uSq)));
-            double B = uSq/1024*(256 + uSq*(-128 + uSq*(74 - 47*uSq)));
-            double deltaSigma = B*sinSigma*
+            double uSq = cosSqAlpha * (a * a - b * b) / (b * b);
+            double A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
+            double B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
+            double deltaSigma = B * sinSigma *
                                 (cos2SigmaM +
-                                 B/4*
-                                 (cosSigma*(-1 + 2*cos2SigmaM*cos2SigmaM) -
-                                  B/6*cos2SigmaM*(-3 + 4*sinSigma*sinSigma)*(-3 + 4*cos2SigmaM*cos2SigmaM)));
-            double distance = b*A*(sigma - deltaSigma);
+                                 B / 4 *
+                                 (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) -
+                                  B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
+            double distance = b * A * (sigma - deltaSigma);
 
             // initial bearing
-            double fwdAz = MathExtensions.ToDegree(System.Math.Atan2(cosU2*sinLambda, cosU1*sinU2 - sinU1*cosU2*cosLambda));
+            double fwdAz = MathExtensions.ToDegree(System.Math.Atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
             // final bearing
-            double revAz = MathExtensions.ToDegree(System.Math.Atan2(cosU1*sinLambda, -sinU1*cosU2 + cosU1*sinU2*cosLambda));
+            double revAz = MathExtensions.ToDegree(System.Math.Atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda));
             if (formula == DISTANCE)
             {
                 return distance;
@@ -523,10 +522,10 @@ namespace net.sourceforge.zmanim.util
         {
             double dLon = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
             double dPhi =
-                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLatitude())/2 + System.Math.PI/4)/
-                                System.Math.Tan(MathExtensions.ToRadians(getLatitude())/2 + System.Math.PI/4));
+                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLatitude()) / 2 + System.Math.PI / 4) /
+                                System.Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + System.Math.PI / 4));
             if (System.Math.Abs(dLon) > System.Math.PI)
-                dLon = dLon > 0 ? -(2*System.Math.PI - dLon) : (2*System.Math.PI + dLon);
+                dLon = dLon > 0 ? -(2 * System.Math.PI - dLon) : (2 * System.Math.PI + dLon);
             return MathExtensions.ToDegree(System.Math.Atan2(dLon, dPhi));
         }
 
@@ -544,14 +543,14 @@ namespace net.sourceforge.zmanim.util
             double dLat = MathExtensions.ToRadians(location.getLatitude() - getLatitude());
             double dLon = MathExtensions.ToRadians(System.Math.Abs(location.getLongitude() - getLongitude()));
             double dPhi =
-                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLongitude())/2 + System.Math.PI/4)/
-                                System.Math.Tan(MathExtensions.ToRadians(getLatitude())/2 + System.Math.PI/4));
-            double q = (System.Math.Abs(dLat) > 1e-10) ? dLat/dPhi : System.Math.Cos(MathExtensions.ToRadians(getLatitude()));
+                System.Math.Log(System.Math.Tan(MathExtensions.ToRadians(location.getLongitude()) / 2 + System.Math.PI / 4) /
+                                System.Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + System.Math.PI / 4));
+            double q = (System.Math.Abs(dLat) > 1e-10) ? dLat / dPhi : System.Math.Cos(MathExtensions.ToRadians(getLatitude()));
             // if dLon over 180° take shorter rhumb across 180° meridian:
             if (dLon > System.Math.PI)
-                dLon = 2*System.Math.PI - dLon;
-            double d = System.Math.Sqrt(dLat*dLat + q*q*dLon*dLon);
-            return d*R;
+                dLon = 2 * System.Math.PI - dLon;
+            double d = System.Math.Sqrt(dLat * dLat + q * q * dLon * dLon);
+            return d * R;
         }
 
 
@@ -586,9 +585,9 @@ namespace net.sourceforge.zmanim.util
             sb.Append("\t<TimezoneName>").Append(getTimeZone().getID()).Append("</TimezoneName>\n");
             sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append(
                 "</TimeZoneDisplayName>\n");
-            sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset()/HOUR_MILLIS).Append(
+            sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset() / HOUR_MILLIS).Append(
                 "</TimezoneGMTOffset>\n");
-            sb.Append("\t<TimezoneDSTOffset>").Append(getTimeZone().getDSTSavings()/HOUR_MILLIS).Append(
+            sb.Append("\t<TimezoneDSTOffset>").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS).Append(
                 "</TimezoneDSTOffset>\n");
             sb.Append("</GeoLocation>");
             return sb.ToString();
@@ -610,9 +609,9 @@ namespace net.sourceforge.zmanim.util
                 return true;
             if (!(obj is GeoLocation))
                 return false;
-            var geo = (GeoLocation) obj;
-            return Double.doubleToLongBits(latitude) == Double.doubleToLongBits(geo.latitude) &&
-                   Double.doubleToLongBits(longitude) == Double.doubleToLongBits(geo.longitude) &&
+            var geo = (GeoLocation)obj;
+            return BitConverter.DoubleToInt64Bits(latitude) == BitConverter.DoubleToInt64Bits(geo.latitude) &&
+                   BitConverter.DoubleToInt64Bits(longitude) == BitConverter.DoubleToInt64Bits(geo.longitude) &&
                    elevation == geo.elevation &&
                    (locationName == null ? geo.locationName == null : locationName.Equals(geo.locationName)) &&
                    (timeZone == null ? geo.timeZone == null : timeZone.Equals(geo.timeZone));
@@ -627,18 +626,18 @@ namespace net.sourceforge.zmanim.util
         public override int GetHashCode()
         {
             int result = 17;
-            long latLong = Double.doubleToLongBits(latitude);
-            long lonLong = Double.doubleToLongBits(longitude);
-            long elevLong = Double.doubleToLongBits(elevation);
-            var latInt = (int) (latLong ^ (latLong >> 32));
-            var lonInt = (int) (lonLong ^ (lonLong >> 32));
-            var elevInt = (int) (elevLong ^ (elevLong >> 32));
-            result = 37*result + GetType().GetHashCode();
-            result += 37*result + latInt;
-            result += 37*result + lonInt;
-            result += 37*result + elevInt;
-            result += 37*result + (locationName == null ? 0 : locationName.GetHashCode());
-            result += 37*result + (timeZone == null ? 0 : timeZone.GetHashCode());
+            long latLong = BitConverter.DoubleToInt64Bits(latitude);
+            long lonLong = BitConverter.DoubleToInt64Bits(longitude);
+            long elevLong = BitConverter.DoubleToInt64Bits(elevation);
+            var latInt = (int)(latLong ^ (latLong >> 32));
+            var lonInt = (int)(lonLong ^ (lonLong >> 32));
+            var elevInt = (int)(elevLong ^ (elevLong >> 32));
+            result = 37 * result + GetType().GetHashCode();
+            result += 37 * result + latInt;
+            result += 37 * result + lonInt;
+            result += 37 * result + elevInt;
+            result += 37 * result + (locationName == null ? 0 : locationName.GetHashCode());
+            result += 37 * result + (timeZone == null ? 0 : timeZone.GetHashCode());
             return result;
         }
 
@@ -660,8 +659,8 @@ namespace net.sourceforge.zmanim.util
             //		 * sb.append("\nTimezone Display Name:\t\t").append(
             //		 * getTimeZone().getDisplayName());
             //		 
-            sb.Append("\nTimezone GMT Offset:\t\t").Append(getTimeZone().getRawOffset()/HOUR_MILLIS);
-            sb.Append("\nTimezone DST Offset:\t\t").Append(getTimeZone().getDSTSavings()/HOUR_MILLIS);
+            sb.Append("\nTimezone GMT Offset:\t\t").Append(getTimeZone().getRawOffset() / HOUR_MILLIS);
+            sb.Append("\nTimezone DST Offset:\t\t").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS);
             return sb.ToString();
         }
     }

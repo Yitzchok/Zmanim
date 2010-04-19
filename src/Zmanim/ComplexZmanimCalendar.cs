@@ -18,7 +18,6 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
-using java.lang;
 using java.util;
 using net.sourceforge.zmanim.util;
 
@@ -2266,10 +2265,10 @@ namespace net.sourceforge.zmanim
         public override int GetHashCode()
         {
             int num = 0x11;
-            num = (0x25 * num) + Object.instancehelper_hashCode(base.getTemporalHour());
+            num = (0x25 * num) + base.getTemporalHour().GetHashCode();
             num += (0x25 * num) + getCalendar().hashCode();
             num += (0x25 * num) + getGeoLocation().GetHashCode();
-            return (num + ((0x25 * num) + Object.instancehelper_hashCode(getAstronomicalCalculator())));
+            return (num + ((0x25 * num) + getAstronomicalCalculator().GetHashCode()));
         }
     }
 }
