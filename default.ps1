@@ -59,7 +59,21 @@ task Test -depends Compile {
 }
 
 task Release -depends Test {
-	& $tools_dir\zip.exe -9 -A -j $release_dir\Zmanim-$humanReadableversion.zip $build_dir\Zmanim.dll $build_dir\Zmanim.xml lgpl.txt acknowledgements.txt
+	& $tools_dir\zip.exe -9 -A -j $release_dir\Zmanim-$humanReadableversion.zip `
+	$build_dir\Zmanim.dll `
+	$build_dir\Zmanim.xml `
+	$build_dir\IKVM.*.dll `
+	lgpl.txt `
+	acknowledgements.txt
+	
+	& $tools_dir\zip.exe -9 -A -j $release_dir\Zmanim.Cli-$humanReadableversion.zip `
+	$build_dir\Zmanim.dll `
+	$build_dir\Zmanim.xml `
+	$build_dir\Zmanim.Cli.exe `
+	$build_dir\IKVM.*.dll `
+	lgpl.txt `
+	acknowledgements.txt
+	
 	if ($lastExitCode -ne 0) {
         throw "Error: Failed to execute ZIP command"
     }
