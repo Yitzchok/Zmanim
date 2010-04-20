@@ -318,9 +318,9 @@ namespace net.sourceforge.zmanim
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
                 Calendar clonedCalendar = (GregorianCalendar)getCalendar().clone();
-                clonedCalendar.setTime(sunset);
+                clonedCalendar.setTime(sunset.ToDate());
                 clonedCalendar.add(Calendar.DAY_OF_MONTH, 1);
-                return clonedCalendar.getTime().ToDateTime();
+                return clonedCalendar.getTime().ToDateTimeWithMilliseconds();
             }
             else
             {
@@ -586,7 +586,7 @@ namespace net.sourceforge.zmanim
             {
                 return long.MinValue;
             }
-            return (long) ((sunset - sunrise).TotalMilliseconds / 12);
+            return (long)((sunset - sunrise).TotalMilliseconds / 12);
         }
 
         ///<summary>
@@ -636,7 +636,7 @@ namespace net.sourceforge.zmanim
             cal.set(Calendar.MINUTE, minutes);
             cal.set(Calendar.SECOND, seconds);
             cal.set(Calendar.MILLISECOND, (int)(time * 1000));
-            return cal.getTime().ToDateTime();
+            return cal.getTime().ToDateTimeWithMilliseconds();
         }
 
         ///<summary>

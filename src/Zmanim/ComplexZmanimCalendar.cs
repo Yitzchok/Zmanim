@@ -1691,7 +1691,7 @@ namespace net.sourceforge.zmanim
         {
             DateTime alos19Point8 = getAlos19Point8Degrees();
             DateTime sunrise = getSeaLevelSunrise();
-            if (alos19Point8 == null || sunrise == null)
+            if (alos19Point8 == DateTime.MinValue || sunrise == DateTime.MinValue)
             {
                 return DateTime.MinValue;
             }

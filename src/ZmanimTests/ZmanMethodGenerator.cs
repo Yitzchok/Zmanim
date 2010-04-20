@@ -42,13 +42,16 @@ namespace ZmanimTests
         {
             var testFormatters = new List<ITestFormatter>
                                      {
-                                         new DotNetTestFormatter{ClassName = "ZmanimTest"},
-                                         new JavaTestFormatter{ClassName = "ZmanimTest"}
+                                         /*new DotNetTestFormatter{ClassName = "ZmanimTest"},
+                                         new JavaTestFormatter{ClassName = "ZmanimTest"},*/
+                                         new DotNetTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"},
+                                         new JavaTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"}
                                      };
 
             var testMethodGenerators = new List<ITestMethodGenerator>
                                            {
-                                               new DateTestMethodGenerator(),
+                                               new DateTimeTestMethodGenerator(),
+                                               //new DateTestMethodGenerator(),
                                                new LongTestMethodGenerator()
                                            };
 

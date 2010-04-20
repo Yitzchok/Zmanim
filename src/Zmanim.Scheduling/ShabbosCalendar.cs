@@ -30,7 +30,7 @@ namespace Zmanim.Scheduling
             else if (timeUtc.DayOfWeek == DayOfWeek.Saturday)
                 complexZmanimCalendar = ZmanimHelper.GetCalendar(location, timeUtc);
 
-            return complexZmanimCalendar == null ? DateTime.UtcNow : complexZmanimCalendar.getTzais().ToDateTime().ToUniversalTime();
+            return complexZmanimCalendar == null ? DateTime.UtcNow : complexZmanimCalendar.getTzais().ToUniversalTime();
         }
 
         public string Description { get; set; }

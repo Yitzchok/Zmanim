@@ -70,9 +70,30 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                     calendar.get(Calendar.DAY_OF_MONTH),
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
-                    calendar.get(Calendar.SECOND)
-                /*,calender.get(Calendar.MILLISECOND)*/
+                    calendar.get(Calendar.SECOND),
+                    calendar.get(Calendar.MILLISECOND)
                     ));
+            return this;
+        }
+
+        public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime date)
+        {
+            AddTestMethod(methodName,
+                 string.Format(
+                 @"var zman = calendar.{0}();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime({1}, {2}, {3}, {4}, {5}, {6})
+                ));",
+                     methodName,
+                     date.Year,
+                     date.Month - 1,
+                     date.Day,
+                     date.Hour,
+                     date.Minute,
+                     date.Second,
+                     date.Millisecond
+                     ));
             return this;
         }
 

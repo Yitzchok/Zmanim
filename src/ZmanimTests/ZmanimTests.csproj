@@ -45,11 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZmanimTestWithMilliseconds.cs" />
     <Compile Include="JewishDatesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDateExtensions.cs" />
+    <Compile Include="TestGeneration\TestFormatters\JavaTestFormatterWithMilliseconds.cs" />
+    <Compile Include="TestGeneration\TestFormatters\DotNetTestFormatterWithMilliseconds.cs" />
     <Compile Include="TestGeneration\TestFormatters\JavaTestFormatter.cs" />
     <Compile Include="TestGeneration\TestFormatters\DotNetTestFormatter.cs" />
     <Compile Include="TestGeneration\TestFormatters\ITestFormatter.cs" />
+    <Compile Include="TestGeneration\TestMethodGenerators\DateTimeTestMethodGenerator.cs" />
     <Compile Include="TestGeneration\TestMethodGenerators\DateTestMethodGenerator.cs" />
     <Compile Include="TestGeneration\TestMethodGenerators\ITestMethodGenerator.cs" />
     <Compile Include="TestGeneration\TestMethodGenerators\LongTestMethodGenerator.cs" />

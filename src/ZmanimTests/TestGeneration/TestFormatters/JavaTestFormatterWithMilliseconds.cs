@@ -5,9 +5,9 @@ using java.util;
 
 namespace ZmanimTests.TestGeneration.TestFormatters
 {
-    public class JavaTestFormatter : ITestFormatter
+    public class JavaTestFormatterWithMilliseconds : ITestFormatter
     {
-        public JavaTestFormatter()
+        public JavaTestFormatterWithMilliseconds()
         {
             TestMethods = new List<string>();
             TestMethods.Add(@"
@@ -76,7 +76,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
    Assert.assertEquals(new GregorianCalendar({1}, {2}, {3}, {4}, {5}, {6}).getTime().toString(), zman.toString());",
                     methodName,
                     date.Year,
-                    date.Month - 1,
+                    date.Month-1,
                     date.Day,
                     date.Hour,
                     date.Minute,

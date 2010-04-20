@@ -30,7 +30,7 @@ namespace Zmanim.Extensions
 
         public static long ToMillisecondsFromEpoch(this DateTime dateTime)
         {
-            return (long) (new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc) - dateTime).TotalMilliseconds;
+            return (long)(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
         }
 
         /// <summary>
@@ -72,6 +72,19 @@ namespace Zmanim.Extensions
                                 calender.get(Calendar.SECOND),
                                 DateTimeKind.Local
                 );
+        }
+
+        /// <summary>
+        /// Converts a Date to DateTime. (no milliseconds)
+        /// </summary>
+        /// <param name="dateTime">The dateTime.</param>
+        /// <returns></returns>
+        public static Date ToDate(this DateTime dateTime)
+        {
+            return new GregorianCalendar(
+                dateTime.Year, dateTime.Month - 1, dateTime.Day,
+                dateTime.Hour, dateTime.Minute, dateTime.Second).getTime();
+
         }
     }
 }

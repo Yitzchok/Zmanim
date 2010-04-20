@@ -48,7 +48,7 @@ namespace Zmanim.Cli
 
             czc.setCalendar(new GregorianCalendar(options.Date.Year, options.Date.Month - 1, options.Date.Day));
 
-            var methods = GetDateAndLongMethods();
+            var methods = GetDateTimeAndLongMethods();
 
             foreach (var first in
                 extraArgs.Select(extraArg =>
@@ -78,10 +78,10 @@ namespace Zmanim.Cli
             //Console.Read();
         }
 
-        private static IEnumerable<MethodInfo> GetDateAndLongMethods()
+        private static IEnumerable<MethodInfo> GetDateTimeAndLongMethods()
         {
             return typeof (ComplexZmanimCalendar).GetMethods()
-                .Where(m => (m.ReturnType == typeof (Date) || m.ReturnType == typeof (long))
+                .Where(m => (m.ReturnType == typeof (DateTime) || m.ReturnType == typeof (long))
                             && m.Name.StartsWith("get")
                             && m.IsPublic
                             && m.GetParameters().Count() == 0);

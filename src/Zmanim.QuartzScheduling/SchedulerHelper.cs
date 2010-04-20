@@ -91,7 +91,7 @@ namespace Zmanim.QuartzScheduling
         {
             if (ZmainMethods == null)
             {
-                var dateType = typeof(Date);
+                var dateType = typeof(DateTime);
                 /*var longType = typeof(long);*/
 
                 ZmainMethods = typeof(ComplexZmanimCalendar).GetMethods()
@@ -112,7 +112,7 @@ namespace Zmanim.QuartzScheduling
         {
             if (ZmainMethods == null)
             {
-                var dateType = typeof(Date);
+                var dateType = typeof(DateTime);
 
                 ZmainMethods = typeof(ComplexZmanimCalendar).GetMethods()
                     .Where(m => (m.ReturnType == dateType /*|| m.ReturnType == longType*/)
