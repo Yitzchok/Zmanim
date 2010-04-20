@@ -10,6 +10,7 @@ namespace Zmanim.Cli
             Latitude = 40.09596;
             Longitude = -74.22213;
             TimeZone = "America/New_York";
+            DateTimeFormat = "HH:mm:ss";
         }
 
         public DateTime Date { get; set; }
@@ -18,5 +19,6 @@ namespace Zmanim.Cli
         public double Elevation { get; set; }
         public string TimeZone { get; set; }
         public string MethodName { get; set; }
+        public string DateTimeFormat { get; set; }
     }
 }

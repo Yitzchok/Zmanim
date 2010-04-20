@@ -29,20 +29,23 @@ namespace Zmanim.Cli
                         {"lon|longitude=", "Set location's longitude", (double x) => options.Longitude = x},
                         {"e|elevation=", "Set location's elevation; Positive only", (double x) => options.Elevation = x},
                         {"tz|timezone=", "Set location's TimeZone", x => options.TimeZone = x},
+                        {"tf|timeformat=", "Set the way the application formats a DateTime object.", x => options.DateTimeFormat = x},
                         {"h|?|help", "Shows this help message", v => ShowHelp()}
                     };
 
             List<string> extraArgs;
-            try {
+            try
+            {
                 extraArgs = p.Parse(args);
             }
-            catch (OptionException e) {
+            catch (OptionException e)
+            {
                 ShowHelp();
                 return;
             }
 
             var timeZone = TimeZone.getTimeZone(options.TimeZone);
-            var location = 
+            var location =
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
             var czc = new ComplexZmanimCalendar(location);
 
@@ -54,22 +57,21 @@ namespace Zmanim.Cli
                 extraArgs.Select(extraArg =>
                                  methods.Where(
                                      f => f.Name.Remove(0, 3).ToLowerInvariant() == extraArg.ToLowerInvariant()).First())
-                ) {
+                )
+            {
                 object invoke = first.Invoke(czc, null);
 
                 if (extraArgs.Count > 1)
                     Console.Write(first.Name.Remove(0, 3) + ": ");
 
-                if (invoke.GetType() == typeof (Date)) {
-                    var calendar = new GregorianCalendar();
-                    calendar.setTime((Date) invoke);
-
-                    Console.Write("{0:D2}:{1:D2}:{2:D2}",
-                                  calendar.get(Calendar.HOUR_OF_DAY),
-                                  calendar.get(Calendar.MINUTE),
-                                  calendar.get(Calendar.SECOND));
-                } else if (invoke.GetType() == typeof (long)) {
-                    Console.WriteLine((long) invoke);
+                if (invoke.GetType() == typeof(DateTime))
+                {
+                    var time = (DateTime)invoke;
+                    Console.Write(time.ToString(options.DateTimeFormat));
+                }
+                else if (invoke.GetType() == typeof(long))
+                {
+                    Console.WriteLine((long)invoke);
                 }
 
                 if (extraArgs.Count > 1)
@@ -80,8 +82,8 @@ namespace Zmanim.Cli
 
         private static IEnumerable<MethodInfo> GetDateTimeAndLongMethods()
         {
-            return typeof (ComplexZmanimCalendar).GetMethods()
-                .Where(m => (m.ReturnType == typeof (DateTime) || m.ReturnType == typeof (long))
+            return typeof(ComplexZmanimCalendar).GetMethods()
+                .Where(m => (m.ReturnType == typeof(DateTime) || m.ReturnType == typeof(long))
                             && m.Name.StartsWith("get")
                             && m.IsPublic
                             && m.GetParameters().Count() == 0);
