@@ -20,15 +20,15 @@ Public Class _Default
     End Sub
 
     Protected Function GetSunrise() As DateTime
-        Return Calendar.getSunrise().ToDateTime()
+        Return Calendar.getSunrise()
     End Function
 
     Protected Function GetSunset() As DateTime
-        Return Calendar.getSunset().ToDateTime()
+        Return Calendar.getSunset()
     End Function
 
 
-    Protected Function GetZman(ByVal zman As Func(Of ComplexZmanimCalendar, [Date])) As DateTime
-        Return zman.Invoke(Calendar).ToDateTime()
+    Protected Function GetZman(ByVal zman As Func(Of ComplexZmanimCalendar, [DateTime])) As DateTime
+        Return zman.Invoke(Calendar)
     End Function
 End Class
