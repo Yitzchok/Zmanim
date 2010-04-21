@@ -317,7 +317,7 @@ namespace net.sourceforge.zmanim
         {
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
-                Calendar clonedCalendar = (GregorianCalendar)getCalendar().clone();
+                Calendar clonedCalendar = (Calendar)getCalendar().clone();
                 clonedCalendar.setTime(sunset.ToDate());
                 clonedCalendar.add(Calendar.DAY_OF_MONTH, 1);
                 return clonedCalendar.getTime().ToDateTimeWithMilliseconds();
@@ -618,7 +618,7 @@ namespace net.sourceforge.zmanim
             time = getOffsetTime(time);
             time = (time + 240) % 24; // the calculators sometimes return a double
             // that is negative or slightly greater than 24
-            Calendar cal = new GregorianCalendar();
+            Calendar cal = Calendar.getInstance();
             cal.clear();
             cal.set(Calendar.YEAR, getCalendar().get(Calendar.YEAR));
             cal.set(Calendar.MONTH, getCalendar().get(Calendar.MONTH));
