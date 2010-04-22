@@ -1,3 +1,6 @@
+include .\psake_ext.ps1
+$framework = "4.0"
+
 properties { 
   $base_dir  = resolve-path .
   $lib_dir = "$base_dir\lib"
@@ -11,8 +14,6 @@ properties {
   $src_dir = "$base_dir\src"
   $sample_dir = "$base_dir\Samples"
 } 
-
-include .\psake_ext.ps1
 
 task default -depends Release
 
@@ -65,15 +66,14 @@ task Init -depends Clean {
 } 
 
 task Compile -depends Init { 
-	$v4_net_version = (ls "C:\Windows\Microsoft.NET\Framework\v4.0*").Name
-    exec "C:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" """$sln_file"" /p:OutDir=""$buildartifacts_dir\"""
+	exec { msbuild $sln_file /p:OutDir=""$buildartifacts_dir\"" }
 } 
 
 task Test -depends Compile {
-  $old = pwd
-  cd $build_dir
-  exec "$tools_dir\NUnit\nunit-console.exe" "$build_dir\ZmanimTests.dll"
-  cd $old
+	$old = pwd
+	cd $build_dir
+	exec { & $tools_dir\NUnit\nunit-console.exe "$build_dir\ZmanimTests.dll" /nodots }
+	cd $old
 }
 
 task Release -depends Test {
