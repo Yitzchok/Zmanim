@@ -35,5 +35,10 @@ namespace Zmanim.Scheduling
 
         public string Description { get; set; }
         public ICalendar CalendarBase { get; set; }
+        
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

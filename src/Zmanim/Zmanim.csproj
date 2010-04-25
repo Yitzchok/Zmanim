@@ -68,6 +68,7 @@
     <Compile Include="ComplexZmanimCalendar.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
+    <Compile Include="TimeZone\ITimeZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
