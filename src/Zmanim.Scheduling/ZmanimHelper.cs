@@ -35,15 +35,20 @@ namespace Zmanim.Scheduling
         public static ComplexZmanimCalendar GetCalendar(this Location location, DateTime date)
         {
             var complexZmanimCalendar = GetCalendar(location);
-            complexZmanimCalendar.setCalendar(new GregorianCalendar(date.Year, date.Month - 1, date.Day));
-
+            complexZmanimCalendar.setCalendar(new DefaultCalendar
+                                                  {
+                                                      Date = new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)
+                                                  });
+            
             return complexZmanimCalendar;
         }
 
         public static ComplexZmanimCalendar SetCalendarDate(this ComplexZmanimCalendar calendar, DateTime date)
         {
-            calendar.setCalendar(new GregorianCalendar(date.Year, date.Month - 1, date.Day));
-
+            calendar.setCalendar(new DefaultCalendar
+            {
+                Date = new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)
+            });
             return calendar;
         }
 

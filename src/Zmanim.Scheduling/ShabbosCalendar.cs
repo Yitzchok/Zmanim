@@ -1,7 +1,6 @@
 ﻿using System;
 using net.sourceforge.zmanim;
-using Quartz;
-using Zmanim.Extensions;
+using ICalendar = Quartz.ICalendar;
 
 namespace Zmanim.Scheduling
 {
