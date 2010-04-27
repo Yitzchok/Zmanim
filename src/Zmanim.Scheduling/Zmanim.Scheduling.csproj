@@ -36,9 +36,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\..\lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Quartz">
       <HintPath>..\..\lib\Quartz.dll</HintPath>
     </Reference>

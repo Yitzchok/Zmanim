@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 using Quartz;
 using Quartz.Impl.Calendar;
-using Zmanim.Extensions;
 using Zmanim.QuartzScheduling.Configuration;
 using Zmanim.Scheduling;
 using Zmanim.TimeZone;
@@ -103,7 +101,7 @@ namespace Zmanim.QuartzScheduling
             var methodInfo = ZmainMethods
                 .Where(z => z.Name.ToLowerInvariant() == "get" + methodName.ToLowerInvariant()).First();
 
-            return ((Date)methodInfo.Invoke(zmanimCalendar, null)).ToDateTime();
+            return (DateTime)methodInfo.Invoke(zmanimCalendar, null);
         }
 
 

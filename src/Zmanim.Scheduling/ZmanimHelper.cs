@@ -1,8 +1,6 @@
 using System;
-using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
-using Zmanim.Extensions;
 using Zmanim.TimeZone;
 
 namespace Zmanim.Scheduling

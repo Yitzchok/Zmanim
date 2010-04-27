@@ -1,11 +1,9 @@
 using System;
-using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Zmanim.TimeZone;
-using TimeZone = java.util.TimeZone;
 
 namespace ZmanimTests
 {

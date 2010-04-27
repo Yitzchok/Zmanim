@@ -1,7 +1,5 @@
 ﻿using System;
-using java.util;
 using Quartz;
-using Zmanim.Extensions;
 using Zmanim.QuartzScheduling.Configuration;
 using Zmanim.Scheduling;
 
@@ -30,8 +28,9 @@ namespace Zmanim.QuartzScheduling.JobScheduler
             jobDetail.JobDataMap["Location"] = ReminderService.Location;
 
             var trigger = new ZmanimTrigger(Name, 
-                                            ReminderService.Location, z => ((Date)SchedulerHelper.GetMethodInfo(ReminderService.ZmanName).Invoke(z, null)).ToDateTime()
-                                                                               .AddSeconds(ReminderService.AddSeconds));
+                                            ReminderService.Location, z => (
+                                                (DateTime)SchedulerHelper.GetMethodInfo(ReminderService.ZmanName).Invoke(z, null))
+                                                .AddSeconds(ReminderService.AddSeconds));
 
             scheduler.ScheduleJob(jobDetail, trigger);
         }

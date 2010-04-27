@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq.Expressions;
-using java.util;
 using net.sourceforge.zmanim;
 using Quartz;
 using Quartz.Util;
-using Zmanim.Extensions;
 using ICalendar = Quartz.ICalendar;
 
 namespace Zmanim.Scheduling

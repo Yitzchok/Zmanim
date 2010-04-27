@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using java.util;
 
 namespace ZmanimTests.TestGeneration.TestFormatters
 {
@@ -8,7 +7,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
     {
         ITestFormatter SetClassName(string name);
         ITestFormatter AddTestMethod(string methodName, string testBody);
-        ITestFormatter AddDateTestMethod(string methodName, Date date);
+        /*ITestFormatter AddDateTestMethod(string methodName, Date date);*/
         ITestFormatter AddDateTimeTestMethod(string methodName, DateTime date);
         ITestFormatter AddLongTestMethod(string methodName, long testResult);
         IList<string> TestMethods { get; set; }

@@ -6,7 +6,6 @@ using NUnit.Framework;
 using Zmanim.TimeZone;
 using ZmanimTests.TestGeneration.TestFormatters;
 using ZmanimTests.TestGeneration.TestMethodGenerators;
-using TimeZone = java.util.TimeZone;
 
 namespace ZmanimTests
 {

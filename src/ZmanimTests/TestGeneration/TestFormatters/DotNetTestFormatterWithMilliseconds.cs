@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using java.util;
 
 namespace ZmanimTests.TestGeneration.TestFormatters
 {
@@ -52,6 +51,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
             return this;
         }
 
+        /*
         public ITestFormatter AddDateTestMethod(string methodName, Date date)
         {
             var calendar = new GregorianCalendar();
@@ -75,6 +75,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                     ));
             return this;
         }
+        */
 
         public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime date)
         {
