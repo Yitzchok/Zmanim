@@ -25,7 +25,7 @@ namespace ZmanimTests
             var calendar = new GregorianCalendar();
 
             foreach (var method in type.GetMethods()
-                .Where(m => m.ReturnType == typeof(Date)
+                .Where(m => m.ReturnType == typeof(DateTime)
                             && m.Name.StartsWith("get")
                             && m.IsPublic == true
                             && m.GetParameters().Count() == 0))

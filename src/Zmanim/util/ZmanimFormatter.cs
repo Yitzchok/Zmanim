@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using java.text;
+//using java.text;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -81,10 +81,10 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         public const int XSD_DURATION_FORMAT = 5;
 
-        private static readonly DecimalFormat minuteSecondNF = new DecimalFormat("00");
-        private static readonly DecimalFormat milliNF = new DecimalFormat("000");
-        private readonly DecimalFormat hourNF;
-        private SimpleDateFormat dateFormat;
+        private static readonly string minuteSecondNF = "00";
+        private static readonly string milliNF = "000";
+        private readonly string hourNF;
+        private string dateFormat;
         private bool prependZeroHours;
         private int timeFormat = SEXAGESIMAL_XSD_FORMAT;
         internal bool useDecimal;
@@ -94,7 +94,7 @@ namespace net.sourceforge.zmanim.util
         /// <summary>
         /// </summary>
         public ZmanimFormatter()
-            : this(0, new SimpleDateFormat("h:mm:ss"))
+            : this(0, "h:mm:ss")
         {
         }
 
@@ -106,14 +106,14 @@ namespace net.sourceforge.zmanim.util
         ///  ZmanimFormatter.SEXAGESIMAL_SECONDS_FORMAT will format the
         ///  time time of 90*60*1000 + 1 as 1:30:00 </param>
         ///<param name = "dateFormat">The date format.</param>
-        public ZmanimFormatter(int format, SimpleDateFormat dateFormat)
+        public ZmanimFormatter(int format, string dateFormat)
         {
             string hourFormat = "0";
             if (prependZeroHours)
             {
                 hourFormat = "00";
             }
-            hourNF = new DecimalFormat(hourFormat);
+            hourNF = hourFormat;
             // decimalNF = new DecimalFormat("0.0####");
             setTimeFormat(format);
             setDateFormat(dateFormat);
@@ -152,7 +152,7 @@ namespace net.sourceforge.zmanim.util
         ///   Sets the date format.
         /// </summary>
         /// <param name = "sdf"></param>
-        public virtual void setDateFormat(SimpleDateFormat sdf)
+        public virtual void setDateFormat(string sdf)
         {
             dateFormat = sdf;
         }
@@ -161,7 +161,7 @@ namespace net.sourceforge.zmanim.util
         ///   Gets the date format.
         /// </summary>
         /// <returns></returns>
-        public virtual SimpleDateFormat getDateFormat()
+        public virtual string getDateFormat()
         {
             return dateFormat;
         }
@@ -208,18 +208,18 @@ namespace net.sourceforge.zmanim.util
                 return formatXSDDurationTime(time);
             }
             var sb = new StringBuilder();
-            sb.Append(hourNF.format(time.getHours()));
+            sb.Append(time.getHours().ToString(hourNF));
             sb.Append(":");
-            sb.Append(minuteSecondNF.format(time.getMinutes()));
+            sb.Append(time.getMinutes().ToString(minuteSecondNF));
             if (useSeconds)
             {
                 sb.Append(":");
-                sb.Append(minuteSecondNF.format(time.getSeconds()));
+                sb.Append(time.getSeconds().ToString(minuteSecondNF));
             }
             if (useMillis)
             {
                 sb.Append(".");
-                sb.Append(milliNF.format(time.getMilliseconds()));
+                sb.Append(time.getMilliseconds().ToString(milliNF));
             }
             return sb.ToString();
         }
@@ -235,18 +235,13 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the formatted string </returns>
         public virtual string formatDate(DateTime Date, ITimeZoneDateTime timeZoneDateTime)
         {
-            //dateFormat.setCalendar(new GregorianCalendar(
-            //    timeZoneDateTime.Date.Year, timeZoneDateTime.Date.Month, timeZoneDateTime.Date.Day,
-            //    timeZoneDateTime.Date.Hour, timeZoneDateTime.Date.Minute, timeZoneDateTime.Date.Second));
-
-            if (dateFormat.toPattern().Equals("yyyy-MM-dd'T'HH:mm:ss"))
+            if (dateFormat == "yyyy-MM-dd'T'HH:mm:ss")
             {
                 return getXSDate(Date, timeZoneDateTime);
             }
             else
             {
-                return Date.ToString(dateFormat.toPattern());
-                return dateFormat.format(Date);
+                return Date.ToString(dateFormat);
             }
         }
 
@@ -271,9 +266,9 @@ namespace net.sourceforge.zmanim.util
             //		 * if (xmlDateFormat == null || xmlDateFormat.trim().equals("")) {
             //		 * xmlDateFormat = xsdDateFormat; }
             //		 
-            var dateFormat = new SimpleDateFormat(xsdDateFormat);
+            //var dateFormat = new SimpleDateFormat(xsdDateFormat);
 
-            var buff = new StringBuilder(dateFormat.format(Date));
+            var buff = new StringBuilder(Date.ToString(xsdDateFormat));
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
             //int offset = cal.get(Calendar.ZONE_OFFSET) + cal.get(Calendar.DST_OFFSET);
@@ -338,7 +333,7 @@ namespace net.sourceforge.zmanim.util
 
                 if (time.getSeconds() != 0 || time.getMilliseconds() != 0)
                 {
-                    duration.Append(time.getSeconds() + "." + milliNF.format(time.getMilliseconds()));
+                    duration.Append(time.getSeconds() + "." + time.getMilliseconds().ToString(milliNF));
                     duration.Append("S");
                 }
                 if (duration.Length == 1) // zero seconds
@@ -379,8 +374,8 @@ namespace net.sourceforge.zmanim.util
         ///</returns>
         public static string toXML(AstronomicalCalendar ac)
         {
-            var formatter = new ZmanimFormatter(XSD_DURATION_FORMAT, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            var formatter = new ZmanimFormatter(XSD_DURATION_FORMAT, "yyyy-MM-dd'T'HH:mm:ss");
+            string df = "yyyy-MM-dd";
             var output = new StringBuilder("<");
 
             if (ac.GetType().Name.EndsWith("AstronomicalCalendar"))
@@ -391,7 +386,7 @@ namespace net.sourceforge.zmanim.util
             {
                 output.Append("Zmanim");
             }
-            output.Append(" date=\"" + df.format(ac.getCalendar().Date) + "\"");
+            output.Append(" date=\"" + ac.getCalendar().Date.ToString(df) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
             output.Append(" algorithm=\"" + ac.getAstronomicalCalculator().getCalculatorName() + "\"");
             output.Append(" location=\"" + ac.getGeoLocation().getLocationName() + "\"");
