@@ -47,8 +47,7 @@ namespace net.sourceforge.zmanim
     /// double latitude = 40.0828; //Lakewood, NJ
     /// double longitude = -74.2094; //Lakewood, NJ
     /// double elevation = 0;
-    /// //the String parameter in getTimeZone() has to be a valid timezone listed in <see cref="java.util.TimeZone.getAvailableIDs()"/>
-    /// TimeZone timeZone = TimeZone.getTimeZone("America/New_York");
+    /// ITimeZone timeZone = new JavaTimeZone(&quot;America/New_York&quot;);
     /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
     /// elevation, timeZone);
     /// ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
