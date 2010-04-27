@@ -59,9 +59,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
-    <Reference Include="Zmanim, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Zmanim, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\build\Zmanim.dll</HintPath>
+      <HintPath>..\..\lib\Zmanim.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

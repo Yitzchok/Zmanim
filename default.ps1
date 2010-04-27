@@ -13,9 +13,10 @@ properties {
   $release_dir = "$base_dir\Release"
   $src_dir = "$base_dir\src"
   $sample_dir = "$base_dir\Samples"
+  $sample_lib_dir = "$sample_dir\lib"
 } 
 
-task default -depends Release
+task default -depends CopyBuildFilesToSampleDirectory
 
 task Clean { 
   remove-item -force -recurse $buildartifacts_dir -ErrorAction SilentlyContinue 
@@ -96,4 +97,13 @@ task Release -depends Test {
 	if ($lastExitCode -ne 0) {
         throw "Error: Failed to execute ZIP command"
     }
+}
+
+task CopyBuildFilesToSampleDirectory -depends Release {
+	Write-Host "Copying assemblies to sample lib directory."
+	Copy-Item $build_dir\Zmanim.dll $sample_lib_dir
+	Copy-Item $build_dir\Zmanim.xml $sample_lib_dir
+	Copy-Item $build_dir\IKVM.*.dll $sample_lib_dir
+	Copy-Item lgpl.txt $sample_lib_dir
+	Copy-Item acknowledgements.txt $sample_lib_dir	
 }
