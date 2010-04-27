@@ -5,7 +5,16 @@ namespace net.sourceforge.zmanim
 {
     public interface ICalendar : ICloneable
     {
+        /// <summary>
+        /// Gets or sets the date.
+        /// </summary>
+        /// <value>The date.</value>
         DateTime Date { get; set; }
+
+        /// <summary>
+        /// Gets or sets the time zone.
+        /// </summary>
+        /// <value>The time zone.</value>
         TimeZone TimeZone { get; set; }
     }
 
