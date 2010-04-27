@@ -7,22 +7,31 @@ namespace net.sourceforge.zmanim
     {
         DateTime Date { get; set; }
         TimeZone TimeZone { get; set; }
-        long getTimeInMillis();
     }
 
     public class DefaultCalendar : ICalendar
     {
+        /// <summary>
+        /// Gets or sets the date.
+        /// </summary>
+        /// <value>The date.</value>
+        public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Gets or sets the time zone.
+        /// </summary>
+        /// <value>The time zone.</value>
+        public TimeZone TimeZone { get; set; }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
         public object Clone()
         {
             return MemberwiseClone();
-        }
-
-        public DateTime Date { get; set; }
-        public TimeZone TimeZone { get; set; }
-
-        public long getTimeInMillis()
-        {
-            return Date.ToFileTime();
         }
     }
 }

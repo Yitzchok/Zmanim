@@ -400,7 +400,7 @@ namespace net.sourceforge.zmanim.util
             output.Append(" timeZoneName=\"" + ac.getGeoLocation().getTimeZone().getDisplayName() + "\"");
             output.Append(" timeZoneID=\"" + ac.getGeoLocation().getTimeZone().getID() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.getGeoLocation().getTimeZone().getOffset(ac.getCalendar().getTimeInMillis()) /
+                          (ac.getGeoLocation().getTimeZone().getOffset(ac.getCalendar().Date.ToFileTime()) /
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
