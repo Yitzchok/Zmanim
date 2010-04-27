@@ -8,7 +8,7 @@ namespace PublicDomain
     /// <summary>
     /// Methods to help in date and time manipulation.
     /// </summary>
-    public static class DateTimeUtlities
+    internal static class DateTimeUtlities
     {
         /// <summary>
         /// Parses the month.

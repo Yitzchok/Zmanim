@@ -9,7 +9,7 @@ namespace PublicDomain
     /// Common regular expressions.
     /// http://www.codeproject.com/dotnet/RegexTutorial.asp
     /// </summary>
-    public static class RegexUtilities
+    internal static class RegexUtilities
     {
         /// <summary>
         /// 

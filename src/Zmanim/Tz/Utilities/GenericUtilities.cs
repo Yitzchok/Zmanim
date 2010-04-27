@@ -7,7 +7,7 @@ namespace PublicDomain
     /// <summary>
     /// Various utilities that work on generics
     /// </summary>
-    public static class GenericUtilities
+    internal static class GenericUtilities
     {
         /// <summary>
         /// Equalses the comparison.

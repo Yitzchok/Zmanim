@@ -7,7 +7,7 @@ namespace PublicDomain
     /// <summary>
     /// Methods to work with characters, such as an indexable ASCII table.
     /// </summary>
-    public class CharUtilities
+    internal class CharUtilities
     {
         /// <summary>
         /// 

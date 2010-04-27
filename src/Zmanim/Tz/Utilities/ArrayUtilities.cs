@@ -7,7 +7,7 @@ namespace PublicDomain
     /// <summary>
     /// Methods to manipulate arrays.
     /// </summary>
-    public static class ArrayUtilities
+    internal static class ArrayUtilities
     {
         /// <summary>
         /// Gets the list from enumerable.

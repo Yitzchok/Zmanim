@@ -8,7 +8,7 @@ namespace PublicDomain
     /// <summary>
     /// Common conversion tasks such as parsing string values into various types.
     /// </summary>
-    public static class ConversionUtilities
+    internal static class ConversionUtilities
     {
         /// <summary>
         /// Determines whether [is string an integer] [the specified STR].

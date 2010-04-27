@@ -11,7 +11,7 @@ namespace PublicDomain
     /// <summary>
     /// String manipulation and generation methods, as well as string array manipulation.
     /// </summary>
-    public static class StringUtilities
+    internal static class StringUtilities
     {
         /// <summary>
         /// 

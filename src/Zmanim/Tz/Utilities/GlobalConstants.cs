@@ -7,7 +7,7 @@ namespace PublicDomain
     /// <summary>
     /// Various useful global constants.
     /// </summary>
-    public static class GlobalConstants
+    internal static class GlobalConstants
     {
         /// <summary>
         /// 

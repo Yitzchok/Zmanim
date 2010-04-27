@@ -8,7 +8,7 @@ namespace PublicDomain
     /// <summary>
     /// 
     /// </summary>
-    public static class CryptographyUtilities
+    internal static class CryptographyUtilities
     {
         /// <summary>
         /// Computes the SHA1 hash.
