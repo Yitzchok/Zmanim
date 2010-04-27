@@ -101,6 +101,7 @@ task Release -depends Test {
 
 task CopyBuildFilesToSampleDirectory -depends Release {
 	Write-Host "Copying assemblies to sample lib directory."
+	New-Item $sample_lib_dir -type directory -force
 	Copy-Item $build_dir\Zmanim.dll $sample_lib_dir
 	Copy-Item $build_dir\Zmanim.xml $sample_lib_dir
 	Copy-Item $build_dir\IKVM.*.dll $sample_lib_dir
