@@ -69,9 +69,9 @@ namespace net.sourceforge.zmanim.util
             {
                 zenith = adjustZenith(zenith, 0);
             }
-            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().get(Calendar.YEAR),
-                                    astronomicalCalendar.getCalendar().get(Calendar.MONTH) + 1,
-                                    astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_MONTH),
+            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().getTime().Year,
+                                    astronomicalCalendar.getCalendar().getTime().Month,
+                                    astronomicalCalendar.getCalendar().getTime().Day,
                                     astronomicalCalendar.getGeoLocation().getLongitude(),
                                     astronomicalCalendar.getGeoLocation().getLatitude(), zenith, TYPE_SUNRISE);
             return doubleTime;
@@ -91,9 +91,9 @@ namespace net.sourceforge.zmanim.util
             {
                 zenith = adjustZenith(zenith, 0);
             }
-            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().get(Calendar.YEAR),
-                                    astronomicalCalendar.getCalendar().get(Calendar.MONTH) + 1,
-                                    astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_MONTH),
+            doubleTime = getTimeUTC(astronomicalCalendar.getCalendar().getTime().Year,
+                                    astronomicalCalendar.getCalendar().getTime().Month,
+                                    astronomicalCalendar.getCalendar().getTime().Day,
                                     astronomicalCalendar.getGeoLocation().getLongitude(),
                                     astronomicalCalendar.getGeoLocation().getLatitude(), zenith, TYPE_SUNSET);
             return doubleTime;

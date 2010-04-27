@@ -68,12 +68,12 @@ namespace net.sourceforge.zmanim.util
         /// <summary>
         ///   constant for milliseconds in a minute (60,000)
         /// </summary>
-        internal const long MINUTE_MILLIS = 60*1000;
+        internal const long MINUTE_MILLIS = 60 * 1000;
 
         /// <summary>
         ///   constant for milliseconds in an hour (3,600,000)
         /// </summary>
-        public const long HOUR_MILLIS = MINUTE_MILLIS*60;
+        public const long HOUR_MILLIS = MINUTE_MILLIS * 60;
 
         ///<summary>
         ///  Format using the XSD Duration format. This is in the format of
@@ -182,7 +182,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> String The formatted <c>String</c> </returns>
         public virtual string format(double milliseconds)
         {
-            return format((int) milliseconds);
+            return format((int)milliseconds);
         }
 
         ///<summary>
@@ -234,9 +234,11 @@ namespace net.sourceforge.zmanim.util
         ///  the <see cref = "java.util.Calendar">Calendar</see> used to help format
         ///  based on the Calendar's DST and other settings. </param>
         ///<returns> the formatted string </returns>
-        public virtual string formatDate(Date Date, Calendar calendar)
+        public virtual string formatDate(Date Date, ICalendar calendar)
         {
-            dateFormat.setCalendar(calendar);
+            dateFormat.setCalendar(new GregorianCalendar(
+                calendar.getTime().Year, calendar.getTime().Month, calendar.getTime().Day,
+                calendar.getTime().Hour, calendar.getTime().Minute, calendar.getTime().Second));
             if (dateFormat.toPattern().Equals("yyyy-MM-dd'T'HH:mm:ss"))
             {
                 return getXSDate(Date, calendar);
@@ -261,7 +263,7 @@ namespace net.sourceforge.zmanim.util
         ///  followed by the difference between the difference from UTC represented as
         ///  hh:mm.
         ///</summary>
-        public virtual string getXSDate(Date Date, Calendar cal)
+        public virtual string getXSDate(Date Date, ICalendar cal)
         {
             string xsdDateFormat = "yyyy-MM-dd'T'HH:mm:ss";
             //        
@@ -273,7 +275,8 @@ namespace net.sourceforge.zmanim.util
             var buff = new StringBuilder(dateFormat.format(Date));
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
-            int offset = cal.get(Calendar.ZONE_OFFSET) + cal.get(Calendar.DST_OFFSET);
+            //int offset = cal.get(Calendar.ZONE_OFFSET) + cal.get(Calendar.DST_OFFSET);
+            int offset = cal.getTimeZone().getRawOffset() + cal.getTimeZone().getDSTSavings();
             // If there is no offset, we have "Coordinated
             // Universal Time."
             if (offset == 0)
@@ -281,9 +284,9 @@ namespace net.sourceforge.zmanim.util
             else
             {
                 // Convert milliseconds to hours and minutes
-                int hrs = offset/(60*60*1000);
+                int hrs = offset / (60 * 60 * 1000);
                 // In a few cases, the time zone may be +/-hh:30.
-                int min = offset%(60*60*1000);
+                int min = offset % (60 * 60 * 1000);
                 char posneg = hrs < 0 ? '-' : '+';
                 buff.Append(posneg + formatDigits(hrs) + ':' + formatDigits(min));
             }
@@ -397,8 +400,8 @@ namespace net.sourceforge.zmanim.util
             output.Append(" timeZoneName=\"" + ac.getGeoLocation().getTimeZone().getDisplayName() + "\"");
             output.Append(" timeZoneID=\"" + ac.getGeoLocation().getTimeZone().getID() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.getGeoLocation().getTimeZone().getOffset(ac.getCalendar().getTimeInMillis())/
-                           ((double) HOUR_MILLIS)) + "\"");
+                          (ac.getGeoLocation().getTimeZone().getOffset(ac.getCalendar().getTimeInMillis()) /
+                           ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
 
@@ -423,11 +426,11 @@ namespace net.sourceforge.zmanim.util
                         }
                         else if (@value is Date)
                         {
-                            dateList.Add(new Zman((Date) @value, tagName));
+                            dateList.Add(new Zman((Date)@value, tagName));
                         } // shaah zmanis
                         else if (@value is long?)
                         {
-                            durationList.Add(new Zman((int) ((long?) @value), tagName));
+                            durationList.Add(new Zman((int)((long?)@value), tagName));
                         } // will probably never enter this block, but is
                         else
                         {
@@ -455,7 +458,7 @@ namespace net.sourceforge.zmanim.util
             {
                 output.Append("\t<" + zman.getZmanLabel());
                 output.Append(">");
-                output.Append(formatter.format((int) zman.getDuration()) + "</"
+                output.Append(formatter.format((int)zman.getDuration()) + "</"
                               + zman.getZmanLabel() + ">\n");
             }
 
@@ -501,8 +504,8 @@ namespace net.sourceforge.zmanim.util
             if (!method.Name.StartsWith("get"))
                 return false;
 
-            if (method.ReturnType == typeof (Date)
-                || method.ReturnType == typeof (long))
+            if (method.ReturnType == typeof(Date)
+                || method.ReturnType == typeof(long))
             {
                 return true;
             }

@@ -28,7 +28,7 @@ namespace ZmanimTests
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new GregorianCalendar(2010, 3, 2));
+            czc.setCalendar(new DefaultCalendar { Date = new DateTime(2010, 4, 2) });
             calendar = czc;
         }
 

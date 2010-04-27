@@ -2268,7 +2268,7 @@ namespace net.sourceforge.zmanim
         {
             int num = 0x11;
             num = (0x25 * num) + base.getTemporalHour().GetHashCode();
-            num += (0x25 * num) + getCalendar().hashCode();
+            num += (0x25 * num) + getCalendar().GetHashCode();
             num += (0x25 * num) + getGeoLocation().GetHashCode();
             return (num + ((0x25 * num) + getAstronomicalCalculator().GetHashCode()));
         }

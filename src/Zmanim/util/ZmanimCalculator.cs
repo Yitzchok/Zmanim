@@ -71,7 +71,7 @@ namespace net.sourceforge.zmanim.util
             // approximate time
             double lngHour = astronomicalCalendar.getGeoLocation().getLongitude()/15;
 
-            double t = astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_YEAR) + ((6 - lngHour)/24); // use 18 for
+            double t = astronomicalCalendar.getCalendar().getTime().DayOfYear + ((6 - lngHour)/24); // use 18 for
             // sunset instead
             // of 6
 
@@ -179,7 +179,7 @@ namespace net.sourceforge.zmanim.util
             // int calendarDayOfYear = calelendar.DAY_OF_YEAR;
 
             // int N=theday - date(1,1,theday.year()) + 1;
-            int N = astronomicalCalendar.getCalendar().get(Calendar.DAY_OF_YEAR);
+            int N = astronomicalCalendar.getCalendar().getTime().DayOfYear;
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time

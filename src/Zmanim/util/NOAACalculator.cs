@@ -103,11 +103,11 @@ namespace net.sourceforge.zmanim.util
         ///  Java Calendar </param>
         ///<returns> the Julian day corresponding to the date Note: Number is returned
         ///  for start of day. Fractional days should be added later. </returns>
-        private static double calcJD(Calendar date)
+        private static double calcJD(ICalendar date)
         {
-            int year = date.get(Calendar.YEAR);
-            int month = date.get(Calendar.MONTH) + 1;
-            int day = date.get(Calendar.DAY_OF_MONTH);
+            int year = date.getTime().Year;
+            int month = date.getTime().Month + 1;
+            int day = date.getTime().Day;
             if (month <= 2)
             {
                 year -= 1;

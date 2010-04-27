@@ -13,7 +13,7 @@ namespace ZmanimTests
     [TestFixture]
     public class ZmanimTest
     {
-        
+
         //We can use these test when removing the depenency to Java (IKVM)
         //To make sure that the code stayes the same.
 
@@ -30,7 +30,7 @@ namespace ZmanimTests
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new GregorianCalendar(2010, 3, 2));
+            czc.setCalendar(new DefaultCalendar { Date = new DateTime(2010, 4, 2) });
             calendar = czc;
         }
 

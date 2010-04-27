@@ -190,14 +190,14 @@ namespace net.sourceforge.zmanim.util
             return evening;
         }
 
-        private static double dateToJulian(Calendar date)
+        private static double dateToJulian(ICalendar date)
         {
-            int year = date.get(Calendar.YEAR);
-            int month = date.get(Calendar.MONTH) + 1;
-            int day = date.get(Calendar.DAY_OF_MONTH);
-            int hour = date.get(Calendar.HOUR_OF_DAY);
-            int minute = date.get(Calendar.MINUTE);
-            int second = date.get(Calendar.SECOND);
+            int year = date.getTime().Year;
+            int month = date.getTime().Month;
+            int day = date.getTime().Day;
+            int hour = date.getTime().Hour;
+            int minute = date.getTime().Minute;
+            int second = date.getTime().Second;
 
             double extra = (100.0*year) + month - 190002.5;
             double JD = (367.0*year) - (Math.Floor(7.0*(year + Math.Floor((month + 9.0)/12.0))/4.0)) +
