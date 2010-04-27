@@ -169,7 +169,7 @@ namespace net.sourceforge.zmanim
         public virtual DateTime getSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar)Clone();
-            clonedCal.getCalendar().setTime(clonedCal.getCalendar().getTime().AddDays(1));
+            clonedCal.getCalendar().Date = clonedCal.getCalendar().Date.AddDays(1);
             DateTime sunset = getSunset();
             DateTime sunrise = clonedCal.getSunrise();
             return getTimeOffset(sunset, getTemporalHour(sunset, sunrise) * 6);

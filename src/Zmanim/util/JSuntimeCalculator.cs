@@ -192,12 +192,12 @@ namespace net.sourceforge.zmanim.util
 
         private static double dateToJulian(ICalendar date)
         {
-            int year = date.getTime().Year;
-            int month = date.getTime().Month;
-            int day = date.getTime().Day;
-            int hour = date.getTime().Hour;
-            int minute = date.getTime().Minute;
-            int second = date.getTime().Second;
+            int year = date.Date.Year;
+            int month = date.Date.Month;
+            int day = date.Date.Day;
+            int hour = date.Date.Hour;
+            int minute = date.Date.Minute;
+            int second = date.Date.Second;
 
             double extra = (100.0*year) + month - 190002.5;
             double JD = (367.0*year) - (Math.Floor(7.0*(year + Math.Floor((month + 9.0)/12.0))/4.0)) +

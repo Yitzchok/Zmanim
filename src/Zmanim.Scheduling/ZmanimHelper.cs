@@ -12,7 +12,7 @@ namespace Zmanim.Scheduling
         {
             bool isShabbos = false;
 
-            var timeUtc = calendar.getCalendar().getTime().ToDateTime().ToUniversalTime();
+            var timeUtc = calendar.getCalendar().Date.ToUniversalTime();
 
             if (timeUtc.DayOfWeek == DayOfWeek.Friday)
                 isShabbos = timeUtc > calendar.getCandelLighting().ToUniversalTime();

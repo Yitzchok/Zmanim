@@ -237,8 +237,8 @@ namespace net.sourceforge.zmanim.util
         public virtual string formatDate(Date Date, ICalendar calendar)
         {
             dateFormat.setCalendar(new GregorianCalendar(
-                calendar.getTime().Year, calendar.getTime().Month, calendar.getTime().Day,
-                calendar.getTime().Hour, calendar.getTime().Minute, calendar.getTime().Second));
+                calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                calendar.Date.Hour, calendar.Date.Minute, calendar.Date.Second));
             if (dateFormat.toPattern().Equals("yyyy-MM-dd'T'HH:mm:ss"))
             {
                 return getXSDate(Date, calendar);
@@ -276,7 +276,7 @@ namespace net.sourceforge.zmanim.util
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
             //int offset = cal.get(Calendar.ZONE_OFFSET) + cal.get(Calendar.DST_OFFSET);
-            int offset = cal.getTimeZone().getRawOffset() + cal.getTimeZone().getDSTSavings();
+            int offset = cal.TimeZone.getRawOffset() + cal.TimeZone.getDSTSavings();
             // If there is no offset, we have "Coordinated
             // Universal Time."
             if (offset == 0)
@@ -390,7 +390,7 @@ namespace net.sourceforge.zmanim.util
             {
                 output.Append("Zmanim");
             }
-            output.Append(" date=\"" + df.format(ac.getCalendar().getTime()) + "\"");
+            output.Append(" date=\"" + df.format(ac.getCalendar().Date) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
             output.Append(" algorithm=\"" + ac.getAstronomicalCalculator().getCalculatorName() + "\"");
             output.Append(" location=\"" + ac.getGeoLocation().getLocationName() + "\"");

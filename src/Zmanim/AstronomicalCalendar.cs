@@ -318,9 +318,9 @@ namespace net.sourceforge.zmanim
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
                 ICalendar clonedCalendar = (ICalendar)getCalendar().Clone();
-                clonedCalendar.setTime(sunset);
-                clonedCalendar.getTime().AddDays(1);
-                return clonedCalendar.getTime();
+                clonedCalendar.Date = sunset;
+                clonedCalendar.Date.AddDays(1);
+                return clonedCalendar.Date;
             }
             else
             {
@@ -545,13 +545,13 @@ namespace net.sourceforge.zmanim
         ///  time. </returns>
         private double getOffsetTime(double time)
         {
-            bool dst = getCalendar().getTimeZone().inDaylightTime(getCalendar().getTime().ToDate());
+            bool dst = getCalendar().TimeZone.inDaylightTime(getCalendar().Date.ToDate());
             double dstOffset = 0;
             // be nice to Newfies and use a double
-            double gmtOffset = getCalendar().getTimeZone().getRawOffset() / (60 * MINUTE_MILLIS);
+            double gmtOffset = getCalendar().TimeZone.getRawOffset() / (60 * MINUTE_MILLIS);
             if (dst)
             {
-                dstOffset = getCalendar().getTimeZone().getDSTSavings() / (60 * MINUTE_MILLIS);
+                dstOffset = getCalendar().TimeZone.getDSTSavings() / (60 * MINUTE_MILLIS);
             }
             return time + gmtOffset + dstOffset;
         }
@@ -620,9 +620,9 @@ namespace net.sourceforge.zmanim
             // that is negative or slightly greater than 24
             Calendar cal = Calendar.getInstance();
             cal.clear();
-            cal.set(Calendar.YEAR, getCalendar().getTime().Year);
-            cal.set(Calendar.MONTH, getCalendar().getTime().Month - 1);
-            cal.set(Calendar.DAY_OF_MONTH, getCalendar().getTime().Day);
+            cal.set(Calendar.YEAR, getCalendar().Date.Year);
+            cal.set(Calendar.MONTH, getCalendar().Date.Month - 1);
+            cal.set(Calendar.DAY_OF_MONTH, getCalendar().Date.Day);
 
             var hours = (int)time; // cut off minutes
 
@@ -760,7 +760,7 @@ namespace net.sourceforge.zmanim
             this.geoLocation = geoLocation;
             // if not set the output will be in the original timezone. The call
             // below is also in the constructor
-            getCalendar().setTimeZone(geoLocation.getTimeZone());
+            getCalendar().TimeZone = geoLocation.getTimeZone();
         }
 
         ///<summary>
@@ -811,7 +811,7 @@ namespace net.sourceforge.zmanim
             {
                 // Always set the Calendar's timezone to match the GeoLocation
                 // TimeZone
-                getCalendar().setTimeZone(getGeoLocation().getTimeZone());
+                getCalendar().TimeZone = getGeoLocation().getTimeZone();
             }
         }
     }

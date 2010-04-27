@@ -105,9 +105,9 @@ namespace net.sourceforge.zmanim.util
         ///  for start of day. Fractional days should be added later. </returns>
         private static double calcJD(ICalendar date)
         {
-            int year = date.getTime().Year;
-            int month = date.getTime().Month + 1;
-            int day = date.getTime().Day;
+            int year = date.Date.Year;
+            int month = date.Date.Month + 1;
+            int day = date.Date.Day;
             if (month <= 2)
             {
                 year -= 1;
