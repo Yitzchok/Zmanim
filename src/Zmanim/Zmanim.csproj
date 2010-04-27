@@ -77,12 +77,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
-    <Compile Include="Tz\Utilities\BaseException.cs" />
+    <Compile Include="Tz\BaseException.cs" />
     <Compile Include="Tz\Utilities\CharUtilities.cs" />
     <Compile Include="Tz\Utilities\ConversionUtilities.cs" />
-    <Compile Include="Tz\Utilities\CryptographyUtilities.cs" />
     <Compile Include="Tz\Utilities\DateTimeUtlities.cs" />
-    <Compile Include="Tz\Utilities\GenericUtilities.cs" />
     <Compile Include="Tz\Utilities\GlobalConstants.cs" />
     <Compile Include="Tz\Month.cs" />
     <Compile Include="Collections\ReadOnlyDictionary.cs" />

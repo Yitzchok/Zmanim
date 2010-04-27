@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using java.util;
 using NDesk.Options;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
-using Calendar = java.util.Calendar;
-using GregorianCalendar = java.util.GregorianCalendar;
-using TimeZone = java.util.TimeZone;
 
 namespace Zmanim.Cli
 {
@@ -44,12 +40,12 @@ namespace Zmanim.Cli
                 return;
             }
 
-            var timeZone = TimeZone.getTimeZone(options.TimeZone);
+            var timeZone = java.util.TimeZone.getTimeZone(options.TimeZone);
             var location =
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
             var czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new GregorianCalendar(options.Date.Year, options.Date.Month - 1, options.Date.Day));
+            czc.setCalendar(new DefaultCalendar { Date = new DateTime(options.Date.Year, options.Date.Month, options.Date.Day) });
 
             var methods = GetDateTimeAndLongMethods();
 

@@ -70,12 +70,6 @@ namespace PublicDomain
         public const string PublicDomainNamespace = "http://www.codeplex.com/PublicDomain/";
 
         /// <summary>
-        /// Always ends in a trailing slash.
-        /// C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\
-        /// </summary>
-        public const string DotNetFrameworkLocation20 = @"C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\";
-
-        /// <summary>
         /// The number of bits in 1 Byte (8)
         /// </summary>
         public static readonly int BitsInAByte;
@@ -220,45 +214,5 @@ namespace PublicDomain
         /// 
         /// </summary>
         public const double EarthEquatorialDiameterInKilometers = EarthEquatorialRadiusInKilometers * 2;
-
-        /// <summary>
-        /// The default installation diretory of a standalone PublicDomain assembly.
-        /// Always ends in a trailing slash.
-        /// </summary>
-        public const string PublicDomainDefaultInstallLocation = @"C:\Program Files\Public Domain\";
-
-        /// <summary>
-        /// Represents the string (50 characters): 
-        /// ==================================================
-        /// </summary>
-        public const string DividerEquals = "==================================================";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string LogClassDatabase = "Database";
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public delegate void CallbackNoArgs();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="rock"></param>
-    public delegate void CallbackWithRock(object rock);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="str"></param>
-    public delegate void CallbackWithString(string str);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="i"></param>
-    public delegate void CallbackWithInt(int i);
 }

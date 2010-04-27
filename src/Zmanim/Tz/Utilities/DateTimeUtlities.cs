@@ -105,20 +105,6 @@ namespace PublicDomain
         }
 
         /// <summary>
-        /// Returns the absolute value of the specified TimeSpan.
-        /// </summary>
-        /// <param name="val">The val.</param>
-        /// <returns></returns>
-        public static TimeSpan AbsTimeSpan(TimeSpan val)
-        {
-            if (IsTimeSpanNegative(val))
-            {
-                val = val.Negate();
-            }
-            return val;
-        }
-
-        /// <summary>
         /// Thrown when there is an error relating to dates.
         /// </summary>
         [Serializable]
@@ -195,7 +181,7 @@ namespace PublicDomain
         /// <returns></returns>
         public static double ConvertTimeSpanToDouble(string timeSpan)
         {
-            return ConvertTimeSpanToDouble(DateTimeUtlities.ParseTimeSpan(timeSpan));
+            return ConvertTimeSpanToDouble(ParseTimeSpan(timeSpan));
         }
 
         /// <summary>
@@ -206,17 +192,6 @@ namespace PublicDomain
         public static double ConvertTimeSpanToDouble(TimeSpan timeSpan)
         {
             return timeSpan.TotalMilliseconds;
-        }
-
-        /// <summary>
-        /// Tries the parse time span.
-        /// </summary>
-        /// <param name="timeSpan">The time span.</param>
-        /// <param name="result">The result.</param>
-        /// <returns></returns>
-        public static bool TryParseTimeSpan(string timeSpan, out TimeSpan result)
-        {
-            return TryParseTimeSpan(timeSpan, TimeSpanAssumption.None, out result);
         }
 
         /// <summary>
