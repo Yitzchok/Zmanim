@@ -69,6 +69,7 @@
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="ITimeZoneDateTime.cs" />
+    <Compile Include="TimeZoneDateTime.cs" />
     <Compile Include="TimeZone\ITimeZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -76,6 +77,7 @@
     <Compile Include="AstronomicalCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimeZone\JavaTimeZone.cs" />
     <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
     <Compile Include="Tz\BaseException.cs" />
     <Compile Include="Tz\Utilities\CharUtilities.cs" />
