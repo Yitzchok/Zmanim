@@ -19,7 +19,6 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using java.util;
 using net.sourceforge.zmanim.util;
 
 namespace net.sourceforge.zmanim

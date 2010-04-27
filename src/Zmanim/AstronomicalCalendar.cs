@@ -19,7 +19,6 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using java.util;
 using net.sourceforge.zmanim.util;
 using Zmanim.Extensions;
 
@@ -618,11 +617,6 @@ namespace net.sourceforge.zmanim
             time = getOffsetTime(time);
             time = (time + 240) % 24; // the calculators sometimes return a double
             // that is negative or slightly greater than 24
-            Calendar cal = Calendar.getInstance();
-            cal.clear();
-            cal.set(Calendar.YEAR, getCalendar().Date.Year);
-            cal.set(Calendar.MONTH, getCalendar().Date.Month - 1);
-            cal.set(Calendar.DAY_OF_MONTH, getCalendar().Date.Day);
 
             var hours = (int)time; // cut off minutes
 
@@ -632,11 +626,8 @@ namespace net.sourceforge.zmanim
             var seconds = (int)(time *= 60);
             time -= seconds; // milliseconds
 
-            cal.set(Calendar.HOUR_OF_DAY, hours);
-            cal.set(Calendar.MINUTE, minutes);
-            cal.set(Calendar.SECOND, seconds);
-            cal.set(Calendar.MILLISECOND, (int)(time * 1000));
-            return cal.getTime().ToDateTimeWithMilliseconds();
+            return new DateTime(getCalendar().Date.Year, getCalendar().Date.Month, getCalendar().Date.Day,
+                hours, minutes, seconds, (int)(time * 1000));
         }
 
         ///<summary>
