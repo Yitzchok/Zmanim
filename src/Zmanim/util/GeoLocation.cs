@@ -22,7 +22,6 @@ using System;
 using System.Text;
 using Zmanim.Extensions;
 using Zmanim.TimeZone;
-using TimeZone = java.util.TimeZone;
 
 namespace net.sourceforge.zmanim.util
 {
