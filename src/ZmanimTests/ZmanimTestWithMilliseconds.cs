@@ -4,6 +4,7 @@ using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Zmanim.TimeZone;
 using TimeZone = java.util.TimeZone;
 
 namespace ZmanimTests
@@ -24,11 +25,11 @@ namespace ZmanimTests
             double latitude = 40.09596; //Lakewood, NJ
             double longitude = -74.22213; //Lakewood, NJ
             double elevation = 0; //optional elevation
-            TimeZone timeZone = TimeZone.getTimeZone("America/New_York");
+            ITimeZone timeZone = new JavaTimeZone("America/New_York");
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new DefaultCalendar { Date = new DateTime(2010, 4, 2) });
+            czc.setCalendar(new TimeZoneDateTime(new DateTime(2010, 4, 2)));
             calendar = czc;
         }
 

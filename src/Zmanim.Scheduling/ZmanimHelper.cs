@@ -3,6 +3,7 @@ using java.util;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
 using Zmanim.Extensions;
+using Zmanim.TimeZone;
 
 namespace Zmanim.Scheduling
 {
@@ -35,20 +36,14 @@ namespace Zmanim.Scheduling
         public static ComplexZmanimCalendar GetCalendar(this Location location, DateTime date)
         {
             var complexZmanimCalendar = GetCalendar(location);
-            complexZmanimCalendar.setCalendar(new DefaultCalendar
-                                                  {
-                                                      Date = new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)
-                                                  });
-            
+            complexZmanimCalendar.setCalendar(new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)));
+
             return complexZmanimCalendar;
         }
 
         public static ComplexZmanimCalendar SetCalendarDate(this ComplexZmanimCalendar calendar, DateTime date)
         {
-            calendar.setCalendar(new DefaultCalendar
-            {
-                Date = new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)
-            });
+            calendar.setCalendar(new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)));
             return calendar;
         }
 
@@ -57,7 +52,7 @@ namespace Zmanim.Scheduling
             var complexZmanimCalendar =
                 new ComplexZmanimCalendar(new GeoLocation(location.LocationName, location.Latitude, location.Longitude,
                                                           location.Elevation,
-                                                          java.util.TimeZone.getTimeZone(location.TimeZone)));
+                                                          new JavaTimeZone(location.TimeZone)));
 
             return complexZmanimCalendar;
         }

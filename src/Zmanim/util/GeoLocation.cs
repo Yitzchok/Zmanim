@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using Zmanim.Extensions;
+using Zmanim.TimeZone;
 using TimeZone = java.util.TimeZone;
 
 namespace net.sourceforge.zmanim.util
@@ -54,7 +55,7 @@ namespace net.sourceforge.zmanim.util
         private double latitude;
         private string locationName;
         private double longitude;
-        private TimeZone timeZone;
+        private ITimeZone timeZone;
 
         ///<summary>
         ///  GeoLocation constructor with parameters for all required fields.
@@ -70,7 +71,7 @@ namespace net.sourceforge.zmanim.util
         ///    Meridian </a> (Greenwich), a negative value should be used. </param>
         ///<param name = "timeZone">
         ///  the <c>TimeZone</c> for the location. </param>
-        public GeoLocation(double latitude, double longitude, TimeZone timeZone)
+        public GeoLocation(double latitude, double longitude, ITimeZone timeZone)
             : this(string.Empty, latitude, longitude, 0, timeZone)
         {
         }
@@ -92,7 +93,7 @@ namespace net.sourceforge.zmanim.util
         ///    Meridian </a> (Greenwich), a negative value should be used. </param>
         ///<param name = "timeZone">
         ///  the <c>TimeZone</c> for the location. </param>
-        public GeoLocation(string name, double latitude, double longitude, TimeZone timeZone)
+        public GeoLocation(string name, double latitude, double longitude, ITimeZone timeZone)
             : this(name, latitude, longitude, 0, timeZone)
         {
         }
@@ -118,7 +119,7 @@ namespace net.sourceforge.zmanim.util
         ///  in most algorithms used for calculating sunrise and set. </param>
         ///<param name = "timeZone">
         ///  the <c>TimeZone</c> for the location. </param>
-        public GeoLocation(string name, double latitude, double longitude, double elevation, TimeZone timeZone)
+        public GeoLocation(string name, double latitude, double longitude, double elevation, ITimeZone timeZone)
         {
             setLocationName(name);
             setLatitude(latitude);
@@ -140,7 +141,7 @@ namespace net.sourceforge.zmanim.util
             setLocationName("Greenwich, England");
             setLongitude(0); // added for clarity
             setLatitude(51.4772);
-            setTimeZone(TimeZone.getTimeZone("GMT"));
+            setTimeZone(new JavaTimeZone("GMT"));
         }
 
         #region ICloneable Members
@@ -161,7 +162,7 @@ namespace net.sourceforge.zmanim.util
         public virtual object Clone()
         {
             var clone = (GeoLocation)MemberwiseClone();
-            clone.timeZone = (TimeZone)getTimeZone().clone();
+            clone.timeZone = (ITimeZone)getTimeZone().Clone();
             clone.locationName = getLocationName();
             return clone;
         }
@@ -329,7 +330,7 @@ namespace net.sourceforge.zmanim.util
 
 
         ///<returns> Returns the timeZone. </returns>
-        public virtual TimeZone getTimeZone()
+        public virtual ITimeZone getTimeZone()
         {
             return timeZone;
         }
@@ -346,7 +347,7 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         ///<param name = "timeZone">
         ///  The timeZone to set. </param>
-        public virtual void setTimeZone(TimeZone timeZone)
+        public virtual void setTimeZone(ITimeZone timeZone)
         {
             this.timeZone = timeZone;
         }

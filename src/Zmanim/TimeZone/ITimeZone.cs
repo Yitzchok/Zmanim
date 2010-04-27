@@ -1,11 +1,15 @@
+using System;
+using java.util;
+using Zmanim.Extensions;
+
 namespace Zmanim.TimeZone
 {
     ///<summary>
     /// Provides the most basic useage of a TimeZone.
     ///</summary>
-    public interface ITimeZone
+    public interface ITimeZone : ICloneable
     {
-        bool IsDaylightSavingTime { get; }
+        //bool IsDaylightSavingTime { get; }
         int UtcOffset { get; }
         //int RawOffset { get; }
 
@@ -14,19 +18,80 @@ namespace Zmanim.TimeZone
 
         string Name { get; }
         string DisplayName { get; }
+        int getRawOffset();
+        int getDSTSavings();
+        bool inDaylightTime(DateTime dateTime);
+        string getID();
+        string getDisplayName();
+        int getOffset(long toFileTime);
     }
 
-
-    public class TimeZone : ITimeZone
+    public class JavaTimeZone : ITimeZone
     {
-        public TimeZone(int utcOffset)
+        private java.util.TimeZone timeZone;
+        public JavaTimeZone(string name)
         {
-            UtcOffset = utcOffset;
+            timeZone = java.util.TimeZone.getTimeZone(name);
         }
 
-        public bool IsDaylightSavingTime { get; private set; }
-        public int UtcOffset { get; private set; }
-        public string Name { get { return "Offset"; } }
-        public string DisplayName { get { return "Offset"; } }
+        //public bool IsDaylightSavingTime
+        //{
+        //    get { return false; }
+        //}
+
+        public JavaTimeZone()
+        {
+            timeZone = java.util.TimeZone.getDefault();
+        }
+
+        public int UtcOffset
+        {
+            get { return timeZone.getRawOffset(); }
+        }
+
+        public string Name
+        {
+            get { return timeZone.getDisplayName(); }
+        }
+
+        public string DisplayName
+        {
+            get { return getDisplayName(); }
+        }
+
+        public int getRawOffset()
+        {
+            return timeZone.getRawOffset();
+        }
+
+        public int getDSTSavings()
+        {
+            return timeZone.getDSTSavings();
+        }
+
+        public bool inDaylightTime(DateTime dateTime)
+        {
+            return timeZone.inDaylightTime(dateTime.ToDate());
+        }
+
+        public string getID()
+        {
+            return timeZone.getID();
+        }
+
+        public string getDisplayName()
+        {
+            return timeZone.getDisplayName();
+        }
+
+        public int getOffset(long toFileTime)
+        {
+            return timeZone.getOffset(toFileTime);
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

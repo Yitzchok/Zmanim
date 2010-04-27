@@ -103,7 +103,7 @@ namespace net.sourceforge.zmanim.util
         ///  Java Calendar </param>
         ///<returns> the Julian day corresponding to the date Note: Number is returned
         ///  for start of day. Fractional days should be added later. </returns>
-        private static double calcJD(ICalendar date)
+        private static double calcJD(ITimeZoneDateTime date)
         {
             int year = date.Date.Year;
             int month = date.Date.Month + 1;

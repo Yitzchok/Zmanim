@@ -6,6 +6,7 @@ using System.Reflection;
 using NDesk.Options;
 using net.sourceforge.zmanim;
 using net.sourceforge.zmanim.util;
+using Zmanim.TimeZone;
 
 namespace Zmanim.Cli
 {
@@ -40,12 +41,12 @@ namespace Zmanim.Cli
                 return;
             }
 
-            var timeZone = java.util.TimeZone.getTimeZone(options.TimeZone);
+            var timeZone = new JavaTimeZone(options.TimeZone);
             var location =
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
             var czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new DefaultCalendar { Date = new DateTime(options.Date.Year, options.Date.Month, options.Date.Day) });
+            czc.setCalendar(new TimeZoneDateTime(new DateTime(options.Date.Year, options.Date.Month, options.Date.Day)));
 
             var methods = GetDateTimeAndLongMethods();
 

@@ -190,7 +190,7 @@ namespace net.sourceforge.zmanim.util
             return evening;
         }
 
-        private static double dateToJulian(ICalendar date)
+        private static double dateToJulian(ITimeZoneDateTime date)
         {
             int year = date.Date.Year;
             int month = date.Date.Month;

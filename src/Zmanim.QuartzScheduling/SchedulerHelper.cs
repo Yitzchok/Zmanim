@@ -10,6 +10,7 @@ using Quartz.Impl.Calendar;
 using Zmanim.Extensions;
 using Zmanim.QuartzScheduling.Configuration;
 using Zmanim.Scheduling;
+using Zmanim.TimeZone;
 
 namespace Zmanim.QuartzScheduling
 {
@@ -73,16 +74,13 @@ namespace Zmanim.QuartzScheduling
 
         public static ComplexZmanimCalendar GetComplexZmanimCalendar(Location location, DateTime date)
         {
-            java.util.TimeZone timeZone = java.util.TimeZone.getTimeZone(location.TimeZone);
+            ITimeZone timeZone = new JavaTimeZone(location.TimeZone);
             var geoLocation = new GeoLocation(location.LocationName,
                                            location.Latitude, location.Longitude,
                                            location.Elevation, timeZone);
 
             var czc = new ComplexZmanimCalendar(geoLocation);
-            czc.setCalendar(new DefaultCalendar
-            {
-                Date = new DateTime(date.Year, date.Month, date.Day)
-            });
+            czc.setCalendar(new TimeZoneDateTime(new DateTime(date.Year, date.Month, date.Day)));
             return czc;
         }
 

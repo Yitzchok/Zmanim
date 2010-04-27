@@ -137,7 +137,7 @@ namespace net.sourceforge.zmanim
         ///  The Java Calendar encapsulated by this class to track the current date
         ///  used by the class
         ///</summary>
-        private ICalendar calendar;
+        private ITimeZoneDateTime timeZoneDateTime;
 
         private GeoLocation geoLocation;
 
@@ -160,7 +160,7 @@ namespace net.sourceforge.zmanim
         ///  times. </param>
         public AstronomicalCalendar(GeoLocation geoLocation)
         {
-            setCalendar(new DefaultCalendar { Date = DateTime.Now, TimeZone = geoLocation.getTimeZone() });
+            setCalendar(new TimeZoneDateTime(DateTime.Now, geoLocation.getTimeZone()));
             setGeoLocation(geoLocation); // duplicate call
             setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
@@ -183,7 +183,7 @@ namespace net.sourceforge.zmanim
             var clone = (AstronomicalCalendar)MemberwiseClone();
 
             clone.setGeoLocation((GeoLocation)getGeoLocation().Clone());
-            clone.setCalendar((ICalendar)getCalendar().Clone());
+            clone.setCalendar((ITimeZoneDateTime)getCalendar().Clone());
             clone.setAstronomicalCalculator((AstronomicalCalculator)getAstronomicalCalculator().Clone());
             return clone;
         }
@@ -317,10 +317,10 @@ namespace net.sourceforge.zmanim
         {
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
-                ICalendar clonedCalendar = (ICalendar)getCalendar().Clone();
-                clonedCalendar.Date = sunset;
-                clonedCalendar.Date.AddDays(1);
-                return clonedCalendar.Date;
+                ITimeZoneDateTime clonedTimeZoneDateTime = (ITimeZoneDateTime)getCalendar().Clone();
+                clonedTimeZoneDateTime.Date = sunset;
+                clonedTimeZoneDateTime.Date.AddDays(1);
+                return clonedTimeZoneDateTime.Date;
             }
             else
             {
@@ -545,7 +545,7 @@ namespace net.sourceforge.zmanim
         ///  time. </returns>
         private double getOffsetTime(double time)
         {
-            bool dst = getCalendar().TimeZone.inDaylightTime(getCalendar().Date.ToDate());
+            bool dst = getCalendar().TimeZone.inDaylightTime(getCalendar().Date);
             double dstOffset = 0;
             // be nice to Newfies and use a double
             double gmtOffset = getCalendar().TimeZone.getRawOffset() / (60 * MINUTE_MILLIS);
@@ -795,18 +795,18 @@ namespace net.sourceforge.zmanim
         ///  returns the Calendar object encapsulated in this class.
         ///</summary>
         ///<returns> Returns the calendar. </returns>
-        public virtual ICalendar getCalendar()
+        public virtual ITimeZoneDateTime getCalendar()
         {
-            return calendar;
+            return timeZoneDateTime;
         }
 
         /// <summary>
         ///   Set the calender to be used in the calculations.
         /// </summary>
-        /// <param name = "calendar">The calendar to set.</param>
-        public virtual void setCalendar(ICalendar calendar)
+        /// <param name = "timeZoneDateTime">The calendar to set.</param>
+        public virtual void setCalendar(ITimeZoneDateTime timeZoneDateTime)
         {
-            this.calendar = calendar;
+            this.timeZoneDateTime = timeZoneDateTime;
             if (getGeoLocation() != null) // set the timezone if possible
             {
                 // Always set the Calendar's timezone to match the GeoLocation

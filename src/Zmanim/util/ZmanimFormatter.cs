@@ -230,18 +230,18 @@ namespace net.sourceforge.zmanim.util
         ///</summary>
         ///<param name = "Date">
         ///  the date to format </param>
-        ///<param name = "calendar">
+        ///<param name = "timeZoneDateTime">
         ///  the <see cref = "java.util.Calendar">Calendar</see> used to help format
         ///  based on the Calendar's DST and other settings. </param>
         ///<returns> the formatted string </returns>
-        public virtual string formatDate(Date Date, ICalendar calendar)
+        public virtual string formatDate(Date Date, ITimeZoneDateTime timeZoneDateTime)
         {
             dateFormat.setCalendar(new GregorianCalendar(
-                calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
-                calendar.Date.Hour, calendar.Date.Minute, calendar.Date.Second));
+                timeZoneDateTime.Date.Year, timeZoneDateTime.Date.Month, timeZoneDateTime.Date.Day,
+                timeZoneDateTime.Date.Hour, timeZoneDateTime.Date.Minute, timeZoneDateTime.Date.Second));
             if (dateFormat.toPattern().Equals("yyyy-MM-dd'T'HH:mm:ss"))
             {
-                return getXSDate(Date, calendar);
+                return getXSDate(Date, timeZoneDateTime);
             }
             else
             {
@@ -263,7 +263,7 @@ namespace net.sourceforge.zmanim.util
         ///  followed by the difference between the difference from UTC represented as
         ///  hh:mm.
         ///</summary>
-        public virtual string getXSDate(Date Date, ICalendar cal)
+        public virtual string getXSDate(Date Date, ITimeZoneDateTime cal)
         {
             string xsdDateFormat = "yyyy-MM-dd'T'HH:mm:ss";
             //        

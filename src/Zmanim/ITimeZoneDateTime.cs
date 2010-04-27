@@ -1,9 +1,13 @@
 using System;
+using Zmanim.TimeZone;
 using TimeZone = java.util.TimeZone;
 
 namespace net.sourceforge.zmanim
 {
-    public interface ICalendar : ICloneable
+    /// <summary>
+    /// A DateTime that works with the TimeZone.
+    /// </summary>
+    public interface ITimeZoneDateTime : ICloneable
     {
         /// <summary>
         /// Gets or sets the date.
@@ -15,11 +19,23 @@ namespace net.sourceforge.zmanim
         /// Gets or sets the time zone.
         /// </summary>
         /// <value>The time zone.</value>
-        TimeZone TimeZone { get; set; }
+        ITimeZone TimeZone { get; set; }
     }
 
-    public class DefaultCalendar : ICalendar
+    public class TimeZoneDateTime : ITimeZoneDateTime
     {
+        public TimeZoneDateTime(DateTime date)
+            : this(date,new JavaTimeZone())
+        {
+            Date = date;
+        }
+
+        public TimeZoneDateTime(DateTime date, ITimeZone timeZone)
+        {
+            Date = date;
+            TimeZone = timeZone;
+        }
+
         /// <summary>
         /// Gets or sets the date.
         /// </summary>
@@ -30,7 +46,7 @@ namespace net.sourceforge.zmanim
         /// Gets or sets the time zone.
         /// </summary>
         /// <value>The time zone.</value>
-        public TimeZone TimeZone { get; set; }
+        public ITimeZone TimeZone { get; set; }
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
