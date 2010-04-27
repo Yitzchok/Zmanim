@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using java.util;
 using net.sourceforge.zmanim;
 using NUnit.Framework;
-using GregorianCalendar = java.util.GregorianCalendar;
 
 namespace ZmanimTests
 {
@@ -22,7 +19,6 @@ namespace ZmanimTests
         {
             StringBuilder csvStringBuilder = new StringBuilder("MethodName,DateCalculated");
             Type type = typeof(ComplexZmanimCalendar);
-            var calendar = new GregorianCalendar();
 
             foreach (var method in type.GetMethods()
                 .Where(m => m.ReturnType == typeof(DateTime)
@@ -30,10 +26,9 @@ namespace ZmanimTests
                             && m.IsPublic == true
                             && m.GetParameters().Count() == 0))
             {
-                Date date = (Date)method.Invoke(GetCalendar(), null);
-                calendar.setTime(date);
+                var date = (DateTime)method.Invoke(GetCalendar(), null);
 
-                csvStringBuilder.AppendFormat("{0},{1}{2}", method.Name, date.toString(), Environment.NewLine);
+                csvStringBuilder.AppendFormat("{0},{1}{2}", method.Name, date, Environment.NewLine);
 
             }
 
