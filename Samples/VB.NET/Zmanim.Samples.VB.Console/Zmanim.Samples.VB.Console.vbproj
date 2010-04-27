@@ -49,10 +49,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IKVM.OpenJDK.Core, Version=0.43.3744.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\build\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

@@ -1,6 +1,6 @@
 ﻿Imports net.sourceforge.zmanim.util
 Imports net.sourceforge.zmanim
-Imports Zmanim.Extensions
+Imports Zmanim.TimeZone
 
 Module Module1
 
@@ -9,7 +9,7 @@ Module Module1
         Dim latitude As Double = 40.09596 'Lakewood, NJ
         Dim longitude As Double = -74.22213 'Lakewood, NJ
         Dim elevation As Double = 0 'optional elevation
-        Dim timeZone As java.util.TimeZone = java.util.TimeZone.getTimeZone("America/New_York")
+        Dim timeZone As ITimeZone = New JavaTimeZone("America/New_York")
         Dim location As New GeoLocation(locationName, latitude, longitude, elevation, timeZone)
         Dim zc As New ComplexZmanimCalendar(location)
 
