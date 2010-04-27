@@ -43,7 +43,7 @@ namespace net.sourceforge.zmanim
     /// First create the Calendar for the location you would like to calculate:
     /// <example>
     /// 		<code>
-    /// String locationName = "Lakewood, NJ"
+    /// string locationName = "Lakewood, NJ"
     /// double latitude = 40.0828; //Lakewood, NJ
     /// double longitude = -74.2094; //Lakewood, NJ
     /// double elevation = 0;
