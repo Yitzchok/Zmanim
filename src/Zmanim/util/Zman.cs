@@ -18,7 +18,7 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
-using java.util;
+using System;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -30,8 +30,7 @@ namespace net.sourceforge.zmanim.util
     public class Zman
     {
         private long duration;
-        private Date zman;
-        private Date zmanDescription;
+        private DateTime zman;
         private string zmanLabel;
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace net.sourceforge.zmanim.util
         /// </summary>
         /// <param name="date">The date.</param>
         /// <param name="label">The label.</param>
-        public Zman(Date date, string label)
+        public Zman(DateTime date, string label)
         {
             zmanLabel = label;
             zman = date;
@@ -69,18 +68,9 @@ namespace net.sourceforge.zmanim.util
         /// Gets the zman.
         /// </summary>
         /// <returns></returns>
-        public virtual Date getZman()
+        public virtual DateTime getZman()
         {
             return zman;
-        }
-
-        /// <summary>
-        /// Gets the zman description.
-        /// </summary>
-        /// <returns></returns>
-        public virtual Date getZmanDescription()
-        {
-            return zmanDescription;
         }
 
         /// <summary>
@@ -105,18 +95,9 @@ namespace net.sourceforge.zmanim.util
         /// Sets the zman.
         /// </summary>
         /// <param name="date">The date.</param>
-        public virtual void setZman(Date date)
+        public virtual void setZman(DateTime date)
         {
             zman = date;
-        }
-
-        /// <summary>
-        /// Sets the zman description.
-        /// </summary>
-        /// <param name="zmanDescription">The zman description.</param>
-        public virtual void setZmanDescription(Date zmanDescription)
-        {
-            this.zmanDescription = zmanDescription;
         }
 
         /// <summary>

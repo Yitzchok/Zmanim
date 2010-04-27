@@ -24,7 +24,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using java.text;
-using java.util;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -234,17 +233,19 @@ namespace net.sourceforge.zmanim.util
         ///  the <see cref = "java.util.Calendar">Calendar</see> used to help format
         ///  based on the Calendar's DST and other settings. </param>
         ///<returns> the formatted string </returns>
-        public virtual string formatDate(Date Date, ITimeZoneDateTime timeZoneDateTime)
+        public virtual string formatDate(DateTime Date, ITimeZoneDateTime timeZoneDateTime)
         {
-            dateFormat.setCalendar(new GregorianCalendar(
-                timeZoneDateTime.Date.Year, timeZoneDateTime.Date.Month, timeZoneDateTime.Date.Day,
-                timeZoneDateTime.Date.Hour, timeZoneDateTime.Date.Minute, timeZoneDateTime.Date.Second));
+            //dateFormat.setCalendar(new GregorianCalendar(
+            //    timeZoneDateTime.Date.Year, timeZoneDateTime.Date.Month, timeZoneDateTime.Date.Day,
+            //    timeZoneDateTime.Date.Hour, timeZoneDateTime.Date.Minute, timeZoneDateTime.Date.Second));
+
             if (dateFormat.toPattern().Equals("yyyy-MM-dd'T'HH:mm:ss"))
             {
                 return getXSDate(Date, timeZoneDateTime);
             }
             else
             {
+                return Date.ToString(dateFormat.toPattern());
                 return dateFormat.format(Date);
             }
         }
@@ -263,7 +264,7 @@ namespace net.sourceforge.zmanim.util
         ///  followed by the difference between the difference from UTC represented as
         ///  hh:mm.
         ///</summary>
-        public virtual string getXSDate(Date Date, ITimeZoneDateTime cal)
+        public virtual string getXSDate(DateTime Date, ITimeZoneDateTime cal)
         {
             string xsdDateFormat = "yyyy-MM-dd'T'HH:mm:ss";
             //        
@@ -424,9 +425,9 @@ namespace net.sourceforge.zmanim.util
                         {
                             otherList.Add("<" + tagName + ">N/A</" + tagName + ">");
                         }
-                        else if (@value is Date)
+                        else if (@value is DateTime)
                         {
-                            dateList.Add(new Zman((Date)@value, tagName));
+                            dateList.Add(new Zman((DateTime)@value, tagName));
                         } // shaah zmanis
                         else if (@value is long?)
                         {
@@ -504,7 +505,7 @@ namespace net.sourceforge.zmanim.util
             if (!method.Name.StartsWith("get"))
                 return false;
 
-            if (method.ReturnType == typeof(Date)
+            if (method.ReturnType == typeof(DateTime)
                 || method.ReturnType == typeof(long))
             {
                 return true;
