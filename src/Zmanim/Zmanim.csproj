@@ -77,7 +77,6 @@
     <Compile Include="AstronomicalCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TimeZone\JavaTimeZone.cs" />
     <Compile Include="TimeZone\OlsonTimeZone.cs" />
     <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
     <Compile Include="Tz\BaseException.cs" />

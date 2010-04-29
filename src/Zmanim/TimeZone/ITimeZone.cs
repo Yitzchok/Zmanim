@@ -16,20 +16,6 @@ namespace Zmanim.TimeZone
         /// <returns></returns>
         int UtcOffset(DateTime dateTime);
 
-        /*
-        /// <summary>
-        /// Gets the amount of time in milliseconds to add to UTC to get standard time in this time zone. Because this value is not affected by daylight saving time, it is called raw offset.
-        /// </summary>
-        /// <returns>the amount of raw offset time in milliseconds to add to UTC</returns>
-        int getRawOffset();
-
-        /// <summary>
-        /// Returns the amount of time to be added to local standard time to get local wall clock time.
-        /// </summary>
-        /// <returns>the amount of saving time in milliseconds</returns>
-        int getDSTSavings();
-        */
-
         bool inDaylightTime(DateTime dateTime);
 
         /// <summary>

@@ -3,14 +3,26 @@ using Zmanim.TimeZone;
 
 namespace net.sourceforge.zmanim
 {
+    /// <summary>
+    /// A simple implementation of ITimeZoneDateTime.
+    /// </summary>
     public class TimeZoneDateTime : ITimeZoneDateTime
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeZoneDateTime"/> class.
+        /// </summary>
+        /// <param name="date">The date.</param>
         public TimeZoneDateTime(DateTime date)
             : this(date, new OlsonTimeZone())
         {
             Date = date;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeZoneDateTime"/> class.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="timeZone">The time zone.</param>
         public TimeZoneDateTime(DateTime date, ITimeZone timeZone)
         {
             Date = date;

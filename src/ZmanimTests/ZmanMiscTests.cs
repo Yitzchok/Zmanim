@@ -9,22 +9,6 @@ namespace ZmanimTests
 {
     public class ZmanMiscTests : ZmanMethodGenerator
     {
-#if ikvm
-        [Test]
-        public void TestTimeZone()
-        {
-            var javaTimeZone = new JavaTimeZone("America/New_York");
-            var olsonTimeZone = new OlsonTimeZone("America/New_York");
-            //var pdTimeZone = TzTimeZone.GetTimeZone("America/New_York");
-
-            var timeFromEpoch = DateTime.Now - new DateTime(1970, 1, 1);
-            Assert.AreEqual(javaTimeZone.getDSTSavings(), olsonTimeZone.getDSTSavings());
-            Assert.AreEqual(javaTimeZone.inDaylightTime(DateTime.Now), olsonTimeZone.inDaylightTime(DateTime.Now));
-            Assert.AreEqual(javaTimeZone.UtcOffset(DateTime.Now), olsonTimeZone.UtcOffset(DateTime.Now));
-            Assert.AreEqual(javaTimeZone.getOffset(timeFromEpoch.Milliseconds), olsonTimeZone.getOffset(timeFromEpoch.Milliseconds));
-            Assert.AreEqual(javaTimeZone.getRawOffset(), olsonTimeZone.getRawOffset());
-        }
-#endif
         [Test]
         public void Check_getFixedLocalChatzosDST()
         {

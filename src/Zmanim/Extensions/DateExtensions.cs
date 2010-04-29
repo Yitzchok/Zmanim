@@ -22,70 +22,24 @@ namespace Zmanim.Extensions
     /// </summary>
     public static class DateExtensions
     {
+        /// <summary>
+        /// Toes the date time.
+        /// </summary>
+        /// <param name="fromEpoch">From epoch.</param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this long fromEpoch)
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(fromEpoch);
         }
 
+        /// <summary>
+        /// Toes the milliseconds from epoch.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns></returns>
         public static long ToMillisecondsFromEpoch(this DateTime dateTime)
         {
             return (long)(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
         }
-
-#if ikvm
-        /// <summary>
-        /// Converts a Date to DateTime with milliseconds.
-        /// </summary>
-        /// <param name="javaDate">The java date.</param>
-        /// <returns></returns>
-        public static DateTime ToDateTimeWithMilliseconds(this Date javaDate)
-        {
-            var calender = new java.util.GregorianCalendar();
-            calender.setTime(javaDate);
-
-            return new DateTime(calender.get(java.util.Calendar.YEAR),
-                                calender.get(java.util.Calendar.MONTH) + 1,
-                                calender.get(java.util.Calendar.DAY_OF_MONTH),
-                                calender.get(java.util.Calendar.HOUR_OF_DAY),
-                                calender.get(java.util.Calendar.MINUTE),
-                                calender.get(java.util.Calendar.SECOND),
-                                calender.get(java.util.Calendar.MILLISECOND),
-                                DateTimeKind.Local
-                );
-        }
-
-        /// <summary>
-        /// Converts a Date to DateTime. (no milliseconds)
-        /// </summary>
-        /// <param name="javaDate">The java date.</param>
-        /// <returns></returns>
-        public static DateTime ToDateTime(this Date javaDate)
-        {
-            var calender = new GregorianCalendar();
-            calender.setTime(javaDate);
-
-            return new DateTime(calender.get(Calendar.YEAR),
-                                calender.get(Calendar.MONTH) + 1,
-                                calender.get(Calendar.DAY_OF_MONTH),
-                                calender.get(Calendar.HOUR_OF_DAY),
-                                calender.get(Calendar.MINUTE),
-                                calender.get(Calendar.SECOND),
-                                DateTimeKind.Local
-                );
-        }
-
-        /// <summary>
-        /// Converts a Date to DateTime. (no milliseconds)
-        /// </summary>
-        /// <param name="dateTime">The dateTime.</param>
-        /// <returns></returns>
-        public static Date ToDate(this DateTime dateTime)
-        {
-            return new GregorianCalendar(
-                dateTime.Year, dateTime.Month - 1, dateTime.Day,
-                dateTime.Hour, dateTime.Minute, dateTime.Second).getTime();
-
-        }
-#endif
     }
 }

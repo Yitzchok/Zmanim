@@ -106,5 +106,5 @@ task CopyBuildFilesToSampleDirectory -depends Release {
 	Copy-Item $build_dir\Zmanim.xml $sample_lib_dir
 	Copy-Item $build_dir\IKVM.*.dll $sample_lib_dir
 	Copy-Item lgpl.txt $sample_lib_dir
-	Copy-Item acknowledgements.txt $sample_lib_dir	
+	Copy-Item acknowledgements.txt $sample_lib_dir
 }
