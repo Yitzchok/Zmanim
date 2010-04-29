@@ -6,7 +6,7 @@ namespace net.sourceforge.zmanim
     public class TimeZoneDateTime : ITimeZoneDateTime
     {
         public TimeZoneDateTime(DateTime date)
-            : this(date, new JavaTimeZone())
+            : this(date, new OlsonTimeZone())
         {
             Date = date;
         }

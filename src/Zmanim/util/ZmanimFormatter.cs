@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-//using java.text;
 
 namespace net.sourceforge.zmanim.util
 {
@@ -271,8 +270,7 @@ namespace net.sourceforge.zmanim.util
             var buff = new StringBuilder(Date.ToString(xsdDateFormat));
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
-            //int offset = cal.get(Calendar.ZONE_OFFSET) + cal.get(Calendar.DST_OFFSET);
-            int offset = cal.TimeZone.getRawOffset() + cal.TimeZone.getDSTSavings();
+            int offset = cal.TimeZone.UtcOffset(cal.Date);
             // If there is no offset, we have "Coordinated
             // Universal Time."
             if (offset == 0)

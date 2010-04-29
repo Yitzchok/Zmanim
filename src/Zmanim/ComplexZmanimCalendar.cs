@@ -2222,8 +2222,10 @@ namespace net.sourceforge.zmanim
         /// <seealso cref="GeoLocation.getLocalMeanTimeOffset()"/>
         public virtual DateTime getFixedLocalChatzos()
         {
-            return getTimeOffset(getDateFromTime(12.0 - getGeoLocation().getTimeZone().getRawOffset() / HOUR_MILLIS),
-                                 -getGeoLocation().getLocalMeanTimeOffset());
+            return getTimeOffset(
+                getDateFromTime(
+                12.0 - getGeoLocation().getTimeZone().UtcOffset(getCalendar().Date) / HOUR_MILLIS),
+                                 -getGeoLocation().getLocalMeanTimeOffset(getCalendar().Date));
         }
 
         /// <summary>

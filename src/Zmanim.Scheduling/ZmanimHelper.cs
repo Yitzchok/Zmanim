@@ -50,7 +50,7 @@ namespace Zmanim.Scheduling
             var complexZmanimCalendar =
                 new ComplexZmanimCalendar(new GeoLocation(location.LocationName, location.Latitude, location.Longitude,
                                                           location.Elevation,
-                                                          new JavaTimeZone(location.TimeZone)));
+                                                          new OlsonTimeZone(location.TimeZone)));
 
             return complexZmanimCalendar;
         }

@@ -546,12 +546,9 @@ namespace net.sourceforge.zmanim
             bool dst = getCalendar().TimeZone.inDaylightTime(getCalendar().Date);
             double dstOffset = 0;
             // be nice to Newfies and use a double
-            double gmtOffset = getCalendar().TimeZone.getRawOffset() / (60 * MINUTE_MILLIS);
-            if (dst)
-            {
-                dstOffset = getCalendar().TimeZone.getDSTSavings() / (60 * MINUTE_MILLIS);
-            }
-            return time + gmtOffset + dstOffset;
+            double gmtOffset = getCalendar().TimeZone.UtcOffset(getCalendar().Date) / (60 * MINUTE_MILLIS);
+
+            return time + gmtOffset;
         }
 
         ///<summary>

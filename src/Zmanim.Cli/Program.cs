@@ -41,7 +41,7 @@ namespace Zmanim.Cli
                 return;
             }
 
-            var timeZone = new JavaTimeZone(options.TimeZone);
+            var timeZone = new OlsonTimeZone(options.TimeZone);
             var location =
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
             var czc = new ComplexZmanimCalendar(location);

@@ -14,7 +14,6 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using java.util;
 
 namespace Zmanim.Extensions
 {
@@ -33,6 +32,7 @@ namespace Zmanim.Extensions
             return (long)(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
         }
 
+#if ikvm
         /// <summary>
         /// Converts a Date to DateTime with milliseconds.
         /// </summary>
@@ -40,16 +40,16 @@ namespace Zmanim.Extensions
         /// <returns></returns>
         public static DateTime ToDateTimeWithMilliseconds(this Date javaDate)
         {
-            var calender = new GregorianCalendar();
+            var calender = new java.util.GregorianCalendar();
             calender.setTime(javaDate);
 
-            return new DateTime(calender.get(Calendar.YEAR),
-                                calender.get(Calendar.MONTH) + 1,
-                                calender.get(Calendar.DAY_OF_MONTH),
-                                calender.get(Calendar.HOUR_OF_DAY),
-                                calender.get(Calendar.MINUTE),
-                                calender.get(Calendar.SECOND),
-                                calender.get(Calendar.MILLISECOND),
+            return new DateTime(calender.get(java.util.Calendar.YEAR),
+                                calender.get(java.util.Calendar.MONTH) + 1,
+                                calender.get(java.util.Calendar.DAY_OF_MONTH),
+                                calender.get(java.util.Calendar.HOUR_OF_DAY),
+                                calender.get(java.util.Calendar.MINUTE),
+                                calender.get(java.util.Calendar.SECOND),
+                                calender.get(java.util.Calendar.MILLISECOND),
                                 DateTimeKind.Local
                 );
         }
@@ -86,5 +86,6 @@ namespace Zmanim.Extensions
                 dateTime.Hour, dateTime.Minute, dateTime.Second).getTime();
 
         }
+#endif
     }
 }

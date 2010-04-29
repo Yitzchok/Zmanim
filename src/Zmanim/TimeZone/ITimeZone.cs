@@ -7,20 +7,52 @@ namespace Zmanim.TimeZone
     ///</summary>
     public interface ITimeZone : ICloneable
     {
-        //bool IsDaylightSavingTime { get; }
-        int UtcOffset { get; }
-        //int RawOffset { get; }
+        /// <summary>
+        /// UTCs the offset.
+        /// If Daylight Saving Time is in effect at the specified date,
+        /// the offset value is adjusted with the amount of daylight saving.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns></returns>
+        int UtcOffset(DateTime dateTime);
 
-        //int GMTOffset { get; }
-        //int DSTOffset { get; }
-
-        string Name { get; }
-        string DisplayName { get; }
+        /*
+        /// <summary>
+        /// Gets the amount of time in milliseconds to add to UTC to get standard time in this time zone. Because this value is not affected by daylight saving time, it is called raw offset.
+        /// </summary>
+        /// <returns>the amount of raw offset time in milliseconds to add to UTC</returns>
         int getRawOffset();
+
+        /// <summary>
+        /// Returns the amount of time to be added to local standard time to get local wall clock time.
+        /// </summary>
+        /// <returns>the amount of saving time in milliseconds</returns>
         int getDSTSavings();
+        */
+
         bool inDaylightTime(DateTime dateTime);
+
+        /// <summary>
+        /// Gets the ID of this time zone.
+        /// </summary>
+        /// <returns>the ID of this time zone.</returns>
         string getID();
+
+        /// <summary>
+        /// Returns a name of this time zone suitable for presentation to the user in the default locale. 
+        /// This method returns the long name, not including daylight savings.
+        /// If the display name is not available for the locale, then this method returns a string in the normalized custom ID format.
+        /// </summary>
+        /// <returns></returns>
         string getDisplayName();
-        int getOffset(long toFileTime);
+
+        ///<summary>
+        /// Returns the offset of this time zone from UTC at the specified date.
+        /// If Daylight Saving Time is in effect at the specified date,
+        /// the offset value is adjusted with the amount of daylight saving.
+        ///</summary>
+        ///<param name="timeFromEpoch">the date represented in milliseconds since January 1, 1970 00:00:00 GMT</param>
+        ///<returns>the amount of time in milliseconds to add to UTC to get local time.</returns>
+        int getOffset(long timeFromEpoch);
     }
 }

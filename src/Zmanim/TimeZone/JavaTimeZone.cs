@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if ikvm
+using System;
 using Zmanim.Extensions;
 
 namespace Zmanim.TimeZone
@@ -19,19 +20,10 @@ namespace Zmanim.TimeZone
             timeZone = java.util.TimeZone.getDefault();
         }
 
-        public int UtcOffset
+        public int UtcOffset(DateTime dateTime)
         {
-            get { return timeZone.getRawOffset(); }
-        }
-
-        public string Name
-        {
-            get { return timeZone.getDisplayName(); }
-        }
-
-        public string DisplayName
-        {
-            get { return getDisplayName(); }
+            var utcOffset = timeZone.getOffset(dateTime.ToDate().getTime());
+            return utcOffset;
         }
 
         public int getRawOffset()
@@ -59,9 +51,10 @@ namespace Zmanim.TimeZone
             return timeZone.getDisplayName();
         }
 
-        public int getOffset(long toFileTime)
+        public int getOffset(long timeFromEpoch)
         {
-            return timeZone.getOffset(toFileTime);
+            var offset = timeZone.getOffset(timeFromEpoch);
+            return offset;
         }
 
         public object Clone()
@@ -70,3 +63,4 @@ namespace Zmanim.TimeZone
         }
     }
 }
+#endif

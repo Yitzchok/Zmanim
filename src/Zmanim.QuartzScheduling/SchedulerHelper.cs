@@ -72,7 +72,7 @@ namespace Zmanim.QuartzScheduling
 
         public static ComplexZmanimCalendar GetComplexZmanimCalendar(Location location, DateTime date)
         {
-            ITimeZone timeZone = new JavaTimeZone(location.TimeZone);
+            ITimeZone timeZone = new OlsonTimeZone(location.TimeZone);
             var geoLocation = new GeoLocation(location.LocationName,
                                            location.Latitude, location.Longitude,
                                            location.Elevation, timeZone);

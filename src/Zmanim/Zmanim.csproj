@@ -78,6 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TimeZone\JavaTimeZone.cs" />
+    <Compile Include="TimeZone\OlsonTimeZone.cs" />
     <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
     <Compile Include="Tz\BaseException.cs" />
     <Compile Include="Tz\Utilities\CharUtilities.cs" />
@@ -143,15 +144,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\..\lib\ikvm\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Text">
-      <HintPath>..\..\lib\ikvm\IKVM.OpenJDK.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.Runtime">
-      <HintPath>..\..\lib\ikvm\IKVM.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
   </ItemGroup>

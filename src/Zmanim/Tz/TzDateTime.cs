@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
@@ -29,7 +29,7 @@ namespace PublicDomain
         /// Represents the largest possible value of PublicDomain.TzDateTime. This field is read-only.
         /// </summary>
         public static readonly TzDateTime MaxValue;
-        
+
         /// <summary>
         ///     Represents the smallest possible value of PublicDomain.TzDateTime. This field is
         ///     read-only.
@@ -1427,7 +1427,7 @@ namespace PublicDomain
         /// </returns>
         public bool IsDaylightSavingTime()
         {
-            throw new NotImplementedException();
+            return TimeZone.IsDaylightSavingTime(DateTimeUtc);
         }
 
         /// <summary>
@@ -1589,7 +1589,7 @@ namespace PublicDomain
                         char modifier = s[s.Length - UtcOffsetModifier.Length];
                         string[] pieces = StringUtilities.SplitAroundLastIndexOfAny(s, '+', '-');
                         s = pieces[0];
-                        
+
                         TzTimeZone offsetTimeZone = TzTimeZone.GetTimeZoneByOffset(modifier + pieces[1]);
 
                         // If it's UTC, then create a UTC DateTime

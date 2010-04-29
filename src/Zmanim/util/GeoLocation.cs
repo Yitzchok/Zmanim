@@ -140,7 +140,7 @@ namespace net.sourceforge.zmanim.util
             setLocationName("Greenwich, England");
             setLongitude(0); // added for clarity
             setLatitude(51.4772);
-            setTimeZone(new JavaTimeZone("GMT"));
+            setTimeZone(new OlsonTimeZone("GMT"));
         }
 
         #region ICloneable Members
@@ -351,28 +351,28 @@ namespace net.sourceforge.zmanim.util
             this.timeZone = timeZone;
         }
 
-        ///<summary>
-        ///  A method that will return the location's local mean time offset in
-        ///  milliseconds from local standard time. The globe is split into 360°,
-        ///  with 15° per hour of the day. For a local that is at a longitude that
-        ///  is evenly divisible by 15 (longitude % 15 == 0), at solar
-        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
-        ///  (with adjustment for the <a href = "http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
-        ///  the sun should be directly overhead, so a user who is 1° west of this
-        ///  will have noon at 4 minutes after standard time noon, and conversely, a
-        ///  user who is 1° east of the 15° longitude will have noon at 11:56
-        ///  AM. The offset returned does not account for the <a href = "http://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving
-        ///                                                     time</a> offset since this class is unaware of dates.
-        ///</summary>
-        ///<returns> the offset in milliseconds not accounting for Daylight saving
-        ///  time. A positive value will be returned East of the timezone
-        ///  line, and a negative value West of it.
-        ///</returns>
-        public virtual long getLocalMeanTimeOffset()
+        /// <summary>
+        /// A method that will return the location's local mean time offset in
+        /// milliseconds from local standard time. The globe is split into 360°,
+        /// with 15° per hour of the day. For a local that is at a longitude that
+        /// is evenly divisible by 15 (longitude % 15 == 0), at solar
+        /// <see cref="net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
+        /// (with adjustment for the <a href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
+        /// the sun should be directly overhead, so a user who is 1° west of this
+        /// will have noon at 4 minutes after standard time noon, and conversely, a
+        /// user who is 1° east of the 15° longitude will have noon at 11:56
+        /// AM.
+        /// </summary>
+        /// <param name="date">The date used to get the UtcOffset.</param>
+        /// <returns>
+        /// the offset in milliseconds not accounting for Daylight saving
+        /// time. A positive value will be returned East of the timezone
+        /// line, and a negative value West of it.
+        /// </returns>
+        public virtual long getLocalMeanTimeOffset(DateTime date)
         {
-            return (long)(getLongitude() * 4 * MINUTE_MILLIS - getTimeZone().getRawOffset());
+            return (long)(getLongitude() * 4 * MINUTE_MILLIS - getTimeZone().UtcOffset(date));
         }
-
 
         ///<summary>
         ///  Calculate the initial <a href = "http://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing
@@ -588,10 +588,12 @@ namespace net.sourceforge.zmanim.util
             sb.Append("\t<TimezoneName>").Append(getTimeZone().getID()).Append("</TimezoneName>\n");
             sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append(
                 "</TimeZoneDisplayName>\n");
+            /*
             sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset() / HOUR_MILLIS).Append(
                 "</TimezoneGMTOffset>\n");
             sb.Append("\t<TimezoneDSTOffset>").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS).Append(
                 "</TimezoneDSTOffset>\n");
+            */
             sb.Append("</GeoLocation>");
             return sb.ToString();
         }
@@ -662,8 +664,10 @@ namespace net.sourceforge.zmanim.util
             //		 * sb.append("\nTimezone Display Name:\t\t").append(
             //		 * getTimeZone().getDisplayName());
             //		 
+            /*
             sb.Append("\nTimezone GMT Offset:\t\t").Append(getTimeZone().getRawOffset() / HOUR_MILLIS);
             sb.Append("\nTimezone DST Offset:\t\t").Append(getTimeZone().getDSTSavings() / HOUR_MILLIS);
+            */
             return sb.ToString();
         }
     }
