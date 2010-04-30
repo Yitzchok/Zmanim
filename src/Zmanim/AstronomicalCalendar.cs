@@ -39,7 +39,7 @@ namespace net.sourceforge.zmanim
     ///  happen on that date. This is common when calculating twilight with a deep dip
     ///  below the horizon for locations as south of the North Pole as London in the
     ///  northern hemisphere. When the calculations encounter this condition a null
-    ///  will be returned when a <see cref = "java.util.Date" /> is expected and
+    ///  will be returned when a <see cref = "DateTime" /> is expected and
     ///  <see cref = "double.NaN" /> when a double is expected. The reason that
     ///  <c>Exception</c>s are not thrown in these cases is because the lack
     ///  of a rise/set are not exceptions, but expected in many parts of the world.
@@ -166,11 +166,12 @@ namespace net.sourceforge.zmanim
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
-        /// <b>Note:</b> If the <seealso cref="java.util.TimeZone"/> in the cloned
+        /// <b>Note:</b> If the <seealso cref="Zmanim.TimeZone.ITimeZone"/> in the cloned
         /// <see cref="GeoLocation"/> will be changed from the
         /// original, it is critical that
-        /// <see cref="AstronomicalCalendar.getCalendar()"/>.<see cref="java.util.Calendar.setTimeZone(java.util.TimeZone)">setTimeZone(TimeZone)</see>
-        /// be called in order for the AstronomicalCalendar to output times in the
+        /// <see cref="AstronomicalCalendar.getCalendar()"/>.
+        /// <see cref="ITimeZoneDateTime.TimeZone">TimeZone</see>
+        /// be set in order for the AstronomicalCalendar to output times in the
         /// expected offset after being cloned.
         /// </summary>
         /// <returns>
@@ -396,7 +397,7 @@ namespace net.sourceforge.zmanim
         ///  the start time </param>
         ///<param name = "offset">
         ///  the offset in milliseconds to add to the time </param>
-        ///<returns> the <see cref = "java.util.Date" />with the offset added to it </returns>
+        ///<returns> the <see cref = "DateTime" />with the offset added to it </returns>
         public virtual DateTime getTimeOffset(DateTime time, double offset)
         {
             return getTimeOffset(time, (long)offset);
@@ -409,7 +410,7 @@ namespace net.sourceforge.zmanim
         ///  the start time </param>
         ///<param name = "offset">
         ///  the offset in milliseconds to add to the time. </param>
-        ///<returns> the <see cref = "java.util.Date" /> with the offset in milliseconds added
+        ///<returns> the <see cref = "DateTime" /> with the offset in milliseconds added
         ///  to it </returns>
         public virtual DateTime getTimeOffset(DateTime time, long offset)
         {
@@ -427,7 +428,7 @@ namespace net.sourceforge.zmanim
         ///<param name = "offsetZenith">
         ///  the degrees before <see cref = "getSunrise()" /> to use in the
         ///  calculation. For time after sunrise use negative numbers. </param>
-        ///<returns> The <seealso cref = "java.util.Date" /> of the offset after (or before)
+        ///<returns> The <seealso cref = "DateTime" /> of the offset after (or before)
         ///  <see cref = "getSunrise()" />. If the calculation can not be computed
         ///  null will be returned. </returns>
         public virtual DateTime getSunriseOffsetByDegrees(double offsetZenith)
@@ -446,7 +447,7 @@ namespace net.sourceforge.zmanim
         ///<param name = "offsetZenith">
         ///  the degrees after <see cref = "getSunset()" /> to use in the
         ///  calculation. For time before sunset use negative numbers. </param>
-        ///<returns> The <seealso cref = "java.util.Date" />of the offset after (or before)
+        ///<returns> The <seealso cref = "DateTime" />of the offset after (or before)
         ///  <see cref = "getSunset()" />. If the calculation can not be computed
         ///  null will be returned. </returns>
         public virtual DateTime getSunsetOffsetByDegrees(double offsetZenith)

@@ -55,7 +55,7 @@ namespace net.sourceforge.zmanim
     /// 	</example>
     /// Note: For locations such as Israel where the beginning and end of daylight
     /// savings time can fluctuate from year to year create a
-    /// <see cref="java.util.SimpleTimeZone"/> with the known start and end of DST. <br/>
+    /// <see cref="Zmanim.TimeZone.ITimeZone"/> with the known start and end of DST. <br/>
     /// To get alos calculated as 14° below the horizon (as calculated in the
     /// calendars published in Montreal) use:
     /// <code>

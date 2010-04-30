@@ -928,7 +928,7 @@ namespace ZmanimTests
             var zman = calendar.getFixedLocalChatzos();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 12, 56, 53, 312)
+                    new DateTime(2010, 4, 2, 12, 56, 53, 311)
                 ));
         }
 
@@ -938,7 +938,7 @@ namespace ZmanimTests
             var zman = calendar.getSofZmanShmaFixedLocal();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 9, 56, 53, 312)
+                    new DateTime(2010, 4, 2, 9, 56, 53, 311)
                 ));
         }
 
@@ -948,7 +948,7 @@ namespace ZmanimTests
             var zman = calendar.getSofZmanTfilaFixedLocal();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 10, 56, 53, 312)
+                    new DateTime(2010, 4, 2, 10, 56, 53, 311)
                 ));
         }
 

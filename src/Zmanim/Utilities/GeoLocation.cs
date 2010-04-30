@@ -148,11 +148,11 @@ namespace net.sourceforge.zmanim.util
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
-        /// <b>Note:</b> If the <seealso cref = "java.util.TimeZone" /> in
+        /// <b>Note:</b> If the <seealso cref = "Zmanim.TimeZone.ITimeZone" /> in
         ///  the clone will be changed from the original, it is critical that
         ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
-        ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
-        ///  is called after cloning in order for the AstronomicalCalendar to output
+        ///  <see cref = "ITimeZoneDateTime.TimeZone">ITimeZoneDateTime.TimeZone</see>
+        ///  is set after cloning in order for the AstronomicalCalendar to output
         ///  times in the expected offset.
         /// </summary>
         /// <returns>
@@ -339,7 +339,7 @@ namespace net.sourceforge.zmanim.util
         ///  set in the <see cref = "net.sourceforge.zmanim.AstronomicalCalendar" />, it is
         ///  critical that
         ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
-        ///  <see cref = "java.util.Calendar.setTimeZone(TimeZone)">setTimeZone(TimeZone)</see>
+        ///  <see cref = "ITimeZoneDateTime">TimeZone</see>
         ///  be called in order for the AstronomicalCalendar to output times in the
         ///  expected offset. This situation will arise if the AstronomicalCalendar is
         ///  ever <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.Clone()">cloned</see>.

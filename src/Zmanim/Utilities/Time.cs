@@ -24,7 +24,7 @@ namespace net.sourceforge.zmanim.util
 {
     /// <summary>
     ///   A class that represents a numeric time. Times that represent a time of day
-    ///   are stored as <seealso cref = "java.util.Date" />s in this API. The time class is used to
+    ///   are stored as <seealso cref = "DateTime" />s in this API. The time class is used to
     ///   represent numeric time such as the time in hours, minutes, seconds and
     ///   milliseconds of a
     ///   <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.

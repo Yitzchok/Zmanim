@@ -81,7 +81,6 @@ task Release -depends Test {
 	& $tools_dir\zip.exe -9 -A -j $release_dir\Zmanim-$humanReadableversion.zip `
 	$build_dir\Zmanim.dll `
 	$build_dir\Zmanim.xml `
-	$build_dir\IKVM.*.dll `
 	$base_dir\docs\Documentation.chm `
 	lgpl.txt `
 	acknowledgements.txt
@@ -90,7 +89,6 @@ task Release -depends Test {
 	$build_dir\Zmanim.dll `
 	$build_dir\Zmanim.xml `
 	$build_dir\Zmanim.Cli.exe `
-	$build_dir\IKVM.*.dll `
 	lgpl.txt `
 	acknowledgements.txt
 	
@@ -104,7 +102,6 @@ task CopyBuildFilesToSampleDirectory -depends Release {
 	New-Item $sample_lib_dir -type directory -force
 	Copy-Item $build_dir\Zmanim.dll $sample_lib_dir
 	Copy-Item $build_dir\Zmanim.xml $sample_lib_dir
-	Copy-Item $build_dir\IKVM.*.dll $sample_lib_dir
 	Copy-Item lgpl.txt $sample_lib_dir
 	Copy-Item acknowledgements.txt $sample_lib_dir
 }
