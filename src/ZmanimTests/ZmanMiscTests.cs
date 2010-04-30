@@ -22,13 +22,19 @@ namespace ZmanimTests
         [Test]
         public void Check_getFixedLocalChatzosEST()
         {
-            var complexZmanimCalendar = GetCalendar();
-            complexZmanimCalendar.setCalendar(new TimeZoneDateTime(new DateTime(2010, 1, 1)));
-            var zman = complexZmanimCalendar.getFixedLocalChatzos();
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 1, 1)), Is.EqualTo(new DateTime(2010, 1, 1, 11, 56, 53, 312)));
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 1, 1, 1, 20, 0)), Is.EqualTo(new DateTime(2010, 1, 1, 11, 56, 53, 312)));
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 1, 8, 2, 0, 10)), Is.EqualTo(new DateTime(2010, 1, 8, 11, 56, 53, 312)));
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 1, 25, 3, 30, 5)), Is.EqualTo(new DateTime(2010, 1, 25, 11, 56, 53, 312)));
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 2, 1, 8, 15, 0)), Is.EqualTo(new DateTime(2010, 2, 1, 11, 56, 53, 312)));
+            Assert.That(GetFixedLocalChatzos(new DateTime(2010, 3, 5, 10, 50, 55)), Is.EqualTo(new DateTime(2010, 3, 5, 11, 56, 53, 312)));
+        }
 
-            Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 1, 1, 11, 56, 53, 312)
-                ));
+        private DateTime GetFixedLocalChatzos(DateTime dateTime)
+        {
+            var calendar = GetCalendar();
+            calendar.setCalendar(new TimeZoneDateTime(dateTime));
+            return calendar.getFixedLocalChatzos();
         }
 
         [Test, Ignore]

@@ -10,10 +10,8 @@ namespace ZmanimTests
     [TestFixture]
     public class ZmanimTest
     {
-
         //We can use these test when removing the depenency to Java (IKVM)
         //To make sure that the code stayes the same.
-
         private ComplexZmanimCalendar calendar;
 
         [SetUp]

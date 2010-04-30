@@ -17,30 +17,29 @@ using System;
 
 namespace Zmanim.Extensions
 {
-
     /// <summary>
     /// Math helpers.
     /// </summary>
     public static class MathExtensions
     {
         /// <summary>
-        ///   Converts degrees to radians.
+        /// Convert degree angle to radians.
         /// </summary>
-        /// <param name = "angle"></param>
+        /// <param name="angleDegree">The angle degree.</param>
         /// <returns></returns>
-        public static double ToRadians(this double angle)
+        public static double ToRadians(this double angleDegree)
         {
-            return Math.PI*angle/180.0;
+            return (Math.PI * angleDegree / 180.0);
         }
 
         /// <summary>
-        ///   Converts radians to degrees.
+        /// Convert radian angle to degrees.
         /// </summary>
-        /// <param name = "angle"></param>
+        /// <param name="angleRadians">The angle radians.</param>
         /// <returns></returns>
-        public static double ToDegree(this double angle)
+        public static double ToDegree(this double angleRadians)
         {
-            return angle*(180.0/Math.PI);
+            return (180.0 * angleRadians / Math.PI);
         }
     }
 }

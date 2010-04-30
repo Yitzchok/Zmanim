@@ -95,32 +95,32 @@
     <Compile Include="Tz\TzDatabase.cs" />
     <Compile Include="Tz\TzDateTime.cs" />
     <Compile Include="Tz\TzTimeZone.cs" />
-    <Compile Include="util\AstronomicalCalculator.cs">
+    <Compile Include="Utilities\AstronomicalCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\GeoLocation.cs">
+    <Compile Include="Utilities\GeoLocation.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\GeoLocationUtils.cs">
+    <Compile Include="Utilities\GeoLocationUtils.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\JSuntimeCalculator.cs">
+    <Compile Include="Utilities\JSuntimeCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\NOAACalculator.cs">
+    <Compile Include="Utilities\NOAACalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\SunTimesCalculator.cs">
+    <Compile Include="Utilities\SunTimesCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\Time.cs">
+    <Compile Include="Utilities\Time.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\Zman.cs">
+    <Compile Include="Utilities\Zman.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\ZmanimCalculator.cs" />
-    <Compile Include="util\ZmanimFormatter.cs" />
+    <Compile Include="Utilities\ZmanimCalculator.cs" />
+    <Compile Include="Utilities\ZmanimFormatter.cs" />
     <Compile Include="ZmanimCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
