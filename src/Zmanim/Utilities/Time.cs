@@ -19,8 +19,9 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using net.sourceforge.zmanim.util;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   A class that represents a numeric time. Times that represent a time of day
