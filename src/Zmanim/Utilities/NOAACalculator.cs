@@ -37,12 +37,37 @@ namespace net.sourceforge.zmanim.util
     {
         private string calculatorName = "US National Oceanic and Atmospheric Administration Algorithm";
 
+        /// <summary>
+        /// Gets the name of the Calculator.
+        /// </summary>
+        /// <returns>the descriptive name of the algorithm.</returns>
         public override string getCalculatorName()
         {
             return calculatorName;
         }
 
-        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)" />
+        /// <summary>
+        /// A method that calculates UTC sunrise as well as any time based on an
+        /// angle above or below sunrise. This abstract method is implemented by the
+        /// classes that extend this class.
+        /// </summary>
+        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
+        /// sunrise typically the <see cref="AstronomicalCalculator.adjustZenith">zenith</see> used for
+        /// the calculation uses geometric zenith of 90°; and
+        /// <see cref="AstronomicalCalculator.adjustZenith">adjusts</see> this slightly to account for
+        /// solar refraction and the sun's radius. Another example would
+        /// be <see cref="AstronomicalCalendar.getBeginNauticalTwilight()"/>
+        /// that passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to
+        /// this method.</param>
+        /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
+        /// <returns>
+        /// The UTC time of sunrise in 24 hour format. 5:45:00 AM will return
+        /// 5.75.0. If an error was encountered in the calculation (expected
+        /// behavior for some locations such as near the poles,
+        /// <see cref="Double.NaN"/> will be returned.
+        /// </returns>
+        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)"/>
         public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
@@ -63,14 +88,31 @@ namespace net.sourceforge.zmanim.util
             double sunRise = calcSunriseUTC(calcJD(astronomicalCalendar.getCalendar()),
                                             astronomicalCalendar.getGeoLocation().getLatitude(),
                                             -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
-            return sunRise/60;
+            return sunRise / 60;
         }
 
-        ///<seealso cref = "net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)" />
-        ///<exception cref = "ZmanimException">
-        ///  If the year entered is lt 2001.
-        ///  This calculator can't properly deal with the year 2000.
-        ///  It can properly calculate times for years gt 2000. </exception>
+        /// <summary>
+        /// A method that calculates UTC sunset as well as any time based on an angle
+        /// above or below sunset. This abstract method is implemented by the classes
+        /// that extend this class.
+        /// </summary>
+        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
+        /// typically the <see cref="AstronomicalCalculator.adjustZenith">zenith</see> used for the
+        /// calculation uses geometric zenith of 90°; and
+        /// <see cref="AstronomicalCalculator.adjustZenith">adjusts</see> this slightly to account for
+        /// solar refraction and the sun's radius. Another example would
+        /// be <see cref="AstronomicalCalendar.getEndNauticalTwilight()"/> that
+        /// passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to this
+        /// method.</param>
+        /// <param name="adjustForElevation"></param>
+        /// <returns>
+        /// The UTC time of sunset in 24 hour format. 5:45:00 AM will return
+        /// 5.75.0. If an error was encountered in the calculation (expected
+        /// behavior for some locations such as near the poles,
+        /// <seealso cref="Double.NaN"/> will be returned.
+        /// </returns>
+        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)"/>
         public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
@@ -92,7 +134,7 @@ namespace net.sourceforge.zmanim.util
             double sunSet = calcSunsetUTC(calcJD(astronomicalCalendar.getCalendar()),
                                           astronomicalCalendar.getGeoLocation().getLatitude(),
                                           -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
-            return sunSet/60;
+            return sunSet / 60;
         }
 
         ///<summary>
@@ -112,10 +154,10 @@ namespace net.sourceforge.zmanim.util
                 year -= 1;
                 month += 12;
             }
-            double A = Math.Floor((double) (year/100));
-            double B = 2 - A + Math.Floor(A/4);
+            double A = Math.Floor((double)(year / 100));
+            double B = 2 - A + Math.Floor(A / 4);
 
-            return Math.Floor(365.25*(year + 4716)) + Math.Floor(30.6001*(month + 1)) + day + B - 1524.5;
+            return Math.Floor(365.25 * (year + 4716)) + Math.Floor(30.6001 * (month + 1)) + day + B - 1524.5;
         }
 
         ///<summary>
@@ -126,7 +168,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the T value corresponding to the Julian Day </returns>
         private static double calcTimeJulianCent(double jd)
         {
-            return (jd - 2451545.0)/36525.0;
+            return (jd - 2451545.0) / 36525.0;
         }
 
         ///<summary>
@@ -137,7 +179,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the Julian Day corresponding to the t value </returns>
         private static double calcJDFromJulianCent(double t)
         {
-            return t*36525.0 + 2451545.0;
+            return t * 36525.0 + 2451545.0;
         }
 
         ///<summary>
@@ -148,7 +190,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the Geometric Mean Longitude of the Sun in degrees </returns>
         private static double calcGeomMeanLongSun(double t)
         {
-            double L0 = 280.46646 + t*(36000.76983 + 0.0003032*t);
+            double L0 = 280.46646 + t * (36000.76983 + 0.0003032 * t);
             while (L0 > 360.0)
             {
                 L0 -= 360.0;
@@ -169,7 +211,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the Geometric Mean Anomaly of the Sun in degrees </returns>
         private static double calcGeomMeanAnomalySun(double t)
         {
-            double M = 357.52911 + t*(35999.05029 - 0.0001537*t);
+            double M = 357.52911 + t * (35999.05029 - 0.0001537 * t);
             return M; // in degrees
         }
 
@@ -181,7 +223,7 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the unitless eccentricity </returns>
         private static double calcEccentricityEarthOrbit(double t)
         {
-            double e = 0.016708634 - t*(0.000042037 + 0.0000001267*t);
+            double e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
             return e; // unitless
         }
 
@@ -200,7 +242,7 @@ namespace net.sourceforge.zmanim.util
             double sin2m = Math.Sin(mrad + mrad);
             double sin3m = Math.Sin(mrad + mrad + mrad);
 
-            double C = sinm*(1.914602 - t*(0.004817 + 0.000014*t)) + sin2m*(0.019993 - 0.000101*t) + sin3m*0.000289;
+            double C = sinm * (1.914602 - t * (0.004817 + 0.000014 * t)) + sin2m * (0.019993 - 0.000101 * t) + sin3m * 0.000289;
             return C; // in degrees
         }
 
@@ -244,8 +286,8 @@ namespace net.sourceforge.zmanim.util
         {
             double o = calcSunTrueLong(t);
 
-            double omega = 125.04 - 1934.136*t;
-            double lambda = o - 0.00569 - 0.00478*Math.Sin(MathExtensions.ToRadians(omega));
+            double omega = 125.04 - 1934.136 * t;
+            double lambda = o - 0.00569 - 0.00478 * Math.Sin(MathExtensions.ToRadians(omega));
             return lambda; // in degrees
         }
 
@@ -257,8 +299,8 @@ namespace net.sourceforge.zmanim.util
         ///<returns> the mean obliquity in degrees </returns>
         private static double calcMeanObliquityOfEcliptic(double t)
         {
-            double seconds = 21.448 - t*(46.8150 + t*(0.00059 - t*(0.001813)));
-            double e0 = 23.0 + (26.0 + (seconds/60.0))/60.0;
+            double seconds = 21.448 - t * (46.8150 + t * (0.00059 - t * (0.001813)));
+            double e0 = 23.0 + (26.0 + (seconds / 60.0)) / 60.0;
             return e0; // in degrees
         }
 
@@ -272,8 +314,8 @@ namespace net.sourceforge.zmanim.util
         {
             double e0 = calcMeanObliquityOfEcliptic(t);
 
-            double omega = 125.04 - 1934.136*t;
-            double e = e0 + 0.00256*Math.Cos(MathExtensions.ToRadians(omega));
+            double omega = 125.04 - 1934.136 * t;
+            double e = e0 + 0.00256 * Math.Cos(MathExtensions.ToRadians(omega));
             return e; // in degrees
         }
 
@@ -287,7 +329,7 @@ namespace net.sourceforge.zmanim.util
             double e = calcObliquityCorrection(t);
             double lambda = calcSunApparentLong(t);
 
-            double sint = Math.Sin(MathExtensions.ToRadians(e))*Math.Sin(MathExtensions.ToRadians(lambda));
+            double sint = Math.Sin(MathExtensions.ToRadians(e)) * Math.Sin(MathExtensions.ToRadians(lambda));
             double theta = MathExtensions.ToDegree(Math.Asin(sint));
             return theta; // in degrees
         }
@@ -305,27 +347,27 @@ namespace net.sourceforge.zmanim.util
             double e = calcEccentricityEarthOrbit(t);
             double m = calcGeomMeanAnomalySun(t);
 
-            double y = Math.Tan(MathExtensions.ToRadians(epsilon)/2.0);
+            double y = Math.Tan(MathExtensions.ToRadians(epsilon) / 2.0);
             y *= y;
 
-            double sin2l0 = Math.Sin(2.0*MathExtensions.ToRadians(l0));
+            double sin2l0 = Math.Sin(2.0 * MathExtensions.ToRadians(l0));
             double sinm = Math.Sin(MathExtensions.ToRadians(m));
-            double cos2l0 = Math.Cos(2.0*MathExtensions.ToRadians(l0));
-            double sin4l0 = Math.Sin(4.0*MathExtensions.ToRadians(l0));
-            double sin2m = Math.Sin(2.0*MathExtensions.ToRadians(m));
+            double cos2l0 = Math.Cos(2.0 * MathExtensions.ToRadians(l0));
+            double sin4l0 = Math.Sin(4.0 * MathExtensions.ToRadians(l0));
+            double sin2m = Math.Sin(2.0 * MathExtensions.ToRadians(m));
 
-            double Etime = y*sin2l0 - 2.0*e*sinm + 4.0*e*y*sinm*cos2l0 - 0.5*y*y*sin4l0 - 1.25*e*e*sin2m;
-            return MathExtensions.ToDegree(Etime)*4.0; // in minutes of time
+            double Etime = y * sin2l0 - 2.0 * e * sinm + 4.0 * e * y * sinm * cos2l0 - 0.5 * y * y * sin4l0 - 1.25 * e * e * sin2m;
+            return MathExtensions.ToDegree(Etime) * 4.0; // in minutes of time
         }
 
-        ///<summary>
-        ///  Calculate the hour angle of the sun at sunrise for the latitude
-        ///</summary>
-        ///<param name = "lat">,
-        ///  the latitude of observer in degrees </param>
-        ///<param name = "solarDec">
-        ///  the declination angle of sun in degrees </param>
-        ///<returns> hour angle of sunrise in radians </returns>
+        /// <summary>
+        /// Calculate the hour angle of the sun at sunrise for the latitude
+        /// </summary>
+        /// <param name="lat">,
+        /// the latitude of observer in degrees</param>
+        /// <param name="solarDec">the declination angle of sun in degrees</param>
+        /// <param name="zenith">The zenith.</param>
+        /// <returns>hour angle of sunrise in radians</returns>
         private static double calcHourAngleSunrise(double lat, double solarDec, double zenith)
         {
             double latRad = MathExtensions.ToRadians(lat);
@@ -336,20 +378,21 @@ namespace net.sourceforge.zmanim.util
             // * Math.tan(sdRad));
 
             double HA =
-                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
-                           Math.Tan(latRad)*Math.Tan(sdRad)));
+                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith)) / (Math.Cos(latRad) * Math.Cos(sdRad)) -
+                           Math.Tan(latRad) * Math.Tan(sdRad)));
             return HA; // in radians
         }
 
-        ///<summary>
-        ///  Calculate the hour angle of the sun at sunset for the latitude
-        ///</summary>
-        ///<param name = "lat">
-        ///  the latitude of observer in degrees </param>
-        ///<param name = "solarDec">
-        ///  the declination angle of sun in degrees </param>
-        ///<returns> the hour angle of sunset in radians
-        ///  TODO: use - calcHourAngleSunrise implementation </returns>
+        /// <summary>
+        /// Calculate the hour angle of the sun at sunset for the latitude
+        /// </summary>
+        /// <param name="lat">the latitude of observer in degrees</param>
+        /// <param name="solarDec">the declination angle of sun in degrees</param>
+        /// <param name="zenith">The zenith.</param>
+        /// <returns>
+        /// the hour angle of sunset in radians
+        /// TODO: use - calcHourAngleSunrise implementation
+        /// </returns>
         private static double calcHourAngleSunset(double lat, double solarDec, double zenith)
         {
             double latRad = MathExtensions.ToRadians(lat);
@@ -360,22 +403,20 @@ namespace net.sourceforge.zmanim.util
             // * Math.tan(sdRad));
 
             double HA =
-                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith))/(Math.Cos(latRad)*Math.Cos(sdRad)) -
-                           Math.Tan(latRad)*Math.Tan(sdRad)));
+                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith)) / (Math.Cos(latRad) * Math.Cos(sdRad)) -
+                           Math.Tan(latRad) * Math.Tan(sdRad)));
             return -HA; // in radians
         }
 
-        ///<summary>
-        ///  Calculate the Universal Coordinated Time (UTC) of sunrise for the given
-        ///  day at the given location on earth
-        ///</summary>
-        ///<param name = "JD">
-        ///  the julian day </param>
-        ///<param name = "latitude">
-        ///  the latitude of observer in degrees </param>
-        ///<param name = "longitude">
-        ///  the longitude of observer in degrees </param>
-        ///<returns> the time in minutes from zero Z </returns>
+        /// <summary>
+        /// Calculate the Universal Coordinated Time (UTC) of sunrise for the given
+        /// day at the given location on earth
+        /// </summary>
+        /// <param name="JD">the julian day</param>
+        /// <param name="latitude">the latitude of observer in degrees</param>
+        /// <param name="longitude">the longitude of observer in degrees</param>
+        /// <param name="zenith">The zenith.</param>
+        /// <returns>the time in minutes from zero Z</returns>
         private static double calcSunriseUTC(double JD, double latitude, double longitude, double zenith)
         {
             double t = calcTimeJulianCent(JD);
@@ -385,7 +426,7 @@ namespace net.sourceforge.zmanim.util
             // Julian day
 
             double noonmin = calcSolNoonUTC(t, longitude);
-            double tnoon = calcTimeJulianCent(JD + noonmin/1440.0);
+            double tnoon = calcTimeJulianCent(JD + noonmin / 1440.0);
 
             // *** First pass to approximate sunrise (using solar noon)
 
@@ -394,17 +435,17 @@ namespace net.sourceforge.zmanim.util
             double hourAngle = calcHourAngleSunrise(latitude, solarDec, zenith);
 
             double delta = longitude - MathExtensions.ToDegree(hourAngle);
-            double timeDiff = 4*delta; // in minutes of time
+            double timeDiff = 4 * delta; // in minutes of time
             double timeUTC = 720 + timeDiff - eqTime; // in minutes
 
             // *** Second pass includes fractional jday in gamma calc
 
-            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) + timeUTC/1440.0);
+            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) + timeUTC / 1440.0);
             eqTime = calcEquationOfTime(newt);
             solarDec = calcSunDeclination(newt);
             hourAngle = calcHourAngleSunrise(latitude, solarDec, zenith);
             delta = longitude - MathExtensions.ToDegree(hourAngle);
-            timeDiff = 4*delta;
+            timeDiff = 4 * delta;
             timeUTC = 720 + timeDiff - eqTime; // in minutes
             return timeUTC;
         }
@@ -421,14 +462,14 @@ namespace net.sourceforge.zmanim.util
         private static double calcSolNoonUTC(double t, double longitude)
         {
             // First pass uses approximate solar noon to calculate eqtime
-            double tnoon = calcTimeJulianCent(calcJDFromJulianCent(t) + longitude/360.0);
+            double tnoon = calcTimeJulianCent(calcJDFromJulianCent(t) + longitude / 360.0);
             double eqTime = calcEquationOfTime(tnoon);
-            double solNoonUTC = 720 + (longitude*4) - eqTime; // min
+            double solNoonUTC = 720 + (longitude * 4) - eqTime; // min
 
-            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) - 0.5 + solNoonUTC/1440.0);
+            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) - 0.5 + solNoonUTC / 1440.0);
 
             eqTime = calcEquationOfTime(newt);
-            return 720 + (longitude*4) - eqTime; // min
+            return 720 + (longitude * 4) - eqTime; // min
         }
 
         ///<summary>
@@ -452,7 +493,7 @@ namespace net.sourceforge.zmanim.util
             // Julian day
 
             double noonmin = calcSolNoonUTC(t, longitude);
-            double tnoon = calcTimeJulianCent(JD + noonmin/1440.0);
+            double tnoon = calcTimeJulianCent(JD + noonmin / 1440.0);
 
             // First calculates sunrise and approx length of day
 
@@ -461,18 +502,18 @@ namespace net.sourceforge.zmanim.util
             double hourAngle = calcHourAngleSunset(latitude, solarDec, zenith);
 
             double delta = longitude - MathExtensions.ToDegree(hourAngle);
-            double timeDiff = 4*delta;
+            double timeDiff = 4 * delta;
             double timeUTC = 720 + timeDiff - eqTime;
 
             // first pass used to include fractional day in gamma calc
 
-            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) + timeUTC/1440.0);
+            double newt = calcTimeJulianCent(calcJDFromJulianCent(t) + timeUTC / 1440.0);
             eqTime = calcEquationOfTime(newt);
             solarDec = calcSunDeclination(newt);
             hourAngle = calcHourAngleSunset(latitude, solarDec, zenith);
 
             delta = longitude - MathExtensions.ToDegree(hourAngle);
-            timeDiff = 4*delta;
+            timeDiff = 4 * delta;
             return 720 + timeDiff - eqTime; // in minutes
         }
     }

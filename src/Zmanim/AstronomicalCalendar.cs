@@ -391,7 +391,7 @@ namespace net.sourceforge.zmanim
         ///<summary>
         ///  Utility method that returns a date offset by the offset time passed in.
         ///  This method casts the offset as a <code>long</code> and calls
-        ///  <see cref = "getTimeOffset(Date, long)" />.
+        ///  <see cref = "getTimeOffset(DateTime, long)" />.
         ///</summary>
         ///<param name = "time">
         ///  the start time </param>
@@ -544,8 +544,6 @@ namespace net.sourceforge.zmanim
         ///  time. </returns>
         private double getOffsetTime(double time)
         {
-            bool dst = getCalendar().TimeZone.inDaylightTime(getCalendar().Date);
-            double dstOffset = 0;
             // be nice to Newfies and use a double
             double gmtOffset = getCalendar().TimeZone.UtcOffset(getCalendar().Date) / (60 * MINUTE_MILLIS);
 

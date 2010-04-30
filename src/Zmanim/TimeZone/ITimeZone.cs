@@ -16,6 +16,11 @@ namespace Zmanim.TimeZone
         /// <returns></returns>
         int UtcOffset(DateTime dateTime);
 
+        /// <summary>
+        /// Is the current DateTime in daylight time for this time zone.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns></returns>
         bool inDaylightTime(DateTime dateTime);
 
         /// <summary>

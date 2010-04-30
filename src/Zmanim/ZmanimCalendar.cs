@@ -24,16 +24,16 @@ using net.sourceforge.zmanim.util;
 namespace net.sourceforge.zmanim
 {
     /// <summary>
-    ///   <p> Description: A Java library for calculating zmanim. </p>
-    ///   The zmanim library is an API is a specialized calendar that can calculate
-    ///   sunrise and sunset and Jewish <em>zmanim</em> (religious times) for prayers
-    ///   and other Jewish religious duties. For a much more extensive list of zmanim
-    ///   use the <seealso cref = "ComplexZmanimCalendar" /> that extends this class. This class
-    ///   contains the main functionality of the Zmanim library. See documentation for
-    ///   the <seealso cref = "ComplexZmanimCalendar" /> and <seealso cref = "AstronomicalCalendar" /> for simple
-    ///   examples on using the API. <h2>Disclaimer:</h2> While I did my best to get
-    ///   accurate results please do not rely on these zmanim for
-    ///   <em>halacha lemaaseh</em>
+    /// 	<p> Description: A Java library for calculating zmanim. </p>
+    /// The zmanim library is an API is a specialized calendar that can calculate
+    /// sunrise and sunset and Jewish <em>zmanim</em> (religious times) for prayers
+    /// and other Jewish religious duties. For a much more extensive list of zmanim
+    /// use the <seealso cref="ComplexZmanimCalendar"/> that extends this class. This class
+    /// contains the main functionality of the Zmanim library. See documentation for
+    /// the <seealso cref="ComplexZmanimCalendar"/> and <seealso cref="AstronomicalCalendar"/> for simple
+    /// examples on using the API. <h2>Disclaimer:</h2> While I did my best to get
+    /// accurate results please do not rely on these zmanim for
+    /// <em>halacha lemaaseh</em>
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class ZmanimCalendar : AstronomicalCalendar
@@ -47,19 +47,19 @@ namespace net.sourceforge.zmanim
         ///  the calculation that the time between dawn and sunrise (and sunset to
         ///  nightfall) is the time that is takes to walk 4 <em>mil</em> at 18 minutes
         ///  a mil (<em>Ramba"m</em> and others). The sun's position at 72 minutes
-        ///  before <see cref = "AstronomicalCalendar.getSunrise">sunrise</see> in Jerusalem on the equinox is
-        ///  16.1° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
+        ///  before <see cref="AstronomicalCalendar.getSunrise">sunrise</see> in Jerusalem on the equinox is
+        ///  16.1° below <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
         ///</summary>
-        ///<seealso cref = "getAlosHashachar()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getAlos16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getTzais16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaMGA16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getSofZmanTfilaMGA16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getMinchaGedola16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getMinchaKetana16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getPlagHamincha16Point1Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()" />
-        ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaAlos16Point1ToSunset()" />
+        ///<seealso cref="getAlosHashachar()" />
+        ///<seealso cref="ComplexZmanimCalendar.getAlos16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getTzais16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getSofZmanShmaMGA16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getSofZmanTfilaMGA16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getMinchaGedola16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getMinchaKetana16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getPlagHamincha16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.getSofZmanShmaAlos16Point1ToSunset()" />
         protected internal const double ZENITH_16_POINT_1 = GEOMETRIC_ZENITH + 16.1;
 
         ///<summary>
@@ -338,7 +338,7 @@ namespace net.sourceforge.zmanim
 
         ///<summary>
         ///  Method to return a <em>shaah zmanis</em> (
-        ///  <see cref = "AstronomicalCalendar.getTemporalHour(Date, Date)">temporal hour</see>) according to the
+        ///  <see cref = "AstronomicalCalendar.getTemporalHour(DateTime, DateTime)">temporal hour</see>) according to the
         ///  opinion of the <em>GR"A</em> and the <em>Baal Hatanya</em>. This
         ///  calculation divides the day based on the opinion of the <em>GR"A</em> and
         ///  the <em>Baal Hatanya</em> that the day runs from <see cref = "AstronomicalCalendar.getSunrise()"> sunrise</see>
@@ -353,7 +353,7 @@ namespace net.sourceforge.zmanim
         ///</summary>
         ///<returns> the <code>long</code> millisecond length of a
         ///  <em>shaah zmanis</em>. </returns>
-        ///<seealso cref = "AstronomicalCalendar.getTemporalHour(Date, Date)" />
+        ///<seealso cref = "AstronomicalCalendar.getTemporalHour(DateTime, DateTime)" />
         public virtual long getShaahZmanisGra()
         {
             return getTemporalHour(getSeaLevelSunrise(), getSeaLevelSunset());

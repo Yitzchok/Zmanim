@@ -46,6 +46,13 @@ namespace net.sourceforge.zmanim.util
 
         private int seconds;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> class.
+        /// </summary>
+        /// <param name="hours">The hours.</param>
+        /// <param name="minutes">The minutes.</param>
+        /// <param name="seconds">The seconds.</param>
+        /// <param name="milliseconds">The milliseconds.</param>
         public Time(int hours, int minutes, int seconds, int milliseconds)
         {
             this.hours = hours;
@@ -54,11 +61,19 @@ namespace net.sourceforge.zmanim.util
             this.milliseconds = milliseconds;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> class.
+        /// </summary>
+        /// <param name="millis">The millis.</param>
         public Time(double millis)
             : this((int) millis)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> class.
+        /// </summary>
+        /// <param name="millis">The millis.</param>
         public Time(int millis)
         {
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(millis);
@@ -76,81 +91,121 @@ namespace net.sourceforge.zmanim.util
             milliseconds = timeSpan.Milliseconds;
         }
 
+        /// <summary>
+        /// Determines whether this instance is negative.
+        /// </summary>
+        /// <returns>
+        /// 	<c>true</c> if this instance is negative; otherwise, <c>false</c>.
+        /// </returns>
         public virtual bool IsNegative()
         {
             return isNegative;
         }
 
+        /// <summary>
+        /// Sets the is negative.
+        /// </summary>
+        /// <param name="isNegative">if set to <c>true</c> [is negative].</param>
         public virtual void setIsNegative(bool isNegative)
         {
             this.isNegative = isNegative;
         }
 
 
-        /// <returns> Returns the hour. </returns>
+        /// <summary>
+        /// Gets the hours.
+        /// </summary>
+        /// <returns>Returns the hour.</returns>
         public virtual int getHours()
         {
             return hours;
         }
 
 
-        /// <param name = "hours">
-        ///   The hours to set. </param>
+        /// <summary>
+        /// Sets the hours.
+        /// </summary>
+        /// <param name="hours">The hours to set.</param>
         public virtual void setHours(int hours)
         {
             this.hours = hours;
         }
 
 
-        /// <returns> Returns the minutes. </returns>
+        /// <summary>
+        /// Gets the minutes.
+        /// </summary>
+        /// <returns>Returns the minutes.</returns>
         public virtual int getMinutes()
         {
             return minutes;
         }
 
 
-        /// <param name = "minutes">
-        ///   The minutes to set. </param>
+        /// <summary>
+        /// Sets the minutes.
+        /// </summary>
+        /// <param name="minutes">The minutes to set.</param>
         public virtual void setMinutes(int minutes)
         {
             this.minutes = minutes;
         }
 
 
-        /// <returns> Returns the seconds. </returns>
+        /// <summary>
+        /// Gets the seconds.
+        /// </summary>
+        /// <returns>Returns the seconds.</returns>
         public virtual int getSeconds()
         {
             return seconds;
         }
 
 
-        /// <param name = "seconds">
-        ///   The seconds to set. </param>
+        /// <summary>
+        /// Sets the seconds.
+        /// </summary>
+        /// <param name="seconds">The seconds to set.</param>
         public virtual void setSeconds(int seconds)
         {
             this.seconds = seconds;
         }
 
 
-        /// <returns> Returns the milliseconds. </returns>
+        /// <summary>
+        /// Gets the milliseconds.
+        /// </summary>
+        /// <returns>Returns the milliseconds.</returns>
         public virtual int getMilliseconds()
         {
             return milliseconds;
         }
 
 
-        /// <param name = "milliseconds">
-        ///   The milliseconds to set. </param>
+        /// <summary>
+        /// Sets the milliseconds.
+        /// </summary>
+        /// <param name="milliseconds">The milliseconds to set.</param>
         public virtual void setMilliseconds(int milliseconds)
         {
             this.milliseconds = milliseconds;
         }
 
+        /// <summary>
+        /// Gets the time.
+        /// </summary>
+        /// <returns></returns>
         public virtual double getTime()
         {
             return hours*HOUR_MILLIS + minutes*MINUTE_MILLIS + seconds*SECOND_MILLIS + milliseconds;
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return new ZmanimFormatter().format(this);

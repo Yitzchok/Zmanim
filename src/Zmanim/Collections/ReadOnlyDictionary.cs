@@ -23,7 +23,7 @@ namespace PublicDomain
     /// dictionary with a wrapper that prevents modifying the
     /// dictionary; therefore, if changes are made to the underlying
     /// dictionary, the read-only dictionary reflects those changes. 
-    /// See <see cref="Dictionary`2"/> for a modifiable version of 
+    /// See <see cref="Dictionary{TKey,TValue}"/> for a modifiable version of 
     /// this class.
     /// </para>
     /// <para>
@@ -382,16 +382,23 @@ namespace PublicDomain
         }
 
         /// <summary>
-        /// For a description of this member, see <see cref="ICollection{T}.IsSynchronized"/>.
+        /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
         /// </summary>
+        /// <value></value>
+        /// <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+        /// </returns>
         bool ICollection.IsSynchronized
         {
             get { return ((ICollection)this._source).IsSynchronized; }
         }
 
         /// <summary>
-        /// For a description of this member, see <see cref="ICollection{T}.SyncRoot"/>.
+        /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
         /// </summary>
+        /// <value></value>
+        /// <returns>
+        /// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+        /// </returns>
         object ICollection.SyncRoot
         {
             get { return ((ICollection)this._source).SyncRoot; }

@@ -48,8 +48,7 @@ namespace PublicDomain
         /// Splits <paramref name="str"/> based on finding the last location of any of the charactesr from
         /// <paramref name="anyOf"/>. The first element
         /// is the left portion, and the second element
-        /// is the right portion. The character at index <paramref name="index"/>
-        /// is not included in either portion.
+        /// is the right portion.
         /// The return result is never null, and the elements
         /// are never null, so one of the elements may be an empty string.
         /// </summary>
