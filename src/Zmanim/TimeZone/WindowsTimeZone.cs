@@ -1,24 +1,25 @@
 ﻿using System;
-using PublicDomain;
 using Zmanim.Extensions;
+using System.Linq;
 
 namespace Zmanim.TimeZone
 {
     /// <summary>
-    /// A ITimeZone implementation of the Olson TimeZone DataBase
+    /// A ITimeZone implementation of the Windows TimeZone
+    /// (uses the default .net <see cref="TimeZone"/> class)
     /// </summary>
-    public class OlsonTimeZone : ITimeZone
+    public class WindowsTimeZone : ITimeZone
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
         /// </summary>
-        public OlsonTimeZone() { }
+        public WindowsTimeZone() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
         /// </summary>
         /// <param name="timeZone">The time zone.</param>
-        public OlsonTimeZone(TzTimeZone timeZone)
+        public WindowsTimeZone(TimeZoneInfo timeZone)
         {
             this.TimeZone = timeZone;
         }
@@ -27,16 +28,16 @@ namespace Zmanim.TimeZone
         /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
         /// </summary>
         /// <param name="timeZoneName">Name of the time zone.</param>
-        public OlsonTimeZone(string timeZoneName)
+        public WindowsTimeZone(string timeZoneName)
         {
-            TimeZone = TzTimeZone.GetTimeZone(timeZoneName);
+            TimeZone= TimeZoneInfo.FindSystemTimeZoneById(timeZoneName);
         }
 
         /// <summary>
         /// Gets or sets the time zone.
         /// </summary>
         /// <value>The time zone.</value>
-        public TzTimeZone TimeZone { get; set; }
+        public TimeZoneInfo TimeZone { get; set; }
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.

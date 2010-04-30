@@ -78,6 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TimeZone\OlsonTimeZone.cs" />
+    <Compile Include="TimeZone\WindowsTimeZone.cs" />
     <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
     <Compile Include="Tz\BaseException.cs" />
     <Compile Include="Tz\Utilities\CharUtilities.cs" />
