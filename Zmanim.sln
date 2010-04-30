@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.QuartzScheduling", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Scheduling", "src\Zmanim.Scheduling\Zmanim.Scheduling.csproj", "{C3866745-0DAC-4B06-8B30-D56CD7471A0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Java", "src\Zmanim.Java\Zmanim.Java.csproj", "{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{C3866745-0DAC-4B06-8B30-D56CD7471A0B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C3866745-0DAC-4B06-8B30-D56CD7471A0B}.Release|x86.ActiveCfg = Release|x86
 		{C3866745-0DAC-4B06-8B30-D56CD7471A0B}.Release|x86.Build.0 = Release|x86
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
