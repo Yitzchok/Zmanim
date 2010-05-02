@@ -542,7 +542,7 @@ namespace Zmanim
         ///  10.75 * <see cref = "getShaahZmanis120MinutesZmanis()" /> after
         ///  <see cref = "getAlos120Zmanis">dawn</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha120MinutesZmanis()
         {
             return getTimeOffset(getAlos120Zmanis(), getShaahZmanis120MinutesZmanis() * 10.75);
@@ -555,7 +555,7 @@ namespace Zmanim
         ///  used is:<br />
         ///  10.75 <see cref = "getShaahZmanis120Minutes()" /> after <see cref = "getAlos120()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha120Minutes()
         {
             return getTimeOffset(getAlos120(), getShaahZmanis120Minutes() * 10.75);
@@ -571,7 +571,7 @@ namespace Zmanim
         ///  location but purely depends on the time it takes to walk the distance of
         ///  4 <em>Mil</em>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime getAlos60()
         {
             return getTimeOffset(getSeaLevelSunrise(), -60 * MINUTE_MILLIS);
@@ -589,7 +589,7 @@ namespace Zmanim
         ///  This calculation is used in the calendars published by
         ///  <em>Hisachdus Harabanim D'Artzos Habris Ve'Kanada</em>
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
         public virtual DateTime getAlos72Zmanis()
         {
@@ -610,7 +610,7 @@ namespace Zmanim
         ///  the time of year or location but purely depends on the time it takes to
         ///  walk the distance of 4 <em>Mil</em>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime getAlos96()
         {
             return getTimeOffset(getSeaLevelSunrise(), -96 * MINUTE_MILLIS);
@@ -626,7 +626,7 @@ namespace Zmanim
         ///  The actual calculation is <see cref = "AstronomicalCalendar.getSunrise()" /> - (
         ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 1.5).
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
         public virtual DateTime getAlos90Zmanis()
         {
@@ -648,7 +648,7 @@ namespace Zmanim
         ///  The actual calculation is <seealso cref = "AstronomicalCalendar.getSunrise()" /> - (
         ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 1.6).
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
         public virtual DateTime getAlos96Zmanis()
         {
@@ -669,7 +669,7 @@ namespace Zmanim
         ///  of year or location but purely depends on the time it takes to walk the
         ///  distance of 4 <em>Mil</em>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime getAlos90()
         {
             return getTimeOffset(getSeaLevelSunrise(), -90 * MINUTE_MILLIS);
@@ -685,7 +685,7 @@ namespace Zmanim
         ///  of year or location but purely depends on the time it takes to walk the
         ///  distance of 5 <em>Mil</em>(<em>Ula</em>).
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime getAlos120()
         {
             return getTimeOffset(getSeaLevelSunrise(), -120 * MINUTE_MILLIS);
@@ -701,7 +701,7 @@ namespace Zmanim
         ///  The actual calculation is <seealso cref = "AstronomicalCalendar.getSunrise()" /> - (
         ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 2).
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
         public virtual DateTime getAlos120Zmanis()
         {
@@ -722,7 +722,7 @@ namespace Zmanim
         ///  of the sun 120 minutes before sunrise in Jerusalem in the equinox which
         ///  calculates to 26° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing <em>alos</em>. </returns>
+        ///<returns> the <c>DateTime</c> representing <em>alos</em>. </returns>
         ///<seealso cref = "ZENITH_26_DEGREES" />
         ///<seealso cref = "getAlos120()" />
         ///<seealso cref = "getTzais120()" />
@@ -737,7 +737,7 @@ namespace Zmanim
         /// before sunrise.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> representing <em>alos</em>.
+        /// the <c>DateTime</c> representing <em>alos</em>.
         /// </returns>
         /// <seealso cref="AstronomicalCalendar.ASTRONOMICAL_ZENITH"/>
         public virtual DateTime getAlos18Degrees()
@@ -754,7 +754,7 @@ namespace Zmanim
         ///  the sun 90 minutes before sunrise in Jerusalem in the equinox which
         ///  calculates to 19.8° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
         ///</summary>
-        ///<returns> the <c>Date</c> representing <em>alos</em>. </returns>
+        ///<returns> the <c>DateTime</c> representing <em>alos</em>. </returns>
         ///<seealso cref = "ZENITH_19_POINT_8" />
         ///<seealso cref = "getAlos90()" />
         public virtual DateTime getAlos19Point8Degrees()
@@ -772,7 +772,7 @@ namespace Zmanim
         /// calculates to 16.1° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> representing <em>alos</em>.
+        /// the <c>DateTime</c> representing <em>alos</em>.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_16_POINT_1"/>
         /// <seealso cref="ZmanimCalendar.getAlos72()"/>
@@ -838,7 +838,7 @@ namespace Zmanim
         ///  of 3 <seealso cref = "getShaahZmanis19Point8Degrees()" /> after
         ///  <seealso cref = "getAlos19Point8Degrees">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis19Point8Degrees()" />
         ///<seealso cref = "getAlos19Point8Degrees()" />
         public virtual DateTime getSofZmanShmaMGA19Point8Degrees()
@@ -858,7 +858,7 @@ namespace Zmanim
         ///  of 3 <seealso cref = "getShaahZmanis16Point1Degrees()" /> after
         ///  <seealso cref = "getAlos16Point1Degrees">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis16Point1Degrees()" />
         ///<seealso cref = "getAlos16Point1Degrees()" />
         public virtual DateTime getSofZmanShmaMGA16Point1Degrees()
@@ -880,7 +880,7 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.getSofZmanShmaMGA()"/> and is repeated here for clarity.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis72Minutes()"/>
         /// <seealso cref="ZmanimCalendar.getAlos72()"/>
@@ -906,7 +906,7 @@ namespace Zmanim
         ///  time of 3 * <seealso cref = "getShaahZmanis72MinutesZmanis()" /> after
         ///  <seealso cref = "getAlos72Zmanis">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis72MinutesZmanis()" />
         ///<seealso cref = "getAlos72Zmanis()" />
         public virtual DateTime getSofZmanShmaMGA72MinutesZmanis()
@@ -926,7 +926,7 @@ namespace Zmanim
         ///  sunset. This returns the time of 3 * <seealso cref = "getShaahZmanis90Minutes()" />
         ///  after <seealso cref = "getAlos90">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis90Minutes()" />
         ///<seealso cref = "getAlos90()" />
         public virtual DateTime getSofZmanShmaMGA90Minutes()
@@ -948,7 +948,7 @@ namespace Zmanim
         ///  <see cref = "getShaahZmanis90MinutesZmanis()" /> after <see cref = "getAlos90Zmanis()"> dawn</see>
         ///  .
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis90MinutesZmanis()" />
         ///<seealso cref = "getAlos90Zmanis()" />
         public virtual DateTime getSofZmanShmaMGA90MinutesZmanis()
@@ -968,7 +968,7 @@ namespace Zmanim
         ///  sunset. This returns the time of 3 * <see cref = "getShaahZmanis96Minutes()" />
         ///  after <see cref = "getAlos96">dawn</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis96Minutes()" />
         ///<seealso cref = "getAlos96()" />
         public virtual DateTime getSofZmanShmaMGA96Minutes()
@@ -990,7 +990,7 @@ namespace Zmanim
         ///  <see cref = "getShaahZmanis96MinutesZmanis()" /> after <see cref = "getAlos96Zmanis()"> dawn</see>
         ///  .
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "getShaahZmanis96MinutesZmanis()" />
         ///<seealso cref = "getAlos96Zmanis()" />
         public virtual DateTime getSofZmanShmaMGA96MinutesZmanis()
@@ -1008,7 +1008,7 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.getChatzos()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.getChatzos()"/>
         /// <seealso cref="getSofZmanTfila2HoursBeforeChatzos()"/>
@@ -1030,7 +1030,7 @@ namespace Zmanim
         /// <see cref="getShaahZmanis120Minutes()"/> after <see cref="getAlos120">dawn</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis120Minutes()"/>
         /// <seealso cref="getAlos120()"/>
@@ -1054,7 +1054,7 @@ namespace Zmanim
         /// midday.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema based on this day.
+        /// the <c>DateTime</c> of the latest zman shema based on this day.
         /// </returns>
         /// <seealso cref="getAlos16Point1Degrees()"/>
         /// <seealso cref="AstronomicalCalendar.getSeaLevelSunset"/>
@@ -1079,7 +1079,7 @@ namespace Zmanim
         ///  <b>Note: </b> Based on this calculation <em>chatzos</em> will not be at
         ///  midday.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema based on this
+        ///<returns> the <c>DateTime</c> of the latest zman shema based on this
         ///  calculation. </returns>
         ///<seealso cref = "getAlos16Point1Degrees()" />
         ///<seealso cref = "getTzaisGeonim7Point083Degrees()" />
@@ -1098,7 +1098,7 @@ namespace Zmanim
         /// III page 1016.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema based on this
+        /// the <c>DateTime</c> of the latest zman shema based on this
         /// calculation.
         /// </returns>
         /// <seealso cref="getFixedLocalChatzos()"/>
@@ -1125,7 +1125,7 @@ namespace Zmanim
         ///  of 4 <see cref = "getShaahZmanis19Point8Degrees()" /> after
         ///  <see cref = "getAlos19Point8Degrees">dawn</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema.
+        ///<returns> the <c>DateTime</c> of the latest zman shema.
         ///</returns>
         ///<seealso cref = "getShaahZmanis19Point8Degrees()" />
         ///<seealso cref = "getAlos19Point8Degrees()" />
@@ -1146,7 +1146,7 @@ namespace Zmanim
         ///  of 4 <see cref = "getShaahZmanis16Point1Degrees()" /> after
         ///  <see cref = "getAlos16Point1Degrees">dawn</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema.
+        ///<returns> the <c>DateTime</c> of the latest zman shema.
         ///</returns>
         ///<seealso cref = "getShaahZmanis16Point1Degrees()" />
         ///<seealso cref = "getAlos16Point1Degrees()" />
@@ -1169,7 +1169,7 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.getSofZmanTfilaMGA()"/> and is repeated here for clarity.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman tfila.
+        /// the <c>DateTime</c> of the latest zman tfila.
         /// </returns>
         /// <seealso cref="getShaahZmanis72Minutes()"/>
         /// <seealso cref="ZmanimCalendar.getAlos72"/>
@@ -1193,7 +1193,7 @@ namespace Zmanim
         /// <seealso cref="getShaahZmanis72MinutesZmanis()"/> after <see cref="getAlos72Zmanis()"> dawn</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis72MinutesZmanis()"/>
         /// <seealso cref="getAlos72Zmanis()"/>
@@ -1215,7 +1215,7 @@ namespace Zmanim
         /// after <seealso cref="getAlos90">dawn</seealso>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman tfila.
+        /// the <c>DateTime</c> of the latest zman tfila.
         /// </returns>
         /// <seealso cref="getShaahZmanis90Minutes()"/>
         /// <seealso cref="getAlos90()"/>
@@ -1239,7 +1239,7 @@ namespace Zmanim
         /// .
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis90MinutesZmanis()"/>
         /// <seealso cref="getAlos90Zmanis()"/>
@@ -1261,7 +1261,7 @@ namespace Zmanim
         /// after <see cref="getAlos96">dawn</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman tfila.
+        /// the <c>DateTime</c> of the latest zman tfila.
         /// </returns>
         /// <seealso cref="getShaahZmanis96Minutes()"/>
         /// <seealso cref="getAlos96()"/>
@@ -1285,7 +1285,7 @@ namespace Zmanim
         /// .
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis90MinutesZmanis()"/>
         /// <seealso cref="getAlos90Zmanis()"/>
@@ -1307,7 +1307,7 @@ namespace Zmanim
         /// <see cref="getShaahZmanis120Minutes()"/> after <see cref="getAlos120">dawn</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis120Minutes()"/>
         /// <seealso cref="getAlos120()"/>
@@ -1325,7 +1325,7 @@ namespace Zmanim
         /// hours before <seealso cref="ZmanimCalendar.getChatzos()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.getChatzos()"/>
         /// <seealso cref="getSofZmanShma3HoursBeforeChatzos()"/>
@@ -1350,7 +1350,7 @@ namespace Zmanim
         /// <em>Shaar Hatziyon seif katan ches</em>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of 30 mintes after <em>chatzos</em>.
+        /// the <c>DateTime</c> of 30 mintes after <em>chatzos</em>.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
         /// <seealso cref="getMinchaGedolaGreaterThan30()"/>
@@ -1370,7 +1370,7 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.getAlos72">alos</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha gedola.
+        /// the <c>DateTime</c> of the time of mincha gedola.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.getAlos72()"/>
         /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
@@ -1392,7 +1392,7 @@ namespace Zmanim
         /// <see cref="getAlos16Point1Degrees">alos</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha gedola.
+        /// the <c>DateTime</c> of the time of mincha gedola.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
@@ -1410,7 +1410,7 @@ namespace Zmanim
         /// returned, otherwise <see cref="ZmanimCalendar.getMinchaGedola()"/> will be returned.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the later of <see cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// the <c>DateTime</c> of the later of <see cref="ZmanimCalendar.getMinchaGedola()"/>
         /// and <see cref="getMinchaGedola30Minutes()"/>
         /// </returns>
         public virtual DateTime getMinchaGedolaGreaterThan30()
@@ -1435,7 +1435,7 @@ namespace Zmanim
         /// <seealso cref="getAlos16Point1Degrees">alos</seealso>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha ketana.
+        /// the <c>DateTime</c> of the time of mincha ketana.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
@@ -1457,7 +1457,7 @@ namespace Zmanim
         /// .
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha ketana.
+        /// the <c>DateTime</c> of the time of mincha ketana.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
@@ -1474,7 +1474,7 @@ namespace Zmanim
         /// 10.75 <see cref="getShaahZmanis60Minutes()"/> after <seealso see="getAlos60()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of <em>plag hamincha</em>.
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
         public virtual DateTime getPlagHamincha60Minutes()
         {
@@ -1488,7 +1488,7 @@ namespace Zmanim
         /// 10.75 <see cref="getShaahZmanis72Minutes()"/> after <see cref="ZmanimCalendar.getAlos72"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of <em>plag hamincha</em>.
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
         public virtual DateTime getPlagHamincha72Minutes()
         {
@@ -1502,7 +1502,7 @@ namespace Zmanim
         /// 10.75 <seealso cref="getShaahZmanis90Minutes()"/> after <seealso cref="getAlos90()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of <em>plag hamincha</em>.
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
         public virtual DateTime getPlagHamincha90Minutes()
         {
@@ -1515,7 +1515,7 @@ namespace Zmanim
         ///  used is:<br />
         ///  10.75 <seealso cref = "getShaahZmanis96Minutes()" /> after <seealso cref = "getAlos96()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha96Minutes()
         {
             return getTimeOffset(getAlos96(), getShaahZmanis96Minutes() * 10.75);
@@ -1528,7 +1528,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis96MinutesZmanis()" /> after
         ///  <seealso cref = "getAlos96Zmanis">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha96MinutesZmanis()
         {
             return getTimeOffset(getAlos96Zmanis(), getShaahZmanis96MinutesZmanis() * 10.75);
@@ -1541,7 +1541,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis90MinutesZmanis()" /> after
         ///  <seealso cref = "getAlos90Zmanis">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha90MinutesZmanis()
         {
             return getTimeOffset(getAlos90Zmanis(), getShaahZmanis90MinutesZmanis() * 10.75);
@@ -1554,7 +1554,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis72MinutesZmanis()" /> after
         ///  <seealso cref = "getAlos72Zmanis">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha72MinutesZmanis()
         {
             return getTimeOffset(getAlos72Zmanis(), getShaahZmanis72MinutesZmanis() * 10.75);
@@ -1570,7 +1570,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis16Point1Degrees()" /> after
         ///  <seealso cref = "getAlos16Point1Degrees()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha16Point1Degrees()
         {
             return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 10.75);
@@ -1586,7 +1586,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis19Point8Degrees()" /> after
         ///  <seealso cref = "getAlos19Point8Degrees()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha19Point8Degrees()
         {
             return getTimeOffset(getAlos19Point8Degrees(), getShaahZmanis19Point8Degrees() * 10.75);
@@ -1602,7 +1602,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis26Degrees()" /> after
         ///  <seealso cref = "getAlos26Degrees()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha26Degrees()
         {
             return getTimeOffset(getAlos26Degrees(), getShaahZmanis26Degrees() * 10.75);
@@ -1618,7 +1618,7 @@ namespace Zmanim
         ///  10.75 * <seealso cref = "getShaahZmanis18Degrees()" /> after
         ///  <seealso cref = "getAlos18Degrees()" />.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha18Degrees()
         {
             return getTimeOffset(getAlos18Degrees(), getShaahZmanis18Degrees() * 10.75);
@@ -1637,7 +1637,7 @@ namespace Zmanim
         ///  . This returns the time of 10.75 * the calculated
         ///  <em>shaah zmanis</em> after <seealso cref = "getAlos16Point1Degrees">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the plag. </returns>
+        ///<returns> the <c>DateTime</c> of the plag. </returns>
         ///<seealso cref = "getAlos16Point1Degrees()" />
         ///<seealso cref = "AstronomicalCalendar.getSeaLevelSunset" />
         public virtual DateTime getPlagAlosToSunset()
@@ -1660,7 +1660,7 @@ namespace Zmanim
         /// . This returns the time of 10.75 * the calculated <em>shaah zmanis</em>
         /// after <see cref="getAlos16Point1Degrees">dawn</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> of the plag.</returns>
+        /// <returns>the <c>DateTime</c> of the plag.</returns>
         /// <seealso cref="getAlos16Point1Degrees()"/>
         /// <seealso cref="getTzaisGeonim7Point083Degrees()"/>
         public virtual DateTime getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
@@ -1682,7 +1682,7 @@ namespace Zmanim
         /// in the solstice, the difference is 1 minute 56 seconds.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the sun being 13° below
+        /// the <c>DateTime</c> of the sun being 13° below
         /// <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see> (90°).
         /// </returns>
         /// <seealso cref="ZENITH_13_DEGREES"/>
@@ -1697,7 +1697,7 @@ namespace Zmanim
         ///  or 3 1/4 mil after sunset. With a mil calculated as 18 minutes, 3.25 * 18
         ///  = 58.5 minutes.
         ///</summary>
-        ///<returns> the <c>Date</c> of 58.5 minutes after sunset
+        ///<returns> the <c>DateTime</c> of 58.5 minutes after sunset
         ///</returns>
         public virtual DateTime getBainHasmashosRT58Point5Minutes()
         {
@@ -1709,7 +1709,7 @@ namespace Zmanim
         ///  calculation of 13.5 minutes (3/4 of an 18 minute mil before shkiah
         ///  calculated as <seealso cref = "getTzaisGeonim7Point083Degrees">7.083°</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the bain hashmashos of Rabainu Tam in
+        ///<returns> the <c>DateTime</c> of the bain hashmashos of Rabainu Tam in
         ///  this calculation. </returns>
         ///<seealso cref = "getTzaisGeonim7Point083Degrees()" />
         public virtual DateTime getBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
@@ -1724,7 +1724,7 @@ namespace Zmanim
         ///  sunrise) and sunrise. This is added to sunset to arrive at the time for
         ///  bain hashmashos of Rabainu Tam).
         ///</summary>
-        ///<returns> the <c>Date</c> of bain hashmashos of Rabainu Tam for this
+        ///<returns> the <c>DateTime</c> of bain hashmashos of Rabainu Tam for this
         ///  calculation. </returns>
         public virtual DateTime getBainHasmashosRT2Stars()
         {
@@ -1745,7 +1745,7 @@ namespace Zmanim
         ///  of the <em>Geonim</em> calculated at the sun's position at
         ///  <seealso cref = "ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time when the sun is
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  5.95° below sea level. </returns>
         ///<seealso cref = "ZENITH_5_POINT_95" />
         ///<summary>
@@ -1753,7 +1753,7 @@ namespace Zmanim
         ///  of the <em>Geonim</em> calculated at the sun's position at
         ///  <seealso cref = "ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time when the sun is
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  5.95° below sea level. </returns>
         ///<seealso cref = "ZENITH_5_POINT_95" />
         public virtual DateTime getTzaisGeonim5Point95Degrees()
@@ -1768,7 +1768,7 @@ namespace Zmanim
         ///   horizon. This is a very early zman and should not be relied on without
         ///   Rabbinical guidance.
         /// </summary>
-        /// <returns> the <c>Date</c> representing the time when the sun is
+        /// <returns> the <c>DateTime</c> representing the time when the sun is
         ///   3.65° below sea level. </returns>
         /// <seealso cref = "ZENITH_3_POINT_65" />
         public virtual DateTime getTzaisGeonim3Point65Degrees()
@@ -1783,7 +1783,7 @@ namespace Zmanim
         ///  horizon. This is a very early zman and should not be relied on without
         ///  Rabbinical guidance.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time when the sun is
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  4.61° below sea level. </returns>
         ///<seealso cref = "ZENITH_4_POINT_61" />
         public virtual DateTime getTzaisGeonim4Point61Degrees()
@@ -1798,7 +1798,7 @@ namespace Zmanim
         ///  horizon. This is a very early zman and should not be relied on without
         ///  Rabbinical guidance.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time when the sun is
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  4.37° below sea level. </returns>
         ///<seealso cref = "ZENITH_4_POINT_37" />
         public virtual DateTime getTzaisGeonim4Point37Degrees()
@@ -1815,7 +1815,7 @@ namespace Zmanim
         /// very early zman and should not be relied on without Rabbinical guidance.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> representing the time when the sun is
+        /// the <c>DateTime</c> representing the time when the sun is
         /// 5.88° below sea level.
         /// </returns>
         /// <seealso cref="ZENITH_5_POINT_88"/>
@@ -1833,7 +1833,7 @@ namespace Zmanim
         /// and should not be relied on without Rabbinical guidance.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> representing the time when the sun is
+        /// the <c>DateTime</c> representing the time when the sun is
         /// 4.8° below sea level.
         /// </returns>
         /// <seealso cref="ZENITH_4_POINT_8"/>
@@ -1847,7 +1847,7 @@ namespace Zmanim
         ///  of the <em>Geonim</em> calculated at the sun's position at
         ///  <see cref = "ZENITH_7_POINT_083">7.083°</see> below the western horizon.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time when the sun is
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  7.083° below sea level. </returns>
         ///<seealso cref = "ZENITH_7_POINT_083" />
         public virtual DateTime getTzaisGeonim7Point083Degrees()
@@ -1861,7 +1861,7 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.ZENITH_8_POINT_5">8.5°</see> below the western horizon.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> representing the time when the sun is
+        /// the <c>DateTime</c> representing the time when the sun is
         /// 8.5° below sea level.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_8_POINT_5"/>
@@ -1876,7 +1876,7 @@ namespace Zmanim
         ///  of a Mil is 15 minutes for a total of 60 minutes for 4 mil after
         ///  <see cref = "AstronomicalCalendar.getSeaLevelSunset">sea level sunset</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing 60 minutes after sea level
+        ///<returns> the <c>DateTime</c> representing 60 minutes after sea level
         ///  sunset. </returns>
         ///<seealso cref = "getAlos60()" />
         public virtual DateTime getTzais60()
@@ -1894,7 +1894,7 @@ namespace Zmanim
         ///  minutes year round in any place on the globe by default. This offset can
         ///  be changed by calling <see cref = "setAteretTorahSunsetOffset(double)" />.
         ///</summary>
-        ///<returns> the <c>Date</c> representing 40 minutes after sea level
+        ///<returns> the <c>DateTime</c> representing 40 minutes after sea level
         ///  sunset </returns>
         ///<seealso cref = "getAteretTorahSunsetOffset()" />
         ///<seealso cref = "setAteretTorahSunsetOffset(double)" />
@@ -1948,7 +1948,7 @@ namespace Zmanim
         /// midday.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema based on this
+        /// the <c>DateTime</c> of the latest zman shema based on this
         /// calculation.
         /// </returns>
         /// <seealso cref="getAlos72Zmanis()"/>
@@ -1975,7 +1975,7 @@ namespace Zmanim
         /// midday.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema based on this
+        /// the <c>DateTime</c> of the latest zman shema based on this
         /// calculation.
         /// </returns>
         /// <seealso cref="getAlos72Zmanis()"/>
@@ -2001,7 +2001,7 @@ namespace Zmanim
         /// <see cref="getAlos72Zmanis">alos</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha gedola.
+        /// the <c>DateTime</c> of the time of mincha gedola.
         /// </returns>
         /// <seealso cref="getAlos72Zmanis()"/>
         /// <seealso cref="getTzaisAteretTorah()"/>
@@ -2028,7 +2028,7 @@ namespace Zmanim
         /// <see cref="getShaahZmanisAteretTorah()"/> after <see cref="getAlos72Zmanis()"> alos</see>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the time of mincha ketana.
+        /// the <c>DateTime</c> of the time of mincha ketana.
         /// </returns>
         /// <seealso cref="getAlos72Zmanis()"/>
         /// <seealso cref="getTzaisAteretTorah()"/>
@@ -2051,7 +2051,7 @@ namespace Zmanim
         /// <em><see cref="getShaahZmanisAteretTorah">shaos zmaniyos</see></em> (temporal
         /// hours) after <see cref="getAlos72Zmanis">dawn</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> of the plag.</returns>
+        /// <returns>the <c>DateTime</c> of the plag.</returns>
         /// <seealso cref="getAlos72Zmanis()"/>
         /// <seealso cref="getTzaisAteretTorah()"/>
         /// <seealso cref="getShaahZmanisAteretTorah()"/>
@@ -2076,7 +2076,7 @@ namespace Zmanim
         ///	<param name="minutes">
         ///	           the number of minutes after alos calculated as
         ///	           <seealso cref="getAlos72Zmanis">1/10th of the day</seealso> </param>
-        ///	<returns> the <c>Date</c> of misheyakir </returns>
+        ///	<returns> the <c>DateTime</c> of misheyakir </returns>
         ///	<seealso cref="getAlos72Zmanis()"/>
         ///	 
         // public Date getMesheyakirAteretTorah(double minutes) {
@@ -2088,7 +2088,7 @@ namespace Zmanim
         /// Method to return <em>tzais</em> (dusk) calculated as 72 minutes zmaniyos,
         /// or 1/10th of the day after <see cref="AstronomicalCalendar.getSeaLevelSunset">sea level sunset</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getAlos72Zmanis()"/>
         public virtual DateTime getTzais72Zmanis()
         {
@@ -2105,7 +2105,7 @@ namespace Zmanim
         /// zmaniyos (<em>GR"A</em> and the <em>Baal Hatanya</em>) after
         /// <see cref="AstronomicalCalendar.getSeaLevelSunset">sea level sunset</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getAlos90Zmanis()"/>
         public virtual DateTime getTzais90Zmanis()
         {
@@ -2122,7 +2122,7 @@ namespace Zmanim
         /// zmaniyos (<em>GR"A</em> and the <em>Baal Hatanya</em>) after
         /// <see cref="AstronomicalCalendar.getSeaLevelSunset">sea level sunset</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getAlos96Zmanis()"/>
         public virtual DateTime getTzais96Zmanis()
         {
@@ -2144,7 +2144,7 @@ namespace Zmanim
         /// <see cref="getTzais19Point8Degrees()"/>uses solar position calculations based
         /// on this time.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getTzais19Point8Degrees()"/>
         /// <seealso cref="getAlos90()"/>
         public virtual DateTime getTzais90()
@@ -2161,7 +2161,7 @@ namespace Zmanim
         /// calculation <see cref="getTzais26Degrees()"/> uses temporal calculations based
         /// on this time.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getTzais26Degrees()"/>
         /// <seealso cref="getAlos120()"/>
         public virtual DateTime getTzais120()
@@ -2174,7 +2174,7 @@ namespace Zmanim
         /// zmaniyos (<em>GR"A</em> and the <em>Baal Hatanya</em>) after
         /// <see cref="AstronomicalCalendar.getSeaLevelSunset">sea level sunset</see>.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getAlos120Zmanis()"/>
         public virtual DateTime getTzais120Zmanis()
         {
@@ -2190,7 +2190,7 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="getAlos16Point1Degrees()"/>
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="ZmanimCalendar.getTzais72()"/>
         /// <seealso cref="getAlos16Point1Degrees">for more information on this calculation.</seealso>
         public virtual DateTime getTzais16Point1Degrees()
@@ -2202,7 +2202,7 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="getAlos26Degrees()"/>
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getTzais120()"/>
         /// <seealso cref="getAlos26Degrees()"/>
         public virtual DateTime getTzais26Degrees()
@@ -2214,7 +2214,7 @@ namespace Zmanim
         ///  For information on how this is calculated see the comments on
         ///  <see cref = "getAlos18Degrees()" />
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "getAlos18Degrees()" />
         public virtual DateTime getTzais18Degrees()
         {
@@ -2225,7 +2225,7 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="getAlos19Point8Degrees()"/>
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getTzais90()"/>
         /// <seealso cref="getAlos19Point8Degrees()"/>
         public virtual DateTime getTzais19Point8Degrees()
@@ -2238,7 +2238,7 @@ namespace Zmanim
         /// sea level sunset. For information on how this is calculated see the
         /// comments on <see cref="getAlos96()"/>.
         /// </summary>
-        /// <returns>the <c>Date</c> representing the time.</returns>
+        /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="getAlos96()"/>
         public virtual DateTime getTzais96()
         {
@@ -2275,7 +2275,7 @@ namespace Zmanim
         /// <see cref="getFixedLocalChatzos()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman shema.
+        /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getFixedLocalChatzos()"/>
         /// <seealso cref="getSofZmanTfilaFixedLocal()"/>
@@ -2290,7 +2290,7 @@ namespace Zmanim
         /// <see cref="getFixedLocalChatzos()"/>.
         /// </summary>
         /// <returns>
-        /// the <c>Date</c> of the latest zman tfila.
+        /// the <c>DateTime</c> of the latest zman tfila.
         /// </returns>
         /// <seealso cref="getFixedLocalChatzos()"/>
         /// <seealso cref="getSofZmanShmaFixedLocal()"/>

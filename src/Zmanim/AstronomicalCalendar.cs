@@ -186,7 +186,7 @@ namespace Zmanim
 
 
         ///<summary>
-        ///  The getSunrise method Returns a <c>Date</c> representing the
+        ///  The getSunrise method Returns a <c>DateTime</c> representing the
         ///  sunrise time. The zenith used for the calculation uses
         ///  <seealso cref = "GEOMETRIC_ZENITH">geometric zenith</seealso> of 90°. This is adjusted
         ///  by the <seealso cref = "AstronomicalCalculator" /> that adds approximately 50/60 of a
@@ -196,7 +196,7 @@ namespace Zmanim
         ///  documentation for the specific implementation of the
         ///  <seealso cref = "AstronomicalCalculator" /> that you are using.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the exact sunrise time. If
+        ///<returns> the <c>DateTime</c> representing the exact sunrise time. If
         ///  the calculation can not be computed null will be returned. </returns>
         ///<seealso cref = "AstronomicalCalculator.adjustZenith" />
         public virtual DateTime getSunrise()
@@ -216,7 +216,7 @@ namespace Zmanim
         ///  for dawn calculations that are calculated as a dip below the horizon
         ///  before sunrise.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the exact sea-level sunrise
+        ///<returns> the <c>DateTime</c> representing the exact sea-level sunrise
         ///  time. If the calculation can not be computed null will be
         ///  returned. </returns>
         ///<seealso cref = "AstronomicalCalendar.getSunrise" />
@@ -234,7 +234,7 @@ namespace Zmanim
         ///  A method to return the the beginning of civil twilight (dawn) using a
         ///  zenith of <seealso cref = "CIVIL_ZENITH">96°</seealso>.
         ///</summary>
-        ///<returns> The <c>Date</c> of the beginning of civil twilight using
+        ///<returns> The <c>DateTime</c> of the beginning of civil twilight using
         ///  a zenith of 96°. If the calculation can not be computed null
         ///  will be returned. </returns>
         ///<seealso cref = "CIVIL_ZENITH" />
@@ -247,7 +247,7 @@ namespace Zmanim
         ///  A method to return the the beginning of nautical twilight using a zenith
         ///  of <see cref = "NAUTICAL_ZENITH">102°</see>.
         ///</summary>
-        ///<returns> The <c>Date</c> of the beginning of nautical twilight
+        ///<returns> The <c>DateTime</c> of the beginning of nautical twilight
         ///  using a zenith of 102°. If the calculation can not be
         ///  computed null will be returned. </returns>
         ///<seealso cref = "NAUTICAL_ZENITH" />
@@ -260,7 +260,7 @@ namespace Zmanim
         ///  A method that returns the the beginning of astronomical twilight using a
         ///  zenith of <see cref = "ASTRONOMICAL_ZENITH">108°</see>.
         ///</summary>
-        ///<returns> The <c>Date</c> of the beginning of astronomical twilight
+        ///<returns> The <c>DateTime</c> of the beginning of astronomical twilight
         ///  using a zenith of 108°. If the calculation can not be
         ///  computed null will be returned. </returns>
         ///<seealso cref = "ASTRONOMICAL_ZENITH" />
@@ -270,7 +270,7 @@ namespace Zmanim
         }
 
         ///<summary>
-        ///  The getSunset method Returns a <c>Date</c> representing the
+        ///  The getSunset method Returns a <c>DateTime</c> representing the
         ///  sunset time. The zenith used for the calculation uses
         ///  <see cref = "GEOMETRIC_ZENITH">geometric zenith</see> of 90°. This is adjusted
         ///  by the <see cref = "AstronomicalCalculator" /> that adds approximately 50/60 of a
@@ -284,7 +284,7 @@ namespace Zmanim
         ///  Los Angeles sunset using a GMT timezone for example). In this case the
         ///  sunset date will be incremented to the following date.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the exact sunset time. If
+        ///<returns> the <c>DateTime</c> representing the exact sunset time. If
         ///  the calculation can not be computed null will be returned. If the
         ///  time calculation </returns>
         ///<seealso cref = "AstronomicalCalculator.adjustZenith" />
@@ -332,7 +332,7 @@ namespace Zmanim
         ///  for dusk calculations that are calculated as a dip below the horizon
         ///  after sunset.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the exact sea-level sunset
+        ///<returns> the <c>DateTime</c> representing the exact sea-level sunset
         ///  time. If the calculation can not be computed null will be
         ///  returned. </returns>
         ///<seealso cref = "AstronomicalCalendar.getSunset" />
@@ -350,7 +350,7 @@ namespace Zmanim
         ///  A method to return the the end of civil twilight using a zenith of
         ///  <see cref = "CIVIL_ZENITH">96°</see>.
         ///</summary>
-        ///<returns> The <c>Date</c> of the end of civil twilight using a
+        ///<returns> The <c>DateTime</c> of the end of civil twilight using a
         ///  zenith of <seealso cref = "CIVIL_ZENITH">96°</seealso>. If the calculation can
         ///  not be computed null will be returned. </returns>
         ///<seealso cref = "CIVIL_ZENITH" />
@@ -363,7 +363,7 @@ namespace Zmanim
         ///  A method to return the the end of nautical twilight using a zenith of
         ///  <see cref = "NAUTICAL_ZENITH">102°</see>.
         ///</summary>
-        ///<returns> The <c>Date</c> of the end of nautical twilight using a
+        ///<returns> The <c>DateTime</c> of the end of nautical twilight using a
         ///  zenith of <seealso cref = "NAUTICAL_ZENITH">102°</seealso>. If the calculation
         ///  can not be computed null will be returned. </returns>
         ///<seealso cref = "NAUTICAL_ZENITH" />
@@ -376,7 +376,7 @@ namespace Zmanim
         ///  A method to return the the end of astronomical twilight using a zenith of
         ///  <see cref = "ASTRONOMICAL_ZENITH">108°</see>.
         ///</summary>
-        ///<returns> The The <c>Date</c> of the end of astronomical twilight
+        ///<returns> The The <c>DateTime</c> of the end of astronomical twilight
         ///  using a zenith of <see cref = "ASTRONOMICAL_ZENITH">108°</see>. If the
         ///  calculation can not be computed null will be returned. </returns>
         ///<seealso cref = "ASTRONOMICAL_ZENITH" />
@@ -587,7 +587,7 @@ namespace Zmanim
         ///  and sunset, which can be slightly off the real transit time due to the
         ///  lengthening or shortening day.
         ///</summary>
-        ///<returns> the <c>Date</c> representing Sun's transit. If the
+        ///<returns> the <c>DateTime</c> representing Sun's transit. If the
         ///  calculation can not be computed null will be returned. </returns>
         public virtual DateTime getSunTransit()
         {
@@ -595,10 +595,10 @@ namespace Zmanim
         }
 
         ///<summary>
-        ///  A method that returns a <c>Date</c> from the time passed in
+        ///  A method that returns a <c>DateTime</c> from the time passed in
         ///</summary>
         ///<param name = "time">
-        ///  The time to be set as the time for the <c>Date</c>.
+        ///  The time to be set as the time for the <c>DateTime</c>.
         ///  The time expected is in the format: 18.75 for 6:45:00 PM </param>
         ///<returns> The Date. </returns>
         protected internal virtual DateTime getDateFromTime(double time)

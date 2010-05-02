@@ -109,7 +109,7 @@ namespace Zmanim
         ///  information on the source of this calculation see
         ///  <seealso cref = "ZENITH_8_POINT_5" />.
         ///</summary>
-        ///<returns> The <c>Date</c> of nightfall. </returns>
+        ///<returns> The <c>DateTime</c> of nightfall. </returns>
         ///<seealso cref = "ZENITH_8_POINT_5" />
         public virtual DateTime getTzais()
         {
@@ -123,7 +123,7 @@ namespace Zmanim
         ///  see <see cref = "ZENITH_16_POINT_1" />.
         ///</summary>
         ///<seealso cref = "ZENITH_16_POINT_1" />
-        ///<returns> The <c>Date</c> of dawn. </returns>
+        ///<returns> The <c>DateTime</c> of dawn. </returns>
         public virtual DateTime getAlosHashachar()
         {
             return getSunriseOffsetByDegrees(ZENITH_16_POINT_1);
@@ -139,7 +139,7 @@ namespace Zmanim
         ///  but purely depends on the time it takes to walk the distance of 4
         ///  <em>Mil</em>.
         ///</summary>
-        ///<returns> the <c>Date</c> representing the time. </returns>
+        ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime getAlos72()
         {
             return getTimeOffset(getSeaLevelSunrise(), -72 * MINUTE_MILLIS);
@@ -152,7 +152,7 @@ namespace Zmanim
         ///  returned value is identical to <see cref = "AstronomicalCalendar.getSunTransit()" />
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar.getSunTransit()" />
-        ///<returns> the <c>Date</c> of chatzos. </returns>
+        ///<returns> the <c>DateTime</c> of chatzos. </returns>
         public virtual DateTime getChatzos()
         {
             return getSunTransit();
@@ -164,7 +164,7 @@ namespace Zmanim
         ///  <br />
         ///  <b>Note:</b> this method is experimental and might be removed (or moved)
         ///</summary>
-        ///<returns> the <c>Date</c> of Solar Midnight (chatzos layla). </returns>
+        ///<returns> the <c>DateTime</c> of Solar Midnight (chatzos layla). </returns>
         public virtual DateTime getSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar)Clone();
@@ -192,7 +192,7 @@ namespace Zmanim
         ///  <see cref = "getShaahZmanisGra()" /> after <see cref = "AstronomicalCalendar.getSeaLevelSunrise()">sea level sunrise</see>.
         ///</summary>
         ///<seealso cref = "getShaahZmanisGra" />
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         public virtual DateTime getSofZmanShmaGRA()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 3);
@@ -207,7 +207,7 @@ namespace Zmanim
         ///  minutes before sunrise to nightfall of 72 minutes after sunset. This
         ///  returns the time of 3 * <em>shaos zmaniyos</em> after dawn.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "ComplexZmanimCalendar.getShaahZmanis72Minutes()" />
         ///<seealso cref = "getAlos72()" />
         ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaMGA72Minutes()" />
@@ -224,7 +224,7 @@ namespace Zmanim
         ///  level, this is calculated at sea level, since the darkness level is not
         ///  affected by elevation.
         ///</summary>
-        ///<returns> the <c>Date</c> representing 72 minutes after sea level
+        ///<returns> the <c>DateTime</c> representing 72 minutes after sea level
         ///  sunset. </returns>
         public virtual DateTime getTzais72()
         {
@@ -254,7 +254,7 @@ namespace Zmanim
         ///  <seealso cref = "AstronomicalCalendar.getSeaLevelSunrise">sea level sunrise</seealso>.
         ///</summary>
         ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
-        ///<returns> the <c>Date</c> of the latest zman tefilah. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman tefilah. </returns>
         public virtual DateTime getSofZmanTfilaGRA()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 4);
@@ -272,7 +272,7 @@ namespace Zmanim
         ///  sunset. This returns the time of 4 * <seealso cref = "getShaahZmanisMGA()" /> after
         ///  <seealso cref = "getAlos72">dawn</seealso>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the latest zman tfila. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman tfila. </returns>
         ///<seealso cref = "getShaahZmanisMGA()" />
         ///<seealso cref = "getAlos72()" />
         public virtual DateTime getSofZmanTfilaMGA()
@@ -297,7 +297,7 @@ namespace Zmanim
         ///</summary>
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaKetana()" />
-        ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
+        ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
         public virtual DateTime getMinchaGedola()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 6.5);
@@ -317,7 +317,7 @@ namespace Zmanim
         ///</summary>
         ///<seealso cref = "getShaahZmanisGra()" />
         ///<seealso cref = "getMinchaGedola()" />
-        ///<returns> the <c>Date</c> of the time of mincha gedola. </returns>
+        ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
         public virtual DateTime getMinchaKetana()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 9.5);
@@ -330,7 +330,7 @@ namespace Zmanim
         ///  is calculated from sunrise to sunset. This returns the time 10.75 *
         ///  <see cref = "getShaahZmanisGra()" /> after <see cref = "AstronomicalCalendar.getSeaLevelSunrise()">sea level sunrise</see>.
         ///</summary>
-        ///<returns> the <c>Date</c> of the time of <em>plag hamincha</em>. </returns>
+        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime getPlagHamincha()
         {
             return getTimeOffset(getSeaLevelSunrise(), getShaahZmanisGra() * 10.75);
