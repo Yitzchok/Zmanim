@@ -1,7 +1,7 @@
 ﻿using System;
 using Zmanim.TimeZone;
 
-namespace net.sourceforge.zmanim
+namespace Zmanim
 {
     /// <summary>
     /// A simple implementation of ITimeZoneDateTime.

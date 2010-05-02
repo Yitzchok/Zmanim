@@ -4,9 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using NDesk.Options;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace Zmanim.Cli
 {

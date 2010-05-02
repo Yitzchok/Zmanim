@@ -19,9 +19,9 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using net.sourceforge.zmanim.util;
+using Zmanim.Utilities;
 
-namespace net.sourceforge.zmanim
+namespace Zmanim
 {
     /// <summary>
     /// 	<p> Description: A Java library for calculating zmanim. </p>
@@ -122,7 +122,7 @@ namespace net.sourceforge.zmanim
         ///  <see cref = "AstronomicalCalendar.getSunrise">sunrise</see>. For more information the source of 16.1°
         ///  see <see cref = "ZENITH_16_POINT_1" />.
         ///</summary>
-        ///<seealso cref = "net.sourceforge.zmanim.ZmanimCalendar.ZENITH_16_POINT_1" />
+        ///<seealso cref = "ZENITH_16_POINT_1" />
         ///<returns> The <c>Date</c> of dawn. </returns>
         public virtual DateTime getAlosHashachar()
         {
@@ -191,7 +191,7 @@ namespace net.sourceforge.zmanim
         ///  calculated from sunrise to sunset. This returns the time 3 *
         ///  <see cref = "getShaahZmanisGra()" /> after <see cref = "AstronomicalCalendar.getSeaLevelSunrise()">sea level sunrise</see>.
         ///</summary>
-        ///<seealso cref = "net.sourceforge.zmanim.ZmanimCalendar.getShaahZmanisGra()" />
+        ///<seealso cref = "getShaahZmanisGra" />
         ///<returns> the <c>Date</c> of the latest zman shema. </returns>
         public virtual DateTime getSofZmanShmaGRA()
         {

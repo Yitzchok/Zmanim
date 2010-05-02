@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using NUnit.Framework;
+using Zmanim;
 using Zmanim.TimeZone;
+using Zmanim.Utilities;
 using ZmanimTests.TestGeneration.TestFormatters;
 using ZmanimTests.TestGeneration.TestMethodGenerators;
 

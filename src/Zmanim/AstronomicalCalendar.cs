@@ -19,10 +19,10 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using net.sourceforge.zmanim.util;
 using Zmanim.Extensions;
+using Zmanim.Utilities;
 
-namespace net.sourceforge.zmanim
+namespace Zmanim
 {
     ///<summary>
     ///  A Java calendar that calculates astronomical time calculations such as
@@ -764,7 +764,7 @@ namespace net.sourceforge.zmanim
         ///  calculations. The Zmanim package ships with a number of different
         ///  implementations of the <code>abstract</code>
         ///  <see cref = "AstronomicalCalculator" /> based on different algorithms, including
-        ///  <see cref = "net.sourceforge.zmanim.util.SunTimesCalculator">one implementation</see>
+        ///  <see cref = "SunTimesCalculator">one implementation</see>
         ///  based on the <a href = "http://aa.usno.navy.mil/">US Naval Observatory's</a>
         ///  algorithm, and <see cref = "JSuntimeCalculator">another</see> based on
         ///  <a href = "http://noaa.gov">NOAA's</a> algorithm. This allows easy

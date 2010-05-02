@@ -1,9 +1,9 @@
 using System;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Zmanim;
 using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace ZmanimTests
 {

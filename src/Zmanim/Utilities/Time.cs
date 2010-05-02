@@ -19,7 +19,6 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
-using net.sourceforge.zmanim.util;
 
 namespace Zmanim.Utilities
 {
@@ -28,7 +27,7 @@ namespace Zmanim.Utilities
     ///   are stored as <seealso cref = "DateTime" />s in this API. The time class is used to
     ///   represent numeric time such as the time in hours, minutes, seconds and
     ///   milliseconds of a
-    ///   <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
+    ///   <see cref = "AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class Time

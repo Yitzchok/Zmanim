@@ -1,5 +1,4 @@
 ﻿using System;
-using net.sourceforge.zmanim;
 using ICalendar = Quartz.ICalendar;
 
 namespace Zmanim.Scheduling

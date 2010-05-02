@@ -23,7 +23,7 @@ using System.Text;
 using Zmanim.Extensions;
 using Zmanim.TimeZone;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   A class that contains location information such as latitude and longitude
@@ -150,7 +150,7 @@ namespace net.sourceforge.zmanim.util
         /// Creates a new object that is a copy of the current instance.
         /// <b>Note:</b> If the <seealso cref = "Zmanim.TimeZone.ITimeZone" /> in
         ///  the clone will be changed from the original, it is critical that
-        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
+        ///  <see cref = "AstronomicalCalendar.getCalendar()" />.
         ///  <see cref = "ITimeZoneDateTime.TimeZone">ITimeZoneDateTime.TimeZone</see>
         ///  is set after cloning in order for the AstronomicalCalendar to output
         ///  times in the expected offset.
@@ -336,13 +336,13 @@ namespace net.sourceforge.zmanim.util
 
         ///<summary>
         ///  Method to set the TimeZone. If this is ever set after the GeoLocation is
-        ///  set in the <see cref = "net.sourceforge.zmanim.AstronomicalCalendar" />, it is
+        ///  set in the <see cref = "AstronomicalCalendar" />, it is
         ///  critical that
-        ///  <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.getCalendar()" />.
+        ///  <see cref = "AstronomicalCalendar.getCalendar()" />.
         ///  <see cref = "ITimeZoneDateTime">TimeZone</see>
         ///  be called in order for the AstronomicalCalendar to output times in the
         ///  expected offset. This situation will arise if the AstronomicalCalendar is
-        ///  ever <see cref = "net.sourceforge.zmanim.AstronomicalCalendar.Clone()">cloned</see>.
+        ///  ever <see cref = "AstronomicalCalendar.Clone()">cloned</see>.
         ///</summary>
         ///<param name = "timeZone">
         ///  The timeZone to set. </param>
@@ -356,7 +356,7 @@ namespace net.sourceforge.zmanim.util
         /// milliseconds from local standard time. The globe is split into 360°,
         /// with 15° per hour of the day. For a local that is at a longitude that
         /// is evenly divisible by 15 (longitude % 15 == 0), at solar
-        /// <see cref="net.sourceforge.zmanim.AstronomicalCalendar.getSunTransit()">noon</see>
+        /// <see cref="AstronomicalCalendar.getSunTransit()">noon</see>
         /// (with adjustment for the <a href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
         /// the sun should be directly overhead, so a user who is 1° west of this
         /// will have noon at 4 minutes after standard time noon, and conversely, a

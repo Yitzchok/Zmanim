@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using Quartz;
 using Quartz.Impl.Calendar;
 using Zmanim.QuartzScheduling.Configuration;
 using Zmanim.Scheduling;
 using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace Zmanim.QuartzScheduling
 {

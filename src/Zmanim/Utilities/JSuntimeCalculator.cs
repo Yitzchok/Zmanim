@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   Implementation of sunrise and sunset methods to calculate astronomical times.
@@ -34,7 +34,7 @@ namespace net.sourceforge.zmanim.util
     ///   implementation was released under the GPL. Added to the algorithm is an
     ///   adjustment of the zenith to account for elevation.
     /// </summary>
-    /// <seealso cref = "net.sourceforge.zmanim.util.NOAACalculator" />
+    /// <seealso cref = "NOAACalculator" />
     /// <author>Jonathan Stott</author>
     /// <author>Eliyahu Hershfeld</author>
     [Obsolete(
@@ -47,7 +47,7 @@ namespace net.sourceforge.zmanim.util
         /// <summary>
         /// </summary>
         /// <returns>the descriptive name of the algorithm.</returns>
-        /// <seealso cref="net.sourceforge.zmanim.util.NOAACalculator.getCalculatorName()"/>
+        /// <seealso cref="NOAACalculator.getCalculatorName"/>
         [Obsolete]
         public override string getCalculatorName()
         {
@@ -75,8 +75,8 @@ namespace net.sourceforge.zmanim.util
         /// behavior for some locations such as near the poles,
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="net.sourceforge.zmanim.util.NOAACalculator.getUTCSunrise(AstronomicalCalendar, double, bool)"/>
-        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)"/>
+        /// <seealso cref="NOAACalculator.getUTCSunrise"/>
+        /// <seealso cref="AstronomicalCalculator.getUTCSunrise"/>
         [Obsolete]
         public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
@@ -121,8 +121,8 @@ namespace net.sourceforge.zmanim.util
         /// behavior for some locations such as near the poles,
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="net.sourceforge.zmanim.util.NOAACalculator.getUTCSunset(AstronomicalCalendar, double, bool)"/>
-        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar, double, bool)"/>
+        /// <seealso cref="NOAACalculator.getUTCSunset"/>
+        /// <seealso cref="AstronomicalCalculator.getUTCSunset"/>
         [Obsolete]
         public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using net.sourceforge.zmanim;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Zmanim;
 
 namespace ZmanimTests
 {

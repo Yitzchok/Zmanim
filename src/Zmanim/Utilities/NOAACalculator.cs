@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   Implementation of sunrise and sunset methods to calculate astronomical times based on the <a href = "http://noaa.gov">NOAA</a> algorithm.
@@ -67,7 +67,7 @@ namespace net.sourceforge.zmanim.util
         /// behavior for some locations such as near the poles,
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunrise(AstronomicalCalendar,double, bool)"/>
+        /// <seealso cref="AstronomicalCalculator.getUTCSunrise"/>
         public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
@@ -112,7 +112,7 @@ namespace net.sourceforge.zmanim.util
         /// behavior for some locations such as near the poles,
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="net.sourceforge.zmanim.util.AstronomicalCalculator.getUTCSunset(AstronomicalCalendar,double, bool)"/>
+        /// <seealso cref="AstronomicalCalculator.getUTCSunset"/>
         public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {

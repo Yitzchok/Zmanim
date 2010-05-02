@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   A class for various location calculations

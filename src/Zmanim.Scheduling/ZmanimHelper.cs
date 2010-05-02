@@ -1,7 +1,6 @@
 using System;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace Zmanim.Scheduling
 {

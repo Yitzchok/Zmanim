@@ -20,7 +20,7 @@
 
 using System;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     /// Wrapper class for an astronomical time, mostly used to sort collections of

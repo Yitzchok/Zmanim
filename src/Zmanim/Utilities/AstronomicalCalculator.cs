@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace net.sourceforge.zmanim.util
+namespace Zmanim.Utilities
 {
     /// <summary>
     ///   An abstract class that all sun time calculating classes extend. This allows
