@@ -2265,8 +2265,8 @@ namespace Zmanim
         {
             return getTimeOffset(
                 getDateFromTime(
-                12.0 - getGeoLocation().getTimeZone().UtcOffset(Calendar.Date) / HOUR_MILLIS),
-                                 -getGeoLocation().getLocalMeanTimeOffset(Calendar.Date));
+                12.0 - GeoLocation.getTimeZone().UtcOffset(Calendar.Date) / HOUR_MILLIS),
+                                 -GeoLocation.getLocalMeanTimeOffset(Calendar.Date));
         }
 
         /// <summary>
@@ -2310,8 +2310,8 @@ namespace Zmanim
             int num = 0x11;
             num = (0x25 * num) + base.getTemporalHour().GetHashCode();
             num += (0x25 * num) + Calendar.GetHashCode();
-            num += (0x25 * num) + getGeoLocation().GetHashCode();
-            return (num + ((0x25 * num) + getAstronomicalCalculator().GetHashCode()));
+            num += (0x25 * num) + GeoLocation.GetHashCode();
+            return (num + ((0x25 * num) + AstronomicalCalculator.GetHashCode()));
         }
     }
 }

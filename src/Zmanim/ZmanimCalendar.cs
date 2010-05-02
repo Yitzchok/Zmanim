@@ -398,8 +398,8 @@ namespace Zmanim
             }
             var zCal = (ZmanimCalendar)obj;
             // return getCalendar().ToMillisecondsFromEpoch().equals(zCal.getCalendar().ToMillisecondsFromEpoch())
-            return Calendar.Equals(zCal.Calendar) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
-                   getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
+            return Calendar.Equals(zCal.Calendar) && GeoLocation.Equals(zCal.GeoLocation) &&
+                   AstronomicalCalculator.Equals(zCal.AstronomicalCalculator);
         }
 
         /// <summary>
@@ -415,8 +415,8 @@ namespace Zmanim
             // subclasses will
             // return identical hash
             result += 37 * result + Calendar.GetHashCode();
-            result += 37 * result + getGeoLocation().GetHashCode();
-            result += 37 * result + getAstronomicalCalculator().GetHashCode();
+            result += 37 * result + GeoLocation.GetHashCode();
+            result += 37 * result + AstronomicalCalculator.GetHashCode();
             return result;
         }
 

@@ -62,8 +62,7 @@ namespace Zmanim
     ///    default to today):
     /// 
     ///    <code>
-    ///      ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
-    ///      ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
+    ///      ac.Calendar.Date = new DateTime(2010, 2, 8);
     ///      Date sunrise = ac.getSunrise();
     ///    </code>
     ///  </example>
@@ -129,8 +128,6 @@ namespace Zmanim
         /// </summary>
         internal const long HOUR_MILLIS = MINUTE_MILLIS * 60;
 
-        private AstronomicalCalculator astronomicalCalculator;
-
         ///<summary>
         ///  The Java Calendar encapsulated by this class to track the current date
         ///  used by the class
@@ -159,8 +156,8 @@ namespace Zmanim
         public AstronomicalCalendar(GeoLocation geoLocation)
         {
             Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.getTimeZone());
-            setGeoLocation(geoLocation); // duplicate call
-            setAstronomicalCalculator(AstronomicalCalculator.getDefault());
+            GeoLocation = geoLocation; // duplicate call
+            AstronomicalCalculator = AstronomicalCalculator.getDefault();
         }
 
 
@@ -181,9 +178,9 @@ namespace Zmanim
         {
             var clone = (AstronomicalCalendar)MemberwiseClone();
 
-            clone.setGeoLocation((GeoLocation)getGeoLocation().Clone());
+            clone.GeoLocation = (GeoLocation)GeoLocation.Clone();
             clone.Calendar = (ITimeZoneDateTime)Calendar.Clone();
-            clone.setAstronomicalCalculator((AstronomicalCalculator)getAstronomicalCalculator().Clone());
+            clone.AstronomicalCalculator = (AstronomicalCalculator)AstronomicalCalculator.Clone();
             return clone;
         }
 
@@ -471,7 +468,7 @@ namespace Zmanim
         ///  returned. </returns>
         public virtual double getUTCSunrise(double zenith)
         {
-            return getAstronomicalCalculator().getUTCSunrise(this, zenith, true);
+            return AstronomicalCalculator.getUTCSunrise(this, zenith, true);
         }
 
         ///<summary>
@@ -493,7 +490,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunset" />
         public virtual double getUTCSeaLevelSunrise(double zenith)
         {
-            return getAstronomicalCalculator().getUTCSunrise(this, zenith, false);
+            return AstronomicalCalculator.getUTCSunrise(this, zenith, false);
         }
 
         ///<summary>
@@ -509,7 +506,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunset" />
         public virtual double getUTCSunset(double zenith)
         {
-            return getAstronomicalCalculator().getUTCSunset(this, zenith, true);
+            return AstronomicalCalculator.getUTCSunset(this, zenith, true);
         }
 
         ///<summary>
@@ -531,7 +528,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunrise" />
         public virtual double getUTCSeaLevelSunset(double zenith)
         {
-            return getAstronomicalCalculator().getUTCSunset(this, zenith, false);
+            return AstronomicalCalculator.getUTCSunset(this, zenith, false);
         }
 
         ///<summary>
@@ -706,8 +703,8 @@ namespace Zmanim
             if (!(obj is AstronomicalCalendar))
                 return false;
             var aCal = (AstronomicalCalendar)obj;
-            return Calendar.Equals(aCal.Calendar) && getGeoLocation().Equals(aCal.getGeoLocation()) &&
-                   getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
+            return Calendar.Equals(aCal.Calendar) && GeoLocation.Equals(aCal.GeoLocation) &&
+                   AstronomicalCalculator.Equals(aCal.AstronomicalCalculator);
         }
 
         /// <summary>
@@ -721,64 +718,35 @@ namespace Zmanim
             int result = 17;
             result = 37 * result + GetType().GetHashCode(); // needed or this and subclasses will return identical hash
             result += 37 * result + Calendar.GetHashCode();
-            result += 37 * result + getGeoLocation().GetHashCode();
-            result += 37 * result + getAstronomicalCalculator().GetHashCode();
+            result += 37 * result + GeoLocation.GetHashCode();
+            result += 37 * result + AstronomicalCalculator.GetHashCode();
             return result;
         }
 
-        ///<summary>
-        ///  A method that returns the currently set <seealso cref = "GeoLocation" /> that contains
-        ///  location information used for the astronomical calculations.
-        ///</summary>
-        ///<returns> Returns the geoLocation. </returns>
-        public virtual GeoLocation getGeoLocation()
+        /// <summary>
+        /// Gets or Sets the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
+        /// </summary>
+        /// <value>The geoLocation to set.</value>
+        public virtual GeoLocation GeoLocation
         {
-            return geoLocation;
-        }
-
-        ///<summary>
-        ///  Set the <seealso cref = "GeoLocation" /> to be used for astronomical calculations.
-        ///</summary>
-        ///<param name = "geoLocation">
-        ///  The geoLocation to set. </param>
-        public virtual void setGeoLocation(GeoLocation geoLocation)
-        {
-            this.geoLocation = geoLocation;
-            // if not set the output will be in the original timezone. The call
-            // below is also in the constructor
-            Calendar.TimeZone = geoLocation.getTimeZone();
-        }
-
-        ///<summary>
-        ///  A method to return the current AstronomicalCalculator set.
-        ///</summary>
-        ///<returns> Returns the astronimicalCalculator. </returns>
-        ///<seealso cref = "setAstronomicalCalculator(AstronomicalCalculator)" />
-        public virtual AstronomicalCalculator getAstronomicalCalculator()
-        {
-            return astronomicalCalculator;
-        }
-
-        ///<summary>
-        ///  A method to set the <seealso cref = "AstronomicalCalculator" /> used for astronomical
-        ///  calculations. The Zmanim package ships with a number of different
-        ///  implementations of the <code>abstract</code>
-        ///  <see cref = "AstronomicalCalculator" /> based on different algorithms, including
-        ///  <see cref = "SunTimesCalculator">one implementation</see>
-        ///  based on the <a href = "http://aa.usno.navy.mil/">US Naval Observatory's</a>
-        ///  algorithm, and <see cref = "JSuntimeCalculator">another</see> based on
-        ///  <a href = "http://noaa.gov">NOAA's</a> algorithm. This allows easy
-        ///  runtime switching and comparison of different algorithms.
-        ///</summary>
-        ///<param name = "astronomicalCalculator">
-        ///  The astronimicalCalculator to set. </param>
-        public virtual void setAstronomicalCalculator(AstronomicalCalculator astronomicalCalculator)
-        {
-            this.astronomicalCalculator = astronomicalCalculator;
+            set
+            {
+                this.geoLocation = value;
+                // if not set the output will be in the original timezone. The call
+                // below is also in the constructor
+                Calendar.TimeZone = value.getTimeZone();
+            }
+            get { return geoLocation; }
         }
 
         /// <summary>
-        ///   Set the calender to be used in the calculations.
+        /// Gets or Sets the current AstronomicalCalculator set.
+        /// </summary>
+        /// <value>Returns the astronimicalCalculator.</value>
+        public virtual AstronomicalCalculator AstronomicalCalculator { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the calender to be used in the calculations.
         /// </summary>
         /// <value>The calendar to set.</value>
         public virtual ITimeZoneDateTime Calendar
@@ -786,11 +754,11 @@ namespace Zmanim
             set
             {
                 this.timeZoneDateTime = value;
-                if (getGeoLocation() != null) // set the timezone if possible
+                if (GeoLocation != null) // set the timezone if possible
                 {
                     // Always set the Calendar's timezone to match the GeoLocation
                     // TimeZone
-                    Calendar.TimeZone = getGeoLocation().getTimeZone();
+                    Calendar.TimeZone = GeoLocation.getTimeZone();
                 }
             }
             get { return timeZoneDateTime; }

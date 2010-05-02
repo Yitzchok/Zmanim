@@ -88,15 +88,15 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
             }
             else
             {
                 zenith = adjustZenith(zenith, 0);
             }
             double timeMins = morningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
-                                                astronomicalCalendar.getGeoLocation().getLatitude(),
-                                                -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
+                                                astronomicalCalendar.GeoLocation.getLatitude(),
+                                                -astronomicalCalendar.GeoLocation.getLongitude(), zenith);
             return timeMins/60;
         }
 
@@ -134,15 +134,15 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
             }
             else
             {
                 zenith = adjustZenith(zenith, 0);
             }
             double timeMins = eveningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
-                                                astronomicalCalendar.getGeoLocation().getLatitude(),
-                                                -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
+                                                astronomicalCalendar.GeoLocation.getLatitude(),
+                                                -astronomicalCalendar.GeoLocation.getLongitude(), zenith);
             return timeMins/60;
         }
 

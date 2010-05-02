@@ -79,7 +79,7 @@ namespace Zmanim.Utilities
             // double refractionAdjustment = this.getRefraction(zenith);
             // zenith = zenith + elevationAdjustment + refractionAdjustment;
             if (adjustForElevation)
-                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
             else
                 zenith = adjustZenith(zenith, 0);
 
@@ -89,7 +89,7 @@ namespace Zmanim.Utilities
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time
-            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude()/15;
+            double lngHour = astronomicalCalendar.GeoLocation.getLongitude()/15;
 
             double t = astronomicalCalendar.Calendar.Date.DayOfYear + ((6 - lngHour)/24); // use 18 for
             // sunset instead
@@ -140,8 +140,8 @@ namespace Zmanim.Utilities
 
             // step 7a: calculate the sun's local hour angle
             double cosH = (Math.Cos(MathExtensions.ToRadians(zenith)) -
-                           (sinDec*Math.Sin(MathExtensions.ToRadians(astronomicalCalendar.getGeoLocation().getLatitude()))))/
-                          (cosDec*Math.Cos(MathExtensions.ToRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
+                           (sinDec*Math.Sin(MathExtensions.ToRadians(astronomicalCalendar.GeoLocation.getLatitude()))))/
+                          (cosDec*Math.Cos(MathExtensions.ToRadians(astronomicalCalendar.GeoLocation.getLatitude())));
 
             // the following line would throw an Exception if the sun never rose.
             // this is not needed since the calculation will return a Double.NaN
@@ -209,7 +209,7 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.getGeoLocation().getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
             }
             else
             {
@@ -224,7 +224,7 @@ namespace Zmanim.Utilities
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time
-            double lngHour = astronomicalCalendar.getGeoLocation().getLongitude()/15;
+            double lngHour = astronomicalCalendar.GeoLocation.getLongitude()/15;
 
             double t = N + ((18 - lngHour)/24);
 
@@ -272,8 +272,8 @@ namespace Zmanim.Utilities
 
             // step 7a: calculate the sun's local hour angle
             double cosH = (Math.Cos(MathExtensions.ToRadians(zenith)) -
-                           (sinDec*Math.Sin(MathExtensions.ToRadians(astronomicalCalendar.getGeoLocation().getLatitude()))))/
-                          (cosDec*Math.Cos(MathExtensions.ToRadians(astronomicalCalendar.getGeoLocation().getLatitude())));
+                           (sinDec*Math.Sin(MathExtensions.ToRadians(astronomicalCalendar.GeoLocation.getLatitude()))))/
+                          (cosDec*Math.Cos(MathExtensions.ToRadians(astronomicalCalendar.GeoLocation.getLatitude())));
 
             // the following line would throw an Exception if the sun never set.
             // this is not needed since the calculation will return a Double.NaN
