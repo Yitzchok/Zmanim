@@ -45,7 +45,7 @@ namespace Zmanim.Cli
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
             var czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new TimeZoneDateTime(new DateTime(options.Date.Year, options.Date.Month, options.Date.Day)));
+            czc.Calendar = new TimeZoneDateTime(new DateTime(options.Date.Year, options.Date.Month, options.Date.Day));
 
             var methods = GetDateTimeAndLongMethods();
 

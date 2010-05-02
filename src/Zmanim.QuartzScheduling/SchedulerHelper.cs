@@ -77,7 +77,7 @@ namespace Zmanim.QuartzScheduling
                                            location.Elevation, timeZone);
 
             var czc = new ComplexZmanimCalendar(geoLocation);
-            czc.setCalendar(new TimeZoneDateTime(new DateTime(date.Year, date.Month, date.Day)));
+            czc.Calendar = new TimeZoneDateTime(new DateTime(date.Year, date.Month, date.Day));
             return czc;
         }
 

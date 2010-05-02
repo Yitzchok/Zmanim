@@ -168,7 +168,7 @@ namespace Zmanim
         public virtual DateTime getSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar)Clone();
-            clonedCal.getCalendar().Date = clonedCal.getCalendar().Date.AddDays(1);
+            clonedCal.Calendar.Date = clonedCal.Calendar.Date.AddDays(1);
             DateTime sunset = getSunset();
             DateTime sunrise = clonedCal.getSunrise();
             return getTimeOffset(sunset, getTemporalHour(sunset, sunrise) * 6);
@@ -398,7 +398,7 @@ namespace Zmanim
             }
             var zCal = (ZmanimCalendar)obj;
             // return getCalendar().ToMillisecondsFromEpoch().equals(zCal.getCalendar().ToMillisecondsFromEpoch())
-            return getCalendar().Equals(zCal.getCalendar()) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
+            return Calendar.Equals(zCal.Calendar) && getGeoLocation().Equals(zCal.getGeoLocation()) &&
                    getAstronomicalCalculator().Equals(zCal.getAstronomicalCalculator());
         }
 
@@ -414,7 +414,7 @@ namespace Zmanim
             result = 37 * result + GetType().GetHashCode(); // needed or this and
             // subclasses will
             // return identical hash
-            result += 37 * result + getCalendar().GetHashCode();
+            result += 37 * result + Calendar.GetHashCode();
             result += 37 * result + getGeoLocation().GetHashCode();
             result += 37 * result + getAstronomicalCalculator().GetHashCode();
             return result;

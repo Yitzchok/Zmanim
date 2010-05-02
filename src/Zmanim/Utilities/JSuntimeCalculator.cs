@@ -94,7 +94,7 @@ namespace Zmanim.Utilities
             {
                 zenith = adjustZenith(zenith, 0);
             }
-            double timeMins = morningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()),
+            double timeMins = morningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
                                                 astronomicalCalendar.getGeoLocation().getLatitude(),
                                                 -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
             return timeMins/60;
@@ -140,7 +140,7 @@ namespace Zmanim.Utilities
             {
                 zenith = adjustZenith(zenith, 0);
             }
-            double timeMins = eveningPhenomenon(dateToJulian(astronomicalCalendar.getCalendar()),
+            double timeMins = eveningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
                                                 astronomicalCalendar.getGeoLocation().getLatitude(),
                                                 -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
             return timeMins/60;

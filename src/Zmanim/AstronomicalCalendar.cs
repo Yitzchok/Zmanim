@@ -158,7 +158,7 @@ namespace Zmanim
         ///  times. </param>
         public AstronomicalCalendar(GeoLocation geoLocation)
         {
-            setCalendar(new TimeZoneDateTime(DateTime.Now, geoLocation.getTimeZone()));
+            Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.getTimeZone());
             setGeoLocation(geoLocation); // duplicate call
             setAstronomicalCalculator(AstronomicalCalculator.getDefault());
         }
@@ -182,7 +182,7 @@ namespace Zmanim
             var clone = (AstronomicalCalendar)MemberwiseClone();
 
             clone.setGeoLocation((GeoLocation)getGeoLocation().Clone());
-            clone.setCalendar((ITimeZoneDateTime)getCalendar().Clone());
+            clone.Calendar = (ITimeZoneDateTime)Calendar.Clone();
             clone.setAstronomicalCalculator((AstronomicalCalculator)getAstronomicalCalculator().Clone());
             return clone;
         }
@@ -316,7 +316,7 @@ namespace Zmanim
         {
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
-                ITimeZoneDateTime clonedTimeZoneDateTime = (ITimeZoneDateTime)getCalendar().Clone();
+                ITimeZoneDateTime clonedTimeZoneDateTime = (ITimeZoneDateTime)Calendar.Clone();
                 clonedTimeZoneDateTime.Date = sunset;
                 clonedTimeZoneDateTime.Date.AddDays(1);
                 return clonedTimeZoneDateTime.Date;
@@ -545,7 +545,7 @@ namespace Zmanim
         private double getOffsetTime(double time)
         {
             // be nice to Newfies and use a double
-            double gmtOffset = getCalendar().TimeZone.UtcOffset(getCalendar().Date) / (60 * MINUTE_MILLIS);
+            double gmtOffset = Calendar.TimeZone.UtcOffset(Calendar.Date) / (60 * MINUTE_MILLIS);
 
             return time + gmtOffset;
         }
@@ -621,7 +621,7 @@ namespace Zmanim
             var seconds = (int)(time *= 60);
             time -= seconds; // milliseconds
 
-            return new DateTime(getCalendar().Date.Year, getCalendar().Date.Month, getCalendar().Date.Day,
+            return new DateTime(Calendar.Date.Year, Calendar.Date.Month, Calendar.Date.Day,
                 hours, minutes, seconds, (int)(time * 1000));
         }
 
@@ -706,7 +706,7 @@ namespace Zmanim
             if (!(obj is AstronomicalCalendar))
                 return false;
             var aCal = (AstronomicalCalendar)obj;
-            return getCalendar().Equals(aCal.getCalendar()) && getGeoLocation().Equals(aCal.getGeoLocation()) &&
+            return Calendar.Equals(aCal.Calendar) && getGeoLocation().Equals(aCal.getGeoLocation()) &&
                    getAstronomicalCalculator().Equals(aCal.getAstronomicalCalculator());
         }
 
@@ -720,7 +720,7 @@ namespace Zmanim
         {
             int result = 17;
             result = 37 * result + GetType().GetHashCode(); // needed or this and subclasses will return identical hash
-            result += 37 * result + getCalendar().GetHashCode();
+            result += 37 * result + Calendar.GetHashCode();
             result += 37 * result + getGeoLocation().GetHashCode();
             result += 37 * result + getAstronomicalCalculator().GetHashCode();
             return result;
@@ -746,7 +746,7 @@ namespace Zmanim
             this.geoLocation = geoLocation;
             // if not set the output will be in the original timezone. The call
             // below is also in the constructor
-            getCalendar().TimeZone = geoLocation.getTimeZone();
+            Calendar.TimeZone = geoLocation.getTimeZone();
         }
 
         ///<summary>
@@ -777,28 +777,23 @@ namespace Zmanim
             this.astronomicalCalculator = astronomicalCalculator;
         }
 
-        ///<summary>
-        ///  returns the Calendar object encapsulated in this class.
-        ///</summary>
-        ///<returns> Returns the calendar. </returns>
-        public virtual ITimeZoneDateTime getCalendar()
-        {
-            return timeZoneDateTime;
-        }
-
         /// <summary>
         ///   Set the calender to be used in the calculations.
         /// </summary>
-        /// <param name = "timeZoneDateTime">The calendar to set.</param>
-        public virtual void setCalendar(ITimeZoneDateTime timeZoneDateTime)
+        /// <value>The calendar to set.</value>
+        public virtual ITimeZoneDateTime Calendar
         {
-            this.timeZoneDateTime = timeZoneDateTime;
-            if (getGeoLocation() != null) // set the timezone if possible
+            set
             {
-                // Always set the Calendar's timezone to match the GeoLocation
-                // TimeZone
-                getCalendar().TimeZone = getGeoLocation().getTimeZone();
+                this.timeZoneDateTime = value;
+                if (getGeoLocation() != null) // set the timezone if possible
+                {
+                    // Always set the Calendar's timezone to match the GeoLocation
+                    // TimeZone
+                    Calendar.TimeZone = getGeoLocation().getTimeZone();
+                }
             }
+            get { return timeZoneDateTime; }
         }
     }
 }

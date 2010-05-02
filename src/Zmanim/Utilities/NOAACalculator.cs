@@ -85,7 +85,7 @@ namespace Zmanim.Utilities
                 zenith = adjustZenith(zenith, 0);
             }
 
-            double sunRise = calcSunriseUTC(calcJD(astronomicalCalendar.getCalendar()),
+            double sunRise = calcSunriseUTC(calcJD(astronomicalCalendar.Calendar),
                                             astronomicalCalendar.getGeoLocation().getLatitude(),
                                             -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
             return sunRise / 60;
@@ -131,7 +131,7 @@ namespace Zmanim.Utilities
                 zenith = adjustZenith(zenith, 0);
             }
 
-            double sunSet = calcSunsetUTC(calcJD(astronomicalCalendar.getCalendar()),
+            double sunSet = calcSunsetUTC(calcJD(astronomicalCalendar.Calendar),
                                           astronomicalCalendar.getGeoLocation().getLatitude(),
                                           -astronomicalCalendar.getGeoLocation().getLongitude(), zenith);
             return sunSet / 60;

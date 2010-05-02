@@ -10,7 +10,7 @@ namespace Zmanim.Scheduling
         {
             bool isShabbos = false;
 
-            var timeUtc = calendar.getCalendar().Date.ToUniversalTime();
+            var timeUtc = calendar.Calendar.Date.ToUniversalTime();
 
             if (timeUtc.DayOfWeek == DayOfWeek.Friday)
                 isShabbos = timeUtc > calendar.getCandelLighting().ToUniversalTime();
@@ -33,14 +33,14 @@ namespace Zmanim.Scheduling
         public static ComplexZmanimCalendar GetCalendar(this Location location, DateTime date)
         {
             var complexZmanimCalendar = GetCalendar(location);
-            complexZmanimCalendar.setCalendar(new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)));
+            complexZmanimCalendar.Calendar = new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day));
 
             return complexZmanimCalendar;
         }
 
         public static ComplexZmanimCalendar SetCalendarDate(this ComplexZmanimCalendar calendar, DateTime date)
         {
-            calendar.setCalendar(new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day)));
+            calendar.Calendar = new TimeZoneDateTime(new DateTime(date.Date.Year, date.Date.Month, date.Date.Day));
             return calendar;
         }
 

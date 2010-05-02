@@ -384,7 +384,7 @@ namespace Zmanim.Utilities
             {
                 output.Append("Zmanim");
             }
-            output.Append(" date=\"" + ac.getCalendar().Date.ToString(df) + "\"");
+            output.Append(" date=\"" + ac.Calendar.Date.ToString(df) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
             output.Append(" algorithm=\"" + ac.getAstronomicalCalculator().getCalculatorName() + "\"");
             output.Append(" location=\"" + ac.getGeoLocation().getLocationName() + "\"");
@@ -394,7 +394,7 @@ namespace Zmanim.Utilities
             output.Append(" timeZoneName=\"" + ac.getGeoLocation().getTimeZone().getDisplayName() + "\"");
             output.Append(" timeZoneID=\"" + ac.getGeoLocation().getTimeZone().getID() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.getGeoLocation().getTimeZone().getOffset(ac.getCalendar().Date.ToFileTime()) /
+                          (ac.getGeoLocation().getTimeZone().getOffset(ac.Calendar.Date.ToFileTime()) /
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
@@ -444,7 +444,7 @@ namespace Zmanim.Utilities
             {
                 output.Append("\t<" + zman.getZmanLabel());
                 output.Append(">");
-                output.Append(formatter.formatDate(zman.getZman(), ac.getCalendar())
+                output.Append(formatter.formatDate(zman.getZman(), ac.Calendar)
                               + "</" + zman.getZmanLabel() + ">\n");
             }
 
