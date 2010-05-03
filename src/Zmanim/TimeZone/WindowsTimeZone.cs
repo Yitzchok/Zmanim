@@ -11,12 +11,12 @@ namespace Zmanim.TimeZone
     public class WindowsTimeZone : ITimeZone
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
+        /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
         public WindowsTimeZone() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
+        /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
         /// <param name="timeZone">The time zone.</param>
         public WindowsTimeZone(TimeZoneInfo timeZone)
@@ -25,7 +25,7 @@ namespace Zmanim.TimeZone
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
+        /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
         /// <param name="timeZoneName">Name of the time zone.</param>
         public WindowsTimeZone(string timeZoneName)
