@@ -1,6 +1,6 @@
-This project is a port from the Java zmanim-project (http://www.kosherjava.com/zmanim-project/) developed by Eliyahu Hershfeld.
+This project is a port from the [Java zmanim-project](http://www.kosherjava.com/zmanim-project/) developed by Eliyahu Hershfeld.
 
-The Zmanim ("times" referring to the calculations of time that govern the start and end time of Jewish prayers and holidays)
+The _Zmanim_ ("times" referring to the calculations of time that govern the start and end time of Jewish prayers and holidays)
 project is a .NET API for generating zmanim from within .NET programs.
 If you are a non programmer, this means that the software created by the project is a building block of code to allow other programmers to easily include zmanim in their programs.
 The basis for most zmanim in this class are from the sefer Yisroel Vehazmanim by Rabbi Yisroel Dovid Harfenes.
