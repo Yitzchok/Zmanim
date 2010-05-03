@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
 using System.Threading;
+using Zmanim.Collections;
 
 namespace PublicDomain
 {

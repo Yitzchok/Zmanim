@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 //This was taken from http://www.cuttingedge.it/blogs/steven/pivot/entry.php?id=29
-namespace PublicDomain
+namespace Zmanim.Collections
 {
     /// <summary>
     /// Provides the base class for a generic read-only dictionary.
