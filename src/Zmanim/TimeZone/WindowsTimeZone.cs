@@ -13,7 +13,7 @@ namespace Zmanim.TimeZone
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
-        public WindowsTimeZone() { }
+        public WindowsTimeZone() : this(TimeZoneInfo.Local) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
@@ -31,7 +31,7 @@ namespace Zmanim.TimeZone
         /// <param name="timeZoneName">Name of the time zone.</param>
         public WindowsTimeZone(string timeZoneName)
         {
-            TimeZone= TimeZoneInfo.FindSystemTimeZoneById(timeZoneName);
+            TimeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneName);
         }
 #endif
 
