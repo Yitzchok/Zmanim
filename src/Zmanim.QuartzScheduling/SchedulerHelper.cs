@@ -7,6 +7,7 @@ using Quartz.Impl.Calendar;
 using Zmanim.QuartzScheduling.Configuration;
 using Zmanim.Scheduling;
 using Zmanim.TimeZone;
+using Zmanim.TzDatebase;
 using Zmanim.Utilities;
 
 namespace Zmanim.QuartzScheduling

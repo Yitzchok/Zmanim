@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Zmanim;
 using Zmanim.TimeZone;
+using Zmanim.TzDatebase;
 using Zmanim.Utilities;
 using ZmanimTests.TestGeneration.TestFormatters;
 using ZmanimTests.TestGeneration.TestMethodGenerators;

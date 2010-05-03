@@ -24,7 +24,7 @@ using Zmanim.Utilities;
 namespace Zmanim
 {
     /// <summary>
-    /// 	<p> Description: A Java library for calculating zmanim. </p>
+    /// 	<p> Description: A .NET library for calculating zmanim. </p>
     /// The zmanim library is an API is a specialized calendar that can calculate
     /// sunrise and sunset and Jewish <em>zmanim</em> (religious times) for prayers
     /// and other Jewish religious duties. For a much more extensive list of zmanim

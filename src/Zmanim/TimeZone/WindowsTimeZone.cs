@@ -24,6 +24,7 @@ namespace Zmanim.TimeZone
             this.TimeZone = timeZone;
         }
 
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zmanim.TimeZone
         {
             TimeZone= TimeZoneInfo.FindSystemTimeZoneById(timeZoneName);
         }
+#endif
 
         /// <summary>
         /// Gets or sets the time zone.

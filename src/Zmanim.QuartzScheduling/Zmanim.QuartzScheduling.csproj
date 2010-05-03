@@ -75,6 +75,10 @@
       <Project>{C3866745-0DAC-4B06-8B30-D56CD7471A0B}</Project>
       <Name>Zmanim.Scheduling</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zmanim.TzDatebase\Zmanim.TzDatebase.csproj">
+      <Project>{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}</Project>
+      <Name>Zmanim.TzDatebase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zmanim\Zmanim.csproj">
       <Project>{7629E910-1996-448E-B344-AA925F23EEE6}</Project>
       <Name>Zmanim</Name>

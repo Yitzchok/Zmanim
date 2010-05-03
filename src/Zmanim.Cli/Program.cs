@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using NDesk.Options;
 using Zmanim.TimeZone;
+using Zmanim.TzDatebase;
 using Zmanim.Utilities;
 
 namespace Zmanim.Cli

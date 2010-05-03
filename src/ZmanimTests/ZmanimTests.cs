@@ -4,6 +4,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Zmanim;
 using Zmanim.TimeZone;
 using Zmanim.Utilities;
+using Zmanim.TzDatebase;
 
 namespace ZmanimTests
 {

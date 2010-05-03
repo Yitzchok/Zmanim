@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zmanim.Silverlight</RootNamespace>
+    <RootNamespace>Zmanim</RootNamespace>
     <AssemblyName>Zmanim.Silverlight</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -35,6 +35,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Bin\Debug\Zmanim.Silverlight.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,9 +60,6 @@
     <Compile Include="..\Zmanim\AstronomicalCalendar.cs">
       <Link>AstronomicalCalendar.cs</Link>
     </Compile>
-    <Compile Include="..\Zmanim\Collections\ReadOnlyDictionary.cs">
-      <Link>Collections\ReadOnlyDictionary.cs</Link>
-    </Compile>
     <Compile Include="..\Zmanim\ComplexZmanimCalendar.cs">
       <Link>ComplexZmanimCalendar.cs</Link>
     </Compile>
@@ -79,6 +77,9 @@
     </Compile>
     <Compile Include="..\Zmanim\TimeZone\ITimeZone.cs">
       <Link>TimeZone\ITimeZone.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\TimeZone\WindowsTimeZone.cs">
+      <Link>TimeZone\WindowsTimeZone.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\Utilities\AstronomicalCalculator.cs">
       <Link>Utilities\AstronomicalCalculator.cs</Link>
@@ -113,14 +114,10 @@
     <Compile Include="..\Zmanim\ZmanimCalendar.cs">
       <Link>ZmanimCalendar.cs</Link>
     </Compile>
-    <Compile Include="Collections\SerializableAttribute.cs" />
     <Compile Include="ICloneable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeZone\SilverlightTimeZone.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tz\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

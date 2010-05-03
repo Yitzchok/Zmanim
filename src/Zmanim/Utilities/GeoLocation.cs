@@ -141,9 +141,9 @@ namespace Zmanim.Utilities
             setLongitude(0); // added for clarity
             setLatitude(51.4772);
 #if SILVERLIGHT
-            setTimeZone(new SilverlightTimeZone());
+            setTimeZone(new WindowsTimeZone());
 #else
-            setTimeZone(new OlsonTimeZone("GMT"));
+            setTimeZone(new WindowsTimeZone("GMT"));
 #endif
         }
 

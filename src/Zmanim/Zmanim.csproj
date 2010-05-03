@@ -77,25 +77,7 @@
     <Compile Include="AstronomicalCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TimeZone\OlsonTimeZone.cs" />
     <Compile Include="TimeZone\WindowsTimeZone.cs" />
-    <Compile Include="Tz\Utilities\ArrayUtilities.cs" />
-    <Compile Include="Tz\BaseException.cs" />
-    <Compile Include="Tz\Utilities\CharUtilities.cs" />
-    <Compile Include="Tz\Utilities\ConversionUtilities.cs" />
-    <Compile Include="Tz\Utilities\DateTimeUtlities.cs" />
-    <Compile Include="Tz\Utilities\GlobalConstants.cs" />
-    <Compile Include="Tz\Month.cs" />
-    <Compile Include="Collections\ReadOnlyDictionary.cs" />
-    <Compile Include="Tz\Utilities\RegexUtilities.cs" />
-    <Compile Include="Tz\Standards\Iso3166.cs" />
-    <Compile Include="Tz\Standards\Iso6709.cs" />
-    <Compile Include="Tz\Standards\Iso8601.cs" />
-    <Compile Include="Tz\Utilities\StringUtilities.cs" />
-    <Compile Include="Tz\TzConstants.cs" />
-    <Compile Include="Tz\TzDatabase.cs" />
-    <Compile Include="Tz\TzDateTime.cs" />
-    <Compile Include="Tz\TzTimeZone.cs" />
     <Compile Include="Utilities\AstronomicalCalculator.cs">
       <SubType>Code</SubType>
     </Compile>

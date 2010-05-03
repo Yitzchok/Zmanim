@@ -1,32 +1,43 @@
-using System;
+﻿using System;
+using PublicDomain;
 using Zmanim.Extensions;
+using Zmanim.TimeZone;
 
-namespace Zmanim.TimeZone
-{    /// <summary>
-    /// A ITimeZone implementation of the Windows TimeZone
-    /// (uses the default .net <see cref="TimeZone"/> class)
+namespace Zmanim.TzDatebase
+{
+    /// <summary>
+    /// A ITimeZone implementation of the Olson TimeZone DataBase
     /// </summary>
-    public class SilverlightTimeZone : ITimeZone
+    public class OlsonTimeZone : ITimeZone
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SilverlightTimeZone"/> class.
+        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
         /// </summary>
-        public SilverlightTimeZone() : this(TimeZoneInfo.Local) { }
+        public OlsonTimeZone() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SilverlightTimeZone"/> class.
+        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
         /// </summary>
         /// <param name="timeZone">The time zone.</param>
-        public SilverlightTimeZone(TimeZoneInfo timeZone)
+        public OlsonTimeZone(TzTimeZone timeZone)
         {
             this.TimeZone = timeZone;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OlsonTimeZone"/> class.
+        /// </summary>
+        /// <param name="timeZoneName">Name of the time zone.</param>
+        public OlsonTimeZone(string timeZoneName)
+        {
+            TimeZone = TzTimeZone.GetTimeZone(timeZoneName);
         }
 
         /// <summary>
         /// Gets or sets the time zone.
         /// </summary>
         /// <value>The time zone.</value>
-        public TimeZoneInfo TimeZone { get; set; }
+        public TzTimeZone TimeZone { get; set; }
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -94,6 +105,5 @@ namespace Zmanim.TimeZone
         {
             return UtcOffset(timeFromEpoch.ToDateTime());
         }
-
     }
 }
