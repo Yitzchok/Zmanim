@@ -1,5 +1,5 @@
 include .\psake_ext.ps1
-$framework = "4.0"
+$framework = "4.0x86"
 
 properties { 
   $base_dir  = resolve-path .
@@ -35,6 +35,15 @@ task Init -depends Clean {
 		-copyright "Copyright © Eliyahu Hershfeld 2010"
 		
 	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.Cli\Properties\AssemblyInfo.cs" `
+		-title "Zmanim CLI $version" `
+		-description "Zmanim CLI" `
+		-company "" `
+		-product "Zmanim CLI $version" `
+		-version $version `
+		-copyright "Copyright © Adminjew 2010"
+		
+	Generate-Assembly-Info `
 		-file "$src_dir\ZmanimTests\Properties\AssemblyInfo.cs" `
 		-title "Zmanim Tests $version" `
 		-description "Zmanim Test Library" `
@@ -61,6 +70,34 @@ task Init -depends Clean {
 		-version $version `
 		-copyright "Copyright © Adminjew 2010"
 
+	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.TzDatebase\Properties\AssemblyInfo.cs" `
+		-title "Zmanim TzDatebase $version" `
+		-description "Zmanim TzDatebase Library" `
+		-company "" `
+		-product "Zmanim TzDatebase $version" `
+		-version $version `
+		-copyright "Copyright © Adminjew 2010"
+	
+	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.Java\Properties\AssemblyInfo.cs" `
+		-title "Zmanim Java $version" `
+		-description "Zmanim Java Library" `
+		-company "" `
+		-product "Zmanim Java $version" `
+		-version $version `
+		-copyright "Copyright © Adminjew 2010"
+	
+	Generate-Assembly-Info `
+		-file "$src_dir\Zmanim.Silverlight\Properties\AssemblyInfo.cs" `
+		-title "Zmanim Silverlight $version" `
+		-description "Zmanim Silverlight" `
+		-company "" `
+		-product "Zmanim Silverlight $version" `
+		-version $version `
+		-clsCompliant "false" `
+		-copyright "Copyright © Eliyahu Hershfeld 2010"
+		
 	new-item $release_dir -itemType directory 
 	new-item $buildartifacts_dir -itemType directory 
 #	cp $tools_dir\NUnit\*.* $build_dir
@@ -89,6 +126,14 @@ task Release -depends Test {
 	$build_dir\Zmanim.dll `
 	$build_dir\Zmanim.xml `
 	$build_dir\Zmanim.Cli.exe `
+	$build_dir\Zmanim.TzDatebase.dll `
+	lgpl.txt `
+	acknowledgements.txt
+	
+	& $tools_dir\zip.exe -9 -A -j $release_dir\Zmanim.Silverlight-$humanReadableversion.zip `
+	$build_dir\Zmanim.Silverlight.dll `
+	$build_dir\Zmanim.Silverlight.xml `
+	$base_dir\docs\Documentation.chm `
 	lgpl.txt `
 	acknowledgements.txt
 	
@@ -102,6 +147,11 @@ task CopyBuildFilesToSampleDirectory -depends Release {
 	New-Item $sample_lib_dir -type directory -force
 	Copy-Item $build_dir\Zmanim.dll $sample_lib_dir
 	Copy-Item $build_dir\Zmanim.xml $sample_lib_dir
+	Copy-Item $build_dir\Zmanim.TzDatebase.dll $sample_lib_dir
 	Copy-Item lgpl.txt $sample_lib_dir
 	Copy-Item acknowledgements.txt $sample_lib_dir
+	
+	New-Item "$sample_lib_dir\Silverlight" -type directory -force
+	Copy-Item $build_dir\Zmanim.Silverlight.dll "$sample_lib_dir\Silverlight"
+	Copy-Item $build_dir\Zmanim.Silverlight.xml "$sample_lib_dir\Silverlight"
 }
