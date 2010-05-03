@@ -13,7 +13,13 @@ namespace Zmanim
         /// </summary>
         /// <param name="date">The date.</param>
         public TimeZoneDateTime(DateTime date)
-            : this(date, new OlsonTimeZone())
+            : this(date,
+#if SILVERLIGHT
+            new SilverlightTimeZone()
+#else
+            new OlsonTimeZone()
+#endif
+)
         {
             Date = date;
         }

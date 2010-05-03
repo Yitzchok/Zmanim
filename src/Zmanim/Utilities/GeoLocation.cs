@@ -140,7 +140,11 @@ namespace Zmanim.Utilities
             setLocationName("Greenwich, England");
             setLongitude(0); // added for clarity
             setLatitude(51.4772);
+#if SILVERLIGHT
+            setTimeZone(new SilverlightTimeZone());
+#else
             setTimeZone(new OlsonTimeZone("GMT"));
+#endif
         }
 
         #region ICloneable Members

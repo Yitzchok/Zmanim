@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Scheduling", "src\Zm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Java", "src\Zmanim.Java\Zmanim.Java.csproj", "{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Silverlight", "src\Zmanim.Silverlight\Zmanim.Silverlight.csproj", "{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{42692F9E-E292-45E4-AF3D-2682194A37D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,8 +87,21 @@ Global
 		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}.Release|x86.ActiveCfg = Release|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08C7CC59-CFE9-481E-8523-8B2F73A10AD8} = {42692F9E-E292-45E4-AF3D-2682194A37D3}
 	EndGlobalSection
 EndGlobal
