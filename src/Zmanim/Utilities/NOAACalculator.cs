@@ -78,7 +78,7 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
@@ -86,8 +86,8 @@ namespace Zmanim.Utilities
             }
 
             double sunRise = calcSunriseUTC(calcJD(astronomicalCalendar.Calendar),
-                                            astronomicalCalendar.GeoLocation.getLatitude(),
-                                            -astronomicalCalendar.GeoLocation.getLongitude(), zenith);
+                                            astronomicalCalendar.GeoLocation.Latitude,
+                                            -astronomicalCalendar.GeoLocation.Longitude, zenith);
             return sunRise / 60;
         }
 
@@ -124,7 +124,7 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
@@ -132,8 +132,8 @@ namespace Zmanim.Utilities
             }
 
             double sunSet = calcSunsetUTC(calcJD(astronomicalCalendar.Calendar),
-                                          astronomicalCalendar.GeoLocation.getLatitude(),
-                                          -astronomicalCalendar.GeoLocation.getLongitude(), zenith);
+                                          astronomicalCalendar.GeoLocation.Latitude,
+                                          -astronomicalCalendar.GeoLocation.Longitude, zenith);
             return sunSet / 60;
         }
 

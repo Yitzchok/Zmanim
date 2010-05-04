@@ -155,7 +155,7 @@ namespace Zmanim
         ///  times. </param>
         public AstronomicalCalendar(GeoLocation geoLocation)
         {
-            Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.getTimeZone());
+            Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.TimeZone);
             GeoLocation = geoLocation; // duplicate call
             AstronomicalCalculator = AstronomicalCalculator.getDefault();
         }
@@ -734,7 +734,7 @@ namespace Zmanim
                 this.geoLocation = value;
                 // if not set the output will be in the original timezone. The call
                 // below is also in the constructor
-                Calendar.TimeZone = value.getTimeZone();
+                Calendar.TimeZone = value.TimeZone;
             }
             get { return geoLocation; }
         }
@@ -758,7 +758,7 @@ namespace Zmanim
                 {
                     // Always set the Calendar's timezone to match the GeoLocation
                     // TimeZone
-                    Calendar.TimeZone = GeoLocation.getTimeZone();
+                    Calendar.TimeZone = GeoLocation.TimeZone;
                 }
             }
             get { return timeZoneDateTime; }

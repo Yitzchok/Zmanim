@@ -120,11 +120,11 @@ namespace Zmanim.Utilities
         ///  the <c>TimeZone</c> for the location. </param>
         public GeoLocation(string name, double latitude, double longitude, double elevation, ITimeZone timeZone)
         {
-            setLocationName(name);
-            setLatitude(latitude);
-            setLongitude(longitude);
-            setElevation(elevation);
-            setTimeZone(timeZone);
+            LocationName = name;
+            Latitude = latitude;
+            Longitude = longitude;
+            Elevation = elevation;
+            TimeZone = timeZone;
         }
 
 
@@ -137,24 +137,21 @@ namespace Zmanim.Utilities
         ///</summary>
         public GeoLocation()
         {
-            setLocationName("Greenwich, England");
-            setLongitude(0); // added for clarity
-            setLatitude(51.4772);
+            LocationName = "Greenwich, England";
+            Longitude = 0; // added for clarity
+            Latitude = 51.4772;
 #if SILVERLIGHT
-            setTimeZone(new WindowsTimeZone());
+            TimeZone = new WindowsTimeZone(TimeZoneInfo.Utc);
 #else
-            setTimeZone(new WindowsTimeZone("GMT"));
+            TimeZone = new WindowsTimeZone("GMT");
 #endif
         }
-
-        #region ICloneable Members
-
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
         /// <b>Note:</b> If the <seealso cref = "Zmanim.TimeZone.ITimeZone" /> in
         ///  the clone will be changed from the original, it is critical that
-        ///  <see cref = "AstronomicalCalendar.getCalendar()" />.
+        ///  <see cref = "AstronomicalCalendar.Calendar" />.
         ///  <see cref = "ITimeZoneDateTime.TimeZone">ITimeZoneDateTime.TimeZone</see>
         ///  is set after cloning in order for the AstronomicalCalendar to output
         ///  times in the expected offset.
@@ -165,55 +162,49 @@ namespace Zmanim.Utilities
         public virtual object Clone()
         {
             var clone = (GeoLocation)MemberwiseClone();
-            clone.timeZone = (ITimeZone)getTimeZone().Clone();
-            clone.locationName = getLocationName();
+            clone.timeZone = (ITimeZone)TimeZone.Clone();
+            clone.locationName = LocationName;
             return clone;
         }
-
-        #endregion
 
         ///<summary>
         ///  Method to get the elevation in Meters.
         ///</summary>
-        ///<returns> Returns the elevation in Meters. </returns>
-        public virtual double getElevation()
+        ///<value> Returns the elevation in Meters. </value>
+        public virtual double Elevation
         {
-            return elevation;
-        }
-
-
-        ///<summary>
-        ///  Method to set the elevation in Meters <b>above </b> sea level.
-        ///</summary>
-        ///<param name = "elevation">
-        ///  The elevation to set in Meters. An IllegalArgumentException
-        ///  will be thrown if the value is a negative. </param>
-        public virtual void setElevation(double elevation)
-        {
-            if (elevation < 0)
+            get { return elevation; }
+            set
             {
-                throw new ArgumentException("Elevation cannot be negative");
+                if (value < 0)
+                {
+                    throw new ArgumentException("Elevation cannot be negative");
+                }
+                this.elevation = value;
             }
-            this.elevation = elevation;
         }
 
 
         ///<summary>
         ///  Method to set the latitude.
         ///</summary>
-        ///<param name = "latitude">
+        ///<value>
         ///  The degrees of latitude to set. The values should be between
         ///  -90° and 90°. An IllegalArgumentException will be
         ///  thrown if the value exceeds the limit. For example 40.095965
-        ///  would be used for Lakewood, NJ. <b>Note: </b> For latitudes south of the
-        ///  equator, a negative value should be used. </param>
-        public virtual void setLatitude(double latitude)
+        ///  would be used for Lakewood, NJ. &lt;b&gt;Note: &lt;/b&gt; For latitudes south of the
+        ///  equator, a negative value should be used. </value>
+        public virtual double Latitude
         {
-            if (latitude > 90 || latitude < -90)
+            set
             {
-                throw new ArgumentException("Latitude must be between -90 and  90");
+                if (value > 90 || value < -90)
+                {
+                    throw new ArgumentException("Latitude must be between -90 and  90");
+                }
+                this.latitude = value;
             }
-            this.latitude = latitude;
+            get { return latitude; }
         }
 
 
@@ -229,7 +220,7 @@ namespace Zmanim.Utilities
         ///<param name = "direction">
         ///  N for north and S for south. An IllegalArgumentException will
         ///  be thrown if the value is not S or N. </param>
-        public virtual void setLatitude(int degrees, int minutes, double seconds, string direction)
+        public virtual void SetLatitude(int degrees, int minutes, double seconds, string direction)
         {
             double tempLat = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if (tempLat > 90 || tempLat < 0)
@@ -249,30 +240,27 @@ namespace Zmanim.Utilities
         }
 
 
-        ///<returns> Returns the latitude. </returns>
-        public virtual double getLatitude()
-        {
-            return latitude;
-        }
-
-
         ///<summary>
         ///  Method to set the longitude in a double format.
         ///</summary>
-        ///<param name = "longitude">
+        ///<value>
         ///  The degrees of longitude to set in a double format between
         ///  -180° and 180°. An IllegalArgumentException will be
         ///  thrown if the value exceeds the limit. For example -74.2094
         ///  would be used for Lakewood, NJ. Note: for longitudes east of
-        ///  the <a href = "http://en.wikipedia.org/wiki/Prime_Meridian">Prime
-        ///        Meridian</a> (Greenwich) a negative value should be used. </param>
-        public virtual void setLongitude(double longitude)
+        ///  the &lt;a href = &quot;http://en.wikipedia.org/wiki/Prime_Meridian&quot;&gt;Prime
+        ///  Meridian&lt;/a&gt; (Greenwich) a negative value should be used. </value>
+        public virtual double Longitude
         {
-            if (longitude > 180 || longitude < -180)
+            set
             {
-                throw new ArgumentException("Longitude must be between -180 and  180");
+                if (value > 180 || value < -180)
+                {
+                    throw new ArgumentException("Longitude must be between -180 and  180");
+                }
+                this.longitude = value;
             }
-            this.longitude = longitude;
+            get { return longitude; }
         }
 
 
@@ -291,7 +279,7 @@ namespace Zmanim.Utilities
         ///  E for east of the Prime Meridian or W for west of it. An
         ///  IllegalArgumentException will be thrown if the value is not E
         ///  or W. </param>
-        public virtual void setLongitude(int degrees, int minutes, double seconds, string direction)
+        public virtual void SetLongitude(int degrees, int minutes, double seconds, string direction)
         {
             double longTemp = degrees + ((minutes + (seconds / 60.0)) / 60.0);
             if (longTemp > 180 || longitude < 0)
@@ -310,49 +298,19 @@ namespace Zmanim.Utilities
         }
 
 
-        ///<returns> Returns the longitude. </returns>
-        public virtual double getLongitude()
+        ///<value> Returns the location name. </value>
+        public virtual string LocationName
         {
-            return longitude;
+            get { return locationName; }
+            set { locationName = value; }
         }
 
 
-        ///<returns> Returns the location name. </returns>
-        public virtual string getLocationName()
+        ///<value> Returns the timeZone. </value>
+        public virtual ITimeZone TimeZone
         {
-            return locationName;
-        }
-
-
-        ///<param name = "name">
-        ///  The setter method for the display name. </param>
-        public virtual void setLocationName(string name)
-        {
-            locationName = name;
-        }
-
-
-        ///<returns> Returns the timeZone. </returns>
-        public virtual ITimeZone getTimeZone()
-        {
-            return timeZone;
-        }
-
-        ///<summary>
-        ///  Method to set the TimeZone. If this is ever set after the GeoLocation is
-        ///  set in the <see cref = "AstronomicalCalendar" />, it is
-        ///  critical that
-        ///  <see cref = "AstronomicalCalendar.getCalendar()" />.
-        ///  <see cref = "ITimeZoneDateTime">TimeZone</see>
-        ///  be called in order for the AstronomicalCalendar to output times in the
-        ///  expected offset. This situation will arise if the AstronomicalCalendar is
-        ///  ever <see cref = "AstronomicalCalendar.Clone()">cloned</see>.
-        ///</summary>
-        ///<param name = "timeZone">
-        ///  The timeZone to set. </param>
-        public virtual void setTimeZone(ITimeZone timeZone)
-        {
-            this.timeZone = timeZone;
+            get { return timeZone; }
+            set { this.timeZone = value; }
         }
 
         /// <summary>
@@ -373,9 +331,9 @@ namespace Zmanim.Utilities
         /// time. A positive value will be returned East of the timezone
         /// line, and a negative value West of it.
         /// </returns>
-        public virtual long getLocalMeanTimeOffset(DateTime date)
+        public virtual long GetLocalMeanTimeOffset(DateTime date)
         {
-            return (long)(getLongitude() * 4 * MINUTE_MILLIS - getTimeZone().UtcOffset(date));
+            return (long)(Longitude * 4 * MINUTE_MILLIS - TimeZone.UtcOffset(date));
         }
 
         ///<summary>
@@ -388,9 +346,9 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "location">
         ///  the destination location </param>
-        public virtual double getGeodesicInitialBearing(GeoLocation location)
+        public virtual double GetGeodesicInitialBearing(GeoLocation location)
         {
-            return vincentyFormula(location, INITIAL_BEARING);
+            return VincentyFormula(location, INITIAL_BEARING);
         }
 
 
@@ -404,9 +362,9 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "location">
         ///  the destination location </param>
-        public virtual double getGeodesicFinalBearing(GeoLocation location)
+        public virtual double GetGeodesicFinalBearing(GeoLocation location)
         {
-            return vincentyFormula(location, FINAL_BEARING);
+            return VincentyFormula(location, FINAL_BEARING);
         }
 
         ///<summary>
@@ -419,9 +377,9 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "location">
         ///  the destination location </param>
-        public virtual double getGeodesicDistance(GeoLocation location)
+        public virtual double GetGeodesicDistance(GeoLocation location)
         {
-            return vincentyFormula(location, DISTANCE);
+            return VincentyFormula(location, DISTANCE);
         }
 
         ///<summary>
@@ -437,14 +395,14 @@ namespace Zmanim.Utilities
         ///<param name = "formula">
         ///  This formula calculates initial bearing (<seealso cref = "INITIAL_BEARING" />),
         ///  final bearing (<seealso cref = "FINAL_BEARING" />) and distance (<seealso cref = "DISTANCE" />). </param>
-        private double vincentyFormula(GeoLocation location, int formula)
+        private double VincentyFormula(GeoLocation location, int formula)
         {
             double a = 6378137;
             double b = 6356752.3142;
             double f = 1 / 298.257223563; // WGS-84 ellipsiod
-            double L = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
-            double U1 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(getLatitude())));
-            double U2 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
+            double L = MathExtensions.ToRadians(location.Longitude - Longitude);
+            double U1 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(Latitude)));
+            double U2 = Math.Atan((1 - f) * Math.Tan(MathExtensions.ToRadians(location.Latitude)));
             double sinU1 = Math.Sin(U1), cosU1 = Math.Cos(U1);
             double sinU2 = Math.Sin(U2), cosU2 = Math.Cos(U2);
 
@@ -525,12 +483,12 @@ namespace Zmanim.Utilities
         ///<param name = "location">
         ///  destination location </param>
         ///<returns> the bearing in degrees </returns>
-        public virtual double getRhumbLineBearing(GeoLocation location)
+        public virtual double GetRhumbLineBearing(GeoLocation location)
         {
-            double dLon = MathExtensions.ToRadians(location.getLongitude() - getLongitude());
+            double dLon = MathExtensions.ToRadians(location.Longitude - Longitude);
             double dPhi =
-                Math.Log(Math.Tan(MathExtensions.ToRadians(location.getLatitude()) / 2 + Math.PI / 4) /
-                                Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + Math.PI / 4));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(location.Latitude) / 2 + Math.PI / 4) /
+                                Math.Tan(MathExtensions.ToRadians(Latitude) / 2 + Math.PI / 4));
             if (Math.Abs(dLon) > Math.PI)
                 dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
             return MathExtensions.ToDegree(Math.Atan2(dLon, dPhi));
@@ -544,15 +502,15 @@ namespace Zmanim.Utilities
         ///<param name = "location">
         ///  the destination location </param>
         ///<returns> the distance in Meters </returns>
-        public virtual double getRhumbLineDistance(GeoLocation location)
+        public virtual double GetRhumbLineDistance(GeoLocation location)
         {
             double R = 6371; // earth's mean radius in km
-            double dLat = MathExtensions.ToRadians(location.getLatitude() - getLatitude());
-            double dLon = MathExtensions.ToRadians(Math.Abs(location.getLongitude() - getLongitude()));
+            double dLat = MathExtensions.ToRadians(location.Latitude - Latitude);
+            double dLon = MathExtensions.ToRadians(Math.Abs(location.Longitude - Longitude));
             double dPhi =
-                Math.Log(Math.Tan(MathExtensions.ToRadians(location.getLongitude()) / 2 + Math.PI / 4) /
-                                Math.Tan(MathExtensions.ToRadians(getLatitude()) / 2 + Math.PI / 4));
-            double q = (Math.Abs(dLat) > 1e-10) ? dLat / dPhi : Math.Cos(MathExtensions.ToRadians(getLatitude()));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(location.Longitude) / 2 + Math.PI / 4) /
+                                Math.Tan(MathExtensions.ToRadians(Latitude) / 2 + Math.PI / 4));
+            double q = (Math.Abs(dLat) > 1e-10) ? dLat / dPhi : Math.Cos(MathExtensions.ToRadians(Latitude));
             // if dLon over 180° take shorter rhumb across 180° meridian:
             if (dLon > Math.PI)
                 dLon = 2 * Math.PI - dLon;
@@ -581,16 +539,16 @@ namespace Zmanim.Utilities
         ///  </code>
         ///</summary>
         ///<returns> The XML formatted <code>String</code>. </returns>
-        public virtual string toXML()
+        public virtual string ToXml()
         {
             var sb = new StringBuilder();
             sb.Append("<GeoLocation>\n");
-            sb.Append("\t<LocationName>").Append(getLocationName()).Append("</LocationName>\n");
-            sb.Append("\t<Latitude>").Append(getLatitude()).Append("°").Append("</Latitude>\n");
-            sb.Append("\t<Longitude>").Append(getLongitude()).Append("°").Append("</Longitude>\n");
-            sb.Append("\t<Elevation>").Append(getElevation()).Append(" Meters").Append("</Elevation>\n");
-            sb.Append("\t<TimezoneName>").Append(getTimeZone().getID()).Append("</TimezoneName>\n");
-            sb.Append("\t<TimeZoneDisplayName>").Append(getTimeZone().getDisplayName()).Append(
+            sb.Append("\t<LocationName>").Append(LocationName).Append("</LocationName>\n");
+            sb.Append("\t<Latitude>").Append(Latitude).Append("°").Append("</Latitude>\n");
+            sb.Append("\t<Longitude>").Append(Longitude).Append("°").Append("</Longitude>\n");
+            sb.Append("\t<Elevation>").Append(Elevation).Append(" Meters").Append("</Elevation>\n");
+            sb.Append("\t<TimezoneName>").Append(TimeZone.getID()).Append("</TimezoneName>\n");
+            sb.Append("\t<TimeZoneDisplayName>").Append(TimeZone.getDisplayName()).Append(
                 "</TimeZoneDisplayName>\n");
             /*
             sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset() / HOUR_MILLIS).Append(
@@ -659,11 +617,11 @@ namespace Zmanim.Utilities
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("\nLocation Name:\t\t\t").Append(getLocationName());
-            sb.Append("\nLatitude:\t\t\t").Append(getLatitude()).Append("°");
-            sb.Append("\nLongitude:\t\t\t").Append(getLongitude()).Append("°");
-            sb.Append("\nElevation:\t\t\t").Append(getElevation()).Append(" Meters");
-            sb.Append("\nTimezone Name:\t\t\t").Append(getTimeZone().getID());
+            sb.Append("\nLocation Name:\t\t\t").Append(LocationName);
+            sb.Append("\nLatitude:\t\t\t").Append(Latitude).Append("°");
+            sb.Append("\nLongitude:\t\t\t").Append(Longitude).Append("°");
+            sb.Append("\nElevation:\t\t\t").Append(Elevation).Append(" Meters");
+            sb.Append("\nTimezone Name:\t\t\t").Append(TimeZone.getID());
             //        
             //		 * sb.append("\nTimezone Display Name:\t\t").append(
             //		 * getTimeZone().getDisplayName());

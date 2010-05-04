@@ -387,14 +387,14 @@ namespace Zmanim.Utilities
             output.Append(" date=\"" + ac.Calendar.Date.ToString(df) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
             output.Append(" algorithm=\"" + ac.AstronomicalCalculator.getCalculatorName() + "\"");
-            output.Append(" location=\"" + ac.GeoLocation.getLocationName() + "\"");
-            output.Append(" latitude=\"" + ac.GeoLocation.getLatitude() + "\"");
-            output.Append(" longitude=\"" + ac.GeoLocation.getLongitude() + "\"");
-            output.Append(" elevation=\"" + ac.GeoLocation.getElevation() + "\"");
-            output.Append(" timeZoneName=\"" + ac.GeoLocation.getTimeZone().getDisplayName() + "\"");
-            output.Append(" timeZoneID=\"" + ac.GeoLocation.getTimeZone().getID() + "\"");
+            output.Append(" location=\"" + ac.GeoLocation.LocationName + "\"");
+            output.Append(" latitude=\"" + ac.GeoLocation.Latitude + "\"");
+            output.Append(" longitude=\"" + ac.GeoLocation.Longitude + "\"");
+            output.Append(" elevation=\"" + ac.GeoLocation.Elevation + "\"");
+            output.Append(" timeZoneName=\"" + ac.GeoLocation.TimeZone.getDisplayName() + "\"");
+            output.Append(" timeZoneID=\"" + ac.GeoLocation.TimeZone.getID() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.GeoLocation.getTimeZone().getOffset(ac.Calendar.Date.ToFileTime()) /
+                          (ac.GeoLocation.TimeZone.getOffset(ac.Calendar.Date.ToFileTime()) /
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");

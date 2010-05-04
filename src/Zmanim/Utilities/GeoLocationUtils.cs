@@ -99,9 +99,9 @@ namespace Zmanim.Utilities
             double a = 6378137;
             double b = 6356752.3142;
             double f = 1/298.257223563; // WGS-84 ellipsiod
-            double L = MathExtensions.ToRadians(destination.getLongitude() - location.getLongitude());
-            double U1 = Math.Atan((1 - f)*Math.Tan(MathExtensions.ToRadians(location.getLatitude())));
-            double U2 = Math.Atan((1 - f)*Math.Tan(MathExtensions.ToRadians(destination.getLatitude())));
+            double L = MathExtensions.ToRadians(destination.Longitude - location.Longitude);
+            double U1 = Math.Atan((1 - f)*Math.Tan(MathExtensions.ToRadians(location.Latitude)));
+            double U2 = Math.Atan((1 - f)*Math.Tan(MathExtensions.ToRadians(destination.Latitude)));
             double sinU1 = Math.Sin(U1), cosU1 = Math.Cos(U1);
             double sinU2 = Math.Sin(U2), cosU2 = Math.Cos(U2);
 
@@ -176,10 +176,10 @@ namespace Zmanim.Utilities
         /// <returns>the bearing in degrees</returns>
         public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
-            double dLon = MathExtensions.ToRadians(destination.getLongitude() - location.getLongitude());
+            double dLon = MathExtensions.ToRadians(destination.Longitude - location.Longitude);
             double dPhi =
-                Math.Log(Math.Tan(MathExtensions.ToRadians(destination.getLatitude())/2 + Math.PI/4)/
-                                Math.Tan(MathExtensions.ToRadians(location.getLatitude())/2 + Math.PI/4));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(destination.Latitude)/2 + Math.PI/4)/
+                                Math.Tan(MathExtensions.ToRadians(location.Latitude)/2 + Math.PI/4));
             if (Math.Abs(dLon) > Math.PI)
                 dLon = dLon > 0 ? -(2*Math.PI - dLon) : (2*Math.PI + dLon);
             return MathExtensions.ToDegree(Math.Atan2(dLon, dPhi));
@@ -196,14 +196,14 @@ namespace Zmanim.Utilities
         public static double getRhumbLineDistance(GeoLocation location, GeoLocation destination)
         {
             double R = 6371; // earth's mean radius in km
-            double dLat = MathExtensions.ToRadians(destination.getLatitude() - location.getLatitude());
-            double dLon = MathExtensions.ToRadians(Math.Abs(destination.getLongitude() - location.getLongitude()));
+            double dLat = MathExtensions.ToRadians(destination.Latitude - location.Latitude);
+            double dLon = MathExtensions.ToRadians(Math.Abs(destination.Longitude - location.Longitude));
             double dPhi =
-                Math.Log(Math.Tan(MathExtensions.ToRadians(destination.getLongitude())/2 + Math.PI/4)/
-                                Math.Tan(MathExtensions.ToRadians(location.getLatitude())/2 + Math.PI/4));
+                Math.Log(Math.Tan(MathExtensions.ToRadians(destination.Longitude)/2 + Math.PI/4)/
+                                Math.Tan(MathExtensions.ToRadians(location.Latitude)/2 + Math.PI/4));
             double q = (Math.Abs(dLat) > 1e-10)
                            ? dLat/dPhi
-                           : Math.Cos(MathExtensions.ToRadians(location.getLatitude()));
+                           : Math.Cos(MathExtensions.ToRadians(location.Latitude));
             // if dLon over 180° take shorter rhumb across 180° meridian:
             if (dLon > Math.PI)
                 dLon = 2*Math.PI - dLon;

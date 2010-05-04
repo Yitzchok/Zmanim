@@ -144,7 +144,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Zmanim.TzDatebase\Zmanim.TzDatebase.csproj">
+      <Project>{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}</Project>
+      <Name>Zmanim.TzDatebase</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

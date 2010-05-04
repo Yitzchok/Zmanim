@@ -2260,13 +2260,13 @@ namespace Zmanim
         /// <returns>
         /// the Date representing the local <em>chatzos</em>
         /// </returns>
-        /// <seealso cref="GeoLocation.getLocalMeanTimeOffset(DateTime)"/>
+        /// <seealso cref="GeoLocation.GetLocalMeanTimeOffset"/>
         public virtual DateTime getFixedLocalChatzos()
         {
             return getTimeOffset(
                 getDateFromTime(
-                12.0 - GeoLocation.getTimeZone().UtcOffset(Calendar.Date) / HOUR_MILLIS),
-                                 -GeoLocation.getLocalMeanTimeOffset(Calendar.Date));
+                12.0 - GeoLocation.TimeZone.UtcOffset(Calendar.Date) / HOUR_MILLIS),
+                                 -GeoLocation.GetLocalMeanTimeOffset(Calendar.Date));
         }
 
         /// <summary>

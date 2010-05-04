@@ -108,6 +108,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Zmanim.TzDatebase\Zmanim.TzDatebase.csproj">
+      <Project>{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}</Project>
+      <Name>Zmanim.TzDatebase</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

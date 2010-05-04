@@ -1,4 +1,5 @@
 ﻿using Zmanim.TimeZone;
+using Zmanim.TzDatebase;
 using Zmanim.Utilities;
 
 namespace Zmanim.Samples.Console

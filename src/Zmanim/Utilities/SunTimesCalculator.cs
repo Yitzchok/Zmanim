@@ -86,7 +86,7 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
@@ -95,8 +95,8 @@ namespace Zmanim.Utilities
             doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,
                                     astronomicalCalendar.Calendar.Date.Day,
-                                    astronomicalCalendar.GeoLocation.getLongitude(),
-                                    astronomicalCalendar.GeoLocation.getLatitude(), zenith, TYPE_SUNRISE);
+                                    astronomicalCalendar.GeoLocation.Longitude,
+                                    astronomicalCalendar.GeoLocation.Latitude, zenith, TYPE_SUNRISE);
             return doubleTime;
         }
 
@@ -129,7 +129,7 @@ namespace Zmanim.Utilities
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.getElevation());
+                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
@@ -138,8 +138,8 @@ namespace Zmanim.Utilities
             doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,
                                     astronomicalCalendar.Calendar.Date.Day,
-                                    astronomicalCalendar.GeoLocation.getLongitude(),
-                                    astronomicalCalendar.GeoLocation.getLatitude(), zenith, TYPE_SUNSET);
+                                    astronomicalCalendar.GeoLocation.Longitude,
+                                    astronomicalCalendar.GeoLocation.Latitude, zenith, TYPE_SUNSET);
             return doubleTime;
         }
 
