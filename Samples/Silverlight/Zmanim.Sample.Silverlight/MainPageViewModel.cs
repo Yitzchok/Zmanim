@@ -1,6 +1,5 @@
 ﻿using System;
 using Zmanim.Sample.Silverlight.Observable;
-using Zmanim.Utilities;
 
 namespace Zmanim.Sample.Silverlight
 {
