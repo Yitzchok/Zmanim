@@ -391,10 +391,10 @@ namespace Zmanim.Utilities
             output.Append(" latitude=\"" + ac.GeoLocation.Latitude + "\"");
             output.Append(" longitude=\"" + ac.GeoLocation.Longitude + "\"");
             output.Append(" elevation=\"" + ac.GeoLocation.Elevation + "\"");
-            output.Append(" timeZoneName=\"" + ac.GeoLocation.TimeZone.getDisplayName() + "\"");
-            output.Append(" timeZoneID=\"" + ac.GeoLocation.TimeZone.getID() + "\"");
+            output.Append(" timeZoneName=\"" + ac.GeoLocation.TimeZone.GetDisplayName() + "\"");
+            output.Append(" timeZoneID=\"" + ac.GeoLocation.TimeZone.GetId() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.GeoLocation.TimeZone.getOffset(ac.Calendar.Date.ToFileTime()) /
+                          (ac.GeoLocation.TimeZone.GetOffset(ac.Calendar.Date.ToFileTime()) /
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");

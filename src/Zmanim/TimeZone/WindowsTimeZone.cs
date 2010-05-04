@@ -69,7 +69,7 @@ namespace Zmanim.TimeZone
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns></returns>
-        public bool inDaylightTime(DateTime dateTime)
+        public bool IsDaylightSavingTime(DateTime dateTime)
         {
             return TimeZone.IsDaylightSavingTime(dateTime);
         }
@@ -78,9 +78,9 @@ namespace Zmanim.TimeZone
         /// Gets the ID of this time zone.
         /// </summary>
         /// <returns>the ID of this time zone.</returns>
-        public string getID()
+        public string GetId()
         {
-            return getDisplayName();
+            return GetDisplayName();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Zmanim.TimeZone
         /// If the display name is not available for the locale, then this method returns a string in the normalized custom ID format.
         /// </summary>
         /// <returns></returns>
-        public string getDisplayName()
+        public string GetDisplayName()
         {
             return TimeZone.StandardName;
         }
@@ -103,7 +103,7 @@ namespace Zmanim.TimeZone
         /// <returns>
         /// the amount of time in milliseconds to add to UTC to get local time.
         /// </returns>
-        public int getOffset(long timeFromEpoch)
+        public int GetOffset(long timeFromEpoch)
         {
             return UtcOffset(timeFromEpoch.ToDateTime());
         }

@@ -48,7 +48,7 @@ namespace Zmanim.Java
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns></returns>
-        public bool inDaylightTime(DateTime dateTime)
+        public bool IsDaylightSavingTime(DateTime dateTime)
         {
             return timeZone.inDaylightTime(ToDate(dateTime));
         }
@@ -57,7 +57,7 @@ namespace Zmanim.Java
         /// Gets the ID of this time zone.
         /// </summary>
         /// <returns>the ID of this time zone.</returns>
-        public string getID()
+        public string GetId()
         {
             return timeZone.getID();
         }
@@ -68,7 +68,7 @@ namespace Zmanim.Java
         /// If the display name is not available for the locale, then this method returns a string in the normalized custom ID format.
         /// </summary>
         /// <returns></returns>
-        public string getDisplayName()
+        public string GetDisplayName()
         {
             return timeZone.getDisplayName();
         }
@@ -82,7 +82,7 @@ namespace Zmanim.Java
         /// <returns>
         /// the amount of time in milliseconds to add to UTC to get local time.
         /// </returns>
-        public int getOffset(long timeFromEpoch)
+        public int GetOffset(long timeFromEpoch)
         {
             int offset = timeZone.getOffset(timeFromEpoch);
             return offset;

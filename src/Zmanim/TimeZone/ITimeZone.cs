@@ -21,13 +21,13 @@ namespace Zmanim.TimeZone
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns></returns>
-        bool inDaylightTime(DateTime dateTime);
+        bool IsDaylightSavingTime(DateTime dateTime);
 
         /// <summary>
         /// Gets the ID of this time zone.
         /// </summary>
         /// <returns>the ID of this time zone.</returns>
-        string getID();
+        string GetId();
 
         /// <summary>
         /// Returns a name of this time zone suitable for presentation to the user in the default locale. 
@@ -35,7 +35,7 @@ namespace Zmanim.TimeZone
         /// If the display name is not available for the locale, then this method returns a string in the normalized custom ID format.
         /// </summary>
         /// <returns></returns>
-        string getDisplayName();
+        string GetDisplayName();
 
         ///<summary>
         /// Returns the offset of this time zone from UTC at the specified date.
@@ -44,6 +44,6 @@ namespace Zmanim.TimeZone
         ///</summary>
         ///<param name="timeFromEpoch">the date represented in milliseconds since January 1, 1970 00:00:00 GMT</param>
         ///<returns>the amount of time in milliseconds to add to UTC to get local time.</returns>
-        int getOffset(long timeFromEpoch);
+        int GetOffset(long timeFromEpoch);
     }
 }

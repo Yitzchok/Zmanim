@@ -547,8 +547,8 @@ namespace Zmanim.Utilities
             sb.Append("\t<Latitude>").Append(Latitude).Append("°").Append("</Latitude>\n");
             sb.Append("\t<Longitude>").Append(Longitude).Append("°").Append("</Longitude>\n");
             sb.Append("\t<Elevation>").Append(Elevation).Append(" Meters").Append("</Elevation>\n");
-            sb.Append("\t<TimezoneName>").Append(TimeZone.getID()).Append("</TimezoneName>\n");
-            sb.Append("\t<TimeZoneDisplayName>").Append(TimeZone.getDisplayName()).Append(
+            sb.Append("\t<TimezoneName>").Append(TimeZone.GetId()).Append("</TimezoneName>\n");
+            sb.Append("\t<TimeZoneDisplayName>").Append(TimeZone.GetDisplayName()).Append(
                 "</TimeZoneDisplayName>\n");
             /*
             sb.Append("\t<TimezoneGMTOffset>").Append(getTimeZone().getRawOffset() / HOUR_MILLIS).Append(
@@ -621,7 +621,7 @@ namespace Zmanim.Utilities
             sb.Append("\nLatitude:\t\t\t").Append(Latitude).Append("°");
             sb.Append("\nLongitude:\t\t\t").Append(Longitude).Append("°");
             sb.Append("\nElevation:\t\t\t").Append(Elevation).Append(" Meters");
-            sb.Append("\nTimezone Name:\t\t\t").Append(TimeZone.getID());
+            sb.Append("\nTimezone Name:\t\t\t").Append(TimeZone.GetId());
             //        
             //		 * sb.append("\nTimezone Display Name:\t\t").append(
             //		 * getTimeZone().getDisplayName());
