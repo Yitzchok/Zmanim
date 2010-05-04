@@ -45,9 +45,9 @@ namespace Zmanim.Utilities
         /// <param name="location">the destination location</param>
         /// <param name="destination">The destination.</param>
         /// <returns></returns>
-        public static double getGeodesicInitialBearing(GeoLocation location, GeoLocation destination)
+        public static double GetGeodesicInitialBearing(GeoLocation location, GeoLocation destination)
         {
-            return vincentyFormula(location, destination, INITIAL_BEARING);
+            return VincentyFormula(location, destination, INITIAL_BEARING);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace Zmanim.Utilities
         /// <param name="location">the destination location</param>
         /// <param name="destination">The destination.</param>
         /// <returns></returns>
-        public static double getGeodesicFinalBearing(GeoLocation location, GeoLocation destination)
+        public static double GetGeodesicFinalBearing(GeoLocation location, GeoLocation destination)
         {
-            return vincentyFormula(location, destination, FINAL_BEARING);
+            return VincentyFormula(location, destination, FINAL_BEARING);
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace Zmanim.Utilities
         /// <param name="location">the destination location</param>
         /// <param name="destination">The destination.</param>
         /// <returns></returns>
-        public static double getGeodesicDistance(GeoLocation location, GeoLocation destination)
+        public static double GetGeodesicDistance(GeoLocation location, GeoLocation destination)
         {
-            return vincentyFormula(location, destination, DISTANCE);
+            return VincentyFormula(location, destination, DISTANCE);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Zmanim.Utilities
         /// <param name="formula">This formula calculates initial bearing (<seealso cref="INITIAL_BEARING"/>),
         /// final bearing (<seealso cref="FINAL_BEARING"/>) and distance (<seealso cref="DISTANCE"/>).</param>
         /// <returns></returns>
-        private static double vincentyFormula(GeoLocation location, GeoLocation destination, int formula)
+        private static double VincentyFormula(GeoLocation location, GeoLocation destination, int formula)
         {
             double a = 6378137;
             double b = 6356752.3142;
@@ -174,7 +174,7 @@ namespace Zmanim.Utilities
         /// <param name="location">destination location</param>
         /// <param name="destination">The destination.</param>
         /// <returns>the bearing in degrees</returns>
-        public static double getRhumbLineBearing(GeoLocation location, GeoLocation destination)
+        public static double GetRhumbLineBearing(GeoLocation location, GeoLocation destination)
         {
             double dLon = MathExtensions.ToRadians(destination.Longitude - location.Longitude);
             double dPhi =
@@ -193,7 +193,7 @@ namespace Zmanim.Utilities
         /// <param name="location">the destination location</param>
         /// <param name="destination">The destination.</param>
         /// <returns>the distance in Meters</returns>
-        public static double getRhumbLineDistance(GeoLocation location, GeoLocation destination)
+        public static double GetRhumbLineDistance(GeoLocation location, GeoLocation destination)
         {
             double R = 6371; // earth's mean radius in km
             double dLat = MathExtensions.ToRadians(destination.Latitude - location.Latitude);
