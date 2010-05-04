@@ -29,10 +29,6 @@ namespace Zmanim.Utilities
     /// <author>Eliyahu Hershfeld</author>
     public class Zman
     {
-        private long duration;
-        private DateTime zman;
-        private string zmanLabel;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Zman"/> class.
         /// </summary>
@@ -40,8 +36,8 @@ namespace Zmanim.Utilities
         /// <param name="label">The label.</param>
         public Zman(DateTime date, string label)
         {
-            zmanLabel = label;
-            zman = date;
+            ZmanLabel = label;
+            ZmanTime = date;
         }
 
         /// <summary>
@@ -51,62 +47,26 @@ namespace Zmanim.Utilities
         /// <param name="label">The label.</param>
         public Zman(long duration, string label)
         {
-            zmanLabel = label;
-            this.duration = duration;
+            ZmanLabel = label;
+            this.Duration = duration;
         }
 
         /// <summary>
         /// Gets the duration.
         /// </summary>
-        /// <returns></returns>
-        public virtual long getDuration()
-        {
-            return duration;
-        }
+        /// <value></value>
+        public virtual long Duration { get; set; }
 
         /// <summary>
         /// Gets the zman.
         /// </summary>
-        /// <returns></returns>
-        public virtual DateTime getZman()
-        {
-            return zman;
-        }
+        /// <value></value>
+        public virtual DateTime ZmanTime { get; set; }
 
         /// <summary>
         /// Gets the zman label.
         /// </summary>
-        /// <returns></returns>
-        public virtual string getZmanLabel()
-        {
-            return zmanLabel;
-        }
-
-        /// <summary>
-        /// Sets the duration.
-        /// </summary>
-        /// <param name="duration">The duration.</param>
-        public virtual void setDuration(long duration)
-        {
-            this.duration = duration;
-        }
-
-        /// <summary>
-        /// Sets the zman.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        public virtual void setZman(DateTime date)
-        {
-            zman = date;
-        }
-
-        /// <summary>
-        /// Sets the zman label.
-        /// </summary>
-        /// <param name="label">The label.</param>
-        public virtual void setZmanLabel(string label)
-        {
-            zmanLabel = label;
-        }
+        /// <value></value>
+        public virtual string ZmanLabel { get; set; }
     }
 }

@@ -440,20 +440,20 @@ namespace Zmanim.Utilities
                 }
             }
 
-            foreach (Zman zman in dateList.OrderBy(x => x.getZman()))
+            foreach (Zman zman in dateList.OrderBy(x => x.ZmanTime))
             {
-                output.Append("\t<" + zman.getZmanLabel());
+                output.Append("\t<" + zman.ZmanLabel);
                 output.Append(">");
-                output.Append(formatter.formatDate(zman.getZman(), ac.Calendar)
-                              + "</" + zman.getZmanLabel() + ">\n");
+                output.Append(formatter.formatDate(zman.ZmanTime, ac.Calendar)
+                              + "</" + zman.ZmanLabel + ">\n");
             }
 
-            foreach (Zman zman in durationList.OrderBy(x => x.getDuration()))
+            foreach (Zman zman in durationList.OrderBy(x => x.Duration))
             {
-                output.Append("\t<" + zman.getZmanLabel());
+                output.Append("\t<" + zman.ZmanLabel);
                 output.Append(">");
-                output.Append(formatter.format((int)zman.getDuration()) + "</"
-                              + zman.getZmanLabel() + ">\n");
+                output.Append(formatter.format((int)zman.Duration) + "</"
+                              + zman.ZmanLabel + ">\n");
             }
 
             foreach (string t in otherList)
