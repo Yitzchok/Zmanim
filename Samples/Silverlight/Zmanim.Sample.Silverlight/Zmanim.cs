@@ -10,12 +10,12 @@ namespace Zmanim.Sample.Silverlight
         }
 
         public ComplexZmanimCalendar ZmanimCalendar { get; set; }
-        public DateTime AlosHashachar { get { return ZmanimCalendar.getAlosHashachar(); } }
-        public DateTime Alos72 { get { return ZmanimCalendar.getAlos72(); } }
-        public DateTime Sunrise { get { return ZmanimCalendar.getSunrise(); } }
-        public DateTime Sunset { get { return ZmanimCalendar.getSunset(); } }
-        public DateTime CandelLighting { get { return ZmanimCalendar.getCandelLighting(); } }
-        public DateTime Tzais { get { return ZmanimCalendar.getTzais(); } }
+        public DateTime AlosHashachar { get { return ZmanimCalendar.GetAlosHashachar(); } }
+        public DateTime Alos72 { get { return ZmanimCalendar.GetAlos72(); } }
+        public DateTime Sunrise { get { return ZmanimCalendar.GetSunrise(); } }
+        public DateTime Sunset { get { return ZmanimCalendar.GetSunset(); } }
+        public DateTime CandelLighting { get { return ZmanimCalendar.GetCandelLighting(); } }
+        public DateTime Tzais { get { return ZmanimCalendar.GetTzais(); } }
 
     }
 }

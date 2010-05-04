@@ -26,10 +26,10 @@ namespace Zmanim.Sample.Silverlight
 
         public double Latitude
         {
-            get { return ZmanimCalendar.GeoLocation.getLatitude(); }
+            get { return ZmanimCalendar.GeoLocation.Latitude; }
             set
             {
-                ZmanimCalendar.GeoLocation.setLatitude(value);
+                ZmanimCalendar.GeoLocation.Latitude = value;
                 this.RaisePropertyChanged(x => x.Latitude);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
@@ -37,10 +37,10 @@ namespace Zmanim.Sample.Silverlight
 
         public double Longitude
         {
-            get { return ZmanimCalendar.GeoLocation.getLongitude(); }
+            get { return ZmanimCalendar.GeoLocation.Longitude; }
             set
             {
-                ZmanimCalendar.GeoLocation.setLongitude(value);
+                ZmanimCalendar.GeoLocation.Longitude = value;
                 this.RaisePropertyChanged(x => x.Longitude);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
@@ -48,16 +48,16 @@ namespace Zmanim.Sample.Silverlight
 
         public double Elevation
         {
-            get { return ZmanimCalendar.GeoLocation.getElevation(); }
+            get { return ZmanimCalendar.GeoLocation.Elevation; }
             set
             {
-                ZmanimCalendar.GeoLocation.setElevation(value);
+                ZmanimCalendar.GeoLocation.Elevation = value;
                 this.RaisePropertyChanged(x => x.Elevation);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
         }
 
-        public string LocationName { get { return ZmanimCalendar.GeoLocation.getLocationName(); } }
+        public string LocationName { get { return ZmanimCalendar.GeoLocation.LocationName; } }
         public Zmanim Zmanim { get; set; }
     }
 }
