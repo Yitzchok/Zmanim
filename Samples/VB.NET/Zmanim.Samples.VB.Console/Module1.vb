@@ -14,13 +14,13 @@ Module Module1
         Dim zc As New ComplexZmanimCalendar(location)
 
         System.Console.WriteLine("Today's Zmanim for " & locationName)
-        System.Console.WriteLine("Sunrise: " & zc.getSunrise().ToString)
+        System.Console.WriteLine("Sunrise: " & zc.GetSunrise().ToString)
         'output sunrise
-        System.Console.WriteLine("Sof Zman Shema MGA: " & zc.getSofZmanShmaMGA().ToString)
+        System.Console.WriteLine("Sof Zman Shema MGA: " & zc.GetSofZmanShmaMGA().ToString)
         'output Sof Zman Shema MGA
-        System.Console.WriteLine("Sof Zman Shema GRA: " & zc.getSofZmanShmaGRA().ToString)
+        System.Console.WriteLine("Sof Zman Shema GRA: " & zc.GetSofZmanShmaGRA().ToString)
         'output Sof Zman Shema GRA
-        System.Console.WriteLine("Sunset: " & zc.getSunset().ToString)
+        System.Console.WriteLine("Sunset: " & zc.GetSunset().ToString)
         'output sunset
         System.Console.WriteLine("Press enter to exit.")
         System.Console.ReadLine()

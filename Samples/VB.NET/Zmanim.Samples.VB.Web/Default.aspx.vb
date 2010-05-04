@@ -19,11 +19,11 @@ Public Class _Default
     End Sub
 
     Protected Function GetSunrise() As DateTime
-        Return Calendar.getSunrise()
+        Return Calendar.GetSunrise()
     End Function
 
     Protected Function GetSunset() As DateTime
-        Return Calendar.getSunset()
+        Return Calendar.GetSunset()
     End Function
 
 
