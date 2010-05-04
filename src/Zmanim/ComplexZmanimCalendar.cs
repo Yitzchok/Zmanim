@@ -376,7 +376,7 @@ namespace Zmanim
         ///  <em>shaah zmanis</em>. </returns>
         public virtual long getShaahZmanis72Minutes()
         {
-            return getShaahZmanisMGA();
+            return GetShaahZmanisMGA();
         }
 
         ///<summary>
@@ -583,15 +583,15 @@ namespace Zmanim
         ///  of a day (12 * 60 = 720) based on the day starting at
         ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see> and ending at
         ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>. The actual alculation is
-        ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunrise" />- ( <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 1.2).
+        ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunrise" />- ( <see cref = "ZmanimCalendar.GetShaahZmanisGra" /> * 1.2).
         ///  This calculation is used in the calendars published by
         ///  <em>Hisachdus Harabanim D'Artzos Habris Ve'Kanada</em>
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
+        ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
         public virtual DateTime getAlos72Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -622,13 +622,13 @@ namespace Zmanim
         ///  of a day (12 * 60 = 720) /8 =90 based on the day starting at
         ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see> and ending at <seealso cref = "AstronomicalCalendar.GetSunset">sunset</seealso>.
         ///  The actual calculation is <see cref = "AstronomicalCalendar.GetSunrise" /> - (
-        ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 1.5).
+        ///  <see cref = "ZmanimCalendar.GetShaahZmanisGra" /> * 1.5).
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
+        ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
         public virtual DateTime getAlos90Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -644,13 +644,13 @@ namespace Zmanim
         ///  1/7.5th of a day (12 * 60 = 720) / 7.5 =96 based on the day starting at
         ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see> and ending at <see cref = "AstronomicalCalendar.GetSunset">sunset</see>.
         ///  The actual calculation is <seealso cref = "AstronomicalCalendar.GetSunrise" /> - (
-        ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 1.6).
+        ///  <see cref = "ZmanimCalendar.GetShaahZmanisGra" /> * 1.6).
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
+        ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
         public virtual DateTime getAlos96Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -697,13 +697,13 @@ namespace Zmanim
         ///  of a day (12 * 60 = 720) / 6 =120 based on the day starting at
         ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see> and ending at <see cref = "AstronomicalCalendar.GetSunset">sunset</see>.
         ///  The actual calculation is <seealso cref = "AstronomicalCalendar.GetSunrise" /> - (
-        ///  <see cref = "ZmanimCalendar.getShaahZmanisGra()" /> * 2).
+        ///  <see cref = "ZmanimCalendar.GetShaahZmanisGra" /> * 2).
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "ZmanimCalendar.getShaahZmanisGra()" />
+        ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
         public virtual DateTime getAlos120Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -764,7 +764,7 @@ namespace Zmanim
         /// Method to return <em>alos</em> (dawn) calculated when the sun is
         /// <seealso cref="ZmanimCalendar.ZENITH_16_POINT_1">16.1°</seealso> below the eastern geometric horizon
         /// before sunrise. This calculation is based on the same calculation of
-        /// <seealso cref="ZmanimCalendar.getAlos72">72 minutes</seealso> but uses a degree based calculation
+        /// <seealso cref="ZmanimCalendar.GetAlos72">72 minutes</seealso> but uses a degree based calculation
         /// instead of 72 exact minutes. This calculation is based on the position of
         /// the sun 72 minutes before sunrise in Jerusalem in the equinox which
         /// calculates to 16.1° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>.
@@ -773,7 +773,7 @@ namespace Zmanim
         /// the <c>DateTime</c> representing <em>alos</em>.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_16_POINT_1"/>
-        /// <seealso cref="ZmanimCalendar.getAlos72()"/>
+        /// <seealso cref="ZmanimCalendar.GetAlos72"/>
         public virtual DateTime getAlos16Point1Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_16_POINT_1);
@@ -867,25 +867,25 @@ namespace Zmanim
         /// <summary>
         /// This method returns the latest <em>zman krias shema</em> (time to say
         /// Shema in the morning) in the opinion of the <em>MG"A</em> based on
-        /// <em>alos</em> being <see cref="ZmanimCalendar.getAlos72">72</see> minutes before
+        /// <em>alos</em> being <see cref="ZmanimCalendar.GetAlos72">72</see> minutes before
         /// <see cref="AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 3
         /// <em><see cref="getShaahZmanis72Minutes">shaos zmaniyos</see></em> (solar hours)
-        /// after <see cref="ZmanimCalendar.getAlos72">dawn</see> based on the opinion of the <em>MG"A</em>
-        /// that the day is calculated from a <see cref="ZmanimCalendar.getAlos72">dawn</see> of 72 minutes
-        /// before sunrise to <see cref="ZmanimCalendar.getTzais72">nightfall</see> of 72 minutes after
+        /// after <see cref="ZmanimCalendar.GetAlos72">dawn</see> based on the opinion of the <em>MG"A</em>
+        /// that the day is calculated from a <see cref="ZmanimCalendar.GetAlos72">dawn</see> of 72 minutes
+        /// before sunrise to <see cref="ZmanimCalendar.GetTzais72">nightfall</see> of 72 minutes after
         /// sunset. This returns the time of 3 * <seealso cref="getShaahZmanis72Minutes()"/>
-        /// after <see cref="ZmanimCalendar.getAlos72">dawn</see>. This class returns an identical time to
-        /// <see cref="ZmanimCalendar.getSofZmanShmaMGA()"/> and is repeated here for clarity.
+        /// after <see cref="ZmanimCalendar.GetAlos72">dawn</see>. This class returns an identical time to
+        /// <see cref="ZmanimCalendar.GetSofZmanShmaMGA"/> and is repeated here for clarity.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
         /// <seealso cref="getShaahZmanis72Minutes()"/>
-        /// <seealso cref="ZmanimCalendar.getAlos72()"/>
-        /// <seealso cref="ZmanimCalendar.getSofZmanShmaMGA()"/>
+        /// <seealso cref="ZmanimCalendar.GetAlos72"/>
+        /// <seealso cref="ZmanimCalendar.GetSofZmanShmaMGA"/>
         public virtual DateTime getSofZmanShmaMGA72Minutes()
         {
-            return getSofZmanShmaMGA();
+            return GetSofZmanShmaMGA();
         }
 
         ///<summary>
@@ -999,20 +999,20 @@ namespace Zmanim
         /// <summary>
         /// This method returns the latest <em>zman krias shema</em> (time to say
         /// Shema in the morning) calculated as 3 hours (regular and not zmaniyos)
-        /// before <see cref="ZmanimCalendar.getChatzos()"/>. This is the opinion of the
+        /// before <see cref="ZmanimCalendar.GetChatzos"/>. This is the opinion of the
         /// <em>Shach</em> in the
         /// <em>Nekudas Hakesef (Yora Deah 184), Shevus Yaakov, Chasan Sofer</em> and
         /// others.This returns the time of 3 hours before
-        /// <see cref="ZmanimCalendar.getChatzos()"/>.
+        /// <see cref="ZmanimCalendar.GetChatzos"/>.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
-        /// <seealso cref="ZmanimCalendar.getChatzos()"/>
+        /// <seealso cref="ZmanimCalendar.GetChatzos"/>
         /// <seealso cref="getSofZmanTfila2HoursBeforeChatzos()"/>
         public virtual DateTime getSofZmanShma3HoursBeforeChatzos()
         {
-            return GetTimeOffset(getChatzos(), -180 * MINUTE_MILLIS);
+            return GetTimeOffset(GetChatzos(), -180 * MINUTE_MILLIS);
         }
 
         /// <summary>
@@ -1156,25 +1156,25 @@ namespace Zmanim
         /// <summary>
         /// This method returns the latest <em>zman tfila</em> (time to say the
         /// morning prayers) in the opinion of the <em>MG"A</em> based on
-        /// <em>alos</em> being <see cref="ZmanimCalendar.getAlos72">72</see> minutes before
+        /// <em>alos</em> being <see cref="ZmanimCalendar.GetAlos72">72</see> minutes before
         /// <see cref="AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 4
         /// <em><see cref="getShaahZmanis72Minutes">shaos zmaniyos</see></em> (solar hours)
-        /// after <see cref="ZmanimCalendar.getAlos72">dawn</see> based on the opinion of the <em>MG"A</em>
-        /// that the day is calculated from a <see cref="ZmanimCalendar.getAlos72">dawn</see> of 72 minutes
-        /// before sunrise to <see cref="ZmanimCalendar.getTzais72">nightfall</see> of 72 minutes after
+        /// after <see cref="ZmanimCalendar.GetAlos72">dawn</see> based on the opinion of the <em>MG"A</em>
+        /// that the day is calculated from a <see cref="ZmanimCalendar.GetAlos72">dawn</see> of 72 minutes
+        /// before sunrise to <see cref="ZmanimCalendar.GetTzais72">nightfall</see> of 72 minutes after
         /// sunset. This returns the time of 4 * <see cref="getShaahZmanis72Minutes()"/>
-        /// after <see cref="ZmanimCalendar.getAlos72">dawn</see>. This class returns an identical time to
-        /// <see cref="ZmanimCalendar.getSofZmanTfilaMGA()"/> and is repeated here for clarity.
+        /// after <see cref="ZmanimCalendar.GetAlos72">dawn</see>. This class returns an identical time to
+        /// <see cref="ZmanimCalendar.GetSofZmanTfilaMGA"/> and is repeated here for clarity.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman tfila.
         /// </returns>
         /// <seealso cref="getShaahZmanis72Minutes()"/>
-        /// <seealso cref="ZmanimCalendar.getAlos72"/>
-        /// <seealso cref="ZmanimCalendar.getSofZmanShmaMGA()"/>
+        /// <seealso cref="ZmanimCalendar.GetAlos72"/>
+        /// <seealso cref="ZmanimCalendar.GetSofZmanShmaMGA"/>
         public virtual DateTime getSofZmanTfilaMGA72Minutes()
         {
-            return getSofZmanTfilaMGA();
+            return GetSofZmanTfilaMGA();
         }
 
         /// <summary>
@@ -1317,44 +1317,44 @@ namespace Zmanim
         /// <summary>
         /// This method returns the latest <em>zman tfila</em> (time to say the
         /// morning prayers) calculated as 2 hours befor
-        /// <see cref="ZmanimCalendar.getChatzos()"/>. This is based on the opinions that
+        /// <see cref="ZmanimCalendar.GetChatzos"/>. This is based on the opinions that
         /// calculate <em>sof zman krias shema</em> as
         /// <see cref="getSofZmanShma3HoursBeforeChatzos()"/>. This returns the time of 2
-        /// hours before <seealso cref="ZmanimCalendar.getChatzos()"/>.
+        /// hours before <seealso cref="ZmanimCalendar.GetChatzos"/>.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman shema.
         /// </returns>
-        /// <seealso cref="ZmanimCalendar.getChatzos()"/>
+        /// <seealso cref="ZmanimCalendar.GetChatzos"/>
         /// <seealso cref="getSofZmanShma3HoursBeforeChatzos()"/>
         public virtual DateTime getSofZmanTfila2HoursBeforeChatzos()
         {
-            return GetTimeOffset(getChatzos(), -120 * MINUTE_MILLIS);
+            return GetTimeOffset(GetChatzos(), -120 * MINUTE_MILLIS);
         }
 
         /// <summary>
         /// This method returns mincha gedola calculated as 30 minutes after
-        /// <em><see cref="ZmanimCalendar.getChatzos">chatzos</see></em> and not 1/2 of a
-        /// <em><see cref="ZmanimCalendar.getShaahZmanisGra">shaah zmanis</see></em> after
-        /// <em><see cref="ZmanimCalendar.getChatzos">chatzos</see></em> as calculated by
-        /// <see cref="ZmanimCalendar.getMinchaGedola"/>. Some use this time to delay the start of mincha
+        /// <em><see cref="ZmanimCalendar.GetChatzos">chatzos</see></em> and not 1/2 of a
+        /// <em><see cref="ZmanimCalendar.GetShaahZmanisGra">shaah zmanis</see></em> after
+        /// <em><see cref="ZmanimCalendar.GetChatzos">chatzos</see></em> as calculated by
+        /// <see cref="ZmanimCalendar.GetMinchaGedola"/>. Some use this time to delay the start of mincha
         /// in the winter when 1/2 of a
-        /// <em><see cref="ZmanimCalendar.getShaahZmanisGra">shaah zmanis</see></em> is less than 30
+        /// <em><see cref="ZmanimCalendar.GetShaahZmanisGra">shaah zmanis</see></em> is less than 30
         /// minutes. See <seealso cref="getMinchaGedolaGreaterThan30()"/>for a conveniance
         /// method that returns the later of the 2 calculations. One should not use
         /// this time to start <em>mincha</em> before the standard
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. See <em>Shulchan Aruch
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. See <em>Shulchan Aruch
         /// Orach Chayim Siman Raish Lamed Gimel seif alef</em> and the
         /// <em>Shaar Hatziyon seif katan ches</em>.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of 30 mintes after <em>chatzos</em>.
         /// </returns>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="getMinchaGedolaGreaterThan30()"/>
         public virtual DateTime getMinchaGedola30Minutes()
         {
-            return GetTimeOffset(getChatzos(), MINUTE_MILLIS * 30);
+            return GetTimeOffset(GetChatzos(), MINUTE_MILLIS * 30);
         }
 
         /// <summary>
@@ -1362,21 +1362,21 @@ namespace Zmanim
         /// Magen Avraham with the day starting 72 minutes before sunrise and ending
         /// 72 minutes after sunset. This is the earliest time to pray
         /// <em>mincha</em>. For more information on this see the documentation on
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. This is calculated as
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. This is calculated as
         /// 6.5 <see cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)">solar hours</see> after alos. The calculation
         /// used is 6.5 * <see cref="getShaahZmanis72Minutes()"/> after
-        /// <see cref="ZmanimCalendar.getAlos72">alos</see>.
+        /// <see cref="ZmanimCalendar.GetAlos72">alos</see>.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the time of mincha gedola.
         /// </returns>
-        /// <seealso cref="ZmanimCalendar.getAlos72()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaKetana()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// <seealso cref="ZmanimCalendar.GetAlos72"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         public virtual DateTime getMinchaGedola72Minutes()
         {
-            return GetTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 6.5);
+            return GetTimeOffset(GetAlos72(), getShaahZmanis72Minutes() * 6.5);
         }
 
         /// <summary>
@@ -1384,7 +1384,7 @@ namespace Zmanim
         /// Magen Avraham with the day starting and ending 16.1° below the
         /// horizon. This is the earliest time to pray <em>mincha</em>. For more
         /// information on this see the documentation on
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. This is calculated as
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. This is calculated as
         /// 6.5 <see cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)">solar hours</see> after alos. The calculation
         /// used is 6.5 * <see cref="getShaahZmanis16Point1Degrees()"/> after
         /// <see cref="getAlos16Point1Degrees">alos</see>.
@@ -1393,8 +1393,8 @@ namespace Zmanim
         /// the <c>DateTime</c> of the time of mincha gedola.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaKetana()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
         public virtual DateTime getMinchaGedola16Point1Degrees()
         {
             return GetTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 6.5);
@@ -1402,23 +1402,23 @@ namespace Zmanim
 
         /// <summary>
         /// This is a conveniance methd that returns the later of
-        /// <see cref="ZmanimCalendar.getMinchaGedola()"/> and <see cref="getMinchaGedola30Minutes()"/>. In
-        /// the winter when a <em><see cref="ZmanimCalendar.getShaahZmanisGra">shaah zmanis</see></em> is
+        /// <see cref="ZmanimCalendar.GetMinchaGedola"/> and <see cref="getMinchaGedola30Minutes()"/>. In
+        /// the winter when a <em><see cref="ZmanimCalendar.GetShaahZmanisGra">shaah zmanis</see></em> is
         /// less than 30 minutes <see cref="getMinchaGedola30Minutes()"/> will be
-        /// returned, otherwise <see cref="ZmanimCalendar.getMinchaGedola()"/> will be returned.
+        /// returned, otherwise <see cref="ZmanimCalendar.GetMinchaGedola"/> will be returned.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> of the later of <see cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// the <c>DateTime</c> of the later of <see cref="ZmanimCalendar.GetMinchaGedola"/>
         /// and <see cref="getMinchaGedola30Minutes()"/>
         /// </returns>
         public virtual DateTime getMinchaGedolaGreaterThan30()
         {
-            if (getMinchaGedola30Minutes() == null || getMinchaGedola() == null)
+            if (getMinchaGedola30Minutes() == null || GetMinchaGedola() == null)
                 return DateTime.MinValue;
 
-            return getMinchaGedola30Minutes().CompareTo(getMinchaGedola()) > 0
+            return getMinchaGedola30Minutes().CompareTo(GetMinchaGedola()) > 0
                        ? getMinchaGedola30Minutes()
-                       : getMinchaGedola();
+                       : GetMinchaGedola();
         }
 
         /// <summary>
@@ -1426,7 +1426,7 @@ namespace Zmanim
         /// Magen Avraham with the day starting and ending 16.1° below the
         /// horizon. This is the perfered earliest time to pray <em>mincha</em> in
         /// the opinion of the Ramba"m and others. For more information on this see
-        /// the documentation on <em><seealso cref="ZmanimCalendar.getMinchaGedola">mincha gedola</seealso></em>.
+        /// the documentation on <em><seealso cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</seealso></em>.
         /// This is calculated as 9.5 <seealso cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)">solar hours</seealso> after
         /// alos. The calculation used is 9.5 *
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/> after
@@ -1436,8 +1436,8 @@ namespace Zmanim
         /// the <c>DateTime</c> of the time of mincha ketana.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaKetana()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
         public virtual DateTime getMinchaKetana16Point1Degrees()
         {
             return GetTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 9.5);
@@ -1449,20 +1449,20 @@ namespace Zmanim
         /// 72 minutes after sunset. This is the perfered earliest time to pray
         /// <em>mincha</em> in the opinion of the Ramba"m and others. For more
         /// information on this see the documentation on
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. This is calculated as
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. This is calculated as
         /// 9.5 <see cref="getShaahZmanis72Minutes()"/> after alos. The calculation used
-        /// is 9.5 * <see cref="getShaahZmanis72Minutes()"/> after <see cref="ZmanimCalendar.getAlos72()"> alos</see>
+        /// is 9.5 * <see cref="getShaahZmanis72Minutes()"/> after <see cref="ZmanimCalendar.GetAlos72"> alos</see>
         /// .
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the time of mincha ketana.
         /// </returns>
         /// <seealso cref="getShaahZmanis16Point1Degrees()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaKetana()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
         public virtual DateTime getMinchaKetana72Minutes()
         {
-            return GetTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 9.5);
+            return GetTimeOffset(GetAlos72(), getShaahZmanis72Minutes() * 9.5);
         }
 
         /// <summary>
@@ -1481,16 +1481,16 @@ namespace Zmanim
 
         /// <summary>
         /// This method returns the time of <em>plag hamincha</em>. This is
-        /// calculated as 10.75 hours after <see cref="ZmanimCalendar.getAlos72">dawn</see>. The formula
+        /// calculated as 10.75 hours after <see cref="ZmanimCalendar.GetAlos72">dawn</see>. The formula
         /// used is:<br/>
-        /// 10.75 <see cref="getShaahZmanis72Minutes()"/> after <see cref="ZmanimCalendar.getAlos72"/>.
+        /// 10.75 <see cref="getShaahZmanis72Minutes()"/> after <see cref="ZmanimCalendar.GetAlos72"/>.
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
         public virtual DateTime getPlagHamincha72Minutes()
         {
-            return GetTimeOffset(getAlos72(), getShaahZmanis72Minutes() * 10.75);
+            return GetTimeOffset(GetAlos72(), getShaahZmanis72Minutes() * 10.75);
         }
 
         /// <summary>
@@ -1993,7 +1993,7 @@ namespace Zmanim
         /// <see cref="getTzaisAteretTorah">40 minutes after sunset</see>. This is the
         /// perfered earliest time to pray <em>mincha</em> in the opinion of the
         /// Ramba"m and others. For more information on this see the documentation on
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. This is calculated as
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. This is calculated as
         /// 6.5 <see cref="getShaahZmanisAteretTorah">solar hours</see> after alos. The
         /// calculation used is 6.5 * <seealso cref="getShaahZmanisAteretTorah()"/> after
         /// <see cref="getAlos72Zmanis">alos</see>.
@@ -2004,9 +2004,9 @@ namespace Zmanim
         /// <seealso cref="getAlos72Zmanis()"/>
         /// <seealso cref="getTzaisAteretTorah()"/>
         /// <seealso cref="getShaahZmanisAteretTorah()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="getMinchaKetanaAteretTorah()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         public virtual DateTime getMinchaGedolaAteretTorah()
         {
             return GetTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 6.5);
@@ -2020,7 +2020,7 @@ namespace Zmanim
         /// <see cref="getTzaisAteretTorah">40 minutes after sunset</see>. This is the
         /// perfered earliest time to pray <em>mincha</em> in the opinion of the
         /// Ramba"m and others. For more information on this see the documentation on
-        /// <em><see cref="ZmanimCalendar.getMinchaGedola">mincha gedola</see></em>. This is calculated as
+        /// <em><see cref="ZmanimCalendar.GetMinchaGedola">mincha gedola</see></em>. This is calculated as
         /// 9.5 <see cref="getShaahZmanisAteretTorah">solar hours</see> after
         /// <see cref="getAlos72Zmanis">alos</see>. The calculation used is 9.5 *
         /// <see cref="getShaahZmanisAteretTorah()"/> after <see cref="getAlos72Zmanis()"> alos</see>.
@@ -2031,8 +2031,8 @@ namespace Zmanim
         /// <seealso cref="getAlos72Zmanis()"/>
         /// <seealso cref="getTzaisAteretTorah()"/>
         /// <seealso cref="getShaahZmanisAteretTorah()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaGedola()"/>
-        /// <seealso cref="ZmanimCalendar.getMinchaKetana()"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
+        /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
         public virtual DateTime getMinchaKetanaAteretTorah()
         {
             return GetTimeOffset(getAlos72Zmanis(), getShaahZmanisAteretTorah() * 9.5);
@@ -2090,7 +2090,7 @@ namespace Zmanim
         /// <seealso cref="getAlos72Zmanis()"/>
         public virtual DateTime getTzais72Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -2107,7 +2107,7 @@ namespace Zmanim
         /// <seealso cref="getAlos90Zmanis()"/>
         public virtual DateTime getTzais90Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -2124,7 +2124,7 @@ namespace Zmanim
         /// <seealso cref="getAlos96Zmanis()"/>
         public virtual DateTime getTzais96Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -2176,7 +2176,7 @@ namespace Zmanim
         /// <seealso cref="getAlos120Zmanis()"/>
         public virtual DateTime getTzais120Zmanis()
         {
-            long shaahZmanis = getShaahZmanisGra();
+            long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
                 return DateTime.MinValue;
@@ -2189,7 +2189,7 @@ namespace Zmanim
         /// <see cref="getAlos16Point1Degrees()"/>
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
-        /// <seealso cref="ZmanimCalendar.getTzais72()"/>
+        /// <seealso cref="ZmanimCalendar.GetTzais72"/>
         /// <seealso cref="getAlos16Point1Degrees">for more information on this calculation.</seealso>
         public virtual DateTime getTzais16Point1Degrees()
         {

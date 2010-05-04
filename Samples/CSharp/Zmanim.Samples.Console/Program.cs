@@ -18,8 +18,8 @@ namespace Zmanim.Samples.Console
 
             System.Console.WriteLine("Today's Zmanim for " + locationName);
             System.Console.WriteLine("Sunrise: " + zc.GetSunrise()); //output sunrise
-            System.Console.WriteLine("Sof Zman Shema MGA: " + zc.getSofZmanShmaMGA()); //output Sof Zman Shema MGA
-            System.Console.WriteLine("Sof Zman Shema GRA: " + zc.getSofZmanShmaGRA()); //output Sof Zman Shema GRA
+            System.Console.WriteLine("Sof Zman Shema MGA: " + zc.GetSofZmanShmaMGA()); //output Sof Zman Shema MGA
+            System.Console.WriteLine("Sof Zman Shema GRA: " + zc.GetSofZmanShmaGRA()); //output Sof Zman Shema GRA
             System.Console.WriteLine("Sunset: " + zc.GetSunset()); //output sunset
 
             System.Console.WriteLine("Press enter to exit.");

@@ -28,7 +28,7 @@ namespace Zmanim.Scheduling
             else if (timeUtc.DayOfWeek == DayOfWeek.Saturday)
                 complexZmanimCalendar = ZmanimHelper.GetCalendar(location, timeUtc);
 
-            return complexZmanimCalendar == null ? DateTime.UtcNow : complexZmanimCalendar.getTzais().ToUniversalTime();
+            return complexZmanimCalendar == null ? DateTime.UtcNow : complexZmanimCalendar.GetTzais().ToUniversalTime();
         }
 
         public string Description { get; set; }

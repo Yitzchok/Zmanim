@@ -956,7 +956,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getTzais()
         {
-            var zman = calendar.getTzais();
+            var zman = calendar.GetTzais();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 20, 2, 52, 939)
@@ -966,7 +966,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getAlosHashachar()
         {
-            var zman = calendar.getAlosHashachar();
+            var zman = calendar.GetAlosHashachar();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 5, 17, 14, 493)
@@ -976,7 +976,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getAlos72()
         {
-            var zman = calendar.getAlos72();
+            var zman = calendar.GetAlos72();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 5, 27, 41, 832)
@@ -986,7 +986,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getChatzos()
         {
-            var zman = calendar.getChatzos();
+            var zman = calendar.GetChatzos();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 13, 0, 52, 770)
@@ -996,7 +996,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSolarMidnight()
         {
-            var zman = calendar.getSolarMidnight();
+            var zman = calendar.GetSolarMidnight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 3, 1, 0, 4, 568)
@@ -1006,7 +1006,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSofZmanShmaGRA()
         {
-            var zman = calendar.getSofZmanShmaGRA();
+            var zman = calendar.GetSofZmanShmaGRA();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 9, 50, 17, 301)
@@ -1016,7 +1016,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSofZmanShmaMGA()
         {
-            var zman = calendar.getSofZmanShmaMGA();
+            var zman = calendar.GetSofZmanShmaMGA();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 9, 14, 17, 301)
@@ -1026,7 +1026,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getTzais72()
         {
-            var zman = calendar.getTzais72();
+            var zman = calendar.GetTzais72();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 20, 34, 3, 710)
@@ -1036,7 +1036,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getCandelLighting()
         {
-            var zman = calendar.getCandelLighting();
+            var zman = calendar.GetCandelLighting();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 19, 4, 3, 710)
@@ -1046,7 +1046,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSofZmanTfilaGRA()
         {
-            var zman = calendar.getSofZmanTfilaGRA();
+            var zman = calendar.GetSofZmanTfilaGRA();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 10, 53, 49, 124)
@@ -1056,7 +1056,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSofZmanTfilaMGA()
         {
-            var zman = calendar.getSofZmanTfilaMGA();
+            var zman = calendar.GetSofZmanTfilaMGA();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 10, 29, 49, 124)
@@ -1066,7 +1066,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getMinchaGedola()
         {
-            var zman = calendar.getMinchaGedola();
+            var zman = calendar.GetMinchaGedola();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 13, 32, 38, 681)
@@ -1076,7 +1076,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getMinchaKetana()
         {
-            var zman = calendar.getMinchaKetana();
+            var zman = calendar.GetMinchaKetana();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 16, 43, 14, 150)
@@ -1086,7 +1086,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getPlagHamincha()
         {
-            var zman = calendar.getPlagHamincha();
+            var zman = calendar.GetPlagHamincha();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 18, 2, 38, 929)
@@ -1290,13 +1290,13 @@ namespace ZmanimTests
         [Test]
         public void Check_getShaahZmanisGra()
         {
-            Assert.That(calendar.getShaahZmanisGra(), Is.EqualTo(3811823));
+            Assert.That(calendar.GetShaahZmanisGra(), Is.EqualTo(3811823));
         }
 
         [Test]
         public void Check_getShaahZmanisMGA()
         {
-            Assert.That(calendar.getShaahZmanisMGA(), Is.EqualTo(4531823));
+            Assert.That(calendar.GetShaahZmanisMGA(), Is.EqualTo(4531823));
         }
 
         [Test]
