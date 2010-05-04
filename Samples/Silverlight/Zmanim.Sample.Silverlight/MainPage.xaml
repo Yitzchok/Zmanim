@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Zmanim.Sample.Silverlight.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+
+    <Grid x:Name="LayoutRoot">
+    	<Grid.Background>
+    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    			<GradientStop Color="#FFDADADA" Offset="0"/>
+    			<GradientStop Color="White" Offset="1"/>
+    		</LinearGradientBrush>
+    	</Grid.Background>
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="100"/>
+    		<ColumnDefinition/>
+    	</Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="0.862*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Grid.RowSpan="1" Name="locationName" Text="{Binding LocationName}" Foreground="Black" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
+        <TextBlock Grid.Row="2" Grid.RowSpan="1" Name="sunrise" Text="{Binding Zmanim.Sunrise, StringFormat='h:mm:ss', Mode=OneWay}" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
+        <TextBlock Grid.Row="3" Grid.RowSpan="1" Name="sunset" Text="{Binding Zmanim.Sunset, StringFormat='h:mm:ss', Mode=OneWay}" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
+        <sdk:Label Content="Date" Grid.Row="0"/>
+		<sdk:DatePicker Grid.Column="1" d:LayoutOverrides="Width, Height" SelectedDate="{Binding Date, Mode=TwoWay}"/>
+		<sdk:Label Margin="0" Content="Location Name" Grid.Row="1"/>
+        <sdk:Label Margin="0,1,0,0" Content="Sunrise" Grid.Row="2"/>
+        <sdk:Label Content="Sunset" Grid.Row="3"/>
+      </Grid>
+</UserControl>

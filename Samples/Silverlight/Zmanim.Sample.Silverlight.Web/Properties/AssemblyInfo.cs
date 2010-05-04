@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Zmain.Sample.Silverlight.Web")]
+[assembly: AssemblyTitle("Zmanim.Sample.Silverlight.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Zmain.Sample.Silverlight.Web")]
+[assembly: AssemblyProduct("Zmanim.Sample.Silverlight.Web")]
 [assembly: AssemblyCopyright("Copyright © Adminjew 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
