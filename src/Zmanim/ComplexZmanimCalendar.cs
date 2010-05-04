@@ -90,8 +90,6 @@ namespace Zmanim
     /// <author>Eliyahu Hershfeld</author>
     public class ComplexZmanimCalendar : ZmanimCalendar
     {
-        private const long serialVersionUID = 1;
-
         ///<summary>
         ///  The zenith of 3.7° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>
         ///  (90°). This calculation is used for calculating <em>tzais</em>

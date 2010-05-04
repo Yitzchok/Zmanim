@@ -38,8 +38,6 @@ namespace Zmanim
     /// <author>Eliyahu Hershfeld</author>
     public class ZmanimCalendar : AstronomicalCalendar
     {
-        private const long serialVersionUID = 1;
-
         ///<summary>
         ///  The zenith of 16.1° below geometric zenith (90°). This
         ///  calculation is used for calculating <em>alos</em> (dawn) and

@@ -70,8 +70,6 @@ namespace Zmanim
     ///<author>Eliyahu Hershfeld</author>
     public class AstronomicalCalendar : ICloneable
     {
-        private const long serialVersionUID = 1;
-
         ///<summary>
         ///  90° below the vertical. Used for certain calculations.<br />
         ///  <b>Note </b>: it is important to note the distinction between this zenith
