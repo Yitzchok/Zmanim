@@ -157,7 +157,7 @@ namespace Zmanim
         {
             Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.TimeZone);
             GeoLocation = geoLocation; // duplicate call
-            AstronomicalCalculator = AstronomicalCalculator.getDefault();
+            AstronomicalCalculator = AstronomicalCalculator.GetDefault();
         }
 
 
@@ -468,7 +468,7 @@ namespace Zmanim
         ///  returned. </returns>
         public virtual double getUTCSunrise(double zenith)
         {
-            return AstronomicalCalculator.getUTCSunrise(this, zenith, true);
+            return AstronomicalCalculator.GetUtcSunrise(this, zenith, true);
         }
 
         ///<summary>
@@ -490,7 +490,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunset" />
         public virtual double getUTCSeaLevelSunrise(double zenith)
         {
-            return AstronomicalCalculator.getUTCSunrise(this, zenith, false);
+            return AstronomicalCalculator.GetUtcSunrise(this, zenith, false);
         }
 
         ///<summary>
@@ -506,7 +506,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunset" />
         public virtual double getUTCSunset(double zenith)
         {
-            return AstronomicalCalculator.getUTCSunset(this, zenith, true);
+            return AstronomicalCalculator.GetUtcSunset(this, zenith, true);
         }
 
         ///<summary>
@@ -528,7 +528,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.getUTCSeaLevelSunrise" />
         public virtual double getUTCSeaLevelSunset(double zenith)
         {
-            return AstronomicalCalculator.getUTCSunset(this, zenith, false);
+            return AstronomicalCalculator.GetUtcSunset(this, zenith, false);
         }
 
         ///<summary>

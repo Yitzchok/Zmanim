@@ -51,10 +51,10 @@ namespace Zmanim.Utilities
 
         /// <summary>
         /// </summary>
-        /// <returns>the descriptive name of the algorithm.</returns>
-        public override string getCalculatorName()
+        /// <value>the descriptive name of the algorithm.</value>
+        public override string CalculatorName
         {
-            return calculatorName;
+            get { return calculatorName; }
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Zmanim.Utilities
         /// </summary>
         /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
-        /// sunrise typically the <see cref="AstronomicalCalculator.adjustZenith">zenith</see> used for
+        /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
-        /// <see cref="AstronomicalCalculator.adjustZenith">adjusts</see> this slightly to account for
+        /// <see cref="AstronomicalCalculator.AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
         /// be <see cref="AstronomicalCalendar.getBeginNauticalTwilight()"/>
         /// that passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to
@@ -78,19 +78,19 @@ namespace Zmanim.Utilities
         /// behavior for some locations such as near the poles,
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="AstronomicalCalculator.getUTCSunrise"/>
-        public override double getUTCSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
+        /// <seealso cref="AstronomicalCalculator.GetUtcSunrise"/>
+        public override double GetUtcSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
             double doubleTime = double.NaN;
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
-                zenith = adjustZenith(zenith, 0);
+                zenith = AdjustZenith(zenith, 0);
             }
             doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,
@@ -107,9 +107,9 @@ namespace Zmanim.Utilities
         /// </summary>
         /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
-        /// typically the <see cref="AstronomicalCalculator.adjustZenith">zenith</see> used for the
+        /// typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for the
         /// calculation uses geometric zenith of 90°; and
-        /// <see cref="AstronomicalCalculator.adjustZenith">adjusts</see> this slightly to account for
+        /// <see cref="AstronomicalCalculator.AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
         /// be <see cref="AstronomicalCalendar.getEndNauticalTwilight()"/> that
         /// passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to this
@@ -121,19 +121,19 @@ namespace Zmanim.Utilities
         /// behavior for some locations such as near the poles,
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
-        /// <seealso cref="AstronomicalCalculator.getUTCSunset"/>
-        public override double getUTCSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
+        /// <seealso cref="AstronomicalCalculator.GetUtcSunset"/>
+        public override double GetUtcSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
             double doubleTime = double.NaN;
 
             if (adjustForElevation)
             {
-                zenith = adjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
             }
             else
             {
-                zenith = adjustZenith(zenith, 0);
+                zenith = AdjustZenith(zenith, 0);
             }
             doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,

@@ -386,7 +386,7 @@ namespace Zmanim.Utilities
             }
             output.Append(" date=\"" + ac.Calendar.Date.ToString(df) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
-            output.Append(" algorithm=\"" + ac.AstronomicalCalculator.getCalculatorName() + "\"");
+            output.Append(" algorithm=\"" + ac.AstronomicalCalculator.CalculatorName + "\"");
             output.Append(" location=\"" + ac.GeoLocation.LocationName + "\"");
             output.Append(" latitude=\"" + ac.GeoLocation.Latitude + "\"");
             output.Append(" longitude=\"" + ac.GeoLocation.Longitude + "\"");

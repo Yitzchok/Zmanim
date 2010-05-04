@@ -85,7 +85,7 @@ namespace Zmanim
 
         ///<summary>
         ///  Default constructor will set a default <see cref = "GeoLocation" />,
-        ///  a default <see cref = "AstronomicalCalculator.getDefault()"> AstronomicalCalculator</see>
+        ///  a default <see cref = "AstronomicalCalculator.GetDefault"> AstronomicalCalculator</see>
         ///  and default the calendar to the current date.
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar" />
