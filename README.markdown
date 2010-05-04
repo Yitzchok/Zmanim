@@ -12,8 +12,8 @@ Inaccuracy is increased by elevation. It is not the intent of this API to provid
 
 
 TODO:
-    * <strike>Remove dependancy to Java (IKvm) assemblies</strike> - Done
+    * <s>Remove dependancy to Java (IKvm) assemblies</s> - Done
     * The API should follow the .NET guidlines. - In Progress
     * Make it Linq friendly.
     * Add examples how to use this project in a ASP.NET MVC site and WPF Application.
-    * <strike>Try to get it to work on Silverlight.</strike> - Done
+    * <s>Try to get it to work on Silverlight.</s> - Done
