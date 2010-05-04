@@ -318,7 +318,7 @@ namespace Zmanim.Utilities
         /// milliseconds from local standard time. The globe is split into 360°,
         /// with 15° per hour of the day. For a local that is at a longitude that
         /// is evenly divisible by 15 (longitude % 15 == 0), at solar
-        /// <see cref="AstronomicalCalendar.getSunTransit()">noon</see>
+        /// <see cref="AstronomicalCalendar.GetSunTransit">noon</see>
         /// (with adjustment for the <a href="http://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>)
         /// the sun should be directly overhead, so a user who is 1° west of this
         /// will have noon at 4 minutes after standard time noon, and conversely, a

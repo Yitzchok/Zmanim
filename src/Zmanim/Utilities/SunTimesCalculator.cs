@@ -68,7 +68,7 @@ namespace Zmanim.Utilities
         /// the calculation uses geometric zenith of 90°; and
         /// <see cref="AstronomicalCalculator.AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.getBeginNauticalTwilight()"/>
+        /// be <see cref="AstronomicalCalendar.GetBeginNauticalTwilight"/>
         /// that passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to
         /// this method.</param>
         /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
@@ -111,7 +111,7 @@ namespace Zmanim.Utilities
         /// calculation uses geometric zenith of 90°; and
         /// <see cref="AstronomicalCalculator.AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.getEndNauticalTwilight()"/> that
+        /// be <see cref="AstronomicalCalendar.GetEndNauticalTwilight"/> that
         /// passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to this
         /// method.</param>
         /// <param name="adjustForElevation"></param>

@@ -88,7 +88,7 @@ namespace Zmanim.Utilities
         /// the calculation uses geometric zenith of 90°; and
         /// <see cref="AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.getBeginNauticalTwilight()"/>
+        /// be <see cref="AstronomicalCalendar.GetBeginNauticalTwilight"/>
         /// that passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to
         /// this method.</param>
         /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
@@ -112,7 +112,7 @@ namespace Zmanim.Utilities
         /// calculation uses geometric zenith of 90°; and
         /// <see cref="AdjustZenith">adjusts</see> this slightly to account for
         /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.getEndNauticalTwilight()"/> that
+        /// be <see cref="AstronomicalCalendar.GetEndNauticalTwilight"/> that
         /// passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to this
         /// method.</param>
         /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
@@ -131,7 +131,7 @@ namespace Zmanim.Utilities
         ///  horizon, the calculation for sunrise / sunset is calculated below the
         ///  horizon used at sea level. This is only used for sunrise and sunset and
         ///  not times above or below it such as
-        ///  <see cref = "AstronomicalCalendar.getBeginNauticalTwilight()">nautical twilight</see>
+        ///  <see cref = "AstronomicalCalendar.GetBeginNauticalTwilight">nautical twilight</see>
         ///  since those calculations are based on the level of available light at the
         ///  given dip below the horizon, something that is not affected by elevation,
         ///  the adjustment should only made if the zenith == 90°;

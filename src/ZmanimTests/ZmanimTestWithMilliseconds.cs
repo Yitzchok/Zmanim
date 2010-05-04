@@ -1096,7 +1096,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSunrise()
         {
-            var zman = calendar.getSunrise();
+            var zman = calendar.GetSunrise();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 6, 39, 41, 832)
@@ -1106,7 +1106,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSeaLevelSunrise()
         {
-            var zman = calendar.getSeaLevelSunrise();
+            var zman = calendar.GetSeaLevelSunrise();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 6, 39, 41, 832)
@@ -1116,7 +1116,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getBeginCivilTwilight()
         {
-            var zman = calendar.getBeginCivilTwilight();
+            var zman = calendar.GetBeginCivilTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 6, 12, 18, 676)
@@ -1126,7 +1126,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getBeginNauticalTwilight()
         {
-            var zman = calendar.getBeginNauticalTwilight();
+            var zman = calendar.GetBeginNauticalTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 5, 39, 55, 441)
@@ -1136,7 +1136,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getBeginAstronomicalTwilight()
         {
-            var zman = calendar.getBeginAstronomicalTwilight();
+            var zman = calendar.GetBeginAstronomicalTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 5, 6, 31, 438)
@@ -1146,7 +1146,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSunset()
         {
-            var zman = calendar.getSunset();
+            var zman = calendar.GetSunset();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 19, 22, 3, 710)
@@ -1156,7 +1156,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSeaLevelSunset()
         {
-            var zman = calendar.getSeaLevelSunset();
+            var zman = calendar.GetSeaLevelSunset();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 19, 22, 3, 710)
@@ -1166,7 +1166,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getEndCivilTwilight()
         {
-            var zman = calendar.getEndCivilTwilight();
+            var zman = calendar.GetEndCivilTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 19, 49, 28, 84)
@@ -1176,7 +1176,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getEndNauticalTwilight()
         {
-            var zman = calendar.getEndNauticalTwilight();
+            var zman = calendar.GetEndNauticalTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 20, 21, 53, 607)
@@ -1186,7 +1186,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getEndAstronomicalTwilight()
         {
-            var zman = calendar.getEndAstronomicalTwilight();
+            var zman = calendar.GetEndAstronomicalTwilight();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 20, 55, 21, 164)
@@ -1196,7 +1196,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getSunTransit()
         {
-            var zman = calendar.getSunTransit();
+            var zman = calendar.GetSunTransit();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 13, 0, 52, 770)
@@ -1302,7 +1302,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getTemporalHour()
         {
-            Assert.That(calendar.getTemporalHour(), Is.EqualTo(3811823));
+            Assert.That(calendar.GetTemporalHour(), Is.EqualTo(3811823));
         }
 
     }

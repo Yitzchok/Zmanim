@@ -27,7 +27,7 @@ namespace Zmanim.Utilities
     ///   are stored as <seealso cref = "DateTime" />s in this API. The time class is used to
     ///   represent numeric time such as the time in hours, minutes, seconds and
     ///   milliseconds of a
-    ///   <see cref = "AstronomicalCalendar.getTemporalHour()">temporal hour"/>.</see>.
+    ///   <see cref = "AstronomicalCalendar.GetTemporalHour">temporal hour"/>.</see>.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class Time

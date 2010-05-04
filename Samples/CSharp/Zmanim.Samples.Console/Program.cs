@@ -17,10 +17,10 @@ namespace Zmanim.Samples.Console
             ComplexZmanimCalendar zc = new ComplexZmanimCalendar(location);
 
             System.Console.WriteLine("Today's Zmanim for " + locationName);
-            System.Console.WriteLine("Sunrise: " + zc.getSunrise()); //output sunrise
+            System.Console.WriteLine("Sunrise: " + zc.GetSunrise()); //output sunrise
             System.Console.WriteLine("Sof Zman Shema MGA: " + zc.getSofZmanShmaMGA()); //output Sof Zman Shema MGA
             System.Console.WriteLine("Sof Zman Shema GRA: " + zc.getSofZmanShmaGRA()); //output Sof Zman Shema GRA
-            System.Console.WriteLine("Sunset: " + zc.getSunset()); //output sunset
+            System.Console.WriteLine("Sunset: " + zc.GetSunset()); //output sunset
 
             System.Console.WriteLine("Press enter to exit.");
             System.Console.ReadLine();
