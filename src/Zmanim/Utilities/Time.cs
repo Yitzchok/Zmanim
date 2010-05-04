@@ -38,14 +38,6 @@ namespace Zmanim.Utilities
 
         private const int HOUR_MILLIS = MINUTE_MILLIS*60;
 
-        private int hours;
-        private bool isNegative;
-        private int milliseconds;
-
-        private int minutes;
-
-        private int seconds;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Time"/> class.
         /// </summary>
@@ -55,10 +47,10 @@ namespace Zmanim.Utilities
         /// <param name="milliseconds">The milliseconds.</param>
         public Time(int hours, int minutes, int seconds, int milliseconds)
         {
-            this.hours = hours;
-            this.minutes = minutes;
-            this.seconds = seconds;
-            this.milliseconds = milliseconds;
+            Hours = hours;
+            Minutes = minutes;
+            Seconds = seconds;
+            Milliseconds = milliseconds;
         }
 
         /// <summary>
@@ -79,125 +71,55 @@ namespace Zmanim.Utilities
             TimeSpan timeSpan = TimeSpan.FromMilliseconds(millis);
             if (millis < 0)
             {
-                isNegative = true;
+                IsNegative = true;
                 millis = Math.Abs(millis);
             }
-            hours = timeSpan.Hours;
 
-            minutes = timeSpan.Minutes;
-
-            seconds = timeSpan.Seconds;
-
-            milliseconds = timeSpan.Milliseconds;
+            Hours = timeSpan.Hours;
+            Minutes = timeSpan.Minutes;
+            Seconds = timeSpan.Seconds;
+            Milliseconds = timeSpan.Milliseconds;
         }
 
         /// <summary>
         /// Determines whether this instance is negative.
         /// </summary>
-        /// <returns>
-        /// 	<c>true</c> if this instance is negative; otherwise, <c>false</c>.
-        /// </returns>
-        public virtual bool IsNegative()
-        {
-            return isNegative;
-        }
-
-        /// <summary>
-        /// Sets the is negative.
-        /// </summary>
-        /// <param name="isNegative">if set to <c>true</c> [is negative].</param>
-        public virtual void setIsNegative(bool isNegative)
-        {
-            this.isNegative = isNegative;
-        }
-
+        /// <value>
+        ///   &lt;c&gt;true&lt;/c&gt; if this instance is negative; otherwise, &lt;c&gt;false&lt;/c&gt;.
+        /// </value>
+        public virtual bool IsNegative { get; set; }
 
         /// <summary>
         /// Gets the hours.
         /// </summary>
-        /// <returns>Returns the hour.</returns>
-        public virtual int getHours()
-        {
-            return hours;
-        }
-
-
-        /// <summary>
-        /// Sets the hours.
-        /// </summary>
-        /// <param name="hours">The hours to set.</param>
-        public virtual void setHours(int hours)
-        {
-            this.hours = hours;
-        }
-
+        /// <value>Returns the hour.</value>
+        public virtual int Hours { get; set; }
 
         /// <summary>
         /// Gets the minutes.
         /// </summary>
-        /// <returns>Returns the minutes.</returns>
-        public virtual int getMinutes()
-        {
-            return minutes;
-        }
-
-
-        /// <summary>
-        /// Sets the minutes.
-        /// </summary>
-        /// <param name="minutes">The minutes to set.</param>
-        public virtual void setMinutes(int minutes)
-        {
-            this.minutes = minutes;
-        }
-
+        /// <value>Returns the minutes.</value>
+        public virtual int Minutes { get; set; }
 
         /// <summary>
         /// Gets the seconds.
         /// </summary>
-        /// <returns>Returns the seconds.</returns>
-        public virtual int getSeconds()
-        {
-            return seconds;
-        }
-
-
-        /// <summary>
-        /// Sets the seconds.
-        /// </summary>
-        /// <param name="seconds">The seconds to set.</param>
-        public virtual void setSeconds(int seconds)
-        {
-            this.seconds = seconds;
-        }
-
+        /// <value>Returns the seconds.</value>
+        public virtual int Seconds { get; set; }
 
         /// <summary>
         /// Gets the milliseconds.
         /// </summary>
-        /// <returns>Returns the milliseconds.</returns>
-        public virtual int getMilliseconds()
-        {
-            return milliseconds;
-        }
-
-
-        /// <summary>
-        /// Sets the milliseconds.
-        /// </summary>
-        /// <param name="milliseconds">The milliseconds to set.</param>
-        public virtual void setMilliseconds(int milliseconds)
-        {
-            this.milliseconds = milliseconds;
-        }
+        /// <value>Returns the milliseconds.</value>
+        public virtual int Milliseconds { get; set; }
 
         /// <summary>
         /// Gets the time.
         /// </summary>
         /// <returns></returns>
-        public virtual double getTime()
+        public virtual double GetTime()
         {
-            return hours*HOUR_MILLIS + minutes*MINUTE_MILLIS + seconds*SECOND_MILLIS + milliseconds;
+            return Hours*HOUR_MILLIS + Minutes*MINUTE_MILLIS + Seconds*SECOND_MILLIS + Milliseconds;
         }
 
         /// <summary>

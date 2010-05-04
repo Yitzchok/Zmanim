@@ -207,18 +207,18 @@ namespace Zmanim.Utilities
                 return formatXSDDurationTime(time);
             }
             var sb = new StringBuilder();
-            sb.Append(time.getHours().ToString(hourNF));
+            sb.Append(time.Hours.ToString(hourNF));
             sb.Append(":");
-            sb.Append(time.getMinutes().ToString(minuteSecondNF));
+            sb.Append(time.Minutes.ToString(minuteSecondNF));
             if (useSeconds)
             {
                 sb.Append(":");
-                sb.Append(time.getSeconds().ToString(minuteSecondNF));
+                sb.Append(time.Seconds.ToString(minuteSecondNF));
             }
             if (useMillis)
             {
                 sb.Append(".");
-                sb.Append(time.getMilliseconds().ToString(milliNF));
+                sb.Append(time.Milliseconds.ToString(milliNF));
             }
             return sb.ToString();
         }
@@ -319,24 +319,24 @@ namespace Zmanim.Utilities
 
             duration.Append("P");
 
-            if (time.getHours() != 0 || time.getMinutes() != 0 || time.getSeconds() != 0 || time.getMilliseconds() != 0)
+            if (time.Hours != 0 || time.Minutes != 0 || time.Seconds != 0 || time.Milliseconds != 0)
             {
                 duration.Append("T");
 
-                if (time.getHours() != 0)
-                    duration.Append(time.getHours() + "H");
+                if (time.Hours != 0)
+                    duration.Append(time.Hours + "H");
 
-                if (time.getMinutes() != 0)
-                    duration.Append(time.getMinutes() + "M");
+                if (time.Minutes != 0)
+                    duration.Append(time.Minutes + "M");
 
-                if (time.getSeconds() != 0 || time.getMilliseconds() != 0)
+                if (time.Seconds != 0 || time.Milliseconds != 0)
                 {
-                    duration.Append(time.getSeconds() + "." + time.getMilliseconds().ToString(milliNF));
+                    duration.Append(time.Seconds + "." + time.Milliseconds.ToString(milliNF));
                     duration.Append("S");
                 }
                 if (duration.Length == 1) // zero seconds
                     duration.Append("T0S");
-                if (time.IsNegative())
+                if (time.IsNegative)
                     duration.Insert(0, "-");
             }
             return duration.ToString();
