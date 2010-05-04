@@ -37,7 +37,6 @@ namespace Zmanim.Utilities
     /// </remarks>
     public class ZmanimCalculator : AstronomicalCalculator
     {
-        private string calculatorName = "US Naval Almanac Algorithm";
 
         /// <summary>
         ///   Gets the name of the calculator/.
@@ -45,7 +44,7 @@ namespace Zmanim.Utilities
         /// <value></value>
         public override string CalculatorName
         {
-            get { return calculatorName; }
+            get { return "US Naval Almanac Algorithm"; }
         }
 
         /// <summary>

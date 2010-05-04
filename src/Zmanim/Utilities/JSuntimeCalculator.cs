@@ -42,8 +42,6 @@ namespace Zmanim.Utilities
         )]
     public class JSuntimeCalculator : AstronomicalCalculator
     {
-        private string calculatorName = "US National Oceanic and Atmospheric Administration Algorithm";
-
         /// <summary>
         /// </summary>
         /// <value>the descriptive name of the algorithm.</value>
@@ -51,7 +49,7 @@ namespace Zmanim.Utilities
         [Obsolete]
         public override string CalculatorName
         {
-            get { return calculatorName; }
+            get { return "US National Oceanic and Atmospheric Administration Algorithm"; }
         }
 
         /// <summary>
@@ -94,7 +92,7 @@ namespace Zmanim.Utilities
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            double timeMins = morningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
+            double timeMins = MorningPhenomenon(DateToJulian(astronomicalCalendar.Calendar),
                                                 astronomicalCalendar.GeoLocation.Latitude,
                                                 -astronomicalCalendar.GeoLocation.Longitude, zenith);
             return timeMins/60;
@@ -140,7 +138,7 @@ namespace Zmanim.Utilities
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            double timeMins = eveningPhenomenon(dateToJulian(astronomicalCalendar.Calendar),
+            double timeMins = EveningPhenomenon(DateToJulian(astronomicalCalendar.Calendar),
                                                 astronomicalCalendar.GeoLocation.Latitude,
                                                 -astronomicalCalendar.GeoLocation.Longitude, zenith);
             return timeMins/60;
@@ -162,21 +160,21 @@ namespace Zmanim.Utilities
         ///  Sun.NAUTICAL_TWILIGHT_ZENITH_DISTANCE,
         ///  Sun.ASTRONOMICAL_TWILIGHT_ZENITH_DISTANCE. </param>
         ///<returns> time in minutes from zero Z </returns>
-        private static double morningPhenomenon(double julian, double latitude, double longitude, double zenithDistance)
+        private static double MorningPhenomenon(double julian, double latitude, double longitude, double zenithDistance)
         {
-            double t = julianDayToJulianCenturies(julian);
-            double eqtime = equationOfTime(t);
-            double solarDec = sunDeclination(t);
-            double hourangle = hourAngleMorning(latitude, solarDec, zenithDistance);
+            double t = JulianDayToJulianCenturies(julian);
+            double eqtime = EquationOfTime(t);
+            double solarDec = SunDeclination(t);
+            double hourangle = HourAngleMorning(latitude, solarDec, zenithDistance);
             double delta = longitude - MathExtensions.ToDegree(hourangle);
             double timeDiff = 4*delta;
             double timeUTC = 720 + timeDiff - eqtime;
 
             // Second pass includes fractional julian day in gamma calc
-            double newt = julianDayToJulianCenturies(julianCenturiesToJulianDay(t) + timeUTC/1440);
-            eqtime = equationOfTime(newt);
-            solarDec = sunDeclination(newt);
-            hourangle = hourAngleMorning(latitude, solarDec, zenithDistance);
+            double newt = JulianDayToJulianCenturies(JulianCenturiesToJulianDay(t) + timeUTC/1440);
+            eqtime = EquationOfTime(newt);
+            solarDec = SunDeclination(newt);
+            hourangle = HourAngleMorning(latitude, solarDec, zenithDistance);
             delta = longitude - MathExtensions.ToDegree(hourangle);
             timeDiff = 4*delta;
 
@@ -200,24 +198,24 @@ namespace Zmanim.Utilities
         ///  Sun.NAUTICAL_TWILIGHT_ZENITH_DISTANCE,
         ///  Sun.ASTRONOMICAL_TWILIGHT_ZENITH_DISTANCE. </param>
         ///<returns> time in minutes from zero Z </returns>
-        private static double eveningPhenomenon(double julian, double latitude, double longitude, double zenithDistance)
+        private static double EveningPhenomenon(double julian, double latitude, double longitude, double zenithDistance)
         {
-            double t = julianDayToJulianCenturies(julian);
+            double t = JulianDayToJulianCenturies(julian);
 
             // First calculates sunrise and approx length of day
-            double eqtime = equationOfTime(t);
-            double solarDec = sunDeclination(t);
-            double hourangle = hourAngleEvening(latitude, solarDec, zenithDistance);
+            double eqtime = EquationOfTime(t);
+            double solarDec = SunDeclination(t);
+            double hourangle = HourAngleEvening(latitude, solarDec, zenithDistance);
 
             double delta = longitude - MathExtensions.ToDegree(hourangle);
             double timeDiff = 4*delta;
             double timeUTC = 720 + timeDiff - eqtime;
 
             // first pass used to include fractional day in gamma calc
-            double newt = julianDayToJulianCenturies(julianCenturiesToJulianDay(t) + timeUTC/1440);
-            eqtime = equationOfTime(newt);
-            solarDec = sunDeclination(newt);
-            hourangle = hourAngleEvening(latitude, solarDec, zenithDistance);
+            double newt = JulianDayToJulianCenturies(JulianCenturiesToJulianDay(t) + timeUTC/1440);
+            eqtime = EquationOfTime(newt);
+            solarDec = SunDeclination(newt);
+            hourangle = HourAngleEvening(latitude, solarDec, zenithDistance);
 
             delta = longitude - MathExtensions.ToDegree(hourangle);
             timeDiff = 4*delta;
@@ -226,7 +224,7 @@ namespace Zmanim.Utilities
             return evening;
         }
 
-        private static double dateToJulian(ITimeZoneDateTime date)
+        private static double DateToJulian(ITimeZoneDateTime date)
         {
             int year = date.Date.Year;
             int month = date.Date.Month;
@@ -248,7 +246,7 @@ namespace Zmanim.Utilities
         ///<param name = "julian">
         ///  The Julian Day to convert </param>
         ///<returns> the value corresponding to the Julian Day </returns>
-        private static double julianDayToJulianCenturies(double julian)
+        private static double JulianDayToJulianCenturies(double julian)
         {
             return (julian - 2451545)/36525;
         }
@@ -259,7 +257,7 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The Julian Day corresponding to the value of t </returns>
-        private static double julianCenturiesToJulianDay(double t)
+        private static double JulianCenturiesToJulianDay(double t)
         {
             return (t*36525) + 2451545;
         }
@@ -268,12 +266,12 @@ namespace Zmanim.Utilities
         ///  Calculate the difference between true solar time and mean solar time
         ///</summary>
         ///<param name = "t">Number of Julian centuries since J2000.0</param>
-        private static double equationOfTime(double t)
+        private static double EquationOfTime(double t)
         {
-            double epsilon = obliquityCorrection(t);
-            double l0 = geomMeanLongSun(t);
-            double e = eccentricityOfEarthsOrbit(t);
-            double m = geometricMeanAnomalyOfSun(t);
+            double epsilon = ObliquityCorrection(t);
+            double l0 = GeomMeanLongSun(t);
+            double e = EccentricityOfEarthsOrbit(t);
+            double m = GeometricMeanAnomalyOfSun(t);
             double y = Math.Pow((Math.Tan(MathExtensions.ToRadians(epsilon)/2)), 2);
 
             double eTime = y*Math.Sin(2*MathExtensions.ToRadians(l0)) - 2*e*Math.Sin(MathExtensions.ToRadians(m)) +
@@ -288,10 +286,10 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The Sun's declination in degrees </returns>
-        private static double sunDeclination(double t)
+        private static double SunDeclination(double t)
         {
-            double e = obliquityCorrection(t);
-            double lambda = sunsApparentLongitude(t);
+            double e = ObliquityCorrection(t);
+            double lambda = SunsApparentLongitude(t);
 
             double sint = Math.Sin(MathExtensions.ToRadians(e))*Math.Sin(MathExtensions.ToRadians(lambda));
             return MathExtensions.ToDegree(Math.Asin(sint));
@@ -308,7 +306,7 @@ namespace Zmanim.Utilities
         ///<param name = "zenithDistance">
         ///  zenith distance of the sun in degrees </param>
         ///<returns> hour angle of sunrise in radians </returns>
-        private static double hourAngleMorning(double lat, double solarDec, double zenithDistance)
+        private static double HourAngleMorning(double lat, double solarDec, double zenithDistance)
         {
             return
                 (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenithDistance))/
@@ -327,9 +325,9 @@ namespace Zmanim.Utilities
         ///<param name = "zenithDistance">
         ///  zenith distance of the sun in degrees </param>
         ///<returns> hour angle of sunset in radians </returns>
-        private static double hourAngleEvening(double lat, double solarDec, double zenithDistance)
+        private static double HourAngleEvening(double lat, double solarDec, double zenithDistance)
         {
-            return -hourAngleMorning(lat, solarDec, zenithDistance);
+            return -HourAngleMorning(lat, solarDec, zenithDistance);
         }
 
         ///<summary>
@@ -338,9 +336,9 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> Corrected obliquity in degrees </returns>
-        private static double obliquityCorrection(double t)
+        private static double ObliquityCorrection(double t)
         {
-            return meanObliquityOfEcliptic(t) + 0.00256*Math.Cos(MathExtensions.ToRadians(125.04 - 1934.136*t));
+            return MeanObliquityOfEcliptic(t) + 0.00256*Math.Cos(MathExtensions.ToRadians(125.04 - 1934.136*t));
         }
 
         ///<summary>
@@ -349,7 +347,7 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> Mean obliquity in degrees </returns>
-        private static double meanObliquityOfEcliptic(double t)
+        private static double MeanObliquityOfEcliptic(double t)
         {
             return 23 + (26 + (21.448 - t*(46.815 + t*(0.00059 - t*(0.001813)))/60))/60;
         }
@@ -360,7 +358,7 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  number of Julian centuries since J2000.0 </param>
         ///<returns> the geometric mean longitude of the sun in degrees </returns>
-        private static double geomMeanLongSun(double t)
+        private static double GeomMeanLongSun(double t)
         {
             double l0 = 280.46646 + t*(36000.76983 + 0.0003032*t);
 
@@ -385,7 +383,7 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> the eccentricity </returns>
-        private static double eccentricityOfEarthsOrbit(double t)
+        private static double EccentricityOfEarthsOrbit(double t)
         {
             return 0.016708634 - t*(0.000042037 + 0.0000001267*t);
         }
@@ -396,7 +394,7 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> the geometric mean anomaly of the Sun in degrees </returns>
-        private static double geometricMeanAnomalyOfSun(double t)
+        private static double GeometricMeanAnomalyOfSun(double t)
         {
             return 357.52911 + t*(35999.05029 - 0.0001537*t);
         }
@@ -407,9 +405,9 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The apparent longitude of the Sun in degrees </returns>
-        private static double sunsApparentLongitude(double t)
+        private static double SunsApparentLongitude(double t)
         {
-            return sunsTrueLongitude(t) - 0.00569 - 0.00478*Math.Sin(MathExtensions.ToRadians(125.04 - 1934.136*t));
+            return SunsTrueLongitude(t) - 0.00569 - 0.00478*Math.Sin(MathExtensions.ToRadians(125.04 - 1934.136*t));
         }
 
         ///<summary>
@@ -418,9 +416,9 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The Sun's true longitude in degrees </returns>
-        private static double sunsTrueLongitude(double t)
+        private static double SunsTrueLongitude(double t)
         {
-            return geomMeanLongSun(t) + equationOfCentreForSun(t);
+            return GeomMeanLongSun(t) + EquationOfCentreForSun(t);
         }
 
         ///<summary>
@@ -429,9 +427,9 @@ namespace Zmanim.Utilities
         ///<param name = "t">
         ///  Number of Julian centuries since J2000.0 </param>
         ///<returns> The equation of centre for the Sun in degrees </returns>
-        private static double equationOfCentreForSun(double t)
+        private static double EquationOfCentreForSun(double t)
         {
-            double m = geometricMeanAnomalyOfSun(t);
+            double m = GeometricMeanAnomalyOfSun(t);
 
             return Math.Sin(MathExtensions.ToRadians(m))*(1.914602 - t*(0.004817 + 0.000014*t)) +
                    Math.Sin(2*MathExtensions.ToRadians(m))*(0.019993 - 0.000101*t) +

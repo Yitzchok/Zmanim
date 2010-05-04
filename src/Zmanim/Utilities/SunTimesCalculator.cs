@@ -47,14 +47,13 @@ namespace Zmanim.Utilities
         // DEG_PER_HOUR is the number of degrees of longitude
         // that corresponds to one hour time difference.
         private const double DEG_PER_HOUR = 360.0/24.0;
-        private string calculatorName = "US Naval Almanac Algorithm";
 
         /// <summary>
         /// </summary>
         /// <value>the descriptive name of the algorithm.</value>
         public override string CalculatorName
         {
-            get { return calculatorName; }
+            get { return "US Naval Almanac Algorithm"; }
         }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace Zmanim.Utilities
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
+            doubleTime = GetTimeUtc(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,
                                     astronomicalCalendar.Calendar.Date.Day,
                                     astronomicalCalendar.GeoLocation.Longitude,
@@ -135,7 +134,7 @@ namespace Zmanim.Utilities
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = getTimeUTC(astronomicalCalendar.Calendar.Date.Year,
+            doubleTime = GetTimeUtc(astronomicalCalendar.Calendar.Date.Year,
                                     astronomicalCalendar.Calendar.Date.Month,
                                     astronomicalCalendar.Calendar.Date.Day,
                                     astronomicalCalendar.GeoLocation.Longitude,
@@ -146,7 +145,7 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  sin of an angle in degrees
         ///</summary>
-        private static double sinDeg(double deg)
+        private static double SinDeg(double deg)
         {
             return Math.Sin(deg*2.0*Math.PI/360.0);
         }
@@ -154,7 +153,7 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  acos of an angle, result in degrees
         ///</summary>
-        private static double acosDeg(double x)
+        private static double AcosDeg(double x)
         {
             return Math.Acos(x)*360.0/(2*Math.PI);
         }
@@ -162,7 +161,7 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  * asin of an angle, result in degrees
         ///</summary>
-        private static double asinDeg(double x)
+        private static double AsinDeg(double x)
         {
             return Math.Asin(x)*360.0/(2*Math.PI);
         }
@@ -170,7 +169,7 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  tan of an angle in degrees
         ///</summary>
-        private static double tanDeg(double deg)
+        private static double TanDeg(double deg)
         {
             return Math.Tan(deg*2.0*Math.PI/360.0);
         }
@@ -178,7 +177,7 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  cos of an angle in degrees
         ///</summary>
-        private static double cosDeg(double deg)
+        private static double CosDeg(double deg)
         {
             return Math.Cos(deg*2.0*Math.PI/360.0);
         }
@@ -187,7 +186,7 @@ namespace Zmanim.Utilities
         ///  * Calculate the day of the year, where Jan 1st is day 1. Note that this
         ///  * method needs to know the year, because leap years have an impact here
         ///</summary>
-        private static int getDayOfYear(int year, int month, int day)
+        private static int GetDayOfYear(int year, int month, int day)
         {
             int n1 = 275*month/9;
             int n2 = (month + 9)/12;
@@ -200,7 +199,7 @@ namespace Zmanim.Utilities
         ///  Get time difference between location's longitude and the Meridian, in
         ///  hours. West of Meridian has a negative time difference
         ///</summary>
-        private static double getHoursFromMeridian(double longitude)
+        private static double GetHoursFromMeridian(double longitude)
         {
             return longitude/DEG_PER_HOUR;
         }
@@ -210,7 +209,7 @@ namespace Zmanim.Utilities
         ///  Jan 1st, assuming 6am and 6pm events. We need this figure to derive the
         ///  Sun's mean anomaly
         ///</summary>
-        private static double getApproxTimeDays(int dayOfYear, double hoursFromMeridian, int type)
+        private static double GetApproxTimeDays(int dayOfYear, double hoursFromMeridian, int type)
         {
             if (type == TYPE_SUNRISE)
             {
@@ -226,18 +225,18 @@ namespace Zmanim.Utilities
         ///  Calculate the Sun's mean anomaly in degrees, at sunrise or sunset, given
         ///  the longitude in degrees
         ///</summary>
-        private static double getMeanAnomaly(int dayOfYear, double longitude, int type)
+        private static double GetMeanAnomaly(int dayOfYear, double longitude, int type)
         {
-            return (0.9856*getApproxTimeDays(dayOfYear, getHoursFromMeridian(longitude), type)) - 3.289;
+            return (0.9856*GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(longitude), type)) - 3.289;
         }
 
         ///<summary>
         ///  Calculates the Sun's true longitude in degrees. The result is an angle
         ///  gte 0 and lt 360. Requires the Sun's mean anomaly, also in degrees
         ///</summary>
-        private static double getSunTrueLongitude(double sunMeanAnomaly)
+        private static double GetSunTrueLongitude(double sunMeanAnomaly)
         {
-            double l = sunMeanAnomaly + (1.916*sinDeg(sunMeanAnomaly)) + (0.020*sinDeg(2*sunMeanAnomaly)) + 282.634;
+            double l = sunMeanAnomaly + (1.916*SinDeg(sunMeanAnomaly)) + (0.020*SinDeg(2*sunMeanAnomaly)) + 282.634;
 
             // get longitude into 0-360 degree range
             if (l >= 360.0)
@@ -255,9 +254,9 @@ namespace Zmanim.Utilities
         ///  Calculates the Sun's right ascension in hours, given the Sun's true
         ///  longitude in degrees. Input and output are angles gte 0 and lt 360.
         ///</summary>
-        private static double getSunRightAscensionHours(double sunTrueLongitude)
+        private static double GetSunRightAscensionHours(double sunTrueLongitude)
         {
-            double a = 0.91764*tanDeg(sunTrueLongitude);
+            double a = 0.91764*TanDeg(sunTrueLongitude);
             double ra = 360.0/(2.0*Math.PI)*Math.Atan(a);
             // get result into 0-360 degree range
             // if (ra >= 360.0) ra = ra - 360.0;
@@ -273,12 +272,12 @@ namespace Zmanim.Utilities
         ///<summary>
         ///  Gets the cosine of the Sun's local hour angle
         ///</summary>
-        private static double getCosLocalHourAngle(double sunTrueLongitude, double latitude, double zenith)
+        private static double GetCosLocalHourAngle(double sunTrueLongitude, double latitude, double zenith)
         {
-            double sinDec = 0.39782*sinDeg(sunTrueLongitude);
-            double cosDec = cosDeg(asinDeg(sinDec));
+            double sinDec = 0.39782*SinDeg(sunTrueLongitude);
+            double cosDec = CosDeg(AsinDeg(sinDec));
 
-            double cosH = (cosDeg(zenith) - (sinDec*sinDeg(latitude)))/(cosDec*cosDeg(latitude));
+            double cosH = (CosDeg(zenith) - (sinDec*SinDeg(latitude)))/(cosDec*CosDeg(latitude));
 
             // Check bounds
 
@@ -301,7 +300,7 @@ namespace Zmanim.Utilities
         ///  we must convert it to UTC and then to a local time. The result is
         ///  expressed as a fractional number of hours since midnight
         ///</summary>
-        private static double getLocalMeanTime(double localHour, double sunRightAscensionHours, double approxTimeDays)
+        private static double GetLocalMeanTime(double localHour, double sunRightAscensionHours, double approxTimeDays)
         {
             return localHour + sunRightAscensionHours - (0.06571*approxTimeDays) - 6.622;
         }
@@ -321,14 +320,14 @@ namespace Zmanim.Utilities
         ///<returns> the time as a double. If an error was encountered in the
         ///  calculation (expected behavior for some locations such as near
         ///  the poles, <see cref = "Double.NaN" /> will be returned. </returns>
-        private static double getTimeUTC(int year, int month, int day, double longitude, double latitude, double zenith,
+        private static double GetTimeUtc(int year, int month, int day, double longitude, double latitude, double zenith,
                                          int type)
         {
-            int dayOfYear = getDayOfYear(year, month, day);
-            double sunMeanAnomaly = getMeanAnomaly(dayOfYear, longitude, type);
-            double sunTrueLong = getSunTrueLongitude(sunMeanAnomaly);
-            double sunRightAscensionHours = getSunRightAscensionHours(sunTrueLong);
-            double cosLocalHourAngle = getCosLocalHourAngle(sunTrueLong, latitude, zenith);
+            int dayOfYear = GetDayOfYear(year, month, day);
+            double sunMeanAnomaly = GetMeanAnomaly(dayOfYear, longitude, type);
+            double sunTrueLong = GetSunTrueLongitude(sunMeanAnomaly);
+            double sunRightAscensionHours = GetSunRightAscensionHours(sunTrueLong);
+            double cosLocalHourAngle = GetCosLocalHourAngle(sunTrueLong, latitude, zenith);
 
             double localHourAngle = 0;
             if (type == TYPE_SUNRISE)
@@ -338,7 +337,7 @@ namespace Zmanim.Utilities
                     // since the calculation
                     // will return Double.NaN
                 }
-                localHourAngle = 360.0 - acosDeg(cosLocalHourAngle);
+                localHourAngle = 360.0 - AcosDeg(cosLocalHourAngle);
             } // if (type == TYPE_SUNSET) 
             else
             {
@@ -347,13 +346,13 @@ namespace Zmanim.Utilities
                     // since the calculation
                     // will return Double.NaN
                 }
-                localHourAngle = acosDeg(cosLocalHourAngle);
+                localHourAngle = AcosDeg(cosLocalHourAngle);
             }
             double localHour = localHourAngle/DEG_PER_HOUR;
 
-            double localMeanTime = getLocalMeanTime(localHour, sunRightAscensionHours,
-                                                    getApproxTimeDays(dayOfYear, getHoursFromMeridian(longitude), type));
-            double pocessedTime = localMeanTime - getHoursFromMeridian(longitude);
+            double localMeanTime = GetLocalMeanTime(localHour, sunRightAscensionHours,
+                                                    GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(longitude), type));
+            double pocessedTime = localMeanTime - GetHoursFromMeridian(longitude);
             while (pocessedTime < 0.0)
             {
                 pocessedTime += 24.0;
