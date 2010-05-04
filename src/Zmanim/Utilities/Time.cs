@@ -130,7 +130,7 @@ namespace Zmanim.Utilities
         /// </returns>
         public override string ToString()
         {
-            return new ZmanimFormatter().format(this);
+            return new ZmanimFormatter().Format(this);
         }
     }
 }

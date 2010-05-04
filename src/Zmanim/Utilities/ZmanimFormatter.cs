@@ -83,7 +83,6 @@ namespace Zmanim.Utilities
         private static readonly string minuteSecondNF = "00";
         private static readonly string milliNF = "000";
         private readonly string hourNF;
-        private string dateFormat;
         private bool prependZeroHours;
         private int timeFormat = SEXAGESIMAL_XSD_FORMAT;
         internal bool useDecimal;
@@ -114,8 +113,8 @@ namespace Zmanim.Utilities
             }
             hourNF = hourFormat;
             // decimalNF = new DecimalFormat("0.0####");
-            setTimeFormat(format);
-            setDateFormat(dateFormat);
+            SetTimeFormat(format);
+            DateFormat = dateFormat;
         }
 
         ///<summary>
@@ -123,22 +122,22 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "format">
         ///  int the format constant to use. </param>
-        public virtual void setTimeFormat(int format)
+        public virtual void SetTimeFormat(int format)
         {
             timeFormat = format;
             switch (format)
             {
                 case SEXAGESIMAL_XSD_FORMAT:
-                    setSettings(true, true, true);
+                    SetSettings(true, true, true);
                     break;
                 case SEXAGESIMAL_FORMAT:
-                    setSettings(false, false, false);
+                    SetSettings(false, false, false);
                     break;
                 case SEXAGESIMAL_SECONDS_FORMAT:
-                    setSettings(false, true, false);
+                    SetSettings(false, true, false);
                     break;
                 case SEXAGESIMAL_MILLIS_FORMAT:
-                    setSettings(false, true, true);
+                    SetSettings(false, true, true);
                     break;
                 case DECIMAL_FORMAT:
                 default:
@@ -148,24 +147,12 @@ namespace Zmanim.Utilities
         }
 
         /// <summary>
-        ///   Sets the date format.
-        /// </summary>
-        /// <param name = "sdf"></param>
-        public virtual void setDateFormat(string sdf)
-        {
-            dateFormat = sdf;
-        }
-
-        /// <summary>
         ///   Gets the date format.
         /// </summary>
-        /// <returns></returns>
-        public virtual string getDateFormat()
-        {
-            return dateFormat;
-        }
+        /// <value></value>
+        public virtual string DateFormat { get; set; }
 
-        private void setSettings(bool prependZeroHours, bool useSeconds, bool useMillis)
+        private void SetSettings(bool prependZeroHours, bool useSeconds, bool useMillis)
         {
             this.prependZeroHours = prependZeroHours;
             this.useSeconds = useSeconds;
@@ -178,9 +165,9 @@ namespace Zmanim.Utilities
         ///<param name = "milliseconds">
         ///  The time in milliseconds. </param>
         ///<returns> String The formatted <c>String</c> </returns>
-        public virtual string format(double milliseconds)
+        public virtual string Format(double milliseconds)
         {
-            return format((int)milliseconds);
+            return Format((int)milliseconds);
         }
 
         ///<summary>
@@ -189,9 +176,9 @@ namespace Zmanim.Utilities
         ///<param name = "millis">
         ///  The time in milliseconds. </param>
         ///<returns> String The formatted <c>String</c> </returns>
-        public virtual string format(int millis)
+        public virtual string Format(int millis)
         {
-            return format(new Time(millis));
+            return Format(new Time(millis));
         }
 
         ///<summary>
@@ -200,11 +187,11 @@ namespace Zmanim.Utilities
         ///<param name = "time">
         ///  The time <c>Object</c> to be formatted. </param>
         ///<returns> String The formatted <c>String</c> </returns>
-        public virtual string format(Time time)
+        public virtual string Format(Time time)
         {
             if (timeFormat == XSD_DURATION_FORMAT)
             {
-                return formatXSDDurationTime(time);
+                return FormatXSDDurationTime(time);
             }
             var sb = new StringBuilder();
             sb.Append(time.Hours.ToString(hourNF));
@@ -224,23 +211,23 @@ namespace Zmanim.Utilities
         }
 
         ///<summary>
-        ///  Formats a date using this classe's <see cref = "getDateFormat()">date format</see>.
+        ///  Formats a date using this classe's <see cref = "DateFormat">date format</see>.
         ///</summary>
-        ///<param name = "Date">
+        ///<param name = "date">
         ///  the date to format </param>
         ///<param name = "timeZoneDateTime">
         ///  the <see cref = "ITimeZoneDateTime">TimeZone and DateTime</see> used to help format
         ///  based on the Calendar's DST and other settings. </param>
         ///<returns> the formatted string </returns>
-        public virtual string formatDate(DateTime Date, ITimeZoneDateTime timeZoneDateTime)
+        public virtual string FormatDate(DateTime date, ITimeZoneDateTime timeZoneDateTime)
         {
-            if (dateFormat == "yyyy-MM-dd'T'HH:mm:ss")
+            if (DateFormat == "yyyy-MM-dd'T'HH:mm:ss")
             {
-                return getXSDate(Date, timeZoneDateTime);
+                return GetXSDate(date, timeZoneDateTime);
             }
             else
             {
-                return Date.ToString(dateFormat);
+                return date.ToString(DateFormat);
             }
         }
 
@@ -258,7 +245,7 @@ namespace Zmanim.Utilities
         ///  followed by the difference between the difference from UTC represented as
         ///  hh:mm.
         ///</summary>
-        public virtual string getXSDate(DateTime Date, ITimeZoneDateTime cal)
+        public virtual string GetXSDate(DateTime date, ITimeZoneDateTime cal)
         {
             string xsdDateFormat = "yyyy-MM-dd'T'HH:mm:ss";
             //        
@@ -267,7 +254,7 @@ namespace Zmanim.Utilities
             //		 
             //var dateFormat = new SimpleDateFormat(xsdDateFormat);
 
-            var buff = new StringBuilder(Date.ToString(xsdDateFormat));
+            var buff = new StringBuilder(date.ToString(xsdDateFormat));
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
             int offset = cal.TimeZone.UtcOffset(cal.Date);
@@ -282,7 +269,7 @@ namespace Zmanim.Utilities
                 // In a few cases, the time zone may be +/-hh:30.
                 int min = offset % (60 * 60 * 1000);
                 char posneg = hrs < 0 ? '-' : '+';
-                buff.Append(posneg + formatDigits(hrs) + ':' + formatDigits(min));
+                buff.Append(posneg + FormatDigits(hrs) + ':' + FormatDigits(min));
             }
             return buff.ToString();
         }
@@ -292,7 +279,7 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "digits"> hours or minutes. </param>
         ///<returns> two-digit String representation of hrs or minutes. </returns>
-        private static string formatDigits(int digits)
+        private static string FormatDigits(int digits)
         {
             string dd = Convert.ToString(Math.Abs(digits));
             return dd.Length == 1 ? '0' + dd : dd;
@@ -303,9 +290,9 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "millis"> the duration in milliseconds </param>
         ///<returns> the xsd:duration formatted String </returns>
-        public virtual string formatXSDDurationTime(long millis)
+        public virtual string FormatXSDDurationTime(long millis)
         {
-            return formatXSDDurationTime(new Time(millis));
+            return FormatXSDDurationTime(new Time(millis));
         }
 
         ///<summary>
@@ -313,7 +300,7 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "time"> the duration as a Time object  </param>
         ///<returns> the xsd:duration formatted String </returns>
-        public virtual string formatXSDDurationTime(Time time)
+        public virtual string FormatXSDDurationTime(Time time)
         {
             var duration = new StringBuilder();
 
@@ -407,7 +394,7 @@ namespace Zmanim.Utilities
             IList<string> otherList = new List<string>();
             for (int i = 0; i < theMethods.Length; i++)
             {
-                if (includeMethod(theMethods[i]))
+                if (IncludeMethod(theMethods[i]))
                 {
                     tagName = theMethods[i].Name.Substring(3);
                     //String returnType = theMethods[i].getReturnType().getName();
@@ -444,7 +431,7 @@ namespace Zmanim.Utilities
             {
                 output.Append("\t<" + zman.ZmanLabel);
                 output.Append(">");
-                output.Append(formatter.formatDate(zman.ZmanTime, ac.Calendar)
+                output.Append(formatter.FormatDate(zman.ZmanTime, ac.Calendar)
                               + "</" + zman.ZmanLabel + ">\n");
             }
 
@@ -452,7 +439,7 @@ namespace Zmanim.Utilities
             {
                 output.Append("\t<" + zman.ZmanLabel);
                 output.Append(">");
-                output.Append(formatter.format((int)zman.Duration) + "</"
+                output.Append(formatter.Format((int)zman.Duration) + "</"
                               + zman.ZmanLabel + ">\n");
             }
 
@@ -478,7 +465,7 @@ namespace Zmanim.Utilities
         ///  Determines if a method should be output by the <see cref = "ToXml" />
         ///</summary>
         ///<param name = "method"> Should this method be inculeded. </param>
-        private static bool includeMethod(MethodInfo method)
+        private static bool IncludeMethod(MethodInfo method)
         {
             IList<string> methodWhiteList = new List<string>();
             // methodWhiteList.add("getName");
