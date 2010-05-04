@@ -51,7 +51,7 @@ namespace ZmanimTests
 
             foreach (var method in type.GetMethods()
                 .Where(m => m.ReturnType == typeof(DateTime)
-                            && m.Name.StartsWith("get")
+                            && m.Name.ToLowerInvariant().StartsWith("get")
                             && m.IsPublic == true
                             && m.GetParameters().Count() == 0))
             {

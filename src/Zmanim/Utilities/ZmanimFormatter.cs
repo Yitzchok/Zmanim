@@ -482,7 +482,7 @@ namespace Zmanim.Utilities
                 return false; // Skip get methods with parameters since we do not
             // know what value to pass
 
-            if (!method.Name.StartsWith("get"))
+            if (!method.Name.ToLowerInvariant().StartsWith("get"))
                 return false;
 
             if (method.ReturnType == typeof(DateTime)

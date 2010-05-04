@@ -81,7 +81,7 @@ namespace Zmanim.Cli
         {
             return typeof(ComplexZmanimCalendar).GetMethods()
                 .Where(m => (m.ReturnType == typeof(DateTime) || m.ReturnType == typeof(long))
-                            && m.Name.StartsWith("get")
+                            && m.Name.ToLowerInvariant().StartsWith("get")
                             && m.IsPublic
                             && m.GetParameters().Count() == 0);
         }

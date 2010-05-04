@@ -11,7 +11,7 @@ namespace ZmanimTests.TestGeneration.TestMethodGenerators
         {
             foreach (var method in type.GetMethods()
                 .Where(m => m.ReturnType == typeof(long)
-                            && m.Name.StartsWith("get")
+                            && m.Name.ToLowerInvariant().StartsWith("get")
                             && m.IsPublic
                             && m.GetParameters().Count() == 0))
             {
