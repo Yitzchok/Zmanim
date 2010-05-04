@@ -27,8 +27,16 @@
         <TextBlock Grid.Row="1" Grid.RowSpan="1" Name="locationName" Text="{Binding LocationName}" Foreground="Black" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
         <TextBlock Grid.Row="2" Grid.RowSpan="1" Name="sunrise" Text="{Binding Zmanim.Sunrise, StringFormat='h:mm:ss', Mode=OneWay}" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
         <TextBlock Grid.Row="3" Grid.RowSpan="1" Name="sunset" Text="{Binding Zmanim.Sunset, StringFormat='h:mm:ss', Mode=OneWay}" Grid.Column="1" HorizontalAlignment="Left" d:LayoutOverrides="GridBox"/>
-        <sdk:Label Content="Date" Grid.Row="0"/>
-		<sdk:DatePicker Grid.Column="1" d:LayoutOverrides="Width, Height" SelectedDate="{Binding Date, Mode=TwoWay}"/>
+        <StackPanel d:LayoutOverrides="Height" Orientation="Horizontal" Grid.ColumnSpan="2">
+        	<sdk:Label Content="Date" Grid.Row="0"/>
+			<sdk:DatePicker d:LayoutOverrides="Width" SelectedDate="{Binding Date, Mode=TwoWay}"/>
+			<sdk:Label Content="Latitude"/>
+			<TextBox Text="{Binding Latitude, Mode=TwoWay}"/>
+			<sdk:Label Content="Longitude"/>
+			<TextBox Text="{Binding Longitude, Mode=TwoWay}"/>
+			<sdk:Label Content="Elevation"/>
+			<TextBox Text="{Binding Elevation, Mode=TwoWay}"/>
+        </StackPanel>
 		<sdk:Label Margin="0" Content="Location Name" Grid.Row="1"/>
         <sdk:Label Margin="0,1,0,0" Content="Sunrise" Grid.Row="2"/>
         <sdk:Label Content="Sunset" Grid.Row="3"/>

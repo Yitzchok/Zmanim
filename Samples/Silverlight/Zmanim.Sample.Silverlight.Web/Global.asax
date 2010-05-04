@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Zmain.Sample.Silverlight.Web.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Zmanim.Sample.Silverlight.Web.MvcApplication" Language="C#" %>
