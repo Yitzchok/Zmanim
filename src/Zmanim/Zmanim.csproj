@@ -68,6 +68,7 @@
     <Compile Include="ComplexZmanimCalendar.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
+    <Compile Include="IAstronomicalCalendar.cs" />
     <Compile Include="ITimeZoneDateTime.cs" />
     <Compile Include="TimeZoneDateTime.cs" />
     <Compile Include="TimeZone\ITimeZone.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Utilities\GeoLocationUtils.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\IAstronomicalCalculator.cs" />
     <Compile Include="Utilities\JSuntimeCalculator.cs">
       <SubType>Code</SubType>
     </Compile>

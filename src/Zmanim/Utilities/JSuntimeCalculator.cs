@@ -76,7 +76,7 @@ namespace Zmanim.Utilities
         /// <seealso cref="NOAACalculator.GetUtcSunrise"/>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunrise"/>
         [Obsolete]
-        public override double GetUtcSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
             //		if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) == 2000) {
@@ -122,7 +122,7 @@ namespace Zmanim.Utilities
         /// <seealso cref="NOAACalculator.GetUtcSunset"/>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunset"/>
         [Obsolete]
-        public override double GetUtcSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
             //		if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) == 2000) {

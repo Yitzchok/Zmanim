@@ -66,7 +66,7 @@ namespace Zmanim.Utilities
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunrise"/>
-        public override double GetUtcSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith,
                                              bool adjustForElevation)
         {
             //		if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {
@@ -111,7 +111,7 @@ namespace Zmanim.Utilities
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunset"/>
-        public override double GetUtcSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith,
                                             bool adjustForElevation)
         {
             // if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {

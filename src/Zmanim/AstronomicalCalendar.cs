@@ -25,7 +25,7 @@ using Zmanim.Utilities;
 namespace Zmanim
 {
     ///<summary>
-    ///  A Java calendar that calculates astronomical time calculations such as
+    ///  A calendar that calculates astronomical time calculations such as
     ///  <see cref = "GetSunrise">sunrise</see> and <see cref = "GetSunset">sunset</see> times. This
     ///  class contains a <see cref = "getCalendar()">Calendar</see> and can therefore use the
     ///  standard Calendar functionality to change dates etc. The calculation engine
@@ -68,7 +68,7 @@ namespace Zmanim
     ///  </example>
     ///</summary>
     ///<author>Eliyahu Hershfeld</author>
-    public class AstronomicalCalendar : ICloneable
+    public class AstronomicalCalendar : IAstronomicalCalendar
     {
         ///<summary>
         ///  90° below the vertical. Used for certain calculations.<br />
@@ -155,7 +155,7 @@ namespace Zmanim
         {
             Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.TimeZone);
             GeoLocation = geoLocation; // duplicate call
-            AstronomicalCalculator = AstronomicalCalculator.GetDefault();
+            AstronomicalCalculator = Utilities.AstronomicalCalculator.GetDefault();
         }
 
 
@@ -744,7 +744,7 @@ namespace Zmanim
         /// Gets or Sets the current AstronomicalCalculator set.
         /// </summary>
         /// <value>Returns the astronimicalCalculator.</value>
-        public virtual AstronomicalCalculator AstronomicalCalculator { get; set; }
+        public virtual IAstronomicalCalculator AstronomicalCalculator { get; set; }
 
         /// <summary>
         /// Gets or Sets the calender to be used in the calculations.

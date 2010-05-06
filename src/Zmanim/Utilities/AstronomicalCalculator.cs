@@ -29,11 +29,11 @@ namespace Zmanim.Utilities
     ///   results of using different algorithms.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
-    public abstract class AstronomicalCalculator : ICloneable
+    public abstract class AstronomicalCalculator : IAstronomicalCalculator
     {
         // private double refraction = 34.478885263888294 / 60d;
 
-        public AstronomicalCalculator()
+        protected AstronomicalCalculator()
         {
             SolarRadius = 16/60d;
             Refraction = 34/60d;
@@ -60,70 +60,6 @@ namespace Zmanim.Utilities
         {
             return new SunTimesCalculator();
         }
-
-        ///<summary>
-        ///</summary>
-        ///<value> the descriptive name of the algorithm. </value>
-        public abstract string CalculatorName { get; }
-
-        /*  
-        ///	 <summary>
-        /// Setter method for the descriptive name of the calculator. This will
-        ///	typically not have to be set
-        ///	</summary>
-        ///	<param name="calculatorName">
-        ///	           descriptive name of the algorithm. </param>
-        ///	 
-        //	public abstract void setCalculatorName(String calculatorName);
-        */
-
-        /// <summary>
-        /// A method that calculates UTC sunrise as well as any time based on an
-        /// angle above or below sunrise. This abstract method is implemented by the
-        /// classes that extend this class.
-        /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
-        /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
-        /// sunrise typically the <see cref="AdjustZenith">zenith</see> used for
-        /// the calculation uses geometric zenith of 90°; and
-        /// <see cref="AdjustZenith">adjusts</see> this slightly to account for
-        /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.GetBeginNauticalTwilight"/>
-        /// that passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to
-        /// this method.</param>
-        /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
-        /// <returns>
-        /// The UTC time of sunrise in 24 hour format. 5:45:00 AM will return
-        /// 5.75.0. If an error was encountered in the calculation (expected
-        /// behavior for some locations such as near the poles,
-        /// <see cref="Double.NaN"/> will be returned.
-        /// </returns>
-        public abstract double GetUtcSunrise(AstronomicalCalendar astronomicalCalendar, double zenith,
-                                             bool adjustForElevation);
-
-        /// <summary>
-        /// A method that calculates UTC sunset as well as any time based on an angle
-        /// above or below sunset. This abstract method is implemented by the classes
-        /// that extend this class.
-        /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
-        /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
-        /// typically the <see cref="AdjustZenith">zenith</see> used for the
-        /// calculation uses geometric zenith of 90°; and
-        /// <see cref="AdjustZenith">adjusts</see> this slightly to account for
-        /// solar refraction and the sun's radius. Another example would
-        /// be <see cref="AstronomicalCalendar.GetEndNauticalTwilight"/> that
-        /// passes <see cref="AstronomicalCalendar.NAUTICAL_ZENITH"/> to this
-        /// method.</param>
-        /// <param name="adjustForElevation">if set to <c>true</c> [adjust for elevation].</param>
-        /// <returns>
-        /// The UTC time of sunset in 24 hour format. 5:45:00 AM will return
-        /// 5.75.0. If an error was encountered in the calculation (expected
-        /// behavior for some locations such as near the poles,
-        /// <seealso cref="Double.NaN"/> will be returned.
-        /// </returns>
-        public abstract double GetUtcSunset(AstronomicalCalendar astronomicalCalendar, double zenith,
-                                            bool adjustForElevation);
 
         ///<summary>
         ///  Method to return the adjustment to the zenith required to account for the
@@ -215,5 +151,9 @@ namespace Zmanim.Utilities
         ///<value>
         ///  The sun&apos;s radius in arc minutes. </value>
         internal virtual double SolarRadius { get; set; }
+
+        public abstract string CalculatorName { get; }
+        public abstract double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation);
+        public abstract double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation);
     }
 }
