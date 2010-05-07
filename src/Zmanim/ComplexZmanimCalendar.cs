@@ -252,8 +252,6 @@ namespace Zmanim
         /// </summary>
         protected internal const double ZENITH_5_POINT_88 = GEOMETRIC_ZENITH + 5.88;
 
-        private double ateretTorahSunsetOffset = 40;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
         /// </summary>
@@ -261,6 +259,7 @@ namespace Zmanim
         public ComplexZmanimCalendar(GeoLocation location)
             : base(location)
         {
+            AteretTorahSunsetOffset = 40;
         }
 
         ///<summary>
@@ -271,6 +270,7 @@ namespace Zmanim
         ///<seealso cref =  "AstronomicalCalendar"/>
         public ComplexZmanimCalendar()
         {
+            AteretTorahSunsetOffset = 40;
         }
 
         ///<summary>
@@ -476,7 +476,7 @@ namespace Zmanim
         /// <seealso cref="GetAlos72Zmanis()"/>
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="GetAteretTorahSunsetOffset"/>
-        /// <seealso cref="setAteretTorahSunsetOffset(double)"/>
+        /// <seealso cref="SetAteretTorahSunsetOffset"/>
         public virtual long GetShaahZmanisAteretTorah()
         {
             return GetTemporalHour(GetAlos72Zmanis(), GetTzaisAteretTorah());
@@ -1890,12 +1890,12 @@ namespace Zmanim
         ///  publish a zman for Tzais. It should also be noted that Chacham
         ///  Harari-Raful provided a 25 minute zman for Israel. This API uses 40
         ///  minutes year round in any place on the globe by default. This offset can
-        ///  be changed by calling <see cref = "setAteretTorahSunsetOffset(double)" />.
+        ///  be changed by calling <see cref = "SetAteretTorahSunsetOffset" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing 40 minutes after sea level
         ///  sunset </returns>
         ///<seealso cref = "GetAteretTorahSunsetOffset" />
-        ///<seealso cref = "setAteretTorahSunsetOffset(double)" />
+        ///<seealso cref = "SetAteretTorahSunsetOffset" />
         public virtual DateTime GetTzaisAteretTorah()
         {
             return GetTimeOffset(GetSeaLevelSunset(), GetAteretTorahSunsetOffset() * MINUTE_MILLIS);
@@ -1909,10 +1909,10 @@ namespace Zmanim
         /// <returns>
         /// the number of minutes after sunset for Tzais.
         /// </returns>
-        /// <seealso cref="setAteretTorahSunsetOffset(double)"/>
+        /// <seealso cref="SetAteretTorahSunsetOffset"/>
         public virtual double GetAteretTorahSunsetOffset()
         {
-            return ateretTorahSunsetOffset;
+            return AteretTorahSunsetOffset;
         }
 
         /// <summary>
@@ -1922,14 +1922,14 @@ namespace Zmanim
         /// Israel where a 25 minute offset is used. This 25 minute (or any other)
         /// offset can be overridden by this methd. This offset impacts all Ateret
         /// Torah methods.
+        /// --
+        /// Returns the offset in minutes after sunset used to calculate
+        /// <em>tzais</em> for the Ateret Torah zmanim. The defaullt value is 40
+        /// minutes.
         /// </summary>
-        /// <param name="ateretTorahSunsetOffset">the number of minutes after sunset to use as an offset for the
-        /// Ateret Torah <em>tzais</em></param>
-        /// <seealso cref="GetAteretTorahSunsetOffset"/>
-        public virtual void setAteretTorahSunsetOffset(double ateretTorahSunsetOffset)
-        {
-            this.ateretTorahSunsetOffset = ateretTorahSunsetOffset;
-        }
+        /// <value>the number of minutes after sunset to use as an offset for the
+        ///   Ateret Torah &lt;em&gt;tzais&lt;/em&gt;</value>
+        public virtual double AteretTorahSunsetOffset { get; set; }
 
         /// <summary>
         /// This method returns the latest <em>zman krias shema</em> (time to say
@@ -1952,7 +1952,7 @@ namespace Zmanim
         /// <seealso cref="GetAlos72Zmanis()"/>
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="GetAteretTorahSunsetOffset"/>
-        /// <seealso cref="setAteretTorahSunsetOffset(double)"/>
+        /// <seealso cref="SetAteretTorahSunsetOffset"/>
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
         public virtual DateTime GetSofZmanShmaAteretTorah()
         {
@@ -1979,7 +1979,7 @@ namespace Zmanim
         /// <seealso cref="GetAlos72Zmanis()"/>
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
-        /// <seealso cref="setAteretTorahSunsetOffset(double)"/>
+        /// <seealso cref="SetAteretTorahSunsetOffset"/>
         public virtual DateTime GetSofZmanTfilahAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 4);
