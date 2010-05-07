@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zmanim.Utilities
+namespace Zmanim.Calculator
 {
 
     /// <summary>

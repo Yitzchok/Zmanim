@@ -79,7 +79,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TimeZone\WindowsTimeZone.cs" />
-    <Compile Include="Utilities\AstronomicalCalculator.cs">
+    <Compile Include="Calculator\AstronomicalCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\GeoLocation.cs">
@@ -88,14 +88,14 @@
     <Compile Include="Utilities\GeoLocationUtils.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\IAstronomicalCalculator.cs" />
-    <Compile Include="Utilities\JSuntimeCalculator.cs">
+    <Compile Include="Calculator\IAstronomicalCalculator.cs" />
+    <Compile Include="Calculator\JSuntimeCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\NOAACalculator.cs">
+    <Compile Include="Calculator\NOAACalculator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\SunTimesCalculator.cs">
+    <Compile Include="Calculator\SunTimesCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\Time.cs">
@@ -104,7 +104,7 @@
     <Compile Include="Utilities\Zman.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\ZmanimCalculator.cs" />
+    <Compile Include="Calculator\ZmanimCalculator.cs" />
     <Compile Include="Utilities\ZmanimFormatter.cs" />
     <Compile Include="ZmanimCalendar.cs">
       <SubType>Code</SubType>
@@ -131,6 +131,7 @@
     <Reference Include="System" />
     <Reference Include="System.XML" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />

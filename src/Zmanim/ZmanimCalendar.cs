@@ -19,6 +19,7 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using Zmanim.Calculator;
 using Zmanim.Utilities;
 
 namespace Zmanim
@@ -49,15 +50,15 @@ namespace Zmanim
         ///  16.1° below <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
         ///</summary>
         ///<seealso cref="GetAlosHashachar" />
-        ///<seealso cref="ComplexZmanimCalendar.getAlos16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getTzais16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getSofZmanShmaMGA16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getSofZmanTfilaMGA16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getMinchaGedola16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getMinchaKetana16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getPlagHamincha16Point1Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()" />
-        ///<seealso cref="ComplexZmanimCalendar.getSofZmanShmaAlos16Point1ToSunset()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetAlos16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetTzais16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetSofZmanShmaMGA16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetSofZmanTfilaMGA16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetMinchaGedola16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetMinchaKetana16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetPlagHamincha16Point1Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees()" />
+        ///<seealso cref="ComplexZmanimCalendar.GetSofZmanShmaAlos16Point1ToSunset()" />
         protected internal const double ZENITH_16_POINT_1 = GEOMETRIC_ZENITH + 16.1;
 
         ///<summary>
@@ -71,7 +72,7 @@ namespace Zmanim
         ///  visible, later than the required 3 medium stars.
         ///</summary>
         ///<seealso cref = "GetTzais" />
-        ///<seealso cref = "ComplexZmanimCalendar.getTzaisGeonim8Point5Degrees" />
+        ///<seealso cref = "ComplexZmanimCalendar.GetTzaisGeonim8Point5Degrees" />
         protected internal const double ZENITH_8_POINT_5 = GEOMETRIC_ZENITH + 8.5;
 
         ///<summary>
@@ -201,9 +202,9 @@ namespace Zmanim
         ///  returns the time of 3 * <em>shaos zmaniyos</em> after dawn.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
-        ///<seealso cref = "ComplexZmanimCalendar.getShaahZmanis72Minutes()" />
+        ///<seealso cref = "ComplexZmanimCalendar.GetShaahZmanis72Minutes()" />
         ///<seealso cref = "GetAlos72" />
-        ///<seealso cref = "ComplexZmanimCalendar.getSofZmanShmaMGA72Minutes()" />
+        ///<seealso cref = "ComplexZmanimCalendar.GetSofZmanShmaMGA72Minutes()" />
         public virtual DateTime GetSofZmanShmaMGA()
         {
             return GetTimeOffset(GetAlos72(), GetShaahZmanisMGA() * 3);
@@ -226,13 +227,12 @@ namespace Zmanim
 
         ///<summary>
         ///  A method to return candle lighting time. This is calculated as
-        ///  <seealso cref = "GetCandleLightingOffset" /> minutes before sunset. This will
+        ///  <seealso cref = "CandleLightingOffset" /> minutes before sunset. This will
         ///  return the time for any day of the week, since it can be used to
         ///  calculate candle lighting time for <em>yom tov</em> (holidays) as well.
         ///</summary>
         ///<returns> candle lighting time. </returns>
-        ///<seealso cref = "GetCandleLightingOffset" />
-        ///<seealso cref = "SetCandleLightingOffset" />
+        ///<seealso cref = "CandleLightingOffset" />
         public virtual DateTime GetCandelLighting()
         {
             return GetTimeOffset(GetSunset(), -CandleLightingOffset * MINUTE_MILLIS);
@@ -339,7 +339,7 @@ namespace Zmanim
         ///  day from <see cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see> to
         ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>. The day is split into 12
         ///  equal parts each part with each one being a <em>shaah zmanis</em>. This
-        ///  method is similar to <see cref = "AstronomicalCalendar.GetTemporalHour" />, but all calculations are
+        ///  method is similar to <see cref = "AstronomicalCalendar.GetTemporalHour()" />, but all calculations are
         ///  based on a sealevel sunrise and sunset. For additional information, see
         ///  Zmanim Kehilchasam, 2nd Edition by Rabbi Dovid Yehuda Burstein,
         ///  Jerusalem, 2007.

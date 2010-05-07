@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace Zmanim.Utilities
+namespace Zmanim.Calculator
 {
     /// <summary>
     ///   Implementation of sunrise and sunset methods to calculate astronomical times.
@@ -45,7 +45,7 @@ namespace Zmanim.Utilities
         /// <summary>
         /// </summary>
         /// <value>the descriptive name of the algorithm.</value>
-        /// <seealso cref="NOAACalculator.getCalculatorName"/>
+        /// <seealso cref="NOAACalculator.CalculatorName"/>
         [Obsolete]
         public override string CalculatorName
         {

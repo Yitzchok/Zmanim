@@ -23,11 +23,11 @@ using System;
 namespace Zmanim.Utilities
 {
     /// <summary>
-    ///   A class that represents a numeric time. Times that represent a time of day
-    ///   are stored as <seealso cref = "DateTime" />s in this API. The time class is used to
-    ///   represent numeric time such as the time in hours, minutes, seconds and
-    ///   milliseconds of a
-    ///   <see cref = "AstronomicalCalendar.GetTemporalHour">temporal hour"/>.</see>.
+    /// A class that represents a numeric time. Times that represent a time of day
+    /// are stored as <seealso cref="DateTime"/>s in this API. The time class is used to
+    /// represent numeric time such as the time in hours, minutes, seconds and
+    /// milliseconds of a
+    /// <see cref="AstronomicalCalendar.GetTemporalHour()">temporal hour</see>.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class Time

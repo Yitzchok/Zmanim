@@ -1,4 +1,5 @@
 ﻿using System;
+using Zmanim.Calculator;
 using Zmanim.Utilities;
 
 namespace Zmanim
@@ -16,13 +17,13 @@ namespace Zmanim
         ///  by the <seealso cref = "AstronomicalCalendar.AstronomicalCalculator" /> that adds approximately 50/60 of a
         ///  degree to account for 34 archminutes of refraction and 16 archminutes for
         ///  the sun's radius for a total of
-        ///  <seealso cref = "AstronomicalCalendar.AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
+        ///  <seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
         ///  documentation for the specific implementation of the
         ///  <seealso cref = "AstronomicalCalendar.AstronomicalCalculator" /> that you are using.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the exact sunrise time. If
         ///  the calculation can not be computed null will be returned. </returns>
-        ///<seealso cref = "AstronomicalCalendar.AstronomicalCalculator.AdjustZenith" />
+        ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
         DateTime GetSunrise();
 
         ///<summary>
@@ -32,9 +33,9 @@ namespace Zmanim
         ///  by the <see cref = "AstronomicalCalendar.AstronomicalCalculator" /> that adds approximately 50/60 of a
         ///  degree to account for 34 archminutes of refraction and 16 archminutes for
         ///  the sun's radius for a total of
-        ///  <see cref = "AstronomicalCalendar.AstronomicalCalculator.adjustZenith">90.83333°</see>. See
+        ///  <see cref = "Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</see>. See
         ///  documentation for the specific implementation of the
-        ///  <see cref = "AstronomicalCalendar.AstronomicalCalculator" /> that you are using. Note: In certain cases
+        ///  <see cref = "Calculator.AstronomicalCalculator" /> that you are using. Note: In certain cases
         ///  the calculates sunset will occur before sunrise. This will typically
         ///  happen when a timezone other than the local timezone is used (calculating
         ///  Los Angeles sunset using a GMT timezone for example). In this case the
@@ -43,7 +44,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the exact sunset time. If
         ///  the calculation can not be computed null will be returned. If the
         ///  time calculation </returns>
-        ///<seealso cref = "AstronomicalCalendar.AstronomicalCalculator.adjustZenith" />
+        ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
         DateTime GetSunset();
 
         /// <summary>

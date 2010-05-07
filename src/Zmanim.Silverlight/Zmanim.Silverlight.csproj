@@ -60,6 +60,24 @@
     <Compile Include="..\Zmanim\AstronomicalCalendar.cs">
       <Link>AstronomicalCalendar.cs</Link>
     </Compile>
+    <Compile Include="..\Zmanim\Calculator\AstronomicalCalculator.cs">
+      <Link>Calculator\AstronomicalCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Calculator\IAstronomicalCalculator.cs">
+      <Link>Calculator\IAstronomicalCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Calculator\JSuntimeCalculator.cs">
+      <Link>Calculator\JSuntimeCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Calculator\NOAACalculator.cs">
+      <Link>Calculator\NOAACalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Calculator\SunTimesCalculator.cs">
+      <Link>Calculator\SunTimesCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Calculator\ZmanimCalculator.cs">
+      <Link>Calculator\ZmanimCalculator.cs</Link>
+    </Compile>
     <Compile Include="..\Zmanim\ComplexZmanimCalendar.cs">
       <Link>ComplexZmanimCalendar.cs</Link>
     </Compile>
@@ -84,35 +102,17 @@
     <Compile Include="..\Zmanim\TimeZone\WindowsTimeZone.cs">
       <Link>TimeZone\WindowsTimeZone.cs</Link>
     </Compile>
-    <Compile Include="..\Zmanim\Utilities\AstronomicalCalculator.cs">
-      <Link>Utilities\AstronomicalCalculator.cs</Link>
-    </Compile>
     <Compile Include="..\Zmanim\Utilities\GeoLocation.cs">
       <Link>Utilities\GeoLocation.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\Utilities\GeoLocationUtils.cs">
       <Link>Utilities\GeoLocationUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Zmanim\Utilities\IAstronomicalCalculator.cs">
-      <Link>Utilities\IAstronomicalCalculator.cs</Link>
-    </Compile>
-    <Compile Include="..\Zmanim\Utilities\JSuntimeCalculator.cs">
-      <Link>Utilities\JSuntimeCalculator.cs</Link>
-    </Compile>
-    <Compile Include="..\Zmanim\Utilities\NOAACalculator.cs">
-      <Link>Utilities\NOAACalculator.cs</Link>
-    </Compile>
-    <Compile Include="..\Zmanim\Utilities\SunTimesCalculator.cs">
-      <Link>Utilities\SunTimesCalculator.cs</Link>
-    </Compile>
     <Compile Include="..\Zmanim\Utilities\Time.cs">
       <Link>Utilities\Time.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\Utilities\Zman.cs">
       <Link>Utilities\Zman.cs</Link>
-    </Compile>
-    <Compile Include="..\Zmanim\Utilities\ZmanimCalculator.cs">
-      <Link>Utilities\ZmanimCalculator.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\Utilities\ZmanimFormatter.cs">
       <Link>Utilities\ZmanimFormatter.cs</Link>

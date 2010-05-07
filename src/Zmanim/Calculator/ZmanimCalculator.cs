@@ -21,7 +21,7 @@
 using System;
 using Zmanim.Extensions;
 
-namespace Zmanim.Utilities
+namespace Zmanim.Calculator
 {
     /// <summary>
     ///   Implementation of sunrise and sunset methods to calculate astronomical times.

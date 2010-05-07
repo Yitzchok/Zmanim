@@ -19,6 +19,7 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using Zmanim.Calculator;
 using Zmanim.Extensions;
 using Zmanim.Utilities;
 
@@ -27,11 +28,11 @@ namespace Zmanim
     ///<summary>
     ///  A calendar that calculates astronomical time calculations such as
     ///  <see cref = "GetSunrise">sunrise</see> and <see cref = "GetSunset">sunset</see> times. This
-    ///  class contains a <see cref = "getCalendar()">Calendar</see> and can therefore use the
+    ///  class contains a <see cref = "Calendar">Calendar</see> and can therefore use the
     ///  standard Calendar functionality to change dates etc. The calculation engine
     ///  used to calculate the astronomical times can be changed to a different
     ///  implementation by implementing the <see cref = "AstronomicalCalculator" /> and setting
-    ///  it with the <see cref = "setAstronomicalCalculator(AstronomicalCalculator)" />. A
+    ///  it with the <see cref = "AstronomicalCalculator" />. A
     ///  number of different implementations are included in the util package <br />
     ///  <b>Note:</b> There are times when the algorithms can't calculate proper
     ///  values for sunrise and sunset. This is usually caused by trying to calculate
@@ -73,7 +74,7 @@ namespace Zmanim
         ///<summary>
         ///  90° below the vertical. Used for certain calculations.<br />
         ///  <b>Note </b>: it is important to note the distinction between this zenith
-        ///  and the <see cref = "AstronomicalCalculator.adjustZenith">adjusted zenith</see> used
+        ///  and the <see cref = "Calculator.AstronomicalCalculator.AdjustZenith">adjusted zenith</see> used
         ///  for some solar calculations. This 90 zenith is only used because some
         ///  calculations in some subclasses are historically calculated as an offset
         ///  in reference to 90.
@@ -137,7 +138,7 @@ namespace Zmanim
         ///<summary>
         ///  Default constructor will set a default <see cref = "GeoLocation" />,
         ///  a default
-        ///  <see cref = "AstronomicalCalculator.getDefault()">AstronomicalCalculator</see> and
+        ///  <see cref = "Calculator.AstronomicalCalculator.GetDefault()">AstronomicalCalculator</see> and
         ///  default the calendar to the current date.
         ///</summary>
         public AstronomicalCalendar()
@@ -155,7 +156,7 @@ namespace Zmanim
         {
             Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.TimeZone);
             GeoLocation = geoLocation; // duplicate call
-            AstronomicalCalculator = Utilities.AstronomicalCalculator.GetDefault();
+            AstronomicalCalculator = Calculator.AstronomicalCalculator.GetDefault();
         }
 
 
@@ -164,7 +165,7 @@ namespace Zmanim
         /// <b>Note:</b> If the <seealso cref="Zmanim.TimeZone.ITimeZone"/> in the cloned
         /// <see cref="GeoLocation"/> will be changed from the
         /// original, it is critical that
-        /// <see cref="AstronomicalCalendar.getCalendar()"/>.
+        /// <see cref="AstronomicalCalendar.Calendar"/>.
         /// <see cref="ITimeZoneDateTime.TimeZone">TimeZone</see>
         /// be set in order for the AstronomicalCalendar to output times in the
         /// expected offset after being cloned.
@@ -190,13 +191,13 @@ namespace Zmanim
         ///  by the <seealso cref = "AstronomicalCalculator" /> that adds approximately 50/60 of a
         ///  degree to account for 34 archminutes of refraction and 16 archminutes for
         ///  the sun's radius for a total of
-        ///  <seealso cref = "AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
+        ///  <seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
         ///  documentation for the specific implementation of the
         ///  <seealso cref = "AstronomicalCalculator" /> that you are using.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the exact sunrise time. If
         ///  the calculation can not be computed null will be returned. </returns>
-        ///<seealso cref = "AstronomicalCalculator.AdjustZenith" />
+        ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
         public virtual DateTime GetSunrise()
         {
             double sunrise = GetUtcSunrise(GEOMETRIC_ZENITH);
@@ -274,7 +275,7 @@ namespace Zmanim
         ///  by the <see cref = "AstronomicalCalculator" /> that adds approximately 50/60 of a
         ///  degree to account for 34 archminutes of refraction and 16 archminutes for
         ///  the sun's radius for a total of
-        ///  <see cref = "AstronomicalCalculator.adjustZenith">90.83333°</see>. See
+        ///  <see cref = "Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</see>. See
         ///  documentation for the specific implementation of the
         ///  <see cref = "AstronomicalCalculator" /> that you are using. Note: In certain cases
         ///  the calculates sunset will occur before sunrise. This will typically
@@ -285,7 +286,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the exact sunset time. If
         ///  the calculation can not be computed null will be returned. If the
         ///  time calculation </returns>
-        ///<seealso cref = "AstronomicalCalculator.adjustZenith" />
+        ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
         public virtual DateTime GetSunset()
         {
             double sunset = GetUtcSunset(GEOMETRIC_ZENITH);

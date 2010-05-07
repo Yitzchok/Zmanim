@@ -20,6 +20,7 @@
 
 using System;
 using System.Text;
+using Zmanim.Calculator;
 using Zmanim.Extensions;
 using Zmanim.TimeZone;
 
