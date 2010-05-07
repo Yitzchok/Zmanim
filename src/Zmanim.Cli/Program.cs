@@ -35,7 +35,7 @@ namespace Zmanim.Cli
             {
                 extraArgs = p.Parse(args);
             }
-            catch (OptionException e)
+            catch (OptionException)
             {
                 ShowHelp();
                 return;

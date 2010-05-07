@@ -31,7 +31,6 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim $version" `
 		-version $version `
-		-clsCompliant "false" `
 		-copyright "Copyright © Eliyahu Hershfeld 2010"
 		
 	Generate-Assembly-Info `
@@ -95,7 +94,6 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim Silverlight $version" `
 		-version $version `
-		-clsCompliant "false" `
 		-copyright "Copyright © Eliyahu Hershfeld 2010"
 		
 	new-item $release_dir -itemType directory 

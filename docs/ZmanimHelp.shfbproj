@@ -21,7 +21,12 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\src\Zmanim\Zmanim.csproj" />
     </DocumentationSources>
-    <CopyrightHref>http://www.kosherjava.com/zmanim-project/</CopyrightHref>
+    <CopyrightHref>http://yitzchok.github.com/Zmanim/</CopyrightHref>
+    <CopyrightText>Zmanim Project</CopyrightText>
+    <HeaderText>Jewish Zmanim Framework for .NET</HeaderText>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <MissingTags>None</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional
