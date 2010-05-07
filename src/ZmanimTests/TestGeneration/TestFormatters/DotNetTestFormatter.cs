@@ -22,11 +22,11 @@ namespace ZmanimTests.TestGeneration.TestFormatters
             double latitude = 40.09596; //Lakewood, NJ
             double longitude = -74.22213; //Lakewood, NJ
             double elevation = 0; //optional elevation
-            TimeZone timeZone = TimeZone.getTimeZone(""America/New_York"");
+            ITimeZone timeZone = new OlsonTimeZone(""America/New_York"");
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
 
-            czc.setCalendar(new GregorianCalendar(2010, 3, 2));
+            czc.Calendar = new TimeZoneDateTime(new DateTime(2010, 4, 2));
             calendar = czc;
         }
 ");
@@ -65,13 +65,13 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                     new DateTime({1}, {2}, {3}, {4}, {5}, {6})
                 ));",
                     methodName,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH) + 1,
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE),
-                    calendar.get(Calendar.SECOND),
-                    calendar.get(Calendar.MILLISECOND)
+                    calendar.Get(Calendar.YEAR),
+                    calendar.Get(Calendar.MONTH) + 1,
+                    calendar.Get(Calendar.DAY_OF_MONTH),
+                    calendar.Get(Calendar.HOUR_OF_DAY),
+                    calendar.Get(Calendar.MINUTE),
+                    calendar.Get(Calendar.SECOND),
+                    calendar.Get(Calendar.MILLISECOND)
                     ));
             return this;
         }
@@ -118,13 +118,12 @@ namespace ZmanimTests.TestGeneration.TestFormatters
 
             return string.Format(@"
 using System;
-using java.util;
-using net.sourceforge.zmanim;
-using net.sourceforge.zmanim.util;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using Zmanim.Extensions;
-using TimeZone = java.util.TimeZone;
+using Zmanim;
+using Zmanim.TimeZone;
+using Zmanim.TzDatebase;
+using Zmanim.Utilities;
 
 namespace ZmanimTests
 {{

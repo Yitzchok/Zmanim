@@ -12,7 +12,7 @@ namespace ZmanimTests
         [Test]
         public void Check_getFixedLocalChatzosDST()
         {
-            var zman = GetCalendar().getFixedLocalChatzos();
+            var zman = GetCalendar().GetFixedLocalChatzos();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 12, 56, 53, 311)
@@ -34,7 +34,7 @@ namespace ZmanimTests
         {
             var calendar = GetCalendar();
             calendar.Calendar = new TimeZoneDateTime(dateTime);
-            return calendar.getFixedLocalChatzos();
+            return calendar.GetFixedLocalChatzos();
         }
 
         [Test, Ignore]

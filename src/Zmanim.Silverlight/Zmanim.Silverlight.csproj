@@ -93,6 +93,9 @@
     <Compile Include="..\Zmanim\Utilities\GeoLocationUtils.cs">
       <Link>Utilities\GeoLocationUtils.cs</Link>
     </Compile>
+    <Compile Include="..\Zmanim\Utilities\IAstronomicalCalculator.cs">
+      <Link>Utilities\IAstronomicalCalculator.cs</Link>
+    </Compile>
     <Compile Include="..\Zmanim\Utilities\JSuntimeCalculator.cs">
       <Link>Utilities\JSuntimeCalculator.cs</Link>
     </Compile>
@@ -119,7 +122,6 @@
     </Compile>
     <Compile Include="ICloneable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\IAstronomicalCalculator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
