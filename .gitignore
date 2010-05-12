@@ -1,14 +1,12 @@
 # Standard VS.NET and ReSharper Foo
-obj
-bin
-Bin
+obj/
+[Bb]in/
 *.csproj.user
 *ReSharper*
 *resharper*
 *.suo
-*.cache
-*.Cache
-* Thumbs.db
+*.[Cc]ache
+*Thumbs.db
 
 # Other useful stuff
 *.bak
