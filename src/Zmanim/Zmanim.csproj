@@ -82,6 +82,7 @@
     <Compile Include="Calculator\AstronomicalCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\BitConverter.cs" />
     <Compile Include="Utilities\GeoLocation.cs">
       <SubType>Code</SubType>
     </Compile>

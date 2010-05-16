@@ -102,6 +102,9 @@
     <Compile Include="..\Zmanim\TimeZone\WindowsTimeZone.cs">
       <Link>TimeZone\WindowsTimeZone.cs</Link>
     </Compile>
+    <Compile Include="..\Zmanim\Utilities\BitConverter.cs">
+      <Link>Utilities\BitConverter.cs</Link>
+    </Compile>
     <Compile Include="..\Zmanim\Utilities\GeoLocation.cs">
       <Link>Utilities\GeoLocation.cs</Link>
     </Compile>
