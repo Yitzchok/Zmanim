@@ -22,7 +22,7 @@ namespace Zmanim.Extensions
     /// </summary>
     public static class DateExtensions
     {
-        public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1);
+        internal static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1);
 
         /// <summary>
         /// Converts Unix Epoch Milliseconds to DateTime.
