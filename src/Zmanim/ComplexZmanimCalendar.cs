@@ -1107,7 +1107,7 @@ namespace Zmanim
             {
                 return DateTime.MinValue;
             }
-            long diff = (chatzos.ToMillisecondsFromEpoch() - GetSeaLevelSunrise().ToMillisecondsFromEpoch()) / 2;
+            long diff = (chatzos.ToUnixEpochMilliseconds() - GetSeaLevelSunrise().ToUnixEpochMilliseconds()) / 2;
             return GetTimeOffset(chatzos, -diff);
         }
 
@@ -1732,7 +1732,7 @@ namespace Zmanim
             {
                 return DateTime.MinValue;
             }
-            return GetTimeOffset(GetSeaLevelSunset(), (sunrise.ToMillisecondsFromEpoch() - alos19Point8.ToMillisecondsFromEpoch()) * (5 / 18d));
+            return GetTimeOffset(GetSeaLevelSunset(), (sunrise.ToUnixEpochMilliseconds() - alos19Point8.ToUnixEpochMilliseconds()) * (5 / 18d));
         }
 
         // public Date getTzaisGeonim3Point7Degrees() {

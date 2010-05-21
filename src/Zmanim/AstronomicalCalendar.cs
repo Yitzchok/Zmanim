@@ -641,7 +641,7 @@ namespace Zmanim
 
             var degrees = 0m;
             var incrementor = 0.0001m;
-            while (offsetByDegrees == null || offsetByDegrees.ToMillisecondsFromEpoch() > offsetByTime.ToMillisecondsFromEpoch())
+            while (offsetByDegrees == null || offsetByDegrees.ToUnixEpochMilliseconds() > offsetByTime.ToUnixEpochMilliseconds())
             {
                 degrees += incrementor;
                 offsetByDegrees = GetSunriseOffsetByDegrees(GEOMETRIC_ZENITH + (double)degrees);
@@ -670,7 +670,7 @@ namespace Zmanim
 
             var degrees = 0m;
             var incrementor = 0.0001m;
-            while (offsetByDegrees == null || offsetByDegrees.ToMillisecondsFromEpoch() < offsetByTime.ToMillisecondsFromEpoch())
+            while (offsetByDegrees == null || offsetByDegrees.ToUnixEpochMilliseconds() < offsetByTime.ToUnixEpochMilliseconds())
             {
                 degrees += incrementor;
                 offsetByDegrees = GetSunsetOffsetByDegrees(GEOMETRIC_ZENITH + (double)degrees);

@@ -18,28 +18,30 @@ using System;
 namespace Zmanim.Extensions
 {
     /// <summary>
-    /// Date extensions.
+    /// DateTime extensions.
     /// </summary>
     public static class DateExtensions
     {
+        public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1);
+
         /// <summary>
-        /// Toes the date time.
+        /// Converts Unix Epoch Milliseconds to DateTime.
         /// </summary>
-        /// <param name="fromEpoch">From epoch.</param>
+        /// <param name="unixEpochMilliseconds">Milliseconds from the Unix Epoch.</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this long fromEpoch)
+        public static DateTime ToDateTime(this long unixEpochMilliseconds)
         {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(fromEpoch);
+            return UnixEpoch.AddMilliseconds(unixEpochMilliseconds);
         }
 
         /// <summary>
-        /// Toes the milliseconds from epoch.
+        /// Converts a DateTime to Unix Epoch Milliseconds.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns></returns>
-        public static long ToMillisecondsFromEpoch(this DateTime dateTime)
+        public static long ToUnixEpochMilliseconds(this DateTime dateTime)
         {
-            return (long)(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+            return (long)(dateTime - UnixEpoch).TotalMilliseconds;
         }
     }
 }
