@@ -1,12 +1,12 @@
 using System;
-using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace Zmanim
 {
     /// <summary>
-    /// A DateTime that works with the TimeZone.
+    /// The GeoLocation and DateTime.
     /// </summary>
-    public interface ITimeZoneDateTime : ICloneable
+    public interface IDateWithLocation : ICloneable
     {
         /// <summary>
         /// Gets or sets the date.
@@ -15,9 +15,9 @@ namespace Zmanim
         DateTime Date { get; set; }
 
         /// <summary>
-        /// Gets or sets the time zone.
+        /// Gets or sets the location.
         /// </summary>
-        /// <value>The time zone.</value>
-        ITimeZone TimeZone { get; set; }
+        /// <value>The location.</value>
+        IGeoLocation Location { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace Zmanim
     ///<summary>
     ///  A calendar that calculates astronomical time calculations such as
     ///  <see cref = "GetSunrise">sunrise</see> and <see cref = "GetSunset">sunset</see> times. This
-    ///  class contains a <see cref = "Calendar">Calendar</see> and can therefore use the
+    ///  class contains a <see cref = "DateWithLocation">Calendar</see> and can therefore use the
     ///  standard Calendar functionality to change dates etc. The calculation engine
     ///  used to calculate the astronomical times can be changed to a different
     ///  implementation by implementing the <see cref = "AstronomicalCalculator" /> and setting
@@ -128,14 +128,6 @@ namespace Zmanim
         internal const long HOUR_MILLIS = MINUTE_MILLIS * 60;
 
         ///<summary>
-        ///  The Java Calendar encapsulated by this class to track the current date
-        ///  used by the class
-        ///</summary>
-        private ITimeZoneDateTime timeZoneDateTime;
-
-        private GeoLocation geoLocation;
-
-        ///<summary>
         ///  Default constructor will set a default <see cref = "GeoLocation" />,
         ///  a default
         ///  <see cref = "Calculator.AstronomicalCalculator.GetDefault()">AstronomicalCalculator</see> and
@@ -152,10 +144,20 @@ namespace Zmanim
         ///<param name = "geoLocation">
         ///  The location information used for astronomical calculating sun
         ///  times. </param>
-        public AstronomicalCalendar(GeoLocation geoLocation)
+        public AstronomicalCalendar(IGeoLocation geoLocation)
+            : this(DateTime.Now, geoLocation)
+        { }
+
+        ///<summary>
+        ///  A constructor that takes in as a parameter geolocation information
+        ///</summary>
+        ///<param name="dateTime">The DateTime</param>
+        ///<param name = "geoLocation">
+        ///  The location information used for astronomical calculating sun
+        ///  times. </param>
+        public AstronomicalCalendar(DateTime dateTime, IGeoLocation geoLocation)
         {
-            Calendar = new TimeZoneDateTime(DateTime.Now, geoLocation.TimeZone);
-            GeoLocation = geoLocation; // duplicate call
+            DateWithLocation = new DateWithLocation(dateTime, geoLocation);
             AstronomicalCalculator = Calculator.AstronomicalCalculator.GetDefault();
         }
 
@@ -165,8 +167,8 @@ namespace Zmanim
         /// <b>Note:</b> If the <seealso cref="Zmanim.TimeZone.ITimeZone"/> in the cloned
         /// <see cref="GeoLocation"/> will be changed from the
         /// original, it is critical that
-        /// <see cref="AstronomicalCalendar.Calendar"/>.
-        /// <see cref="ITimeZoneDateTime.TimeZone">TimeZone</see>
+        /// <see cref="DateWithLocation"/>.
+        /// <see cref="TimeZone">TimeZone</see>
         /// be set in order for the AstronomicalCalendar to output times in the
         /// expected offset after being cloned.
         /// </summary>
@@ -177,8 +179,7 @@ namespace Zmanim
         {
             var clone = (AstronomicalCalendar)MemberwiseClone();
 
-            clone.GeoLocation = (GeoLocation)GeoLocation.Clone();
-            clone.Calendar = (ITimeZoneDateTime)Calendar.Clone();
+            clone.DateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
             clone.AstronomicalCalculator = (AstronomicalCalculator)AstronomicalCalculator.Clone();
             return clone;
         }
@@ -312,10 +313,10 @@ namespace Zmanim
         {
             if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
             {
-                ITimeZoneDateTime clonedTimeZoneDateTime = (ITimeZoneDateTime)Calendar.Clone();
-                clonedTimeZoneDateTime.Date = sunset;
-                clonedTimeZoneDateTime.Date.AddDays(1);
-                return clonedTimeZoneDateTime.Date;
+                IDateWithLocation clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
+                clonedDateWithLocation.Date = sunset;
+                clonedDateWithLocation.Date.AddDays(1);
+                return clonedDateWithLocation.Date;
             }
             else
             {
@@ -541,7 +542,7 @@ namespace Zmanim
         private double GetOffsetTime(double time)
         {
             // be nice to Newfies and use a double
-            double gmtOffset = Calendar.TimeZone.UtcOffset(Calendar.Date) / (60 * MINUTE_MILLIS);
+            double gmtOffset = DateWithLocation.Location.TimeZone.UtcOffset(DateWithLocation.Date) / (60 * MINUTE_MILLIS);
 
             return time + gmtOffset;
         }
@@ -617,7 +618,7 @@ namespace Zmanim
             var seconds = (int)(time *= 60);
             time -= seconds; // milliseconds
 
-            return new DateTime(Calendar.Date.Year, Calendar.Date.Month, Calendar.Date.Day,
+            return new DateTime(DateWithLocation.Date.Year, DateWithLocation.Date.Month, DateWithLocation.Date.Day,
                 hours, minutes, seconds, (int)(time * 1000));
         }
 
@@ -705,7 +706,7 @@ namespace Zmanim
             if (!(obj is AstronomicalCalendar))
                 return false;
             var aCal = (AstronomicalCalendar)obj;
-            return Calendar.Equals(aCal.Calendar) && GeoLocation.Equals(aCal.GeoLocation) &&
+            return DateWithLocation.Equals(aCal.DateWithLocation) && DateWithLocation.Location.Equals(aCal.DateWithLocation.Location) &&
                    AstronomicalCalculator.Equals(aCal.AstronomicalCalculator);
         }
 
@@ -719,26 +720,10 @@ namespace Zmanim
         {
             int result = 17;
             result = 37 * result + GetType().GetHashCode(); // needed or this and subclasses will return identical hash
-            result += 37 * result + Calendar.GetHashCode();
-            result += 37 * result + GeoLocation.GetHashCode();
+            result += 37 * result + DateWithLocation.GetHashCode();
+            result += 37 * result + DateWithLocation.Location.GetHashCode();
             result += 37 * result + AstronomicalCalculator.GetHashCode();
             return result;
-        }
-
-        /// <summary>
-        /// Gets or Sets the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
-        /// </summary>
-        /// <value>The geoLocation to set.</value>
-        public virtual GeoLocation GeoLocation
-        {
-            set
-            {
-                this.geoLocation = value;
-                // if not set the output will be in the original timezone. The call
-                // below is also in the constructor
-                Calendar.TimeZone = value.TimeZone;
-            }
-            get { return geoLocation; }
         }
 
         /// <summary>
@@ -748,22 +733,9 @@ namespace Zmanim
         public virtual IAstronomicalCalculator AstronomicalCalculator { get; set; }
 
         /// <summary>
-        /// Gets or Sets the calender to be used in the calculations.
+        /// Gets or Sets the Date and Location to be used in the calculations.
         /// </summary>
         /// <value>The calendar to set.</value>
-        public virtual ITimeZoneDateTime Calendar
-        {
-            set
-            {
-                this.timeZoneDateTime = value;
-                if (GeoLocation != null) // set the timezone if possible
-                {
-                    // Always set the Calendar's timezone to match the GeoLocation
-                    // TimeZone
-                    Calendar.TimeZone = GeoLocation.TimeZone;
-                }
-            }
-            get { return timeZoneDateTime; }
-        }
+        public virtual IDateWithLocation DateWithLocation { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace ZmanimTests
             for (int i = 0; i < daysInMonth; i++)
             {
                 var zmanimCalendar = new ComplexZmanimCalendar(location);
-                zmanimCalendar.Calendar.Date = new DateTime(yearAndMonth.Year, yearAndMonth.Month, i + 1);
+                zmanimCalendar.DateWithLocation.Date = new DateTime(yearAndMonth.Year, yearAndMonth.Month, i + 1);
                 yield return zmanimCalendar;
             }
         }
@@ -54,7 +54,7 @@ namespace ZmanimTests
                 for (int dayOfMonth = 0; dayOfMonth < daysInMonth; dayOfMonth++)
                 {
                     var zmanimCalendar = new ComplexZmanimCalendar(location);
-                    zmanimCalendar.Calendar.Date = new DateTime(currentYear, currentMonth, dayOfMonth + 1, calendar);
+                    zmanimCalendar.DateWithLocation.Date = new DateTime(currentYear, currentMonth, dayOfMonth + 1, calendar);
                     yield return zmanimCalendar;
                 }
             }

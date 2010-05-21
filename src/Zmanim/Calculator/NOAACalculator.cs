@@ -76,16 +76,16 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
 
-            double sunRise = CalcSunriseUtc(CalcJd(astronomicalCalendar.Calendar),
-                                            astronomicalCalendar.GeoLocation.Latitude,
-                                            -astronomicalCalendar.GeoLocation.Longitude, zenith);
+            double sunRise = CalcSunriseUtc(CalcJd(astronomicalCalendar.DateWithLocation),
+                                            astronomicalCalendar.DateWithLocation.Location.Latitude,
+                                            -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
             return sunRise / 60;
         }
 
@@ -122,16 +122,16 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
 
-            double sunSet = CalcSunsetUtc(CalcJd(astronomicalCalendar.Calendar),
-                                          astronomicalCalendar.GeoLocation.Latitude,
-                                          -astronomicalCalendar.GeoLocation.Longitude, zenith);
+            double sunSet = CalcSunsetUtc(CalcJd(astronomicalCalendar.DateWithLocation),
+                                          astronomicalCalendar.DateWithLocation.Location.Latitude,
+                                          -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
             return sunSet / 60;
         }
 
@@ -142,7 +142,7 @@ namespace Zmanim.Calculator
         ///  Java Calendar </param>
         ///<returns> the Julian day corresponding to the date Note: Number is returned
         ///  for start of day. Fractional days should be added later. </returns>
-        private static double CalcJd(ITimeZoneDateTime date)
+        private static double CalcJd(IDateWithLocation date)
         {
             int year = date.Date.Year;
             int month = date.Date.Month + 1;

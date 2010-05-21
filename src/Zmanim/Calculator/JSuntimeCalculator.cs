@@ -86,15 +86,15 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            double timeMins = MorningPhenomenon(DateToJulian(astronomicalCalendar.Calendar),
-                                                astronomicalCalendar.GeoLocation.Latitude,
-                                                -astronomicalCalendar.GeoLocation.Longitude, zenith);
+            double timeMins = MorningPhenomenon(DateToJulian(astronomicalCalendar.DateWithLocation),
+                                                astronomicalCalendar.DateWithLocation.Location.Latitude,
+                                                -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
             return timeMins/60;
         }
 
@@ -132,15 +132,15 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            double timeMins = EveningPhenomenon(DateToJulian(astronomicalCalendar.Calendar),
-                                                astronomicalCalendar.GeoLocation.Latitude,
-                                                -astronomicalCalendar.GeoLocation.Longitude, zenith);
+            double timeMins = EveningPhenomenon(DateToJulian(astronomicalCalendar.DateWithLocation),
+                                                astronomicalCalendar.DateWithLocation.Location.Latitude,
+                                                -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
             return timeMins/60;
         }
 
@@ -224,7 +224,7 @@ namespace Zmanim.Calculator
             return evening;
         }
 
-        private static double DateToJulian(ITimeZoneDateTime date)
+        private static double DateToJulian(IDateWithLocation date)
         {
             int year = date.Date.Year;
             int month = date.Date.Month;

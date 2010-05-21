@@ -34,8 +34,7 @@ namespace Zmanim.Utilities
     ///   elevation is calculated as part o the algorithm.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
-    public class
-        GeoLocation : ICloneable
+    public class GeoLocation : IGeoLocation
     {
         /// <summary>
         ///   constant for milliseconds in a minute (60,000)
@@ -152,8 +151,8 @@ namespace Zmanim.Utilities
         /// Creates a new object that is a copy of the current instance.
         /// <b>Note:</b> If the <seealso cref = "Zmanim.TimeZone.ITimeZone" /> in
         ///  the clone will be changed from the original, it is critical that
-        ///  <see cref = "AstronomicalCalendar.Calendar" />.
-        ///  <see cref = "ITimeZoneDateTime.TimeZone">ITimeZoneDateTime.TimeZone</see>
+        ///  <see cref = "AstronomicalCalendar.DateWithLocation" />.
+        ///  <see cref = "IDateWithLocation.TimeZone">ITimeZoneDateTime.TimeZone</see>
         ///  is set after cloning in order for the AstronomicalCalendar to output
         ///  times in the expected offset.
         /// </summary>

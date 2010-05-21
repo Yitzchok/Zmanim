@@ -85,17 +85,17 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = GetTimeUtc(astronomicalCalendar.Calendar.Date.Year,
-                                    astronomicalCalendar.Calendar.Date.Month,
-                                    astronomicalCalendar.Calendar.Date.Day,
-                                    astronomicalCalendar.GeoLocation.Longitude,
-                                    astronomicalCalendar.GeoLocation.Latitude, zenith, TYPE_SUNRISE);
+            doubleTime = GetTimeUtc(astronomicalCalendar.DateWithLocation.Date.Year,
+                                    astronomicalCalendar.DateWithLocation.Date.Month,
+                                    astronomicalCalendar.DateWithLocation.Date.Day,
+                                    astronomicalCalendar.DateWithLocation.Location.Longitude,
+                                    astronomicalCalendar.DateWithLocation.Location.Latitude, zenith, TYPE_SUNRISE);
             return doubleTime;
         }
 
@@ -128,17 +128,17 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.GeoLocation.Elevation);
+                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = GetTimeUtc(astronomicalCalendar.Calendar.Date.Year,
-                                    astronomicalCalendar.Calendar.Date.Month,
-                                    astronomicalCalendar.Calendar.Date.Day,
-                                    astronomicalCalendar.GeoLocation.Longitude,
-                                    astronomicalCalendar.GeoLocation.Latitude, zenith, TYPE_SUNSET);
+            doubleTime = GetTimeUtc(astronomicalCalendar.DateWithLocation.Date.Year,
+                                    astronomicalCalendar.DateWithLocation.Date.Month,
+                                    astronomicalCalendar.DateWithLocation.Date.Day,
+                                    astronomicalCalendar.DateWithLocation.Location.Longitude,
+                                    astronomicalCalendar.DateWithLocation.Location.Latitude, zenith, TYPE_SUNSET);
             return doubleTime;
         }
 

@@ -28,7 +28,7 @@ namespace ZmanimTests
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
 
-            czc.Calendar = new TimeZoneDateTime(new DateTime(2010, 4, 2));
+            czc.DateWithLocation = new DateWithLocation(new DateTime(2010, 4, 2), location);
             calendar = czc;
         }
 

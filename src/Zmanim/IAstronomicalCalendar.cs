@@ -48,12 +48,6 @@ namespace Zmanim
         DateTime GetSunset();
 
         /// <summary>
-        /// Gets or Sets the <seealso cref="GeoLocation"/> to be used for astronomical calculations.
-        /// </summary>
-        /// <value>The geoLocation to set.</value>
-        GeoLocation GeoLocation { set; get; }
-
-        /// <summary>
         /// Gets or Sets the current AstronomicalCalculator set.
         /// </summary>
         /// <value>Returns the astronimicalCalculator.</value>
@@ -63,6 +57,6 @@ namespace Zmanim
         /// Gets or Sets the calender to be used in the calculations.
         /// </summary>
         /// <value>The calendar to set.</value>
-        ITimeZoneDateTime Calendar { set; get; }
+        IDateWithLocation DateWithLocation { set; get; }
     }
 }

@@ -33,7 +33,7 @@ namespace ZmanimTests
         private DateTime GetFixedLocalChatzos(DateTime dateTime)
         {
             var calendar = GetCalendar();
-            calendar.Calendar = new TimeZoneDateTime(dateTime);
+            calendar.DateWithLocation = new DateWithLocation(dateTime, calendar.DateWithLocation.Location);
             return calendar.GetFixedLocalChatzos();
         }
 

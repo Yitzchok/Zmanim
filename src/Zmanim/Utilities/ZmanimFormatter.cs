@@ -215,15 +215,15 @@ namespace Zmanim.Utilities
         ///</summary>
         ///<param name = "date">
         ///  the date to format </param>
-        ///<param name = "timeZoneDateTime">
-        ///  the <see cref = "ITimeZoneDateTime">TimeZone and DateTime</see> used to help format
+        ///<param name = "dateWithLocation">
+        ///  the <see cref = "IDateWithLocation">TimeZone and DateTime</see> used to help format
         ///  based on the Calendar's DST and other settings. </param>
         ///<returns> the formatted string </returns>
-        public virtual string FormatDate(DateTime date, ITimeZoneDateTime timeZoneDateTime)
+        public virtual string FormatDate(DateTime date, IDateWithLocation dateWithLocation)
         {
             if (DateFormat == "yyyy-MM-dd'T'HH:mm:ss")
             {
-                return GetXSDate(date, timeZoneDateTime);
+                return GetXSDate(date, dateWithLocation);
             }
             else
             {
@@ -245,7 +245,7 @@ namespace Zmanim.Utilities
         ///  followed by the difference between the difference from UTC represented as
         ///  hh:mm.
         ///</summary>
-        public virtual string GetXSDate(DateTime date, ITimeZoneDateTime cal)
+        public virtual string GetXSDate(DateTime date, IDateWithLocation cal)
         {
             string xsdDateFormat = "yyyy-MM-dd'T'HH:mm:ss";
             //        
@@ -257,7 +257,7 @@ namespace Zmanim.Utilities
             var buff = new StringBuilder(date.ToString(xsdDateFormat));
             // Must also include offset from UTF.
             // Get the offset (in milliseconds).
-            int offset = cal.TimeZone.UtcOffset(cal.Date);
+            int offset = cal.Location.TimeZone.UtcOffset(cal.Date);
             // If there is no offset, we have "Coordinated
             // Universal Time."
             if (offset == 0)
@@ -371,17 +371,17 @@ namespace Zmanim.Utilities
             {
                 output.Append("Zmanim");
             }
-            output.Append(" date=\"" + ac.Calendar.Date.ToString(df) + "\"");
+            output.Append(" date=\"" + ac.DateWithLocation.Date.ToString(df) + "\"");
             output.Append(" type=\"" + ac.GetType().Name + "\"");
             output.Append(" algorithm=\"" + ac.AstronomicalCalculator.CalculatorName + "\"");
-            output.Append(" location=\"" + ac.GeoLocation.LocationName + "\"");
-            output.Append(" latitude=\"" + ac.GeoLocation.Latitude + "\"");
-            output.Append(" longitude=\"" + ac.GeoLocation.Longitude + "\"");
-            output.Append(" elevation=\"" + ac.GeoLocation.Elevation + "\"");
-            output.Append(" timeZoneName=\"" + ac.GeoLocation.TimeZone.GetDisplayName() + "\"");
-            output.Append(" timeZoneID=\"" + ac.GeoLocation.TimeZone.GetId() + "\"");
+            output.Append(" location=\"" + ac.DateWithLocation.Location.LocationName + "\"");
+            output.Append(" latitude=\"" + ac.DateWithLocation.Location.Latitude + "\"");
+            output.Append(" longitude=\"" + ac.DateWithLocation.Location.Longitude + "\"");
+            output.Append(" elevation=\"" + ac.DateWithLocation.Location.Elevation + "\"");
+            output.Append(" timeZoneName=\"" + ac.DateWithLocation.Location.TimeZone.GetDisplayName() + "\"");
+            output.Append(" timeZoneID=\"" + ac.DateWithLocation.Location.TimeZone.GetId() + "\"");
             output.Append(" timeZoneOffset=\"" +
-                          (ac.GeoLocation.TimeZone.GetOffset(ac.Calendar.Date.ToFileTime()) /
+                          (ac.DateWithLocation.Location.TimeZone.GetOffset(ac.DateWithLocation.Date.ToFileTime()) /
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
@@ -431,7 +431,7 @@ namespace Zmanim.Utilities
             {
                 output.Append("\t<" + zman.ZmanLabel);
                 output.Append(">");
-                output.Append(formatter.FormatDate(zman.ZmanTime, ac.Calendar)
+                output.Append(formatter.FormatDate(zman.ZmanTime, ac.DateWithLocation)
                               + "</" + zman.ZmanLabel + ">\n");
             }
 

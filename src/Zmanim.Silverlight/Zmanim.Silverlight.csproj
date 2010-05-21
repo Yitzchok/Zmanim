@@ -81,6 +81,9 @@
     <Compile Include="..\Zmanim\ComplexZmanimCalendar.cs">
       <Link>ComplexZmanimCalendar.cs</Link>
     </Compile>
+    <Compile Include="..\Zmanim\DateWithLocation.cs">
+      <Link>DateWithLocation.cs</Link>
+    </Compile>
     <Compile Include="..\Zmanim\Extensions\DateExtensions.cs">
       <Link>Extensions\DateExtensions.cs</Link>
     </Compile>
@@ -90,11 +93,8 @@
     <Compile Include="..\Zmanim\IAstronomicalCalendar.cs">
       <Link>IAstronomicalCalendar.cs</Link>
     </Compile>
-    <Compile Include="..\Zmanim\ITimeZoneDateTime.cs">
-      <Link>ITimeZoneDateTime.cs</Link>
-    </Compile>
-    <Compile Include="..\Zmanim\TimeZoneDateTime.cs">
-      <Link>TimeZoneDateTime.cs</Link>
+    <Compile Include="..\Zmanim\IDateWithLocation.cs">
+      <Link>IDateWithLocation.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\TimeZone\ITimeZone.cs">
       <Link>TimeZone\ITimeZone.cs</Link>
@@ -110,6 +110,9 @@
     </Compile>
     <Compile Include="..\Zmanim\Utilities\GeoLocationUtils.cs">
       <Link>Utilities\GeoLocationUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Zmanim\Utilities\IGeoLocation.cs">
+      <Link>Utilities\IGeoLocation.cs</Link>
     </Compile>
     <Compile Include="..\Zmanim\Utilities\Time.cs">
       <Link>Utilities\Time.cs</Link>

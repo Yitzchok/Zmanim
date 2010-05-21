@@ -69,8 +69,8 @@
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="IAstronomicalCalendar.cs" />
-    <Compile Include="ITimeZoneDateTime.cs" />
-    <Compile Include="TimeZoneDateTime.cs" />
+    <Compile Include="IDateWithLocation.cs" />
+    <Compile Include="DateWithLocation.cs" />
     <Compile Include="TimeZone\ITimeZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -99,6 +99,7 @@
     <Compile Include="Calculator\SunTimesCalculator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\IGeoLocation.cs" />
     <Compile Include="Utilities\Time.cs">
       <SubType>Code</SubType>
     </Compile>

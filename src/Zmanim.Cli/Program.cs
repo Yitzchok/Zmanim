@@ -44,9 +44,7 @@ namespace Zmanim.Cli
             var timeZone = new OlsonTimeZone(options.TimeZone);
             var location =
                 new GeoLocation(string.Empty, options.Latitude, options.Longitude, options.Elevation, timeZone);
-            var czc = new ComplexZmanimCalendar(location);
-
-            czc.Calendar = new TimeZoneDateTime(new DateTime(options.Date.Year, options.Date.Month, options.Date.Day));
+            var czc = new ComplexZmanimCalendar(new DateTime(options.Date.Year, options.Date.Month, options.Date.Day), location);
 
             var methods = GetDateTimeAndLongMethods();
 

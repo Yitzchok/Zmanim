@@ -1,32 +1,22 @@
 ﻿using System;
-using Zmanim.TimeZone;
+using Zmanim.Utilities;
 
 namespace Zmanim
 {
     /// <summary>
     /// A simple implementation of ITimeZoneDateTime.
     /// </summary>
-    public class TimeZoneDateTime : ITimeZoneDateTime
+    public class DateWithLocation : IDateWithLocation
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimeZoneDateTime"/> class.
+        /// Initializes a new instance of the <see cref="DateWithLocation"/> class.
         /// </summary>
         /// <param name="date">The date.</param>
-        public TimeZoneDateTime(DateTime date)
-            : this(date, new WindowsTimeZone())
+        /// <param name="location"></param>
+        public DateWithLocation(DateTime date, IGeoLocation location)
         {
             Date = date;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TimeZoneDateTime"/> class.
-        /// </summary>
-        /// <param name="date">The date.</param>
-        /// <param name="timeZone">The time zone.</param>
-        public TimeZoneDateTime(DateTime date, ITimeZone timeZone)
-        {
-            Date = date;
-            TimeZone = timeZone;
+            Location = location;
         }
 
         /// <summary>
@@ -36,10 +26,10 @@ namespace Zmanim
         public DateTime Date { get; set; }
 
         /// <summary>
-        /// Gets or sets the time zone.
+        /// Gets or sets the location.
         /// </summary>
-        /// <value>The time zone.</value>
-        public ITimeZone TimeZone { get; set; }
+        /// <value>The location.</value>
+        public IGeoLocation Location { get; set; }
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.

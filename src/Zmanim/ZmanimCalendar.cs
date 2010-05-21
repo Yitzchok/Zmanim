@@ -91,8 +91,19 @@ namespace Zmanim
         ///</summary>
         ///<param name = "location">
         ///  the location </param>
-        public ZmanimCalendar(GeoLocation location)
+        public ZmanimCalendar(IGeoLocation location)
             : base(location)
+        {
+            CandleLightingOffset = 18;
+        }
+
+        /// <summary>
+        /// A constructor that takes a <seealso cref="GeoLocation"/> as a parameter.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="location">the location</param>
+        public ZmanimCalendar(DateTime date, IGeoLocation location)
+            : base(date, location)
         {
             CandleLightingOffset = 18;
         }
@@ -162,7 +173,7 @@ namespace Zmanim
         public virtual DateTime GetSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar)Clone();
-            clonedCal.Calendar.Date = clonedCal.Calendar.Date.AddDays(1);
+            clonedCal.DateWithLocation.Date = clonedCal.DateWithLocation.Date.AddDays(1);
             DateTime sunset = GetSunset();
             DateTime sunrise = clonedCal.GetSunrise();
             return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
@@ -391,7 +402,7 @@ namespace Zmanim
             }
             var zCal = (ZmanimCalendar)obj;
             // return getCalendar().ToMillisecondsFromEpoch().equals(zCal.getCalendar().ToMillisecondsFromEpoch())
-            return Calendar.Equals(zCal.Calendar) && GeoLocation.Equals(zCal.GeoLocation) &&
+            return DateWithLocation.Equals(zCal.DateWithLocation) && DateWithLocation.Location.Equals(zCal.DateWithLocation.Location) &&
                    AstronomicalCalculator.Equals(zCal.AstronomicalCalculator);
         }
 
@@ -407,8 +418,8 @@ namespace Zmanim
             result = 37 * result + GetType().GetHashCode(); // needed or this and
             // subclasses will
             // return identical hash
-            result += 37 * result + Calendar.GetHashCode();
-            result += 37 * result + GeoLocation.GetHashCode();
+            result += 37 * result + DateWithLocation.GetHashCode();
+            result += 37 * result + DateWithLocation.Location.GetHashCode();
             result += 37 * result + AstronomicalCalculator.GetHashCode();
             return result;
         }

@@ -257,18 +257,29 @@ namespace Zmanim
         /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
         /// </summary>
         /// <param name="location">The location.</param>
-        public ComplexZmanimCalendar(GeoLocation location)
+        public ComplexZmanimCalendar(IGeoLocation location)
             : base(location)
         {
             AteretTorahSunsetOffset = 40;
         }
 
-        ///<summary>
-        ///  Default constructor will set a default <see cref =  "GeoLocation"/>,
-        ///	a default <see cref = "AstronomicalCalculator.GetDefault"> AstronomicalCalculator</see>
-        ///                                           and default the calendar to the current date.
-        ///</summary>
-        ///<seealso cref =  "AstronomicalCalendar"/>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="location">The location.</param>
+        public ComplexZmanimCalendar(DateTime date, IGeoLocation location)
+            : base(date, location)
+        {
+            AteretTorahSunsetOffset = 40;
+        }
+
+        /// <summary>
+        /// Default constructor will set a default <see cref="GeoLocation"/>,
+        /// a default <see cref="AstronomicalCalculator.GetDefault"> AstronomicalCalculator</see>
+        /// and default the calendar to the current date.
+        /// </summary>
+        /// <seealso cref="AstronomicalCalendar"/>
         public ComplexZmanimCalendar()
         {
             AteretTorahSunsetOffset = 40;
@@ -2261,8 +2272,8 @@ namespace Zmanim
         {
             return GetTimeOffset(
                 GetDateFromTime(
-                12.0 - GeoLocation.TimeZone.UtcOffset(Calendar.Date) / HOUR_MILLIS),
-                                 -GeoLocation.GetLocalMeanTimeOffset(Calendar.Date));
+                12.0 - DateWithLocation.Location.TimeZone.UtcOffset(DateWithLocation.Date) / HOUR_MILLIS),
+                                 -DateWithLocation.Location.GetLocalMeanTimeOffset(DateWithLocation.Date));
         }
 
         /// <summary>
@@ -2305,8 +2316,8 @@ namespace Zmanim
         {
             int num = 0x11;
             num = (0x25 * num) + base.GetTemporalHour().GetHashCode();
-            num += (0x25 * num) + Calendar.GetHashCode();
-            num += (0x25 * num) + GeoLocation.GetHashCode();
+            num += (0x25 * num) + DateWithLocation.GetHashCode();
+            num += (0x25 * num) + DateWithLocation.Location.GetHashCode();
             return (num + ((0x25 * num) + AstronomicalCalculator.GetHashCode()));
         }
     }
