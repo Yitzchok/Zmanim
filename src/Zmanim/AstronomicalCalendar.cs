@@ -58,12 +58,16 @@ namespace Zmanim
     ///      elevation, timeZone);
     ///      AstronomicalCalendar ac = new AstronomicalCalendar(location);
     ///    </code>
-    /// 
-    ///    To get the time of sunrise, first set the date (if not set, the date will
-    ///    default to today):
-    /// 
+    ///      You can set the Date and Location on the constructor (or else it will default the the current day). 
     ///    <code>
-    ///      ac.Calendar.Date = new DateTime(2010, 2, 8);
+    ///        AstronomicalCalendar ac = new AstronomicalCalendar(new DateTime(2010, 2, 8), location);
+    ///    </code>
+    ///     Or you can set the DateTime by calling.
+    ///    <code>
+    ///      ac.DateWithLocation.Date = new DateTime(2010, 2, 8);
+    ///    </code>
+    ///    To get the time of sunrise
+    ///    <code>
     ///      Date sunrise = ac.getSunrise();
     ///    </code>
     ///  </example>

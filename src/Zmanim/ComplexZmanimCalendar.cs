@@ -51,7 +51,7 @@ namespace Zmanim
     /// ITimeZone timeZone = new JavaTimeZone("America/New_York");
     /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
     /// elevation, timeZone);
-    /// ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
+    /// ComplexZmanimCalendar czc = new ComplexZmanimCalendar(DateTime.Now, location);
     /// </code>
     /// 	</example>
     /// Note: For locations such as Israel where the beginning and end of daylight
