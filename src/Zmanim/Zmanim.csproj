@@ -78,6 +78,7 @@
     <Compile Include="AstronomicalCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimeZone\OffsetTimeZone.cs" />
     <Compile Include="TimeZone\WindowsTimeZone.cs" />
     <Compile Include="Calculator\AstronomicalCalculator.cs">
       <SubType>Code</SubType>

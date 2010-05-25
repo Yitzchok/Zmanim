@@ -99,6 +99,9 @@
     <Compile Include="..\Zmanim\TimeZone\ITimeZone.cs">
       <Link>TimeZone\ITimeZone.cs</Link>
     </Compile>
+    <Compile Include="..\Zmanim\TimeZone\OffsetTimeZone.cs">
+      <Link>TimeZone\OffsetTimeZone.cs</Link>
+    </Compile>
     <Compile Include="..\Zmanim\TimeZone\WindowsTimeZone.cs">
       <Link>TimeZone\WindowsTimeZone.cs</Link>
     </Compile>

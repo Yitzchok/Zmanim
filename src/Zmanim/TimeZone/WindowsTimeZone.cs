@@ -1,6 +1,5 @@
 ﻿using System;
 using Zmanim.Extensions;
-using System.Linq;
 
 namespace Zmanim.TimeZone
 {
