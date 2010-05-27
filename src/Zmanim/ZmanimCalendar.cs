@@ -147,7 +147,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         public virtual DateTime? GetAlos72()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), -72 * MINUTE_MILLIS);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, -72 * MINUTE_MILLIS);
         }
 
         ///<summary>
@@ -176,7 +176,7 @@ namespace Zmanim
             clonedCal.DateWithLocation.Date = clonedCal.DateWithLocation.Date.AddDays(1);
             DateTime? sunset = GetSunset();
             DateTime? sunrise = clonedCal.GetSunrise();
-            return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
+            return GetTimeOffset(sunset.Value, GetTemporalHour(sunset.Value, sunrise.Value) * 6);
         }
 
         // public DateTime GetChatzosLaylaRSZ() {
@@ -200,7 +200,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         public virtual DateTime? GetSofZmanShmaGRA()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 3);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 3);
         }
 
         ///<summary>
@@ -218,7 +218,7 @@ namespace Zmanim
         ///<seealso cref = "ComplexZmanimCalendar.GetSofZmanShmaMGA72Minutes()" />
         public virtual DateTime? GetSofZmanShmaMGA()
         {
-            return GetTimeOffset(GetAlos72(), GetShaahZmanisMGA() * 3);
+            return GetTimeOffset(GetAlos72().Value, GetShaahZmanisMGA() * 3);
         }
 
         ///<summary>
@@ -233,7 +233,7 @@ namespace Zmanim
         ///  sunset. </returns>
         public virtual DateTime? GetTzais72()
         {
-            return GetTimeOffset(GetSeaLevelSunset(), 72 * MINUTE_MILLIS);
+            return GetTimeOffset(GetSeaLevelSunset().Value, 72 * MINUTE_MILLIS);
         }
 
         ///<summary>
@@ -246,7 +246,7 @@ namespace Zmanim
         ///<seealso cref = "CandleLightingOffset" />
         public virtual DateTime? GetCandelLighting()
         {
-            return GetTimeOffset(GetSunset(), -CandleLightingOffset * MINUTE_MILLIS);
+            return GetTimeOffset(GetSunset().Value, -CandleLightingOffset * MINUTE_MILLIS);
         }
 
         ///<summary>
@@ -261,7 +261,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman tefilah. </returns>
         public virtual DateTime? GetSofZmanTfilaGRA()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 4);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 4);
         }
 
         ///<summary>
@@ -281,7 +281,7 @@ namespace Zmanim
         ///<seealso cref = "GetAlos72" />
         public virtual DateTime? GetSofZmanTfilaMGA()
         {
-            return GetTimeOffset(GetAlos72(), GetShaahZmanisMGA() * 4);
+            return GetTimeOffset(GetAlos72().Value, GetShaahZmanisMGA() * 4);
         }
 
         ///<summary>
@@ -304,7 +304,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
         public virtual DateTime? GetMinchaGedola()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 6.5);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 6.5);
         }
 
         ///<summary>
@@ -324,7 +324,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
         public virtual DateTime? GetMinchaKetana()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 9.5);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 9.5);
         }
 
         ///<summary>
@@ -337,7 +337,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
         public virtual DateTime? GetPlagHamincha()
         {
-            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 10.75);
+            return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 10.75);
         }
 
         ///<summary>
@@ -360,7 +360,7 @@ namespace Zmanim
         ///<seealso cref = "AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)" />
         public virtual long GetShaahZmanisGra()
         {
-            return GetTemporalHour(GetSeaLevelSunrise(), GetSeaLevelSunset());
+            return GetTemporalHour(GetSeaLevelSunrise().Value, GetSeaLevelSunset().Value);
         }
 
         ///<summary>
@@ -377,7 +377,7 @@ namespace Zmanim
         ///  <em>shaah zmanis</em>. </returns>
         public virtual long GetShaahZmanisMGA()
         {
-            return GetTemporalHour(GetAlos72(), GetTzais72());
+            return GetTemporalHour(GetAlos72().Value, GetTzais72().Value);
         }
 
         /// <summary>

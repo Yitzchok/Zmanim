@@ -329,17 +329,16 @@ namespace Zmanim
         /// </returns>
         private DateTime? GetAdjustedSunsetDate(DateTime? sunset, DateTime? sunrise)
         {
-            if (sunset != null && sunrise != null && sunrise.Value.CompareTo(sunset) >= 0)
-            {
-                IDateWithLocation clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
-                clonedDateWithLocation.Date = sunset.Value;
-                clonedDateWithLocation.Date.AddDays(1);
-                return clonedDateWithLocation.Date;
-            }
-            else
-            {
+            if (sunset == null || sunrise == null || sunrise.Value.CompareTo(sunset) < 0)
                 return sunset;
-            }
+
+
+            var clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
+            clonedDateWithLocation.Date = sunset.Value;
+            clonedDateWithLocation.Date.AddDays(1);
+
+            return clonedDateWithLocation.Date;
+
         }
 
         /// <summary>
@@ -425,7 +424,12 @@ namespace Zmanim
         /// <returns>
         /// the <see cref="DateTime"/>with the offset added to it
         /// </returns>
-        public virtual DateTime? GetTimeOffset(DateTime? time, double offset)
+        public virtual DateTime? GetTimeOffset(DateTime time, double offset)
+        {
+            return GetTimeOffset(time, (long)offset);
+        }
+
+        protected virtual DateTime? GetTimeOffset(DateTime? time, double offset)
         {
             return GetTimeOffset(time, (long)offset);
         }
@@ -439,13 +443,17 @@ namespace Zmanim
         ///  the offset in milliseconds to add to the time. </param>
         ///<returns> the <see cref = "DateTime" /> with the offset in milliseconds added
         ///  to it </returns>
-        public virtual DateTime? GetTimeOffset(DateTime? time, long offset)
+        public virtual DateTime? GetTimeOffset(DateTime time, long offset)
         {
             if (time == null || offset == long.MinValue)
-            {
-                return null;//TODO:Check this out
-            }
-            return time.Value.AddMilliseconds(offset);
+                return null;
+
+            return time.AddMilliseconds(offset);
+        }
+
+        protected virtual DateTime? GetTimeOffset(DateTime? time, long offset)
+        {
+            return GetTimeOffset(time.Value, offset);
         }
 
         /// <summary>
@@ -596,7 +604,7 @@ namespace Zmanim
         /// </returns>
         public virtual long GetTemporalHour()
         {
-            return GetTemporalHour(GetSunrise(), GetSunset());
+            return GetTemporalHour(GetSunrise().Value, GetSunset().Value);
         }
 
         /// <summary>
@@ -611,7 +619,16 @@ namespace Zmanim
         /// will be returned.
         /// </returns>
         /// <seealso cref="GetTemporalHour()"/>
-        public virtual long GetTemporalHour(DateTime? sunrise, DateTime? sunset)
+        public virtual long GetTemporalHour(DateTime sunrise, DateTime sunset)
+        {
+            if (sunrise == DateTime.MinValue || sunset == DateTime.MinValue)
+            {
+                return long.MinValue;
+            }
+            return (long)((sunset - sunrise).TotalMilliseconds / 12);
+        }
+
+        protected virtual long GetTemporalHour(DateTime? sunrise, DateTime? sunset)
         {
             if (sunrise == DateTime.MinValue || sunset == DateTime.MinValue)
             {
@@ -633,7 +650,7 @@ namespace Zmanim
         /// </returns>
         public virtual DateTime? GetSunTransit()
         {
-            return GetTimeOffset(GetSunrise(), GetTemporalHour() * 6);
+            return GetTimeOffset(GetSunrise().Value, GetTemporalHour() * 6);
         }
 
         ///<summary>
@@ -679,8 +696,8 @@ namespace Zmanim
         /// </returns>
         public virtual double GetSunriseSolarDipFromOffset(double minutes)
         {
-            DateTime? offsetByDegrees = GetSeaLevelSunrise();
-            DateTime? offsetByTime = GetTimeOffset(GetSeaLevelSunrise(), -(minutes * MINUTE_MILLIS));
+            var offsetByDegrees = GetSeaLevelSunrise();
+            var offsetByTime = GetTimeOffset(GetSeaLevelSunrise().Value, -(minutes * MINUTE_MILLIS));
 
             var degrees = 0m;
             var incrementor = 0.0001m;
@@ -708,8 +725,8 @@ namespace Zmanim
         /// <seealso cref="GetSunriseSolarDipFromOffset"/>
         public virtual double GetSunsetSolarDipFromOffset(double minutes)
         {
-            DateTime? offsetByDegrees = GetSeaLevelSunset();
-            DateTime? offsetByTime = GetTimeOffset(GetSeaLevelSunset(), minutes * MINUTE_MILLIS);
+            var offsetByDegrees = GetSeaLevelSunset();
+            var offsetByTime = GetTimeOffset(GetSeaLevelSunset().Value, minutes * MINUTE_MILLIS);
 
             var degrees = 0m;
             var incrementor = 0.0001m;
