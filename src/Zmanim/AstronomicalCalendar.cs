@@ -273,8 +273,10 @@ namespace Zmanim
         ///  zenith of <see cref = "ASTRONOMICAL_ZENITH">108°</see>.
         ///</summary>
         ///<returns> The <c>DateTime</c> of the beginning of astronomical twilight
-        ///  using a zenith of 108°. If the calculation can not be
-        ///  computed null will be returned. </returns>
+        ///  using a zenith of 108°. If the 
+        /// calculation can't be computed (see explanation on top of thepage),
+        /// null will be returned.
+        /// </returns>
         ///<seealso cref = "ASTRONOMICAL_ZENITH" />
         public virtual DateTime? GetBeginAstronomicalTwilight()
         {
