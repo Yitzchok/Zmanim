@@ -10,7 +10,7 @@ namespace ZmanimTests
     public class ZmanimUnavailableLocationTest
     {
         [Test]
-        public void Returns_DateTime_MinValue_when_trying_to_get_a_zman_for_a_location_that_cant_be_calculated()
+        public void Will_return_null_when_trying_to_get_the_zman()
         {
             var calendar = new ComplexZmanimCalendar(
                 new DateTime(2010, 5, 27),
