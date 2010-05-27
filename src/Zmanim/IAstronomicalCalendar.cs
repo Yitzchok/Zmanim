@@ -24,7 +24,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the exact sunrise time. If
         ///  the calculation can not be computed null will be returned. </returns>
         ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
-        DateTime GetSunrise();
+        DateTime? GetSunrise();
 
         ///<summary>
         ///  The getSunset method Returns a <c>DateTime</c> representing the
@@ -45,7 +45,7 @@ namespace Zmanim
         ///  the calculation can not be computed null will be returned. If the
         ///  time calculation </returns>
         ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
-        DateTime GetSunset();
+        DateTime? GetSunset();
 
         /// <summary>
         /// Gets or Sets the current AstronomicalCalculator set.

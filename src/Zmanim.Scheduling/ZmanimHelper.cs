@@ -14,9 +14,9 @@ namespace Zmanim.Scheduling
             var timeUtc = calendar.DateWithLocation.Date.ToUniversalTime();
 
             if (timeUtc.DayOfWeek == DayOfWeek.Friday)
-                isShabbos = timeUtc > calendar.GetCandelLighting().ToUniversalTime();
+                isShabbos = timeUtc > calendar.GetCandelLighting().Value.ToUniversalTime();
             if (timeUtc.DayOfWeek == DayOfWeek.Saturday)
-                isShabbos = timeUtc <= calendar.GetTzais().ToUniversalTime();
+                isShabbos = timeUtc <= calendar.GetTzais().Value.ToUniversalTime();
 
             return isShabbos;
         }

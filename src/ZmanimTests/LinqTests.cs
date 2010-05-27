@@ -19,7 +19,7 @@ namespace ZmanimTests
 
             var days = from day in GetDaysInHebrewYear(DateTime.Now, location)
                        let sunrise = day.GetSunrise()
-                       where sunrise.Hour >= 5 && sunrise.Minute > 45
+                       where sunrise.Value.Hour >= 5 && sunrise.Value.Minute > 45
                        select sunrise;
 
 

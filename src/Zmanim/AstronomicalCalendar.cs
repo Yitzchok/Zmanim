@@ -206,11 +206,11 @@ namespace Zmanim
         /// will be returned. See detailed explanation on top of the page.
         /// </returns>
         ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
-        public virtual DateTime GetSunrise()
+        public virtual DateTime? GetSunrise()
         {
             double sunrise = GetUtcSunrise(GEOMETRIC_ZENITH);
             if (double.IsNaN(sunrise))
-                return DateTime.MinValue;
+                return null;
 
             return GetDateFromTime(sunrise);
         }
@@ -231,11 +231,11 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetSunrise"/>
         /// <seealso cref="GetUtcSeaLevelSunrise"/>
-        public virtual DateTime GetSeaLevelSunrise()
+        public virtual DateTime? GetSeaLevelSunrise()
         {
             double sunrise = GetUtcSeaLevelSunrise(GEOMETRIC_ZENITH);
             if (double.IsNaN(sunrise))
-                return DateTime.MinValue;
+                return null;
 
             return GetDateFromTime(sunrise);
         }
@@ -250,7 +250,7 @@ namespace Zmanim
         /// will be returned.
         /// </returns>
         /// <seealso cref="CIVIL_ZENITH"/>
-        public virtual DateTime GetBeginCivilTwilight()
+        public virtual DateTime? GetBeginCivilTwilight()
         {
             return GetSunriseOffsetByDegrees(CIVIL_ZENITH);
         }
@@ -263,7 +263,7 @@ namespace Zmanim
         ///  using a zenith of 102°. If the calculation can't be
         ///  computed (see explanation on top of the page), null will be returned. </returns>
         ///<seealso cref = "NAUTICAL_ZENITH" />
-        public virtual DateTime GetBeginNauticalTwilight()
+        public virtual DateTime? GetBeginNauticalTwilight()
         {
             return GetSunriseOffsetByDegrees(NAUTICAL_ZENITH);
         }
@@ -276,7 +276,7 @@ namespace Zmanim
         ///  using a zenith of 108°. If the calculation can not be
         ///  computed null will be returned. </returns>
         ///<seealso cref = "ASTRONOMICAL_ZENITH" />
-        public virtual DateTime GetBeginAstronomicalTwilight()
+        public virtual DateTime? GetBeginAstronomicalTwilight()
         {
             return GetSunriseOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
@@ -303,11 +303,11 @@ namespace Zmanim
         /// returned. See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="Calculator.AstronomicalCalculator.AdjustZenith"/>
-        public virtual DateTime GetSunset()
+        public virtual DateTime? GetSunset()
         {
             double sunset = GetUtcSunset(GEOMETRIC_ZENITH);
             if (double.IsNaN(sunset))
-                return DateTime.MinValue;
+                return null;
 
             return GetAdjustedSunsetDate(GetDateFromTime(sunset), GetSunrise());
         }
@@ -327,12 +327,12 @@ namespace Zmanim
         /// one day a year), a null will be returned. See detailed
         /// explanation on top of the page.
         /// </returns>
-        private DateTime GetAdjustedSunsetDate(DateTime sunset, DateTime sunrise)
+        private DateTime? GetAdjustedSunsetDate(DateTime? sunset, DateTime? sunrise)
         {
-            if (sunset != DateTime.MinValue && sunrise != DateTime.MinValue && sunrise.CompareTo(sunset) >= 0)
+            if (sunset != null && sunrise != null && sunrise.Value.CompareTo(sunset) >= 0)
             {
                 IDateWithLocation clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
-                clonedDateWithLocation.Date = sunset;
+                clonedDateWithLocation.Date = sunset.Value;
                 clonedDateWithLocation.Date.AddDays(1);
                 return clonedDateWithLocation.Date;
             }
@@ -358,11 +358,11 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetSunset"/>
         /// <seealso cref="GetUtcSeaLevelSunset"/>
-        public virtual DateTime GetSeaLevelSunset()
+        public virtual DateTime? GetSeaLevelSunset()
         {
             double sunset = GetUtcSeaLevelSunset(GEOMETRIC_ZENITH);
             if (double.IsNaN(sunset))
-                return DateTime.MinValue;
+                return null;
 
             return GetAdjustedSunsetDate(GetDateFromTime(sunset), GetSeaLevelSunrise());
         }
@@ -378,7 +378,7 @@ namespace Zmanim
         /// null will be returned.
         /// </returns>
         /// <seealso cref="CIVIL_ZENITH"/>
-        public virtual DateTime GetEndCivilTwilight()
+        public virtual DateTime? GetEndCivilTwilight()
         {
             return GetSunsetOffsetByDegrees(CIVIL_ZENITH);
         }
@@ -394,7 +394,7 @@ namespace Zmanim
         /// null will be returned.
         /// </returns>
         /// <seealso cref="NAUTICAL_ZENITH"/>
-        public virtual DateTime GetEndNauticalTwilight()
+        public virtual DateTime? GetEndNauticalTwilight()
         {
             return GetSunsetOffsetByDegrees(NAUTICAL_ZENITH);
         }
@@ -410,7 +410,7 @@ namespace Zmanim
         /// null will be returned.
         /// </returns>
         /// <seealso cref="ASTRONOMICAL_ZENITH"/>
-        public virtual DateTime GetEndAstronomicalTwilight()
+        public virtual DateTime? GetEndAstronomicalTwilight()
         {
             return GetSunsetOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
@@ -425,7 +425,7 @@ namespace Zmanim
         /// <returns>
         /// the <see cref="DateTime"/>with the offset added to it
         /// </returns>
-        public virtual DateTime GetTimeOffset(DateTime time, double offset)
+        public virtual DateTime? GetTimeOffset(DateTime? time, double offset)
         {
             return GetTimeOffset(time, (long)offset);
         }
@@ -439,13 +439,13 @@ namespace Zmanim
         ///  the offset in milliseconds to add to the time. </param>
         ///<returns> the <see cref = "DateTime" /> with the offset in milliseconds added
         ///  to it </returns>
-        public virtual DateTime GetTimeOffset(DateTime time, long offset)
+        public virtual DateTime? GetTimeOffset(DateTime? time, long offset)
         {
-            if (time == DateTime.MinValue || offset == long.MinValue)
+            if (time == null || offset == long.MinValue)
             {
-                return DateTime.MinValue;//TODO:Check this out
+                return null;//TODO:Check this out
             }
-            return time.AddMilliseconds(offset);
+            return time.Value.AddMilliseconds(offset);
         }
 
         /// <summary>
@@ -460,11 +460,11 @@ namespace Zmanim
         /// (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
-        public virtual DateTime GetSunriseOffsetByDegrees(double offsetZenith)
+        public virtual DateTime? GetSunriseOffsetByDegrees(double offsetZenith)
         {
             double alos = GetUtcSunrise(offsetZenith);
             if (double.IsNaN(alos))
-                return DateTime.MinValue;
+                return null;
 
             return GetDateFromTime(alos);
         }
@@ -481,11 +481,11 @@ namespace Zmanim
         /// (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
-        public virtual DateTime GetSunsetOffsetByDegrees(double offsetZenith)
+        public virtual DateTime? GetSunsetOffsetByDegrees(double offsetZenith)
         {
             double sunset = GetUtcSunset(offsetZenith);
             if (double.IsNaN(sunset))
-                return DateTime.MinValue;
+                return null;
 
             return GetAdjustedSunsetDate(GetDateFromTime(sunset), GetSunriseOffsetByDegrees(offsetZenith));
         }
@@ -611,13 +611,13 @@ namespace Zmanim
         /// will be returned.
         /// </returns>
         /// <seealso cref="GetTemporalHour()"/>
-        public virtual long GetTemporalHour(DateTime sunrise, DateTime sunset)
+        public virtual long GetTemporalHour(DateTime? sunrise, DateTime? sunset)
         {
             if (sunrise == DateTime.MinValue || sunset == DateTime.MinValue)
             {
                 return long.MinValue;
             }
-            return (long)((sunset - sunrise).TotalMilliseconds / 12);
+            return (long)((sunset - sunrise).Value.TotalMilliseconds / 12);
         }
 
         ///<summary>
@@ -631,7 +631,7 @@ namespace Zmanim
         /// calculation can't be computed (see explanation on top of the page), 
         /// null will be returned.
         /// </returns>
-        public virtual DateTime GetSunTransit()
+        public virtual DateTime? GetSunTransit()
         {
             return GetTimeOffset(GetSunrise(), GetTemporalHour() * 6);
         }
@@ -643,10 +643,10 @@ namespace Zmanim
         ///  The time to be set as the time for the <c>DateTime</c>.
         ///  The time expected is in the format: 18.75 for 6:45:00 PM </param>
         ///<returns> The Date. </returns>
-        protected internal virtual DateTime GetDateFromTime(double time)
+        protected internal virtual DateTime? GetDateFromTime(double time)
         {
             if (double.IsNaN(time))
-                return DateTime.MinValue;
+                return null;
 
             time = GetOffsetTime(time);
             time = (time + 240) % 24; // the calculators sometimes return a double
@@ -679,12 +679,12 @@ namespace Zmanim
         /// </returns>
         public virtual double GetSunriseSolarDipFromOffset(double minutes)
         {
-            DateTime offsetByDegrees = GetSeaLevelSunrise();
-            DateTime offsetByTime = GetTimeOffset(GetSeaLevelSunrise(), -(minutes * MINUTE_MILLIS));
+            DateTime? offsetByDegrees = GetSeaLevelSunrise();
+            DateTime? offsetByTime = GetTimeOffset(GetSeaLevelSunrise(), -(minutes * MINUTE_MILLIS));
 
             var degrees = 0m;
             var incrementor = 0.0001m;
-            while (offsetByDegrees == null || offsetByDegrees.ToUnixEpochMilliseconds() > offsetByTime.ToUnixEpochMilliseconds())
+            while (offsetByDegrees == null || offsetByDegrees.Value.ToUnixEpochMilliseconds() > offsetByTime.Value.ToUnixEpochMilliseconds())
             {
                 degrees += incrementor;
                 offsetByDegrees = GetSunriseOffsetByDegrees(GEOMETRIC_ZENITH + (double)degrees);
@@ -708,12 +708,12 @@ namespace Zmanim
         /// <seealso cref="GetSunriseSolarDipFromOffset"/>
         public virtual double GetSunsetSolarDipFromOffset(double minutes)
         {
-            DateTime offsetByDegrees = GetSeaLevelSunset();
-            DateTime offsetByTime = GetTimeOffset(GetSeaLevelSunset(), minutes * MINUTE_MILLIS);
+            DateTime? offsetByDegrees = GetSeaLevelSunset();
+            DateTime? offsetByTime = GetTimeOffset(GetSeaLevelSunset(), minutes * MINUTE_MILLIS);
 
             var degrees = 0m;
             var incrementor = 0.0001m;
-            while (offsetByDegrees == null || offsetByDegrees.ToUnixEpochMilliseconds() < offsetByTime.ToUnixEpochMilliseconds())
+            while (offsetByDegrees == null || offsetByDegrees.Value.ToUnixEpochMilliseconds() < offsetByTime.Value.ToUnixEpochMilliseconds())
             {
                 degrees += incrementor;
                 offsetByDegrees = GetSunsetOffsetByDegrees(GEOMETRIC_ZENITH + (double)degrees);

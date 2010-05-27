@@ -1,6 +1,5 @@
 using System;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Zmanim;
 using Zmanim.TimeZone;
 using Zmanim.Utilities;
@@ -24,9 +23,7 @@ namespace ZmanimTests
             double elevation = 0; //optional elevation
             ITimeZone timeZone = new OlsonTimeZone("America/New_York");
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
-            ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
-
-            czc.DateWithLocation = new DateWithLocation(new DateTime(2010, 4, 2), location);
+            ComplexZmanimCalendar czc = new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location);
             calendar = czc;
         }
 

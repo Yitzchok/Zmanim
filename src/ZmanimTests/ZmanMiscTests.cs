@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Zmanim;
 using Zmanim.TimeZone;
 using Zmanim.Utilities;
@@ -50,7 +49,7 @@ namespace ZmanimTests
             Assert.That(GetFixedLocalChatzos(new DateTime(2010, 3, 5, 10, 50, 55)), Is.EqualTo(new DateTime(2010, 3, 5, 11, 56, 53, 312)));
         }
 
-        private DateTime GetFixedLocalChatzos(DateTime dateTime)
+        private DateTime? GetFixedLocalChatzos(DateTime dateTime)
         {
             var calendar = GetCalendar();
             calendar.DateWithLocation = new DateWithLocation(dateTime, calendar.DateWithLocation.Location);

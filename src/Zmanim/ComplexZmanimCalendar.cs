@@ -552,7 +552,7 @@ namespace Zmanim
         ///  <see cref = "GetAlos120Zmanis">dawn</see>.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha120MinutesZmanis()
+        public virtual DateTime? GetPlagHamincha120MinutesZmanis()
         {
             return GetTimeOffset(GetAlos120Zmanis(), GetShaahZmanis120MinutesZmanis() * 10.75);
         }
@@ -565,7 +565,7 @@ namespace Zmanim
         ///  10.75 <see cref = "GetShaahZmanis120Minutes()" /> after <see cref = "GetAlos120()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha120Minutes()
+        public virtual DateTime? GetPlagHamincha120Minutes()
         {
             return GetTimeOffset(GetAlos120(), GetShaahZmanis120Minutes() * 10.75);
         }
@@ -581,7 +581,7 @@ namespace Zmanim
         ///  4 <em>Mil</em>.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        public virtual DateTime GetAlos60()
+        public virtual DateTime? GetAlos60()
         {
             return GetTimeOffset(GetSeaLevelSunrise(), -60 * MINUTE_MILLIS);
         }
@@ -600,12 +600,12 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
-        public virtual DateTime GetAlos72Zmanis()
+        public virtual DateTime? GetAlos72Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunrise(), (long)(shaahZmanis * -1.2));
         }
@@ -620,7 +620,7 @@ namespace Zmanim
         ///  walk the distance of 4 <em>Mil</em>.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        public virtual DateTime GetAlos96()
+        public virtual DateTime? GetAlos96()
         {
             return GetTimeOffset(GetSeaLevelSunrise(), -96 * MINUTE_MILLIS);
         }
@@ -637,12 +637,12 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
-        public virtual DateTime GetAlos90Zmanis()
+        public virtual DateTime? GetAlos90Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunrise(), (long)(shaahZmanis * -1.5));
         }
@@ -659,12 +659,12 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
-        public virtual DateTime GetAlos96Zmanis()
+        public virtual DateTime? GetAlos96Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunrise(), (long)(shaahZmanis * -1.6));
         }
@@ -679,7 +679,7 @@ namespace Zmanim
         ///  distance of 4 <em>Mil</em>.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        public virtual DateTime GetAlos90()
+        public virtual DateTime? GetAlos90()
         {
             return GetTimeOffset(GetSeaLevelSunrise(), -90 * MINUTE_MILLIS);
         }
@@ -695,7 +695,7 @@ namespace Zmanim
         ///  distance of 5 <em>Mil</em>(<em>Ula</em>).
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
-        public virtual DateTime GetAlos120()
+        public virtual DateTime? GetAlos120()
         {
             return GetTimeOffset(GetSeaLevelSunrise(), -120 * MINUTE_MILLIS);
         }
@@ -712,12 +712,12 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
-        public virtual DateTime GetAlos120Zmanis()
+        public virtual DateTime? GetAlos120Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunrise(), shaahZmanis * -2);
         }
@@ -735,7 +735,7 @@ namespace Zmanim
         ///<seealso cref = "ZENITH_26_DEGREES" />
         ///<seealso cref = "GetAlos120()" />
         ///<seealso cref = "GetTzais120()" />
-        public virtual DateTime GetAlos26Degrees()
+        public virtual DateTime? GetAlos26Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_26_DEGREES);
         }
@@ -749,7 +749,7 @@ namespace Zmanim
         /// the <c>DateTime</c> representing <em>alos</em>.
         /// </returns>
         /// <seealso cref="AstronomicalCalendar.ASTRONOMICAL_ZENITH"/>
-        public virtual DateTime GetAlos18Degrees()
+        public virtual DateTime? GetAlos18Degrees()
         {
             return GetSunriseOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
@@ -766,7 +766,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing <em>alos</em>. </returns>
         ///<seealso cref = "ZENITH_19_POINT_8" />
         ///<seealso cref = "GetAlos90()" />
-        public virtual DateTime GetAlos19Point8Degrees()
+        public virtual DateTime? GetAlos19Point8Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_19_POINT_8);
         }
@@ -785,7 +785,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_16_POINT_1"/>
         /// <seealso cref="ZmanimCalendar.GetAlos72"/>
-        public virtual DateTime GetAlos16Point1Degrees()
+        public virtual DateTime? GetAlos16Point1Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_16_POINT_1);
         }
@@ -800,7 +800,7 @@ namespace Zmanim
         ///  to 11.5° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
         ///</summary>
         ///<seealso cref = "ZENITH_11_POINT_5" />
-        public virtual DateTime GetMisheyakir11Point5Degrees()
+        public virtual DateTime? GetMisheyakir11Point5Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_11_POINT_5);
         }
@@ -815,7 +815,7 @@ namespace Zmanim
         ///  to 11° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
         ///</summary>
         ///<seealso cref = "ZENITH_11_DEGREES" />
-        public virtual DateTime GetMisheyakir11Degrees()
+        public virtual DateTime? GetMisheyakir11Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_11_DEGREES);
         }
@@ -830,7 +830,7 @@ namespace Zmanim
         ///  to 10.2° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
         ///</summary>
         ///<seealso cref = "ZENITH_10_POINT_2" />
-        public virtual DateTime GetMisheyakir10Point2Degrees()
+        public virtual DateTime? GetMisheyakir10Point2Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_10_POINT_2);
         }
@@ -850,7 +850,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis19Point8Degrees()" />
         ///<seealso cref = "GetAlos19Point8Degrees()" />
-        public virtual DateTime GetSofZmanShmaMGA19Point8Degrees()
+        public virtual DateTime? GetSofZmanShmaMGA19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 3);
         }
@@ -870,7 +870,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis16Point1Degrees()" />
         ///<seealso cref = "GetAlos16Point1Degrees()" />
-        public virtual DateTime GetSofZmanShmaMGA16Point1Degrees()
+        public virtual DateTime? GetSofZmanShmaMGA16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 3);
         }
@@ -894,7 +894,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanis72Minutes()"/>
         /// <seealso cref="ZmanimCalendar.GetAlos72"/>
         /// <seealso cref="ZmanimCalendar.GetSofZmanShmaMGA"/>
-        public virtual DateTime GetSofZmanShmaMGA72Minutes()
+        public virtual DateTime? GetSofZmanShmaMGA72Minutes()
         {
             return GetSofZmanShmaMGA();
         }
@@ -918,7 +918,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis72MinutesZmanis()" />
         ///<seealso cref = "GetAlos72Zmanis()" />
-        public virtual DateTime GetSofZmanShmaMGA72MinutesZmanis()
+        public virtual DateTime? GetSofZmanShmaMGA72MinutesZmanis()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanis72MinutesZmanis() * 3);
         }
@@ -938,7 +938,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis90Minutes()" />
         ///<seealso cref = "GetAlos90()" />
-        public virtual DateTime GetSofZmanShmaMGA90Minutes()
+        public virtual DateTime? GetSofZmanShmaMGA90Minutes()
         {
             return GetTimeOffset(GetAlos90(), GetShaahZmanis90Minutes() * 3);
         }
@@ -960,7 +960,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis90MinutesZmanis()" />
         ///<seealso cref = "GetAlos90Zmanis()" />
-        public virtual DateTime GetSofZmanShmaMGA90MinutesZmanis()
+        public virtual DateTime? GetSofZmanShmaMGA90MinutesZmanis()
         {
             return GetTimeOffset(GetAlos90Zmanis(), GetShaahZmanis90MinutesZmanis() * 3);
         }
@@ -980,7 +980,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis96Minutes()" />
         ///<seealso cref = "GetAlos96()" />
-        public virtual DateTime GetSofZmanShmaMGA96Minutes()
+        public virtual DateTime? GetSofZmanShmaMGA96Minutes()
         {
             return GetTimeOffset(GetAlos96(), GetShaahZmanis96Minutes() * 3);
         }
@@ -1002,7 +1002,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
         ///<seealso cref = "GetShaahZmanis96MinutesZmanis()" />
         ///<seealso cref = "GetAlos96Zmanis()" />
-        public virtual DateTime GetSofZmanShmaMGA96MinutesZmanis()
+        public virtual DateTime? GetSofZmanShmaMGA96MinutesZmanis()
         {
             return GetTimeOffset(GetAlos96Zmanis(), GetShaahZmanis96MinutesZmanis() * 3);
         }
@@ -1021,7 +1021,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="ZmanimCalendar.GetChatzos"/>
         /// <seealso cref="GetSofZmanTfila2HoursBeforeChatzos()"/>
-        public virtual DateTime GetSofZmanShma3HoursBeforeChatzos()
+        public virtual DateTime? GetSofZmanShma3HoursBeforeChatzos()
         {
             return GetTimeOffset(GetChatzos(), -180 * MINUTE_MILLIS);
         }
@@ -1043,7 +1043,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis120Minutes()"/>
         /// <seealso cref="GetAlos120()"/>
-        public virtual DateTime GetSofZmanShmaMGA120Minutes()
+        public virtual DateTime? GetSofZmanShmaMGA120Minutes()
         {
             return GetTimeOffset(GetAlos120(), GetShaahZmanis120Minutes() * 3);
         }
@@ -1067,7 +1067,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetAlos16Point1Degrees()"/>
         /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunset"/>
-        public virtual DateTime GetSofZmanShmaAlos16Point1ToSunset()
+        public virtual DateTime? GetSofZmanShmaAlos16Point1ToSunset()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetSeaLevelSunset());
             return GetTimeOffset(GetAlos16Point1Degrees(), shaahZmanis * 3);
@@ -1092,7 +1092,7 @@ namespace Zmanim
         ///  calculation. </returns>
         ///<seealso cref = "GetAlos16Point1Degrees()" />
         ///<seealso cref = "GetTzaisGeonim7Point083Degrees()" />
-        public virtual DateTime GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
+        public virtual DateTime? GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetTzaisGeonim7Point083Degrees());
             return GetTimeOffset(GetAlos16Point1Degrees(), shaahZmanis * 3);
@@ -1111,14 +1111,14 @@ namespace Zmanim
         /// calculation.
         /// </returns>
         /// <seealso cref="GetFixedLocalChatzos()"/>
-        public virtual DateTime GetSofZmanShmaKolEliyahu()
+        public virtual DateTime? GetSofZmanShmaKolEliyahu()
         {
-            DateTime chatzos = GetFixedLocalChatzos();
+            DateTime? chatzos = GetFixedLocalChatzos();
             if (chatzos == DateTime.MinValue || GetSunrise() == DateTime.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
-            long diff = (chatzos.ToUnixEpochMilliseconds() - GetSeaLevelSunrise().ToUnixEpochMilliseconds()) / 2;
+            long diff = (chatzos.Value.ToUnixEpochMilliseconds() - GetSeaLevelSunrise().Value.ToUnixEpochMilliseconds()) / 2;
             return GetTimeOffset(chatzos, -diff);
         }
 
@@ -1138,7 +1138,7 @@ namespace Zmanim
         ///</returns>
         ///<seealso cref = "GetShaahZmanis19Point8Degrees()" />
         ///<seealso cref = "GetAlos19Point8Degrees()" />
-        public virtual DateTime GetSofZmanTfilaMGA19Point8Degrees()
+        public virtual DateTime? GetSofZmanTfilaMGA19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 4);
         }
@@ -1159,7 +1159,7 @@ namespace Zmanim
         ///</returns>
         ///<seealso cref = "GetShaahZmanis16Point1Degrees()" />
         ///<seealso cref = "GetAlos16Point1Degrees()" />
-        public virtual DateTime GetSofZmanTfilaMGA16Point1Degrees()
+        public virtual DateTime? GetSofZmanTfilaMGA16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 4);
         }
@@ -1183,7 +1183,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanis72Minutes()"/>
         /// <seealso cref="ZmanimCalendar.GetAlos72"/>
         /// <seealso cref="ZmanimCalendar.GetSofZmanShmaMGA"/>
-        public virtual DateTime GetSofZmanTfilaMGA72Minutes()
+        public virtual DateTime? GetSofZmanTfilaMGA72Minutes()
         {
             return GetSofZmanTfilaMGA();
         }
@@ -1206,7 +1206,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis72MinutesZmanis()"/>
         /// <seealso cref="GetAlos72Zmanis()"/>
-        public virtual DateTime GetSofZmanTfilaMGA72MinutesZmanis()
+        public virtual DateTime? GetSofZmanTfilaMGA72MinutesZmanis()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanis72MinutesZmanis() * 4);
         }
@@ -1228,7 +1228,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis90Minutes()"/>
         /// <seealso cref="GetAlos90()"/>
-        public virtual DateTime GetSofZmanTfilaMGA90Minutes()
+        public virtual DateTime? GetSofZmanTfilaMGA90Minutes()
         {
             return GetTimeOffset(GetAlos90(), GetShaahZmanis90Minutes() * 4);
         }
@@ -1252,7 +1252,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis90MinutesZmanis()"/>
         /// <seealso cref="GetAlos90Zmanis()"/>
-        public virtual DateTime GetSofZmanTfilaMGA90MinutesZmanis()
+        public virtual DateTime? GetSofZmanTfilaMGA90MinutesZmanis()
         {
             return GetTimeOffset(GetAlos90Zmanis(), GetShaahZmanis90MinutesZmanis() * 4);
         }
@@ -1274,7 +1274,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis96Minutes()"/>
         /// <seealso cref="GetAlos96()"/>
-        public virtual DateTime GetSofZmanTfilaMGA96Minutes()
+        public virtual DateTime? GetSofZmanTfilaMGA96Minutes()
         {
             return GetTimeOffset(GetAlos96(), GetShaahZmanis96Minutes() * 4);
         }
@@ -1298,7 +1298,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis90MinutesZmanis()"/>
         /// <seealso cref="GetAlos90Zmanis()"/>
-        public virtual DateTime GetSofZmanTfilaMGA96MinutesZmanis()
+        public virtual DateTime? GetSofZmanTfilaMGA96MinutesZmanis()
         {
             return GetTimeOffset(GetAlos96Zmanis(), GetShaahZmanis96MinutesZmanis() * 4);
         }
@@ -1320,7 +1320,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetShaahZmanis120Minutes()"/>
         /// <seealso cref="GetAlos120()"/>
-        public virtual DateTime GetSofZmanTfilaMGA120Minutes()
+        public virtual DateTime? GetSofZmanTfilaMGA120Minutes()
         {
             return GetTimeOffset(GetAlos120(), GetShaahZmanis120Minutes() * 4);
         }
@@ -1338,7 +1338,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="ZmanimCalendar.GetChatzos"/>
         /// <seealso cref="GetSofZmanShma3HoursBeforeChatzos()"/>
-        public virtual DateTime GetSofZmanTfila2HoursBeforeChatzos()
+        public virtual DateTime? GetSofZmanTfila2HoursBeforeChatzos()
         {
             return GetTimeOffset(GetChatzos(), -120 * MINUTE_MILLIS);
         }
@@ -1363,7 +1363,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="GetMinchaGedolaGreaterThan30()"/>
-        public virtual DateTime GetMinchaGedola30Minutes()
+        public virtual DateTime? GetMinchaGedola30Minutes()
         {
             return GetTimeOffset(GetChatzos(), MINUTE_MILLIS * 30);
         }
@@ -1385,7 +1385,7 @@ namespace Zmanim
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
-        public virtual DateTime GetMinchaGedola72Minutes()
+        public virtual DateTime? GetMinchaGedola72Minutes()
         {
             return GetTimeOffset(GetAlos72(), GetShaahZmanis72Minutes() * 6.5);
         }
@@ -1406,7 +1406,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
-        public virtual DateTime GetMinchaGedola16Point1Degrees()
+        public virtual DateTime? GetMinchaGedola16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 6.5);
         }
@@ -1422,12 +1422,12 @@ namespace Zmanim
         /// the <c>DateTime</c> of the later of <see cref="ZmanimCalendar.GetMinchaGedola"/>
         /// and <see cref="GetMinchaGedola30Minutes()"/>
         /// </returns>
-        public virtual DateTime GetMinchaGedolaGreaterThan30()
+        public virtual DateTime? GetMinchaGedolaGreaterThan30()
         {
             if (GetMinchaGedola30Minutes() == null || GetMinchaGedola() == null)
-                return DateTime.MinValue;
+                return null;
 
-            return GetMinchaGedola30Minutes().CompareTo(GetMinchaGedola()) > 0
+            return GetMinchaGedola30Minutes().Value.CompareTo(GetMinchaGedola()) > 0
                        ? GetMinchaGedola30Minutes()
                        : GetMinchaGedola();
         }
@@ -1449,7 +1449,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
-        public virtual DateTime GetMinchaKetana16Point1Degrees()
+        public virtual DateTime? GetMinchaKetana16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 9.5);
         }
@@ -1471,7 +1471,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
-        public virtual DateTime GetMinchaKetana72Minutes()
+        public virtual DateTime? GetMinchaKetana72Minutes()
         {
             return GetTimeOffset(GetAlos72(), GetShaahZmanis72Minutes() * 9.5);
         }
@@ -1485,7 +1485,7 @@ namespace Zmanim
         /// <returns>
         /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
-        public virtual DateTime GetPlagHamincha60Minutes()
+        public virtual DateTime? GetPlagHamincha60Minutes()
         {
             return GetTimeOffset(GetAlos60(), GetShaahZmanis60Minutes() * 10.75);
         }
@@ -1499,7 +1499,7 @@ namespace Zmanim
         /// <returns>
         /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
-        public virtual DateTime GetPlagHamincha72Minutes()
+        public virtual DateTime? GetPlagHamincha72Minutes()
         {
             return GetTimeOffset(GetAlos72(), GetShaahZmanis72Minutes() * 10.75);
         }
@@ -1513,7 +1513,7 @@ namespace Zmanim
         /// <returns>
         /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
         /// </returns>
-        public virtual DateTime GetPlagHamincha90Minutes()
+        public virtual DateTime? GetPlagHamincha90Minutes()
         {
             return GetTimeOffset(GetAlos90(), GetShaahZmanis90Minutes() * 10.75);
         }
@@ -1525,7 +1525,7 @@ namespace Zmanim
         ///  10.75 <seealso cref = "GetShaahZmanis96Minutes()" /> after <seealso cref = "GetAlos96()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha96Minutes()
+        public virtual DateTime? GetPlagHamincha96Minutes()
         {
             return GetTimeOffset(GetAlos96(), GetShaahZmanis96Minutes() * 10.75);
         }
@@ -1538,7 +1538,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos96Zmanis">dawn</seealso>.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha96MinutesZmanis()
+        public virtual DateTime? GetPlagHamincha96MinutesZmanis()
         {
             return GetTimeOffset(GetAlos96Zmanis(), GetShaahZmanis96MinutesZmanis() * 10.75);
         }
@@ -1551,7 +1551,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos90Zmanis">dawn</seealso>.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha90MinutesZmanis()
+        public virtual DateTime? GetPlagHamincha90MinutesZmanis()
         {
             return GetTimeOffset(GetAlos90Zmanis(), GetShaahZmanis90MinutesZmanis() * 10.75);
         }
@@ -1564,7 +1564,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos72Zmanis">dawn</seealso>.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha72MinutesZmanis()
+        public virtual DateTime? GetPlagHamincha72MinutesZmanis()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanis72MinutesZmanis() * 10.75);
         }
@@ -1580,7 +1580,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos16Point1Degrees()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha16Point1Degrees()
+        public virtual DateTime? GetPlagHamincha16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 10.75);
         }
@@ -1596,7 +1596,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos19Point8Degrees()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha19Point8Degrees()
+        public virtual DateTime? GetPlagHamincha19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 10.75);
         }
@@ -1612,7 +1612,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos26Degrees()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha26Degrees()
+        public virtual DateTime? GetPlagHamincha26Degrees()
         {
             return GetTimeOffset(GetAlos26Degrees(), GetShaahZmanis26Degrees() * 10.75);
         }
@@ -1628,7 +1628,7 @@ namespace Zmanim
         ///  <seealso cref = "GetAlos18Degrees()" />.
         ///</summary>
         ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
-        public virtual DateTime GetPlagHamincha18Degrees()
+        public virtual DateTime? GetPlagHamincha18Degrees()
         {
             return GetTimeOffset(GetAlos18Degrees(), GetShaahZmanis18Degrees() * 10.75);
         }
@@ -1649,7 +1649,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the plag. </returns>
         ///<seealso cref = "GetAlos16Point1Degrees()" />
         ///<seealso cref = "AstronomicalCalendar.GetSeaLevelSunset" />
-        public virtual DateTime GetPlagAlosToSunset()
+        public virtual DateTime? GetPlagAlosToSunset()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetSeaLevelSunset());
             return GetTimeOffset(GetAlos16Point1Degrees(), shaahZmanis * 10.75);
@@ -1672,7 +1672,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> of the plag.</returns>
         /// <seealso cref="GetAlos16Point1Degrees()"/>
         /// <seealso cref="GetTzaisGeonim7Point083Degrees()"/>
-        public virtual DateTime GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
+        public virtual DateTime? GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetTzaisGeonim7Point083Degrees());
             return GetTimeOffset(GetAlos16Point1Degrees(), shaahZmanis * 10.75);
@@ -1695,7 +1695,7 @@ namespace Zmanim
         /// <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see> (90°).
         /// </returns>
         /// <seealso cref="ZENITH_13_DEGREES"/>
-        public virtual DateTime GetBainHasmashosRT13Degrees()
+        public virtual DateTime? GetBainHasmashosRT13Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_13_DEGREES);
         }
@@ -1708,7 +1708,7 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> of 58.5 minutes after sunset
         ///</returns>
-        public virtual DateTime GetBainHasmashosRT58Point5Minutes()
+        public virtual DateTime? GetBainHasmashosRT58Point5Minutes()
         {
             return GetTimeOffset(GetSeaLevelSunset(), 58.5 * MINUTE_MILLIS);
         }
@@ -1721,7 +1721,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> of the bain hashmashos of Rabainu Tam in
         ///  this calculation. </returns>
         ///<seealso cref = "GetTzaisGeonim7Point083Degrees()" />
-        public virtual DateTime GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
+        public virtual DateTime? GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
         {
             return GetTimeOffset(GetSunsetOffsetByDegrees(ZENITH_7_POINT_083), -13.5 * MINUTE_MILLIS);
         }
@@ -1735,15 +1735,14 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> of bain hashmashos of Rabainu Tam for this
         ///  calculation. </returns>
-        public virtual DateTime GetBainHasmashosRT2Stars()
+        public virtual DateTime? GetBainHasmashosRT2Stars()
         {
-            DateTime alos19Point8 = GetAlos19Point8Degrees();
-            DateTime sunrise = GetSeaLevelSunrise();
-            if (alos19Point8 == DateTime.MinValue || sunrise == DateTime.MinValue)
-            {
-                return DateTime.MinValue;
-            }
-            return GetTimeOffset(GetSeaLevelSunset(), (sunrise.ToUnixEpochMilliseconds() - alos19Point8.ToUnixEpochMilliseconds()) * (5 / 18d));
+            var alos19Point8 = GetAlos19Point8Degrees();
+            var sunrise = GetSeaLevelSunrise();
+            if (alos19Point8 == null || sunrise == null)
+                return null;
+
+            return GetTimeOffset(GetSeaLevelSunset(), (sunrise.Value.ToUnixEpochMilliseconds() - alos19Point8.Value.ToUnixEpochMilliseconds()) * (5 / 18d));
         }
 
         // public Date getTzaisGeonim3Point7Degrees() {
@@ -1765,7 +1764,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  5.95° below sea level. </returns>
         ///<seealso cref = "ZENITH_5_POINT_95" />
-        public virtual DateTime GetTzaisGeonim5Point95Degrees()
+        public virtual DateTime? GetTzaisGeonim5Point95Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_5_POINT_95);
         }
@@ -1780,7 +1779,7 @@ namespace Zmanim
         /// <returns> the <c>DateTime</c> representing the time when the sun is
         ///   3.65° below sea level. </returns>
         /// <seealso cref = "ZENITH_3_POINT_65" />
-        public virtual DateTime GetTzaisGeonim3Point65Degrees()
+        public virtual DateTime? GetTzaisGeonim3Point65Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_3_POINT_65);
         }
@@ -1795,7 +1794,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  4.61° below sea level. </returns>
         ///<seealso cref = "ZENITH_4_POINT_61" />
-        public virtual DateTime GetTzaisGeonim4Point61Degrees()
+        public virtual DateTime? GetTzaisGeonim4Point61Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_61);
         }
@@ -1810,7 +1809,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  4.37° below sea level. </returns>
         ///<seealso cref = "ZENITH_4_POINT_37" />
-        public virtual DateTime GetTzaisGeonim4Point37Degrees()
+        public virtual DateTime? GetTzaisGeonim4Point37Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_37);
         }
@@ -1828,7 +1827,7 @@ namespace Zmanim
         /// 5.88° below sea level.
         /// </returns>
         /// <seealso cref="ZENITH_5_POINT_88"/>
-        public virtual DateTime GetTzaisGeonim5Point88Degrees()
+        public virtual DateTime? GetTzaisGeonim5Point88Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_5_POINT_88);
         }
@@ -1846,7 +1845,7 @@ namespace Zmanim
         /// 4.8° below sea level.
         /// </returns>
         /// <seealso cref="ZENITH_4_POINT_8"/>
-        public virtual DateTime GetTzaisGeonim4Point8Degrees()
+        public virtual DateTime? GetTzaisGeonim4Point8Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_8);
         }
@@ -1859,7 +1858,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing the time when the sun is
         ///  7.083° below sea level. </returns>
         ///<seealso cref = "ZENITH_7_POINT_083" />
-        public virtual DateTime GetTzaisGeonim7Point083Degrees()
+        public virtual DateTime? GetTzaisGeonim7Point083Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_7_POINT_083);
         }
@@ -1874,7 +1873,7 @@ namespace Zmanim
         /// 8.5° below sea level.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_8_POINT_5"/>
-        public virtual DateTime GetTzaisGeonim8Point5Degrees()
+        public virtual DateTime? GetTzaisGeonim8Point5Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_8_POINT_5);
         }
@@ -1888,7 +1887,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing 60 minutes after sea level
         ///  sunset. </returns>
         ///<seealso cref = "GetAlos60()" />
-        public virtual DateTime GetTzais60()
+        public virtual DateTime? GetTzais60()
         {
             return GetTimeOffset(GetSeaLevelSunset(), 60 * MINUTE_MILLIS);
         }
@@ -1906,7 +1905,7 @@ namespace Zmanim
         ///<returns> the <c>DateTime</c> representing 40 minutes after sea level
         ///  sunset </returns>
         ///<seealso cref = "AteretTorahSunsetOffset" />
-        public virtual DateTime GetTzaisAteretTorah()
+        public virtual DateTime? GetTzaisAteretTorah()
         {
             return GetTimeOffset(GetSeaLevelSunset(), GetAteretTorahSunsetOffset() * MINUTE_MILLIS);
         }
@@ -1963,7 +1962,7 @@ namespace Zmanim
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="AteretTorahSunsetOffset"/>
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
-        public virtual DateTime GetSofZmanShmaAteretTorah()
+        public virtual DateTime? GetSofZmanShmaAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 3);
         }
@@ -1989,7 +1988,7 @@ namespace Zmanim
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
         /// <seealso cref="AteretTorahSunsetOffset"/>
-        public virtual DateTime GetSofZmanTfilahAteretTorah()
+        public virtual DateTime? GetSofZmanTfilahAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 4);
         }
@@ -2016,7 +2015,7 @@ namespace Zmanim
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="GetMinchaKetanaAteretTorah()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
-        public virtual DateTime GetMinchaGedolaAteretTorah()
+        public virtual DateTime? GetMinchaGedolaAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 6.5);
         }
@@ -2042,7 +2041,7 @@ namespace Zmanim
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaKetana"/>
-        public virtual DateTime GetMinchaKetanaAteretTorah()
+        public virtual DateTime? GetMinchaKetanaAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 9.5);
         }
@@ -2062,7 +2061,7 @@ namespace Zmanim
         /// <seealso cref="GetAlos72Zmanis()"/>
         /// <seealso cref="GetTzaisAteretTorah()"/>
         /// <seealso cref="GetShaahZmanisAteretTorah()"/>
-        public virtual DateTime GetPlagHaminchaAteretTorah()
+        public virtual DateTime? GetPlagHaminchaAteretTorah()
         {
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanisAteretTorah() * 10.75);
         }
@@ -2097,12 +2096,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetAlos72Zmanis()"/>
-        public virtual DateTime GetTzais72Zmanis()
+        public virtual DateTime? GetTzais72Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunset(), shaahZmanis * 1.2);
         }
@@ -2114,12 +2113,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetAlos90Zmanis()"/>
-        public virtual DateTime GetTzais90Zmanis()
+        public virtual DateTime? GetTzais90Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunset(), shaahZmanis * 1.5);
         }
@@ -2131,12 +2130,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetAlos96Zmanis()"/>
-        public virtual DateTime GetTzais96Zmanis()
+        public virtual DateTime? GetTzais96Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunset(), shaahZmanis * 1.6);
         }
@@ -2154,7 +2153,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetTzais19Point8Degrees()"/>
         /// <seealso cref="GetAlos90()"/>
-        public virtual DateTime GetTzais90()
+        public virtual DateTime? GetTzais90()
         {
             return GetTimeOffset(GetSeaLevelSunset(), 90 * MINUTE_MILLIS);
         }
@@ -2171,7 +2170,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetTzais26Degrees()"/>
         /// <seealso cref="GetAlos120()"/>
-        public virtual DateTime GetTzais120()
+        public virtual DateTime? GetTzais120()
         {
             return GetTimeOffset(GetSeaLevelSunset(), 120 * MINUTE_MILLIS);
         }
@@ -2183,12 +2182,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetAlos120Zmanis()"/>
-        public virtual DateTime GetTzais120Zmanis()
+        public virtual DateTime? GetTzais120Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
             {
-                return DateTime.MinValue;
+                return null;
             }
             return GetTimeOffset(GetSeaLevelSunset(), shaahZmanis * 2.0);
         }
@@ -2200,7 +2199,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="ZmanimCalendar.GetTzais72"/>
         /// <seealso cref="GetAlos16Point1Degrees">for more information on this calculation.</seealso>
-        public virtual DateTime GetTzais16Point1Degrees()
+        public virtual DateTime? GetTzais16Point1Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_16_POINT_1);
         }
@@ -2212,7 +2211,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetTzais120()"/>
         /// <seealso cref="GetAlos26Degrees()"/>
-        public virtual DateTime GetTzais26Degrees()
+        public virtual DateTime? GetTzais26Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_26_DEGREES);
         }
@@ -2223,7 +2222,7 @@ namespace Zmanim
         ///</summary>
         ///<returns> the <c>DateTime</c> representing the time. </returns>
         ///<seealso cref = "GetAlos18Degrees()" />
-        public virtual DateTime GetTzais18Degrees()
+        public virtual DateTime? GetTzais18Degrees()
         {
             return GetSunsetOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
@@ -2235,7 +2234,7 @@ namespace Zmanim
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetTzais90()"/>
         /// <seealso cref="GetAlos19Point8Degrees()"/>
-        public virtual DateTime GetTzais19Point8Degrees()
+        public virtual DateTime? GetTzais19Point8Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_19_POINT_8);
         }
@@ -2247,7 +2246,7 @@ namespace Zmanim
         /// </summary>
         /// <returns>the <c>DateTime</c> representing the time.</returns>
         /// <seealso cref="GetAlos96()"/>
-        public virtual DateTime GetTzais96()
+        public virtual DateTime? GetTzais96()
         {
             return GetTimeOffset(GetSeaLevelSunset(), 96 * MINUTE_MILLIS);
         }
@@ -2268,7 +2267,7 @@ namespace Zmanim
         /// the Date representing the local <em>chatzos</em>
         /// </returns>
         /// <seealso cref="GeoLocation.GetLocalMeanTimeOffset"/>
-        public virtual DateTime GetFixedLocalChatzos()
+        public virtual DateTime? GetFixedLocalChatzos()
         {
             return GetTimeOffset(
                 GetDateFromTime(
@@ -2286,7 +2285,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetFixedLocalChatzos()"/>
         /// <seealso cref="GetSofZmanTfilaFixedLocal()"/>
-        public virtual DateTime GetSofZmanShmaFixedLocal()
+        public virtual DateTime? GetSofZmanShmaFixedLocal()
         {
             return GetTimeOffset(GetFixedLocalChatzos(), -180 * MINUTE_MILLIS);
         }
@@ -2301,7 +2300,7 @@ namespace Zmanim
         /// </returns>
         /// <seealso cref="GetFixedLocalChatzos()"/>
         /// <seealso cref="GetSofZmanShmaFixedLocal()"/>
-        public virtual DateTime GetSofZmanTfilaFixedLocal()
+        public virtual DateTime? GetSofZmanTfilaFixedLocal()
         {
             return GetTimeOffset(GetFixedLocalChatzos(), -120 * MINUTE_MILLIS);
         }
