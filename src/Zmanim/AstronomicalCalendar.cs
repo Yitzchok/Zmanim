@@ -35,15 +35,16 @@ namespace Zmanim
     /// it with the <see cref="AstronomicalCalculator"/>. A
     /// number of different implementations are included in the util package <br/>
     /// 	<b>Note:</b> There are times when the algorithms can't calculate proper
-    /// values for sunrise and sunset. This is usually caused by trying to calculate
+    /// values for sunrise, sunset and twilight. This is usually caused by trying to calculate
     /// times for areas either very far North or South, where sunrise / sunset never
     /// happen on that date. This is common when calculating twilight with a deep dip
     /// below the horizon for locations as south of the North Pole as London in the
-    /// northern hemisphere. When the calculations encounter this condition a null
+    /// northern hemisphere. The sun never reaches this dip at certain
+    /// times of the year. When the calculations encounter this condition a null
     /// will be returned when a <see cref="DateTime"/> is expected and
     /// <see cref="double.NaN"/> when a double is expected. The reason that
     /// <c>Exception</c>s are not thrown in these cases is because the lack
-    /// of a rise/set are not exceptions, but expected in many parts of the world.
+    /// of a rise/set or twilight are not exceptions, but expected in many parts of the world.
     /// Here is a simple example of how to use the API to calculate sunrise: <br/>
     /// First create the Calendar for the location you would like to calculate:
     /// <example>
@@ -351,7 +352,7 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> representing the exact sea-level sunset
-        /// time. If the calculation Can't be computed
+        /// time. If the calculation can't be computed
         /// (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
@@ -373,7 +374,7 @@ namespace Zmanim
         /// <returns>
         /// The <c>DateTime</c> of the end of civil twilight using a
         /// zenith of <seealso cref="CIVIL_ZENITH">96°</seealso>. If the 
-        /// calculation Can't be computed (see explanation on top of thepage),
+        /// calculation can't be computed (see explanation on top of thepage),
         /// null will be returned.
         /// </returns>
         /// <seealso cref="CIVIL_ZENITH"/>
@@ -389,7 +390,7 @@ namespace Zmanim
         /// <returns>
         /// The <c>DateTime</c> of the end of nautical twilight using a
         /// zenith of <seealso cref="NAUTICAL_ZENITH">102°</seealso>. If the 
-        /// calculation Can't be computed (see explanation on top of thepage),
+        /// calculation can't be computed (see explanation on top of thepage),
         /// null will be returned.
         /// </returns>
         /// <seealso cref="NAUTICAL_ZENITH"/>
@@ -405,7 +406,7 @@ namespace Zmanim
         /// <returns>
         /// The The <c>DateTime</c> of the end of astronomical twilight
         /// using a zenith of <see cref="ASTRONOMICAL_ZENITH">108°</see>. If the
-        /// calculation Can't be computed (see explanation on top of thepage),
+        /// calculation can't be computed (see explanation on top of thepage),
         /// null will be returned.
         /// </returns>
         /// <seealso cref="ASTRONOMICAL_ZENITH"/>
@@ -414,16 +415,16 @@ namespace Zmanim
             return GetSunsetOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
 
-        ///<summary>
-        ///  Utility method that returns a date offset by the offset time passed in.
-        ///  This method casts the offset as a <code>long</code> and calls
-        ///  <see cref = "GetTimeOffset(System.DateTime,long)" />.
-        ///</summary>
-        ///<param name = "time">
-        ///  the start time </param>
-        ///<param name = "offset">
-        ///  the offset in milliseconds to add to the time </param>
-        ///<returns> the <see cref = "DateTime" />with the offset added to it </returns>
+        /// <summary>
+        /// Utility method that returns a date offset by the offset time passed in.
+        /// This method casts the offset as a <code>long</code> and calls
+        /// <see cref="GetTimeOffset(System.DateTime,long)"/>.
+        /// </summary>
+        /// <param name="time">the start time</param>
+        /// <param name="offset">the offset in milliseconds to add to the time</param>
+        /// <returns>
+        /// the <see cref="DateTime"/>with the offset added to it
+        /// </returns>
         public virtual DateTime GetTimeOffset(DateTime time, double offset)
         {
             return GetTimeOffset(time, (long)offset);
@@ -455,7 +456,7 @@ namespace Zmanim
         /// calculation. For time after sunrise use negative numbers.</param>
         /// <returns>
         /// The <seealso cref="DateTime"/> of the offset after (or before)
-        /// <see cref="GetSunrise"/>. If the calculation Can't be computed 
+        /// <see cref="GetSunrise"/>. If the calculation can't be computed 
         /// (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
@@ -476,7 +477,7 @@ namespace Zmanim
         ///  the degrees after <see cref = "GetSunset" /> to use in the
         ///  calculation. For time before sunset use negative numbers. </param>
         ///<returns> The <seealso cref = "DateTime" />of the offset after (or before)
-        ///  <see cref = "GetSunset" />. If the calculation Can't be computed 
+        ///  <see cref = "GetSunset" />. If the calculation can't be computed 
         /// (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
@@ -497,7 +498,7 @@ namespace Zmanim
         /// negative numbers.</param>
         /// <returns>
         /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation Can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
+        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
         public virtual double GetUtcSunrise(double zenith)
@@ -518,7 +519,7 @@ namespace Zmanim
         /// negative numbers.</param>
         /// <returns>
         /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation Can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
+        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSunrise"/>
@@ -536,7 +537,7 @@ namespace Zmanim
         /// use negative numbers.</param>
         /// <returns>
         /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation Can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
+        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSeaLevelSunset"/>
@@ -558,7 +559,7 @@ namespace Zmanim
         /// negative numbers.</param>
         /// <returns>
         /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation Can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
+        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
         /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSunset"/>
@@ -590,7 +591,7 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>long</c> millisecond length of a temporal hour. If
-        /// the calculation Can't be computed  (see explanation on top of the page) <see cref="long.MinValue"/>
+        /// the calculation can't be computed  (see explanation on top of the page) <see cref="long.MinValue"/>
         /// will be returned.
         /// </returns>
         public virtual long GetTemporalHour()
@@ -606,7 +607,7 @@ namespace Zmanim
         /// <param name="sunset">The end of the day.</param>
         /// <returns>
         /// the <code>long</code> millisecond length of the temporal hour.
-        /// If the calculation Can't be computed (see explanation on top of the page) <see cref="long.MinValue"/>
+        /// If the calculation can't be computed (see explanation on top of the page) <see cref="long.MinValue"/>
         /// will be returned.
         /// </returns>
         /// <seealso cref="GetTemporalHour()"/>
@@ -627,7 +628,7 @@ namespace Zmanim
         ///  lengthening or shortening day.
         ///</summary>
         ///<returns> the <c>DateTime</c> representing Sun's transit. If the
-        /// calculation Can't be computed (see explanation on top of the page), 
+        /// calculation can't be computed (see explanation on top of the page), 
         /// null will be returned.
         /// </returns>
         public virtual DateTime GetSunTransit()
