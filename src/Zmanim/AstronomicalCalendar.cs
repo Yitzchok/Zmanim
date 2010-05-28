@@ -44,7 +44,7 @@ namespace Zmanim
     /// will be returned when a <see cref="DateTime"/> is expected and
     /// <see cref="double.NaN"/> when a double is expected. The reason that
     /// <c>Exception</c>s are not thrown in these cases is because the lack
-    /// of a rise/set or twilight are not exceptions, but expected in many parts of the world.
+    /// of a rise/set or twilight is not an exception, but expected in many parts of the world.
     /// Here is a simple example of how to use the API to calculate sunrise: <br/>
     /// First create the Calendar for the location you would like to calculate:
     /// <example>
@@ -189,23 +189,25 @@ namespace Zmanim
         }
 
 
-        ///<summary>
-        ///  The getSunrise method Returns a <c>DateTime</c> representing the
-        ///  sunrise time. The zenith used for the calculation uses
-        ///  <seealso cref = "GEOMETRIC_ZENITH">geometric zenith</seealso> of 90°. This is adjusted
-        ///  by the <seealso cref = "AstronomicalCalculator" /> that adds approximately 50/60 of a
-        ///  degree to account for 34 archminutes of refraction and 16 archminutes for
-        ///  the sun's radius for a total of
-        ///  <seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
-        ///  documentation for the specific implementation of the
-        ///  <seealso cref = "AstronomicalCalculator" /> that you are using.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the exact sunrise time. If
-        ///  the calculation can't be computed (such as in the arctic
-        /// circle where the sun only rises and sets one day a year), a null
-        /// will be returned. See detailed explanation on top of the page.
+        /// <summary>
+        /// The getSunrise method Returns a <c>DateTime</c> representing the
+        /// sunrise time. The zenith used for the calculation uses
+        /// <seealso cref="GEOMETRIC_ZENITH">geometric zenith</seealso> of 90°. This is adjusted
+        /// by the <seealso cref="AstronomicalCalculator"/> that adds approximately 50/60 of a
+        /// degree to account for 34 archminutes of refraction and 16 archminutes for
+        /// the sun's radius for a total of
+        /// <seealso cref="Calculator.AstronomicalCalculator.AdjustZenith">90.83333°</seealso>. See
+        /// documentation for the specific implementation of the
+        /// <seealso cref="AstronomicalCalculator"/> that you are using.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the exact sunrise time.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
-        ///<seealso cref = "Calculator.AstronomicalCalculator.AdjustZenith" />
+        /// <seealso cref="Calculator.AstronomicalCalculator.AdjustZenith"/>
         public virtual DateTime? GetSunrise()
         {
             double sunrise = GetUtcSunrise(GEOMETRIC_ZENITH);
@@ -225,9 +227,11 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> representing the exact sea-level sunrise
-        /// time. If the calculation can't be computed (such as in the arctic
-        /// circle where the sun only rises and sets one day a year), a null
-        /// will be returned. See detailed explanation on top of the page.
+        /// time.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetSunrise"/>
         /// <seealso cref="GetUtcSeaLevelSunrise"/>
@@ -299,10 +303,11 @@ namespace Zmanim
         /// sunset date will be incremented to the following date.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> representing the exact sunset time. If the
-        /// calculation can't be computed (such as in the arctic circle where
-        /// the sun only rises and sets one day a year), a null will be
-        /// returned. See detailed explanation on top of the page.
+        /// the <c>DateTime</c> representing the exact sunset time. 
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="Calculator.AstronomicalCalculator.AdjustZenith"/>
         public virtual DateTime? GetSunset()
@@ -324,23 +329,22 @@ namespace Zmanim
         /// <param name="sunset">the sunset date to adjust if needed</param>
         /// <param name="sunrise">the sunrise to compare to the sunset</param>
         /// <returns>
-        /// the adjusted sunset date. If the calculation can't be computed
-        /// (such as in the arctic circle where the sun only rises and sets
-        /// one day a year), a null will be returned. See detailed
-        /// explanation on top of the page.
+        /// the adjusted sunset date.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         private DateTime? GetAdjustedSunsetDate(DateTime? sunset, DateTime? sunrise)
         {
             if (sunset == null || sunrise == null || sunrise.Value.CompareTo(sunset) < 0)
                 return sunset;
 
-
             var clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
             clonedDateWithLocation.Date = sunset.Value;
             clonedDateWithLocation.Date.AddDays(1);
 
             return clonedDateWithLocation.Date;
-
         }
 
         /// <summary>
@@ -352,10 +356,11 @@ namespace Zmanim
         /// after sunset.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> representing the exact sea-level sunset
-        /// time. If the calculation can't be computed
-        /// (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// the <c>DateTime</c> representing the exact sea-level sunset time.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetSunset"/>
         /// <seealso cref="GetUtcSeaLevelSunset"/>
@@ -406,8 +411,8 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// The The <c>DateTime</c> of the end of astronomical twilight
-        /// using a zenith of <see cref="ASTRONOMICAL_ZENITH">108°</see>. If the
-        /// calculation can't be computed (see explanation on top of thepage),
+        /// using a zenith of <see cref="ASTRONOMICAL_ZENITH">108°</see>.
+        /// If the calculation can't be computed (see explanation on top of thepage),
         /// null will be returned.
         /// </returns>
         /// <seealso cref="ASTRONOMICAL_ZENITH"/>
@@ -436,15 +441,15 @@ namespace Zmanim
             return GetTimeOffset(time, (long)offset);
         }
 
-        ///<summary>
-        ///  A utility method to return a date offset by the offset time passed in.
-        ///</summary>
-        ///<param name = "time">
-        ///  the start time </param>
-        ///<param name = "offset">
-        ///  the offset in milliseconds to add to the time. </param>
-        ///<returns> the <see cref = "DateTime" /> with the offset in milliseconds added
-        ///  to it </returns>
+        /// <summary>
+        /// A utility method to return a date offset by the offset time passed in.
+        /// </summary>
+        /// <param name="time">the start time</param>
+        /// <param name="offset">the offset in milliseconds to add to the time.</param>
+        /// <returns>
+        /// the <see cref="DateTime"/> with the offset in milliseconds added
+        /// to it
+        /// </returns>
         public virtual DateTime? GetTimeOffset(DateTime time, long offset)
         {
             if (time == null || offset == long.MinValue)
@@ -466,9 +471,11 @@ namespace Zmanim
         /// calculation. For time after sunrise use negative numbers.</param>
         /// <returns>
         /// The <seealso cref="DateTime"/> of the offset after (or before)
-        /// <see cref="GetSunrise"/>. If the calculation can't be computed 
-        /// (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// <see cref="GetSunrise"/>.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         public virtual DateTime? GetSunriseOffsetByDegrees(double offsetZenith)
         {
@@ -487,9 +494,11 @@ namespace Zmanim
         ///  the degrees after <see cref = "GetSunset" /> to use in the
         ///  calculation. For time before sunset use negative numbers. </param>
         ///<returns> The <seealso cref = "DateTime" />of the offset after (or before)
-        ///  <see cref = "GetSunset" />. If the calculation can't be computed 
-        /// (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        ///  <see cref = "GetSunset" />.
+        /// If the calculation can't be computed such as in the Arctic Circle where
+        /// there is at least one day a year where the sun does not rise, and
+        /// one where it does not set, <see cref="Double.NaN"/> will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         public virtual DateTime? GetSunsetOffsetByDegrees(double offsetZenith)
         {
@@ -507,9 +516,11 @@ namespace Zmanim
         /// <param name="zenith">the degrees below the horizon. For time after sunrise use
         /// negative numbers.</param>
         /// <returns>
-        /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// The time in the format: 18.75 for 18:45:00 UTC/GMT. 
+        /// If the calculation can't be computed such as in the Arctic Circle where
+        /// there is at least one day a year where the sun does not rise, and
+        /// one where it does not set, <see cref="Double.NaN"/> will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         public virtual double GetUtcSunrise(double zenith)
         {
@@ -528,9 +539,11 @@ namespace Zmanim
         /// <param name="zenith">the degrees below the horizon. For time after sunrise use
         /// negative numbers.</param>
         /// <returns>
-        /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// The time in the format: 18.75 for 18:45:00 UTC/GMT.
+        /// If the calculation can't be computed such as in the Arctic Circle where
+        /// there is at least one day a year where the sun does not rise, and
+        /// one where it does not set, <see cref="Double.NaN"/> will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSunrise"/>
         /// <seealso cref="GetUtcSeaLevelSunset"/>
@@ -546,9 +559,11 @@ namespace Zmanim
         /// <param name="zenith">the degrees below the horizon. For time after before sunset
         /// use negative numbers.</param>
         /// <returns>
-        /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// The time in the format: 18.75 for 18:45:00 UTC/GMT.
+        /// If the calculation can't be computed such as in the Arctic Circle where
+        /// there is at least one day a year where the sun does not rise, and
+        /// one where it does not set, <see cref="Double.NaN"/> will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSeaLevelSunset"/>
         public virtual double GetUtcSunset(double zenith)
@@ -568,9 +583,11 @@ namespace Zmanim
         /// <param name="zenith">the degrees below the horizon. For time before sunset use
         /// negative numbers.</param>
         /// <returns>
-        /// The time in the format: 18.75 for 18:45:00 UTC/GMT. If the
-        /// calculation can't be computed (such as in the arctic circle where the sun only rises and sets one day a year),
-        /// <see cref="Double.NaN"/> will be returned. See detailed explanation on top of the page.
+        /// The time in the format: 18.75 for 18:45:00 UTC/GMT.
+        /// If the calculation can't be computed such as in the Arctic Circle where
+        /// there is at least one day a year where the sun does not rise, and
+        /// one where it does not set, <see cref="Double.NaN"/> will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         /// <seealso cref="GetUtcSunset"/>
         /// <seealso cref="GetUtcSeaLevelSunrise"/>
@@ -617,8 +634,8 @@ namespace Zmanim
         /// <param name="sunset">The end of the day.</param>
         /// <returns>
         /// the <code>long</code> millisecond length of the temporal hour.
-        /// If the calculation can't be computed (see explanation on top of the page) <see cref="long.MinValue"/>
-        /// will be returned.
+        /// If the calculation can't be computed (see explanation on top of the page)
+        /// <see cref="long.MinValue"/> will be returned.
         /// </returns>
         /// <seealso cref="GetTemporalHour()"/>
         public virtual long GetTemporalHour(DateTime sunrise, DateTime sunset)
@@ -646,9 +663,11 @@ namespace Zmanim
         ///  and sunset, which can be slightly off the real transit time due to the
         ///  lengthening or shortening day.
         ///</summary>
-        ///<returns> the <c>DateTime</c> representing Sun's transit. If the
-        /// calculation can't be computed (see explanation on top of the page), 
-        /// null will be returned.
+        ///<returns> the <c>DateTime</c> representing Sun's transit.
+        /// If the calculation can't be computed such as in the Arctic
+        /// Circle where there is at least one day a year where the sun does
+        /// not rise, and one where it does not set, a null will be returned.
+        /// See detailed explanation on top of the page.
         /// </returns>
         public virtual DateTime? GetSunTransit()
         {
@@ -689,13 +708,14 @@ namespace Zmanim
         /// calendar set to the equinox in Jerusalem returns a value close to
         /// 16.1°
         /// Please note that this method is very slow and inefficient and should NEVER be used in a loop.
-        /// TODO: Improve efficiency.
+        /// <em><b>TODO:</b></em> Improve efficiency.
         /// </summary>
         /// <param name="minutes">offset</param>
         /// <returns>
         /// the degrees below the horizon that match the offset on the
         /// equinox in Jerusalem at sea level.
         /// </returns>
+        /// <seealso cref="GetSunsetSolarDipFromOffset"/>
         public virtual double GetSunriseSolarDipFromOffset(double minutes)
         {
             var offsetByDegrees = GetSeaLevelSunrise();
