@@ -32,9 +32,11 @@ namespace Zmanim
     /// use the <seealso cref="ComplexZmanimCalendar"/> that extends this class. This class
     /// contains the main functionality of the Zmanim library. See documentation for
     /// the <seealso cref="ComplexZmanimCalendar"/> and <seealso cref="AstronomicalCalendar"/> for simple
-    /// examples on using the API. <h2>Disclaimer:</h2> While I did my best to get
-    /// accurate results please do not rely on these zmanim for
-    /// <em>halacha lemaaseh</em>
+    /// examples on using the API.<br/>
+    /// 	<b>Note:</b> It is important to read the technical notes on top of the
+    /// <see cref="AstronomicalCalculator"/> documentation. <h2>
+    /// Disclaimer:</h2> While I did my best to get accurate results please do not
+    /// rely on these zmanim for <em>halacha lemaaseh</em>.
     /// </summary>
     /// <author>Eliyahu Hershfeld</author>
     public class ZmanimCalendar : AstronomicalCalendar
@@ -108,14 +110,21 @@ namespace Zmanim
             CandleLightingOffset = 18;
         }
 
-        ///<summary>
-        ///  Returns <em>tzais</em> (nightfall) when the sun is 8.5° below the
-        ///  western geometric horizon (90°) after <seealso cref = "AstronomicalCalendar.GetSunset">sunset</seealso>. For
-        ///  information on the source of this calculation see
-        ///  <seealso cref = "ZENITH_8_POINT_5" />.
-        ///</summary>
-        ///<returns> The <c>DateTime</c> of nightfall. </returns>
-        ///<seealso cref = "ZENITH_8_POINT_5" />
+        /// <summary>
+        /// Returns <em>tzais</em> (nightfall) when the sun is 8.5° below the
+        /// western geometric horizon (90°) after <seealso cref="AstronomicalCalendar.GetSunset">sunset</seealso>. For
+        /// information on the source of this calculation see
+        /// <seealso cref="ZENITH_8_POINT_5"/>.
+        /// </summary>
+        /// <returns>
+        /// The <code>DateTime</code> of nightfall.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_8_POINT_5"/>
         public virtual DateTime? GetTzais()
         {
             return GetSunsetOffsetByDegrees(ZENITH_8_POINT_5);
@@ -128,7 +137,14 @@ namespace Zmanim
         ///  see <see cref = "ZENITH_16_POINT_1" />.
         ///</summary>
         ///<seealso cref = "ZENITH_16_POINT_1" />
-        ///<returns> The <c>DateTime</c> of dawn. </returns>
+        ///<returns>
+        ///  The <c>DateTime</c> of dawn.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual DateTime? GetAlosHashachar()
         {
             return GetSunriseOffsetByDegrees(ZENITH_16_POINT_1);
@@ -144,7 +160,14 @@ namespace Zmanim
         ///  but purely depends on the time it takes to walk the distance of 4
         ///  <em>Mil</em>.
         ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time. </returns>
+        ///<returns>
+        /// the <c>DateTime</c> representing the time.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual DateTime? GetAlos72()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, -72 * MINUTE_MILLIS);
@@ -157,7 +180,13 @@ namespace Zmanim
         ///  returned value is identical to <see cref = "AstronomicalCalendar.GetSunTransit" />
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar.GetSunTransit" />
-        ///<returns> the <c>DateTime</c> of chatzos. </returns>
+        ///<returns> the <c>DateTime</c> of chatzos.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        ///  </returns>
         public virtual DateTime? GetChatzos()
         {
             return GetSunTransit();
@@ -169,7 +198,13 @@ namespace Zmanim
         ///  <br />
         ///  <b>Note:</b> this method is experimental and might be removed (or moved)
         ///</summary>
-        ///<returns> the <c>DateTime</c> of Solar Midnight (chatzos layla). </returns>
+        ///<returns> the <c>DateTime</c> of Solar Midnight (chatzos layla).
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        ///  </returns>
         public virtual DateTime? GetSolarMidnight()
         {
             var clonedCal = (ZmanimCalendar)Clone();
@@ -197,7 +232,13 @@ namespace Zmanim
         ///  <see cref = "GetShaahZmanisGra" /> after <see cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see>.
         ///</summary>
         ///<seealso cref = "GetShaahZmanisGra" />
-        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        ///  </returns>
         public virtual DateTime? GetSofZmanShmaGRA()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 3);
@@ -212,7 +253,13 @@ namespace Zmanim
         ///  minutes before sunrise to nightfall of 72 minutes after sunset. This
         ///  returns the time of 3 * <em>shaos zmaniyos</em> after dawn.
         ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
+        ///<returns> the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        ///  </returns>
         ///<seealso cref = "ComplexZmanimCalendar.GetShaahZmanis72Minutes()" />
         ///<seealso cref = "GetAlos72" />
         ///<seealso cref = "ComplexZmanimCalendar.GetSofZmanShmaMGA72Minutes()" />
@@ -229,152 +276,211 @@ namespace Zmanim
         ///  level, this is calculated at sea level, since the darkness level is not
         ///  affected by elevation.
         ///</summary>
-        ///<returns> the <c>DateTime</c> representing 72 minutes after sea level
-        ///  sunset. </returns>
+        ///<returns> the <c>DateTime</c> representing 72 minutes after sea level sunset.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        ///  </returns>
         public virtual DateTime? GetTzais72()
         {
             return GetTimeOffset(GetSeaLevelSunset().Value, 72 * MINUTE_MILLIS);
         }
 
-        ///<summary>
-        ///  A method to return candle lighting time. This is calculated as
-        ///  <seealso cref = "CandleLightingOffset" /> minutes before sunset. This will
-        ///  return the time for any day of the week, since it can be used to
-        ///  calculate candle lighting time for <em>yom tov</em> (holidays) as well.
-        ///</summary>
-        ///<returns> candle lighting time. </returns>
-        ///<seealso cref = "CandleLightingOffset" />
+        /// <summary>
+        /// A method to return candle lighting time. This is calculated as
+        /// <seealso cref="CandleLightingOffset"/> minutes before sunset. This will
+        /// return the time for any day of the week, since it can be used to
+        /// calculate candle lighting time for <em>yom tov</em> (holidays) as well.
+        /// </summary>
+        /// <returns>
+        /// candle lighting time.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="CandleLightingOffset"/>
         public virtual DateTime? GetCandelLighting()
         {
             return GetTimeOffset(GetSunset().Value, -CandleLightingOffset * MINUTE_MILLIS);
         }
 
-        ///<summary>
-        ///  This method returns the latest
-        ///  <em>zman tefilah<em> (time to pray morning prayers). This time is 4
-        ///                    hours into the day based on the opinion of the <em>GR"A</em> and the
-        ///                  </em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
-        ///  This returns the time 4 * <seealso cref = "GetShaahZmanisGra" /> after
-        ///  <seealso cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
-        ///</summary>
-        ///<seealso cref = "GetShaahZmanisGra" />
-        ///<returns> the <c>DateTime</c> of the latest zman tefilah. </returns>
+        /// <summary>
+        /// This method returns the latest
+        /// <em>zman tefilah<em> (time to pray morning prayers). This time is 4
+        /// hours into the day based on the opinion of the <em>GR"A</em> and the
+        /// </em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
+        /// This returns the time 4 * <seealso cref="GetShaahZmanisGra"/> after
+        /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman tefilah.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanisGra"/>
         public virtual DateTime? GetSofZmanTfilaGRA()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 4);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman tfila</em> (time to say the
-        ///  morning prayers) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <seealso cref = "GetAlos72">72</seealso> minutes before
-        ///  <seealso cref = "AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 4
-        ///  <em><seealso cref = "GetShaahZmanisMGA">shaos zmaniyos</seealso></em> (temporal hours)
-        ///  after <seealso cref = "GetAlos72">dawn</seealso> based on the opinion of the <em>MG"A</em>
-        ///  that the day is calculated from a <seealso cref = "GetAlos72">dawn</seealso> of 72 minutes
-        ///  before sunrise to <seealso cref = "GetTzais72">nightfall</seealso> of 72 minutes after
-        ///  sunset. This returns the time of 4 * <seealso cref = "GetShaahZmanisMGA" /> after
-        ///  <seealso cref = "GetAlos72">dawn</seealso>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman tfila. </returns>
-        ///<seealso cref = "GetShaahZmanisMGA" />
-        ///<seealso cref = "GetAlos72" />
+        /// <summary>
+        /// This method returns the latest <em>zman tfila</em> (time to say the
+        /// morning prayers) in the opinion of the <em>MG"A</em> based on
+        /// <em>alos</em> being <seealso cref="GetAlos72">72</seealso> minutes before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 4
+        /// <em><seealso cref="GetShaahZmanisMGA">shaos zmaniyos</seealso></em> (temporal hours)
+        /// after <seealso cref="GetAlos72">dawn</seealso> based on the opinion of the <em>MG"A</em>
+        /// that the day is calculated from a <seealso cref="GetAlos72">dawn</seealso> of 72 minutes
+        /// before sunrise to <seealso cref="GetTzais72">nightfall</seealso> of 72 minutes after
+        /// sunset. This returns the time of 4 * <seealso cref="GetShaahZmanisMGA"/> after
+        /// <seealso cref="GetAlos72">dawn</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman tfila.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanisMGA"/>
+        /// <seealso cref="GetAlos72"/>
         public virtual DateTime? GetSofZmanTfilaMGA()
         {
             return GetTimeOffset(GetAlos72().Value, GetShaahZmanisMGA() * 4);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>mincha gedola</em>.
-        ///  <em>Mincha gedola</em> is the earliest time one can pray mincha. The
-        ///  Ramba"m is of the opinion that it is better to delay <em>mincha</em>
-        ///  until <em><seealso cref = "GetMinchaKetana">mincha ketana</seealso></em> while the
-        ///  <em>Ra"sh,
-        ///    Tur, GR"A</em> and others are of the opinion that <em>mincha</em> can be
-        ///  prayed <em>lechatchila</em> starting at <em>mincha gedola</em>. This is
-        ///  calculated as 6.5 <seealso cref = "GetShaahZmanisGra">sea level solar hours</seealso>
-        ///  after <seealso cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>. This calculation
-        ///  is calculated based on the opinion of the <em>GR"A</em> and the
-        ///  <em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
-        ///  This returns the time 6.5 <seealso cref = "GetShaahZmanisGra" /> after
-        ///  <seealso cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
-        ///</summary>
-        ///<seealso cref = "GetShaahZmanisGra" />
-        ///<seealso cref = "GetMinchaKetana" />
-        ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
+        /// <summary>
+        /// This method returns the time of <em>mincha gedola</em>.
+        /// <em>Mincha gedola</em> is the earliest time one can pray mincha. The
+        /// Ramba"m is of the opinion that it is better to delay <em>mincha</em>
+        /// until <em><seealso cref="GetMinchaKetana">mincha ketana</seealso></em> while the
+        /// <em>Ra"sh,
+        /// Tur, GR"A</em> and others are of the opinion that <em>mincha</em> can be
+        /// prayed <em>lechatchila</em> starting at <em>mincha gedola</em>. This is
+        /// calculated as 6.5 <seealso cref="GetShaahZmanisGra">sea level solar hours</seealso>
+        /// after <seealso cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>. This calculation
+        /// is calculated based on the opinion of the <em>GR"A</em> and the
+        /// <em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
+        /// This returns the time 6.5 <seealso cref="GetShaahZmanisGra"/> after
+        /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of mincha gedola.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanisGra"/>
+        /// <seealso cref="GetMinchaKetana"/>
         public virtual DateTime? GetMinchaGedola()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 6.5);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>mincha ketana</em>. This is the
-        ///  perfered earliest time to pray <em>mincha</em> in the opinion of the
-        ///  Ramba"m and others. For more information on this see the documentation on
-        ///  <em><seealso cref = "GetMinchaGedola">mincha gedola</seealso></em>. This is calculated as
-        ///  9.5 <seealso cref = "GetShaahZmanisGra">sea level solar hours</seealso> after
-        ///  <seealso cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>. This calculation is
-        ///  calculated based on the opinion of the <em>GR"A</em> and the
-        ///  <em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
-        ///  This returns the time 9.5 * <seealso cref = "GetShaahZmanisGra" /> after
-        ///  <seealso cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
-        ///</summary>
-        ///<seealso cref = "GetShaahZmanisGra" />
-        ///<seealso cref = "GetMinchaGedola" />
-        ///<returns> the <c>DateTime</c> of the time of mincha gedola. </returns>
+        /// <summary>
+        /// This method returns the time of <em>mincha ketana</em>. This is the
+        /// perfered earliest time to pray <em>mincha</em> in the opinion of the
+        /// Ramba"m and others. For more information on this see the documentation on
+        /// <em><seealso cref="GetMinchaGedola">mincha gedola</seealso></em>. This is calculated as
+        /// 9.5 <seealso cref="GetShaahZmanisGra">sea level solar hours</seealso> after
+        /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>. This calculation is
+        /// calculated based on the opinion of the <em>GR"A</em> and the
+        /// <em>Baal Hatanya</em> that the day is calculated from sunrise to sunset.
+        /// This returns the time 9.5 * <seealso cref="GetShaahZmanisGra"/> after
+        /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of mincha gedola.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanisGra"/>
+        /// <seealso cref="GetMinchaGedola"/>
         public virtual DateTime? GetMinchaKetana()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 9.5);
         }
 
-        ///<summary>
-        ///  This method returns he time of <em>plag hamincha</em>. This is calculated
-        ///  as 10.75 hours after sunrise. This calculation is calculated based on the
-        ///  opinion of the <em>GR"A</em> and the <em>Baal Hatanya</em> that the day
-        ///  is calculated from sunrise to sunset. This returns the time 10.75 *
-        ///  <see cref = "GetShaahZmanisGra" /> after <see cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
+        /// <summary>
+        /// This method returns he time of <em>plag hamincha</em>. This is calculated
+        /// as 10.75 hours after sunrise. This calculation is calculated based on the
+        /// opinion of the <em>GR"A</em> and the <em>Baal Hatanya</em> that the day
+        /// is calculated from sunrise to sunset. This returns the time 10.75 *
+        /// <see cref="GetShaahZmanisGra"/> after <see cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
+        /// If the calculation can't be computed such as northern and southern locations
+        /// even south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual DateTime? GetPlagHamincha()
         {
             return GetTimeOffset(GetSeaLevelSunrise().Value, GetShaahZmanisGra() * 10.75);
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (
-        ///  <see cref = "AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)">temporal hour</see>) according to the
-        ///  opinion of the <em>GR"A</em> and the <em>Baal Hatanya</em>. This
-        ///  calculation divides the day based on the opinion of the <em>GR"A</em> and
-        ///  the <em>Baal Hatanya</em> that the day runs from <see cref = "AstronomicalCalendar.GetSunrise"> sunrise</see>
-        ///  to <seealso cref = "AstronomicalCalendar.GetSunset">sunset</seealso>. The calculations are based on a
-        ///  day from <see cref = "AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see> to
-        ///  <see cref = "AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>. The day is split into 12
-        ///  equal parts each part with each one being a <em>shaah zmanis</em>. This
-        ///  method is similar to <see cref = "AstronomicalCalendar.GetTemporalHour()" />, but all calculations are
-        ///  based on a sealevel sunrise and sunset. For additional information, see
-        ///  Zmanim Kehilchasam, 2nd Edition by Rabbi Dovid Yehuda Burstein,
-        ///  Jerusalem, 2007.
-        ///</summary>
-        ///<returns> the <code>long</code> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
-        ///<seealso cref = "AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)" />
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (
+        /// <see cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)">temporal hour</see>) according to the
+        /// opinion of the <em>GR"A</em> and the <em>Baal Hatanya</em>. This
+        /// calculation divides the day based on the opinion of the <em>GR"A</em> and
+        /// the <em>Baal Hatanya</em> that the day runs from <see cref="AstronomicalCalendar.GetSunrise"> sunrise</see>
+        /// to <seealso cref="AstronomicalCalendar.GetSunset">sunset</seealso>. The calculations are based on a
+        /// day from <see cref="AstronomicalCalendar.GetSeaLevelSunrise">sea level sunrise</see> to
+        /// <see cref="AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>. The day is split into 12
+        /// equal parts each part with each one being a <em>shaah zmanis</em>. This
+        /// method is similar to <see cref="AstronomicalCalendar.GetTemporalHour()"/>, but all calculations are
+        /// based on a sealevel sunrise and sunset. For additional information, see
+        /// Zmanim Kehilchasam, 2nd Edition by Rabbi Dovid Yehuda Burstein,
+        /// Jerusalem, 2007.
+        /// </summary>
+        /// <returns>
+        /// the <code>long</code> millisecond length of a <em>shaah zmanis</em>.
+        /// If the calculation can't be computed such
+        /// as in the Arctic Circle where there is at least one day a year
+        /// where the sun does not rise, and one where it does not set,
+        /// <see cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)"/>
         public virtual long GetShaahZmanisGra()
         {
             return GetTemporalHour(GetSeaLevelSunrise().Value, GetSeaLevelSunset().Value);
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (temporal hour) according to the
-        ///  opinion of the MGA. This calculation divides the day based on the opinion
-        ///  of the <em>MGA</em> that the day runs from dawn to dusk (for sof zman
-        ///  krias shema and tfila). Dawn for this calculation is 72 minutes before
-        ///  sunrise and dusk is 72 minutes after sunset. This day is split into 12
-        ///  equal parts with each part being a <em>shaah zmanis</em>. Alternate
-        ///  mothods of calculating a <em>shaah zmanis</em> are available in the
-        ///  subclass <see cref = "ComplexZmanimCalendar" />.
-        ///</summary>
-        ///<returns> the <code>long</code> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (temporal hour) according to the
+        /// opinion of the MGA. This calculation divides the day based on the opinion
+        /// of the <em>MGA</em> that the day runs from dawn to dusk (for sof zman
+        /// krias shema and tfila). Dawn for this calculation is 72 minutes before
+        /// sunrise and dusk is 72 minutes after sunset. This day is split into 12
+        /// equal parts with each part being a <em>shaah zmanis</em>. Alternate
+        /// mothods of calculating a <em>shaah zmanis</em> are available in the
+        /// subclass <see cref="ComplexZmanimCalendar"/>.
+        /// </summary>
+        /// <returns>
+        /// the <code>long</code> millisecond length of a <em>shaah zmanis</em>.
+        /// If the calculation can't be computed such
+        /// as in the Arctic Circle where there is at least one day a year
+        /// where the sun does not rise, and one where it does not set,
+        /// <see cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <see cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual long GetShaahZmanisMGA()
         {
             return GetTemporalHour(GetAlos72().Value, GetTzais72().Value);
