@@ -52,8 +52,8 @@ namespace Zmanim
     /// GeoLocation location = new GeoLocation(locationName, latitude, longitude,
     /// elevation, timeZone);
     /// ComplexZmanimCalendar czc = new ComplexZmanimCalendar(DateTime.Now, location);
-    /// </code>
-    /// 	</example>
+    ///         </code>
+    /// </example>
     /// Note: For locations such as Israel where the beginning and end of daylight
     /// savings time can fluctuate from year to year create a
     /// <see cref="Zmanim.TimeZone.ITimeZone"/> with the known start and end of DST. <br/>
@@ -285,73 +285,101 @@ namespace Zmanim
             AteretTorahSunsetOffset = 40;
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
-        ///  a 19.8° dip. This calculation divides the day based on the opinion of
-        ///  the MGA that the day runs from dawn to dusk. Dawn for this calculation is
-        ///  when the sun is 19.8° below the eastern geometric horizon before
-        ///  sunrise. Dusk for this is when the sun is 19.8° below the western
-        ///  geometric horizon after sunset. This day is split into 12 equal parts
-        ///  with each part being a <em>shaah zmanis</em>.
-        ///</summary>
-        ///<returns> the <c>long</c> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
+        /// a 19.8° dip. This calculation divides the day based on the opinion of
+        /// the MGA that the day runs from dawn to dusk. Dawn for this calculation is
+        /// when the sun is 19.8° below the eastern geometric horizon before
+        /// sunrise. Dusk for this is when the sun is 19.8° below the western
+        /// geometric horizon after sunset. This day is split into 12 equal parts
+        /// with each part being a <em>shaah zmanis</em>.
+        /// </summary>
+        /// <returns>
+        /// the <c>long</c> millisecond length of a <em>shaah zmanis</em>.
+        /// If the calculation can't be computed such
+        /// as northern and southern locations even south of the Arctic
+        /// Circle and north of the Antarctic Circle where the sun may not
+        /// reach low enough below the horizon for this calculation, a
+        /// <seealso cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual long GetShaahZmanis19Point8Degrees()
         {
             return GetTemporalHour(GetAlos19Point8Degrees(), GetTzais19Point8Degrees());
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
-        ///  a 18° dip. This calculation divides the day based on the opinion of
-        ///  the MGA that the day runs from dawn to dusk. Dawn for this calculation is
-        ///  when the sun is 18° below the eastern geometric horizon before
-        ///  sunrise. Dusk for this is when the sun is 18° below the western
-        ///  geometric horizon after sunset. This day is split into 12 equal parts
-        ///  with each part being a <em>shaah zmanis</em>.
-        ///</summary>
-        ///<returns> the <c>long</c> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
+        /// a 18° dip. This calculation divides the day based on the opinion of
+        /// the MGA that the day runs from dawn to dusk. Dawn for this calculation is
+        /// when the sun is 18° below the eastern geometric horizon before
+        /// sunrise. Dusk for this is when the sun is 18° below the western
+        /// geometric horizon after sunset. This day is split into 12 equal parts
+        /// with each part being a <em>shaah zmanis</em>.
+        /// </summary>
+        /// <returns>
+        /// the <c>long</c> millisecond length of a <em>shaah zmanis</em>.
+        /// If the calculation can't be computed such
+        /// as northern and southern locations even south of the Arctic
+        /// Circle and north of the Antarctic Circle where the sun may not
+        /// reach low enough below the horizon for this calculation, a
+        /// <seealso cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual long GetShaahZmanis18Degrees()
         {
             return GetTemporalHour(GetAlos18Degrees(), GetTzais18Degrees());
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
-        ///  a dip of 26°. This calculation divides the day based on the opinion
-        ///  of the MGA that the day runs from dawn to dusk. Dawn for this calculation
-        ///  is when the sun is <see cref = "GetAlos26Degrees">26°</see> below the eastern
-        ///  geometric horizon before sunrise. Dusk for this is when the sun is
-        ///  <see cref = "GetTzais26Degrees">26°</see> below the western geometric horizon
-        ///  after sunset. This day is split into 12 equal parts with each part being
-        ///  a <em>shaah zmanis</em>.
-        ///</summary>
-        ///<returns> the <c>long</c> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
+        /// a dip of 26°. This calculation divides the day based on the opinion
+        /// of the MGA that the day runs from dawn to dusk. Dawn for this calculation
+        /// is when the sun is <see cref="GetAlos26Degrees">26°</see> below the eastern
+        /// geometric horizon before sunrise. Dusk for this is when the sun is
+        /// <see cref="GetTzais26Degrees">26°</see> below the western geometric horizon
+        /// after sunset. This day is split into 12 equal parts with each part being
+        /// a <em>shaah zmanis</em>.
+        /// </summary>
+        /// <returns>
+        /// the <c>long</c> millisecond length of a
+        /// <em>shaah zmanis</em>. If the calculation can't be computed such
+        /// as northern and southern locations even south of the Arctic
+        /// Circle and north of the Antarctic Circle where the sun may not
+        /// reach low enough below the horizon for this calculation, a
+        /// <seealso cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual long GetShaahZmanis26Degrees()
         {
             return GetTemporalHour(GetAlos26Degrees(), GetTzais26Degrees());
         }
 
-        ///<summary>
-        ///  Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
-        ///  a dip of 16.1°. This calculation divides the day based on the opinion
-        ///  that the day runs from dawn to dusk. Dawn for this calculation is when
-        ///  the sun is 16.1° below the eastern geometric horizon before sunrise
-        ///  and dusk is when the sun is 16.1° below the western geometric horizon
-        ///  after sunset. This day is split into 12 equal parts with each part being
-        ///  a <em>shaah zmanis</em>.
-        ///</summary>
-        ///<returns> the <c>long</c> millisecond length of a
-        ///  <em>shaah zmanis</em>. </returns>
-        ///<seealso cref = "GetAlos16Point1Degrees()" />
-        ///<seealso cref = "GetTzais16Point1Degrees()" />
-        ///<seealso cref = "GetSofZmanShmaMGA16Point1Degrees()" />
-        ///<seealso cref = "GetSofZmanTfilaMGA16Point1Degrees()" />
-        ///<seealso cref = "GetMinchaGedola16Point1Degrees()" />
-        ///<seealso cref = "GetMinchaKetana16Point1Degrees()" />
-        ///<seealso cref = "GetPlagHamincha16Point1Degrees()" />
+        /// <summary>
+        /// Method to return a <em>shaah zmanis</em> (temporal hour) calculated using
+        /// a dip of 16.1°. This calculation divides the day based on the opinion
+        /// that the day runs from dawn to dusk. Dawn for this calculation is when
+        /// the sun is 16.1° below the eastern geometric horizon before sunrise
+        /// and dusk is when the sun is 16.1° below the western geometric horizon
+        /// after sunset. This day is split into 12 equal parts with each part being
+        /// a <em>shaah zmanis</em>.
+        /// </summary>
+        /// <returns>
+        /// the <c>long</c> millisecond length of a <em>shaah zmanis</em>.
+        /// If the calculation can't be computed such
+        /// as northern and southern locations even south of the Arctic
+        /// Circle and north of the Antarctic Circle where the sun may not
+        /// reach low enough below the horizon for this calculation, a
+        /// <seealso cref="double.NaN"/> will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetAlos16Point1Degrees()"/>
+        /// <seealso cref="GetTzais16Point1Degrees()"/>
+        /// <seealso cref="GetSofZmanShmaMGA16Point1Degrees()"/>
+        /// <seealso cref="GetSofZmanTfilaMGA16Point1Degrees()"/>
+        /// <seealso cref="GetMinchaGedola16Point1Degrees()"/>
+        /// <seealso cref="GetMinchaKetana16Point1Degrees()"/>
+        /// <seealso cref="GetPlagHamincha16Point1Degrees()"/>
         public virtual long GetShaahZmanis16Point1Degrees()
         {
             return GetTemporalHour(GetAlos16Point1Degrees(), GetTzais16Point1Degrees());
@@ -700,18 +728,20 @@ namespace Zmanim
             return GetTimeOffset(GetSeaLevelSunrise(), -120 * MINUTE_MILLIS);
         }
 
-        ///<summary>
-        ///  Method to return <em>alos</em> (dawn) calculated using 120 minutes
-        ///  <em>zmaniyos</em>( <em>GR"A</em> and the <em>Baal Hatanya</em>) or 1/6th
-        ///  of the day before sea level sunrise. This is based on a 24 minute
-        ///  <em>Mil</em> so the time for 5 <em>Mil</em> is 120 minutes which is 1/6th
-        ///  of a day (12 * 60 = 720) / 6 =120 based on the day starting at
-        ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see> and ending at <see cref = "AstronomicalCalendar.GetSunset">sunset</see>.
-        ///  The actual calculation is <seealso cref = "AstronomicalCalendar.GetSunrise" /> - (
-        ///  <see cref = "ZmanimCalendar.GetShaahZmanisGra" /> * 2).
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "ZmanimCalendar.GetShaahZmanisGra" />
+        /// <summary>
+        /// Method to return <em>alos</em> (dawn) calculated using 120 minutes
+        /// <em>zmaniyos</em>( <em>GR"A</em> and the <em>Baal Hatanya</em>) or 1/6th
+        /// of the day before sea level sunrise. This is based on a 24 minute
+        /// <em>Mil</em> so the time for 5 <em>Mil</em> is 120 minutes which is 1/6th
+        /// of a day (12 * 60 = 720) / 6 =120 based on the day starting at
+        /// <see cref="AstronomicalCalendar.GetSunrise">sunrise</see> and ending at <see cref="AstronomicalCalendar.GetSunset">sunset</see>.
+        /// The actual calculation is <seealso cref="AstronomicalCalendar.GetSunrise"/> - (
+        /// <see cref="ZmanimCalendar.GetShaahZmanisGra"/> * 2).
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time.
+        /// </returns>
+        /// <seealso cref="ZmanimCalendar.GetShaahZmanisGra"/>
         public virtual DateTime? GetAlos120Zmanis()
         {
             long shaahZmanis = GetShaahZmanisGra();
@@ -722,19 +752,27 @@ namespace Zmanim
             return GetTimeOffset(GetSeaLevelSunrise(), shaahZmanis * -2);
         }
 
-        ///<summary>
-        ///  Method to return <em>alos</em> (dawn) calculated when the sun is
-        ///  <see cref = "ZENITH_26_DEGREES">26°</see> below the eastern geometric horizon
-        ///  before sunrise. This calculation is based on the same calculation of
-        ///  <see cref = "GetAlos120">120 minutes</see> but uses a degree based calculation
-        ///  instead of 120 exact minutes. This calculation is based on the position
-        ///  of the sun 120 minutes before sunrise in Jerusalem in the equinox which
-        ///  calculates to 26° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing <em>alos</em>. </returns>
-        ///<seealso cref = "ZENITH_26_DEGREES" />
-        ///<seealso cref = "GetAlos120()" />
-        ///<seealso cref = "GetTzais120()" />
+        /// <summary>
+        /// Method to return <em>alos</em> (dawn) calculated when the sun is
+        /// <see cref="ZENITH_26_DEGREES">26°</see> below the eastern geometric horizon
+        /// before sunrise. This calculation is based on the same calculation of
+        /// <see cref="GetAlos120">120 minutes</see> but uses a degree based calculation
+        /// instead of 120 exact minutes. This calculation is based on the position
+        /// of the sun 120 minutes before sunrise in Jerusalem in the equinox which
+        /// calculates to 26° below <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing <em>alos</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_26_DEGREES"/>
+        /// <seealso cref="GetAlos120()"/>
+        /// <seealso cref="GetTzais120()"/>
         public virtual DateTime? GetAlos26Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_26_DEGREES);
@@ -747,6 +785,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> representing <em>alos</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="AstronomicalCalendar.ASTRONOMICAL_ZENITH"/>
         public virtual DateTime? GetAlos18Degrees()
@@ -754,18 +798,26 @@ namespace Zmanim
             return GetSunriseOffsetByDegrees(ASTRONOMICAL_ZENITH);
         }
 
-        ///<summary>
-        ///  Method to return <em>alos</em> (dawn) calculated when the sun is
-        ///  <seealso cref = "ZENITH_19_POINT_8">19.8°</seealso> below the eastern geometric horizon
-        ///  before sunrise. This calculation is based on the same calculation of
-        ///  <seealso cref = "GetAlos90">90 minutes</seealso> but uses a degree based calculation
-        ///  instead of 90 exact minutes. This calculation is based on the position of
-        ///  the sun 90 minutes before sunrise in Jerusalem in the equinox which
-        ///  calculates to 19.8° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing <em>alos</em>. </returns>
-        ///<seealso cref = "ZENITH_19_POINT_8" />
-        ///<seealso cref = "GetAlos90()" />
+        /// <summary>
+        /// Method to return <em>alos</em> (dawn) calculated when the sun is
+        /// <seealso cref="ZENITH_19_POINT_8">19.8°</seealso> below the eastern geometric horizon
+        /// before sunrise. This calculation is based on the same calculation of
+        /// <seealso cref="GetAlos90">90 minutes</seealso> but uses a degree based calculation
+        /// instead of 90 exact minutes. This calculation is based on the position of
+        /// the sun 90 minutes before sunrise in Jerusalem in the equinox which
+        /// calculates to 19.8° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing <em>alos</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_19_POINT_8"/>
+        /// <seealso cref="GetAlos90()"/>
         public virtual DateTime? GetAlos19Point8Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_19_POINT_8);
@@ -782,6 +834,13 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> representing <em>alos</em>.
+        /// If the
+        /// calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_16_POINT_1"/>
         /// <seealso cref="ZmanimCalendar.GetAlos72"/>
@@ -790,86 +849,128 @@ namespace Zmanim
             return GetSunriseOffsetByDegrees(ZENITH_16_POINT_1);
         }
 
-        ///<summary>
-        ///  This method returns <em>misheyakir</em> based on the position of the sun
-        ///  when it is <seealso cref = "ZENITH_11_DEGREES">11.5°</seealso> below
-        ///  <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
-        ///  used for calculating <em>misheyakir</em> according to some opinions. This
-        ///  calculation is based on the position of the sun 52 minutes before
-        ///  <seealso cref ="AstronomicalCalendar.GetSunrise">sunrise</seealso>in Jerusalem in the equinox which calculates
-        ///  to 11.5° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
-        ///</summary>
-        ///<seealso cref = "ZENITH_11_POINT_5" />
+        /// <summary>
+        /// This method returns <em>misheyakir</em> based on the position of the sun
+        /// when it is <seealso cref="ZENITH_11_DEGREES">11.5°</seealso> below
+        /// <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
+        /// used for calculating <em>misheyakir</em> according to some opinions. This
+        /// calculation is based on the position of the sun 52 minutes before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso>in Jerusalem in the equinox which calculates
+        /// to 11.5° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of misheyakir. If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// ///
+        /// <seealso cref="ZENITH_11_POINT_5"/>
         public virtual DateTime? GetMisheyakir11Point5Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_11_POINT_5);
         }
 
-        ///<summary>
-        ///  This method returns <em>misheyakir</em> based on the position of the sun
-        ///  when it is <seealso cref = "ZENITH_11_DEGREES">11°</seealso> below
-        ///  <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
-        ///  used for calculating <em>misheyakir</em> according to some opinions. This
-        ///  calculation is based on the position of the sun 48 minutes before
-        ///  <seealso cref ="AstronomicalCalendar.GetSunrise">sunrise</seealso>in Jerusalem in the equinox which calculates
-        ///  to 11° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
-        ///</summary>
-        ///<seealso cref = "ZENITH_11_DEGREES" />
+        /// <summary>
+        /// This method returns <em>misheyakir</em> based on the position of the sun
+        /// when it is <seealso cref="ZENITH_11_DEGREES">11°</seealso> below
+        /// <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
+        /// used for calculating <em>misheyakir</em> according to some opinions. This
+        /// calculation is based on the position of the sun 48 minutes before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso>in Jerusalem in the equinox which calculates
+        /// to 11° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
+        /// </summary>
+        /// <returns>
+        /// If the calculation can't be computed such as northern and
+        /// southern locations even south of the Arctic Circle and north of
+        /// the Antarctic Circle where the sun may not reach low enough below
+        /// the horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_11_DEGREES"/>
         public virtual DateTime? GetMisheyakir11Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_11_DEGREES);
         }
 
-        ///<summary>
-        ///  This method returns <em>misheyakir</em> based on the position of the sun
-        ///  when it is <seealso cref = "ZENITH_10_POINT_2">10.2°</seealso> below
-        ///  <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
-        ///  used for calculating <em>misheyakir</em> according to some opinions. This
-        ///  calculation is based on the position of the sun 45 minutes before
-        ///  <seealso cref ="AstronomicalCalendar.GetSunrise">sunrise</seealso> in Jerusalem in the equinox which calculates
-        ///  to 10.2° below <seealso cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
-        ///</summary>
-        ///<seealso cref = "ZENITH_10_POINT_2" />
+        /// <summary>
+        /// This method returns <em>misheyakir</em> based on the position of the sun
+        /// when it is <seealso cref="ZENITH_10_POINT_2">10.2°</seealso> below
+        /// <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso> (90°). This calculation is
+        /// used for calculating <em>misheyakir</em> according to some opinions. This
+        /// calculation is based on the position of the sun 45 minutes before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso> in Jerusalem in the equinox which calculates
+        /// to 10.2° below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</seealso>
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest misheyakir.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_10_POINT_2"/>
         public virtual DateTime? GetMisheyakir10Point2Degrees()
         {
             return GetSunriseOffsetByDegrees(ZENITH_10_POINT_2);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman krias shema</em> (time to say
-        ///  Shema in the morning) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <seealso cref = "GetAlos19Point8Degrees()">19.8°</seealso> before
-        ///  <seealso cref = "AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 3
-        ///  <em><seealso cref = "GetShaahZmanis19Point8Degrees">shaos zmaniyos</seealso></em> (solar
-        ///  hours) after <seealso cref = "GetAlos19Point8Degrees">dawn</seealso> based on the opinion
-        ///  of the <em>MG"A</em> that the day is calculated from dawn to nightfall
-        ///  with both being 19.8° below sunrise or sunset. This returns the time
-        ///  of 3 <seealso cref = "GetShaahZmanis19Point8Degrees()" /> after
-        ///  <seealso cref = "GetAlos19Point8Degrees">dawn</seealso>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
-        ///<seealso cref = "GetShaahZmanis19Point8Degrees()" />
-        ///<seealso cref = "GetAlos19Point8Degrees()" />
+        /// <summary>
+        /// This method returns the latest <em>zman krias shema</em> (time to say
+        /// Shema in the morning) in the opinion of the <em>MG"A</em> based on
+        /// <em>alos</em> being <seealso cref="GetAlos19Point8Degrees()">19.8°</seealso> before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 3
+        /// <em><seealso cref="GetShaahZmanis19Point8Degrees">shaos zmaniyos</seealso></em> (solar
+        /// hours) after <seealso cref="GetAlos19Point8Degrees">dawn</seealso> based on the opinion
+        /// of the <em>MG"A</em> that the day is calculated from dawn to nightfall
+        /// with both being 19.8° below sunrise or sunset. This returns the time
+        /// of 3 <seealso cref="GetShaahZmanis19Point8Degrees()"/> after
+        /// <seealso cref="GetAlos19Point8Degrees">dawn</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis19Point8Degrees()"/>
+        /// <seealso cref="GetAlos19Point8Degrees()"/>
         public virtual DateTime? GetSofZmanShmaMGA19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 3);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman krias shema</em> (time to say
-        ///  Shema in the morning) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <seealso cref = "GetAlos16Point1Degrees()">16.1°</seealso> before
-        ///  <seealso cref = "AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 3
-        ///  <em><seealso cref = "GetShaahZmanis16Point1Degrees">shaos zmaniyos</seealso></em> (solar
-        ///  hours) after <seealso cref = "GetAlos16Point1Degrees">dawn</seealso> based on the opinion
-        ///  of the <em>MG"A</em> that the day is calculated from dawn to nightfall
-        ///  with both being 16.1° below sunrise or sunset. This returns the time
-        ///  of 3 <seealso cref = "GetShaahZmanis16Point1Degrees()" /> after
-        ///  <seealso cref = "GetAlos16Point1Degrees">dawn</seealso>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema. </returns>
-        ///<seealso cref = "GetShaahZmanis16Point1Degrees()" />
-        ///<seealso cref = "GetAlos16Point1Degrees()" />
+        /// <summary>
+        /// This method returns the latest <em>zman krias shema</em> (time to say
+        /// Shema in the morning) in the opinion of the <em>MG"A</em> based on
+        /// <em>alos</em> being <seealso cref="GetAlos16Point1Degrees()">16.1°</seealso> before
+        /// <seealso cref="AstronomicalCalendar.GetSunrise">sunrise</seealso>. This time is 3
+        /// <em><seealso cref="GetShaahZmanis16Point1Degrees">shaos zmaniyos</seealso></em> (solar
+        /// hours) after <seealso cref="GetAlos16Point1Degrees">dawn</seealso> based on the opinion
+        /// of the <em>MG"A</em> that the day is calculated from dawn to nightfall
+        /// with both being 16.1° below sunrise or sunset. This returns the time
+        /// of 3 <seealso cref="GetShaahZmanis16Point1Degrees()"/> after
+        /// <seealso cref="GetAlos16Point1Degrees">dawn</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
+        /// <seealso cref="GetAlos16Point1Degrees()"/>
         public virtual DateTime? GetSofZmanShmaMGA16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 3);
@@ -1064,6 +1165,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman shema based on this day.
+        /// If the calculation can't be computed such as northern and
+        /// southern locations even south of the Arctic Circle and north of
+        /// the Antarctic Circle where the sun may not reach low enough below
+        /// the horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="GetAlos16Point1Degrees()"/>
         /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunset"/>
@@ -1073,25 +1180,32 @@ namespace Zmanim
             return GetTimeOffset(GetAlos16Point1Degrees(), shaahZmanis * 3);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman krias shema</em> (time to say
-        ///  Shema in the morning) based on the opinion that the day starts at
-        ///  <em><see cref = "GetAlos16Point1Degrees">alos 16.1°</see></em> and ends at
-        ///  <see cref = "GetTzaisGeonim7Point083Degrees">tzais 7.083°</see>. 3
-        ///  <em>shaos zmaniyos</em> are calculated based on this day and added to
-        ///  <see cref = "GetAlos16Point1Degrees">alos</see> to reach this time. This time is 3
-        ///  <em>shaos zmaniyos</em> (temporal hours) after
-        ///  <see cref = "GetAlos16Point1Degrees">alos 16.1°</see> based on the opinion
-        ///  that the day is calculated from a <see cref = "GetAlos16Point1Degrees()">alos 16.1°</see>
-        ///  to
-        ///  <em><see cref = "GetTzaisGeonim7Point083Degrees">tzais 7.083°</see></em>.<br />
-        ///  <b>Note: </b> Based on this calculation <em>chatzos</em> will not be at
-        ///  midday.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema based on this
-        ///  calculation. </returns>
-        ///<seealso cref = "GetAlos16Point1Degrees()" />
-        ///<seealso cref = "GetTzaisGeonim7Point083Degrees()" />
+        /// <summary>
+        /// This method returns the latest <em>zman krias shema</em> (time to say
+        /// Shema in the morning) based on the opinion that the day starts at
+        /// <em><see cref="GetAlos16Point1Degrees">alos 16.1°</see></em> and ends at
+        /// <see cref="GetTzaisGeonim7Point083Degrees">tzais 7.083°</see>. 3
+        /// <em>shaos zmaniyos</em> are calculated based on this day and added to
+        /// <see cref="GetAlos16Point1Degrees">alos</see> to reach this time. This time is 3
+        /// <em>shaos zmaniyos</em> (temporal hours) after
+        /// <see cref="GetAlos16Point1Degrees">alos 16.1°</see> based on the opinion
+        /// that the day is calculated from a <see cref="GetAlos16Point1Degrees()">alos 16.1°</see>
+        /// to
+        /// <em><see cref="GetTzaisGeonim7Point083Degrees">tzais 7.083°</see></em>.<br/>
+        /// 	<b>Note: </b> Based on this calculation <em>chatzos</em> will not be at
+        /// midday.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman shema based on this
+        /// calculation. If the calculation can't be computed such as
+        /// northern and southern locations even south of the Arctic Circle
+        /// and north of the Antarctic Circle where the sun may not reach low
+        /// enough below the horizon for this calculation, a null will be
+        /// returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetAlos16Point1Degrees()"/>
+        /// <seealso cref="GetTzaisGeonim7Point083Degrees()"/>
         public virtual DateTime? GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetTzaisGeonim7Point083Degrees());
@@ -1122,43 +1236,57 @@ namespace Zmanim
             return GetTimeOffset(chatzos, -diff);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman tfila</em> (time to say the
-        ///  morning prayers) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <see cref = "GetAlos19Point8Degrees()">19.8°</see> before
-        ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 4
-        ///  <em><see cref = "GetShaahZmanis19Point8Degrees">shaos zmaniyos</see></em> (solar
-        ///  hours) after <see cref = "GetAlos19Point8Degrees">dawn</see> based on the opinion
-        ///  of the <em>MG"A</em> that the day is calculated from dawn to nightfall
-        ///  with both being 19.8° below sunrise or sunset. This returns the time
-        ///  of 4 <see cref = "GetShaahZmanis19Point8Degrees()" /> after
-        ///  <see cref = "GetAlos19Point8Degrees">dawn</see>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema.
-        ///</returns>
-        ///<seealso cref = "GetShaahZmanis19Point8Degrees()" />
-        ///<seealso cref = "GetAlos19Point8Degrees()" />
+        /// <summary>
+        /// This method returns the latest <em>zman tfila</em> (time to say the
+        /// morning prayers) in the opinion of the <em>MG"A</em> based on
+        /// <em>alos</em> being <see cref="GetAlos19Point8Degrees()">19.8°</see> before
+        /// <see cref="AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 4
+        /// <em><see cref="GetShaahZmanis19Point8Degrees">shaos zmaniyos</see></em> (solar
+        /// hours) after <see cref="GetAlos19Point8Degrees">dawn</see> based on the opinion
+        /// of the <em>MG"A</em> that the day is calculated from dawn to nightfall
+        /// with both being 19.8° below sunrise or sunset. This returns the time
+        /// of 4 <see cref="GetShaahZmanis19Point8Degrees()"/> after
+        /// <see cref="GetAlos19Point8Degrees">dawn</see>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis19Point8Degrees()"/>
+        /// <seealso cref="GetAlos19Point8Degrees()"/>
         public virtual DateTime? GetSofZmanTfilaMGA19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 4);
         }
 
-        ///<summary>
-        ///  This method returns the latest <em>zman tfila</em> (time to say the
-        ///  morning prayers) in the opinion of the <em>MG"A</em> based on
-        ///  <em>alos</em> being <see cref = "GetAlos19Point8Degrees()">16.1°</see> before
-        ///  <see cref = "AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 4
-        ///  <em><see cref = "GetShaahZmanis16Point1Degrees">shaos zmaniyos</see></em> (solar
-        ///  hours) after <see cref = "GetAlos16Point1Degrees">dawn</see> based on the opinion
-        ///  of the <em>MG"A</em> that the day is calculated from dawn to nightfall
-        ///  with both being 16.1° below sunrise or sunset. This returns the time
-        ///  of 4 <see cref = "GetShaahZmanis16Point1Degrees()" /> after
-        ///  <see cref = "GetAlos16Point1Degrees">dawn</see>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the latest zman shema.
-        ///</returns>
-        ///<seealso cref = "GetShaahZmanis16Point1Degrees()" />
-        ///<seealso cref = "GetAlos16Point1Degrees()" />
+        /// <summary>
+        /// This method returns the latest <em>zman tfila</em> (time to say the
+        /// morning prayers) in the opinion of the <em>MG"A</em> based on
+        /// <em>alos</em> being <see cref="GetAlos19Point8Degrees()">16.1°</see> before
+        /// <see cref="AstronomicalCalendar.GetSunrise">sunrise</see>. This time is 4
+        /// <em><see cref="GetShaahZmanis16Point1Degrees">shaos zmaniyos</see></em> (solar
+        /// hours) after <see cref="GetAlos16Point1Degrees">dawn</see> based on the opinion
+        /// of the <em>MG"A</em> that the day is calculated from dawn to nightfall
+        /// with both being 16.1° below sunrise or sunset. This returns the time
+        /// of 4 <see cref="GetShaahZmanis16Point1Degrees()"/> after
+        /// <see cref="GetAlos16Point1Degrees">dawn</see>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the latest zman shema.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
+        /// <seealso cref="GetAlos16Point1Degrees()"/>
         public virtual DateTime? GetSofZmanTfilaMGA16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 4);
@@ -1402,6 +1530,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the time of mincha gedola.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
@@ -1445,6 +1579,12 @@ namespace Zmanim
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the time of mincha ketana.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="GetShaahZmanis16Point1Degrees()"/>
         /// <seealso cref="ZmanimCalendar.GetMinchaGedola"/>
@@ -1569,86 +1709,125 @@ namespace Zmanim
             return GetTimeOffset(GetAlos72Zmanis(), GetShaahZmanis72MinutesZmanis() * 10.75);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>plag hamincha</em> based on the
-        ///  opinion that the day starts at
-        ///  <em><seealso cref = "GetAlos16Point1Degrees">alos 16.1°</seealso></em> and ends at
-        ///  <em><seealso cref = "GetTzais16Point1Degrees">tzais 16.1°</seealso></em>. This is
-        ///  calculated as 10.75 hours <em>zmaniyos</em> after
-        ///  <seealso cref = "GetAlos16Point1Degrees">dawn</seealso>. The formula is<br />
-        ///  10.75 * <seealso cref = "GetShaahZmanis16Point1Degrees()" /> after
-        ///  <seealso cref = "GetAlos16Point1Degrees()" />.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
+        /// <summary>
+        /// This method returns the time of <em>plag hamincha</em> based on the
+        /// opinion that the day starts at
+        /// <em><seealso cref="GetAlos16Point1Degrees">alos 16.1°</seealso></em> and ends at
+        /// <em><seealso cref="GetTzais16Point1Degrees">tzais 16.1°</seealso></em>. This is
+        /// calculated as 10.75 hours <em>zmaniyos</em> after
+        /// <seealso cref="GetAlos16Point1Degrees">dawn</seealso>. The formula is<br/>
+        /// 10.75 * <seealso cref="GetShaahZmanis16Point1Degrees()"/> after
+        /// <seealso cref="GetAlos16Point1Degrees()"/>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
         public virtual DateTime? GetPlagHamincha16Point1Degrees()
         {
             return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 10.75);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>plag hamincha</em> based on the
-        ///  opinion that the day starts at
-        ///  <em><seealso cref = "GetAlos19Point8Degrees">alos 19.8°</seealso></em> and ends at
-        ///  <em><seealso cref = "GetTzais19Point8Degrees">tzais 19.8°</seealso></em>. This is
-        ///  calculated as 10.75 hours <em>zmaniyos</em> after
-        ///  <seealso cref = "GetAlos19Point8Degrees">dawn</seealso>. The formula is<br />
-        ///  10.75 * <seealso cref = "GetShaahZmanis19Point8Degrees()" /> after
-        ///  <seealso cref = "GetAlos19Point8Degrees()" />.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
+        /// <summary>
+        /// This method returns the time of <em>plag hamincha</em> based on the
+        /// opinion that the day starts at
+        /// <em><seealso cref="GetAlos19Point8Degrees">alos 19.8°</seealso></em> and ends at
+        /// <em><seealso cref="GetTzais19Point8Degrees">tzais 19.8°</seealso></em>. This is
+        /// calculated as 10.75 hours <em>zmaniyos</em> after
+        /// <seealso cref="GetAlos19Point8Degrees">dawn</seealso>. The formula is<br/>
+        /// 10.75 * <seealso cref="GetShaahZmanis19Point8Degrees()"/> after
+        /// <seealso cref="GetAlos19Point8Degrees()"/>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
         public virtual DateTime? GetPlagHamincha19Point8Degrees()
         {
             return GetTimeOffset(GetAlos19Point8Degrees(), GetShaahZmanis19Point8Degrees() * 10.75);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>plag hamincha</em> based on the
-        ///  opinion that the day starts at
-        ///  <em><seealso cref = "GetAlos26Degrees">alos 26°</seealso></em> and ends at
-        ///  <em><seealso cref = "GetTzais26Degrees">tzais 26°</seealso></em>. This is calculated
-        ///  as 10.75 hours <em>zmaniyos</em> after <seealso cref = "GetAlos26Degrees">dawn</seealso>.
-        ///  The formula is<br />
-        ///  10.75 * <seealso cref = "GetShaahZmanis26Degrees()" /> after
-        ///  <seealso cref = "GetAlos26Degrees()" />.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
+        /// <summary>
+        /// This method returns the time of <em>plag hamincha</em> based on the
+        /// opinion that the day starts at
+        /// <em><seealso cref="GetAlos26Degrees">alos 26°</seealso></em> and ends at
+        /// <em><seealso cref="GetTzais26Degrees">tzais 26°</seealso></em>. This is calculated
+        /// as 10.75 hours <em>zmaniyos</em> after <seealso cref="GetAlos26Degrees">dawn</seealso>.
+        /// The formula is<br/>
+        /// 10.75 * <seealso cref="GetShaahZmanis26Degrees()"/> after
+        /// <seealso cref="GetAlos26Degrees()"/>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
         public virtual DateTime? GetPlagHamincha26Degrees()
         {
             return GetTimeOffset(GetAlos26Degrees(), GetShaahZmanis26Degrees() * 10.75);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>plag hamincha</em> based on the
-        ///  opinion that the day starts at
-        ///  <em><seealso cref = "GetAlos18Degrees">alos 18°</seealso></em> and ends at
-        ///  <em><seealso cref = "GetTzais18Degrees">tzais 18°</seealso></em>. This is calculated
-        ///  as 10.75 hours <em>zmaniyos</em> after <seealso cref = "GetAlos18Degrees">dawn</seealso>.
-        ///  The formula is<br />
-        ///  10.75 * <seealso cref = "GetShaahZmanis18Degrees()" /> after
-        ///  <seealso cref = "GetAlos18Degrees()" />.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the time of <em>plag hamincha</em>. </returns>
+        /// <summary>
+        /// This method returns the time of <em>plag hamincha</em> based on the
+        /// opinion that the day starts at
+        /// <em><seealso cref="GetAlos18Degrees">alos 18°</seealso></em> and ends at
+        /// <em><seealso cref="GetTzais18Degrees">tzais 18°</seealso></em>. This is calculated
+        /// as 10.75 hours <em>zmaniyos</em> after <seealso cref="GetAlos18Degrees">dawn</seealso>.
+        /// The formula is<br/>
+        /// 10.75 * <seealso cref="GetShaahZmanis18Degrees()"/> after
+        /// <seealso cref="GetAlos18Degrees()"/>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the time of <em>plag hamincha</em>.
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
+        /// </returns>
         public virtual DateTime? GetPlagHamincha18Degrees()
         {
             return GetTimeOffset(GetAlos18Degrees(), GetShaahZmanis18Degrees() * 10.75);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>plag hamincha</em> based on the
-        ///  opinion that the day starts at
-        ///  <em><seealso cref = "GetAlos16Point1Degrees">alos 16.1°</seealso></em> and ends at
-        ///  <seealso cref = "AstronomicalCalendar.GetSunset">sunset</seealso>. 10.75 shaos zmaniyos are calculated based on
-        ///  this day and added to <seealso cref = "GetAlos16Point1Degrees">alos</seealso> to reach
-        ///  this time. This time is 10.75 <em>shaos zmaniyos</em> (temporal hours)
-        ///  after <seealso cref = "GetAlos16Point1Degrees">dawn</seealso> based on the opinion that
-        ///  the day is calculated from a <seealso cref = "GetAlos16Point1Degrees">dawn</seealso> of
-        ///  16.1 degrees before sunrise to <see cref = "AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>
-        ///  . This returns the time of 10.75 * the calculated
-        ///  <em>shaah zmanis</em> after <seealso cref = "GetAlos16Point1Degrees">dawn</seealso>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the plag. </returns>
-        ///<seealso cref = "GetAlos16Point1Degrees()" />
-        ///<seealso cref = "AstronomicalCalendar.GetSeaLevelSunset" />
+        /// <summary>
+        /// This method returns the time of <em>plag hamincha</em> based on the
+        /// opinion that the day starts at
+        /// <em><seealso cref="GetAlos16Point1Degrees">alos 16.1°</seealso></em> and ends at
+        /// <seealso cref="AstronomicalCalendar.GetSunset">sunset</seealso>. 10.75 shaos zmaniyos are calculated based on
+        /// this day and added to <seealso cref="GetAlos16Point1Degrees">alos</seealso> to reach
+        /// this time. This time is 10.75 <em>shaos zmaniyos</em> (temporal hours)
+        /// after <seealso cref="GetAlos16Point1Degrees">dawn</seealso> based on the opinion that
+        /// the day is calculated from a <seealso cref="GetAlos16Point1Degrees">dawn</seealso> of
+        /// 16.1 degrees before sunrise to <see cref="AstronomicalCalendar.GetSeaLevelSunset">sea level sunset</see>
+        /// . This returns the time of 10.75 * the calculated
+        /// <em>shaah zmanis</em> after <seealso cref="GetAlos16Point1Degrees">dawn</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the plag.
+        /// If the calculation can't be computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetAlos16Point1Degrees()"/>
+        /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunset"/>
         public virtual DateTime? GetPlagAlosToSunset()
         {
             long shaahZmanis = GetTemporalHour(GetAlos16Point1Degrees(), GetSeaLevelSunset());
@@ -1669,7 +1848,14 @@ namespace Zmanim
         /// . This returns the time of 10.75 * the calculated <em>shaah zmanis</em>
         /// after <see cref="GetAlos16Point1Degrees">dawn</see>.
         /// </summary>
-        /// <returns>the <c>DateTime</c> of the plag.</returns>
+        /// <returns>
+        /// the <c>DateTime</c> of the plag.
+        /// If the calculation can't be computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         /// <seealso cref="GetAlos16Point1Degrees()"/>
         /// <seealso cref="GetTzaisGeonim7Point083Degrees()"/>
         public virtual DateTime? GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
@@ -1693,6 +1879,12 @@ namespace Zmanim
         /// <returns>
         /// the <c>DateTime</c> of the sun being 13° below
         /// <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see> (90°).
+        /// If the calculation can't be computed such as northern and southern
+        /// locations even south of the Arctic Circle and north of the
+        /// Antarctic Circle where the sun may not reach low enough below the
+        /// horizon for this calculation, a null will be returned. See
+        /// detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        /// documentation.
         /// </returns>
         /// <seealso cref="ZENITH_13_DEGREES"/>
         public virtual DateTime? GetBainHasmashosRT13Degrees()
@@ -1713,28 +1905,42 @@ namespace Zmanim
             return GetTimeOffset(GetSeaLevelSunset(), 58.5 * MINUTE_MILLIS);
         }
 
-        ///<summary>
-        ///  This method returns the time of <em>bain hashmashos</em> based on the
-        ///  calculation of 13.5 minutes (3/4 of an 18 minute mil before shkiah
-        ///  calculated as <seealso cref = "GetTzaisGeonim7Point083Degrees">7.083°</seealso>.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of the bain hashmashos of Rabainu Tam in
-        ///  this calculation. </returns>
-        ///<seealso cref = "GetTzaisGeonim7Point083Degrees()" />
+        /// <summary>
+        /// This method returns the time of <em>bain hashmashos</em> based on the
+        /// calculation of 13.5 minutes (3/4 of an 18 minute mil before shkiah
+        /// calculated as <seealso cref="GetTzaisGeonim7Point083Degrees">7.083°</seealso>.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of the bain hashmashos of Rabainu Tam in this calculation.
+        /// If the calculation can't be computed such as
+        /// northern and southern locations even south of the Arctic Circle
+        /// and north of the Antarctic Circle where the sun may not reach low
+        /// enough below the horizon for this calculation, a null will be
+        /// returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetTzaisGeonim7Point083Degrees()"/>
         public virtual DateTime? GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
         {
             return GetTimeOffset(GetSunsetOffsetByDegrees(ZENITH_7_POINT_083), -13.5 * MINUTE_MILLIS);
         }
 
-        ///<summary>
-        ///  This method returns <em>bain hashmashos</em> of Rabainu Tam calculated in
-        ///  the opinion of the Divray Yosef (see Yisrael Vehazmanim) calculated
-        ///  5/18th (27.77%) of the time between alos (calculated as 19.8° before
-        ///  sunrise) and sunrise. This is added to sunset to arrive at the time for
-        ///  bain hashmashos of Rabainu Tam).
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of bain hashmashos of Rabainu Tam for this
-        ///  calculation. </returns>
+        /// <summary>
+        /// This method returns <em>bain hashmashos</em> of Rabainu Tam calculated in
+        /// the opinion of the Divray Yosef (see Yisrael Vehazmanim) calculated
+        /// 5/18th (27.77%) of the time between alos (calculated as 19.8° before
+        /// sunrise) and sunrise. This is added to sunset to arrive at the time for
+        /// bain hashmashos of Rabainu Tam).
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> of bain hashmashos of Rabainu Tam for this calculation.
+        /// If the calculation can't be computed such as
+        /// northern and southern locations even south of the Arctic Circle
+        /// and north of the Antarctic Circle where the sun may not reach low
+        /// enough below the horizon for this calculation, a null will be
+        /// returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         public virtual DateTime? GetBainHasmashosRT2Stars()
         {
             var alos19Point8 = GetAlos19Point8Degrees();
@@ -1745,70 +1951,96 @@ namespace Zmanim
             return GetTimeOffset(GetSeaLevelSunset(), (sunrise.Value.ToUnixEpochMilliseconds() - alos19Point8.Value.ToUnixEpochMilliseconds()) * (5 / 18d));
         }
 
+        ///<summary>
+        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
+        ///  of the <em>Geonim</em> calculated at the sun's position at
+        ///  <seealso cref = "ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
+        ///</summary>
+        ///<returns> the <c>DateTime</c> representing the time when the sun is
+        ///  5.95° below sea level. </returns>
+        ///<seealso cref = "ZENITH_5_POINT_95" />
         // public Date getTzaisGeonim3Point7Degrees() {
         // return getSunsetOffsetByDegrees(ZENITH_3_POINT_7);
         // }
-        ///<summary>
-        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///  of the <em>Geonim</em> calculated at the sun's position at
-        ///  <seealso cref = "ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time when the sun is
-        ///  5.95° below sea level. </returns>
-        ///<seealso cref = "ZENITH_5_POINT_95" />
-        ///<summary>
-        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///  of the <em>Geonim</em> calculated at the sun's position at
-        ///  <seealso cref = "ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time when the sun is
-        ///  5.95° below sea level. </returns>
-        ///<seealso cref = "ZENITH_5_POINT_95" />
+
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated at the sun's position at
+        /// <seealso cref="ZENITH_5_POINT_95">5.95°</seealso> below the western horizon.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time when the sun is 5.95° below sea level.
+        /// If the calculation can't be computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_5_POINT_95"/>
         public virtual DateTime? GetTzaisGeonim5Point95Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_5_POINT_95);
         }
 
         /// <summary>
-        ///   This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///   of the <em>Geonim</em> calculated calculated as 3/4 of a <a href = "http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a> based on an 18 minute Mil, or 13.5 minutes. It is the sun's
-        ///   position at <seealso cref = "ZENITH_3_POINT_65">3.65°</seealso> below the western
-        ///   horizon. This is a very early zman and should not be relied on without
-        ///   Rabbinical guidance.
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated calculated as 3/4 of a <a href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a> based on an 18 minute Mil, or 13.5 minutes. It is the sun's
+        /// position at <seealso cref="ZENITH_3_POINT_65">3.65°</seealso> below the western
+        /// horizon. This is a very early zman and should not be relied on without
+        /// Rabbinical guidance.
         /// </summary>
-        /// <returns> the <c>DateTime</c> representing the time when the sun is
-        ///   3.65° below sea level. </returns>
-        /// <seealso cref = "ZENITH_3_POINT_65" />
+        /// <returns>
+        /// the <c>DateTime</c> representing the time when the sun is 3.65° below sea level.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_3_POINT_65"/>
         public virtual DateTime? GetTzaisGeonim3Point65Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_3_POINT_65);
         }
 
-        ///<summary>
-        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///  of the <em>Geonim</em> calculated as 3/4 of a <a href = "http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a> based on a 24 minute Mil, or 18 minutes. It is the sun's
-        ///  position at <seealso cref = "ZENITH_4_POINT_61">4.61°</seealso> below the western
-        ///  horizon. This is a very early zman and should not be relied on without
-        ///  Rabbinical guidance.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time when the sun is
-        ///  4.61° below sea level. </returns>
-        ///<seealso cref = "ZENITH_4_POINT_61" />
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated as 3/4 of a <a href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a> based on a 24 minute Mil, or 18 minutes. It is the sun's
+        /// position at <seealso cref="ZENITH_4_POINT_61">4.61°</seealso> below the western
+        /// horizon. This is a very early zman and should not be relied on without
+        /// Rabbinical guidance.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time when the sun is 4.61° below sea level.
+        /// If the calculation can't be computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_4_POINT_61"/>
         public virtual DateTime? GetTzaisGeonim4Point61Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_61);
         }
 
-        ///<summary>
-        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///  of the <em>Geonim</em> calculated as 3/4 of a <a href = "http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a>, based on a 22.5 minute Mil, or 16 7/8 minutes. It is the sun's
-        ///  position at <seealso cref = "ZENITH_4_POINT_37">4.37°</seealso> below the western
-        ///  horizon. This is a very early zman and should not be relied on without
-        ///  Rabbinical guidance.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time when the sun is
-        ///  4.37° below sea level. </returns>
-        ///<seealso cref = "ZENITH_4_POINT_37" />
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated as 3/4 of a <a href="http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement">Mil</a>, based on a 22.5 minute Mil, or 16 7/8 minutes. It is the sun's
+        /// position at <seealso cref="ZENITH_4_POINT_37">4.37°</seealso> below the western
+        /// horizon. This is a very early zman and should not be relied on without
+        /// Rabbinical guidance.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time when the sun is 4.37° below sea level.
+        /// If the calculation can't be computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_4_POINT_37"/>
         public virtual DateTime? GetTzaisGeonim4Point37Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_37);
@@ -1825,6 +2057,12 @@ namespace Zmanim
         /// <returns>
         /// the <c>DateTime</c> representing the time when the sun is
         /// 5.88° below sea level.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="ZENITH_5_POINT_88"/>
         public virtual DateTime? GetTzaisGeonim5Point88Degrees()
@@ -1841,8 +2079,13 @@ namespace Zmanim
         /// and should not be relied on without Rabbinical guidance.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> representing the time when the sun is
-        /// 4.8° below sea level.
+        /// the <c>DateTime</c> representing the time when the sun is 4.8° below sea level.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="ZENITH_4_POINT_8"/>
         public virtual DateTime? GetTzaisGeonim4Point8Degrees()
@@ -1850,14 +2093,21 @@ namespace Zmanim
             return GetSunsetOffsetByDegrees(ZENITH_4_POINT_8);
         }
 
-        ///<summary>
-        ///  This method returns the <em>tzais</em> (nightfall) based on the opinion
-        ///  of the <em>Geonim</em> calculated at the sun's position at
-        ///  <see cref = "ZENITH_7_POINT_083">7.083°</see> below the western horizon.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time when the sun is
-        ///  7.083° below sea level. </returns>
-        ///<seealso cref = "ZENITH_7_POINT_083" />
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion
+        /// of the <em>Geonim</em> calculated at the sun's position at
+        /// <see cref="ZENITH_7_POINT_083">7.083°</see> below the western horizon.
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time when the sun is 7.083° below sea level.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="ZENITH_7_POINT_083"/>
         public virtual DateTime? GetTzaisGeonim7Point083Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_7_POINT_083);
@@ -1869,8 +2119,13 @@ namespace Zmanim
         /// <see cref="ZmanimCalendar.ZENITH_8_POINT_5">8.5°</see> below the western horizon.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> representing the time when the sun is
-        /// 8.5° below sea level.
+        /// the <c>DateTime</c> representing the time when the sun is 8.5° below sea level.
+        /// If the calculation can't be computed
+        /// such as northern and southern locations even south of the Arctic
+        /// Circle and north of the Antarctic Circle where the sun may not
+        /// reach low enough below the horizon for this calculation, a
+        /// null will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="ZmanimCalendar.ZENITH_8_POINT_5"/>
         public virtual DateTime? GetTzaisGeonim8Point5Degrees()
@@ -2196,7 +2451,15 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="GetAlos16Point1Degrees()"/>
         /// </summary>
-        /// <returns>the <c>DateTime</c> representing the time.</returns>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time.
+        /// If the calculation
+        /// can't be computed such as northern and southern locations even
+        /// south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this
+        /// calculation, a null will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         /// <seealso cref="ZmanimCalendar.GetTzais72"/>
         /// <seealso cref="GetAlos16Point1Degrees">for more information on this calculation.</seealso>
         public virtual DateTime? GetTzais16Point1Degrees()
@@ -2208,7 +2471,15 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="GetAlos26Degrees()"/>
         /// </summary>
-        /// <returns>the <c>DateTime</c> representing the time.</returns>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         /// <seealso cref="GetTzais120()"/>
         /// <seealso cref="GetAlos26Degrees()"/>
         public virtual DateTime? GetTzais26Degrees()
@@ -2216,12 +2487,20 @@ namespace Zmanim
             return GetSunsetOffsetByDegrees(ZENITH_26_DEGREES);
         }
 
-        ///<summary>
-        ///  For information on how this is calculated see the comments on
-        ///  <see cref = "GetAlos18Degrees()" />
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing the time. </returns>
-        ///<seealso cref = "GetAlos18Degrees()" />
+        /// <summary>
+        /// For information on how this is calculated see the comments on
+        /// <see cref="GetAlos18Degrees()"/>
+        /// </summary>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time.
+        /// If the calculation
+        /// can't be computed such as northern and southern locations even
+        /// south of the Arctic Circle and north of the Antarctic Circle
+        /// where the sun may not reach low enough below the horizon for this
+        /// calculation, a null will be returned. See detailed explanation on
+        /// top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetAlos18Degrees()"/>
         public virtual DateTime? GetTzais18Degrees()
         {
             return GetSunsetOffsetByDegrees(ASTRONOMICAL_ZENITH);
@@ -2231,7 +2510,15 @@ namespace Zmanim
         /// For information on how this is calculated see the comments on
         /// <see cref="GetAlos19Point8Degrees()"/>
         /// </summary>
-        /// <returns>the <c>DateTime</c> representing the time.</returns>
+        /// <returns>
+        /// the <c>DateTime</c> representing the time.
+        /// If the calculation can't be
+        /// computed such as northern and southern locations even south of
+        /// the Arctic Circle and north of the Antarctic Circle where the sun
+        /// may not reach low enough below the horizon for this calculation,
+        /// a null will be returned. See detailed explanation on top of the
+        /// <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
         /// <seealso cref="GetTzais90()"/>
         /// <seealso cref="GetAlos19Point8Degrees()"/>
         public virtual DateTime? GetTzais19Point8Degrees()
