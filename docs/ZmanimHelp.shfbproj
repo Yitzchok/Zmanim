@@ -28,6 +28,24 @@
     <SyntaxFilters>Standard</SyntaxFilters>
     <MissingTags>None</MissingTags>
     <FooterText>Zmanim .NET API %281.2.1%29</FooterText>
+    <PlugInConfigurations>
+      <PlugInConfig id="Hierarchical Table of Contents" enabled="True" xmlns="">
+        <configuration>
+          <toc minParts="2" insertBelow="True" />
+        </configuration>
+      </PlugInConfig>
+    </PlugInConfigurations>
+    <ProjectSummary>This project is a port from the &amp;lt%3bb&amp;gt%3bJava zmanim-project&amp;lt%3b/b&amp;gt%3b developed by Eliyahu Hershfeld.
+&amp;lt%3bbr /&amp;gt%3b&amp;lt%3bbr /&amp;gt%3b
+The &amp;lt%3bi&amp;gt%3bZmanim&amp;lt%3b/i&amp;gt%3b %28&amp;quot%3btimes&amp;quot%3b referring to the calculations of time that govern the start and end time of Jewish prayers and holidays%29 project is a .NET API for generating zmanim from within .NET programs. If you are a non programmer, this means that the software created by the project is a building block of code to allow other programmers to easily include zmanim in their programs. The basis for most zmanim in this class are from the sefer Yisroel Vehazmanim by Rabbi Yisroel Dovid Harfenes.
+&amp;lt%3bbr /&amp;gt%3b&amp;lt%3bbr /&amp;gt%3b
+The code is under the LGPL license.
+&amp;lt%3bbr /&amp;gt%3b&amp;lt%3bbr /&amp;gt%3b
+Please note: due to atmospheric conditions %28pressure, humidity and other conditions%29, calculating zmanim accurately is very complex. The calculation of zmanim is dependant on Atmospheric refraction %28refraction of sunlight through the atmosphere%29, and zmanim can be off by up to 2 minutes based on atmospheric conditions. Inaccuracy is increased by elevation. It is not the intent of this API to provide any guarantee of accuracy.
+&amp;lt%3bbr /&amp;gt%3b
+&amp;lt%3bbr /&amp;gt%3b
+&amp;lt%3bb&amp;gt%3bNote:&amp;lt%3b/b&amp;gt%3b There are times when the algorithms can%27t calculate proper values for sunrise, sunset and twilight. This is usually caused by trying to calculate times for areas either very far North or South, where sunrise / sunset never  happen on that date. This is common when calculating twilight with a deep dip below the horizon for locations as south of the North Pole as London in the northern hemisphere. The sun never reaches this dip at certain times of the year. When the calculations encounter this condition a null will be returned when a &amp;lt%3bb&amp;gt%3bDateTime&amp;lt%3b/b&amp;gt%3b is expected and &amp;lt%3bb&amp;gt%3blong.MinValue&amp;lt%3b/b&amp;gt%3b when a long is expected. The reason that &amp;lt%3bb&amp;gt%3bExceptions&amp;lt%3b/b&amp;gt%3b are not thrown in these cases is because the lack of a rise/set or twilight is not an exception, but expected in many parts of the world.</ProjectSummary>
+    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional
