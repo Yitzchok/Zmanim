@@ -454,7 +454,7 @@ namespace Zmanim
         /// If the calculation can't be computed such
         /// as in the Arctic Circle where there is at least one day a year
         /// where the sun does not rise, and one where it does not set,
-        /// <see cref="double.NaN"/> will be returned. See detailed explanation on
+        /// <see cref="long.MinValue"/> will be returned. See detailed explanation on
         /// top of the <see cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="AstronomicalCalendar.GetTemporalHour(System.DateTime,System.DateTime)"/>
@@ -478,7 +478,7 @@ namespace Zmanim
         /// If the calculation can't be computed such
         /// as in the Arctic Circle where there is at least one day a year
         /// where the sun does not rise, and one where it does not set,
-        /// <see cref="double.NaN"/> will be returned. See detailed explanation on
+        /// <see cref="long.MinValue"/> will be returned. See detailed explanation on
         /// top of the <see cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         public virtual long GetShaahZmanisMGA()

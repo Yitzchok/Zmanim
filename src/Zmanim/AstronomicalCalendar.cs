@@ -42,7 +42,7 @@ namespace Zmanim
     /// northern hemisphere. The sun never reaches this dip at certain
     /// times of the year. When the calculations encounter this condition a null
     /// will be returned when a <see cref="DateTime"/> is expected and
-    /// <see cref="double.NaN"/> when a double is expected. The reason that
+    /// <see cref="long.MinValue"/> when a long is expected. The reason that
     /// <c>Exception</c>s are not thrown in these cases is because the lack
     /// of a rise/set or twilight is not an exception, but expected in many parts of the world.
     /// Here is a simple example of how to use the API to calculate sunrise: <br/>
@@ -640,16 +640,16 @@ namespace Zmanim
         /// <seealso cref="GetTemporalHour()"/>
         public virtual long GetTemporalHour(DateTime sunrise, DateTime sunset)
         {
+            //Note: I don't think we need this.
             if (sunrise == DateTime.MinValue || sunset == DateTime.MinValue)
-            {
                 return long.MinValue;
-            }
+
             return (long)((sunset - sunrise).TotalMilliseconds / 12);
         }
 
         protected virtual long GetTemporalHour(DateTime? sunrise, DateTime? sunset)
         {
-            if (sunrise == DateTime.MinValue || sunset == DateTime.MinValue)
+            if (sunrise == null || sunset == null)
             {
                 return long.MinValue;
             }
