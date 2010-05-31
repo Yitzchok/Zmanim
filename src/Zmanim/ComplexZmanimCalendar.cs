@@ -28,8 +28,7 @@ namespace Zmanim
     /// <summary>
     /// This class extends ZmanimCalendar and provides many more zmanim than
     /// available in the ZmanimCalendar. The basis for most zmanim in this class are
-    /// from the <em>sefer</em>
-    /// 	<b>Yisroel Vehazmanim</b> by <b>Rabbi Yisroel Dovid  Harfenes</b>. <br/>
+    /// from the <em>sefer</em> <b>Yisroel Vehazmanim</b> by <b>Rabbi Yisroel Dovid  Harfenes</b>. <br/>
     /// For an example of the number of different <em>zmanim</em> made available by
     /// this class, there are methods to return 12 different calculations for
     /// <em>alos</em> (dawn) available in this class. The real power of this API is
