@@ -260,7 +260,7 @@ namespace Zmanim
         /// <param name="location">The location.</param>
         public ComplexZmanimCalendar(IGeoLocation location)
             : base(location) { }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
         /// </summary>
@@ -268,6 +268,13 @@ namespace Zmanim
         /// <param name="location">The location.</param>
         public ComplexZmanimCalendar(DateTime date, IGeoLocation location)
             : base(date, location) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
+        /// </summary>
+        /// <param name="dateWithLocation">The date with location.</param>
+        public ComplexZmanimCalendar(IDateWithLocation dateWithLocation)
+            : base(dateWithLocation) { }
 
         /// <summary>
         /// Default constructor will set a default <see cref="GeoLocation"/>,

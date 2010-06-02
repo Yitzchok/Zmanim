@@ -41,6 +41,8 @@ namespace Zmanim
     /// <author>Eliyahu Hershfeld</author>
     public class ZmanimCalendar : AstronomicalCalendar
     {
+        private double candleLightingOffset = 18;
+
         ///<summary>
         ///  The zenith of 16.1° below geometric zenith (90°). This
         ///  calculation is used for calculating <em>alos</em> (dawn) and
@@ -83,10 +85,7 @@ namespace Zmanim
         ///  and default the calendar to the current date.
         ///</summary>
         ///<seealso cref = "AstronomicalCalendar" />
-        public ZmanimCalendar()
-        {
-            CandleLightingOffset = 18;
-        }
+        public ZmanimCalendar() { }
 
         ///<summary>
         ///  A constructor that takes a <seealso cref = "GeoLocation" /> as a parameter.
@@ -94,10 +93,7 @@ namespace Zmanim
         ///<param name = "location">
         ///  the location </param>
         public ZmanimCalendar(IGeoLocation location)
-            : base(location)
-        {
-            CandleLightingOffset = 18;
-        }
+            : base(location) { }
 
         /// <summary>
         /// A constructor that takes a <seealso cref="GeoLocation"/> as a parameter.
@@ -105,10 +101,14 @@ namespace Zmanim
         /// <param name="date">The date.</param>
         /// <param name="location">the location</param>
         public ZmanimCalendar(DateTime date, IGeoLocation location)
-            : base(date, location)
-        {
-            CandleLightingOffset = 18;
-        }
+            : base(date, location) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZmanimCalendar"/> class.
+        /// </summary>
+        /// <param name="dateWithLocation">The date with location.</param>
+        public ZmanimCalendar(IDateWithLocation dateWithLocation)
+            : base(dateWithLocation) { }
 
         /// <summary>
         /// Returns <em>tzais</em> (nightfall) when the sun is 8.5° below the
@@ -540,6 +540,10 @@ namespace Zmanim
         ///</summary>
         ///<value> Returns the candle lighting offset to set in minutes.. </value>
         ///<seealso cref = "GetCandelLighting" />
-        public virtual double CandleLightingOffset { get; set; }
+        public virtual double CandleLightingOffset
+        {
+            get { return candleLightingOffset; }
+            set { candleLightingOffset = value; }
+        }
     }
 }

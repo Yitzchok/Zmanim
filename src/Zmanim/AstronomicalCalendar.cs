@@ -138,9 +138,7 @@ namespace Zmanim
         ///  default the calendar to the current date.
         ///</summary>
         public AstronomicalCalendar()
-            : this(new GeoLocation())
-        {
-        }
+            : this(new GeoLocation()) { }
 
         ///<summary>
         ///  A constructor that takes in as a parameter geolocation information
@@ -149,8 +147,7 @@ namespace Zmanim
         ///  The location information used for astronomical calculating sun
         ///  times. </param>
         public AstronomicalCalendar(IGeoLocation geoLocation)
-            : this(DateTime.Now, geoLocation)
-        { }
+            : this(DateTime.Now, geoLocation) { }
 
         ///<summary>
         ///  A constructor that takes in as a parameter geolocation information
@@ -160,11 +157,17 @@ namespace Zmanim
         ///  The location information used for astronomical calculating sun
         ///  times. </param>
         public AstronomicalCalendar(DateTime dateTime, IGeoLocation geoLocation)
+            : this(new DateWithLocation(dateTime, geoLocation)) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AstronomicalCalendar"/> class.
+        /// </summary>
+        /// <param name="dateWithLocation">The date with location.</param>
+        public AstronomicalCalendar(IDateWithLocation dateWithLocation)
         {
-            DateWithLocation = new DateWithLocation(dateTime, geoLocation);
+            DateWithLocation = dateWithLocation;
             AstronomicalCalculator = Calculator.AstronomicalCalculator.GetDefault();
         }
-
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
