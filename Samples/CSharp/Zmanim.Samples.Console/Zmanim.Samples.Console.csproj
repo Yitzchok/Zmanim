@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Zmanim, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Zmanim.dll</HintPath>
+      <HintPath>..\..\..\src\Zmanim\bin\Debug\Zmanim.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
