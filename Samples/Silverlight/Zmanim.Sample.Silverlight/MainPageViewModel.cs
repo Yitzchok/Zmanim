@@ -15,10 +15,10 @@ namespace Zmanim.Sample.Silverlight
 
         public DateTime Date
         {
-            get { return ZmanimCalendar.Calendar.Date; }
+            get { return ZmanimCalendar.DateWithLocation.Date; }
             set
             {
-                ZmanimCalendar.Calendar.Date = value;
+                ZmanimCalendar.DateWithLocation.Date = value;
                 this.RaisePropertyChanged(x => x.Date);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
@@ -26,10 +26,10 @@ namespace Zmanim.Sample.Silverlight
 
         public double Latitude
         {
-            get { return ZmanimCalendar.GeoLocation.Latitude; }
+            get { return ZmanimCalendar.DateWithLocation.Location.Latitude; }
             set
             {
-                ZmanimCalendar.GeoLocation.Latitude = value;
+                ZmanimCalendar.DateWithLocation.Location.Latitude = value;
                 this.RaisePropertyChanged(x => x.Latitude);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
@@ -37,10 +37,10 @@ namespace Zmanim.Sample.Silverlight
 
         public double Longitude
         {
-            get { return ZmanimCalendar.GeoLocation.Longitude; }
+            get { return ZmanimCalendar.DateWithLocation.Location.Longitude; }
             set
             {
-                ZmanimCalendar.GeoLocation.Longitude = value;
+                ZmanimCalendar.DateWithLocation.Location.Longitude = value;
                 this.RaisePropertyChanged(x => x.Longitude);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
@@ -48,16 +48,16 @@ namespace Zmanim.Sample.Silverlight
 
         public double Elevation
         {
-            get { return ZmanimCalendar.GeoLocation.Elevation; }
+            get { return ZmanimCalendar.DateWithLocation.Location.Elevation; }
             set
             {
-                ZmanimCalendar.GeoLocation.Elevation = value;
+                ZmanimCalendar.DateWithLocation.Location.Elevation = value;
                 this.RaisePropertyChanged(x => x.Elevation);
                 this.RaisePropertyChanged(x => x.Zmanim);
             }
         }
 
-        public string LocationName { get { return ZmanimCalendar.GeoLocation.LocationName; } }
+        public string LocationName { get { return ZmanimCalendar.DateWithLocation.Location.LocationName; } }
         public Zmanim Zmanim { get; set; }
     }
 }
