@@ -69,11 +69,6 @@
     <Compile Include="Extensions\ObjectCopierExtensions.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
-    <Compile Include="HebrewCalendar\Daf.cs" />
-    <Compile Include="HebrewCalendar\HebrewDateFormatter.cs" />
-    <Compile Include="HebrewCalendar\JewishCalendar.cs" />
-    <Compile Include="HebrewCalendar\JewishDate.cs" />
-    <Compile Include="HebrewCalendar\YomiCalculator.cs" />
     <Compile Include="IAstronomicalCalendar.cs" />
     <Compile Include="IDateWithLocation.cs" />
     <Compile Include="DateWithLocation.cs" />
