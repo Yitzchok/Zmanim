@@ -260,7 +260,7 @@ namespace Zmanim
         /// <param name="location">The location.</param>
         public ComplexZmanimCalendar(IGeoLocation location)
             : base(location) { }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexZmanimCalendar"/> class.
         /// </summary>
@@ -2741,7 +2741,7 @@ namespace Zmanim
             long shaahZmanis = GetShaahZmanisGra();
             if (shaahZmanis == long.MinValue)
                 return null;
-            
+
             return GetTimeOffset(GetSeaLevelSunset(), shaahZmanis * 2.0);
         }
 
@@ -2894,6 +2894,140 @@ namespace Zmanim
         public virtual DateTime? GetSofZmanTfilaFixedLocal()
         {
             return GetTimeOffset(GetFixedLocalChatzos(), -120 * MINUTE_MILLIS);
+        }
+
+        /// <summary>
+        /// This method returns the latest time one is allowed eating chametz on Erev Pesach according to the opinion of the
+        /// <em>GRA</em> and the </em>Baal Hatanya</em>. This time is identical to the {@link #getSofZmanTfilaGRA() Sof zman
+        /// tefilah GRA}. This time is 4 hours into the day based on the opinion of the <em>GRA</em> and the </em>Baal
+        /// Hatanya</em> that the day is calculated from sunrise to sunset. This returns the time 4 *
+        /// <seealso cref="GetShaahZmanisGra()"/> after <seealso cref="GetSeaLevelSunrise() sea level sunrise"/>.
+        /// </summary>
+        /// <seealso cref="ZmanimCalendar#getShaahZmanisGra"></seealso>
+        /// <seealso cref="ZmanimCalendar#getSofZmanTfilaGRA"></seealso>
+        /// <returns> the <code>Date</code> one is allowed eating chametz on Erev Pesach. If the calculation can't be computed
+        ///         such as in the Arctic Circle where there is at least one day a year where the sun does not rise, and one
+        ///         where it does not set, a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
+        public virtual DateTime? getSofZmanAchilasChametzGRA()
+        {
+            return GetSofZmanTfilaGRA();
+        }
+
+        /// <summary>
+        /// This method returns the latest time one is allowed eating chametz on Erev Pesach according to the opinion of the
+        /// <em>MGA</em> based on <em>alos</em> being <seealso cref="GetAlos72() 72"/> minutes before <seealso cref="GetSunrise() sunrise"/>.
+        /// This time is identical to the <seealso cref="GetSofZmanTfilaMGA72Minutes() Sof zman tefilah MGA 72 minutes"/>. This time
+        /// is 4 <em><seealso cref="GetShaahZmanisMGA() shaos zmaniyos"/></em> (temporal hours) after <seealso cref="GetAlos72() dawn"/> based
+        /// on the opinion of the <em>MGA</em> that the day is calculated from a <seealso cref="GetAlos72() dawn"/> of 72 minutes
+        /// before sunrise to <seealso cref="GetTzais72() nightfall"/> of 72 minutes after sunset. This returns the time of 4 *
+        /// <seealso cref="GetShaahZmanisMGA()"/> after <seealso cref="GetAlos72() dawn"/>.
+        /// </summary>
+        /// <returns> the <code>Date</code> of the latest time of eating chametz. If the calculation can't be computed such as
+        ///         in the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
+        ///         does not set), a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
+        /// <seealso cref="GetShaahZmanisMGA"></seealso>
+        /// <seealso cref="GetAlos72"></seealso>
+        /// <seealso cref="GetSofZmanTfilaMGA72Minutes"></seealso>
+        public virtual DateTime? GetSofZmanAchilasChametzMGA72Minutes()
+        {
+            return GetSofZmanTfilaMGA72Minutes();
+        }
+
+        /// <summary>
+        /// This method returns the latest time one is allowed eating chametz on Erev Pesach according to the opinion of the
+        /// <em>MGA</em> based on <em>alos</em> being <seealso cref="GetAlos16Point1Degrees() 16.1&deg;"/> before
+        /// <seealso cref="GetSunrise() sunrise"/>. This time is 4 <em><seealso cref="GetShaahZmanis16Point1Degrees() shaos zmaniyos"/></em>
+        /// (solar hours) after <seealso cref="GetAlos16Point1Degrees() dawn"/> based on the opinion of the <em>MGA</em> that the day
+        /// is calculated from dawn to nightfall with both being 16.1&deg; below sunrise or sunset. This returns the time of
+        /// 4 <seealso cref="GetShaahZmanis16Point1Degrees()"/> after <seealso cref="GetAlos16Point1Degrees() dawn"/>.
+        /// </summary>
+        /// <returns> the <code>Date</code> of the latest time of eating chametz. If the calculation can't be computed such as
+        ///         northern and southern locations even south of the Arctic Circle and north of the Antarctic Circle where
+        ///         the sun may not reach low enough below the horizon for this calculation, a null will be returned. See
+        ///         detailed explanation on top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis16Point1Degrees"></seealso>
+        /// <seealso cref="GetAlos16Point1Degrees"></seealso>
+        /// <seealso cref="GetSofZmanTfilaMGA16Point1Degrees"></seealso>
+        public virtual DateTime? GetSofZmanAchilasChametzMGA16Point1Degrees()
+        {
+            return GetSofZmanTfilaMGA16Point1Degrees();
+        }
+
+        /// <summary>
+        /// This method returns the latest time for burning chametz on Erev Pesach according to the opinion of the
+        /// <em>GRA</em> and the </em>Baal Hatanya</em>. This time is 5 hours into the day based on the opinion of the
+        /// <em>GRA</em> and the </em>Baal Hatanya</em> that the day is calculated from sunrise to sunset. This returns the
+        /// time 5 * <seealso cref="GetShaahZmanisGra()"/> after <seealso cref="GetSeaLevelSunrise() sea level sunrise"/>.
+        /// </summary>
+        /// <seealso cref="ZmanimCalendar#getShaahZmanisGra"></seealso>
+        /// <returns> the <code>Date</code> of the latest time for burning chametz on Erev Pesach. If the calculation can't be
+        ///         computed such as in the Arctic Circle where there is at least one day a year where the sun does not rise,
+        ///         and one where it does not set, a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
+        public virtual DateTime? GetSofZmanBiurChametzGRA()
+        {
+            return GetTimeOffset(GetSeaLevelSunrise(), GetShaahZmanisGra() * 5);
+        }
+
+        /// <summary>
+        /// This method returns the latest time for burning chametz on Erev Pesach according to the opinion of the
+        /// <em>MGA</em> based on <em>alos</em> being <seealso cref="GetAlos72() 72"/> minutes before <seealso cref="GetSunrise() sunrise"/>.
+        /// This time is 5 <em><seealso cref="GetShaahZmanisMGA() shaos zmaniyos"/></em> (temporal hours) after {@link #getAlos72()
+        /// dawn} based on the opinion of the <em>MGA</em> that the day is calculated from a <seealso cref="GetAlos72() dawn"/> of 72
+        /// minutes before sunrise to <seealso cref="GetTzais72() nightfall"/> of 72 minutes after sunset. This returns the time of 5
+        /// * <seealso cref="GetShaahZmanisMGA"/> after <seealso cref="GetAlos72() dawn"/>.
+        /// </summary>
+        /// <returns> the <code>Date</code> of the latest time for burning chametz on Erev Pesach. If the calculation can't be
+        ///         computed such as in the Arctic Circle where there is at least one day a year where the sun does not rise,
+        ///         and one where it does not set), a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
+        /// <seealso cref="GetShaahZmanisMGA"></seealso>
+        /// <seealso cref="GetAlos72()"></seealso>
+        public virtual DateTime? GetSofZmanBiurChametzMGA72Minutes()
+        {
+            return GetTimeOffset(GetAlos72(), GetShaahZmanisMGA() * 5);
+        }
+
+        /// <summary>
+        /// This method returns the latest time for burning <em>chametz</em> on <em>Erev Pesach</em> according to the opinion
+        /// of the <em>MGA</em> based on <em>alos</em> being <seealso cref="GetAlos16Point1Degrees() 16.1&deg;"/> before
+        /// <seealso cref="GetSunrise() sunrise"/>. This time is 5 <em><seealso cref="GetShaahZmanis16Point1Degrees() shaos zmaniyos"/></em>
+        /// (solar hours) after <seealso cref="GetAlos16Point1Degrees() dawn"/> based on the opinion of the <em>MGA</em> that the day
+        /// is calculated from dawn to nightfall with both being 16.1&deg; below sunrise or sunset. This returns the time of
+        /// 5 <seealso cref="GetShaahZmanis16Point1Degrees()"/> after <seealso cref="GetAlos16Point1Degrees() dawn"/>.
+        /// </summary>
+        /// <returns> the <code>Date</code> of the latest time for burning chametz on Erev Pesach. If the calculation can't be
+        ///         computed such as northern and southern locations even south of the Arctic Circle and north of the
+        ///         Antarctic Circle where the sun may not reach low enough below the horizon for this calculation, a null
+        ///         will be returned. See detailed explanation on top of the <seealso cref="AstronomicalCalendar"/> documentation.
+        /// </returns>
+        /// <seealso cref="GetShaahZmanis16Point1Degrees"></seealso>
+        /// <seealso cref="GetAlos16Point1Degrees"></seealso>
+        public virtual DateTime? GetSofZmanBiurChametzMGA16Point1Degrees()
+        {
+            return GetTimeOffset(GetAlos16Point1Degrees(), GetShaahZmanis16Point1Degrees() * 5);
+        }
+
+        /// <summary>
+        /// A method that returns "solar" midnight, or the time when the sun is at its <a
+        /// href="http://en.wikipedia.org/wiki/Nadir">nadir</a>. <br/>
+        /// <br/>
+        /// <b>Note:</b> this method is experimental and might be removed.
+        /// </summary>
+        /// <returns> the <code>Date</code> of Solar Midnight (chatzos layla). If the calculation can't be computed such as in
+        ///         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
+        ///         does not set, a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
+        public virtual DateTime? GetSolarMidnight()
+        {
+            ZmanimCalendar clonedCal = (ZmanimCalendar)MemberwiseClone();
+            DateWithLocation.Date = DateWithLocation.Date.AddDays(1);
+            DateTime? sunset = GetSeaLevelSunset();
+            DateTime? sunrise = clonedCal.GetSeaLevelSunrise();
+            return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
         }
 
         /// <summary>
