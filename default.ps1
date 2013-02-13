@@ -40,7 +40,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim CLI $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 		
 	Generate-Assembly-Info `
 		-file "$src_dir\ZmanimTests\Properties\AssemblyInfo.cs" `
@@ -49,7 +49,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim Test $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 			
 	Generate-Assembly-Info `
 		-file "$src_dir\Zmanim.Scheduling\Properties\AssemblyInfo.cs" `
@@ -58,7 +58,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim Scheduling $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 		
 	Generate-Assembly-Info `
 		-file "$src_dir\Zmanim.QuartzScheduling\Properties\AssemblyInfo.cs" `
@@ -67,7 +67,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim Quartz Scheduling $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 
 	Generate-Assembly-Info `
 		-file "$src_dir\Zmanim.TzDatebase\Properties\AssemblyInfo.cs" `
@@ -76,7 +76,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim TzDatebase $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 	
 	Generate-Assembly-Info `
 		-file "$src_dir\Zmanim.Java\Properties\AssemblyInfo.cs" `
@@ -85,7 +85,7 @@ task Init -depends Clean {
 		-company "" `
 		-product "Zmanim Java $version" `
 		-version $version `
-		-copyright "Copyright © Adminjew 2010"
+		-copyright "Copyright © Adminjew 2013"
 	
 	Generate-Assembly-Info `
 		-file "$src_dir\Zmanim.Silverlight\Properties\AssemblyInfo.cs" `
