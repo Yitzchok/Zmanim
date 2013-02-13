@@ -3012,25 +3012,6 @@ namespace Zmanim
         }
 
         /// <summary>
-        /// A method that returns "solar" midnight, or the time when the sun is at its <a
-        /// href="http://en.wikipedia.org/wiki/Nadir">nadir</a>. <br/>
-        /// <br/>
-        /// <b>Note:</b> this method is experimental and might be removed.
-        /// </summary>
-        /// <returns> the <code>Date</code> of Solar Midnight (chatzos layla). If the calculation can't be computed such as in
-        ///         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
-        ///         does not set, a null will be returned. See detailed explanation on top of the
-        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
-        public virtual DateTime? GetSolarMidnight()
-        {
-            ZmanimCalendar clonedCal = (ZmanimCalendar)MemberwiseClone();
-            DateWithLocation.Date = DateWithLocation.Date.AddDays(1);
-            DateTime? sunset = GetSeaLevelSunset();
-            DateTime? sunrise = clonedCal.GetSeaLevelSunrise();
-            return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
