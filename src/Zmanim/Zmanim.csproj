@@ -92,9 +92,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Calculator\IAstronomicalCalculator.cs" />
-    <Compile Include="Calculator\JSuntimeCalculator.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Calculator\NOAACalculator.cs">
       <SubType>Code</SubType>
     </Compile>

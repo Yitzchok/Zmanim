@@ -66,9 +66,6 @@
     <Compile Include="..\Zmanim\Calculator\IAstronomicalCalculator.cs">
       <Link>Calculator\IAstronomicalCalculator.cs</Link>
     </Compile>
-    <Compile Include="..\Zmanim\Calculator\JSuntimeCalculator.cs">
-      <Link>Calculator\JSuntimeCalculator.cs</Link>
-    </Compile>
     <Compile Include="..\Zmanim\Calculator\NOAACalculator.cs">
       <Link>Calculator\NOAACalculator.cs</Link>
     </Compile>
