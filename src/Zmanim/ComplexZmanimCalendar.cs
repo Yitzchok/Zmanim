@@ -19,6 +19,7 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using System.Diagnostics;
 using Zmanim.Calculator;
 using Zmanim.Extensions;
 using Zmanim.Utilities;
@@ -1402,6 +1403,7 @@ namespace Zmanim
         /// detailed explanation on top of the <see cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="GetFixedLocalChatzos()"/>
+        [Obsolete("Pending confirmation from Rabbi Harfenes, this method is deprecated and should not be used.")]
         public virtual DateTime? GetSofZmanShmaKolEliyahu()
         {
             DateTime? chatzos = GetFixedLocalChatzos();
@@ -2108,7 +2110,7 @@ namespace Zmanim
         /// <seealso cref="AstronomicalCalendar.GetSeaLevelSunset"/>
         public virtual DateTime? GetPlagAlosToSunset()
         {
-           return GetPlagHamincha(GetAlos16Point1Degrees(), GetSeaLevelSunset());
+            return GetPlagHamincha(GetAlos16Point1Degrees(), GetSeaLevelSunset());
         }
 
         /// <summary>
