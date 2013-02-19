@@ -659,22 +659,45 @@ namespace Zmanim
             return (long)((sunset - sunrise).Value.TotalMilliseconds / 12);
         }
 
-        ///<summary>
-        ///  A method that returns sundial or solar noon. It occurs when the Sun is <a href = "http://en.wikipedia.org/wiki/Transit_%28astronomy%29">transitting</a>
-        ///  the <a href = "http://en.wikipedia.org/wiki/Meridian_%28astronomy%29">celestial
-        ///        meridian</a>. In this class it is calculated as halfway between sunrise
-        ///  and sunset, which can be slightly off the real transit time due to the
-        ///  lengthening or shortening day.
-        ///</summary>
-        ///<returns> the <c>DateTime</c> representing Sun's transit.
-        /// If the calculation can't be computed such as in the Arctic
-        /// Circle where there is at least one day a year where the sun does
-        /// not rise, and one where it does not set, a null will be returned.
-        /// See detailed explanation on top of the page.
-        /// </returns>
+        /// <summary>
+        /// A method that returns sundial or solar noon. It occurs when the Sun is
+        /// <a href="http://en.wikipedia.org/wiki/Transit_%28astronomy%29">transitting</a> the 
+        /// <a href="http://en.wikipedia.org/wiki/Meridian_%28astronomy%29">celestial meridian</a>.
+        /// In this class it is calculated as halfway between sea level sunrise and sea level sunset,
+        /// which can be slightly off the real transit
+        /// time due to changes in declination (the lengthening or shortening day).
+        /// </summary>
+        /// <returns> the <code>Date</code> representing Sun's transit. If the calculation can't be computed such as in the
+        ///         Arctic Circle where there is at least one day a year where the sun does not rise, and one where it does
+        ///         not set, null will be returned. See detailed explanation on top of the page. </returns>
+        /// <seealso cref="GetSunTransit"/>
+        /// <seealso cref="GetTemporalHour"/>
         public virtual DateTime? GetSunTransit()
         {
-            return GetTimeOffset(GetSunrise().Value, GetTemporalHour() * 6);
+            return GetSunTransit(GetSeaLevelSunrise(), GetSeaLevelSunset());
+        }
+
+        /// <summary>
+        /// A method that returns sundial or solar noon. It occurs when the Sun is 
+        /// <a href="http://en.wikipedia.org/wiki/Transit_%28astronomy%29">transitting</a>
+        /// the <a href="http://en.wikipedia.org/wiki/Meridian_%28astronomy%29">celestial meridian</a>. In this class it is
+        /// calculated as halfway between the sunrise and sunset passed to this method. This time can be slightly off the
+        /// real transit time due to changes in declination (the lengthening or shortening day).
+        /// </summary>
+        /// <param name="startOfDay">
+        ///            the start of day for calculating the sun's transit. This can be sea level sunrise, visual sunrise (or
+        ///            any arbitrary start of day) passed to this method. </param>
+        /// <param name="endOfDay">
+        ///            the end of day for calculating the sun's transit. This can be sea level sunset, visual sunset (or any
+        ///            arbitrary end of day) passed to this method.
+        /// </param>
+        /// <returns> the <code>Date</code> representing Sun's transit. If the calculation can't be computed such as in the
+        ///         Arctic Circle where there is at least one day a year where the sun does not rise, and one where it does
+        ///         not set, null will be returned. See detailed explanation on top of the page. </returns>
+        public virtual DateTime? GetSunTransit(DateTime? startOfDay, DateTime? endOfDay)
+        {
+            long temporalHour = GetTemporalHour(startOfDay, endOfDay);
+            return GetTimeOffset(startOfDay, temporalHour * 6);
         }
 
         ///<summary>

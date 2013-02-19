@@ -246,6 +246,8 @@ namespace Zmanim
         ///<seealso cref = "GetTzaisGeonim3Point65Degrees()" />
         protected internal const double ZENITH_3_POINT_65 = GEOMETRIC_ZENITH + 3.65;
 
+        protected internal const double ZENITH_3_POINT_676 = GEOMETRIC_ZENITH + 3.676;
+
         /// <summary>
         /// The zenith of 5.88° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>
         /// (90°).
@@ -2245,6 +2247,24 @@ namespace Zmanim
         public virtual DateTime? GetTzaisGeonim3Point65Degrees()
         {
             return GetSunsetOffsetByDegrees(ZENITH_3_POINT_65);
+        }
+
+        /// <summary>
+        /// This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
+        /// of a <a href= "http://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on an 18
+        /// minute Mil, or 13.5 minutes. It is the sun's position at <seealso cref="ZENITH_3_POINT_676 3.676°"/> below the western
+        /// horizon based on the calculations of Stanley Fishkind. This is a very early <em>zman</em> and should not be
+        /// relied on without Rabbinical guidance.
+        /// </summary>
+        /// <returns> the <code>DateTime</code> representing the time when the sun is 3.676°; below sea level. If the
+        ///         calculation can't be computed such as northern and southern locations even south of the Arctic Circle and
+        ///         north of the Antarctic Circle where the sun may not reach low enough below the horizon for this
+        ///         calculation, a null will be returned. See detailed explanation on top of the <seealso cref="AstronomicalCalendar"/>
+        ///         documentation. </returns>
+        /// <seealso cref="ZENITH_3_POINT_676"/>
+        public virtual DateTime? GetTzaisGeonim3Point676Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_3_POINT_676);
         }
 
         /// <summary>

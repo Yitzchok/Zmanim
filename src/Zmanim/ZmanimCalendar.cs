@@ -192,26 +192,23 @@ namespace Zmanim
             return GetSunTransit();
         }
 
-        ///<summary>
-        ///  A method that returns "solar" midnight, or the time when the sun is at
-        ///  it's <a href = "http://en.wikipedia.org/wiki/Nadir">nadir</a>. <br />
-        ///  <br />
-        ///  <b>Note:</b> this method is experimental and might be removed (or moved)
-        ///</summary>
-        ///<returns> the <c>DateTime</c> of Solar Midnight (chatzos layla).
-        /// If the calculation can't be computed such as northern and southern locations
-        /// even south of the Arctic Circle and north of the Antarctic Circle
-        /// where the sun may not reach low enough below the horizon for this calculation,
-        /// a null will be returned. See detailed explanation on top of the
-        /// <see cref="AstronomicalCalendar"/> documentation.
-        ///  </returns>
+        /// <summary>
+        /// A method that returns "solar" midnight, or the time when the sun is at its 
+        /// <a href="http://en.wikipedia.org/wiki/Nadir">nadir</a>. <br/>
+        /// <br/>
+        /// <b>Note:</b> this method is experimental and might be removed.
+        /// </summary>
+        /// <returns> the <code>Date</code> of Solar Midnight (chatzos layla). If the calculation can't be computed such as in
+        ///         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
+        ///         does not set, a null will be returned. See detailed explanation on top of the
+        ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
         public virtual DateTime? GetSolarMidnight()
         {
-            var clonedCal = (ZmanimCalendar)Clone();
+            ZmanimCalendar clonedCal = (ZmanimCalendar)MemberwiseClone();
             clonedCal.DateWithLocation.Date = clonedCal.DateWithLocation.Date.AddDays(1);
-            DateTime? sunset = GetSunset();
-            DateTime? sunrise = clonedCal.GetSunrise();
-            return GetTimeOffset(sunset.Value, GetTemporalHour(sunset.Value, sunrise.Value) * 6);
+            DateTime? sunset = GetSeaLevelSunset();
+            DateTime? sunrise = clonedCal.GetSeaLevelSunrise();
+            return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
         }
 
         // public DateTime GetChatzosLaylaRSZ() {
@@ -291,8 +288,10 @@ namespace Zmanim
         /// <summary>
         /// A method to return candle lighting time. This is calculated as
         /// <seealso cref="CandleLightingOffset"/> minutes before sunset. This will
-        /// return the time for any day of the week, since it can be used to
-        /// calculate candle lighting time for <em>yom tov</em> (holidays) as well.
+        /// return the time for any day of the week, since it can be
+        /// used to calculate candle lighting time for <em>yom tov</em>
+        /// (mid-week holidays) as well. To calculate the offset
+        /// of non-sea level sunset, pass the elevation adjusted sunset to <seealso cref="AstronomicalCalendar.GetTimeOffset(System.Nullable{System.DateTime},long)"/>.
         /// </summary>
         /// <returns>
         /// candle lighting time.
@@ -305,7 +304,7 @@ namespace Zmanim
         /// <seealso cref="CandleLightingOffset"/>
         public virtual DateTime? GetCandelLighting()
         {
-            return GetTimeOffset(GetSunset().Value, -CandleLightingOffset * MINUTE_MILLIS);
+            return GetTimeOffset(GetSeaLevelSunset().Value, -CandleLightingOffset * MINUTE_MILLIS);
         }
 
         /// <summary>
