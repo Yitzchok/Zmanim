@@ -1389,11 +1389,9 @@ namespace Zmanim
 
         /// <summary>
         /// From the GR"A in Kol Eliyahu on Berachos #173 that states that zman krias
-        /// shema is calculated as half the time from <see cref="AstronomicalCalendar.GetSeaLevelSunrise"> sea level sunset</see>
-        /// to fixed local chatzos. The GR"A himself seems to
-        /// contradic this when he stated that zman krias shema is 1/4 of the day
-        /// from sunrise to sunset. See Sarah Lamoed #25 in Yisroel Vehazmanim Vol
-        /// III page 1016.
+        /// shema is calculated as half the time from <see cref="AstronomicalCalendar.GetSeaLevelSunrise"> sea level sunrise</see>
+        /// to fixed local chatzos. The GRA himself seems to contradict this when he stated that <em>zman krias shema</em>
+        /// is 1/4 of the day from sunrise to sunset. See <em>Sarah Lamoed</em> #25 in Yisroel Vehazmanim Vol III page 1016
         /// </summary>
         /// <returns>
         /// the <c>DateTime</c> of the latest zman shema based on this calculation.
