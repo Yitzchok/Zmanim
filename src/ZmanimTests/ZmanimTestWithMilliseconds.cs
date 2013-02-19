@@ -621,9 +621,9 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBainHasmashosRT13Degrees()
+        public void Check_getBainHasmashosRT13Point24Degrees()
         {
-            var zman = calendar.GetBainHasmashosRT13Degrees();
+            var zman = calendar.GetBainHasmashosRT13Point24Degrees();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 20, 27, 23, 91)
