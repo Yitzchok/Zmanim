@@ -169,11 +169,9 @@ namespace Zmanim
         ///  (90°). This calculation is used for calculating
         ///  <em>Rabainu Tam's bain hashmashos</em> according to some opinions. <br />
         ///  <br />
-        ///  <b>FIXME:</b> See comments on <see cref = "GetBainHasmashosRT13Degrees" />. This
-        ///  should be changed to 13.2477 after confirmation.
+        /// NOTE: See comments on <see cref="GetBainHasmashosRT13Point24Degrees"/>for additional details about the degrees
         ///</summary>
-        ///<seealso cref = "GetBainHasmashosRT13Degrees" />
-        protected internal const double ZENITH_13_DEGREES = GEOMETRIC_ZENITH + 13;
+        protected internal const double ZENITH_13_POINT_24 = GEOMETRIC_ZENITH + 13.24;
 
         ///<summary>
         ///  The zenith of 19.8° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>
@@ -2141,19 +2139,21 @@ namespace Zmanim
         }
 
         /// <summary>
-        /// This method returns Bain Hashmashos of Rabainu Tam calculated as the time
-        /// the sun is 13° below <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>
-        /// (90°). <br/>
+        /// Method to return <em>Bain Hashmasho</em> of <em>Rabainu Tam</em> calculated when the sun is
+        /// <seealso cref="ZENITH_13_POINT_24 13.24°"/> below the western <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric horizon</seealso> (90°;)
+        /// after sunset. This calculation is based on the same calculation of <see cref="getBainHasmashosRT58Point5Minutes">
+        /// Bain Hasmashos Rabainu Tam 58.5 minutes</see> but uses a degree based calculation instead of 58.5 exact minutes. This
+        /// calculation is based on the position of the sun 58.5 minutes after sunset in Jerusalem during the equinox which
+        /// calculates to 13.24°; below <seealso cref="AstronomicalCalendar.GEOMETRIC_ZENITH geometric zenith"/>.<br/>
         /// 	<br/>
-        /// 	<b>FIXME:</b> As per Yisroel Vehazmanim Vol III page 1028 No 50, the
-        /// 13° is slightly inaccurate. He lists it as a drop less than 13°.
-        /// Calculations show that is seems to be 13.2477° below the horizon at
-        /// that time. This makes a difference of 1 minute and 10 seconds in
-        /// Jerusalem in the Equinox, and 1 minute 29 seconds in the solstice. for NY
-        /// in the solstice, the difference is 1 minute 56 seconds.
+        /// NOTE: As per Yisroel Vehazmanim Vol III page 1028 No 50, a dip of slightly less than 13°; should be used.
+        /// Calculations show that the proper dip to be 13.2456°; (truncated to 13.24 that provides about 1.5 second
+        /// earlier (<em>lechumra</em>) time) below the horizon at that time. This makes a difference of 1 minute and 10
+        /// seconds in Jerusalem during the Equinox, and 1 minute 29 seconds during the solstice as compared to the proper
+        /// 13.24°;. For NY during the solstice, the difference is 1 minute 56 seconds.
         /// </summary>
         /// <returns>
-        /// the <c>DateTime</c> of the sun being 13° below
+        /// the <c>DateTime</c> of the sun being 13.24° below
         /// <see cref="AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see> (90°).
         /// If the calculation can't be computed such as northern and southern
         /// locations even south of the Arctic Circle and north of the
@@ -2163,9 +2163,9 @@ namespace Zmanim
         /// documentation.
         /// </returns>
         /// <seealso cref="ZENITH_13_DEGREES"/>
-        public virtual DateTime? GetBainHasmashosRT13Degrees()
+        public virtual DateTime? GetBainHasmashosRT13Point24Degrees()
         {
-            return GetSunsetOffsetByDegrees(ZENITH_13_DEGREES);
+            return GetSunsetOffsetByDegrees(ZENITH_13_POINT_24);
         }
 
         /// <summary>
