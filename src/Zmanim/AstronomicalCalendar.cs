@@ -718,7 +718,7 @@ namespace Zmanim
 
             var hours = (int)time; // cut off minutes
 
-            time -= hours;
+            time -= hours;  
             var minutes = (int)(time *= 60);
             time -= minutes;
             var seconds = (int)(time *= 60);

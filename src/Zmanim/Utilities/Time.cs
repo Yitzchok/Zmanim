@@ -34,9 +34,9 @@ namespace Zmanim.Utilities
     {
         private const int SECOND_MILLIS = 1000;
 
-        private const int MINUTE_MILLIS = SECOND_MILLIS*60;
+        private const int MINUTE_MILLIS = SECOND_MILLIS * 60;
 
-        private const int HOUR_MILLIS = MINUTE_MILLIS*60;
+        private const int HOUR_MILLIS = MINUTE_MILLIS * 60;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Time"/> class.
@@ -58,7 +58,7 @@ namespace Zmanim.Utilities
         /// </summary>
         /// <param name="millis">The millis.</param>
         public Time(double millis)
-            : this((int) millis)
+            : this((int)millis)
         {
         }
 
@@ -119,7 +119,7 @@ namespace Zmanim.Utilities
         /// <returns></returns>
         public virtual double GetTime()
         {
-            return Hours*HOUR_MILLIS + Minutes*MINUTE_MILLIS + Seconds*SECOND_MILLIS + Milliseconds;
+            return Hours * HOUR_MILLIS + Minutes * MINUTE_MILLIS + Seconds * SECOND_MILLIS + Milliseconds;
         }
 
         /// <summary>
