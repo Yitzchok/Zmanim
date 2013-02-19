@@ -13,7 +13,7 @@ namespace ZmanimTests.TestGeneration.TestMethodGenerators
                 .Where(m => m.ReturnType == typeof(long)
                             && m.Name.ToLowerInvariant().StartsWith("get")
                             && m.IsPublic
-                            && m.GetParameters().Count() == 0))
+                            && !m.GetParameters().Any()))
             {
                 var result = (long)method.Invoke(typeObject(), null);
                 foreach (var formatter in testFormatters)

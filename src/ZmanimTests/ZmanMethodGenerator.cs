@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using Zmanim;
 using Zmanim.TimeZone;
@@ -42,6 +43,7 @@ namespace ZmanimTests
                                      {
                                          /*new DotNetTestFormatter{ClassName = "ZmanimTest"},
                                          new JavaTestFormatter{ClassName = "ZmanimTest"},*/
+                                         new DotNetTestFormatter{ClassName = "ZmanimTest"},
                                          new DotNetTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"},
                                          new JavaTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"}
                                      };
@@ -59,7 +61,12 @@ namespace ZmanimTests
 
             // Here are the outputed Test Fixtures.
             string dotNetTests = testFormatters[0].BuildTestClass();
-            string javaTests = testFormatters[1].BuildTestClass();
+            string dotNetMilliTests = testFormatters[1].BuildTestClass();
+            string javaTests = testFormatters[2].BuildTestClass();
+
+            File.WriteAllText("ZmanimTests.cs", dotNetTests);
+            File.WriteAllText("ZmanimTestWithMilliseconds.cs", dotNetMilliTests);
+            File.WriteAllText("ZmanimTest.java", javaTests);
         }
     }
 }

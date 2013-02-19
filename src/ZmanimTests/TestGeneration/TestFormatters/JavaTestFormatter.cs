@@ -37,11 +37,12 @@ namespace ZmanimTests.TestGeneration.TestFormatters
 
         public ITestFormatter AddTestMethod(string methodName, string testBody)
         {
+            string javaMethodName = "g" + methodName.Remove(0, 1);
             TestMethods.Add(string.Format(@"
         @Test
         public void Check_{0}(){{
             {1}
-        }}", methodName, testBody));
+        }}", javaMethodName, testBody));
 
             return this;
         }
@@ -69,20 +70,20 @@ namespace ZmanimTests.TestGeneration.TestFormatters
         }
         */
 
-        public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime date)
+        public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime? date)
         {
             AddTestMethod(methodName,
                 string.Format(
                 @"Date zman = calendar.{0}();
    Assert.assertEquals(new GregorianCalendar({1}, {2}, {3}, {4}, {5}, {6}).getTime().toString(), zman.toString());",
                     methodName,
-                    date.Year,
-                    date.Month - 1,
-                    date.Day,
-                    date.Hour,
-                    date.Minute,
-                    date.Second,
-                    date.Millisecond
+                    date.Value.Year,
+                    date.Value.Month - 1,
+                    date.Value.Day,
+                    date.Value.Hour,
+                    date.Value.Minute,
+                    date.Value.Second,
+                    date.Value.Millisecond
                     ));
             return this;
         }

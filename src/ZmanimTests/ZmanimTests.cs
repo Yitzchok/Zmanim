@@ -1,35 +1,39 @@
+
 using System;
 using NUnit.Framework;
 using Zmanim;
 using Zmanim.TimeZone;
-using Zmanim.Utilities;
 using Zmanim.TzDatebase;
+using Zmanim.Utilities;
 
 namespace ZmanimTests
 {
     [TestFixture]
     public class ZmanimTest
     {
+        
         //We can use these test when removing the depenency to Java (IKVM)
         //To make sure that the code stayes the same.
+
         private ComplexZmanimCalendar calendar;
 
         [SetUp]
         public void Setup()
         {
-            string locationName = "Lakewood, NJ";
+            String locationName = "Lakewood, NJ";
             double latitude = 40.09596; //Lakewood, NJ
             double longitude = -74.22213; //Lakewood, NJ
             double elevation = 0; //optional elevation
             ITimeZone timeZone = new OlsonTimeZone("America/New_York");
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
             ComplexZmanimCalendar czc = new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location);
+
             calendar = czc;
         }
 
 
         [Test]
-        public void Check_getPlagHamincha120MinutesZmanis()
+        public void Check_GetPlagHamincha120MinutesZmanis()
         {
             var zman = calendar.GetPlagHamincha120MinutesZmanis().RemoveMilliseconds();
 
@@ -39,7 +43,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha120Minutes()
+        public void Check_GetPlagHamincha120Minutes()
         {
             var zman = calendar.GetPlagHamincha120Minutes().RemoveMilliseconds();
 
@@ -49,7 +53,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos60()
+        public void Check_GetAlos60()
         {
             var zman = calendar.GetAlos60().RemoveMilliseconds();
 
@@ -59,7 +63,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos72Zmanis()
+        public void Check_GetAlos72Zmanis()
         {
             var zman = calendar.GetAlos72Zmanis().RemoveMilliseconds();
 
@@ -69,7 +73,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos96()
+        public void Check_GetAlos96()
         {
             var zman = calendar.GetAlos96().RemoveMilliseconds();
 
@@ -79,7 +83,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos90Zmanis()
+        public void Check_GetAlos90Zmanis()
         {
             var zman = calendar.GetAlos90Zmanis().RemoveMilliseconds();
 
@@ -89,7 +93,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos96Zmanis()
+        public void Check_GetAlos96Zmanis()
         {
             var zman = calendar.GetAlos96Zmanis().RemoveMilliseconds();
 
@@ -99,7 +103,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos90()
+        public void Check_GetAlos90()
         {
             var zman = calendar.GetAlos90().RemoveMilliseconds();
 
@@ -109,10 +113,9 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos120()
+        public void Check_GetAlos120()
         {
-            var dateTime = calendar.GetAlos120();
-            var zman = dateTime.RemoveMilliseconds();
+            var zman = calendar.GetAlos120().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 4, 39, 41)
@@ -120,7 +123,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos120Zmanis()
+        public void Check_GetAlos120Zmanis()
         {
             var zman = calendar.GetAlos120Zmanis().RemoveMilliseconds();
 
@@ -130,7 +133,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos26Degrees()
+        public void Check_GetAlos26Degrees()
         {
             var zman = calendar.GetAlos26Degrees().RemoveMilliseconds();
 
@@ -140,7 +143,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos18Degrees()
+        public void Check_GetAlos18Degrees()
         {
             var zman = calendar.GetAlos18Degrees().RemoveMilliseconds();
 
@@ -150,7 +153,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos19Point8Degrees()
+        public void Check_GetAlos19Point8Degrees()
         {
             var zman = calendar.GetAlos19Point8Degrees().RemoveMilliseconds();
 
@@ -160,7 +163,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos16Point1Degrees()
+        public void Check_GetAlos16Point1Degrees()
         {
             var zman = calendar.GetAlos16Point1Degrees().RemoveMilliseconds();
 
@@ -170,7 +173,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMisheyakir11Point5Degrees()
+        public void Check_GetMisheyakir11Point5Degrees()
         {
             var zman = calendar.GetMisheyakir11Point5Degrees().RemoveMilliseconds();
 
@@ -180,7 +183,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMisheyakir11Degrees()
+        public void Check_GetMisheyakir11Degrees()
         {
             var zman = calendar.GetMisheyakir11Degrees().RemoveMilliseconds();
 
@@ -190,7 +193,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMisheyakir10Point2Degrees()
+        public void Check_GetMisheyakir10Point2Degrees()
         {
             var zman = calendar.GetMisheyakir10Point2Degrees().RemoveMilliseconds();
 
@@ -200,7 +203,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA19Point8Degrees()
+        public void Check_GetSofZmanShmaMGA19Point8Degrees()
         {
             var zman = calendar.GetSofZmanShmaMGA19Point8Degrees().RemoveMilliseconds();
 
@@ -210,7 +213,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA16Point1Degrees()
+        public void Check_GetSofZmanShmaMGA16Point1Degrees()
         {
             var zman = calendar.GetSofZmanShmaMGA16Point1Degrees().RemoveMilliseconds();
 
@@ -220,7 +223,17 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA72Minutes()
+        public void Check_GetSofZmanShmaMGA18Degrees()
+        {
+            var zman = calendar.GetSofZmanShmaMGA18Degrees().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 9, 3, 43)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanShmaMGA72Minutes()
         {
             var zman = calendar.GetSofZmanShmaMGA72Minutes().RemoveMilliseconds();
 
@@ -230,7 +243,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA72MinutesZmanis()
+        public void Check_GetSofZmanShmaMGA72MinutesZmanis()
         {
             var zman = calendar.GetSofZmanShmaMGA72MinutesZmanis().RemoveMilliseconds();
 
@@ -240,7 +253,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA90Minutes()
+        public void Check_GetSofZmanShmaMGA90Minutes()
         {
             var zman = calendar.GetSofZmanShmaMGA90Minutes().RemoveMilliseconds();
 
@@ -250,7 +263,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA90MinutesZmanis()
+        public void Check_GetSofZmanShmaMGA90MinutesZmanis()
         {
             var zman = calendar.GetSofZmanShmaMGA90MinutesZmanis().RemoveMilliseconds();
 
@@ -260,7 +273,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA96Minutes()
+        public void Check_GetSofZmanShmaMGA96Minutes()
         {
             var zman = calendar.GetSofZmanShmaMGA96Minutes().RemoveMilliseconds();
 
@@ -270,7 +283,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA96MinutesZmanis()
+        public void Check_GetSofZmanShmaMGA96MinutesZmanis()
         {
             var zman = calendar.GetSofZmanShmaMGA96MinutesZmanis().RemoveMilliseconds();
 
@@ -280,7 +293,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShma3HoursBeforeChatzos()
+        public void Check_GetSofZmanShma3HoursBeforeChatzos()
         {
             var zman = calendar.GetSofZmanShma3HoursBeforeChatzos().RemoveMilliseconds();
 
@@ -290,7 +303,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA120Minutes()
+        public void Check_GetSofZmanShmaMGA120Minutes()
         {
             var zman = calendar.GetSofZmanShmaMGA120Minutes().RemoveMilliseconds();
 
@@ -300,7 +313,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaAlos16Point1ToSunset()
+        public void Check_GetSofZmanShmaAlos16Point1ToSunset()
         {
             var zman = calendar.GetSofZmanShmaAlos16Point1ToSunset().RemoveMilliseconds();
 
@@ -310,7 +323,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
+        public void Check_GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             var zman = calendar.GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
@@ -320,7 +333,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaKolEliyahu()
+        public void Check_GetSofZmanShmaKolEliyahu()
         {
             var zman = calendar.GetSofZmanShmaKolEliyahu().RemoveMilliseconds();
 
@@ -330,7 +343,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA19Point8Degrees()
+        public void Check_GetSofZmanTfilaMGA19Point8Degrees()
         {
             var zman = calendar.GetSofZmanTfilaMGA19Point8Degrees().RemoveMilliseconds();
 
@@ -340,7 +353,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA16Point1Degrees()
+        public void Check_GetSofZmanTfilaMGA16Point1Degrees()
         {
             var zman = calendar.GetSofZmanTfilaMGA16Point1Degrees().RemoveMilliseconds();
 
@@ -350,7 +363,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA72Minutes()
+        public void Check_GetSofZmanTfilaMGA72Minutes()
         {
             var zman = calendar.GetSofZmanTfilaMGA72Minutes().RemoveMilliseconds();
 
@@ -360,7 +373,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA72MinutesZmanis()
+        public void Check_GetSofZmanTfilaMGA72MinutesZmanis()
         {
             var zman = calendar.GetSofZmanTfilaMGA72MinutesZmanis().RemoveMilliseconds();
 
@@ -370,7 +383,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA90Minutes()
+        public void Check_GetSofZmanTfilaMGA90Minutes()
         {
             var zman = calendar.GetSofZmanTfilaMGA90Minutes().RemoveMilliseconds();
 
@@ -380,7 +393,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA90MinutesZmanis()
+        public void Check_GetSofZmanTfilaMGA90MinutesZmanis()
         {
             var zman = calendar.GetSofZmanTfilaMGA90MinutesZmanis().RemoveMilliseconds();
 
@@ -390,7 +403,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA96Minutes()
+        public void Check_GetSofZmanTfilaMGA96Minutes()
         {
             var zman = calendar.GetSofZmanTfilaMGA96Minutes().RemoveMilliseconds();
 
@@ -400,7 +413,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA96MinutesZmanis()
+        public void Check_GetSofZmanTfilaMGA96MinutesZmanis()
         {
             var zman = calendar.GetSofZmanTfilaMGA96MinutesZmanis().RemoveMilliseconds();
 
@@ -410,7 +423,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA120Minutes()
+        public void Check_GetSofZmanTfilaMGA120Minutes()
         {
             var zman = calendar.GetSofZmanTfilaMGA120Minutes().RemoveMilliseconds();
 
@@ -420,7 +433,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfila2HoursBeforeChatzos()
+        public void Check_GetSofZmanTfila2HoursBeforeChatzos()
         {
             var zman = calendar.GetSofZmanTfila2HoursBeforeChatzos().RemoveMilliseconds();
 
@@ -430,7 +443,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedola30Minutes()
+        public void Check_GetMinchaGedola30Minutes()
         {
             var zman = calendar.GetMinchaGedola30Minutes().RemoveMilliseconds();
 
@@ -440,7 +453,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedola72Minutes()
+        public void Check_GetMinchaGedola72Minutes()
         {
             var zman = calendar.GetMinchaGedola72Minutes().RemoveMilliseconds();
 
@@ -450,7 +463,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedola16Point1Degrees()
+        public void Check_GetMinchaGedola16Point1Degrees()
         {
             var zman = calendar.GetMinchaGedola16Point1Degrees().RemoveMilliseconds();
 
@@ -460,7 +473,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedolaGreaterThan30()
+        public void Check_GetMinchaGedolaGreaterThan30()
         {
             var zman = calendar.GetMinchaGedolaGreaterThan30().RemoveMilliseconds();
 
@@ -470,7 +483,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaKetana16Point1Degrees()
+        public void Check_GetMinchaKetana16Point1Degrees()
         {
             var zman = calendar.GetMinchaKetana16Point1Degrees().RemoveMilliseconds();
 
@@ -480,7 +493,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaKetana72Minutes()
+        public void Check_GetMinchaKetana72Minutes()
         {
             var zman = calendar.GetMinchaKetana72Minutes().RemoveMilliseconds();
 
@@ -490,7 +503,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha60Minutes()
+        public void Check_GetPlagHamincha60Minutes()
         {
             var zman = calendar.GetPlagHamincha60Minutes().RemoveMilliseconds();
 
@@ -500,7 +513,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha72Minutes()
+        public void Check_GetPlagHamincha72Minutes()
         {
             var zman = calendar.GetPlagHamincha72Minutes().RemoveMilliseconds();
 
@@ -510,7 +523,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha90Minutes()
+        public void Check_GetPlagHamincha90Minutes()
         {
             var zman = calendar.GetPlagHamincha90Minutes().RemoveMilliseconds();
 
@@ -520,7 +533,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha96Minutes()
+        public void Check_GetPlagHamincha96Minutes()
         {
             var zman = calendar.GetPlagHamincha96Minutes().RemoveMilliseconds();
 
@@ -530,7 +543,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha96MinutesZmanis()
+        public void Check_GetPlagHamincha96MinutesZmanis()
         {
             var zman = calendar.GetPlagHamincha96MinutesZmanis().RemoveMilliseconds();
 
@@ -540,7 +553,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha90MinutesZmanis()
+        public void Check_GetPlagHamincha90MinutesZmanis()
         {
             var zman = calendar.GetPlagHamincha90MinutesZmanis().RemoveMilliseconds();
 
@@ -550,7 +563,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha72MinutesZmanis()
+        public void Check_GetPlagHamincha72MinutesZmanis()
         {
             var zman = calendar.GetPlagHamincha72MinutesZmanis().RemoveMilliseconds();
 
@@ -560,7 +573,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha16Point1Degrees()
+        public void Check_GetPlagHamincha16Point1Degrees()
         {
             var zman = calendar.GetPlagHamincha16Point1Degrees().RemoveMilliseconds();
 
@@ -570,7 +583,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha19Point8Degrees()
+        public void Check_GetPlagHamincha19Point8Degrees()
         {
             var zman = calendar.GetPlagHamincha19Point8Degrees().RemoveMilliseconds();
 
@@ -580,7 +593,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha26Degrees()
+        public void Check_GetPlagHamincha26Degrees()
         {
             var zman = calendar.GetPlagHamincha26Degrees().RemoveMilliseconds();
 
@@ -590,7 +603,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha18Degrees()
+        public void Check_GetPlagHamincha18Degrees()
         {
             var zman = calendar.GetPlagHamincha18Degrees().RemoveMilliseconds();
 
@@ -600,7 +613,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagAlosToSunset()
+        public void Check_GetPlagAlosToSunset()
         {
             var zman = calendar.GetPlagAlosToSunset().RemoveMilliseconds();
 
@@ -610,7 +623,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
+        public void Check_GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees()
         {
             var zman = calendar.GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
@@ -620,17 +633,17 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBainHasmashosRT13Point24Degrees()
+        public void Check_GetBainHasmashosRT13Point24Degrees()
         {
             var zman = calendar.GetBainHasmashosRT13Point24Degrees().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 20, 27, 23)
+                    new DateTime(2010, 4, 2, 20, 28, 42)
                 ));
         }
 
         [Test]
-        public void Check_getBainHasmashosRT58Point5Minutes()
+        public void Check_GetBainHasmashosRT58Point5Minutes()
         {
             var zman = calendar.GetBainHasmashosRT58Point5Minutes().RemoveMilliseconds();
 
@@ -640,7 +653,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
+        public void Check_GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees()
         {
             var zman = calendar.GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees().RemoveMilliseconds();
 
@@ -650,7 +663,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBainHasmashosRT2Stars()
+        public void Check_GetBainHasmashosRT2Stars()
         {
             var zman = calendar.GetBainHasmashosRT2Stars().RemoveMilliseconds();
 
@@ -660,7 +673,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim5Point95Degrees()
+        public void Check_GetTzaisGeonim5Point95Degrees()
         {
             var zman = calendar.GetTzaisGeonim5Point95Degrees().RemoveMilliseconds();
 
@@ -670,7 +683,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim3Point65Degrees()
+        public void Check_GetTzaisGeonim3Point65Degrees()
         {
             var zman = calendar.GetTzaisGeonim3Point65Degrees().RemoveMilliseconds();
 
@@ -680,7 +693,17 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim4Point61Degrees()
+        public void Check_GetTzaisGeonim3Point676Degrees()
+        {
+            var zman = calendar.GetTzaisGeonim3Point676Degrees().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 19, 37, 5)
+                ));
+        }
+
+        [Test]
+        public void Check_GetTzaisGeonim4Point61Degrees()
         {
             var zman = calendar.GetTzaisGeonim4Point61Degrees().RemoveMilliseconds();
 
@@ -690,7 +713,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim4Point37Degrees()
+        public void Check_GetTzaisGeonim4Point37Degrees()
         {
             var zman = calendar.GetTzaisGeonim4Point37Degrees().RemoveMilliseconds();
 
@@ -700,7 +723,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim5Point88Degrees()
+        public void Check_GetTzaisGeonim5Point88Degrees()
         {
             var zman = calendar.GetTzaisGeonim5Point88Degrees().RemoveMilliseconds();
 
@@ -710,7 +733,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim4Point8Degrees()
+        public void Check_GetTzaisGeonim4Point8Degrees()
         {
             var zman = calendar.GetTzaisGeonim4Point8Degrees().RemoveMilliseconds();
 
@@ -720,7 +743,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim7Point083Degrees()
+        public void Check_GetTzaisGeonim7Point083Degrees()
         {
             var zman = calendar.GetTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
@@ -730,7 +753,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisGeonim8Point5Degrees()
+        public void Check_GetTzaisGeonim8Point5Degrees()
         {
             var zman = calendar.GetTzaisGeonim8Point5Degrees().RemoveMilliseconds();
 
@@ -740,7 +763,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais60()
+        public void Check_GetTzais60()
         {
             var zman = calendar.GetTzais60().RemoveMilliseconds();
 
@@ -750,7 +773,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzaisAteretTorah()
+        public void Check_GetTzaisAteretTorah()
         {
             var zman = calendar.GetTzaisAteretTorah().RemoveMilliseconds();
 
@@ -760,7 +783,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaAteretTorah()
+        public void Check_GetSofZmanShmaAteretTorah()
         {
             var zman = calendar.GetSofZmanShmaAteretTorah().RemoveMilliseconds();
 
@@ -770,7 +793,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilahAteretTorah()
+        public void Check_GetSofZmanTfilahAteretTorah()
         {
             var zman = calendar.GetSofZmanTfilahAteretTorah().RemoveMilliseconds();
 
@@ -780,7 +803,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedolaAteretTorah()
+        public void Check_GetMinchaGedolaAteretTorah()
         {
             var zman = calendar.GetMinchaGedolaAteretTorah().RemoveMilliseconds();
 
@@ -790,7 +813,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaKetanaAteretTorah()
+        public void Check_GetMinchaKetanaAteretTorah()
         {
             var zman = calendar.GetMinchaKetanaAteretTorah().RemoveMilliseconds();
 
@@ -800,7 +823,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHaminchaAteretTorah()
+        public void Check_GetPlagHaminchaAteretTorah()
         {
             var zman = calendar.GetPlagHaminchaAteretTorah().RemoveMilliseconds();
 
@@ -810,7 +833,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais72Zmanis()
+        public void Check_GetTzais72Zmanis()
         {
             var zman = calendar.GetTzais72Zmanis().RemoveMilliseconds();
 
@@ -820,7 +843,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais90Zmanis()
+        public void Check_GetTzais90Zmanis()
         {
             var zman = calendar.GetTzais90Zmanis().RemoveMilliseconds();
 
@@ -830,7 +853,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais96Zmanis()
+        public void Check_GetTzais96Zmanis()
         {
             var zman = calendar.GetTzais96Zmanis().RemoveMilliseconds();
 
@@ -840,7 +863,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais90()
+        public void Check_GetTzais90()
         {
             var zman = calendar.GetTzais90().RemoveMilliseconds();
 
@@ -850,7 +873,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais120()
+        public void Check_GetTzais120()
         {
             var zman = calendar.GetTzais120().RemoveMilliseconds();
 
@@ -860,7 +883,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais120Zmanis()
+        public void Check_GetTzais120Zmanis()
         {
             var zman = calendar.GetTzais120Zmanis().RemoveMilliseconds();
 
@@ -870,7 +893,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais16Point1Degrees()
+        public void Check_GetTzais16Point1Degrees()
         {
             var zman = calendar.GetTzais16Point1Degrees().RemoveMilliseconds();
 
@@ -880,7 +903,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais26Degrees()
+        public void Check_GetTzais26Degrees()
         {
             var zman = calendar.GetTzais26Degrees().RemoveMilliseconds();
 
@@ -890,7 +913,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais18Degrees()
+        public void Check_GetTzais18Degrees()
         {
             var zman = calendar.GetTzais18Degrees().RemoveMilliseconds();
 
@@ -900,7 +923,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais19Point8Degrees()
+        public void Check_GetTzais19Point8Degrees()
         {
             var zman = calendar.GetTzais19Point8Degrees().RemoveMilliseconds();
 
@@ -910,7 +933,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais96()
+        public void Check_GetTzais96()
         {
             var zman = calendar.GetTzais96().RemoveMilliseconds();
 
@@ -920,7 +943,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getFixedLocalChatzos()
+        public void Check_GetFixedLocalChatzos()
         {
             var zman = calendar.GetFixedLocalChatzos().RemoveMilliseconds();
 
@@ -930,7 +953,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaFixedLocal()
+        public void Check_GetSofZmanShmaFixedLocal()
         {
             var zman = calendar.GetSofZmanShmaFixedLocal().RemoveMilliseconds();
 
@@ -940,7 +963,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaFixedLocal()
+        public void Check_GetSofZmanTfilaFixedLocal()
         {
             var zman = calendar.GetSofZmanTfilaFixedLocal().RemoveMilliseconds();
 
@@ -950,7 +973,67 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais()
+        public void Check_getSofZmanAchilasChametzGRA()
+        {
+            var zman = calendar.getSofZmanAchilasChametzGRA().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 10, 53, 49)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanAchilasChametzMGA72Minutes()
+        {
+            var zman = calendar.GetSofZmanAchilasChametzMGA72Minutes().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 10, 29, 49)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanAchilasChametzMGA16Point1Degrees()
+        {
+            var zman = calendar.GetSofZmanAchilasChametzMGA16Point1Degrees().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 10, 26, 21)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanBiurChametzGRA()
+        {
+            var zman = calendar.GetSofZmanBiurChametzGRA().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 11, 57, 20)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanBiurChametzMGA72Minutes()
+        {
+            var zman = calendar.GetSofZmanBiurChametzMGA72Minutes().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 11, 45, 20)
+                ));
+        }
+
+        [Test]
+        public void Check_GetSofZmanBiurChametzMGA16Point1Degrees()
+        {
+            var zman = calendar.GetSofZmanBiurChametzMGA16Point1Degrees().RemoveMilliseconds();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 11, 43, 38)
+                ));
+        }
+
+        [Test]
+        public void Check_GetTzais()
         {
             var zman = calendar.GetTzais().RemoveMilliseconds();
 
@@ -960,7 +1043,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlosHashachar()
+        public void Check_GetAlosHashachar()
         {
             var zman = calendar.GetAlosHashachar().RemoveMilliseconds();
 
@@ -970,7 +1053,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getAlos72()
+        public void Check_GetAlos72()
         {
             var zman = calendar.GetAlos72().RemoveMilliseconds();
 
@@ -980,7 +1063,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getChatzos()
+        public void Check_GetChatzos()
         {
             var zman = calendar.GetChatzos().RemoveMilliseconds();
 
@@ -990,17 +1073,17 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSolarMidnight()
+        public void Check_GetSolarMidnight()
         {
             var zman = calendar.GetSolarMidnight().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 3, 1, 0, 4)
+                    new DateTime(2010, 4, 3, 13, 0, 35)
                 ));
         }
 
         [Test]
-        public void Check_getSofZmanShmaGRA()
+        public void Check_GetSofZmanShmaGRA()
         {
             var zman = calendar.GetSofZmanShmaGRA().RemoveMilliseconds();
 
@@ -1010,7 +1093,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanShmaMGA()
+        public void Check_GetSofZmanShmaMGA()
         {
             var zman = calendar.GetSofZmanShmaMGA().RemoveMilliseconds();
 
@@ -1020,7 +1103,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getTzais72()
+        public void Check_GetTzais72()
         {
             var zman = calendar.GetTzais72().RemoveMilliseconds();
 
@@ -1030,7 +1113,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getCandelLighting()
+        public void Check_GetCandelLighting()
         {
             var zman = calendar.GetCandelLighting().RemoveMilliseconds();
 
@@ -1040,7 +1123,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaGRA()
+        public void Check_GetSofZmanTfilaGRA()
         {
             var zman = calendar.GetSofZmanTfilaGRA().RemoveMilliseconds();
 
@@ -1050,7 +1133,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSofZmanTfilaMGA()
+        public void Check_GetSofZmanTfilaMGA()
         {
             var zman = calendar.GetSofZmanTfilaMGA().RemoveMilliseconds();
 
@@ -1060,7 +1143,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaGedola()
+        public void Check_GetMinchaGedola()
         {
             var zman = calendar.GetMinchaGedola().RemoveMilliseconds();
 
@@ -1070,7 +1153,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getMinchaKetana()
+        public void Check_GetMinchaKetana()
         {
             var zman = calendar.GetMinchaKetana().RemoveMilliseconds();
 
@@ -1080,7 +1163,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getPlagHamincha()
+        public void Check_GetPlagHamincha()
         {
             var zman = calendar.GetPlagHamincha().RemoveMilliseconds();
 
@@ -1090,7 +1173,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSunrise()
+        public void Check_GetSunrise()
         {
             var zman = calendar.GetSunrise().RemoveMilliseconds();
 
@@ -1100,7 +1183,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSeaLevelSunrise()
+        public void Check_GetSeaLevelSunrise()
         {
             var zman = calendar.GetSeaLevelSunrise().RemoveMilliseconds();
 
@@ -1110,7 +1193,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBeginCivilTwilight()
+        public void Check_GetBeginCivilTwilight()
         {
             var zman = calendar.GetBeginCivilTwilight().RemoveMilliseconds();
 
@@ -1120,7 +1203,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBeginNauticalTwilight()
+        public void Check_GetBeginNauticalTwilight()
         {
             var zman = calendar.GetBeginNauticalTwilight().RemoveMilliseconds();
 
@@ -1130,7 +1213,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getBeginAstronomicalTwilight()
+        public void Check_GetBeginAstronomicalTwilight()
         {
             var zman = calendar.GetBeginAstronomicalTwilight().RemoveMilliseconds();
 
@@ -1140,7 +1223,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSunset()
+        public void Check_GetSunset()
         {
             var zman = calendar.GetSunset().RemoveMilliseconds();
 
@@ -1150,7 +1233,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSeaLevelSunset()
+        public void Check_GetSeaLevelSunset()
         {
             var zman = calendar.GetSeaLevelSunset().RemoveMilliseconds();
 
@@ -1160,7 +1243,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getEndCivilTwilight()
+        public void Check_GetEndCivilTwilight()
         {
             var zman = calendar.GetEndCivilTwilight().RemoveMilliseconds();
 
@@ -1170,7 +1253,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getEndNauticalTwilight()
+        public void Check_GetEndNauticalTwilight()
         {
             var zman = calendar.GetEndNauticalTwilight().RemoveMilliseconds();
 
@@ -1180,7 +1263,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getEndAstronomicalTwilight()
+        public void Check_GetEndAstronomicalTwilight()
         {
             var zman = calendar.GetEndAstronomicalTwilight().RemoveMilliseconds();
 
@@ -1190,7 +1273,7 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getSunTransit()
+        public void Check_GetSunTransit()
         {
             var zman = calendar.GetSunTransit().RemoveMilliseconds();
 
@@ -1200,103 +1283,103 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_getShaahZmanis19Point8Degrees()
+        public void Check_GetShaahZmanis19Point8Degrees()
         {
             Assert.That(calendar.GetShaahZmanis19Point8Degrees(), Is.EqualTo(4847270));
         }
 
         [Test]
-        public void Check_getShaahZmanis18Degrees()
+        public void Check_GetShaahZmanis18Degrees()
         {
             Assert.That(calendar.GetShaahZmanis18Degrees(), Is.EqualTo(4744143));
         }
 
         [Test]
-        public void Check_getShaahZmanis26Degrees()
+        public void Check_GetShaahZmanis26Degrees()
         {
             Assert.That(calendar.GetShaahZmanis26Degrees(), Is.EqualTo(5217225));
         }
 
         [Test]
-        public void Check_getShaahZmanis16Point1Degrees()
+        public void Check_GetShaahZmanis16Point1Degrees()
         {
             Assert.That(calendar.GetShaahZmanis16Point1Degrees(), Is.EqualTo(4636860));
         }
 
         [Test]
-        public void Check_getShaahZmanis60Minutes()
+        public void Check_GetShaahZmanis60Minutes()
         {
             Assert.That(calendar.GetShaahZmanis60Minutes(), Is.EqualTo(4411823));
         }
 
         [Test]
-        public void Check_getShaahZmanis72Minutes()
+        public void Check_GetShaahZmanis72Minutes()
         {
             Assert.That(calendar.GetShaahZmanis72Minutes(), Is.EqualTo(4531823));
         }
 
         [Test]
-        public void Check_getShaahZmanis72MinutesZmanis()
+        public void Check_GetShaahZmanis72MinutesZmanis()
         {
             Assert.That(calendar.GetShaahZmanis72MinutesZmanis(), Is.EqualTo(4574187));
         }
 
         [Test]
-        public void Check_getShaahZmanis90Minutes()
+        public void Check_GetShaahZmanis90Minutes()
         {
             Assert.That(calendar.GetShaahZmanis90Minutes(), Is.EqualTo(4711823));
         }
 
         [Test]
-        public void Check_getShaahZmanis90MinutesZmanis()
+        public void Check_GetShaahZmanis90MinutesZmanis()
         {
             Assert.That(calendar.GetShaahZmanis90MinutesZmanis(), Is.EqualTo(4764778));
         }
 
         [Test]
-        public void Check_getShaahZmanis96MinutesZmanis()
+        public void Check_GetShaahZmanis96MinutesZmanis()
         {
             Assert.That(calendar.GetShaahZmanis96MinutesZmanis(), Is.EqualTo(4828309));
         }
 
         [Test]
-        public void Check_getShaahZmanisAteretTorah()
+        public void Check_GetShaahZmanisAteretTorah()
         {
             Assert.That(calendar.GetShaahZmanisAteretTorah(), Is.EqualTo(4393005));
         }
 
         [Test]
-        public void Check_getShaahZmanis96Minutes()
+        public void Check_GetShaahZmanis96Minutes()
         {
             Assert.That(calendar.GetShaahZmanis96Minutes(), Is.EqualTo(4771823));
         }
 
         [Test]
-        public void Check_getShaahZmanis120Minutes()
+        public void Check_GetShaahZmanis120Minutes()
         {
             Assert.That(calendar.GetShaahZmanis120Minutes(), Is.EqualTo(5011823));
         }
 
         [Test]
-        public void Check_getShaahZmanis120MinutesZmanis()
+        public void Check_GetShaahZmanis120MinutesZmanis()
         {
             Assert.That(calendar.GetShaahZmanis120MinutesZmanis(), Is.EqualTo(5082430));
         }
 
         [Test]
-        public void Check_getShaahZmanisGra()
+        public void Check_GetShaahZmanisGra()
         {
             Assert.That(calendar.GetShaahZmanisGra(), Is.EqualTo(3811823));
         }
 
         [Test]
-        public void Check_getShaahZmanisMGA()
+        public void Check_GetShaahZmanisMGA()
         {
             Assert.That(calendar.GetShaahZmanisMGA(), Is.EqualTo(4531823));
         }
 
         [Test]
-        public void Check_getTemporalHour()
+        public void Check_GetTemporalHour()
         {
             Assert.That(calendar.GetTemporalHour(), Is.EqualTo(3811823));
         }

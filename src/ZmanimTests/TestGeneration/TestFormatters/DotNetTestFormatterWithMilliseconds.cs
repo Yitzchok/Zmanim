@@ -76,7 +76,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
         }
         */
 
-        public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime date)
+        public ITestFormatter AddDateTimeTestMethod(string methodName, DateTime? date)
         {
             AddTestMethod(methodName,
                 string.Format(
@@ -86,13 +86,13 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                     new DateTime({1}, {2}, {3}, {4}, {5}, {6}, {7})
                 ));",
                     methodName,
-                    date.Year,
-                    date.Month,
-                    date.Day,
-                    date.Hour,
-                    date.Minute,
-                    date.Second,
-                    date.Millisecond
+                    date.Value.Year,
+                    date.Value.Month,
+                    date.Value.Day,
+                    date.Value.Hour,
+                    date.Value.Minute,
+                    date.Value.Second,
+                    date.Value.Millisecond
                     ));
             return this;
         }

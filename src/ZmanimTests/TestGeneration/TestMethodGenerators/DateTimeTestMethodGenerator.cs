@@ -10,12 +10,12 @@ namespace ZmanimTests.TestGeneration.TestMethodGenerators
         public void Generate(Type type, Func<object> typeObject, IEnumerable<ITestFormatter> testFormatters)
         {
             foreach (var method in type.GetMethods()
-                   .Where(m => m.ReturnType == typeof(DateTime)
+                   .Where(m => m.ReturnType == typeof(DateTime?)
                                && m.Name.ToLowerInvariant().StartsWith("get")
                                && m.IsPublic
-                               && m.GetParameters().Count() == 0))
+                               && !m.GetParameters().Any()))
             {
-                var date = (DateTime)method.Invoke(typeObject(), null);
+                var date = (DateTime?)method.Invoke(typeObject(), null);
                 foreach (var formatter in testFormatters)
                     formatter.AddDateTimeTestMethod(method.Name, date);
             }
