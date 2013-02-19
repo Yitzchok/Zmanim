@@ -777,7 +777,7 @@ namespace Zmanim
             var offsetByTime = GetTimeOffset(GetSeaLevelSunset().Value, minutes * MINUTE_MILLIS);
 
             var degrees = 0m;
-            var incrementor = 0.0001m;
+            var incrementor = 0.001m;
             while (offsetByDegrees == null || offsetByDegrees.Value.ToUnixEpochMilliseconds() < offsetByTime.Value.ToUnixEpochMilliseconds())
             {
                 degrees += incrementor;
