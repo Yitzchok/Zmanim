@@ -45,6 +45,7 @@ namespace ZmanimTests
                                          new JavaTestFormatter{ClassName = "ZmanimTest"},*/
                                          new DotNetTestFormatter{ClassName = "ZmanimTest"},
                                          new DotNetTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"},
+                                         new JavaTestFormatter{ClassName = "ZmanimTest"},
                                          new JavaTestFormatterWithMilliseconds{ClassName = "ZmanimTestWithMilliseconds"}
                                      };
 
@@ -67,6 +68,7 @@ namespace ZmanimTests
             File.WriteAllText("ZmanimTests.cs", dotNetTests);
             File.WriteAllText("ZmanimTestWithMilliseconds.cs", dotNetMilliTests);
             File.WriteAllText("ZmanimTest.java", javaTests);
+            File.WriteAllText("ZmanimTestWithMilliseconds.java", javaTests);
         }
     }
 }

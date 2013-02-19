@@ -37,12 +37,11 @@ namespace ZmanimTests.TestGeneration.TestFormatters
 
         public ITestFormatter AddTestMethod(string methodName, string testBody)
         {
-            string javaMethodName = "g" + methodName.Remove(0, 1);
             TestMethods.Add(string.Format(@"
         @Test
         public void Check_{0}(){{
             {1}
-        }}", javaMethodName, testBody));
+        }}", ToJavaGetProprtyName(methodName), testBody));
 
             return this;
         }
@@ -76,7 +75,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
                 string.Format(
                 @"Date zman = calendar.{0}();
    Assert.assertEquals(new GregorianCalendar({1}, {2}, {3}, {4}, {5}, {6}).getTime().toString(), zman.toString());",
-                    methodName,
+                    ToJavaGetProprtyName(methodName),
                     date.Value.Year,
                     date.Value.Month - 1,
                     date.Value.Day,
@@ -120,6 +119,13 @@ public class {0}{{
         {1}
 }}
 ", ClassName, sb);
+        }
+
+
+
+        private static string ToJavaGetProprtyName(string methodName)
+        {
+            return "g" + methodName.Remove(0, 1);
         }
     }
 }
