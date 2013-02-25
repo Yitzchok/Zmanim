@@ -59,7 +59,7 @@ namespace Zmanim.Calculator
         ///<returns> AstronomicalCalculator the default class for calculating sunrise
         ///  and sunset. In the current implementation the default calculator
         ///  returned is the <see cref = "SunTimesCalculator" />. </returns>
-        public static AstronomicalCalculator GetDefault()
+        public static IAstronomicalCalculator GetDefault()
         {
             return new SunTimesCalculator();
         }
