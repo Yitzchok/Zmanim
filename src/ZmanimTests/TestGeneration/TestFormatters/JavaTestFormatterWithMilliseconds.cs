@@ -91,7 +91,7 @@ namespace ZmanimTests.TestGeneration.TestFormatters
         {
             AddTestMethod(methodName,
                  string.Format(@"Assert.assertEquals({1}, calendar.{0}());",
-                     methodName, testResult));
+                    ToJavaGetProprtyName(methodName), testResult));
             return this;
         }
 
