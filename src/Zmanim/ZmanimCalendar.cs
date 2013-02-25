@@ -320,7 +320,7 @@ namespace Zmanim
         /// <see cref="AstronomicalCalendar"/> documentation.
         /// </returns>
         /// <seealso cref="CandleLightingOffset"/>
-        public virtual DateTime? GetCandelLighting()
+        public virtual DateTime? GetCandleLighting()
         {
             return GetTimeOffset(GetSeaLevelSunset().Value, -CandleLightingOffset * MINUTE_MILLIS);
         }
@@ -647,10 +647,10 @@ namespace Zmanim
         ///  calculating candle lighting time. The default time used is 18 minutes
         ///  before sunset. Some calendars use 15 minutes, while the custom in
         ///  Jerusalem is to use a 40 minute offset. Please check the local custom for
-        ///  candel lighting time.
+        ///  Candle lighting time.
         ///</summary>
         ///<value> Returns the candle lighting offset to set in minutes.. </value>
-        ///<seealso cref = "GetCandelLighting" />
+        ///<seealso cref = "GetCandleLighting" />
         public virtual double CandleLightingOffset
         {
             get { return candleLightingOffset; }

@@ -1113,9 +1113,9 @@ namespace ZmanimTests
         }
 
         [Test]
-        public void Check_GetCandelLighting()
+        public void Check_GetCandleLighting()
         {
-            var zman = calendar.GetCandelLighting();
+            var zman = calendar.GetCandleLighting();
 
             Assert.That(zman, Is.EqualTo(
                     new DateTime(2010, 4, 2, 19, 4, 3, 710)

@@ -14,7 +14,7 @@ namespace Zmanim.Sample.Silverlight
         public DateTime? Alos72 { get { return ZmanimCalendar.GetAlos72(); } }
         public DateTime? Sunrise { get { return ZmanimCalendar.GetSunrise(); } }
         public DateTime? Sunset { get { return ZmanimCalendar.GetSunset(); } }
-        public DateTime? CandelLighting { get { return ZmanimCalendar.GetCandelLighting(); } }
+        public DateTime? CandleLighting { get { return ZmanimCalendar.GetCandleLighting(); } }
         public DateTime? Tzais { get { return ZmanimCalendar.GetTzais(); } }
 
     }
