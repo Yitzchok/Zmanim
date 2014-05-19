@@ -610,7 +610,7 @@ namespace Zmanim
         private double GetOffsetTime(double time)
         {
             // be nice to Newfies and use a double
-            double gmtOffset = DateWithLocation.Location.TimeZone.UtcOffset(DateWithLocation.Date) / (60 * MINUTE_MILLIS);
+            long gmtOffset = DateWithLocation.Location.TimeZone.UtcOffset(DateWithLocation.Date) / (60 * MINUTE_MILLIS);
 
             return time + gmtOffset;
         }
