@@ -343,11 +343,7 @@ namespace Zmanim
             if (sunset == null || sunrise == null || sunrise.Value.CompareTo(sunset) < 0)
                 return sunset;
 
-            var clonedDateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
-            clonedDateWithLocation.Date = sunset.Value;
-            clonedDateWithLocation.Date.AddDays(1);
-
-            return clonedDateWithLocation.Date;
+            return sunset.Value.AddDays(1);
         }
 
         /// <summary>
