@@ -204,10 +204,12 @@ namespace Zmanim
         ///         <seealso cref="AstronomicalCalendar"/> documentation. </returns>
         public virtual DateTime? GetSolarMidnight()
         {
-            ZmanimCalendar clonedCal = (ZmanimCalendar)MemberwiseClone();
-            clonedCal.DateWithLocation.Date = clonedCal.DateWithLocation.Date.AddDays(1);
             DateTime? sunset = GetSeaLevelSunset();
+
+            ZmanimCalendar clonedCal = (ZmanimCalendar)MemberwiseClone();
+            clonedCal.DateWithLocation = new DateWithLocation(DateWithLocation.Date.AddDays(1), DateWithLocation.Location);
             DateTime? sunrise = clonedCal.GetSeaLevelSunrise();
+
             return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
         }
 

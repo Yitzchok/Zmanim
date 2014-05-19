@@ -1078,7 +1078,7 @@ namespace ZmanimTests
             var zman = calendar.GetSolarMidnight();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 3, 13, 0, 35, 50)
+                    new DateTime(2010, 4, 3, 1, 0, 4, 568)
                 ));
         }
 
