@@ -34,7 +34,7 @@ namespace Zmanim.Calculator
         /// behavior for some locations such as near the poles,
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
-        double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation);
+        double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith, bool adjustForElevation);
 
         /// <summary>
         /// A method that calculates UTC sunset as well as any time based on an angle
@@ -57,6 +57,6 @@ namespace Zmanim.Calculator
         /// behavior for some locations such as near the poles,
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
-        double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith, bool adjustForElevation);
+        double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith, bool adjustForElevation);
     }
 }

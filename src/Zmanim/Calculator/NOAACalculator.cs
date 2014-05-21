@@ -49,7 +49,7 @@ namespace Zmanim.Calculator
         /// angle above or below sunrise. This abstract method is implemented by the
         /// classes that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
         /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
@@ -66,7 +66,7 @@ namespace Zmanim.Calculator
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunrise"/>
-        public override double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
             //		if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {
@@ -76,16 +76,16 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
+                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
 
-            double sunrise = CalcSunriseUtc(CalcJulianDay(astronomicalCalendar.DateWithLocation),
-                                            astronomicalCalendar.DateWithLocation.Location.Latitude,
-                                            -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
+            double sunrise = CalcSunriseUtc(CalcJulianDay(dateWithLocation),
+                                            dateWithLocation.Location.Latitude,
+                                            -dateWithLocation.Location.Longitude, zenith);
             sunrise = sunrise / 60;
 
             // ensure that the time is >= 0 and < 24
@@ -123,7 +123,7 @@ namespace Zmanim.Calculator
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunset"/>
-        public override double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith,
                                             bool adjustForElevation)
         {
             // if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {
@@ -135,16 +135,16 @@ namespace Zmanim.Calculator
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
+                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
 
-            double sunset = CalcSunsetUtc(CalcJulianDay(astronomicalCalendar.DateWithLocation),
-                                          astronomicalCalendar.DateWithLocation.Location.Latitude,
-                                          -astronomicalCalendar.DateWithLocation.Location.Longitude, zenith);
+            double sunset = CalcSunsetUtc(CalcJulianDay(dateWithLocation),
+                                          dateWithLocation.Location.Latitude,
+                                          -dateWithLocation.Location.Longitude, zenith);
             sunset = sunset / 60;
 
             // ensure that the time is >= 0 and < 24

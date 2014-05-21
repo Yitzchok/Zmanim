@@ -78,24 +78,24 @@ namespace Zmanim.Calculator
         /// <see cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunrise"/>
-        public override double GetUtcSunrise(IAstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
             double doubleTime = double.NaN;
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
+                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = GetTimeUtc(astronomicalCalendar.DateWithLocation.Date.Year,
-                                    astronomicalCalendar.DateWithLocation.Date.Month,
-                                    astronomicalCalendar.DateWithLocation.Date.Day,
-                                    astronomicalCalendar.DateWithLocation.Location.Longitude,
-                                    astronomicalCalendar.DateWithLocation.Location.Latitude, zenith, TYPE_SUNRISE);
+            doubleTime = GetTimeUtc(dateWithLocation.Date.Year,
+                                    dateWithLocation.Date.Month,
+                                    dateWithLocation.Date.Day,
+                                    dateWithLocation.Location.Longitude,
+                                    dateWithLocation.Location.Latitude, zenith, TYPE_SUNRISE);
             return doubleTime;
         }
 
@@ -121,24 +121,24 @@ namespace Zmanim.Calculator
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
         /// <seealso cref="AstronomicalCalculator.GetUtcSunset"/>
-        public override double GetUtcSunset(IAstronomicalCalendar astronomicalCalendar, double zenith,
+        public override double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith,
                                             bool adjustForElevation)
         {
             double doubleTime = double.NaN;
 
             if (adjustForElevation)
             {
-                zenith = AdjustZenith(zenith, astronomicalCalendar.DateWithLocation.Location.Elevation);
+                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
             }
             else
             {
                 zenith = AdjustZenith(zenith, 0);
             }
-            doubleTime = GetTimeUtc(astronomicalCalendar.DateWithLocation.Date.Year,
-                                    astronomicalCalendar.DateWithLocation.Date.Month,
-                                    astronomicalCalendar.DateWithLocation.Date.Day,
-                                    astronomicalCalendar.DateWithLocation.Location.Longitude,
-                                    astronomicalCalendar.DateWithLocation.Location.Latitude, zenith, TYPE_SUNSET);
+            doubleTime = GetTimeUtc(dateWithLocation.Date.Year,
+                                    dateWithLocation.Date.Month,
+                                    dateWithLocation.Date.Day,
+                                    dateWithLocation.Location.Longitude,
+                                    dateWithLocation.Location.Latitude, zenith, TYPE_SUNSET);
             return doubleTime;
         }
 

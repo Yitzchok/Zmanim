@@ -140,11 +140,7 @@ namespace Zmanim.Utilities
             LocationName = "Greenwich, England";
             Longitude = 0; // added for clarity
             Latitude = 51.4772;
-#if SILVERLIGHT
             TimeZone = new WindowsTimeZone(TimeZoneInfo.Utc);
-#else
-            TimeZone = new WindowsTimeZone("GMT");
-#endif
         }
 
         /// <summary>

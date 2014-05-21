@@ -523,7 +523,7 @@ namespace Zmanim
         /// </returns>
         public virtual double GetUtcSunrise(double zenith)
         {
-            return AstronomicalCalculator.GetUtcSunrise(this, zenith, true);
+            return AstronomicalCalculator.GetUtcSunrise(DateWithLocation, zenith, true);
         }
 
         /// <summary>
@@ -548,7 +548,7 @@ namespace Zmanim
         /// <seealso cref="GetUtcSeaLevelSunset"/>
         public virtual double GetUtcSeaLevelSunrise(double zenith)
         {
-            return AstronomicalCalculator.GetUtcSunrise(this, zenith, false);
+            return AstronomicalCalculator.GetUtcSunrise(DateWithLocation, zenith, false);
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace Zmanim
         /// <seealso cref="GetUtcSeaLevelSunset"/>
         public virtual double GetUtcSunset(double zenith)
         {
-            return AstronomicalCalculator.GetUtcSunset(this, zenith, true);
+            return AstronomicalCalculator.GetUtcSunset(DateWithLocation, zenith, true);
         }
 
         /// <summary>
@@ -592,7 +592,7 @@ namespace Zmanim
         /// <seealso cref="GetUtcSeaLevelSunrise"/>
         public virtual double GetUtcSeaLevelSunset(double zenith)
         {
-            return AstronomicalCalculator.GetUtcSunset(this, zenith, false);
+            return AstronomicalCalculator.GetUtcSunset(DateWithLocation, zenith, false);
         }
 
         ///<summary>
