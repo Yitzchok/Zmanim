@@ -160,7 +160,7 @@ namespace Zmanim.Calculator
         }
 
         ///<summary>
-        ///  Generate a Julian day from Java Calendar
+        ///  Generate a Julian day from a .NET date
         ///</summary>
         ///<param name = "date">
         ///  Java Calendar </param>
@@ -176,10 +176,10 @@ namespace Zmanim.Calculator
                 year -= 1;
                 month += 12;
             }
-            double A = Math.Floor((double)(year / 100));
-            double B = 2 - A + Math.Floor(A / 4);
+            double a = Math.Floor((double)(year / 100));
+            double b = 2 - a + Math.Floor(a / 4);
 
-            return Math.Floor(365.25 * (year + 4716)) + Math.Floor(30.6001 * (month + 1)) + day + B - 1524.5;
+            return Math.Floor(365.25 * (year + 4716)) + Math.Floor(30.6001 * (month + 1)) + day + b - 1524.5;
         }
 
         ///<summary>
