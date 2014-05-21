@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LinqTests.cs" />
+    <Compile Include="NOAACalculatorTests.cs" />
     <Compile Include="ZmanimTestWithMilliseconds.cs" />
     <Compile Include="JewishDatesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
