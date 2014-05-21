@@ -169,7 +169,7 @@ namespace Zmanim.Calculator
         private static double CalcJulianDay(IDateWithLocation date)
         {
             int year = date.Date.Year;
-            int month = date.Date.Month + 1;
+            int month = date.Date.Month;
             int day = date.Date.Day;
             if (month <= 2)
             {
