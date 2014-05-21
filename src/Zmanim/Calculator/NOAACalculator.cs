@@ -159,20 +159,11 @@ namespace Zmanim.Calculator
         ///  Java Calendar </param>
         ///<returns> the Julian day corresponding to the date Note: Number is returned
         ///  for start of day. Fractional days should be added later. </returns>
-        private static double CalcJulianDay(IDateWithLocation date)
+        private static double CalcJulianDay(IDateWithLocation dateWithLocation)
         {
-            int year = date.Date.Year;
-            int month = date.Date.Month;
-            int day = date.Date.Day;
-            if (month <= 2)
-            {
-                year -= 1;
-                month += 12;
-            }
-            double a = Math.Floor((double)(year / 100));
-            double b = 2 - a + Math.Floor(a / 4);
+            var date = dateWithLocation.Date;
 
-            return Math.Floor(365.25 * (year + 4716)) + Math.Floor(30.6001 * (month + 1)) + day + b - 1524.5;
+            return new DateTime(date.Year, date.Month, date.Day).ToOADate() + 2415018.5;
         }
 
         ///<summary>
