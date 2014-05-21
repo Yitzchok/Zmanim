@@ -69,19 +69,12 @@ namespace Zmanim.Calculator
         public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
-            //		if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {
-            //			throw new ZmanimException(
-            //					"NOAACalculator can not calculate times earlier than the year 2000.	Please try a date with a different year.");
-            //		}
+            /*if (dateWithLocation.Date.Year <= 2000)
+            {
+                throw new Exception("NOAACalculator can not calculate times earlier than the year 2000.	Please try a date with a different year.");
+            }*/
 
-            if (adjustForElevation)
-            {
-                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
-            }
-            else
-            {
-                zenith = AdjustZenith(zenith, 0);
-            }
+            zenith = AdjustZenith(zenith, adjustForElevation ? dateWithLocation.Location.Elevation : 0);
 
             double sunrise = CalcSunriseUtc(CalcJulianDay(dateWithLocation),
                                             dateWithLocation.Location.Latitude,
