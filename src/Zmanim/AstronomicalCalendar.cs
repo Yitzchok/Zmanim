@@ -451,14 +451,14 @@ namespace Zmanim
         /// </returns>
         public virtual DateTime? GetTimeOffset(DateTime time, long offset)
         {
-            if (time == null || offset == long.MinValue)
-                return null;
-
             return time.AddMilliseconds(offset);
         }
 
         protected virtual DateTime? GetTimeOffset(DateTime? time, long offset)
         {
+            if (time == null || offset == long.MinValue)
+                return null;
+
             return GetTimeOffset(time.Value, offset);
         }
 
