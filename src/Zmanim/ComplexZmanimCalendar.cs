@@ -129,7 +129,7 @@ namespace Zmanim
         ///</summary>
         ///<seealso cref = "GetTzaisGeonim7Point083Degrees()" />
         ///<seealso cref = "GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees()" />
-        protected internal const double ZENITH_7_POINT_083 = GEOMETRIC_ZENITH + 7 + (5 / 60);
+        protected internal const double ZENITH_7_POINT_083 = GEOMETRIC_ZENITH + 7 + (5.0 / 60);
 
         ///<summary>
         ///  The zenith of 10.2° below <see cref = "AstronomicalCalendar.GEOMETRIC_ZENITH">geometric zenith</see>
