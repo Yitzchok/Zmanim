@@ -61,7 +61,7 @@ namespace Zmanim.HebrewCalendar
         /// </returns>
         /// <exception cref="IllegalArgumentException">
         ///             if the date is prior to the September 11, 1923 start date of the first Daf Yomi cycle </exception>
-        public static Daf getDafYomiBavli(JewishCalendar calendar)
+        public static Daf getDafYomiBavli(DateTime date)
         {
             /*
              * The number of daf per masechta. Since the number of blatt in Shekalim changed on the 8th Daf Yomi cycle
@@ -69,7 +69,7 @@ namespace Zmanim.HebrewCalendar
              * adjusted based on the cycle.
              */
             int[] blattPerMasechta = { 64, 157, 105, 121, 22, 88, 56, 40, 35, 31, 32, 29, 27, 122, 112, 91, 66, 49, 90, 82, 119, 119, 176, 113, 24, 49, 76, 14, 120, 110, 142, 61, 34, 34, 28, 22, 4, 10, 4, 73 };
-            DateTime date = calendar.Time;
+            
 
             Daf dafYomi = null;
             int julianDay = getJulianDay(date);
