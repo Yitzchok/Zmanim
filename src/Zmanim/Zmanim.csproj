@@ -3,7 +3,6 @@
   <PropertyGroup>
     <ProjectType>local</ProjectType>
     <ProjectVersion>7.10.3077</ProjectVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7629E910-1996-448E-B344-AA925F23EEE6}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -41,7 +40,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
-    <NoStdLib>false</NoStdLib>
     <Optimize>false</Optimize>
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
@@ -53,8 +51,6 @@
     <OutputPath>bin\Release\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>TRACE</DefineConstants>
-    <DebugSymbols>false</DebugSymbols>
-    <NoStdLib>false</NoStdLib>
     <Optimize>true</Optimize>
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
@@ -110,6 +106,7 @@
     <Compile Include="ZmanimCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="JewishCalendar\JewishCalendar.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -130,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -138,4 +135,7 @@
     <PreBuildEvent />
     <PostBuildEvent />
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="JewishCalendar\" />
+  </ItemGroup>
 </Project>
