@@ -117,12 +117,7 @@ namespace ZmanimTests
 			dateTime = new DateTime(2015, 9, 14, gregorianCalendar);
 			Assert.That(jewishCalendar.GetJewishMonth(dateTime), Is.EqualTo(JewishCalendar.JewishMonth.TISHREI));
 
-			//Why is this failing?!
-			//day is right... maybe it's just month index?
 			dateTime = new DateTime(2016, 6, 12, gregorianCalendar);
-			Console.Write (dateTime.ToLongDateString() + '\n');
-			Console.Write ((jewishCalendar.IsLeapYear(jewishCalendar.GetYear(dateTime)) ? "is leap year" : "is not leap year") + '\n');
-			Console.Write (jewishCalendar.GetDayOfMonth (dateTime) + " of " + jewishCalendar.GetJewishMonth (dateTime));
 			Assert.That(jewishCalendar.GetJewishMonth(dateTime), Is.EqualTo(JewishCalendar.JewishMonth.SIVAN));
 
 
