@@ -4,7 +4,7 @@ using System.Globalization;
 namespace Zmanim
 {
 	/// <summary>
-	/// Jewish calendar. Extends HebrewCalendar to provide things like Jewish info (holidays etc.) and normalized months
+	/// Jewish calendar. Extends HebrewCalendar to provide things like Jewish info (holidays etc.) and jewish months
 	/// </summary>
 	public class JewishCalendar: HebrewCalendar
 	{
@@ -14,8 +14,12 @@ namespace Zmanim
 		/// which changes the index of several months depending on whether or not it is a leap year
 		/// see: https://msdn.microsoft.com/en-us/library/system.globalization.hebrewcalendar(v=vs.110).aspx
 		/// </summary>
-		public enum HebrewMonth
+		public enum JewishMonth
 		{
+			/// <summary>
+			/// To represent "no month"
+			/// </summary>
+			NONE = -1,
 			/// <summary>
 			/// Value of the month field indicating Nissan, the first numeric month of the year in the Jewish calendar. With the
 			/// year starting at <seealso cref="TISHREI"/>, it would actually be the 7th (or 8th in a {@link #IsLeapYearFromDateTime leap
@@ -131,76 +135,135 @@ namespace Zmanim
 			YOM_HAATZMAUT = 31,
 			YOM_YERUSHALAYIM = 32
 		}
+				
+
 
 		/// <summary>
+		/// Natives the month to jewish month.
 		/// see https://msdn.microsoft.com/en-us/library/system.globalization.hebrewcalendar(v=vs.110).aspx
 		/// </summary>
-		private static HebrewMonth[] internalToNormalizedMonthsRegularYear = { 	HebrewMonth.TISHREI, 
-															HebrewMonth.CHESHVAN,
-			HebrewMonth.KISLEV,
-			HebrewMonth.TEVES,
-			HebrewMonth.SHEVAT,
-			HebrewMonth.ADAR,
-			HebrewMonth.NISSAN,
-			HebrewMonth.IYAR,
-			HebrewMonth.TAMMUZ,
-			HebrewMonth.AV,
-			HebrewMonth.ELUL,
+		/// <returns>The month to jewish month.</returns>
+		/// <param name="nativeMonth">Native month.</param>
+		/// <param name="leapYear">If set to <c>true</c> leap year.</param>
+		public JewishMonth NativeMonthToJewishMonth(int nativeMonth, bool leapYear) {
+			
+			switch (nativeMonth) {
+			case 1:
+				return JewishMonth.TISHREI;
+			case 2:
+				return JewishMonth.CHESHVAN;
+			case 3:
+				return JewishMonth.KISLEV;
+			case 4:
+				return JewishMonth.TEVES;
+			case 5:
+				return JewishMonth.SHEVAT;
+			}
 
-		};
+			if (leapYear) {
+				switch (nativeMonth) {
+				case 6:
+					return JewishMonth.ADAR;
+				case 7:
+					return JewishMonth.ADAR_II;
+				case 8:
+					return JewishMonth.NISSAN;
+				case 9:
+					return JewishMonth.IYAR;
+				case 10:
+					return JewishMonth.SIVAN;
+				case 11:
+					return JewishMonth.TAMMUZ;
+				case 12:
+					return JewishMonth.AV;
+				case 13:
+					return JewishMonth.ELUL;
+				}
+			} else {
+				switch (nativeMonth) {
+				case 6:
+					return JewishMonth.ADAR;
+				case 7:
+					return JewishMonth.NISSAN;
+				case 8:
+					return JewishMonth.IYAR;
+				case 9:
+					return JewishMonth.SIVAN;
+				case 10:
+					return JewishMonth.TAMMUZ;
+				case 11:
+					return JewishMonth.AV;
+				case 12:
+					return JewishMonth.ELUL;
+				}
+			}
 
-		private static HebrewMonth[] internalToNormalizedMonthsLeapYear = { 	HebrewMonth.TISHREI, 
-			HebrewMonth.CHESHVAN,
-			HebrewMonth.KISLEV,
-			HebrewMonth.TEVES,
-			HebrewMonth.SHEVAT,
-			HebrewMonth.ADAR,
-			HebrewMonth.ADAR_II,
-			HebrewMonth.NISSAN,
-			HebrewMonth.IYAR,
-			HebrewMonth.TAMMUZ,
-			HebrewMonth.AV,
-			HebrewMonth.ELUL,
+			return JewishMonth.NONE;
+		}
 
-		};
 
 		/// <summary>
-		/// also see https://msdn.microsoft.com/en-us/library/system.globalization.hebrewcalendar(v=vs.110).aspx
-		/// pay particular attention to the fact that there are always 14 indexes, and different ones are skipped depending on leap year
+		/// Jewishs the month to native month.
+		/// see https://msdn.microsoft.com/en-us/library/system.globalization.hebrewcalendar(v=vs.110).aspx
 		/// </summary>
-		private static HebrewMonth[] normalizedToInternalMonthsRegularYear = { 	HebrewMonth.TISHREI, 
-			HebrewMonth.CHESHVAN,
-			HebrewMonth.KISLEV,
-			HebrewMonth.TEVES,
-			HebrewMonth.SHEVAT,
-			HebrewMonth.ADAR,
-			HebrewMonth.NISSAN,
-			HebrewMonth.IYAR,
-			HebrewMonth.TAMMUZ,
-			HebrewMonth.AV,
-			HebrewMonth.ELUL,
-			HebrewMonth.ELUL, 
-			HebrewMonth.ELUL
-		};
+		/// <returns>The month to native month.</returns>
+		/// <param name="jewishMonth">Jewish month.</param>
+		/// <param name="leapYear">If set to <c>true</c> leap year.</param>
+		public int JewishMonthToNativeMonth(JewishMonth jewishMonth, bool leapYear) {
 			
-		private static HebrewMonth[] normalizedToInternalMonthsLeapYear = { 	
-			HebrewMonth.CHESHVAN,
-			HebrewMonth.KISLEV,
-			HebrewMonth.TEVES,
-			HebrewMonth.SHEVAT,
-			HebrewMonth.ADAR,
-			HebrewMonth.ADAR_II,
-			HebrewMonth.NISSAN,
-			HebrewMonth.IYAR,
-			HebrewMonth.TAMMUZ,
-			HebrewMonth.AV,
-			HebrewMonth.ELUL,
-			HebrewMonth.ELUL,
-			HebrewMonth.TISHREI, 
+			switch (jewishMonth) {
+			case JewishMonth.TISHREI:
+				return 1;
+			case JewishMonth.CHESHVAN:
+				return 2;
+			case JewishMonth.KISLEV:
+				return 3;
+			case JewishMonth.TEVES:
+				return 4;
+			case JewishMonth.SHEVAT:
+				return 5;
+			}
 
-		};
+			if (leapYear) {
+				switch (jewishMonth) {
+				case JewishMonth.ADAR:
+					return 6;
+				case JewishMonth.ADAR_II:
+					return 7;
+				case JewishMonth.NISSAN:
+					return 8;
+				case JewishMonth.IYAR:
+					return 9;
+				case JewishMonth.SIVAN:
+					return 10;
+				case JewishMonth.TAMMUZ:
+					return 11;
+				case JewishMonth.AV:
+					return 12;
+				case JewishMonth.ELUL:
+					return 13;
+				}
+			} else {
+				switch (jewishMonth) {
+				case JewishMonth.ADAR:
+					return 6;
+				case JewishMonth.NISSAN:
+					return 7;
+				case JewishMonth.IYAR:
+					return 8;
+				case JewishMonth.SIVAN:
+					return 9;
+				case JewishMonth.TAMMUZ:
+					return 10;
+				case JewishMonth.AV:
+					return 11;
+				case JewishMonth.ELUL:
+					return 12;
+				}
+			}
 
-
+			return -1;
+		}
 		/// <summary>
 		/// Determines whether this instance is leap year from date time the specified dt.
 		/// </summary>
@@ -211,39 +274,24 @@ namespace Zmanim
 		}
 
 		/// <summary>
-		/// Gets the normalized month.
+		/// Gets the jewish month.
 		/// </summary>
-		/// <returns>The normalized month.</returns>
+		/// <returns>The jewish month.</returns>
 		/// <param name="dt">Dt.</param>
-		public HebrewMonth GetNormalizedMonth(DateTime dt) {
-			int index = GetMonth (dt)-1;
-
-			if(IsLeapYearFromDateTime(dt)) {
-				return internalToNormalizedMonthsLeapYear [index];
-			} else {
-				return internalToNormalizedMonthsRegularYear [index];
-			}
+		public JewishMonth GetJewishMonth(DateTime dt) {
+			return NativeMonthToJewishMonth (GetMonth (dt), IsLeapYearFromDateTime(dt));
 		}
 
 		/// <summary>
-		/// Gets the hebrew date time.
+		/// Gets the jewish date time.
 		/// </summary>
-		/// <returns>The hebrew date time.</returns>
+		/// <returns>The jewish date time.</returns>
 		/// <param name="year">Year.</param>
 		/// <param name="month">Month.</param>
 		/// <param name="day">Day.</param>
-		public DateTime GetHebrewDateTime(int year, HebrewMonth month, int day) {
-			DateTime dt;
+		public DateTime GetJewishDateTime(int year, JewishMonth month, int day) {
+			return new DateTime(year, JewishMonthToNativeMonth(month, IsLeapYear (year)), day, this);
 
-			int index = (int)month-1;
-
-
-			if (IsLeapYear (year)) {
-				dt = new DateTime(year, (int)normalizedToInternalMonthsLeapYear [index], day, this);
-			} else {
-				dt = new DateTime(year, (int)normalizedToInternalMonthsRegularYear [index], day, this);
-			}
-			return dt;
 		}
 
 
@@ -267,14 +315,14 @@ namespace Zmanim
 		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael, bool UseModernHolidays)
 		{
 
-			HebrewMonth hebrewMonth = GetNormalizedMonth (dt);
+			JewishMonth hebrewMonth = GetJewishMonth (dt);
 			int dayOfMonth = GetDayOfMonth (dt);
 			int dayOfWeek = (int)GetDayOfWeek (dt);
 
 			// check by month (starts from Nissan)
 			switch (hebrewMonth)
 				{
-			case HebrewMonth.NISSAN:
+			case JewishMonth.NISSAN:
 					if (dayOfMonth == 14)
 					{
 					return JewishHoliday.EREV_PESACH;
@@ -292,7 +340,7 @@ namespace Zmanim
 					return JewishHoliday.YOM_HASHOAH;
 					}
 					break;
-			case HebrewMonth.IYAR:
+			case JewishMonth.IYAR:
 					if (UseModernHolidays && ((dayOfMonth == 4 && dayOfWeek == 3) || ((dayOfMonth == 3 || dayOfMonth == 2) && dayOfWeek == 4) || (dayOfMonth == 5 && dayOfWeek == 2)))
 					{
 					return JewishHoliday.YOM_HAZIKARON;
@@ -312,7 +360,7 @@ namespace Zmanim
 					return JewishHoliday.YOM_YERUSHALAYIM;
 					}
 					break;
-			case HebrewMonth.SIVAN:
+			case JewishMonth.SIVAN:
 					if (dayOfMonth == 5)
 					{
 					return JewishHoliday.EREV_SHAVUOS;
@@ -322,14 +370,14 @@ namespace Zmanim
 					return JewishHoliday.SHAVUOS;
 					}
 					break;
-			case HebrewMonth.TAMMUZ:
+			case JewishMonth.TAMMUZ:
 					// push off the fast day if it falls on Shabbos
 					if ((dayOfMonth == 17 && dayOfWeek != 7) || (dayOfMonth == 18 && dayOfWeek == 1))
 					{
 					return JewishHoliday.SEVENTEEN_OF_TAMMUZ;
 					}
 					break;
-			case HebrewMonth.AV:
+			case JewishMonth.AV:
 					// if Tisha B'av falls on Shabbos, push off until Sunday
 					if ((dayOfWeek == 1 && dayOfMonth == 10) || (dayOfWeek != 7 && dayOfMonth == 9))
 					{
@@ -340,13 +388,13 @@ namespace Zmanim
 					return JewishHoliday.TU_BEAV;
 					}
 					break;
-			case HebrewMonth.ELUL:
+			case JewishMonth.ELUL:
 					if (dayOfMonth == 29)
 					{
 					return JewishHoliday.EREV_ROSH_HASHANA;
 					}
 					break;
-			case HebrewMonth.TISHREI:
+			case JewishMonth.TISHREI:
 					if (dayOfMonth == 1 || dayOfMonth == 2)
 					{
 					return JewishHoliday.ROSH_HASHANA;
@@ -389,7 +437,7 @@ namespace Zmanim
 					return JewishHoliday.SIMCHAS_TORAH;
 					}
 					break;
-			case HebrewMonth.KISLEV: // no yomtov in CHESHVAN
+			case JewishMonth.KISLEV: // no yomtov in CHESHVAN
 					// if (getdayOfMonth() == 24) {
 					// return EREV_CHANUKAH;
 					// } else
@@ -398,7 +446,7 @@ namespace Zmanim
 					return JewishHoliday.CHANUKAH;
 					}
 					break;
-			case HebrewMonth.TEVES:
+			case JewishMonth.TEVES:
 				if (dayOfMonth == 1 || dayOfMonth == 2 || (dayOfMonth == 3 && IsKislevShort(dt)))
 					{
 					return JewishHoliday.CHANUKAH;
@@ -408,13 +456,13 @@ namespace Zmanim
 					return JewishHoliday.TENTH_OF_TEVES;
 					}
 					break;
-			case HebrewMonth.SHEVAT:
+			case JewishMonth.SHEVAT:
 					if (dayOfMonth == 15)
 					{
 					return JewishHoliday.TU_BESHVAT;
 					}
 					break;
-			case HebrewMonth.ADAR:
+			case JewishMonth.ADAR:
 				if (!IsLeapYearFromDateTime(dt))
 					{
 						// if 13th Adar falls on Friday or Shabbos, push back to Thursday
@@ -439,7 +487,7 @@ namespace Zmanim
 						}
 					}
 					break;
-			case HebrewMonth.ADAR_II:
+			case JewishMonth.ADAR_II:
 					// if 13th Adar falls on Friday or Shabbos, push back to Thursday
 					if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == 5) || (dayOfMonth == 13 && !(dayOfWeek == 6 || dayOfWeek == 7)))
 					{
@@ -468,8 +516,10 @@ namespace Zmanim
 		/// <seealso cref= #isTaanis() </seealso>
 		public bool IsYomTov(DateTime dt, bool inIsrael)
 		{
-			
-			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, false);
+
+			bool mashichIsHere = false; //oy oy oy HaKadosh Baruch Hu, bring the geulah!!!!
+
+			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, mashichIsHere);
 			if (IsErevYomTov(dt, inIsrael) || jewishHoliday == JewishHoliday.CHANUKAH || (IsTaanis(dt, inIsrael) && jewishHoliday != JewishHoliday.YOM_KIPPUR))
 				{
 					return false;
@@ -495,7 +545,10 @@ namespace Zmanim
 		/// <param name="inIsrael">If set to <c>true</c> in israel.</param>
 		public bool IsErevYomTov(DateTime dt, bool inIsrael)
 		{
-			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, false);
+			bool mashichIsHere = false; //b'emet, ad matai!? we love You, please help us be holy and rebuild the beit hamikdash!
+
+			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, mashichIsHere);
+
 			return jewishHoliday == JewishHoliday.EREV_PESACH || jewishHoliday == JewishHoliday.EREV_SHAVUOS || jewishHoliday == JewishHoliday.EREV_ROSH_HASHANA || jewishHoliday == JewishHoliday.EREV_YOM_KIPPUR || jewishHoliday == JewishHoliday.EREV_SUCCOS;
 
 		}
