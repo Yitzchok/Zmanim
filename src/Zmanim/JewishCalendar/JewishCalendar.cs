@@ -6,7 +6,7 @@ namespace Zmanim
 	/// <summary>
 	/// Jewish calendar. Extends HebrewCalendar to provide things like Jewish info (holidays etc.) and jewish months
 	/// </summary>
-	public class JewishCalendar: HebrewCalendar
+	public class JewishCalendar: System.Globalization.HebrewCalendar
 	{
 		/// <summary>
 		/// Normalizes the months as 1-13 (1-12, with 13 being adar bet)
@@ -136,7 +136,28 @@ namespace Zmanim
 			YOM_YERUSHALAYIM = 32
 		}
 				
+		public enum JewishYearType {
+			/// <summary>
+			/// A short year where both <seealso cref="#CHESHVAN"/> and <seealso cref="#KISLEV"/> are 29 days.
+			/// </summary>
+			/// <seealso cref= #getCheshvanKislevKviah() </seealso>
+			/// <seealso cref= HebrewDateFormatter#getFormattedKviah(int) </seealso>
+			CHASERIM = 0,
 
+			/// <summary>
+			/// An ordered year where <seealso cref="#CHESHVAN"/> is 29 days and <seealso cref="#KISLEV"/> is 30 days.
+			/// </summary>
+			/// <seealso cref= #getCheshvanKislevKviah() </seealso>
+			/// <seealso cref= HebrewDateFormatter#getFormattedKviah(int) </seealso>
+			KESIDRAN,
+
+			/// <summary>
+			/// A long year where both <seealso cref="#CHESHVAN"/> and <seealso cref="#KISLEV"/> are 30 days.
+			/// </summary>
+			/// <seealso cref= #getCheshvanKislevKviah() </seealso>
+			/// <seealso cref= HebrewDateFormatter#getFormattedKviah(int) </seealso>
+			SHELAIMIM
+		}
 
 		/// <summary>
 		/// Natives the month to jewish month.
@@ -447,7 +468,7 @@ namespace Zmanim
 					}
 					break;
 			case JewishMonth.TEVES:
-				if (dayOfMonth == 1 || dayOfMonth == 2 || (dayOfMonth == 3 && IsKislevShort(dt)))
+				if (dayOfMonth == 1 || dayOfMonth == 2 || (dayOfMonth == 3 && MonthIs29Days(dt, JewishMonth.KISLEV)))
 					{
 					return JewishHoliday.CHANUKAH;
 					}
@@ -528,14 +549,19 @@ namespace Zmanim
 
 		}
 
+
+
 		/// <summary>
-		/// Determines whether this instance is kislev short the specified dt.
+		/// Months the is 29 days / short
 		/// </summary>
-		/// <returns><c>true</c> if this instance is kislev short the specified dt; otherwise, <c>false</c>.</returns>
+		/// <returns><c>true</c>, if is29 days was monthed, <c>false</c> otherwise.</returns>
 		/// <param name="dt">Dt.</param>
-		public bool IsKislevShort(DateTime dt) {
-			return GetDaysInMonth (GetYear (dt), GetMonth (dt)) == 30 ? false : true;
+		/// <param name="month">Month.</param>
+		public bool MonthIs29Days(DateTime dt, JewishMonth month) {
+			int nativeMonth = JewishMonthToNativeMonth (month, IsLeapYearFromDateTime (dt));
+			return GetDaysInMonth (GetYear (dt), nativeMonth) == 29 ? true : false;
 		}
+
 
 		/// <summary>
 		/// Determines whether this instance is erev yom tov the specified dt inIsrael.
@@ -560,6 +586,110 @@ namespace Zmanim
 			return jewishHoliday == JewishHoliday.SEVENTEEN_OF_TAMMUZ || jewishHoliday == JewishHoliday.TISHA_BEAV || jewishHoliday == JewishHoliday.YOM_KIPPUR || jewishHoliday == JewishHoliday.FAST_OF_GEDALYAH || jewishHoliday == JewishHoliday.TENTH_OF_TEVES || jewishHoliday == JewishHoliday.FAST_OF_ESTHER;
 		
 		}
+
+
+		public int GetDayOfChanukah(DateTime dt) {
+			if (IsChanukah(dt))
+			{
+				if (GetJewishMonth(dt) == JewishMonth.KISLEV)
+				{
+					return GetDayOfMonth(dt) - 24;
+				} // teves
+				else
+				{
+					return MonthIs29Days(dt, JewishMonth.KISLEV) ? GetDayOfMonth(dt) + 5 : GetDayOfMonth(dt) + 6;
+				}
+			}
+			else
+			{
+				return -1;
+			}
+		}
+
+		public bool IsChanukah(DateTime dt) {
+			JewishHoliday jewishHoliday = GetJewishHoliday (dt, false, false); //diaspora and modern make no difference here
+
+			return jewishHoliday == JewishHoliday.CHANUKAH;
+		}
+
+		/// <summary>
+		/// Returns if the day is Rosh Chodesh. Rosh Hashana will return false
+		/// </summary>
+		/// <returns> true if it is Rosh Chodesh. Rosh Hashana will return false </returns>
+		public bool IsRoshChodesh(DateTime dt)
+		{
+			return (GetDayOfMonth(dt) == 1 && GetJewishMonth(dt) != JewishMonth.TISHREI) || GetDayOfMonth(dt) == 30;
+
+		}
+
+		/// <summary>
+		/// Returns the int value of the Omer day or -1 if the day is not in the omer
+		/// </summary>
+		/// <returns> The Omer count as an int or -1 if it is not a day of the Omer. </returns>
+		public int GetDayOfOmer(DateTime dt)
+		{
+			int omer = -1; // not a day of the Omer
+			int dayOfMonth = GetDayOfMonth(dt);
+			JewishMonth jMonth = GetJewishMonth (dt);
+
+			// if Nissan and second day of Pesach and on
+			if (jMonth == JewishMonth.NISSAN && dayOfMonth >= 16)
+			{
+				omer = dayOfMonth - 15;
+				// if Iyar
+			}
+			else if (jMonth == JewishMonth.IYAR)
+			{
+				omer = dayOfMonth + 15;
+				// if Sivan and before Shavuos
+			}
+			else if (jMonth == JewishMonth.SIVAN && dayOfMonth < 6)
+			{
+				omer = dayOfMonth + 44;
+			}
+			return omer;
+		}
+
+
+		public JewishYearType GetJewishYearType(DateTime dt) {
+			JewishYearType jType = JewishYearType.SHELAIMIM;
+
+			if (MonthIs29Days (dt, JewishMonth.CHESHVAN)) {
+				jType = JewishYearType.KESIDRAN;
+				if (MonthIs29Days (dt, JewishMonth.KISLEV)) {
+					jType = JewishYearType.CHASERIM;
+				}
+			}
+
+			return jType;
+
+		}
+
+		public int GetJewishDayOfWeek(DateTime dt) {
+			DayOfWeek nativeDayOfWeek = GetDayOfWeek (dt);
+
+			switch (nativeDayOfWeek) {
+			case DayOfWeek.Sunday:
+				return 1;
+			case DayOfWeek.Monday:
+				return 2;
+			case DayOfWeek.Tuesday:
+				return 3;
+			case DayOfWeek.Wednesday:
+				return 4;
+			case DayOfWeek.Thursday:
+				return 5;
+			case DayOfWeek.Friday:
+				return 6;
+			case DayOfWeek.Saturday:
+				return 7;
+			}
+
+			return -1;
+				
+		}
+
+
 	}
 }
 

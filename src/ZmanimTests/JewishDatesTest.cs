@@ -107,9 +107,11 @@ namespace ZmanimTests
 		{
 			DateTime dateTime;
 
+
 			//Leap year
 			dateTime = new DateTime(2016, 4, 8, gregorianCalendar);
 			Assert.That(jewishCalendar.GetJewishMonth(dateTime), Is.EqualTo(JewishCalendar.JewishMonth.ADAR_II));
+
 
 			dateTime = new DateTime(2016, 4, 9, gregorianCalendar);
 			Assert.That(jewishCalendar.GetJewishMonth(dateTime), Is.EqualTo(JewishCalendar.JewishMonth.NISSAN));
@@ -127,6 +129,7 @@ namespace ZmanimTests
 
 			dateTime = new DateTime(2015, 3, 21, gregorianCalendar);
 			Assert.That(jewishCalendar.GetJewishMonth(dateTime), Is.EqualTo(JewishCalendar.JewishMonth.NISSAN));
+
 		}
 
 		[Test]
@@ -179,16 +182,29 @@ namespace ZmanimTests
 		}
 
 		[Test]
-		public void Can_Get_Short_Kislev_From_Gregorian()
+		public void Can_Get_Short_Month_From_Gregorian()
 		{
 			DateTime dateTime;
 
 
 			dateTime = new DateTime(2016, 12, 1, gregorianCalendar);
-			Assert.That(jewishCalendar.IsKislevShort(dateTime), Is.EqualTo(true));
+			Assert.That(jewishCalendar.MonthIs29Days(dateTime, JewishCalendar.JewishMonth.KISLEV), Is.EqualTo(true));
 
 			dateTime = new DateTime(2015, 12, 1, gregorianCalendar);
-			Assert.That(jewishCalendar.IsKislevShort(dateTime), Is.EqualTo(false));
+			Assert.That(jewishCalendar.MonthIs29Days(dateTime, JewishCalendar.JewishMonth.KISLEV), Is.EqualTo(false));
+		}
+
+		[Test]
+		public void Can_Get_Formatter()
+		{
+			DateTime dateTime;
+
+			Zmanim.HebrewDateFormatter formatter = new Zmanim.HebrewDateFormatter ();
+
+			Assert.That (formatter.getFormattedKviah (5729), Is.EqualTo ("בשה"));
+			Assert.That (formatter.getFormattedKviah (5771), Is.EqualTo ("השג"));
+
+
 		}
 	
     }

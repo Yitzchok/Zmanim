@@ -107,6 +107,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="JewishCalendar\JewishCalendar.cs" />
+    <Compile Include="JewishCalendar\Daf.cs" />
+    <Compile Include="JewishCalendar\HebrewDateFormatter.cs" />
+    <Compile Include="JewishCalendar\YomiCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

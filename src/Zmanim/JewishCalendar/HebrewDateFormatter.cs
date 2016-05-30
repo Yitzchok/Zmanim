@@ -19,8 +19,9 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System.Text;
+using System;
 
-namespace Zmanim.HebrewCalendar
+namespace Zmanim
 {
     /// <summary>
     /// The HebrewDateFormatter class formats a <seealso cref="JewishDate"/>.
@@ -45,6 +46,8 @@ namespace Zmanim.HebrewCalendar
         private bool useLonghebrewYears = false;
         private bool useGershGershayim = true;
         private bool longWeekFormat = true;
+
+		private static JewishCalendar jewishCalendar = new JewishCalendar ();
 
         /// <summary>
         /// returns if the <seealso cref="#formatDayOfWeek(JewishDate)"/> will use the long format such as
@@ -135,42 +138,50 @@ namespace Zmanim.HebrewCalendar
         /// <param name="jewishCalendar"> </param>
         /// <returns> the formatted holiday or an empty String if the day is not a holiday. </returns>
         /// <seealso cref= #isHebrewFormat() </seealso>
-        public virtual string formatYomTov(JewishCalendar jewishCalendar)
+		public virtual string formatYomTov(DateTime dt, bool inIsrael)
         {
-            int index = jewishCalendar.YomTovIndex;
-            if (index == JewishCalendar.CHANUKAH)
+			JewishCalendar.JewishHoliday holiday = jewishCalendar.GetJewishHoliday (dt, inIsrael);
+
+			int index = (int)holiday;
+
+            if (holiday == JewishCalendar.JewishHoliday.CHANUKAH)
             {
-                int dayOfChanukah = jewishCalendar.DayOfChanukah;
+				int dayOfChanukah = jewishCalendar.GetDayOfChanukah(dt);
                 return hebrewFormat ? (formatHebrewNumber(dayOfChanukah) + " " + hebrewHolidays[index]) : (transliteratedHolidays[index] + dayOfChanukah);
             }
             return index == -1 ? "" : hebrewFormat ? hebrewHolidays[index] : transliteratedHolidays[index];
         }
 
-        public virtual string formatRoshChodesh(JewishCalendar jewishCalendar)
+		public virtual string formatRoshChodesh(DateTime dt)
         {
-            if (!jewishCalendar.RoshChodesh)
+			
+			if (!jewishCalendar.IsRoshChodesh(dt))
             {
                 return "";
             }
             string formattedRoshChodesh = "";
-            int month = jewishCalendar.JewishMonth;
-            if (jewishCalendar.JewishDayOfMonth == 30)
+			int dayOfMonth = jewishCalendar.GetDayOfMonth(dt);
+			JewishCalendar.JewishMonth month = jewishCalendar.GetJewishMonth (dt);
+			int year = jewishCalendar.GetYear (dt);
+			bool isLeapYear = jewishCalendar.IsLeapYearFromDateTime (dt);
+
+			if (dayOfMonth == 30)
             {
-                if (month < JewishCalendar.ADAR || (month == JewishCalendar.ADAR && jewishCalendar.JewishLeapYear))
+				if (month < JewishCalendar.JewishMonth.ADAR || (month == JewishCalendar.JewishMonth.ADAR && isLeapYear))
                 {
                     month++;
                 } // roll to Nissan
                 else
                 {
-                    month = JewishCalendar.NISSAN;
+                    month = JewishCalendar.JewishMonth.NISSAN;
                 }
             }
 
+			DateTime updatedDateTime = jewishCalendar.GetJewishDateTime (year, month, dayOfMonth);
+
             // This method is only about formatting, so we shouldn't make any changes to the params passed in...
-            jewishCalendar = (JewishCalendar)jewishCalendar.Clone();
-            jewishCalendar.JewishMonth = month;
-            formattedRoshChodesh = hebrewFormat ? hebrewHolidays[JewishCalendar.ROSH_CHODESH] : transliteratedHolidays[JewishCalendar.ROSH_CHODESH];
-            formattedRoshChodesh += " " + formatMonth(jewishCalendar);
+			formattedRoshChodesh = hebrewFormat ? hebrewHolidays[(int)JewishCalendar.JewishHoliday.ROSH_CHODESH] : transliteratedHolidays[(int)JewishCalendar.JewishHoliday.ROSH_CHODESH];
+			formattedRoshChodesh += " " + formatMonth(updatedDateTime);
             return formattedRoshChodesh;
         }
 
@@ -291,17 +302,19 @@ namespace Zmanim.HebrewCalendar
         /// <returns> the formatted day of week </returns>
         /// <seealso cref= #isHebrewFormat() </seealso>
         /// <seealso cref= #isLongWeekFormat() </seealso>
-        public virtual string formatDayOfWeek(JewishDate jewishDate)
+		public virtual string formatDayOfWeek(DateTime dt)
         {
+			int dayOfWeek = jewishCalendar.GetJewishDayOfWeek(dt);
+
             if (hebrewFormat)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(longWeekFormat ? hebrewDaysOfWeek[jewishDate.DayOfWeek - 1] : formatHebrewNumber(jewishDate.DayOfWeek));
+				sb.Append(longWeekFormat ? hebrewDaysOfWeek[dayOfWeek - 1] : formatHebrewNumber(dayOfWeek));
                 return sb.ToString();
             }
             else
             {
-                return jewishDate.DayOfWeek == 7 ? TransliteratedShabbosDayOfWeek : jewishDate.Time.ToString("dddd");
+				return dayOfWeek == 7 ? TransliteratedShabbosDayOfWeek : dt.ToString("dddd");
             }
         }
 
@@ -319,11 +332,14 @@ namespace Zmanim.HebrewCalendar
         ///         there are none. If not set to Hebrew, it returns a string of the parsha(ios) transliterated into Latin
         ///         chars. The default uses Ashkenazi pronunciation in typical American English spelling, for example
         ///         Bereshis or Nitzavim Vayeilech or an empty string if there are none. </returns>
-        public virtual string formatParsha(JewishCalendar jewishCalendar)
+
+		/* removed due to gpl restrictions
+		 * public virtual string formatParsha(DateTime dt)
         {
-            int index = jewishCalendar.ParshaIndex;
+			int index = jewishCalendar.GetParshaIndex(dt);
             return index == -1 ? "" : hebrewFormat ? hebrewParshiyos[index] : transliteratedParshios[index];
         }
+		*/
 
         /// <summary>
         /// Returns a string of the parsha(ios) transliterated into Latin chars. The default uses Ashkenazi pronunciation in
@@ -388,15 +404,16 @@ namespace Zmanim.HebrewCalendar
         /// <returns> the formatted date. If the formatter is set to Hebrew, it will format in the form, "day Month year" for
         ///         example &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;, and the format
         ///         "21 Shevat, 5729" if not. </returns>
-        public virtual string format(JewishDate jewishDate)
+		public virtual string format(DateTime dt)
+
         {
             if (HebrewFormat)
             {
-                return formatHebrewNumber(jewishDate.JewishDayOfMonth) + " " + formatMonth(jewishDate) + " " + formatHebrewNumber(jewishDate.JewishYear);
+				return formatHebrewNumber(jewishCalendar.GetDayOfMonth(dt)) + " " + formatMonth(dt) + " " + formatHebrewNumber(jewishCalendar.GetYear(dt));
             }
             else
             {
-                return jewishDate.JewishDayOfMonth + " " + formatMonth(jewishDate) + ", " + jewishDate.JewishYear;
+				return jewishCalendar.GetDayOfMonth(dt) + " " + formatMonth(dt) + ", " + jewishCalendar.GetYear(dt);
             }
         }
 
@@ -411,35 +428,37 @@ namespace Zmanim.HebrewCalendar
         /// <seealso cref= #setHebrewFormat(boolean) </seealso>
         /// <seealso cref= #getTransliteratedMonthList() </seealso>
         /// <seealso cref= #setTransliteratedMonthList(String[]) </seealso>
-        public virtual string formatMonth(JewishDate jewishDate)
+		public virtual string formatMonth(DateTime dt)
         {
             //JAVA TO C# CONVERTER WARNING: The original Java variable was marked 'final':
             //ORIGINAL LINE: final int month = jewishDate.getJewishMonth();
-            int month = jewishDate.JewishMonth;
+			JewishCalendar.JewishMonth month = jewishCalendar.GetJewishMonth(dt);
+			bool isLeapYear = jewishCalendar.IsLeapYearFromDateTime (dt);
+
             if (HebrewFormat)
             {
-                if (jewishDate.JewishLeapYear && month == JewishDate.ADAR)
+				if (isLeapYear && month == JewishCalendar.JewishMonth.ADAR)
                 {
                     return hebrewMonths[13] + (useGershGershayim ? GERESH : ""); // return Adar I, not Adar in a leap year
                 }
-                else if (jewishDate.JewishLeapYear && month == JewishDate.ADAR_II)
+				else if (isLeapYear && month == JewishCalendar.JewishMonth.ADAR_II)
                 {
                     return hebrewMonths[12] + (useGershGershayim ? GERESH : "");
                 }
                 else
                 {
-                    return hebrewMonths[month - 1];
+					return hebrewMonths[(int)month - 1];
                 }
             }
             else
             {
-                if (jewishDate.JewishLeapYear && month == JewishDate.ADAR)
+				if (isLeapYear && month == JewishCalendar.JewishMonth.ADAR)
                 {
                     return transliteratedMonths[13]; // return Adar I, not Adar in a leap year
                 }
                 else
                 {
-                    return transliteratedMonths[month - 1];
+					return transliteratedMonths[(int)month - 1];
                 }
             }
         }
@@ -455,9 +474,9 @@ namespace Zmanim.HebrewCalendar
         /// <seealso cref= #isHebrewFormat() </seealso>
         /// <seealso cref= #getHebrewOmerPrefix() </seealso>
         /// <seealso cref= #setHebrewOmerPrefix(String) </seealso>
-        public virtual string formatOmer(JewishCalendar jewishCalendar)
+		public virtual string formatOmer(DateTime dt)
         {
-            int omer = jewishCalendar.DayOfOmer;
+			int omer = jewishCalendar.GetDayOfOmer(dt);
             if (omer == -1)
             {
                 return "";
@@ -516,15 +535,19 @@ namespace Zmanim.HebrewCalendar
         ///            the Jewish year </param>
         /// <returns> the Hebrew String such as &#x5D1;&#x5E9;&#x5D4; for 5729 (1969) and &#x5D4;&#x5E9;&#x5D2; for 5771
         ///         (2011). </returns>
-        public virtual string getFormattedKviah(int jewishYear)
+		/// 
+		/// 
+        
+		public virtual string getFormattedKviah(int jewishYear)
         {
-            JewishDate jewishDate = new JewishDate(jewishYear, JewishDate.TISHREI, 1); // set date to Rosh Hashana
-            int kviah = jewishDate.CheshvanKislevKviah;
-            int roshHashanaDayOfweek = jewishDate.DayOfWeek;
+			DateTime dt = jewishCalendar.GetJewishDateTime (jewishYear, JewishCalendar.JewishMonth.TISHREI, 1);// set date to Rosh Hashana
+
+			JewishCalendar.JewishYearType yearType = jewishCalendar.GetJewishYearType (dt);
+			int roshHashanaDayOfweek = jewishCalendar.GetJewishDayOfWeek(dt);
             string returnValue = formatHebrewNumber(roshHashanaDayOfweek);
-            returnValue += (kviah == JewishDate.CHASERIM ? "\u05D7" : kviah == JewishDate.SHELAIMIM ? "\u05E9" : "\u05DB");
-            jewishDate.setJewishDate(jewishYear, JewishDate.NISSAN, 15); // set to Pesach of the given year
-            int pesachDayOfweek = jewishDate.DayOfWeek;
+			returnValue += (yearType == JewishCalendar.JewishYearType.CHASERIM ? "\u05D7" : yearType == JewishCalendar.JewishYearType.SHELAIMIM ? "\u05E9" : "\u05DB");
+			dt = jewishCalendar.GetJewishDateTime (jewishYear, JewishCalendar.JewishMonth.NISSAN, 15); // set to Pesach of the given year
+			int pesachDayOfweek = jewishCalendar.GetJewishDayOfWeek(dt);
             returnValue += formatHebrewNumber(pesachDayOfweek);
             returnValue = returnValue.Replace(GERESH, ""); // geresh is never used in the kviah format
             // boolean isLeapYear = JewishDate.isJewishLeapYear(jewishYear);
