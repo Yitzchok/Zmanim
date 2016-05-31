@@ -558,8 +558,19 @@ namespace Zmanim.JewishCalendar
 		/// <param name="dt">Dt.</param>
 		/// <param name="month">Month.</param>
 		public bool MonthIs29Days(DateTime dt, JewishMonth month) {
+			return GetJewishDaysInMonth(dt, month) == 29 ? true : false;
+		}
+
+
+		/// <summary>
+		/// Gets the jewish days in month.
+		/// </summary>
+		/// <returns>The jewish days in month.</returns>
+		/// <param name="dt">Dt.</param>
+		/// <param name="month">Month.</param>
+		public int GetJewishDaysInMonth(DateTime dt, JewishMonth month) {
 			int nativeMonth = JewishMonthToNativeMonth (month, IsLeapYearFromDateTime (dt));
-			return GetDaysInMonth (GetYear (dt), nativeMonth) == 29 ? true : false;
+			return GetDaysInMonth (GetYear (dt), nativeMonth);
 		}
 
 

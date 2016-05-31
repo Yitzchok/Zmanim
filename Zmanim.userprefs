@@ -1,6 +1,21 @@
 ﻿<Properties StartupItem="src/Zmanim.QuartzScheduling/Zmanim.QuartzScheduling.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|Mixed Platforms" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Zmanim/JewishCalendar/YomiCalculator.cs">
+    <Files>
+      <File FileName="src/Zmanim/JewishCalendar/JewishCalendar.cs" Line="4" Column="32" />
+      <File FileName="src/Zmanim/JewishCalendar/HebrewDateFormatter.cs" Line="24" Column="32" />
+      <File FileName="src/ZmanimTests/JewishDatesTest.cs" Line="171" Column="4" />
+      <File FileName="src/Zmanim/JewishCalendar/Daf.cs" Line="21" Column="1" />
+      <File FileName="src/Zmanim/JewishCalendar/YomiCalculator.cs" Line="24" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="Zmanim" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
