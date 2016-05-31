@@ -569,10 +569,20 @@ namespace Zmanim.JewishCalendar
 		/// <param name="dt">Dt.</param>
 		/// <param name="month">Month.</param>
 		public int GetJewishDaysInMonth(DateTime dt, JewishMonth month) {
-			int nativeMonth = JewishMonthToNativeMonth (month, IsLeapYearFromDateTime (dt));
-			return GetDaysInMonth (GetYear (dt), nativeMonth);
+			return GetJewishDaysInMonth (GetYear (dt), month);
 		}
 
+
+		/// <summary>
+		/// Gets the jewish days in month.
+		/// </summary>
+		/// <returns>The jewish days in month.</returns>
+		/// <param name="year">Year.</param>
+		/// <param name="month">Month.</param>
+		public int GetJewishDaysInMonth(int year, JewishMonth month) {
+			int nativeMonth = JewishMonthToNativeMonth (month, IsLeapYear(year));
+			return GetDaysInMonth (year, nativeMonth);
+		}
 
 		/// <summary>
 		/// Determines whether this instance is erev yom tov the specified dt inIsrael.
