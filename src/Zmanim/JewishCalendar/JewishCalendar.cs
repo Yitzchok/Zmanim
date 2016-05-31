@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Zmanim
+namespace Zmanim.JewishCalendar
 {
 	/// <summary>
 	/// Jewish calendar. Extends HebrewCalendar to provide things like Jewish info (holidays etc.) and jewish months

@@ -21,7 +21,7 @@
 using System.Text;
 using System;
 
-namespace Zmanim
+namespace Zmanim.JewishCalendar
 {
     /// <summary>
     /// The HebrewDateFormatter class formats a <seealso cref="JewishDate"/>.

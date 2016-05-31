@@ -21,7 +21,7 @@
 using System;
 using System.Globalization;
 
-namespace Zmanim
+namespace Zmanim.JewishCalendar
 {
 
     /// <summary>

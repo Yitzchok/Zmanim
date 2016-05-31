@@ -18,7 +18,7 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
-namespace Zmanim
+namespace Zmanim.JewishCalendar
 {
     /// <summary>
     /// An Object representing a Daf in the Daf Yomi cycle.

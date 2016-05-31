@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using NUnit.Framework;
 using Zmanim;
+using Zmanim.JewishCalendar;
 
 namespace ZmanimTests
 {
@@ -199,7 +200,7 @@ namespace ZmanimTests
 		{
 			DateTime dateTime;
 
-			Zmanim.HebrewDateFormatter formatter = new Zmanim.HebrewDateFormatter ();
+			HebrewDateFormatter formatter = new HebrewDateFormatter ();
 
 			Assert.That (formatter.getFormattedKviah (5729), Is.EqualTo ("בשה"));
 			Assert.That (formatter.getFormattedKviah (5771), Is.EqualTo ("השג"));
