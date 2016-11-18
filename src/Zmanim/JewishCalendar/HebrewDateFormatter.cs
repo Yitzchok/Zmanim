@@ -304,7 +304,7 @@ namespace Zmanim.JewishCalendar
         /// <seealso cref= #isLongWeekFormat() </seealso>
 		public virtual string formatDayOfWeek(DateTime dt)
         {
-			int dayOfWeek = jewishCalendar.GetJewishDayOfWeek(dt);
+			int dayOfWeek = jewishCalendar.GetJewishDayOfWeekSundayIsOne(dt);
 
             if (hebrewFormat)
             {
@@ -543,11 +543,11 @@ namespace Zmanim.JewishCalendar
 			DateTime dt = jewishCalendar.GetJewishDateTime (jewishYear, JewishCalendar.JewishMonth.TISHREI, 1);// set date to Rosh Hashana
 
 			JewishCalendar.JewishYearType yearType = jewishCalendar.GetJewishYearType (dt);
-			int roshHashanaDayOfweek = jewishCalendar.GetJewishDayOfWeek(dt);
+			int roshHashanaDayOfweek = jewishCalendar.GetJewishDayOfWeekSundayIsOne(dt);
             string returnValue = formatHebrewNumber(roshHashanaDayOfweek);
 			returnValue += (yearType == JewishCalendar.JewishYearType.CHASERIM ? "\u05D7" : yearType == JewishCalendar.JewishYearType.SHELAIMIM ? "\u05E9" : "\u05DB");
 			dt = jewishCalendar.GetJewishDateTime (jewishYear, JewishCalendar.JewishMonth.NISSAN, 15); // set to Pesach of the given year
-			int pesachDayOfweek = jewishCalendar.GetJewishDayOfWeek(dt);
+			int pesachDayOfweek = jewishCalendar.GetJewishDayOfWeekSundayIsOne(dt);
             returnValue += formatHebrewNumber(pesachDayOfweek);
             returnValue = returnValue.Replace(GERESH, ""); // geresh is never used in the kviah format
             // boolean isLeapYear = JewishDate.isJewishLeapYear(jewishYear);

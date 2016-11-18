@@ -338,7 +338,7 @@ namespace Zmanim.JewishCalendar
 
 			JewishMonth hebrewMonth = GetJewishMonth (dt);
 			int dayOfMonth = GetDayOfMonth (dt);
-			int dayOfWeek = (int)GetDayOfWeek (dt);
+			DayOfWeek dayOfWeek = GetDayOfWeek (dt);
 
 			// check by month (starts from Nissan)
 			switch (hebrewMonth)
@@ -356,19 +356,19 @@ namespace Zmanim.JewishCalendar
 					{
 					return JewishHoliday.CHOL_HAMOED_PESACH;
 					}
-					if (UseModernHolidays && ((dayOfMonth == 26 && dayOfWeek == 5) || (dayOfMonth == 28 && dayOfWeek == 1) || (dayOfMonth == 27 && dayOfWeek == 3) || (dayOfMonth == 27 && dayOfWeek == 5)))
+					if (UseModernHolidays && ((dayOfMonth == 26 && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 28 && dayOfWeek == DayOfWeek.Sunday) || (dayOfMonth == 27 && dayOfWeek == DayOfWeek.Tuesday) || (dayOfMonth == 27 && dayOfWeek == DayOfWeek.Thursday)))
 					{
 					return JewishHoliday.YOM_HASHOAH;
 					}
 					break;
 			case JewishMonth.IYAR:
-					if (UseModernHolidays && ((dayOfMonth == 4 && dayOfWeek == 3) || ((dayOfMonth == 3 || dayOfMonth == 2) && dayOfWeek == 4) || (dayOfMonth == 5 && dayOfWeek == 2)))
+					if (UseModernHolidays && ((dayOfMonth == 4 && dayOfWeek == DayOfWeek.Tuesday) || ((dayOfMonth == 3 || dayOfMonth == 2) && dayOfWeek == DayOfWeek.Wednesday) || (dayOfMonth == 5 && dayOfWeek == DayOfWeek.Monday)))
 					{
 					return JewishHoliday.YOM_HAZIKARON;
 					}
 					// if 5 Iyar falls on Wed Yom Haatzmaut is that day. If it fal1s on Friday or Shabbos it is moved back to
 					// Thursday. If it falls on Monday it is moved to Tuesday
-					if (UseModernHolidays && ((dayOfMonth == 5 && dayOfWeek == 4) || ((dayOfMonth == 4 || dayOfMonth == 3) && dayOfWeek == 5) || (dayOfMonth == 6 && dayOfWeek == 3)))
+					if (UseModernHolidays && ((dayOfMonth == 5 && dayOfWeek == DayOfWeek.Wednesday) || ((dayOfMonth == 4 || dayOfMonth == 3) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 6 && dayOfWeek == DayOfWeek.Tuesday)))
 					{
 					return JewishHoliday.YOM_HAATZMAUT;
 					}
@@ -393,14 +393,14 @@ namespace Zmanim.JewishCalendar
 					break;
 			case JewishMonth.TAMMUZ:
 					// push off the fast day if it falls on Shabbos
-					if ((dayOfMonth == 17 && dayOfWeek != 7) || (dayOfMonth == 18 && dayOfWeek == 1))
+				if ((dayOfMonth == 17 && dayOfWeek != DayOfWeek.Saturday) || (dayOfMonth == 18 && dayOfWeek == DayOfWeek.Sunday))
 					{
 					return JewishHoliday.SEVENTEEN_OF_TAMMUZ;
 					}
 					break;
 			case JewishMonth.AV:
 					// if Tisha B'av falls on Shabbos, push off until Sunday
-					if ((dayOfWeek == 1 && dayOfMonth == 10) || (dayOfWeek != 7 && dayOfMonth == 9))
+				if ((dayOfWeek == DayOfWeek.Sunday && dayOfMonth == 10) || (dayOfWeek != DayOfWeek.Saturday && dayOfMonth == 9))
 					{
 					return JewishHoliday.TISHA_BEAV;
 					}
@@ -420,7 +420,7 @@ namespace Zmanim.JewishCalendar
 					{
 					return JewishHoliday.ROSH_HASHANA;
 					}
-					else if ((dayOfMonth == 3 && dayOfWeek != 7) || (dayOfMonth == 4 && dayOfWeek == 1))
+				else if ((dayOfMonth == 3 && dayOfWeek != DayOfWeek.Saturday) || (dayOfMonth == 4 && dayOfWeek == DayOfWeek.Sunday))
 					{
 						// push off Tzom Gedalia if it falls on Shabbos
 					return JewishHoliday.FAST_OF_GEDALYAH;
@@ -487,7 +487,7 @@ namespace Zmanim.JewishCalendar
 				if (!IsLeapYearFromDateTime(dt))
 					{
 						// if 13th Adar falls on Friday or Shabbos, push back to Thursday
-						if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == 5) || (dayOfMonth == 13 && !(dayOfWeek == 6 || dayOfWeek == 7)))
+						if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 13 && !(dayOfWeek == DayOfWeek.Friday || dayOfWeek == DayOfWeek.Saturday)))
 						{
 						return JewishHoliday.FAST_OF_ESTHER;
 						}
@@ -510,7 +510,7 @@ namespace Zmanim.JewishCalendar
 					break;
 			case JewishMonth.ADAR_II:
 					// if 13th Adar falls on Friday or Shabbos, push back to Thursday
-					if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == 5) || (dayOfMonth == 13 && !(dayOfWeek == 6 || dayOfWeek == 7)))
+					if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 13 && !(dayOfWeek == DayOfWeek.Friday || dayOfWeek == DayOfWeek.Saturday)))
 					{
 					return JewishHoliday.FAST_OF_ESTHER;
 					}
@@ -686,7 +686,7 @@ namespace Zmanim.JewishCalendar
 
 		}
 
-		public int GetJewishDayOfWeek(DateTime dt) {
+		public int GetJewishDayOfWeekSundayIsOne(DateTime dt) {
 			DayOfWeek nativeDayOfWeek = GetDayOfWeek (dt);
 
 			switch (nativeDayOfWeek) {
