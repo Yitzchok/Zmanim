@@ -31,7 +31,7 @@ namespace ZmanimTests
 
 			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.KISLEV, 25);
 
-			Console.Write(jewishCalendar.GetJewishHoliday(dt, true));
+			Console.Write(jewishCalendar.GetJewishHolidayAfterMashiach(dt, false));
 			Console.Write (jewishCalendar.IsYomTov (dt, true));
 
 			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);

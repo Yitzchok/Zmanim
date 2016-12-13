@@ -386,6 +386,15 @@ namespace Zmanim.JewishCalendar
 			return GetJewishHoliday (dt, inIsrael, true);
 		}
 
+		public JewishHoliday GetJewishHolidayAfterMashiach(DateTime dt, bool inIsrael)
+		{
+			if (!inIsrael) {
+				throw new Exception ("You are supposed to be in Israel by now");
+			} else {
+				return JewishHoliday.PURIM;
+			}
+		}
+
 		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael, bool UseModernHolidays)
 		{
 			JewishMonth hebrewMonth = GetJewishMonth (dt);
@@ -553,9 +562,10 @@ namespace Zmanim.JewishCalendar
 	 * @see #isTaanis()
 	 */
 		public bool IsYomTov(DateTime dt, bool inIsrael) {
-			bool mashiachIsHere = false; //oy oy oy HaKadosh Baruch Hu, bring the geulah!!!!
+			
 
-			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael, mashiachIsHere);
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael);
+
 			if ((IsErevYomTov(dt, inIsrael) && (holidayIndex != JewishHoliday.HOSHANA_RABBA && (holidayIndex == JewishHoliday.CHOL_HAMOED_PESACH && GetDayOfMonth (dt) != 20)))
 				|| holidayIndex == JewishHoliday.CHANUKAH || (IsTaanis(dt, inIsrael) && holidayIndex != JewishHoliday.YOM_KIPPUR)) {
 			return false;
