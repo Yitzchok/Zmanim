@@ -2,8 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|Mixed Platforms" />
   <MonoDevelop.Ide.Workbench ActiveDocument="src/ZmanimTests/JewishDatesTest.cs">
     <Files>
-      <File FileName="src/Zmanim/JewishCalendar/JewishCalendar.cs" Line="538" Column="23" />
-      <File FileName="src/ZmanimTests/JewishDatesTest.cs" Line="24" Column="4" />
+      <File FileName="src/Zmanim/JewishCalendar/JewishCalendar.cs" Line="435" Column="27" />
+      <File FileName="src/ZmanimTests/JewishDatesTest.cs" Line="75" Column="4" />
+      <File FileName="src/Zmanim/JewishCalendar/HebrewDateFormatter.cs" Line="545" Column="60" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

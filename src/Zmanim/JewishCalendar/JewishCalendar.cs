@@ -414,7 +414,7 @@ namespace Zmanim.JewishCalendar
 			}
 				if (UseModernHolidays
 				&& ((dayOfMonth == 26 && dayOfWeek == 5)
-					|| (dayOfMonth == 28 && dayOfWeek == 1)
+					|| (dayOfMonth == 28 && dayOfWeek == 2)
 					|| (dayOfMonth == 27 && dayOfWeek != 1 && dayOfWeek != 6))) {
 					return JewishHoliday.YOM_HASHOAH;
 			}
@@ -527,7 +527,7 @@ namespace Zmanim.JewishCalendar
 				}
 				if (dayOfMonth == 14) {
 						return JewishHoliday.PURIM;
-				} else if (dayOfMonth == 15) {
+					} else if (dayOfMonth == 15 && inIsrael) {
 						return JewishHoliday.SHUSHAN_PURIM;
 				}
 			} else { // else if a leap year
@@ -544,7 +544,7 @@ namespace Zmanim.JewishCalendar
 			}
 			if (dayOfMonth == 14) {
 					return JewishHoliday.PURIM;
-			} else if (dayOfMonth == 15) {
+				} else if (dayOfMonth == 15 && inIsrael) {
 					return JewishHoliday.SHUSHAN_PURIM;
 			}
 			break;

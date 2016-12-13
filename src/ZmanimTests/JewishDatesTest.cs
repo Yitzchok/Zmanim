@@ -23,17 +23,60 @@ namespace ZmanimTests
 		public void RebJohnnyTest()
 		{
 			DateTime dt;
+			JewishCalendar.JewishHoliday holiday;
 
+			//sanity check that assur b'melacha can pass
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.TISHREI, 1);
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.True);
+
+			//purim shouldn't be assur b'melacha
 			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.ADAR, 14);
-			Console.Write(jewishCalendar.GetJewishHoliday(dt, true));
-				
-			Console.Write (jewishCalendar.IsYomTov (dt, true));
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.PURIM));
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);
 
-			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.KISLEV, 25);
+			//shushan purim only in Israel
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.ADAR, 15);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.AreEqual (holiday, JewishCalendar.JewishHoliday.SHUSHAN_PURIM);
+			holiday = jewishCalendar.GetJewishHoliday (dt, false);
+			Assert.AreNotEqual (holiday, JewishCalendar.JewishHoliday.SHUSHAN_PURIM);
 
-			Console.Write(jewishCalendar.GetJewishHolidayAfterMashiach(dt, false));
-			Console.Write (jewishCalendar.IsYomTov (dt, true));
+			//taanit esther check
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.ADAR, 11);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.AreEqual (holiday, JewishCalendar.JewishHoliday.FAST_OF_ESTHER);
 
+
+			//pesach check
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.NISSAN, 15);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.PESACH));
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.True);
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.NISSAN, 17);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.CHOL_HAMOED_PESACH));
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);
+
+
+			//yom hashoa check
+			//Console.WriteLine ("DAY OF MONTH: " + dayOfMonth.ToString ());
+			//Console.WriteLine ("DAY OF Week: " + dayOfWeek.ToString ());
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.NISSAN, 28);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.YOM_HASHOAH));
+
+			//pesach sheini
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.IYAR, 14);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.PESACH_SHENI));
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);
+
+
+			//tu b'av
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.AV, 15);
+			holiday = jewishCalendar.GetJewishHoliday (dt, true);
+			Assert.That (holiday, Is.EqualTo(JewishCalendar.JewishHoliday.TU_BEAV));
 			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);
 		}
 
