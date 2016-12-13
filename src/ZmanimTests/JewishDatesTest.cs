@@ -19,6 +19,24 @@ namespace ZmanimTests
             gregorianCalendar = new GregorianCalendar();
         }
 
+		[Test]
+		public void RebJohnnyTest()
+		{
+			DateTime dt;
+
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.ADAR, 14);
+			Console.Write(jewishCalendar.GetJewishHoliday(dt, true));
+				
+			Console.Write (jewishCalendar.IsYomTov (dt, true));
+
+			dt = jewishCalendar.GetJewishDateTime (5777, JewishCalendar.JewishMonth.KISLEV, 25);
+
+			Console.Write(jewishCalendar.GetJewishHoliday(dt, true));
+			Console.Write (jewishCalendar.IsYomTov (dt, true));
+
+			Assert.That (jewishCalendar.IsYomTovAssurBemelacha (dt, true), Is.False);
+		}
+
         [Test]
         public void Jewish_leap_year_test()
         {

@@ -8,6 +8,7 @@ namespace Zmanim.JewishCalendar
 	/// </summary>
 	public class JewishCalendar: System.Globalization.HebrewCalendar
 	{
+		
 		/// <summary>
 		/// Normalizes the months as 1-13 (1-12, with 13 being adar bet)
 		/// This is different than the native HebrewCalendar month index 
@@ -135,7 +136,7 @@ namespace Zmanim.JewishCalendar
 			YOM_HAATZMAUT = 31,
 			YOM_YERUSHALAYIM = 32
 		}
-				
+
 		public enum JewishYearType {
 			/// <summary>
 			/// A short year where both <seealso cref="#CHESHVAN"/> and <seealso cref="#KISLEV"/> are 29 days.
@@ -167,7 +168,7 @@ namespace Zmanim.JewishCalendar
 		/// <param name="nativeMonth">Native month.</param>
 		/// <param name="leapYear">If set to <c>true</c> leap year.</param>
 		public JewishMonth NativeMonthToJewishMonth(int nativeMonth, bool leapYear) {
-			
+
 			switch (nativeMonth) {
 			case 1:
 				return JewishMonth.TISHREI;
@@ -231,7 +232,7 @@ namespace Zmanim.JewishCalendar
 		/// <param name="jewishMonth">Jewish month.</param>
 		/// <param name="leapYear">If set to <c>true</c> leap year.</param>
 		public int JewishMonthToNativeMonth(JewishMonth jewishMonth, bool leapYear) {
-			
+
 			switch (jewishMonth) {
 			case JewishMonth.TISHREI:
 				return 1;
@@ -285,6 +286,31 @@ namespace Zmanim.JewishCalendar
 
 			return -1;
 		}
+
+		public int GetJewishDayOfWeekSundayIsOne(DateTime dt) {
+			DayOfWeek nativeDayOfWeek = GetDayOfWeek (dt);
+
+			switch (nativeDayOfWeek) {
+			case DayOfWeek.Sunday:
+				return 1;
+			case DayOfWeek.Monday:
+				return 2;
+			case DayOfWeek.Tuesday:
+				return 3;
+			case DayOfWeek.Wednesday:
+				return 4;
+			case DayOfWeek.Thursday:
+				return 5;
+			case DayOfWeek.Friday:
+				return 6;
+			case DayOfWeek.Saturday:
+				return 7;
+			}
+
+			return -1;
+
+		}
+
 		/// <summary>
 		/// Determines whether this instance is leap year from date time the specified dt.
 		/// </summary>
@@ -314,242 +340,6 @@ namespace Zmanim.JewishCalendar
 			return new DateTime(year, JewishMonthToNativeMonth(month, IsLeapYear (year)), day, this);
 
 		}
-
-
-		/// <summary>
-		/// Gets the jewish holiday, sets "use modern holidays" to true
-		/// </summary>
-		/// <returns>The jewish holiday.</returns>
-		/// <param name="dt">Dt.</param>
-		/// <param name="inIsrael">If set to <c>true</c> in israel.</param>
-		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael) {
-			return GetJewishHoliday (dt, inIsrael, true);
-		}
-
-		/// <summary>
-		/// Gets the jewish holiday.
-		/// </summary>
-		/// <returns>The jewish holiday.</returns>
-		/// <param name="dt">Dt.</param>
-		/// <param name="inIsrael">If set to <c>true</c> in israel.</param>
-		/// <param name="UseModernHolidays">If set to <c>true</c> use modern holidays.</param>
-		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael, bool UseModernHolidays)
-		{
-
-			JewishMonth hebrewMonth = GetJewishMonth (dt);
-			int dayOfMonth = GetDayOfMonth (dt);
-			DayOfWeek dayOfWeek = GetDayOfWeek (dt);
-
-			// check by month (starts from Nissan)
-			switch (hebrewMonth)
-				{
-			case JewishMonth.NISSAN:
-					if (dayOfMonth == 14)
-					{
-					return JewishHoliday.EREV_PESACH;
-					}
-					else if (dayOfMonth == 15 || dayOfMonth == 21 || (!inIsrael && (dayOfMonth == 16 || dayOfMonth == 22)))
-					{
-					return JewishHoliday.PESACH;
-					}
-					else if (dayOfMonth >= 17 && dayOfMonth <= 20 || (dayOfMonth == 16 && inIsrael))
-					{
-					return JewishHoliday.CHOL_HAMOED_PESACH;
-					}
-					if (UseModernHolidays && ((dayOfMonth == 26 && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 28 && dayOfWeek == DayOfWeek.Sunday) || (dayOfMonth == 27 && dayOfWeek == DayOfWeek.Tuesday) || (dayOfMonth == 27 && dayOfWeek == DayOfWeek.Thursday)))
-					{
-					return JewishHoliday.YOM_HASHOAH;
-					}
-					break;
-			case JewishMonth.IYAR:
-					if (UseModernHolidays && ((dayOfMonth == 4 && dayOfWeek == DayOfWeek.Tuesday) || ((dayOfMonth == 3 || dayOfMonth == 2) && dayOfWeek == DayOfWeek.Wednesday) || (dayOfMonth == 5 && dayOfWeek == DayOfWeek.Monday)))
-					{
-					return JewishHoliday.YOM_HAZIKARON;
-					}
-					// if 5 Iyar falls on Wed Yom Haatzmaut is that day. If it fal1s on Friday or Shabbos it is moved back to
-					// Thursday. If it falls on Monday it is moved to Tuesday
-					if (UseModernHolidays && ((dayOfMonth == 5 && dayOfWeek == DayOfWeek.Wednesday) || ((dayOfMonth == 4 || dayOfMonth == 3) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 6 && dayOfWeek == DayOfWeek.Tuesday)))
-					{
-					return JewishHoliday.YOM_HAATZMAUT;
-					}
-					if (dayOfMonth == 14)
-					{
-					return JewishHoliday.PESACH_SHENI;
-					}
-					if (UseModernHolidays && dayOfMonth == 28)
-					{
-					return JewishHoliday.YOM_YERUSHALAYIM;
-					}
-					break;
-			case JewishMonth.SIVAN:
-					if (dayOfMonth == 5)
-					{
-					return JewishHoliday.EREV_SHAVUOS;
-					}
-					else if (dayOfMonth == 6 || (dayOfMonth == 7 && !inIsrael))
-					{
-					return JewishHoliday.SHAVUOS;
-					}
-					break;
-			case JewishMonth.TAMMUZ:
-					// push off the fast day if it falls on Shabbos
-				if ((dayOfMonth == 17 && dayOfWeek != DayOfWeek.Saturday) || (dayOfMonth == 18 && dayOfWeek == DayOfWeek.Sunday))
-					{
-					return JewishHoliday.SEVENTEEN_OF_TAMMUZ;
-					}
-					break;
-			case JewishMonth.AV:
-					// if Tisha B'av falls on Shabbos, push off until Sunday
-				if ((dayOfWeek == DayOfWeek.Sunday && dayOfMonth == 10) || (dayOfWeek != DayOfWeek.Saturday && dayOfMonth == 9))
-					{
-					return JewishHoliday.TISHA_BEAV;
-					}
-					else if (dayOfMonth == 15)
-					{
-					return JewishHoliday.TU_BEAV;
-					}
-					break;
-			case JewishMonth.ELUL:
-					if (dayOfMonth == 29)
-					{
-					return JewishHoliday.EREV_ROSH_HASHANA;
-					}
-					break;
-			case JewishMonth.TISHREI:
-					if (dayOfMonth == 1 || dayOfMonth == 2)
-					{
-					return JewishHoliday.ROSH_HASHANA;
-					}
-				else if ((dayOfMonth == 3 && dayOfWeek != DayOfWeek.Saturday) || (dayOfMonth == 4 && dayOfWeek == DayOfWeek.Sunday))
-					{
-						// push off Tzom Gedalia if it falls on Shabbos
-					return JewishHoliday.FAST_OF_GEDALYAH;
-					}
-					else if (dayOfMonth == 9)
-					{
-					return JewishHoliday.EREV_YOM_KIPPUR;
-					}
-					else if (dayOfMonth == 10)
-					{
-					return JewishHoliday.YOM_KIPPUR;
-					}
-					else if (dayOfMonth == 14)
-					{
-					return JewishHoliday.EREV_SUCCOS;
-					}
-					if (dayOfMonth == 15 || (dayOfMonth == 16 && !inIsrael))
-					{
-					return JewishHoliday.SUCCOS;
-					}
-					if (dayOfMonth >= 17 && dayOfMonth <= 20 || (dayOfMonth == 16 && inIsrael))
-					{
-					return JewishHoliday.CHOL_HAMOED_SUCCOS;
-					}
-					if (dayOfMonth == 21)
-					{
-					return JewishHoliday.HOSHANA_RABBA;
-					}
-					if (dayOfMonth == 22)
-					{
-					return JewishHoliday.SHEMINI_ATZERES;
-					}
-					if (dayOfMonth == 23 && !inIsrael)
-					{
-					return JewishHoliday.SIMCHAS_TORAH;
-					}
-					break;
-			case JewishMonth.KISLEV: // no yomtov in CHESHVAN
-					// if (getdayOfMonth() == 24) {
-					// return EREV_CHANUKAH;
-					// } else
-					if (dayOfMonth >= 25)
-					{
-					return JewishHoliday.CHANUKAH;
-					}
-					break;
-			case JewishMonth.TEVES:
-				if (dayOfMonth == 1 || dayOfMonth == 2 || (dayOfMonth == 3 && MonthIs29Days(dt, JewishMonth.KISLEV)))
-					{
-					return JewishHoliday.CHANUKAH;
-					}
-					else if (dayOfMonth == 10)
-					{
-					return JewishHoliday.TENTH_OF_TEVES;
-					}
-					break;
-			case JewishMonth.SHEVAT:
-					if (dayOfMonth == 15)
-					{
-					return JewishHoliday.TU_BESHVAT;
-					}
-					break;
-			case JewishMonth.ADAR:
-				if (!IsLeapYearFromDateTime(dt))
-					{
-						// if 13th Adar falls on Friday or Shabbos, push back to Thursday
-						if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 13 && !(dayOfWeek == DayOfWeek.Friday || dayOfWeek == DayOfWeek.Saturday)))
-						{
-						return JewishHoliday.FAST_OF_ESTHER;
-						}
-						if (dayOfMonth == 14)
-						{
-						return JewishHoliday.PURIM;
-						}
-						else if (dayOfMonth == 15)
-						{
-						return JewishHoliday.SHUSHAN_PURIM;
-						}
-					} // else if a leap year
-					else
-					{
-						if (dayOfMonth == 14)
-						{
-						return JewishHoliday.PURIM_KATAN;
-						}
-					}
-					break;
-			case JewishMonth.ADAR_II:
-					// if 13th Adar falls on Friday or Shabbos, push back to Thursday
-					if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == DayOfWeek.Thursday) || (dayOfMonth == 13 && !(dayOfWeek == DayOfWeek.Friday || dayOfWeek == DayOfWeek.Saturday)))
-					{
-					return JewishHoliday.FAST_OF_ESTHER;
-					}
-					if (dayOfMonth == 14)
-					{
-					return JewishHoliday.PURIM;
-					}
-					else if (dayOfMonth == 15)
-					{
-					return JewishHoliday.SHUSHAN_PURIM;
-					}
-					break;
-				}
-				// if we get to this stage, then there are no holidays for the given date return -1
-			return JewishHoliday.NONE;
-
-		}
-
-		/// <summary>
-		/// Returns true if the current day is Yom Tov. The method returns false for Chanukah, Erev Yom tov and fast days.
-		/// </summary>
-		/// <returns> true if the current day is a Yom Tov </returns>
-		/// <seealso cref= #isErevYomTov() </seealso>
-		/// <seealso cref= #isTaanis() </seealso>
-		public bool IsYomTov(DateTime dt, bool inIsrael)
-		{
-
-			bool mashichIsHere = false; //oy oy oy HaKadosh Baruch Hu, bring the geulah!!!!
-
-			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, mashichIsHere);
-			if (IsErevYomTov(dt, inIsrael) || jewishHoliday == JewishHoliday.CHANUKAH || (IsTaanis(dt, inIsrael) && jewishHoliday != JewishHoliday.YOM_KIPPUR))
-				{
-					return false;
-				}
-			return jewishHoliday != JewishHoliday.NONE;
-
-		}
-
-
 
 		/// <summary>
 		/// Months the is 29 days / short
@@ -584,93 +374,321 @@ namespace Zmanim.JewishCalendar
 			return GetDaysInMonth (year, nativeMonth);
 		}
 
+
+
 		/// <summary>
-		/// Determines whether this instance is erev yom tov the specified dt inIsrael.
+		/// Gets the jewish holiday, sets "use modern holidays" to true
 		/// </summary>
-		/// <returns><c>true</c> if this instance is erev yom tov the specified dt inIsrael; otherwise, <c>false</c>.</returns>
+		/// <returns>The jewish holiday.</returns>
 		/// <param name="dt">Dt.</param>
 		/// <param name="inIsrael">If set to <c>true</c> in israel.</param>
-		public bool IsErevYomTov(DateTime dt, bool inIsrael)
-		{
-			bool mashichIsHere = false; //b'emet, ad matai!? we love You, please help us be holy and rebuild the beit hamikdash!
-
-			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, mashichIsHere);
-
-			return jewishHoliday == JewishHoliday.EREV_PESACH || jewishHoliday == JewishHoliday.EREV_SHAVUOS || jewishHoliday == JewishHoliday.EREV_ROSH_HASHANA || jewishHoliday == JewishHoliday.EREV_YOM_KIPPUR || jewishHoliday == JewishHoliday.EREV_SUCCOS;
-
+		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael) {
+			return GetJewishHoliday (dt, inIsrael, true);
 		}
 
-
-		public bool IsTaanis(DateTime dt, bool inIsrael)
+		public JewishHoliday GetJewishHoliday(DateTime dt, bool inIsrael, bool UseModernHolidays)
 		{
-			JewishHoliday jewishHoliday = GetJewishHoliday(dt, inIsrael, false);
-			return jewishHoliday == JewishHoliday.SEVENTEEN_OF_TAMMUZ || jewishHoliday == JewishHoliday.TISHA_BEAV || jewishHoliday == JewishHoliday.YOM_KIPPUR || jewishHoliday == JewishHoliday.FAST_OF_GEDALYAH || jewishHoliday == JewishHoliday.TENTH_OF_TEVES || jewishHoliday == JewishHoliday.FAST_OF_ESTHER;
-		
-		}
+			JewishMonth hebrewMonth = GetJewishMonth (dt);
+			int dayOfMonth = GetDayOfMonth (dt);
+			int dayOfWeek = GetJewishDayOfWeekSundayIsOne (dt);
 
-
-		public int GetDayOfChanukah(DateTime dt) {
-			if (IsChanukah(dt))
-			{
-				if (GetJewishMonth(dt) == JewishMonth.KISLEV)
-				{
-					return GetDayOfMonth(dt) - 24;
-				} // teves
-				else
-				{
-					return MonthIs29Days(dt, JewishMonth.KISLEV) ? GetDayOfMonth(dt) + 5 : GetDayOfMonth(dt) + 6;
+			switch (hebrewMonth) {
+			case JewishMonth.NISSAN:
+			if (dayOfMonth == 14) {
+				return JewishHoliday.EREV_PESACH;
+			} else if (dayOfMonth == 15 || dayOfMonth == 21
+				|| (!inIsrael && (dayOfMonth == 16 || dayOfMonth == 22))) {
+					return JewishHoliday.PESACH;
+			} else if (dayOfMonth >= 17 && dayOfMonth <= 20
+				|| (dayOfMonth == 16 && inIsrael)) {
+					return JewishHoliday.CHOL_HAMOED_PESACH;
+			}
+				if (UseModernHolidays
+				&& ((dayOfMonth == 26 && dayOfWeek == 5)
+					|| (dayOfMonth == 28 && dayOfWeek == 1)
+					|| (dayOfMonth == 27 && dayOfWeek != 1 && dayOfWeek != 6))) {
+					return JewishHoliday.YOM_HASHOAH;
+			}
+			break;
+			case JewishMonth.IYAR:
+				if (UseModernHolidays
+				&& ((dayOfMonth == 4 && dayOfWeek == 3)
+					|| ((dayOfMonth == 3 || dayOfMonth == 2) && dayOfWeek == 4) || (dayOfMonth == 5 && dayOfWeek == 2))) {
+					return JewishHoliday.YOM_HAZIKARON;
+			}
+			// if 5 Iyar falls on Wed Yom Haatzmaut is that day. If it fal1s on Friday or Shabbos it is moved back to
+			// Thursday. If it falls on Monday it is moved to Tuesday
+				if (UseModernHolidays
+				&& ((dayOfMonth == 5 && dayOfWeek == 4)
+					|| ((dayOfMonth == 4 || dayOfMonth == 3) && dayOfWeek == 5) || (dayOfMonth == 6 && dayOfWeek == 3))) {
+					return JewishHoliday.YOM_HAATZMAUT;
+			}
+			if (dayOfMonth == 14) {
+					return JewishHoliday.PESACH_SHENI;
+			}
+				if (UseModernHolidays && dayOfMonth == 28) {
+					return JewishHoliday.YOM_YERUSHALAYIM;
+			}
+			break;
+			case JewishMonth.SIVAN:
+			if (dayOfMonth == 5) {
+					return JewishHoliday.EREV_SHAVUOS;
+			} else if (dayOfMonth == 6 || (dayOfMonth == 7 && !inIsrael)) {
+					return JewishHoliday.SHAVUOS;
+			}
+			break;
+			case JewishMonth.TAMMUZ:
+			// push off the fast day if it falls on Shabbos
+			if ((dayOfMonth == 17 && dayOfWeek != 7)
+				|| (dayOfMonth == 18 && dayOfWeek == 1)) {
+					return JewishHoliday.SEVENTEEN_OF_TAMMUZ;
+			}
+			break;
+			case JewishMonth.AV:
+			// if Tisha B'av falls on Shabbos, push off until Sunday
+			if ((dayOfWeek == 1 && dayOfMonth == 10)
+				|| (dayOfWeek != 7 && dayOfMonth == 9)) {
+					return JewishHoliday.TISHA_BEAV;
+			} else if (dayOfMonth == 15) {
+					return JewishHoliday.TU_BEAV;
+			}
+			break;
+			case JewishMonth.ELUL:
+			if (dayOfMonth == 29) {
+					return JewishHoliday.EREV_ROSH_HASHANA;
+			}
+			break;
+			case JewishMonth.TISHREI:
+			if (dayOfMonth == 1 || dayOfMonth == 2) {
+					return JewishHoliday.ROSH_HASHANA;
+			} else if ((dayOfMonth == 3 && dayOfWeek != 7)
+				|| (dayOfMonth == 4 && dayOfWeek == 1)) {
+				// push off Tzom Gedalia if it falls on Shabbos
+					return JewishHoliday.FAST_OF_GEDALYAH;
+			} else if (dayOfMonth == 9) {
+					return JewishHoliday.EREV_YOM_KIPPUR;
+			} else if (dayOfMonth == 10) {
+					return JewishHoliday.YOM_KIPPUR;
+			} else if (dayOfMonth == 14) {
+					return JewishHoliday.EREV_SUCCOS;
+			}
+			if (dayOfMonth == 15 || (dayOfMonth == 16 && !inIsrael)) {
+					return JewishHoliday.SUCCOS;
+			}
+			if (dayOfMonth >= 17 && dayOfMonth <= 20 || (dayOfMonth == 16 && inIsrael)) {
+					return JewishHoliday.CHOL_HAMOED_SUCCOS;
+			}
+			if (dayOfMonth == 21) {
+					return JewishHoliday.HOSHANA_RABBA;
+			}
+			if (dayOfMonth == 22) {
+					return JewishHoliday.SHEMINI_ATZERES;
+			}
+			if (dayOfMonth == 23 && !inIsrael) {
+					return JewishHoliday.SIMCHAS_TORAH;
+			}
+			break;
+			case JewishMonth.KISLEV: // no yomtov in CHESHVAN
+			// if (dayOfMonth == 24) {
+			// return EREV_CHANUKAH;
+			// } else
+			if (dayOfMonth >= 25) {
+					return JewishHoliday.CHANUKAH;
+			}
+			break;
+			case JewishMonth.TEVES:
+			if (dayOfMonth == 1 || dayOfMonth == 2
+					|| (dayOfMonth == 3 && MonthIs29Days(dt, JewishMonth.KISLEV))) {
+					return JewishHoliday.CHANUKAH;
+			} else if (dayOfMonth == 10) {
+					return JewishHoliday.TENTH_OF_TEVES;
+			}
+			break;
+			case JewishMonth.SHEVAT:
+			if (dayOfMonth == 15) {
+					return JewishHoliday.TU_BESHVAT;
+			}
+			break;
+			case JewishMonth.ADAR:
+				if (!IsLeapYearFromDateTime(dt)) {
+				// if 13th Adar falls on Friday or Shabbos, push back to Thursday
+				if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == 5)
+					|| (dayOfMonth == 13 && !(dayOfWeek == 6 || dayOfWeek == 7))) {
+						return JewishHoliday.FAST_OF_ESTHER;
+				}
+				if (dayOfMonth == 14) {
+						return JewishHoliday.PURIM;
+				} else if (dayOfMonth == 15) {
+						return JewishHoliday.SHUSHAN_PURIM;
+				}
+			} else { // else if a leap year
+				if (dayOfMonth == 14) {
+						return JewishHoliday.PURIM_KATAN;
 				}
 			}
-			else
-			{
-				return -1;
+			break;
+			case JewishMonth.ADAR_II:
+			// if 13th Adar falls on Friday or Shabbos, push back to Thursday
+			if (((dayOfMonth == 11 || dayOfMonth == 12) && dayOfWeek == 5)
+				|| (dayOfMonth == 13 && !(dayOfWeek == 6 || dayOfWeek == 7))) {
+					return JewishHoliday.FAST_OF_ESTHER;
 			}
+			if (dayOfMonth == 14) {
+					return JewishHoliday.PURIM;
+			} else if (dayOfMonth == 15) {
+					return JewishHoliday.SHUSHAN_PURIM;
+			}
+			break;
 		}
+		// if we get to this stage, then there are no holidays for the given date return -1
+			return JewishHoliday.NONE;
+	}
+
+	/**
+	 * Returns true if the current day is Yom Tov. The method returns false for Chanukah, Erev Yom Tov (with the
+	 * exception of Hoshana Rabba and Erev the second days of Pesach) and fast days.
+	 * 
+	 * @return true if the current day is a Yom Tov
+	 * @see #isErevYomTov()
+	 * @see #isTaanis()
+	 */
+		public bool IsYomTov(DateTime dt, bool inIsrael) {
+			bool mashiachIsHere = false; //oy oy oy HaKadosh Baruch Hu, bring the geulah!!!!
+
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael, mashiachIsHere);
+			if ((IsErevYomTov(dt, inIsrael) && (holidayIndex != JewishHoliday.HOSHANA_RABBA && (holidayIndex == JewishHoliday.CHOL_HAMOED_PESACH && GetDayOfMonth (dt) != 20)))
+				|| holidayIndex == JewishHoliday.CHANUKAH || (IsTaanis(dt, inIsrael) && holidayIndex != JewishHoliday.YOM_KIPPUR)) {
+			return false;
+		}
+			return holidayIndex != JewishHoliday.NONE;
+	}
+
+	/**
+	 * Returns true if the Yom Tov day has a melacha (work)  prohibition. This method will return false for a non Yom Tov day, even if it is Shabbos.
+	 * 
+	 * @return if the Yom Tov day has a melacha (work)  prohibition.
+	 */
+		public bool IsYomTovAssurBemelacha(DateTime dt, bool inIsrael){
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael);
+			return holidayIndex == JewishHoliday.PESACH || holidayIndex == JewishHoliday.SHAVUOS || holidayIndex == JewishHoliday.SUCCOS || holidayIndex == JewishHoliday.SHEMINI_ATZERES || 
+				holidayIndex == JewishHoliday.SIMCHAS_TORAH || holidayIndex == JewishHoliday.ROSH_HASHANA  || holidayIndex == JewishHoliday.YOM_KIPPUR;
+	}
+
+	/**
+	 * Returns true if the current day is Chol Hamoed of Pesach or Succos.
+	 * 
+	 * @return true if the current day is Chol Hamoed of Pesach or Succos
+	 * @see #isYomTov()
+	 * @see #CHOL_HAMOED_PESACH
+	 * @see #CHOL_HAMOED_SUCCOS
+	 */
+		public bool IsCholHamoed(DateTime dt, bool inIsrael) {
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael);
+			return holidayIndex == JewishHoliday.CHOL_HAMOED_PESACH || holidayIndex == JewishHoliday.CHOL_HAMOED_SUCCOS;
+	}
+
+	/**
+	 * Returns true if the current day is erev Yom Tov. The method returns true for Erev - Pesach (first and last days),
+	 * Shavuos, Rosh Hashana, Yom Kippur and Succos and Hoshana Rabba.
+	 * 
+	 * @return true if the current day is Erev - Pesach, Shavuos, Rosh Hashana, Yom Kippur and Succos
+	 * @see #isYomTov()
+	 */
+		public bool IsErevYomTov(DateTime dt, bool inIsrael) {
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael);
+			return holidayIndex == JewishHoliday.EREV_PESACH || holidayIndex == JewishHoliday.EREV_SHAVUOS || holidayIndex == JewishHoliday.EREV_ROSH_HASHANA
+				|| holidayIndex == JewishHoliday.EREV_YOM_KIPPUR || holidayIndex == JewishHoliday.EREV_SUCCOS || holidayIndex == JewishHoliday.HOSHANA_RABBA
+				|| (holidayIndex == JewishHoliday.CHOL_HAMOED_PESACH && GetDayOfMonth (dt) == 20);
+	}
+
+	/**
+	 * Returns true if the current day is Erev Rosh Chodesh. Returns false for Erev Rosh Hashana
+	 * 
+	 * @return true if the current day is Erev Rosh Chodesh. Returns false for Erev Rosh Hashana
+	 * @see #isRoshChodesh()
+	 */
+		public bool IsErevRoshChodesh(DateTime dt) {
+		// Erev Rosh Hashana is not Erev Rosh Chodesh.
+			return (GetDayOfMonth (dt) == 29 && GetJewishMonth(dt) != JewishMonth.ELUL);
+	}
+
+	/**
+	 * Return true if the day is a Taanis (fast day). Return true for 17 of Tammuz, Tisha B'Av, Yom Kippur, Fast of
+	 * Gedalyah, 10 of Teves and the Fast of Esther
+	 * 
+	 * @return true if today is a fast day
+	 */
+		public bool IsTaanis(DateTime dt, bool inIsrael) {
+			JewishHoliday holidayIndex = GetJewishHoliday (dt, inIsrael);
+			return holidayIndex == JewishHoliday.SEVENTEEN_OF_TAMMUZ || holidayIndex == JewishHoliday.TISHA_BEAV || holidayIndex == JewishHoliday.YOM_KIPPUR
+				|| holidayIndex == JewishHoliday.FAST_OF_GEDALYAH || holidayIndex == JewishHoliday.TENTH_OF_TEVES || holidayIndex == JewishHoliday.FAST_OF_ESTHER;
+	}
+
+	/**
+	 * Returns the day of Chanukah or -1 if it is not Chanukah.
+	 * 
+	 * @return the day of Chanukah or -1 if it is not Chanukah.
+	 */
+		public int GetDayOfChanukah(DateTime dt) {
+			if (IsChanukah(dt)) {
+				if (GetJewishMonth(dt) == JewishMonth.KISLEV) {
+					return GetDayOfMonth (dt) - 24;
+			} else { // teves
+					return MonthIs29Days(dt, JewishMonth.KISLEV) ? GetDayOfMonth (dt) + 5 : GetDayOfMonth (dt) + 6;
+			}
+		} else {
+			return -1;
+		}
+	}
 
 		public bool IsChanukah(DateTime dt) {
-			JewishHoliday jewishHoliday = GetJewishHoliday (dt, false, false); //diaspora and modern make no difference here
+			//israel settings don't matter, but would rather catch it with compiler elsewhere
+			return GetJewishHoliday (dt, true) == JewishHoliday.CHANUKAH;
+	}
 
-			return jewishHoliday == JewishHoliday.CHANUKAH;
+	/**
+	 * Returns if the day is Rosh Chodesh. Rosh Hashana will return false
+	 * 
+	 * @return true if it is Rosh Chodesh. Rosh Hashana will return false
+	 */
+		public bool IsRoshChodesh(DateTime dt) {
+		// Rosh Hashana is not rosh chodesh. Elul never has 30 days
+			return (GetDayOfMonth (dt) == 1 && GetJewishMonth(dt) != JewishMonth.TISHREI) || GetDayOfMonth (dt) == 30;
+	}
+
+	/**
+	 * Returns the int value of the Omer day or -1 if the day is not in the omer
+	 * 
+	 * @return The Omer count as an int or -1 if it is not a day of the Omer.
+	 */
+		public int GetDayOfOmer(DateTime dt) {
+		int omer = -1; // not a day of the Omer
+
+		// if Nissan and second day of Pesach and on
+			if (GetJewishMonth(dt) == JewishMonth.NISSAN && GetDayOfMonth (dt) >= 16) {
+				omer = GetDayOfMonth (dt) - 15;
+			// if Iyar
+			} else if (GetJewishMonth(dt) == JewishMonth.IYAR) {
+				omer = GetDayOfMonth (dt) + 15;
+			// if Sivan and before Shavuos
+			} else if (GetJewishMonth(dt) == JewishMonth.SIVAN && GetDayOfMonth (dt) < 6) {
+				omer = GetDayOfMonth (dt) + 44;
 		}
+		return omer;
+	}
 
-		/// <summary>
-		/// Returns if the day is Rosh Chodesh. Rosh Hashana will return false
-		/// </summary>
-		/// <returns> true if it is Rosh Chodesh. Rosh Hashana will return false </returns>
-		public bool IsRoshChodesh(DateTime dt)
-		{
-			return (GetDayOfMonth(dt) == 1 && GetJewishMonth(dt) != JewishMonth.TISHREI) || GetDayOfMonth(dt) == 30;
+	
 
-		}
-
-		/// <summary>
-		/// Returns the int value of the Omer day or -1 if the day is not in the omer
-		/// </summary>
-		/// <returns> The Omer count as an int or -1 if it is not a day of the Omer. </returns>
-		public int GetDayOfOmer(DateTime dt)
-		{
-			int omer = -1; // not a day of the Omer
-			int dayOfMonth = GetDayOfMonth(dt);
-			JewishMonth jMonth = GetJewishMonth (dt);
-
-			// if Nissan and second day of Pesach and on
-			if (jMonth == JewishMonth.NISSAN && dayOfMonth >= 16)
-			{
-				omer = dayOfMonth - 15;
-				// if Iyar
-			}
-			else if (jMonth == JewishMonth.IYAR)
-			{
-				omer = dayOfMonth + 15;
-				// if Sivan and before Shavuos
-			}
-			else if (jMonth == JewishMonth.SIVAN && dayOfMonth < 6)
-			{
-				omer = dayOfMonth + 44;
-			}
-			return omer;
-		}
-
+	/**
+	 * Returns the Daf Yomi (Bavli) for the date that the calendar is set to. See the
+	 * {@link HebrewDateFormatter#formatDafYomiBavli(Daf)} for the ability to format the daf in Hebrew or transliterated
+	 * masechta names.
+	 * 
+	 * @return the daf as a {@link Daf}
+	 */
+		public Daf getDafYomiBavli(DateTime dt) {
+			return YomiCalculator.getDafYomiBavli(dt);
+	}
 
 		public JewishYearType GetJewishYearType(DateTime dt) {
 			JewishYearType jType = JewishYearType.SHELAIMIM;
@@ -686,31 +704,6 @@ namespace Zmanim.JewishCalendar
 
 		}
 
-		public int GetJewishDayOfWeekSundayIsOne(DateTime dt) {
-			DayOfWeek nativeDayOfWeek = GetDayOfWeek (dt);
-
-			switch (nativeDayOfWeek) {
-			case DayOfWeek.Sunday:
-				return 1;
-			case DayOfWeek.Monday:
-				return 2;
-			case DayOfWeek.Tuesday:
-				return 3;
-			case DayOfWeek.Wednesday:
-				return 4;
-			case DayOfWeek.Thursday:
-				return 5;
-			case DayOfWeek.Friday:
-				return 6;
-			case DayOfWeek.Saturday:
-				return 7;
-			}
-
-			return -1;
-				
-		}
-
-
-	}
+	
 }
-
+}
