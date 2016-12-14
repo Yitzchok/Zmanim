@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="src/Zmanim.QuartzScheduling/Zmanim.QuartzScheduling.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|Mixed Platforms" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/ZmanimTests/JewishDatesTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Zmanim/JewishCalendar/JewishCalendar.cs">
     <Files>
-      <File FileName="src/Zmanim/JewishCalendar/JewishCalendar.cs" Line="435" Column="27" />
+      <File FileName="src/Zmanim/JewishCalendar/JewishCalendar.cs" Line="494" Column="105" />
       <File FileName="src/ZmanimTests/JewishDatesTest.cs" Line="75" Column="4" />
-      <File FileName="src/Zmanim/JewishCalendar/HebrewDateFormatter.cs" Line="545" Column="60" />
+      <File FileName="src/Zmanim/JewishCalendar/HebrewDateFormatter.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

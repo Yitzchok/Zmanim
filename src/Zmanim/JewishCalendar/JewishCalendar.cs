@@ -491,6 +491,7 @@ namespace Zmanim.JewishCalendar
 					return JewishHoliday.HOSHANA_RABBA;
 			}
 			if (dayOfMonth == 22) {
+					//theoretically this could be simchat torah if in Israel, but shemini atzeret is really the yom tov
 					return JewishHoliday.SHEMINI_ATZERES;
 			}
 			if (dayOfMonth == 23 && !inIsrael) {
