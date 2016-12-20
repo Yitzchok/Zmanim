@@ -328,7 +328,7 @@ namespace ZmanimTests
             var zman = calendar.GetSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 8, 56, 38)
+                    new DateTime(2010, 4, 2, 8, 56, 44)
                 ));
         }
 
@@ -628,7 +628,7 @@ namespace ZmanimTests
             var zman = calendar.GetPlagAlos16Point1ToTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 18, 23, 24)
+                    new DateTime(2010, 4, 2, 18, 23, 48)
                 ));
         }
 
@@ -658,7 +658,7 @@ namespace ZmanimTests
             var zman = calendar.GetBainHasmashosRT13Point5MinutesBefore7Point083Degrees().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 19, 41, 19)
+                    new DateTime(2010, 4, 2, 19, 41, 45)
                 ));
         }
 
@@ -748,7 +748,7 @@ namespace ZmanimTests
             var zman = calendar.GetTzaisGeonim7Point083Degrees().RemoveMilliseconds();
 
             Assert.That(zman, Is.EqualTo(
-                    new DateTime(2010, 4, 2, 19, 54, 49)
+                    new DateTime(2010, 4, 2, 19, 55, 15)
                 ));
         }
 
