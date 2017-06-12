@@ -14,3 +14,5 @@ Inaccuracy is increased by elevation. It is not the intent of this API to provid
 TODO:
     * Make it Linq friendly.
     * Add examples how to use this project in a ASP.NET MVC site and WPF Application.
+
+[![Join the chat at https://gitter.im/Yitzchok/Zmanim](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Yitzchok/Zmanim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
