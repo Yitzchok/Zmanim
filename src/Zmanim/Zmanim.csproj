@@ -137,7 +137,5 @@
     <PreBuildEvent />
     <PostBuildEvent />
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="JewishCalendar\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
