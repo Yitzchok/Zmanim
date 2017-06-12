@@ -1795,12 +1795,15 @@ namespace Zmanim
         /// </returns>
         public virtual DateTime? GetMinchaGedolaGreaterThan30()
         {
-            if (GetMinchaGedola30Minutes() == null || GetMinchaGedola() == null)
+            var minchaGedola = GetMinchaGedola();
+            var minchaGedola30Minutes = GetMinchaGedola30Minutes();
+
+            if (minchaGedola30Minutes == null || minchaGedola == null)
                 return null;
 
-            return GetMinchaGedola30Minutes().Value.CompareTo(GetMinchaGedola()) > 0
-                       ? GetMinchaGedola30Minutes()
-                       : GetMinchaGedola();
+            return minchaGedola30Minutes.Value.CompareTo(minchaGedola.Value) > 0
+                       ? minchaGedola30Minutes
+                       : minchaGedola;
         }
 
         /// <summary>
