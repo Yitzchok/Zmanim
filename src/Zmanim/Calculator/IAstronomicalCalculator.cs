@@ -6,7 +6,7 @@ namespace Zmanim.Calculator
     /// <summary>
     /// A interface that defines the sservices needed to calculate sunrise and sunset.
     /// </summary>
-    public interface IAstronomicalCalculator : ICloneable
+    public interface IAstronomicalCalculator
     {
         ///<summary>
         /// A descriptive name of the algorithm.

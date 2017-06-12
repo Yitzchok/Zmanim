@@ -6,7 +6,7 @@ namespace Zmanim
     /// <summary>
     /// The GeoLocation and DateTime.
     /// </summary>
-    public interface IDateWithLocation : ICloneable
+    public interface IDateWithLocation
     {
         /// <summary>
         /// Gets or sets the date.

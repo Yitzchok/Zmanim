@@ -10,11 +10,6 @@ namespace Zmanim.TimeZone
     {
         private readonly TimeSpan offsetFromGmt;
 
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
-
         ///<summary>
         ///</summary>
         ///<param name="hoursOffsetFromGmt">The amount of hours from gmt.</param>

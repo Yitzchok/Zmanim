@@ -170,29 +170,6 @@ namespace Zmanim
         }
 
         /// <summary>
-        /// Creates a new object that is a copy of the current instance.
-        /// <b>Note:</b> If the <seealso cref="Zmanim.TimeZone.ITimeZone"/> in the cloned
-        /// <see cref="GeoLocation"/> will be changed from the
-        /// original, it is critical that
-        /// <see cref="DateWithLocation"/>.
-        /// <see cref="TimeZone">TimeZone</see>
-        /// be set in order for the AstronomicalCalendar to output times in the
-        /// expected offset after being cloned.
-        /// </summary>
-        /// <returns>
-        /// A new object that is a copy of this instance.
-        /// </returns>
-        public virtual object Clone()
-        {
-            var clone = (AstronomicalCalendar)MemberwiseClone();
-
-            clone.DateWithLocation = (IDateWithLocation)DateWithLocation.Clone();
-            clone.AstronomicalCalculator = (AstronomicalCalculator)AstronomicalCalculator.Clone();
-            return clone;
-        }
-
-
-        /// <summary>
         /// The getSunrise method Returns a <c>DateTime</c> representing the
         /// sunrise time. The zenith used for the calculation uses
         /// <seealso cref="GEOMETRIC_ZENITH">geometric zenith</seealso> of 90°. This is adjusted

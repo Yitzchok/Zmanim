@@ -41,17 +41,6 @@ namespace Zmanim.TimeZone
         public TimeZoneInfo TimeZone { get; set; }
 
         /// <summary>
-        /// Creates a new object that is a copy of the current instance.
-        /// </summary>
-        /// <returns>
-        /// A new object that is a copy of this instance.
-        /// </returns>
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
-
-        /// <summary>
         /// UTCs the offset.
         /// If Daylight Saving Time is in effect at the specified date,
         /// the offset value is adjusted with the amount of daylight saving.

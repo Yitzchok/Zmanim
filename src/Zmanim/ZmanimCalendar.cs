@@ -213,16 +213,6 @@ namespace Zmanim
             return GetTimeOffset(sunset, GetTemporalHour(sunset, sunrise) * 6);
         }
 
-        // public DateTime GetChatzosLaylaRSZ() {
-        // ZmanimCalendar clonedCal = (ZmanimCalendar)clone();
-        // clonedCal.getCalendar().add(Calendar.DAY_OF_MONTH, 1);
-        // Date sunset = getSunset();
-        // Date sunrise = clonedCal.getAlosHashachar();
-        // return getTimeOffset(sunset, getTemporalHour(sunset, sunrise) * 6);
-        // }
-
-
-
         /// <summary>
         /// This is a generic method for calculating the latest <em>zman krias shema</em> (time to recite Shema in the
         /// morning) based on the start and end of day passed to the method. The time from the start of day to the end of day

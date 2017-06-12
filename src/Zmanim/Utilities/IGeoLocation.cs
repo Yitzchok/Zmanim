@@ -6,7 +6,7 @@ namespace Zmanim.Utilities
     ///<summary>
     /// Contains location information such as latitude and longitude ... and TimeZone.
     ///</summary>
-    public interface IGeoLocation : ICloneable
+    public interface IGeoLocation
     {
         ///<summary>
         ///  Method to get the elevation in Meters.

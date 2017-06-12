@@ -143,20 +143,6 @@ namespace Zmanim.Utilities
             TimeZone = new WindowsTimeZone(TimeZoneInfo.Utc);
         }
 
-        /// <summary>
-        /// Creates a new object that is a copy of the current instance.
-        /// </summary>
-        /// <returns>
-        /// A new object that is a copy of this instance.
-        /// </returns>
-        public virtual object Clone()
-        {
-            var clone = (GeoLocation)MemberwiseClone();
-            clone.timeZone = (ITimeZone)TimeZone.Clone();
-            clone.locationName = LocationName;
-            return clone;
-        }
-
         ///<summary>
         ///  Method to get the elevation in Meters.
         ///</summary>

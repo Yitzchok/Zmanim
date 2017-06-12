@@ -8,7 +8,7 @@ namespace Zmanim
     /// A calendar that calculates astronomical time calculations such as
     ///  <see cref = "GetSunrise">sunrise</see> and <see cref = "GetSunset">sunset</see> times.
     ///</summary>
-    public interface IAstronomicalCalendar : ICloneable
+    public interface IAstronomicalCalendar
     {
         ///<summary>
         ///  The getSunrise method Returns a <c>DateTime</c> representing the
