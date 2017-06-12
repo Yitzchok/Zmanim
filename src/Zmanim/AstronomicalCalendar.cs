@@ -428,7 +428,7 @@ namespace Zmanim
         /// </returns>
         public virtual DateTime? GetTimeOffset(DateTime time, long offset)
         {
-            if (time == null || offset == long.MinValue)
+            if (offset == long.MinValue)
                 return null;
 
             return time.AddMilliseconds(offset);
@@ -436,6 +436,9 @@ namespace Zmanim
 
         protected virtual DateTime? GetTimeOffset(DateTime? time, long offset)
         {
+            if (time == null)
+                return null;
+
             return GetTimeOffset(time.Value, offset);
         }
 
@@ -691,7 +694,7 @@ namespace Zmanim
 
             var hours = (int)time; // cut off minutes
 
-            time -= hours;  
+            time -= hours;
             var minutes = (int)(time *= 60);
             time -= minutes;
             var seconds = (int)(time *= 60);
