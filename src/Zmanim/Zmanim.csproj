@@ -62,7 +62,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ComplexZmanimCalendar.cs" />
-    <Compile Include="Extensions\ObjectCopierExtensions.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="IAstronomicalCalendar.cs" />
