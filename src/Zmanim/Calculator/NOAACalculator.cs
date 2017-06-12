@@ -163,7 +163,18 @@ namespace Zmanim.Calculator
         {
             var date = dateWithLocation.Date;
 
-            return new DateTime(date.Year, date.Month, date.Day).ToOADate() + 2415018.5;
+            int year = date.Year;
+            int month = date.Month;
+            int day = date.Day;
+            if (month <= 2)
+            {
+                year -= 1;
+                month += 12;
+            }
+            int a = year / 100;
+            int b = 2 - a + a / 4;
+
+            return Math.Floor(365.25 * (year + 4716)) + Math.Floor(30.6001 * (month + 1)) + day + b - 1524.5;
         }
 
         ///<summary>

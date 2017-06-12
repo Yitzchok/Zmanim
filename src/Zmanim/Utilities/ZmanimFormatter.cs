@@ -385,19 +385,21 @@ namespace Zmanim.Utilities
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
-
-            MethodInfo[] theMethods = ac.GetType().GetMethods();
+#if !NETSTANDARD1_3
+            var theMethods = ac.GetType().GetMethods().ToList();
+#else
+            var theMethods = ac.GetType().GetTypeInfo().DeclaredMethods.ToList();
+#endif
             string tagName = "";
             object @value = null;
             IList<Zman> dateList = new List<Zman>();
             IList<Zman> durationList = new List<Zman>();
             IList<string> otherList = new List<string>();
-            for (int i = 0; i < theMethods.Length; i++)
+            for (int i = 0; i < theMethods.Count; i++)
             {
                 if (IncludeMethod(theMethods[i]))
                 {
                     tagName = theMethods[i].Name.Substring(3);
-                    //String returnType = theMethods[i].getReturnType().getName();
                     try
                     {
                         @value = theMethods[i].Invoke(ac, null);

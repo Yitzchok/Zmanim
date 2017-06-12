@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Version>1.4.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Zmanim\AstronomicalCalendar.cs" Link="AstronomicalCalendar.cs" />
+    <Compile Include="..\Zmanim\Calculator\AstronomicalCalculator.cs" Link="Calculator\AstronomicalCalculator.cs" />
+    <Compile Include="..\Zmanim\Calculator\IAstronomicalCalculator.cs" Link="Calculator\IAstronomicalCalculator.cs" />
+    <Compile Include="..\Zmanim\Calculator\NOAACalculator.cs" Link="Calculator\NOAACalculator.cs" />
+    <Compile Include="..\Zmanim\Calculator\SunTimesCalculator.cs" Link="Calculator\SunTimesCalculator.cs" />
+    <Compile Include="..\Zmanim\Calculator\ZmanimCalculator.cs" Link="Calculator\ZmanimCalculator.cs" />
+    <Compile Include="..\Zmanim\ComplexZmanimCalendar.cs" Link="ComplexZmanimCalendar.cs" />
+    <Compile Include="..\Zmanim\DateWithLocation.cs" Link="DateWithLocation.cs" />
+    <Compile Include="..\Zmanim\Extensions\DateExtensions.cs" Link="Extensions\DateExtensions.cs" />
+    <Compile Include="..\Zmanim\Extensions\MathExtensions.cs" Link="Extensions\MathExtensions.cs" />
+    <Compile Include="..\Zmanim\IAstronomicalCalendar.cs" Link="IAstronomicalCalendar.cs" />
+    <Compile Include="..\Zmanim\IDateWithLocation.cs" Link="IDateWithLocation.cs" />
+    <Compile Include="..\Zmanim\JewishCalendar\Daf.cs" Link="JewishCalendar\Daf.cs" />
+    <Compile Include="..\Zmanim\JewishCalendar\HebrewDateFormatter.cs" Link="JewishCalendar\HebrewDateFormatter.cs" />
+    <Compile Include="..\Zmanim\JewishCalendar\JewishCalendar.cs" Link="JewishCalendar\JewishCalendar.cs" />
+    <Compile Include="..\Zmanim\JewishCalendar\YomiCalculator.cs" Link="JewishCalendar\YomiCalculator.cs" />
+    <Compile Include="..\Zmanim\TimeZone\ITimeZone.cs" Link="TimeZone\ITimeZone.cs" />
+    <Compile Include="..\Zmanim\TimeZone\OffsetTimeZone.cs" Link="TimeZone\OffsetTimeZone.cs" />
+    <Compile Include="..\Zmanim\TimeZone\WindowsTimeZone.cs" Link="TimeZone\WindowsTimeZone.cs" />
+    <Compile Include="..\Zmanim\Utilities\BitConverter.cs" Link="Utilities\BitConverter.cs" />
+    <Compile Include="..\Zmanim\Utilities\GeoLocation.cs" Link="Utilities\GeoLocation.cs" />
+    <Compile Include="..\Zmanim\Utilities\GeoLocationUtils.cs" Link="Utilities\GeoLocationUtils.cs" />
+    <Compile Include="..\Zmanim\Utilities\IGeoLocation.cs" Link="Utilities\IGeoLocation.cs" />
+    <Compile Include="..\Zmanim\Utilities\Time.cs" Link="Utilities\Time.cs" />
+    <Compile Include="..\Zmanim\Utilities\Zman.cs" Link="Utilities\Zman.cs" />
+    <Compile Include="..\Zmanim\Utilities\ZmanimFormatter.cs" Link="Utilities\ZmanimFormatter.cs" />
+    <Compile Include="..\Zmanim\ZmanimCalendar.cs" Link="ZmanimCalendar.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Calculator\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="JewishCalendar\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="TimeZone\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

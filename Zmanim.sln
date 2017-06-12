@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scheduling", "Scheduling", "{84381758-0970-4ACF-A2E4-1288319E0C98}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.Java", "src\Zmanim.Java\Zmanim.Java.csproj", "{D2C208EC-2221-4FF5-8B62-A1AF9236CCD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zmanim.TzDatebase", "src\Zmanim.TzDatebase\Zmanim.TzDatebase.csproj", "{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmanimStandard", "src\ZmanimStandard\ZmanimStandard.csproj", "{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,18 @@ Global
 		{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EC98C596-6984-4D25-8C5C-7F7BB79D0EF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C9C3DDB-3B01-41C7-AAA2-8402A3BBD447}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

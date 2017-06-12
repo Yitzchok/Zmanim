@@ -242,7 +242,6 @@ namespace Zmanim.JewishCalendar
         /// <param name="leapYear">If set to <c>true</c> leap year.</param>
         public int JewishMonthToNativeMonth(JewishMonth jewishMonth, bool leapYear)
         {
-
             switch (jewishMonth)
             {
                 case JewishMonth.TISHREI:
@@ -342,8 +341,7 @@ namespace Zmanim.JewishCalendar
         /// <param name="day">Day.</param>
         public DateTime GetJewishDateTime(int year, JewishMonth month, int day)
         {
-            return new DateTime(year, JewishMonthToNativeMonth(month, IsLeapYear(year)), day, this);
-
+            return ToDateTime(year, JewishMonthToNativeMonth(month, IsLeapYear(year)), day, 0, 0, 0, 0);
         }
 
         /// <summary>

@@ -8,14 +8,12 @@ using Zmanim.Utilities;
 
 namespace ZmanimTests
 {
-    //[TestFixture(typeof(SunTimesCalculator), Description = "SunTimes")]
-    [TestFixture(typeof(NOAACalculator), Description = "NOAA")]
-    public class NOAACalculatorTests<T> where T : IAstronomicalCalculator, new()
+    public class NOAACalculatorTests
     {
         [Test]
         public void TestSunset()
         {
-            var calculator = new T();
+            var calculator = new NOAACalculator();
 
             string locationName = "Lakewood, NJ";
             double latitude = 40.09596; //Lakewood, NJ
