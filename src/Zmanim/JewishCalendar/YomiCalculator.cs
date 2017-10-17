@@ -143,7 +143,7 @@ namespace Zmanim.JewishCalendar
             DateTime calendar = new DateTime();
             calendar = date;
             int year = calendar.Year;
-            int month = calendar.Month + 1;
+            int month = calendar.Month;
             int day = calendar.Day;
             if (month <= 2)
             {
