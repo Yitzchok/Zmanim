@@ -124,7 +124,16 @@ namespace Zmanim.JewishCalendar
                     {
                         blatt += 32;
                     }
-                    dafYomi = new Daf(masechta, blatt);
+
+                    bool isWithNextMasechta = false;
+                    //Spepcial case to support Meilah/Kinnim 22
+                    //same blatt and learned on the same day.
+                    if (masechta == 35 && blatt == 22)
+                    {
+                        isWithNextMasechta = true;
+                    }
+
+                    dafYomi = new Daf(masechta, blatt, isWithNextMasechta);
                     break;
                 }
             }

@@ -41,10 +41,12 @@ namespace Zmanim.JewishCalendar
         /// </summary>
         /// <param name="masechtaNumber"> </param>
         /// <param name="page"> </param>
-        public Daf(int masechtaNumber, int page)
+        /// <param name="isWithNextMasechta"></param>
+        public Daf(int masechtaNumber, int page, bool isWithNextMasechta = false)
         {
             this.masechtaNumber = masechtaNumber;
             this.page = page;
+            IsWithNextMasechta = isWithNextMasechta;
         }
 
         /// <returns> the masechtaNumber </returns>
@@ -75,6 +77,8 @@ namespace Zmanim.JewishCalendar
             }
         }
 
+        public virtual bool IsWithNextMasechta { get; }
+
 
         /// <summary>
         /// Returns the transliterated name of the masechta (tractate) of the Daf Yomi. The list of mashechtos is: Berachos,
@@ -88,7 +92,7 @@ namespace Zmanim.JewishCalendar
         {
             get
             {
-                return masechtosBavliTransliterated[masechtaNumber];
+                return GetMesechtaNames(masechtosBavliTransliterated);
             }
         }
 
@@ -102,8 +106,20 @@ namespace Zmanim.JewishCalendar
         {
             get
             {
-                return masechtosBavli[masechtaNumber];
+                return GetMesechtaNames(masechtosBavli);
             }
+        }
+
+        private string GetMesechtaNames(string[] mesechtaNames)
+        {
+            var mesechtaName = mesechtaNames[masechtaNumber];
+
+            if (IsWithNextMasechta)
+            {
+                mesechtaName += " " + mesechtaNames[masechtaNumber + 1];
+            }
+
+            return mesechtaName;
         }
     }
 }
