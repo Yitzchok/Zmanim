@@ -126,7 +126,7 @@ namespace Zmanim.JewishCalendar
                     }
 
                     bool isWithNextMasechta = false;
-                    //Spepcial case to support Meilah/Kinnim 22
+                    //Special case to support Meilah/Kinnim 22
                     //same blatt and learned on the same day.
                     if (masechta == 35 && blatt == 22)
                     {
