@@ -15,6 +15,8 @@ namespace ZmanimTests
         [TestCase(2017, 9, 30, Result = "Sanhedrin:76")]
         [TestCase(2017, 10, 1, Result = "Sanhedrin:77")]
         [TestCase(2017, 10, 17, Result = "Sanhedrin:93")]
+        [TestCase(2019, 10, 20, Result = "Tamid:33")]
+        [TestCase(2019, 10, 21, Result = "Midos:34")]
         public string Can_DafYomi_Returns_The_Correct_Daf(int year, int month, int day)
         {
             var yomi = YomiCalculator.GetDafYomiBavli(new DateTime(year, month, day));

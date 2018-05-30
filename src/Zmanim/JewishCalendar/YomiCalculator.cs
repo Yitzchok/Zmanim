@@ -67,7 +67,7 @@ namespace Zmanim.JewishCalendar
              * beginning on June 24, 1975 from 13 to 22, the actual calculation for blattPerMasechta[4] will later be
              * adjusted based on the cycle.
              */
-            int[] blattPerMasechta = { 64, 157, 105, 121, 22, 88, 56, 40, 35, 31, 32, 29, 27, 122, 112, 91, 66, 49, 90, 82, 119, 119, 176, 113, 24, 49, 76, 14, 120, 110, 142, 61, 34, 34, 28, 22, 4, 10, 4, 73 };
+            int[] blattPerMasechta = { 64, 157, 105, 121, 22, 88, 56, 40, 35, 31, 32, 29, 27, 122, 112, 91, 66, 49, 90, 82, 119, 119, 176, 113, 24, 49, 76, 14, 120, 110, 142, 61, 34, 34, 28, 22, 4, 9, 5, 73 };
             
 
             Daf dafYomi = null;
@@ -122,7 +122,7 @@ namespace Zmanim.JewishCalendar
                     }
                     else if (masechta == 38)
                     {
-                        blatt += 33;
+                        blatt += 32;
                     }
                     dafYomi = new Daf(masechta, blatt);
                     break;
