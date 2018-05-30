@@ -19,6 +19,8 @@ namespace ZmanimTests
         [TestCase(2019, 9, 19, Result = "Meilah:2")]
         [TestCase(2019, 10, 9, Result = "Meilah Kinnim:22")]
         [TestCase(2019, 10, 10, Result = "Kinnim:23")]
+        [TestCase(2019, 10, 12, Result = "Kinnim Tamid:25")]
+        [TestCase(2019, 10, 13, Result = "Tamid:26")]
         [TestCase(2019, 10, 20, Result = "Tamid:33")]
         [TestCase(2019, 10, 21, Result = "Midos:34")]
         [TestCase(2019, 10, 25, Result = "Niddah:2")]
