@@ -29,9 +29,9 @@ namespace ZmanimTests
         [TestCase(2019, 10, 25, Result = "Niddah:2")]
         public string Can_DafYomi_Returns_The_Correct_Daf(int year, int month, int day)
         {
-            var yomi = YomiCalculator.GetDafYomiBavli(new DateTime(year, month, day));
+            var daf = YomiCalculator.GetDafYomiBavli(new DateTime(year, month, day));
 
-            return $"{yomi.MasechtaTransliterated}:{yomi.Page}";
+            return $"{daf.MasechtaTransliterated}{(daf.HasSecondaryMesechta ? " " + daf.SecondaryMasechtaTransliterated: "")}:{daf.Page}";
         }
     }
 }
