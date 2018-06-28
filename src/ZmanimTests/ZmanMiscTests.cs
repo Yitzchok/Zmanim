@@ -56,13 +56,13 @@ namespace ZmanimTests
             return calendar.GetFixedLocalChatzos();
         }
 
-        [Test, Ignore]
+        [Test, Ignore("Helpers")]
         public void ZmanimCalendarToXml()
         {
             string s = GetCalendar().ToString();
         }
 
-        [Test, Ignore]
+        [Test, Ignore("Helpers")]
         public void TestsMethodsToCsv()
         {
             StringBuilder csvStringBuilder = new StringBuilder("MethodName,DateCalculated");
