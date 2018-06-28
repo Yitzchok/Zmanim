@@ -19,8 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zmanim.TzDatebase\Zmanim.TzDatebase.Standard.csproj" />
-    <ProjectReference Include="..\Zmanim\ZmanimStandard.csproj" />
+    <ProjectReference Include="..\Zmanim.TzDatebase\Zmanim.TzDatebase.csproj" />
+    <ProjectReference Include="..\Zmanim\Zmanim.csproj" />
   </ItemGroup>
   
   <ItemGroup>
