@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NET20
+using System;
 using Zmanim.Extensions;
 
 namespace Zmanim.TimeZone
@@ -23,7 +24,7 @@ namespace Zmanim.TimeZone
             this.TimeZone = timeZone;
         }
 
-#if !SILVERLIGHT
+#if !NO_FIND_SYSTEM_TIMEZONE_BY_ID
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsTimeZone"/> class.
         /// </summary>
@@ -97,3 +98,4 @@ namespace Zmanim.TimeZone
         }
     }
 }
+#endif

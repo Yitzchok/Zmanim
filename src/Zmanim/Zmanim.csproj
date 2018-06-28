@@ -49,14 +49,25 @@ Fixed GetTimeOffset. Errors when sunrise or sunset is null</PackageReleaseNotes>
   
   <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
     <AssemblyTitle>Json.NET .NET 2.0</AssemblyTitle>
-    <DefineConstants>NET20;$(AdditionalConstants)</DefineConstants>
+    <DefineConstants>NET20;NO_LINQ;NO_COM_ATTRIBUTES;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5' OR '$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
-    <PackageReference Include="System.Globalization.Calendars" Version="4.0.0" />
-  </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.0'">
-    <DefineConstants>NETSTANDARD1_0;NOHEBREWCALENDAR;$(AdditionalConstants)</DefineConstants>
+    <DefineConstants>NETSTANDARD1_0;NOHEBREWCALENDAR;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
+    <DefineConstants>PORTABLE;NOHEBREWCALENDAR;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
+    <DefineConstants>PORTABLE;SILVERLIGHT;NO_COM_ATTRIBUTES;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NOHEBREWCALENDAR;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+    <DefineConstants>NETSTANDARD1_3;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard1.3'">
+    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+    <!--<PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />-->
+  </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
     <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>

@@ -140,7 +140,7 @@ namespace Zmanim.Utilities
             LocationName = "Greenwich, England";
             Longitude = 0; // added for clarity
             Latitude = 51.4772;
-            TimeZone = new WindowsTimeZone(TimeZoneInfo.Utc);
+            TimeZone = new OffsetTimeZone(0);
         }
 
         ///<summary>
