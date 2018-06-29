@@ -2,7 +2,7 @@
   $zipFileName = "Zmanim150r1.zip"
   $majorVersion = "1.0"
   $majorWithReleaseVersion = "1.5.0"
-  $nugetPrerelease = "beta1"
+  $nugetPrerelease = "alpha1"
   $version = GetVersion $majorWithReleaseVersion
   $packageId = "Zmanim"
   $signAssemblies = $false
@@ -25,7 +25,7 @@
   $workingDir = "$baseDir\$workingName"
   
   $solutionFile = "$baseDir\Zmanim.sln"
-  $mainProjectName = "ZmanimStandard"
+  $mainProjectName = "Zmanim"
   $testProjectPath = "$sourceDir\ZmanimTests\ZmanimTests.csproj"
   $testProjectDirectory = "$sourceDir\ZmanimTests"
   $testAssemblyName = "ZmanimTests.dll"
