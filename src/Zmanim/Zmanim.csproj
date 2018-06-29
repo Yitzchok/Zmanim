@@ -43,7 +43,6 @@ Fixed GetTimeOffset. Errors when sunrise or sunset is null</PackageReleaseNotes>
   </ItemGroup>
   
   <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
-    <AssemblyTitle>Json.NET .NET 2.0</AssemblyTitle>
     <DefineConstants>NET20;NO_LINQ;NO_COM_ATTRIBUTES;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.0'">
