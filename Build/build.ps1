@@ -38,16 +38,14 @@
 
   $builds = @(
     @{Framework = "netstandard2.0"; TestsFunction = "NetCliTests"; TestFramework = "netcoreapp2.0"; Enabled=$true},
-    @{Framework = "net45"; TestsFunction = "NUnitTests"; TestFramework = "net46"; NUnitFramework="net-4.0"; Enabled=$true}
-    <# @{Framework = "netstandard1.3"; Enabled=$true},
+    @{Framework = "net45"; TestsFunction = "NUnitTests"; TestFramework = "net46"; NUnitFramework="net-4.0"; Enabled=$true},
+    @{Framework = "netstandard1.3"; Enabled=$true},
     @{Framework = "netstandard1.0"; Enabled=$true},
     @{Framework = "net40"; Enabled=$true},
     @{Framework = "net35"; Enabled=$true},
     @{Framework = "net20"; Enabled=$true},
     @{Framework = "portable-net45+win8+wpa81+wp8"; Enabled=$true},
     @{Framework = "portable-net40+win8+wpa81+wp8+sl5"; Enabled=$true}
-    #>
-
   )
 }
 
@@ -154,7 +152,7 @@ function NetCliBuild()
 {
   $projectPath = $solutionFile
   $libraryFrameworks = ($script:enabledBuilds | Select-Object @{Name="Framework";Expression={$_.Framework}} | select -expand Framework) -join ";"
-  $testFrameworks = ($script:enabledBuilds | Select-Object @{Name="Resolved";Expression={if ($_.TestFramework -ne $null) { $_.TestFramework } else { $_.Framework }}} | select -expand Resolved) -join ";"
+  $testFrameworks = ($script:enabledBuilds | ? {$_.TestFramework -ne $null} | Select-Object @{Name="Resolved";Expression={ $_.TestFramework }} | select -expand Resolved) -join ";"
 
   $additionalConstants = switch($signAssemblies) { $true { "SIGNED" } default { "" } }
 
@@ -162,15 +160,6 @@ function NetCliBuild()
   Write-Host
 
   exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:TestFrameworks=`"$testFrameworks`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
-
-<#  if(TestFramework -ne $null)
-  {
-    exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:TestFrameworks=`"$testFrameworks`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
-  }
-  else
-  {
-    exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:ExcludeFromBuild=`"$testProjectPath`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
-  }#>
 
   Write-Host -ForegroundColor Green "Building $libraryFrameworks in $projectPath"
   Write-Host
