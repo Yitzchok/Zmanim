@@ -9,7 +9,7 @@
   $signKeyPath = "C:\Development\Releases\zmanim.snk"
   $buildDocumentation = $false
   $buildNuGet = $true
-  $msbuildVerbosity = 'minimal'
+  $msbuildVerbosity = 'minimal'#normal
   $treatWarningsAsErrors = $false
   $workingName = if ($workingName) {$workingName} else {"Working"}
   $netCliChannel = "2.0"
@@ -39,14 +39,14 @@
   $builds = @(
     @{Framework = "netstandard2.0"; TestsFunction = "NetCliTests"; TestFramework = "netcoreapp2.0"; Enabled=$true},
     @{Framework = "net45"; TestsFunction = "NUnitTests"; TestFramework = "net46"; NUnitFramework="net-4.0"; Enabled=$true}
-#,
-#    @{Framework = "netstandard1.3"; Enabled=$true},
-#    @{Framework = "netstandard1.0"; Enabled=$true},
-#    @{Framework = "net40"; Enabled=$true},
-#    @{Framework = "net35"; Enabled=$true},
-#    @{Framework = "net20"; Enabled=$true},
-#    @{Framework = "portable-net45+win8+wpa81+wp8"; Enabled=$true},
-#    @{Framework = "portable-net40+win8+wpa81+wp8+sl5"; Enabled=$true}
+    <# @{Framework = "netstandard1.3"; Enabled=$true},
+    @{Framework = "netstandard1.0"; Enabled=$true},
+    @{Framework = "net40"; Enabled=$true},
+    @{Framework = "net35"; Enabled=$true},
+    @{Framework = "net20"; Enabled=$true},
+    @{Framework = "portable-net45+win8+wpa81+wp8"; Enabled=$true},
+    @{Framework = "portable-net40+win8+wpa81+wp8+sl5"; Enabled=$true}
+    #>
 
   )
 }
@@ -109,7 +109,7 @@ task Package -depends Build {
     Write-Host -ForegroundColor Green "Copy NuGet package"
 
     mkdir $workingDir\NuGet
-    move -Path $sourceDir\$mainProject\bin\Release\*.nupkg -Destination $workingDir\NuGet
+    move -Path $sourceDir\$mainProjectName\bin\Release\*.nupkg -Destination $workingDir\NuGet
   }
 
   Write-Host "Build documentation: $buildDocumentation"
@@ -129,8 +129,8 @@ task Package -depends Build {
     move -Path $workingDir\Documentation\LastBuild.log -Destination $workingDir\Documentation.log
   }
 
-  Copy-Item -Path $docDir\readme.txt -Destination $workingDir\Package\
-  Copy-Item -Path $docDir\license.txt -Destination $workingDir\Package\
+  Copy-Item -Path $baseDir\README.md -Destination $workingDir\Package\readme.txt
+  Copy-Item -Path $baseDir\LICENSE.md -Destination $workingDir\Package\license.txt
 
   robocopy $sourceDir $workingDir\Package\Source\Src /MIR /NFL /NDL /NJS /NC /NS /NP /XD bin obj TestResults AppPackages .vs artifacts /XF *.suo *.user *.lock.json | Out-Default
   robocopy $buildDir $workingDir\Package\Source\Build /MIR /NFL /NDL /NJS /NC /NS /NP /XD Temp /XF runbuild.txt | Out-Default
@@ -143,8 +143,10 @@ task Package -depends Build {
 task Test -depends Build {
   foreach ($build in $script:enabledBuilds)
   {
-    Write-Host "Calling $($build.TestsFunction)"
-    & $build.TestsFunction $build
+    if ($build.TestsFunction -ne $null){
+        Write-Host "Calling $($build.TestsFunction)"
+        & $build.TestsFunction $build
+    }
   }
 }
 
@@ -160,6 +162,15 @@ function NetCliBuild()
   Write-Host
 
   exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:TestFrameworks=`"$testFrameworks`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
+
+<#  if(TestFramework -ne $null)
+  {
+    exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:TestFrameworks=`"$testFrameworks`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
+  }
+  else
+  {
+    exec { & $script:msBuildPath "/t:restore" "/v:$msbuildVerbosity" "/p:Configuration=Release" "/p:LibraryFrameworks=`"$libraryFrameworks`"" "/p:ExcludeFromBuild=`"$testProjectPath`"" "/m" $projectPath | Out-Default } "Error restoring $projectPath"
+  }#>
 
   Write-Host -ForegroundColor Green "Building $libraryFrameworks in $projectPath"
   Write-Host
