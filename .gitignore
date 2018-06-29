@@ -25,6 +25,13 @@ httpd.parse.errors
 # If you have a deploy folder
 Release
 Release/*
+[Ww]orking*/
+Build/Temp/
+TestResults/
+AppPackages/
+*.nuget.props
+*.nuget.targets
+
 
 SVN
 .svn
