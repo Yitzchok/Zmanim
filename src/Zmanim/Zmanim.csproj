@@ -11,14 +11,21 @@
 The Zmanim ("times" referring to the calculations of time that govern the start and end time of Jewish prayers and holidays) project is a .NET API for generating zmanim from within .NET programs. If you are a non programmer, this means that the software created by the project is a building block of code to allow other programmers to easily include zmanim in their programs. The basis for most zmanim in this class are from the sefer Yisroel Vehazmanim by Rabbi Yisroel Dovid Harfenes.
 
 Please note: due to atmospheric conditions (pressure, humidity and other conditions), calculating zmanim accurately is very complex. The calculation of zmanim is dependant on Atmospheric refraction (refraction of sunlight through the atmosphere), and zmanim can be off by up to 2 minutes based on atmospheric conditions. Inaccuracy is increased by elevation. It is not the intent of this API to provide any guarantee of accuracy.</Description>
-    <Copyright>Copyright © Eliyahu Hershfeld 2014 - 2017</Copyright>
+    <Copyright>Copyright © Eliyahu Hershfeld 2013</Copyright>
     <PackageLicenseUrl>https://www.gnu.org/copyleft/lesser.html</PackageLicenseUrl>
     <PackageProjectUrl>http://www.kosherjava.com/zmanim-project/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
-    <PackageReleaseNotes>Add Support for .NET Standard 1.3
-Added JewishCalendar which calculates Jewish Holidays (Yamim Tovim)
-Added Daf Yomi Calculator
-Fixed GetTimeOffset. Errors when sunrise or sunset is null</PackageReleaseNotes>
+    <PackageReleaseNotes>Now we support
+      .NETFramework 2.0 (some limits)
+      .NETFramework 3.5
+      .NETFramework 4.0
+      .NETFramework 4.5
+      .NETStandard 1.0
+      .NETStandard 1.3
+      .NETStandard 2.0
+      Portable Class Library (.NETFramework 4.0, Silverlight 5.0, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
+      Portable Class Library (.NETFramework 4.5, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
+    </PackageReleaseNotes>
     <AssemblyVersion>1.4.1.0</AssemblyVersion>
     <FileVersion>1.4.1.0</FileVersion>
     <AssemblyTitle>Zmanim</AssemblyTitle>
