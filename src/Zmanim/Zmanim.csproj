@@ -4,7 +4,6 @@
     <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net45;net40;net35;net20;netstandard1.0;netstandard1.3;netstandard2.0;portable-net45+win8+wpa81+wp8;portable-net40+win8+wpa81+wp8+sl5</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
 
-    <Version>1.4.1</Version>
     <PackageId>Zmanim</PackageId>
     <Product>Jewish Zmanim Framework</Product>
     <Description>This project is a port from the Java zmanim-project developed by Eliyahu Hershfeld.

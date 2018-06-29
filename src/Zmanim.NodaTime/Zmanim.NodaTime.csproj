@@ -4,7 +4,6 @@
     <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'==''">net45;netstandard1.3;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
 
-    <Version>1.4.1</Version>
     <PackageId>Zmanim.NodaTime</PackageId>
     <Product>Jewish Zmanim Framework</Product>
     <Description>Zmanim TimeZone for the NodaTime Library</Description>
