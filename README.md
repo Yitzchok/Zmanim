@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/0l0bjmkcv1hihmq3?svg=true)](https://ci.appveyor.com/project/Yitzchok/zmanim)
+
 This project is a port from the [Java zmanim-project](http://www.kosherjava.com/zmanim-project/) developed by Eliyahu Hershfeld.
 
 The _Zmanim_ ("times" referring to the calculations of time that govern the start and end time of Jewish prayers and holidays)
