@@ -16,6 +16,9 @@
     <FileVersion>1.4.1.0</FileVersion>
 
     <MinClientVersion>2.12</MinClientVersion>
+    
+    <!-- Disabled because SourceLink isn't referenced to calculate paths -->
+    <DeterministicSourcePaths>false</DeterministicSourcePaths>
   </PropertyGroup>
 
   <ItemGroup>
