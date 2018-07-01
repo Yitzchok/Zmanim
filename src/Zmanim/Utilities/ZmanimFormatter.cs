@@ -385,7 +385,7 @@ namespace Zmanim.Utilities
                            ((double)HOUR_MILLIS)) + "\"");
 
             output.Append(">\n");
-#if !NETSTANDARD1_3
+#if !NO_TYPE_GET_METHODS
             var theMethods = ac.GetType().GetMethods().ToList();
 #else
             var theMethods = ac.GetType().GetTypeInfo().DeclaredMethods.ToList();

@@ -1,141 +1,84 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <ProjectType>local</ProjectType>
-    <ProjectVersion>7.10.3077</ProjectVersion>
-    <ProjectGuid>{7629E910-1996-448E-B344-AA925F23EEE6}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <AssemblyName>Zmanim</AssemblyName>
-    <DefaultClientScript>JScript</DefaultClientScript>
-    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
-    <DefaultTargetSchema>IE50</DefaultTargetSchema>
-    <DelaySign>false</DelaySign>
-    <OutputType>Library</OutputType>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>0.0</OldToolsVersion>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\</OutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <Optimize>false</Optimize>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Debug\Zmanim.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release\</OutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>none</DebugType>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net45;net40;net35;net20;netstandard1.0;netstandard1.3;netstandard2.0;portable-net45+win8+wpa81+wp8;portable-net40+win8+wpa81+wp8+sl5</TargetFrameworks>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
+
+    <PackageId>Zmanim</PackageId>
+    <Product>Jewish Zmanim Framework</Product>
+    <Description>This project is a port from the Java zmanim-project developed by Eliyahu Hershfeld.
+
+The Zmanim ("times" referring to the calculations of time that govern the start and end time of Jewish prayers and holidays) project is a .NET API for generating zmanim from within .NET programs. If you are a non programmer, this means that the software created by the project is a building block of code to allow other programmers to easily include zmanim in their programs. The basis for most zmanim in this class are from the sefer Yisroel Vehazmanim by Rabbi Yisroel Dovid Harfenes.
+
+Please note: due to atmospheric conditions (pressure, humidity and other conditions), calculating zmanim accurately is very complex. The calculation of zmanim is dependant on Atmospheric refraction (refraction of sunlight through the atmosphere), and zmanim can be off by up to 2 minutes based on atmospheric conditions. Inaccuracy is increased by elevation. It is not the intent of this API to provide any guarantee of accuracy.</Description>
+    <Copyright>Copyright © Eliyahu Hershfeld 2013</Copyright>
+    <PackageLicenseUrl>https://www.gnu.org/copyleft/lesser.html</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.kosherjava.com/zmanim-project/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
+    <PackageReleaseNotes>Now we support
+      .NETFramework 2.0 (some limits)
+      .NETFramework 3.5
+      .NETFramework 4.0
+      .NETFramework 4.5
+      .NETStandard 1.0
+      .NETStandard 1.3
+      .NETStandard 2.0
+      Portable Class Library (.NETFramework 4.0, Silverlight 5.0, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
+      Portable Class Library (.NETFramework 4.5, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
+    </PackageReleaseNotes>
+    <AssemblyVersion>1.4.1.0</AssemblyVersion>
+    <FileVersion>1.4.1.0</FileVersion>
+    <AssemblyTitle>Zmanim</AssemblyTitle>
+    <Title>Jewish Zmanim Framework</Title>
+    <PackageTags>zmanim jewish torah zemanim zman zeman</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl> 
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RootNamespace>Zmanim</RootNamespace>
+
+    <AssemblyName>Zmanim</AssemblyName>
+    <MinClientVersion>2.12</MinClientVersion>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="ComplexZmanimCalendar.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
-    <Compile Include="Extensions\MathExtensions.cs" />
-    <Compile Include="IAstronomicalCalendar.cs" />
-    <Compile Include="IDateWithLocation.cs" />
-    <Compile Include="DateWithLocation.cs" />
-    <Compile Include="TimeZone\ITimeZone.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AstronomicalCalendar.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TimeZone\OffsetTimeZone.cs" />
-    <Compile Include="TimeZone\WindowsTimeZone.cs" />
-    <Compile Include="Calculator\AstronomicalCalculator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\BitConverter.cs" />
-    <Compile Include="Utilities\GeoLocation.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\GeoLocationUtils.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Calculator\IAstronomicalCalculator.cs" />
-    <Compile Include="Calculator\NOAACalculator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Calculator\SunTimesCalculator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\IGeoLocation.cs" />
-    <Compile Include="Utilities\Time.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\Zman.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Calculator\ZmanimCalculator.cs" />
-    <Compile Include="Utilities\ZmanimFormatter.cs" />
-    <Compile Include="ZmanimCalendar.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="JewishCalendar\JewishCalendar.cs" />
-    <Compile Include="JewishCalendar\Daf.cs" />
-    <Compile Include="JewishCalendar\HebrewDateFormatter.cs" />
-    <Compile Include="JewishCalendar\YomiCalculator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent />
-    <PostBuildEvent />
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <DocumentationFile>C:\Dev\Projects\Zmanim\src\Zmanim\Zmanim.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
+    <DefineConstants>NET20;NO_LINQ;NO_COM_ATTRIBUTES;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.0'">
+    <DefineConstants>NETSTANDARD1_0;NOHEBREWCALENDAR;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
+    <DefineConstants>PORTABLE;NOHEBREWCALENDAR;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
+    <DefineConstants>PORTABLE;SILVERLIGHT;NO_COM_ATTRIBUTES;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NOHEBREWCALENDAR;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+    <DefineConstants>NETSTANDARD1_3;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard1.3'">
+    
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile328</NugetTargetMoniker>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile259</NugetTargetMoniker>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
+
 </Project>

@@ -18,6 +18,7 @@
 // * You should have received a copy of the GNU Lesser General Public License
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
+#if !NOHEBREWCALENDAR
 using System.Text;
 using System;
 
@@ -47,7 +48,7 @@ namespace Zmanim.JewishCalendar
         private bool useGershGershayim = true;
         private bool longWeekFormat = true;
 
-		private static JewishCalendar jewishCalendar = new JewishCalendar ();
+		private static JewishCalendar jewishCalendar = new JewishCalendar();
 
         /// <summary>
         /// returns if the <seealso cref="#formatDayOfWeek(JewishDate)"/> will use the long format such as
@@ -655,3 +656,4 @@ namespace Zmanim.JewishCalendar
         }
     }
 }
+#endif
