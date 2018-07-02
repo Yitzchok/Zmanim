@@ -41,9 +41,6 @@ namespace Zmanim.Calculator
         ///</summary>
         public const double ZENITH = 90 + 50.0 / 60.0;
 
-        private const int TYPE_SUNRISE = 0;
-
-        private const int TYPE_SUNSET = 1;
 
         // DEG_PER_HOUR is the number of degrees of longitude
         // that corresponds to one hour time difference.
@@ -193,25 +190,19 @@ namespace Zmanim.Calculator
         ///  Jan 1st, assuming 6am and 6pm events. We need this figure to derive the
         ///  Sun's mean anomaly
         ///</summary>
-        private static double GetApproxTimeDays(int dayOfYear, double hoursFromMeridian, int type)
+        private static double GetApproxTimeDays(int dayOfYear, double hoursFromMeridian, bool isSunrise)
         {
-            if (type == TYPE_SUNRISE)
-            {
-                return dayOfYear + ((6.0 - hoursFromMeridian) / 24);
-            } // if (type == TYPE_SUNSET) 
-            else
-            {
-                return dayOfYear + ((18.0 - hoursFromMeridian) / 24);
-            }
+            var sunriseSunsetVar = isSunrise ? 6.0 : 18.0;
+            return dayOfYear + ((sunriseSunsetVar - hoursFromMeridian) / 24);
         }
 
         ///<summary>
         ///  Calculate the Sun's mean anomaly in degrees, at sunrise or sunset, given
         ///  the longitude in degrees
         ///</summary>
-        private static double GetMeanAnomaly(int dayOfYear, double longitude, int type)
+        private static double GetMeanAnomaly(int dayOfYear, double longitude, bool isSunrise)
         {
-            return (0.9856 * GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(longitude), type)) - 3.289;
+            return (0.9856 * GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(longitude), isSunrise)) - 3.289;
         }
 
         ///<summary>
@@ -302,18 +293,18 @@ namespace Zmanim.Calculator
         ///   calculation (expected behavior for some locations such as near
         ///   the poles, <see cref="Double.NaN" /> will be returned. </returns>
         private static double GetTimeUtc(
-            DateTime date, 
+            DateTime date,
             IGeoLocation location,
-            double zenith, int type)
+            double zenith, bool isSunrise)
         {
             int dayOfYear = date.DayOfYear;
-            double sunMeanAnomaly = GetMeanAnomaly(dayOfYear, location.Longitude, type);
+            double sunMeanAnomaly = GetMeanAnomaly(dayOfYear, location.Longitude, isSunrise);
             double sunTrueLong = GetSunTrueLongitude(sunMeanAnomaly);
             double sunRightAscensionHours = GetSunRightAscensionHours(sunTrueLong);
             double cosLocalHourAngle = GetCosLocalHourAngle(sunTrueLong, location.Latitude, zenith);
 
             double localHourAngle = 0;
-            if (type == TYPE_SUNRISE)
+            if (isSunrise)
             {
                 if (cosLocalHourAngle > 1) // no rise. No need for an Exception
                 {
@@ -334,7 +325,7 @@ namespace Zmanim.Calculator
             double localHour = localHourAngle / DEG_PER_HOUR;
 
             double localMeanTime = GetLocalMeanTime(localHour, sunRightAscensionHours,
-                                                    GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(location.Longitude), type));
+                                                    GetApproxTimeDays(dayOfYear, GetHoursFromMeridian(location.Longitude), isSunrise));
             double pocessedTime = localMeanTime - GetHoursFromMeridian(location.Longitude);
             while (pocessedTime < 0.0)
             {
