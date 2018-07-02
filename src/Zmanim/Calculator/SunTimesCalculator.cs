@@ -250,8 +250,7 @@ namespace Zmanim.Calculator
         /// <param name="date">The date</param>
         /// <param name="location">The location</param>
         /// <param name="zenith">Sun's zenith, in degrees</param>
-        /// <param name="type">type of calculation to carry out <see cref="TYPE_SUNRISE" /> or
-        ///   <see cref="TYPE_SUNRISE" />.
+        /// <param name="isSunrise">type of calculation to carry out sunrise or sunset.
         /// </param>
         /// <returns> the time as a double. If an error was encountered in the
         ///   calculation (expected behavior for some locations such as near
