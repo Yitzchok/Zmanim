@@ -43,10 +43,7 @@ namespace Zmanim.Calculator
         /// <summary>
         /// </summary>
         /// <value>the descriptive name of the algorithm.</value>
-        public override string CalculatorName
-        {
-            get { return "US Naval Almanac Algorithm"; }
-        }
+        public override string CalculatorName => "US Naval Almanac Algorithm";
 
         /// <summary>
         /// A method that calculates UTC sunrise as well as any time based on an
