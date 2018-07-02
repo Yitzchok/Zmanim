@@ -42,6 +42,8 @@ namespace Zmanim.Calculator
             return new SunTimesCalculator();
         }
 
+        double EarthRadius => 6356.9;
+
         ///<summary>
         ///  Method to return the adjustment to the zenith required to account for the
         ///  elevation. Since a person at a higher elevation can see farther below the
@@ -72,13 +74,9 @@ namespace Zmanim.Calculator
         ///<param name = "elevation">
         ///  elevation in Meters. </param>
         ///<returns> the adjusted zenith </returns>
-        internal virtual double GetElevationAdjustment(double elevation)
+        double GetElevationAdjustment(double elevation)
         {
-            double earthRadius = 6356.9;
-            // double elevationAdjustment = 0.0347 * Math.sqrt(elevation);
-            double elevationAdjustment =
-                MathExtensions.ToDegree(Math.Acos(earthRadius / (earthRadius + (elevation / 1000))));
-            return elevationAdjustment;
+            return Math.Acos(EarthRadius / (EarthRadius + (elevation / 1000))).ToDegree();
         }
 
         ///<summary>
@@ -106,7 +104,7 @@ namespace Zmanim.Calculator
         ///  <seealso cref="Refraction">refraction</seealso> and
         ///  <seealso cref="GetElevationAdjustment">elevation</seealso> adjustment.
         ///</returns>
-        internal virtual double AdjustZenith(double zenith, double elevation)
+        protected double AdjustZenith(double zenith, double elevation)
         {
             if (zenith == AstronomicalCalendar.GEOMETRIC_ZENITH)
                 return zenith + (SolarRadius + Refraction + GetElevationAdjustment(elevation));
