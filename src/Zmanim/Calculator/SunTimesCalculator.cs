@@ -59,7 +59,7 @@ namespace Zmanim.Calculator
         /// angle above or below sunrise. This abstract method is implemented by the
         /// classes that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
         /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
@@ -79,20 +79,13 @@ namespace Zmanim.Calculator
         public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
-            double doubleTime = double.NaN;
+            double elevation = adjustForElevation ? dateWithLocation.Location.Elevation : 0;
 
-            if (adjustForElevation)
-            {
-                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
-            }
-            else
-            {
-                zenith = AdjustZenith(zenith, 0);
-            }
-            doubleTime = GetTimeUtc(dateWithLocation.Date,
-                                    dateWithLocation.Location,
-                                    zenith, TYPE_SUNRISE);
-            return doubleTime;
+            return GetTimeUtc(
+                dateWithLocation.Date,
+                dateWithLocation.Location,
+                AdjustZenith(zenith, elevation),
+                true);
         }
 
         /// <summary>
@@ -120,20 +113,13 @@ namespace Zmanim.Calculator
         public override double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith,
                                             bool adjustForElevation)
         {
-            double doubleTime = double.NaN;
+            double elevation = adjustForElevation ? dateWithLocation.Location.Elevation : 0;
 
-            if (adjustForElevation)
-            {
-                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
-            }
-            else
-            {
-                zenith = AdjustZenith(zenith, 0);
-            }
-            doubleTime = GetTimeUtc(dateWithLocation.Date,
-                                    dateWithLocation.Location,
-                                    zenith, TYPE_SUNSET);
-            return doubleTime;
+            return GetTimeUtc(
+                dateWithLocation.Date,
+                dateWithLocation.Location,
+                AdjustZenith(zenith, elevation),
+                false);
         }
 
         ///<summary>
@@ -233,9 +219,6 @@ namespace Zmanim.Calculator
         {
             double a = 0.91764 * TanDeg(sunTrueLongitude);
             double ra = 360.0 / (2.0 * Math.PI) * Math.Atan(a);
-            // get result into 0-360 degree range
-            // if (ra >= 360.0) ra = ra - 360.0;
-            // if (ra < 0) ra = ra + 360.0;
 
             double lQuadrant = Math.Floor(sunTrueLongitude / 90.0) * 90.0;
             double raQuadrant = Math.Floor(ra / 90.0) * 90.0;
@@ -251,21 +234,8 @@ namespace Zmanim.Calculator
         {
             double sinDec = 0.39782 * SinDeg(sunTrueLongitude);
             double cosDec = CosDeg(AsinDeg(sinDec));
-
-            double cosH = (CosDeg(zenith) - (sinDec * SinDeg(latitude))) / (cosDec * CosDeg(latitude));
-
-            // Check bounds
-
-            return cosH;
+            return (CosDeg(zenith) - (sinDec * SinDeg(latitude))) / (cosDec * CosDeg(latitude));
         }
-
-        /*
-        ///	 <summary> Gets the cosine of the Sun's local hour angle for default zenith </summary>
-        //	private static double getCosLocalHourAngle(double sunTrueLongitude,
-        //			double latitude) {
-        //		return getCosLocalHourAngle(sunTrueLongitude, latitude, ZENITH);
-        //	}
-        */
 
         ///<summary>
         ///  Calculate local mean time of rising or setting. By `local' is meant the
