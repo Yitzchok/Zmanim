@@ -35,14 +35,18 @@ namespace Zmanim.Calculator
     /// <author>Eliyahu Hershfeld</author>
     public class NOAACalculator : AstronomicalCalculator
     {
+
+        /// The <a href="http://en.wikipedia.org/wiki/Julian_day">Julian day</a> of January 1, 2000
+        private static double JULIAN_DAY_JAN_1_2000 = 2451545.0;
+
+        /// Julian days per century
+        private static double JULIAN_DAYS_PER_CENTURY = 36525.0;
+
         /// <summary>
         /// Gets the name of the Calculator.
         /// </summary>
         /// <value>the descriptive name of the algorithm.</value>
-        public override string CalculatorName
-        {
-            get { return "US National Oceanic and Atmospheric Administration Algorithm"; }
-        }
+        public override string CalculatorName => "US National Oceanic and Atmospheric Administration Algorithm";
 
         /// <summary>
         /// A method that calculates UTC sunrise as well as any time based on an
@@ -69,16 +73,11 @@ namespace Zmanim.Calculator
         public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
-            /*if (dateWithLocation.Date.Year <= 2000)
-            {
-                throw new Exception("NOAACalculator can not calculate times earlier than the year 2000.	Please try a date with a different year.");
-            }*/
+            double adjustedZenith = AdjustZenith(zenith, adjustForElevation ? dateWithLocation.Location.Elevation : 0);
 
-            zenith = AdjustZenith(zenith, adjustForElevation ? dateWithLocation.Location.Elevation : 0);
-
-            double sunrise = CalcSunriseUtc(CalcJulianDay(dateWithLocation),
+            double sunrise = GetSunriseUTC(GetJulianDay(dateWithLocation.Date),
                                             dateWithLocation.Location.Latitude,
-                                            -dateWithLocation.Location.Longitude, zenith);
+                                            -dateWithLocation.Location.Longitude, adjustedZenith);
             sunrise = sunrise / 60;
 
             // ensure that the time is >= 0 and < 24
@@ -99,7 +98,7 @@ namespace Zmanim.Calculator
         /// above or below sunset. This abstract method is implemented by the classes
         /// that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
         /// typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for the
         /// calculation uses geometric zenith of 90°; and
@@ -119,25 +118,14 @@ namespace Zmanim.Calculator
         public override double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith,
                                             bool adjustForElevation)
         {
-            // if (astronomicalCalendar.getCalendar().get(Calendar.YEAR) <= 2000) {
-            // throw new ZmanimException(
-            // "NOAACalculator can not calculate times for the year 2000. Please try
-            // a date with a different year.");
-            // }
+            double elevation = adjustForElevation ? dateWithLocation.Location.Elevation : 0;
 
+            double sunset = GetSunsetUTC(
+                GetJulianDay(dateWithLocation.Date),
+                dateWithLocation.Location.Latitude, -dateWithLocation.Location.Longitude,
+                AdjustZenith(zenith, elevation)
+            );
 
-            if (adjustForElevation)
-            {
-                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
-            }
-            else
-            {
-                zenith = AdjustZenith(zenith, 0);
-            }
-
-            double sunset = CalcSunsetUtc(CalcJulianDay(dateWithLocation),
-                                          dateWithLocation.Location.Latitude,
-                                          -dateWithLocation.Location.Longitude, zenith);
             sunset = sunset / 60;
 
             // ensure that the time is >= 0 and < 24
@@ -155,14 +143,11 @@ namespace Zmanim.Calculator
         ///<summary>
         ///  Generate a Julian day from a .NET date
         ///</summary>
-        ///<param name = "date">
-        ///  Java Calendar </param>
+        ///<param name="date">DateTime</param>
         ///<returns> the Julian day corresponding to the date Note: Number is returned
         ///  for start of day. Fractional days should be added later. </returns>
-        private static double CalcJulianDay(IDateWithLocation dateWithLocation)
+        private static double GetJulianDay(DateTime date)
         {
-            var date = dateWithLocation.Date;
-
             int year = date.Year;
             int month = date.Month;
             int day = date.Day;
@@ -178,319 +163,319 @@ namespace Zmanim.Calculator
         }
 
         ///<summary>
-        ///  convert Julian Day to centuries since J2000.0.
+        /// Convert <a href="http://en.wikipedia.org/wiki/Julian_day">Julian day</a> to centuries since J2000.0.
         ///</summary>
-        ///<param name = "jd">
+        ///<param name="julianDay">
         ///  the Julian Day to convert </param>
         ///<returns> the T value corresponding to the Julian Day </returns>
-        private static double CalcTimeJulianCent(double jd)
+        private static double GetJulianCenturiesFromJulianDay(double julianDay)
         {
-            return (jd - 2451545.0) / 36525.0;
+            return (julianDay - JULIAN_DAY_JAN_1_2000) / JULIAN_DAYS_PER_CENTURY;
         }
 
         ///<summary>
-        ///  Convert centuries since J2000.0 to Julian Day.
+        /// Convert centuries since J2000.0 to <a href="http://en.wikipedia.org/wiki/Julian_day">Julian day</a>.
         ///</summary>
-        ///<param name = "t">
+        ///<param name="julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
-        ///<returns> the Julian Day corresponding to the t value </returns>
-        private static double CalcJdFromJulianCent(double t)
+        ///<returns>the Julian Day corresponding to the Julian centuries passed in</returns>
+        private static double GetJulianDayFromJulianCenturies(double julianCenturies)
         {
-            return t * 36525.0 + 2451545.0;
+            return julianCenturies * JULIAN_DAYS_PER_CENTURY + JULIAN_DAY_JAN_1_2000;
         }
 
         ///<summary>
-        ///  calculates the Geometric Mean Longitude of the Sun
+        /// Returns the Geometric <a href="http://en.wikipedia.org/wiki/Mean_longitude">Mean Longitude</a> of the Sun.
         ///</summary>
-        ///<param name = "t">
+        ///<param name="julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the Geometric Mean Longitude of the Sun in degrees </returns>
-        private static double CalcGeomMeanLongSun(double t)
+        private static double GetSunGeometricMeanLongitude(double julianCenturies)
         {
-            double L0 = 280.46646 + t * (36000.76983 + 0.0003032 * t);
-            while (L0 > 360.0)
+            double longitude= 280.46646 + julianCenturies * (36000.76983 + 0.0003032 * julianCenturies);
+            while (longitude > 360.0)
             {
-                L0 -= 360.0;
+                longitude -= 360.0;
             }
-            while (L0 < 0.0)
+            while (longitude < 0.0)
             {
-                L0 += 360.0;
+                longitude += 360.0;
             }
 
-            return L0; // in degrees
+            return longitude; // in degrees
         }
 
         ///<summary>
-        ///  Calculate the Geometric Mean Anomaly of the Sun
+        ///  Returns the Geometric <a href="http://en.wikipedia.org/wiki/Mean_anomaly">Mean Anomaly</a> of the Sun.
         ///</summary>
-        ///<param name = "t">
+        ///<param name="julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the Geometric Mean Anomaly of the Sun in degrees </returns>
-        private static double CalcGeomMeanAnomalySun(double t)
+        private static double GetSunGeometricMeanAnomaly(double julianCenturies)
         {
-            return 357.52911 + t * (35999.05029 - 0.0001537 * t);
+            return 357.52911 + julianCenturies * (35999.05029 - 0.0001537 * julianCenturies); // in degrees
         }
 
         ///<summary>
-        ///  calculate the eccentricity of earth's orbit
+        /// Return the <a href="http://en.wikipedia.org/wiki/Eccentricity_%28orbit%29">eccentricity of earth's orbit</a>.
         ///</summary>
-        ///<param name = "t">
+        ///<param name="julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the unitless eccentricity </returns>
-        private static double CalcEccentricityEarthOrbit(double t)
+        private static double GetEarthOrbitEccentricity(double julianCenturies)
         {
-            double e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
+            double e = 0.016708634 - julianCenturies * (0.000042037 + 0.0000001267 * julianCenturies);
             return e; // unitless
         }
 
         ///<summary>
-        ///  Calculate the equation of center for the sun
+        /// Returns the <a href="http://en.wikipedia.org/wiki/Equation_of_the_center">equation of center</a> for the sun.
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the equation of center for the sun in degrees </returns>
-        private static double CalcSunEqOfCenter(double t)
+        private static double GetSunEquationOfCenter(double julianCenturies)
         {
-            double m = CalcGeomMeanAnomalySun(t);
+            double m = GetSunGeometricMeanAnomaly(julianCenturies);
 
-            double mrad = MathExtensions.ToRadians(m);
+            double mrad = m.ToRadians();
             double sinm = Math.Sin(mrad);
             double sin2m = Math.Sin(mrad + mrad);
             double sin3m = Math.Sin(mrad + mrad + mrad);
 
-            return sinm * (1.914602 - t * (0.004817 + 0.000014 * t)) + sin2m * (0.019993 - 0.000101 * t) + sin3m * 0.000289;
+            return sinm * (1.914602 - julianCenturies
+                        * (0.004817 + 0.000014 * julianCenturies)) + sin2m 
+                        * (0.019993 - 0.000101 * julianCenturies) + sin3m * 0.000289;// in degrees
         }
 
         ///<summary>
         ///  Calculate the true longitude of the sun
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the sun's true longitude in degrees </returns>
-        private static double CalcSunTrueLong(double t)
+        private static double GetSunTrueLongitude(double julianCenturies)
         {
-            double l0 = CalcGeomMeanLongSun(t);
-            double c = CalcSunEqOfCenter(t);
+            double sunLongitude = GetSunGeometricMeanLongitude(julianCenturies);
+            double center = GetSunEquationOfCenter(julianCenturies);
 
-            return l0 + c;
+            return sunLongitude + center;// in degrees
         }
-
-        //	/**
-        //	 * Calculate the true anamoly of the sun
-        //	 *
-        //	 * @param t
-        //	 *            the number of Julian centuries since J2000.0
-        //	 * @return the sun's true anamoly in degrees
-        //	 */
-        //	private static double calcSunTrueAnomaly(double t) {
-        //		double m = calcGeomMeanAnomalySun(t);
-        //		double c = calcSunEqOfCenter(t);
-        //
-        //		double v = m + c;
-        //		return v; // in degrees
-        //	}
 
         ///<summary>
         ///  calculate the apparent longitude of the sun
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> sun's apparent longitude in degrees </returns>
-        private static double CalcSunApparentLong(double t)
+        private static double GetSunApparentLongitude(double julianCenturies)
         {
-            double o = CalcSunTrueLong(t);
-
-            double omega = 125.04 - 1934.136 * t;
-            double lambda = o - 0.00569 - 0.00478 * Math.Sin(MathExtensions.ToRadians(omega));
-            return lambda; // in degrees
+            double sunTrueLongitude = GetSunTrueLongitude(julianCenturies);
+            double omega = 125.04 - 1934.136 * julianCenturies;
+            return sunTrueLongitude - 0.00569 - 0.00478 * Math.Sin(omega.ToRadians()); // in degrees
         }
 
         ///<summary>
-        ///  Calculate the mean obliquity of the ecliptic
+        /// Returns the mean <a href="http://en.wikipedia.org/wiki/Axial_tilt">obliquity of the ecliptic</a> (Axial tilt).
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the mean obliquity in degrees </returns>
-        private static double CalcMeanObliquityOfEcliptic(double t)
+        private static double GetMeanObliquityOfEcliptic(double julianCenturies)
         {
-            double seconds = 21.448 - t * (46.8150 + t * (0.00059 - t * (0.001813)));
-            double e0 = 23.0 + (26.0 + (seconds / 60.0)) / 60.0;
-            return e0; // in degrees
+            double seconds = 
+                21.448 - julianCenturies 
+              * (46.8150 + julianCenturies * (0.00059 - julianCenturies * (0.001813)));
+
+            return 23.0 + (26.0 + (seconds / 60.0)) / 60.0; // in degrees
         }
 
         ///<summary>
-        ///  calculate the corrected obliquity of the ecliptic
+        /// Returns the corrected <a href="http://en.wikipedia.org/wiki/Axial_tilt">obliquity of the ecliptic</a> (Axial tilt)
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> the corrected obliquity in degrees </returns>
-        private static double CalcObliquityCorrection(double t)
+        private static double GetObliquityCorrection(double julianCenturies)
         {
-            double e0 = CalcMeanObliquityOfEcliptic(t);
+            double obliquityOfEcliptic = GetMeanObliquityOfEcliptic(julianCenturies);
 
-            double omega = 125.04 - 1934.136 * t;
-            double e = e0 + 0.00256 * Math.Cos(MathExtensions.ToRadians(omega));
-            return e; // in degrees
+            double omega = 125.04 - 1934.136 * julianCenturies;
+            return obliquityOfEcliptic + 0.00256 * Math.Cos(omega.ToRadians()); // in degrees
         }
 
         ///<summary>
-        ///  Calculate the declination of the sun
+        /// Return the <a href="http://en.wikipedia.org/wiki/Declination">declination</a> of the sun.
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
-        private static double CalcSunDeclination(double t)
+        private static double GetSunDeclination(double julianCenturies)
         {
-            double e = CalcObliquityCorrection(t);
-            double lambda = CalcSunApparentLong(t);
+            double obliquityCorrection = GetObliquityCorrection(julianCenturies);
+            double lambda = GetSunApparentLongitude(julianCenturies);
 
-            double sint = Math.Sin(MathExtensions.ToRadians(e)) * Math.Sin(MathExtensions.ToRadians(lambda));
-            double theta = MathExtensions.ToDegree(Math.Asin(sint));
-            return theta; // in degrees
+            double sint = Math.Sin(obliquityCorrection.ToRadians()) * Math.Sin(lambda.ToRadians());
+            return Math.Asin(sint).ToDegree(); // in degrees
         }
 
         ///<summary>
-        ///  calculate the difference between true solar time and mean solar time
+        /// Return the <a href="http://en.wikipedia.org/wiki/Equation_of_time">Equation of Time</a> - the difference between
+        /// true solar time and mean solar time
         ///</summary>
-        ///<param name = "t">
+        ///<param name="julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<returns> equation of time in minutes of time </returns>
-        private static double CalcEquationOfTime(double t)
+        private static double GetEquationOfTime(double julianCenturies)
         {
-            double epsilon = CalcObliquityCorrection(t);
-            double l0 = CalcGeomMeanLongSun(t);
-            double e = CalcEccentricityEarthOrbit(t);
-            double m = CalcGeomMeanAnomalySun(t);
+            double epsilon = GetObliquityCorrection(julianCenturies);
+            double geomMeanLongSun = GetSunGeometricMeanLongitude(julianCenturies);
+            double eccentricityEarthOrbit = GetEarthOrbitEccentricity(julianCenturies);
+            double geomMeanAnomalySun = GetSunGeometricMeanAnomaly(julianCenturies);
 
-            double y = Math.Tan(MathExtensions.ToRadians(epsilon) / 2.0);
+            double y = Math.Tan(epsilon.ToRadians() / 2.0);
             y *= y;
 
-            double sin2l0 = Math.Sin(2.0 * MathExtensions.ToRadians(l0));
-            double sinm = Math.Sin(MathExtensions.ToRadians(m));
-            double cos2l0 = Math.Cos(2.0 * MathExtensions.ToRadians(l0));
-            double sin4l0 = Math.Sin(4.0 * MathExtensions.ToRadians(l0));
-            double sin2m = Math.Sin(2.0 * MathExtensions.ToRadians(m));
+            double sin2l0 = Math.Sin(2.0 * geomMeanLongSun.ToRadians());
+            double sinm = Math.Sin(geomMeanAnomalySun.ToRadians());
+            double cos2l0 = Math.Cos(2.0 * geomMeanLongSun.ToRadians());
+            double sin4l0 = Math.Sin(4.0 * geomMeanLongSun.ToRadians());
+            double sin2m = Math.Sin(2.0 * geomMeanAnomalySun.ToRadians());
 
-            double Etime = y * sin2l0 - 2.0 * e * sinm + 4.0 * e * y * sinm * cos2l0 - 0.5 * y * y * sin4l0 - 1.25 * e * e * sin2m;
-            return MathExtensions.ToDegree(Etime) * 4.0; // in minutes of time
+            double equationOfTime = 
+                y * sin2l0 - 2.0 * eccentricityEarthOrbit * sinm + 4.0 * eccentricityEarthOrbit * y 
+              * sinm * cos2l0 - 0.5 * y * y * sin4l0 - 1.25 * eccentricityEarthOrbit * eccentricityEarthOrbit * sin2m;
+            return equationOfTime.ToDegree() * 4.0; // in minutes of time
         }
 
         /// <summary>
-        /// Calculate the hour angle of the sun at sunrise for the latitude
+        /// Return the <a href="http://en.wikipedia.org/wiki/Hour_angle">hour angle</a> of the sun at sunrise for the
+        /// latitude.
         /// </summary>
         /// <param name="lat">,
         /// the latitude of observer in degrees</param>
         /// <param name="solarDec">the declination angle of sun in degrees</param>
         /// <param name="zenith">The zenith.</param>
         /// <returns>hour angle of sunrise in radians</returns>
-        private static double CalcHourAngleSunrise(double lat, double solarDec, double zenith)
+        private static double GetSunHourAngleAtSunrise(double lat, double solarDec, double zenith)
         {
-            double latRad = MathExtensions.ToRadians(lat);
-            double sdRad = MathExtensions.ToRadians(solarDec);
+            double latRad = lat.ToRadians();
+            double sdRad = solarDec.ToRadians();
 
-            // double HAarg =
-            // (Math.cos(MathExtensions.ToRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
-            // * Math.tan(sdRad));
-
-            double HA =
-                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith)) / (Math.Cos(latRad) * Math.Cos(sdRad)) -
-                           Math.Tan(latRad) * Math.Tan(sdRad)));
-            return HA; // in radians
+            return Math.Acos(Math.Cos(zenith.ToRadians()) / (Math.Cos(latRad) * Math.Cos(sdRad)) -
+                             Math.Tan(latRad) * Math.Tan(sdRad)); // in radians
         }
 
         /// <summary>
-        /// Calculate the hour angle of the sun at sunset for the latitude
+        /// Returns the <a href="http://en.wikipedia.org/wiki/Hour_angle">hour angle</a> of the sun at sunset for the
+	    /// latitude.
         /// </summary>
         /// <param name="lat">the latitude of observer in degrees</param>
         /// <param name="solarDec">the declination angle of sun in degrees</param>
         /// <param name="zenith">The zenith.</param>
         /// <returns>
-        /// the hour angle of sunset in radians
-        /// TODO: use - calcHourAngleSunrise implementation
+        /// the hour angle of sunset in radians.
         /// </returns>
-        private static double CalcHourAngleSunset(double lat, double solarDec, double zenith)
+        private static double GetSunHourAngleAtSunset(double lat, double solarDec, double zenith)
         {
-            double latRad = MathExtensions.ToRadians(lat);
-            double sdRad = MathExtensions.ToRadians(solarDec);
-
-            // double HAarg =
-            // (Math.cos(MathExtensions.ToRadians(zenith))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad)
-            // * Math.tan(sdRad));
-
-            double HA =
-                (Math.Acos(Math.Cos(MathExtensions.ToRadians(zenith)) / (Math.Cos(latRad) * Math.Cos(sdRad)) -
-                           Math.Tan(latRad) * Math.Tan(sdRad)));
-            return -HA; // in radians
+            return -GetSunHourAngleAtSunrise(lat, solarDec, zenith);// in radians
         }
 
         /// <summary>
-        /// Calculate the Universal Coordinated Time (UTC) of sunrise for the given
-        /// day at the given location on earth
+        /// Return the <a href="http://en.wikipedia.org/wiki/Celestial_coordinate_system">Solar Elevation</a> for the
+        /// horizontal coordinate system at the given location at the given time.Can be negative if the sun is below the
+        /// horizon.Not corrected for altitude.
+        ///
+        /// <param name="dateWithLocation">the date with location</param>
+        public static double GetSolarElevation(IDateWithLocation dateWithLocation)
+        {
+            double julianDay = GetJulianDay(dateWithLocation.Date);
+            double julianCenturies = GetJulianCenturiesFromJulianDay(julianDay);
+
+            double eot = GetEquationOfTime(julianCenturies);
+
+            double longitude = (dateWithLocation.Date.Hour + 12.0)
+                               + (dateWithLocation.Date.Minute + eot + dateWithLocation.Date.Second / 60.0) / 60.0;
+
+            longitude = -(longitude * 360.0 / 24.0) % 360.0;
+            double hourAngle_rad = (dateWithLocation.Location.Longitude - longitude).ToRadians();
+            double declination = GetSunDeclination(julianCenturies);
+            double dec_rad = declination.ToRadians();
+            double lat_rad = dateWithLocation.Location.Latitude.ToRadians();
+
+            return Math.Asin((Math.Sin(lat_rad) * Math.Sin(dec_rad))
+                             + (Math.Cos(lat_rad) * Math.Cos(dec_rad) * Math.Cos(hourAngle_rad))).ToDegree();
+
+        }
+
+        /// <summary>
+        /// Return the <a href="http://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
+        /// of sunrise for the given day at the given location on earth
         /// </summary>
-        /// <param name="JD">the julian day</param>
+        /// <param name="julianDay">the julian day</param>
         /// <param name="latitude">the latitude of observer in degrees</param>
         /// <param name="longitude">the longitude of observer in degrees</param>
         /// <param name="zenith">The zenith.</param>
         /// <returns>the time in minutes from zero Z</returns>
-        private static double CalcSunriseUtc(double JD, double latitude, double longitude, double zenith)
+        private static double GetSunriseUTC(double julianDay, double latitude, double longitude, double zenith)
         {
-            double t = CalcTimeJulianCent(JD);
+            double julianCenturies = GetJulianCenturiesFromJulianDay(julianDay);
 
-            // *** Find the time of solar noon at the location, and use
-            // that declination. This is better than start of the
-            // Julian day
+            // Find the time of solar noon at the location, and use that declination.
+            // This is better than start of the Julian day
 
-            double noonmin = CalcSolNoonUtc(t, longitude);
-            double tnoon = CalcTimeJulianCent(JD + noonmin / 1440.0);
+            double noonmin = GetSolarNoonUTC(julianCenturies, longitude);
+            double tnoon = GetJulianCenturiesFromJulianDay(julianDay + noonmin / 1440.0);
 
-            // *** First pass to approximate sunrise (using solar noon)
+            // First pass to approximate sunrise (using solar noon)
 
-            double eqTime = CalcEquationOfTime(tnoon);
-            double solarDec = CalcSunDeclination(tnoon);
-            double hourAngle = CalcHourAngleSunrise(latitude, solarDec, zenith);
+            double eqTime = GetEquationOfTime(tnoon);
+            double solarDec = GetSunDeclination(tnoon);
+            double hourAngle = GetSunHourAngleAtSunrise(latitude, solarDec, zenith);
 
-            double delta = longitude - MathExtensions.ToDegree(hourAngle);
+            double delta = longitude - hourAngle.ToDegree();
             double timeDiff = 4 * delta; // in minutes of time
             double timeUTC = 720 + timeDiff - eqTime; // in minutes
 
-            // *** Second pass includes fractional jday in gamma calc
+            // Second pass includes fractional jday in gamma calc
 
-            double newt = CalcTimeJulianCent(CalcJdFromJulianCent(t) + timeUTC / 1440.0);
-            eqTime = CalcEquationOfTime(newt);
-            solarDec = CalcSunDeclination(newt);
-            hourAngle = CalcHourAngleSunrise(latitude, solarDec, zenith);
-            delta = longitude - MathExtensions.ToDegree(hourAngle);
+            double newt = GetJulianCenturiesFromJulianDay(GetJulianDayFromJulianCenturies(julianCenturies) + timeUTC / 1440.0);
+            eqTime = GetEquationOfTime(newt);
+            solarDec = GetSunDeclination(newt);
+            hourAngle = GetSunHourAngleAtSunrise(latitude, solarDec, zenith);
+            delta = longitude - hourAngle.ToDegree();
             timeDiff = 4 * delta;
             timeUTC = 720 + timeDiff - eqTime; // in minutes
             return timeUTC;
         }
 
         ///<summary>
-        ///  calculate the Universal Coordinated Time (UTC) of solar noon for the
-        ///  given day at the given location on earth
+        /// Return the <a href="http://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
+	    /// of<a href="http://en.wikipedia.org/wiki/Noon#Solar_noon"> solar noon</a> for the given day at the given location
+        /// on earth.
         ///</summary>
-        ///<param name = "t">
+        ///<param name = "julianCenturies">
         ///  the number of Julian centuries since J2000.0 </param>
         ///<param name = "longitude">
         ///  the longitude of observer in degrees </param>
         ///<returns> the time in minutes from zero Z </returns>
-        private static double CalcSolNoonUtc(double t, double longitude)
+        private static double GetSolarNoonUTC(double julianCenturies, double longitude)
         {
             // First pass uses approximate solar noon to calculate eqtime
-            double tnoon = CalcTimeJulianCent(CalcJdFromJulianCent(t) + longitude / 360.0);
-            double eqTime = CalcEquationOfTime(tnoon);
+            double tnoon = GetJulianCenturiesFromJulianDay(GetJulianDayFromJulianCenturies(julianCenturies) + longitude / 360.0);
+            double eqTime = GetEquationOfTime(tnoon);
             double solNoonUTC = 720 + (longitude * 4) - eqTime; // min
 
-            double newt = CalcTimeJulianCent(CalcJdFromJulianCent(t) - 0.5 + solNoonUTC / 1440.0);
+            double newt = GetJulianCenturiesFromJulianDay(GetJulianDayFromJulianCenturies(julianCenturies) - 0.5 + solNoonUTC / 1440.0);
 
-            eqTime = CalcEquationOfTime(newt);
+            eqTime = GetEquationOfTime(newt);
             return 720 + (longitude * 4) - eqTime; // min
         }
 
         ///<summary>
-        ///  calculate the Universal Coordinated Time (UTC) of sunset for the given
-        ///  day at the given location on earth
+        /// Return the <a href="http://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
+	    /// of sunset for the given day at the given location on earth
         ///</summary>
-        ///<param name = "JD">
+        ///<param name = "julianDay">
         ///  the julian day </param>
         ///<param name = "latitude">
         ///  the latitude of observer in degrees </param>
@@ -498,22 +483,22 @@ namespace Zmanim.Calculator
         ///  longitude of observer in degrees </param>
         ///<param name = "zenith"> </param>
         ///<returns> the time in minutes from zero Z </returns>
-        private static double CalcSunsetUtc(double JD, double latitude, double longitude, double zenith)
+        private static double GetSunsetUTC(double julianDay, double latitude, double longitude, double zenith)
         {
-            double t = CalcTimeJulianCent(JD);
+            double t = GetJulianCenturiesFromJulianDay(julianDay);
 
-            // *** Find the time of solar noon at the location, and use
+            // Find the time of solar noon at the location, and use
             // that declination. This is better than start of the
             // Julian day
 
-            double noonmin = CalcSolNoonUtc(t, longitude);
-            double tnoon = CalcTimeJulianCent(JD + noonmin / 1440.0);
+            double noonmin = GetSolarNoonUTC(t, longitude);
+            double tnoon = GetJulianCenturiesFromJulianDay(julianDay + noonmin / 1440.0);
 
             // First calculates sunrise and approx length of day
 
-            double eqTime = CalcEquationOfTime(tnoon);
-            double solarDec = CalcSunDeclination(tnoon);
-            double hourAngle = CalcHourAngleSunset(latitude, solarDec, zenith);
+            double eqTime = GetEquationOfTime(tnoon);
+            double solarDec = GetSunDeclination(tnoon);
+            double hourAngle = GetSunHourAngleAtSunset(latitude, solarDec, zenith);
 
             double delta = longitude - MathExtensions.ToDegree(hourAngle);
             double timeDiff = 4 * delta;
@@ -521,10 +506,10 @@ namespace Zmanim.Calculator
 
             // first pass used to include fractional day in gamma calc
 
-            double newt = CalcTimeJulianCent(CalcJdFromJulianCent(t) + timeUTC / 1440.0);
-            eqTime = CalcEquationOfTime(newt);
-            solarDec = CalcSunDeclination(newt);
-            hourAngle = CalcHourAngleSunset(latitude, solarDec, zenith);
+            double newt = GetJulianCenturiesFromJulianDay(GetJulianDayFromJulianCenturies(t) + timeUTC / 1440.0);
+            eqTime = GetEquationOfTime(newt);
+            solarDec = GetSunDeclination(newt);
+            hourAngle = GetSunHourAngleAtSunset(latitude, solarDec, zenith);
 
             delta = longitude - MathExtensions.ToDegree(hourAngle);
             timeDiff = 4 * delta;
