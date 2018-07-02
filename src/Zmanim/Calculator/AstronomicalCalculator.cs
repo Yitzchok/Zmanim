@@ -77,7 +77,7 @@ namespace Zmanim.Calculator
             double earthRadius = 6356.9;
             // double elevationAdjustment = 0.0347 * Math.sqrt(elevation);
             double elevationAdjustment =
-                MathExtensions.ToDegree(Math.Acos(earthRadius/(earthRadius + (elevation/1000))));
+                MathExtensions.ToDegree(Math.Acos(earthRadius / (earthRadius + (elevation / 1000))));
             return elevationAdjustment;
         }
 
