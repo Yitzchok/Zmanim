@@ -36,12 +36,6 @@ namespace Zmanim.Calculator
     /// <author>Eliyahu Hershfeld</author>
     public class SunTimesCalculator : AstronomicalCalculator
     {
-        ///<summary>
-        ///  Default value for Sun's zenith and true rise/set
-        ///</summary>
-        public const double ZENITH = 90 + 50.0 / 60.0;
-
-
         // DEG_PER_HOUR is the number of degrees of longitude
         // that corresponds to one hour time difference.
         private const double DEG_PER_HOUR = 360.0 / 24.0;
