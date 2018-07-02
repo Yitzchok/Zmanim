@@ -102,16 +102,14 @@ namespace Zmanim.Calculator
         ///  elevation if available.
         ///</summary>
         ///<returns> The zenith adjusted to include the
-        ///  <seealso cref = "SolarRadius">sun's radius</seealso>,
-        ///  <seealso cref = "Refraction">refraction</seealso> and
-        ///  <seealso cref = "GetElevationAdjustment">elevation</seealso> adjustment.
+        ///  <seealso cref="SolarRadius">sun's radius</seealso>,
+        ///  <seealso cref="Refraction">refraction</seealso> and
+        ///  <seealso cref="GetElevationAdjustment">elevation</seealso> adjustment.
         ///</returns>
         internal virtual double AdjustZenith(double zenith, double elevation)
         {
             if (zenith == AstronomicalCalendar.GEOMETRIC_ZENITH)
-            {
-                zenith = zenith + (SolarRadius + Refraction + GetElevationAdjustment(elevation));
-            }
+                return zenith + (SolarRadius + Refraction + GetElevationAdjustment(elevation));
 
             return zenith;
         }
