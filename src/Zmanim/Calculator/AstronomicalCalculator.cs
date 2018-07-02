@@ -31,17 +31,6 @@ namespace Zmanim.Calculator
     /// <author>Eliyahu Hershfeld</author>
     public abstract class AstronomicalCalculator : IAstronomicalCalculator
     {
-        // private double refraction = 34.478885263888294 / 60d;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AstronomicalCalculator"/> class.
-        /// </summary>
-        protected AstronomicalCalculator()
-        {
-            SolarRadius = 16/60d;
-            Refraction = 34/60d;
-        }
-
         ///<summary>
         ///  getDefault method returns the default sun times calculation engine.
         ///</summary>
@@ -128,21 +117,22 @@ namespace Zmanim.Calculator
         }
 
         ///<summary>
-        ///  A method to allow overriding the default refraction of the calculator.
-        ///  TODO: At some point in the future, an AtmosphericModel or Refraction
-        ///  object that models the atmosphere of different locations might be used
-        ///  for increased accuracy.
+        /// Method to get the refraction value to be used when calculating sunrise and sunset.The default value is 34 arc
+        /// minutes. The<a href="http://emr.cs.iit.edu/home/reingold/calendar-book/second-edition/errata.pdf"> Errata and
+        /// Notes for Calendrical Calculations: The Millenium Eddition</a> by Edward M. Reingold and Nachum Dershowitz lists
+        /// the actual average refraction value as 34.478885263888294 or approximately 34' 29". The refraction value as well
+        /// as the solarRadius and elevation adjustment are added to the zenith used to calculate sunrise and sunset.
         ///</summary>
         ///<value>
         ///  The refraction in arc minutes. </value>
-        internal virtual double Refraction { get; set; }
+        protected double Refraction { get; set; } = 34 / 60d;
 
         ///<summary>
         ///  Method to set the sun's radius.
         ///</summary>
         ///<value>
         ///  The sun&apos;s radius in arc minutes. </value>
-        internal virtual double SolarRadius { get; set; }
+        protected double SolarRadius { get; set; } = 16 / 60d;
 
         /// <summary>
         /// A descriptive name of the algorithm.
