@@ -42,17 +42,14 @@ namespace Zmanim.Calculator
         ///   Gets the name of the calculator/.
         /// </summary>
         /// <value></value>
-        public override string CalculatorName
-        {
-            get { return "US Naval Almanac Algorithm"; }
-        }
+        public override string CalculatorName => "US Naval Almanac Algorithm";
 
         /// <summary>
         /// A method that calculates UTC sunrise as well as any time based on an
         /// angle above or below sunrise. This abstract method is implemented by the
         /// classes that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
         /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
@@ -71,34 +68,24 @@ namespace Zmanim.Calculator
         public override double GetUtcSunrise(IDateWithLocation dateWithLocation, double zenith,
                                              bool adjustForElevation)
         {
-            // zenith = adjustZenithForElevation(astronomicalCalendar, zenith,
-            // geoLocation.getElevation());
-            // double elevationAdjustment = this.getElevationAdjustment(zenith,
-            // geoLocation.getElevation());
-            // double refractionAdjustment = this.getRefraction(zenith);
-            // zenith = zenith + elevationAdjustment + refractionAdjustment;
-            if (adjustForElevation)
-                zenith = AdjustZenith(zenith, dateWithLocation.Location.Elevation);
-            else
-                zenith = AdjustZenith(zenith, 0);
-
+            double elevation = adjustForElevation ? dateWithLocation.Location.Elevation : 0;
+            double adjustedZenith = AdjustZenith(zenith, elevation);
 
             // step 1: First calculate the day of the year
-            // NOT NEEDED in this implementation
+            int dayOfYear = dateWithLocation.Date.DayOfYear;
 
             // step 2: convert the longitude to hour value and calculate an
             // approximate time
             double lngHour = dateWithLocation.Location.Longitude / 15;
 
-            double t = dateWithLocation.Date.DayOfYear + ((6 - lngHour) / 24); // use 18 for
-            // sunset instead
-            // of 6
+            double t = dayOfYear + ((6 - lngHour) / 24); // use 18 for
+            // sunset instead of 6
 
             // step 3: calculate the sun's mean anomaly
             double m = (0.9856*t) - 3.289;
 
             // step 4: calculate the sun's true longitude
-            double l = m + (1.916*Math.Sin(MathExtensions.ToRadians(m))) + (0.020*Math.Sin(MathExtensions.ToRadians(2*m))) +
+            double l = m + (1.916*Math.Sin(m.ToRadians())) + (0.020*Math.Sin((2*m).ToRadians())) +
                        282.634;
             while (l < 0)
             {
@@ -112,7 +99,7 @@ namespace Zmanim.Calculator
             }
 
             // step 5a: calculate the sun's right ascension
-            double RA = MathExtensions.ToDegree(Math.Atan(0.91764*Math.Tan(MathExtensions.ToRadians(l))));
+            double RA = Math.Atan(0.91764*Math.Tan(l.ToRadians())).ToDegree();
 
             while (RA < 0)
             {
@@ -134,26 +121,19 @@ namespace Zmanim.Calculator
             RA /= 15;
 
             // step 6: calculate the sun's declination
-            double sinDec = 0.39782*Math.Sin(MathExtensions.ToRadians(l));
+            double sinDec = 0.39782*Math.Sin(l.ToRadians());
             double cosDec = Math.Cos(Math.Asin(sinDec));
 
+            var latitudeRadians = dateWithLocation.Location.Latitude.ToRadians();
             // step 7a: calculate the sun's local hour angle
-            double cosH = (Math.Cos(MathExtensions.ToRadians(zenith)) -
-                           (sinDec * Math.Sin(MathExtensions.ToRadians(dateWithLocation.Location.Latitude)))) /
-                          (cosDec * Math.Cos(MathExtensions.ToRadians(dateWithLocation.Location.Latitude)));
-
-            // the following line would throw an Exception if the sun never rose.
-            // this is not needed since the calculation will return a Double.NaN
-            // if (cosH > 1) throw new Exception("doesnthappen");
-
-            // FOR SUNSET use the following instead of the above if statement.
-            // if (cosH < -1)
+            double cosH = (Math.Cos(adjustedZenith.ToRadians()) -
+                           (sinDec * Math.Sin(latitudeRadians))) /
+                          (cosDec * Math.Cos(latitudeRadians));
 
             // step 7b: finish calculating H and convert into hours
-            double H = 360 - MathExtensions.ToDegree(Math.Acos(cosH));
+            double H = 360 - Math.Acos(cosH).ToDegree();
 
             // FOR SUNSET remove "360 - " from the above
-
             H = H/15;
 
             // step 8: calculate local mean time
@@ -180,7 +160,7 @@ namespace Zmanim.Calculator
         /// above or below sunset. This abstract method is implemented by the classes
         /// that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
         /// typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for the
         /// calculation uses geometric zenith of 90°; and
