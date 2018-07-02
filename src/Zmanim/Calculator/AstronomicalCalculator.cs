@@ -120,17 +120,33 @@ namespace Zmanim.Calculator
         /// Notes for Calendrical Calculations: The Millenium Eddition</a> by Edward M. Reingold and Nachum Dershowitz lists
         /// the actual average refraction value as 34.478885263888294 or approximately 34' 29". The refraction value as well
         /// as the solarRadius and elevation adjustment are added to the zenith used to calculate sunrise and sunset.
+        ///
+        /// Allow overriding the default refraction of the calculator. TODO: At some point in the future, an
+	    /// AtmosphericModel or Refraction object that models the atmosphere of different locations might be used for
+	    /// increased accuracy.
         ///</summary>
         ///<value>
         ///  The refraction in arc minutes. </value>
-        protected double Refraction { get; set; } = 34 / 60d;
+        public double Refraction { get; set; } = 34 / 60d;
 
         ///<summary>
-        ///  Method to set the sun's radius.
+        /// Get or Set the sun's radius. The default value is 16 arc minutes. The sun's radius as it appears from earth is
+        /// almost universally given as 16 arc minutes but in fact it differs by the time of the year.At the<a
+        /// href= "http://en.wikipedia.org/wiki/Perihelion" > perihelion </ a > it has an apparent radius of 16.293, while at the
+        /// <a href = "http://en.wikipedia.org/wiki/Aphelion" > aphelion </ a > it has an apparent radius of 15.755. There is little
+        /// affect for most location, but at high and low latitudes the difference becomes more apparent.My Calculations for
+        /// the difference at the location of the<a href="http://www.rog.nmm.ac.uk"> Royal Observatory, Greenwich</a> show
+        /// only a 4.494 second difference between the perihelion and aphelion radii, but moving into the arctic circle the
+        /// difference becomes more noticeable.Tests for Tromso, Norway (latitude 69.672312, longitude 19.049787) show that
+        /// on May 17, the rise of the midnight sun, a 2 minute 23 second difference is observed between the perihelion and
+        /// aphelion radii using the USNO algorithm, but only 1 minute and 6 seconds difference using the NOAA algorithm.
+        /// Areas farther north show an even greater difference. Note that these test are not real valid test cases because
+        /// they show the extreme difference on days that are not the perihelion or aphelion, but are shown for illustrative
+        /// purposes only.
         ///</summary>
         ///<value>
         ///  The sun&apos;s radius in arc minutes. </value>
-        protected double SolarRadius { get; set; } = 16 / 60d;
+        public double SolarRadius { get; set; } = 16 / 60d;
 
         /// <summary>
         /// A descriptive name of the algorithm.
