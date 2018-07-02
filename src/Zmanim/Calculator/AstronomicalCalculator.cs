@@ -157,7 +157,7 @@ namespace Zmanim.Calculator
         /// angle above or below sunrise. This abstract method is implemented by the
         /// classes that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
         /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
@@ -180,7 +180,7 @@ namespace Zmanim.Calculator
         /// above or below sunset. This abstract method is implemented by the classes
         /// that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
         /// typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for the
         /// calculation uses geometric zenith of 90°; and
