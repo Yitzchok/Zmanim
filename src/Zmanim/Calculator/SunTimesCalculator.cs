@@ -289,18 +289,21 @@ namespace Zmanim.Calculator
             return localHour + sunRightAscensionHours - (0.06571 * approxTimeDays) - 6.622;
         }
 
-        ///<summary>
-        ///  Get sunrise or sunset time in UTC, according to flag.
-        ///</summary>
-        ///<param name = "zenith">Sun's zenith, in degrees</param>
-        ///<param name = "type">type of calculation to carry out <see cref = "TYPE_SUNRISE" /> or
-        ///  <see cref = "TYPE_SUNRISE" />.
-        ///</param>
-        ///<returns> the time as a double. If an error was encountered in the
-        ///  calculation (expected behavior for some locations such as near
-        ///  the poles, <see cref = "Double.NaN" /> will be returned. </returns>
+        /// <summary>
+        ///   Get sunrise or sunset time in UTC, according to flag.
+        /// </summary>
+        /// <param name="date">The date</param>
+        /// <param name="location">The location</param>
+        /// <param name="zenith">Sun's zenith, in degrees</param>
+        /// <param name="type">type of calculation to carry out <see cref="TYPE_SUNRISE" /> or
+        ///   <see cref="TYPE_SUNRISE" />.
+        /// </param>
+        /// <returns> the time as a double. If an error was encountered in the
+        ///   calculation (expected behavior for some locations such as near
+        ///   the poles, <see cref="Double.NaN" /> will be returned. </returns>
         private static double GetTimeUtc(
-            DateTime date, IGeoLocation location, 
+            DateTime date, 
+            IGeoLocation location,
             double zenith, int type)
         {
             int dayOfYear = date.DayOfYear;
