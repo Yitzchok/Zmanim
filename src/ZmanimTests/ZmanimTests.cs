@@ -2,6 +2,7 @@
 using System;
 using NUnit.Framework;
 using Zmanim;
+using Zmanim.Calculator;
 using Zmanim.TimeZone;
 using Zmanim.TzDatebase;
 using Zmanim.Utilities;
@@ -11,11 +12,12 @@ namespace ZmanimTests
     [TestFixture]
     public class ZmanimTest
     {
-        
-        //We can use these test when removing the depenency to Java (IKVM)
-        //To make sure that the code stayes the same.
-
         private ComplexZmanimCalendar calendar;
+
+        protected virtual AstronomicalCalculator GetCalculator()
+        {
+            return new SunTimesCalculator();
+        }
 
         [SetUp]
         public void Setup()
@@ -26,9 +28,11 @@ namespace ZmanimTests
             double elevation = 0; //optional elevation
             ITimeZone timeZone = new OlsonTimeZone("America/New_York");
             GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
-            ComplexZmanimCalendar czc = new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location);
-
-            calendar = czc;
+            calendar = 
+                new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location)
+                {
+                    AstronomicalCalculator = GetCalculator()
+                };
         }
 
 

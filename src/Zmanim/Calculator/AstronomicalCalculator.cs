@@ -31,17 +31,6 @@ namespace Zmanim.Calculator
     /// <author>Eliyahu Hershfeld</author>
     public abstract class AstronomicalCalculator : IAstronomicalCalculator
     {
-        // private double refraction = 34.478885263888294 / 60d;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AstronomicalCalculator"/> class.
-        /// </summary>
-        protected AstronomicalCalculator()
-        {
-            SolarRadius = 16/60d;
-            Refraction = 34/60d;
-        }
-
         ///<summary>
         ///  getDefault method returns the default sun times calculation engine.
         ///</summary>
@@ -52,6 +41,8 @@ namespace Zmanim.Calculator
         {
             return new SunTimesCalculator();
         }
+
+        double EarthRadius => 6356.9;
 
         ///<summary>
         ///  Method to return the adjustment to the zenith required to account for the
@@ -83,13 +74,9 @@ namespace Zmanim.Calculator
         ///<param name = "elevation">
         ///  elevation in Meters. </param>
         ///<returns> the adjusted zenith </returns>
-        internal virtual double GetElevationAdjustment(double elevation)
+        double GetElevationAdjustment(double elevation)
         {
-            double earthRadius = 6356.9;
-            // double elevationAdjustment = 0.0347 * Math.sqrt(elevation);
-            double elevationAdjustment =
-                MathExtensions.ToDegree(Math.Acos(earthRadius/(earthRadius + (elevation/1000))));
-            return elevationAdjustment;
+            return Math.Acos(EarthRadius / (EarthRadius + (elevation / 1000))).ToDegree();
         }
 
         ///<summary>
@@ -113,36 +100,51 @@ namespace Zmanim.Calculator
         ///  elevation if available.
         ///</summary>
         ///<returns> The zenith adjusted to include the
-        ///  <seealso cref = "SolarRadius">sun's radius</seealso>,
-        ///  <seealso cref = "Refraction">refraction</seealso> and
-        ///  <seealso cref = "GetElevationAdjustment">elevation</seealso> adjustment.
+        ///  <seealso cref="SolarRadius">sun's radius</seealso>,
+        ///  <seealso cref="Refraction">refraction</seealso> and
+        ///  <seealso cref="GetElevationAdjustment">elevation</seealso> adjustment.
         ///</returns>
-        internal virtual double AdjustZenith(double zenith, double elevation)
+        protected double AdjustZenith(double zenith, double elevation)
         {
             if (zenith == AstronomicalCalendar.GEOMETRIC_ZENITH)
-            {
-                zenith = zenith + (SolarRadius + Refraction + GetElevationAdjustment(elevation));
-            }
+                return zenith + (SolarRadius + Refraction + GetElevationAdjustment(elevation));
 
             return zenith;
         }
 
         ///<summary>
-        ///  A method to allow overriding the default refraction of the calculator.
-        ///  TODO: At some point in the future, an AtmosphericModel or Refraction
-        ///  object that models the atmosphere of different locations might be used
-        ///  for increased accuracy.
+        /// Method to get the refraction value to be used when calculating sunrise and sunset.The default value is 34 arc
+        /// minutes. The<a href="http://emr.cs.iit.edu/home/reingold/calendar-book/second-edition/errata.pdf"> Errata and
+        /// Notes for Calendrical Calculations: The Millenium Eddition</a> by Edward M. Reingold and Nachum Dershowitz lists
+        /// the actual average refraction value as 34.478885263888294 or approximately 34' 29". The refraction value as well
+        /// as the solarRadius and elevation adjustment are added to the zenith used to calculate sunrise and sunset.
+        ///
+        /// Allow overriding the default refraction of the calculator. TODO: At some point in the future, an
+	    /// AtmosphericModel or Refraction object that models the atmosphere of different locations might be used for
+	    /// increased accuracy.
         ///</summary>
         ///<value>
         ///  The refraction in arc minutes. </value>
-        internal virtual double Refraction { get; set; }
+        public double Refraction { get; set; } = 34 / 60d;
 
         ///<summary>
-        ///  Method to set the sun's radius.
+        /// Get or Set the sun's radius. The default value is 16 arc minutes. The sun's radius as it appears from earth is
+        /// almost universally given as 16 arc minutes but in fact it differs by the time of the year.At the<a
+        /// href= "http://en.wikipedia.org/wiki/Perihelion" > perihelion </ a > it has an apparent radius of 16.293, while at the
+        /// <a href = "http://en.wikipedia.org/wiki/Aphelion" > aphelion </ a > it has an apparent radius of 15.755. There is little
+        /// affect for most location, but at high and low latitudes the difference becomes more apparent.My Calculations for
+        /// the difference at the location of the<a href="http://www.rog.nmm.ac.uk"> Royal Observatory, Greenwich</a> show
+        /// only a 4.494 second difference between the perihelion and aphelion radii, but moving into the arctic circle the
+        /// difference becomes more noticeable.Tests for Tromso, Norway (latitude 69.672312, longitude 19.049787) show that
+        /// on May 17, the rise of the midnight sun, a 2 minute 23 second difference is observed between the perihelion and
+        /// aphelion radii using the USNO algorithm, but only 1 minute and 6 seconds difference using the NOAA algorithm.
+        /// Areas farther north show an even greater difference. Note that these test are not real valid test cases because
+        /// they show the extreme difference on days that are not the perihelion or aphelion, but are shown for illustrative
+        /// purposes only.
         ///</summary>
         ///<value>
         ///  The sun&apos;s radius in arc minutes. </value>
-        internal virtual double SolarRadius { get; set; }
+        public double SolarRadius { get; set; } = 16 / 60d;
 
         /// <summary>
         /// A descriptive name of the algorithm.
@@ -155,7 +157,7 @@ namespace Zmanim.Calculator
         /// angle above or below sunrise. This abstract method is implemented by the
         /// classes that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90 degrees. for
         /// sunrise typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for
         /// the calculation uses geometric zenith of 90°; and
@@ -178,7 +180,7 @@ namespace Zmanim.Calculator
         /// above or below sunset. This abstract method is implemented by the classes
         /// that extend this class.
         /// </summary>
-        /// <param name="astronomicalCalendar">Used to calculate day of year.</param>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
         /// <param name="zenith">the azimuth below the vertical zenith of 90°;. For sunset
         /// typically the <see cref="AstronomicalCalculator.AdjustZenith">zenith</see> used for the
         /// calculation uses geometric zenith of 90°; and
