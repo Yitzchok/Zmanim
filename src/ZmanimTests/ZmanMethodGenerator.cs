@@ -3,28 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using Zmanim;
-using Zmanim.TimeZone;
-using Zmanim.TzDatebase;
-using Zmanim.Utilities;
 using ZmanimTests.TestGeneration.TestFormatters;
 using ZmanimTests.TestGeneration.TestMethodGenerators;
 
 namespace ZmanimTests
 {
-    public class ZmanMethodGenerator
+    public class ZmanMethodGenerator : BaseZmanimTests
     {
-        public ComplexZmanimCalendar GetCalendar()
-        {
-            String locationName = "Lakewood, NJ";
-            double latitude = 40.09596; //Lakewood, NJ
-            double longitude = -74.22213; //Lakewood, NJ
-            double elevation = 0; //optional elevation
-            ITimeZone timeZone = new OlsonTimeZone("America/New_York");
-            GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
-            ComplexZmanimCalendar czc = new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location);
-            return czc;
-        }
-
         [Test, Ignore("Generate Tests")]
         public void GenerateTestsFixtures()
         {

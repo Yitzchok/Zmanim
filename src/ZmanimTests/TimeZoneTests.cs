@@ -21,5 +21,23 @@ namespace ZmanimTests
 
             Assert.That(sunrise.Value.Hour, Is.EqualTo(6));
         }
+
+        [Test]
+        public void Check_is_offset_timezone_working()
+        {
+            String locationName = "Lakewood, NJ";
+            double latitude = 40.09596; //Lakewood, NJ
+            double longitude = -74.22213; //Lakewood, NJ
+            double elevation = 0; //optional elevation
+            var timeZone = new OffsetTimeZone(new TimeSpan(0, 0, -14400));
+            var location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
+            var czc = new ComplexZmanimCalendar(new DateTime(2010, 4, 2), location);
+
+            var zman = czc.GetSunrise();
+
+            Assert.That(zman, Is.EqualTo(
+                    new DateTime(2010, 4, 2, 6, 39, 41, 832)
+                ));
+        }
     }
 }
