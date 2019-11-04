@@ -575,22 +575,6 @@ namespace Zmanim
             return AstronomicalCalculator.GetUtcSunset(DateWithLocation, zenith, false);
         }
 
-        ///<summary>
-        ///  A method that adds time zone offset and daylight savings time to the raw
-        ///  UTC time.
-        ///</summary>
-        ///<param name = "time">
-        ///  The UTC time to be adjusted. </param>
-        ///<returns> The time adjusted for the time zone offset and daylight savings
-        ///  time. </returns>
-        private double GetOffsetTime(double time)
-        {
-            // be nice to Newfies and use a double
-            long gmtOffset = DateWithLocation.Location.TimeZone.UtcOffset(DateWithLocation.Date) / (60 * MINUTE_MILLIS);
-
-            return time + gmtOffset;
-        }
-
         /// <summary>
         /// Method to return a temporal (solar) hour. The day from sunrise to sunset
         /// is split into 12 equal parts with each one being a temporal hour.
@@ -688,7 +672,6 @@ namespace Zmanim
             if (double.IsNaN(time))
                 return null;
 
-            time = GetOffsetTime(time);
             time = (time + 240) % 24; // the calculators sometimes return a double
             // that is negative or slightly greater than 24
 
@@ -700,8 +683,15 @@ namespace Zmanim
             var seconds = (int)(time *= 60);
             time -= seconds; // milliseconds
 
-            return new DateTime(DateWithLocation.Date.Year, DateWithLocation.Date.Month, DateWithLocation.Date.Day,
-                hours, minutes, seconds, (int)(time * 1000));
+            var date = DateWithLocation.Date;
+
+            var utcDateTime = new DateTime(
+                date.Year, date.Month, date.Day,
+                hours, minutes, seconds, (int)(time * 1000),
+                DateTimeKind.Utc);
+
+            long localOffset = DateWithLocation.Location.TimeZone.UtcOffset(utcDateTime);
+            return utcDateTime.AddMilliseconds(localOffset);
         }
 
         /// <summary>
