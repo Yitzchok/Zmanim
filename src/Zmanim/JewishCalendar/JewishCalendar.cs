@@ -1080,12 +1080,38 @@ namespace Zmanim.JewishCalendar
         }
 
         /// <summary>
-        /// Gets the current <seealso cref="Parsha"/> based on the date
+        /// Gets the current <seealso cref="Parsha"/> outside israel, based on the date
         /// </summary>
         /// <param name="date">the date of the shabbos</param>
-        /// <param name="inIsrael">true if in israel, default is false</param>
+        /// <returns>The current parsha outside israel if its a shabbos and there is a parsha, else returns <seealso cref="Parsha.NONE"/></returns>
+        public Parsha GetParshah(DateTime date)
+        {
+            date = new DateTime(date.Year, date.Month, date.Day, 14, 0, 0);
+            if (date.DayOfWeek != DayOfWeek.Saturday)
+            {
+                return Parsha.NONE;
+            }
+
+            int yearType = GetParshaYearType(date, false);
+            int roshHashanaDayOfWeek = (int)base.GetDayOfWeek(base.ToDateTime(base.GetYear(date), 1, 1, 14, 0, 0, 0));
+            TimeSpan daysSinceRoshHashana = date - base.ToDateTime(base.GetYear(date), 1, 1, 14, 0, 0, 0);
+            int day = roshHashanaDayOfWeek + daysSinceRoshHashana.Days + 1;
+
+
+            if (yearType >= 0)
+            { // negative year should be impossible, but lets cover all bases
+                return ParshaList[yearType, day / 7];
+            }
+            return Parsha.NONE; //keep the compiler happy
+        }
+
+        /// <summary>
+        /// Gets the current <seealso cref="Parsha"/> in or outside israel, based on the date
+        /// </summary>
+        /// <param name="date">the date of the shabbos</param>
+        /// <param name="inIsrael">true if in israel</param>
         /// <returns>The current parsha if its a shabbos and there is a parsha, else returns <seealso cref="Parsha.NONE"/></returns>
-        public Parsha GetParshah(DateTime date, bool inIsrael = false)
+        public Parsha GetParshah(DateTime date, bool inIsrael)
         {
             date = new DateTime(date.Year, date.Month, date.Day, 14, 0, 0);
             if (date.DayOfWeek != DayOfWeek.Saturday)
