@@ -1020,6 +1020,8 @@ namespace Zmanim.JewishCalendar
                             return 11;
                         }
                         break;
+                    default:
+                        throw new Exception($"{roshHashanaDayOfWeek} threw an exception");
                 }
             }
             else
@@ -1070,6 +1072,8 @@ namespace Zmanim.JewishCalendar
                             return 5;
                         }
                         break;
+                        default:
+                        throw new Exception($"{roshHashanaDayOfWeek} threw an exception");
                 }
             }
             return -1; //keep the compiler happy
