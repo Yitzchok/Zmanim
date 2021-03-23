@@ -15,19 +15,12 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     <PackageLicenseUrl>https://www.gnu.org/copyleft/lesser.html</PackageLicenseUrl>
     <PackageProjectUrl>http://www.kosherjava.com/zmanim-project/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
-    <PackageReleaseNotes>Now we support
-      .NETFramework 2.0 (some limits)
-      .NETFramework 3.5
-      .NETFramework 4.0
-      .NETFramework 4.5
-      .NETStandard 1.0
-      .NETStandard 1.3
-      .NETStandard 2.0
-      Portable Class Library (.NETFramework 4.0, Silverlight 5.0, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
-      Portable Class Library (.NETFramework 4.5, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)
+    <PackageReleaseNotes>
+      ### Added
+      - Parsha functionality - thanks mordechairoth
     </PackageReleaseNotes>
-    <AssemblyVersion>1.4.1.0</AssemblyVersion>
-    <FileVersion>1.4.1.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
     <AssemblyTitle>Zmanim</AssemblyTitle>
     <Title>Jewish Zmanim Framework</Title>
     <PackageTags>zmanim jewish torah zemanim zman zeman</PackageTags>
@@ -41,8 +34,16 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
-    <DocumentationFile>C:\Dev\Projects\Zmanim\src\Zmanim\Zmanim.xml</DocumentationFile>
+    <DocumentationFile>Zmanim.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="System\Reflection\AssemblyMetadataAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net20' OR '$(TargetFramework)'=='net35' OR '$(TargetFramework)'=='net40' OR '$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8' OR '$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
+    <Compile Include="System\Reflection\AssemblyMetadataAttribute.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
@@ -64,8 +65,8 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     <DefineConstants>NETSTANDARD1_3;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard1.3'">
-    
   </ItemGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
     <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>

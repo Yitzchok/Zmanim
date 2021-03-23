@@ -4,7 +4,7 @@
     <!--<TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;net451;net452;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;</TargetFrameworks>-->
     <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;net451;net452;netcoreapp2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
-    <Version>1.4.1</Version>
+    <Version>1.5.0</Version>
     <PackageId>ZmanimTests</PackageId>
     <Product>Zmanim Tests</Product>
     <Description>Zmanim Test Library</Description>
