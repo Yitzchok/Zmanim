@@ -12,8 +12,8 @@
     <PackageProjectUrl>https://github.com/Yitzchok/Zmanim/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
     <PackageReleaseNotes>NodaTime Support</PackageReleaseNotes>
-    <AssemblyVersion>1.4.1.0</AssemblyVersion>
-    <FileVersion>1.4.1.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
 
     <MinClientVersion>2.12</MinClientVersion>
     
