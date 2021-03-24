@@ -14,6 +14,7 @@
     <PackageReleaseNotes>NodaTime Support</PackageReleaseNotes>
     <AssemblyVersion>1.5.0.0</AssemblyVersion>
     <FileVersion>1.5.0.0</FileVersion>
+    <VersionPrefix>1.5.0.0</VersionPrefix>
 
     <MinClientVersion>2.12</MinClientVersion>
     

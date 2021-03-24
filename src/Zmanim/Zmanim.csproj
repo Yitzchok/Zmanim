@@ -21,6 +21,7 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     </PackageReleaseNotes>
     <AssemblyVersion>1.5.0.0</AssemblyVersion>
     <FileVersion>1.5.0.0</FileVersion>
+    <VersionPrefix>1.5.0.0</VersionPrefix>
     <AssemblyTitle>Zmanim</AssemblyTitle>
     <Title>Jewish Zmanim Framework</Title>
     <PackageTags>zmanim jewish torah zemanim zman zeman</PackageTags>
