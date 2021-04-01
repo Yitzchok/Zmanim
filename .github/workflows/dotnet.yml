@@ -31,11 +31,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release -p:Deterministic=true -p:ContinuousIntegrationBuild=true
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack --output nupkgs --configuration Release
+      run: dotnet pack --output nupkgs --no-build
     - uses: actions/upload-artifact@v2
       with:
         name: nupkgs

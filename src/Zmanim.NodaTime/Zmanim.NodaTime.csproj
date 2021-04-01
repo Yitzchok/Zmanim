@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/Yitzchok/Zmanim/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
     <PackageReleaseNotes>NodaTime Support</PackageReleaseNotes>
-
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <MinClientVersion>2.12</MinClientVersion>
     
     <!-- Disabled because SourceLink isn't referenced to calculate paths -->

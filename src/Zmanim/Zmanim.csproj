@@ -25,9 +25,9 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     <Title>Jewish Zmanim Framework</Title>
     <PackageTags>zmanim jewish torah zemanim zman zeman</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RootNamespace>Zmanim</RootNamespace>
-
     <AssemblyName>Zmanim</AssemblyName>
     <MinClientVersion>2.12</MinClientVersion>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
