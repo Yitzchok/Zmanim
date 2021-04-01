@@ -4,8 +4,6 @@ next-version: 1.5.0
 branches:
   main:
     regex: ^master$
-  master:
-    regex: ^master$
   pull-request:
     tag: pr
 ignore:
