@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'==''">net45;netstandard1.3;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'==''">netstandard1.3;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
 
     <PackageId>Zmanim.NodaTime</PackageId>

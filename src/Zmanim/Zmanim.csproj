@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net45;net40;net20;netstandard1.0;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">netstandard1.0;netstandard1.3;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
 
     <PackageId>Zmanim</PackageId>
@@ -18,6 +18,8 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     <PackageReleaseNotes>
       ### Added
       - Parsha functionality - thanks mordechairoth
+      ### Removed
+      - Support for .NET Framework 2.0, 4.0
     </PackageReleaseNotes>
     <AssemblyTitle>Zmanim</AssemblyTitle>
     <Title>Jewish Zmanim Framework</Title>
@@ -31,18 +33,6 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
-    <DocumentationFile>Zmanim.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="System\Reflection\AssemblyMetadataAttribute.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net20' OR '$(TargetFramework)'=='net35' OR '$(TargetFramework)'=='net40'">
-    <Compile Include="System\Reflection\AssemblyMetadataAttribute.cs" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="GitVersion.MsBuild" Version="5.6.7">
@@ -51,9 +41,6 @@ Please note: due to atmospheric conditions (pressure, humidity and other conditi
     </PackageReference>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net20'">
-    <DefineConstants>NET20;NO_LINQ;NO_COM_ATTRIBUTES;$(AdditionalConstants)</DefineConstants>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.0'">
     <DefineConstants>NETSTANDARD1_0;NOHEBREWCALENDAR;NO_FIND_SYSTEM_TIMEZONE_BY_ID;NO_TYPE_GET_METHODS;$(AdditionalConstants)</DefineConstants>
   </PropertyGroup>
