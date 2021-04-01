@@ -37,3 +37,4 @@ SVN
 .svn
 .vs/
 src/Zmanim/Zmanim.xml
+*.nupkg
