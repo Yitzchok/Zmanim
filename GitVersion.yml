@@ -2,7 +2,7 @@ assembly-versioning-scheme: MajorMinorPatch
 mode: ContinuousDelivery
 next-version: 1.5.0
 branches:
-  master:
+  main:
     regex: ^master$
   pull-request:
     tag: pr
