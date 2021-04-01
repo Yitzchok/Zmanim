@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'==''">net45;netstandard1.3;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'==''">netstandard1.3;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(NodaTimeLibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
 
     <PackageId>Zmanim.NodaTime</PackageId>
@@ -12,9 +12,7 @@
     <PackageProjectUrl>https://github.com/Yitzchok/Zmanim/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yitzchok/Zmanim</RepositoryUrl>
     <PackageReleaseNotes>NodaTime Support</PackageReleaseNotes>
-    <AssemblyVersion>1.4.1.0</AssemblyVersion>
-    <FileVersion>1.4.1.0</FileVersion>
-
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <MinClientVersion>2.12</MinClientVersion>
     
     <!-- Disabled because SourceLink isn't referenced to calculate paths -->
@@ -26,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="2.3.0" />
+    <PackageReference Include="NodaTime" Version="2.4.13" />
+    <PackageReference Include="GitVersion.MsBuild" Version="5.6.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

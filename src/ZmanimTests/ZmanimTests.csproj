@@ -1,10 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!--<TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;net451;net452;net40;net35;net20;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0</TargetFrameworks>-->
-    <!--<TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;net451;net452;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;</TargetFrameworks>-->
-    <TargetFrameworks Condition="'$(TestFrameworks)'==''">net46;net451;net452;netcoreapp2.0;</TargetFrameworks>
-    <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
-    <Version>1.4.1</Version>
+    <TargetFramework>net5.0</TargetFramework>
     <PackageId>ZmanimTests</PackageId>
     <Product>Zmanim Tests</Product>
     <Description>Zmanim Test Library</Description>
@@ -18,13 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
     <ProjectReference Include="..\Zmanim.NodaTime\Zmanim.NodaTime.csproj" />
     <ProjectReference Include="..\Zmanim\Zmanim.csproj" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.10.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
   </ItemGroup>
 </Project>

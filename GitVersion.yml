@@ -1,0 +1,10 @@
+assembly-versioning-scheme: MajorMinorPatch
+mode: ContinuousDelivery
+branches:
+  main:
+    regex: ^master$
+  pull-request:
+    tag: pr
+ignore:
+  sha: []
+merge-message-formats: {}
