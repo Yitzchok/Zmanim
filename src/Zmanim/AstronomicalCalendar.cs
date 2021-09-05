@@ -688,7 +688,7 @@ namespace Zmanim
             var utcDateTime = new DateTime(
                 date.Year, date.Month, date.Day,
                 hours, minutes, seconds, (int)(time * 1000),
-                DateTimeKind.Utc);
+                DateTimeKind.Unspecified);
 
             long localOffset = DateWithLocation.Location.TimeZone.UtcOffset(utcDateTime);
             return utcDateTime.AddMilliseconds(localOffset);
