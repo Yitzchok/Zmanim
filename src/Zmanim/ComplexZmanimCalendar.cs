@@ -3084,5 +3084,157 @@ namespace Zmanim
             num += (0x25 * num) + DateWithLocation.Location.GetHashCode();
             return (num + ((0x25 * num) + AstronomicalCalculator.GetHashCode()));
         }
+         /// Below are Methods added to kosherjava and not yet ported to NET            
+        protected internal const double ZENITH_19_DEGREES = GEOMETRIC_ZENITH + 19;
+        protected internal const double ZENITH_16_POINT_9 = GEOMETRIC_ZENITH + 16.9;
+        protected internal const double ZENITH_MINUS_2_POINT_1 = GEOMETRIC_ZENITH - 2.1;
+        protected internal const double ZENITH_MINUS_2_POINT_8 = GEOMETRIC_ZENITH - 2.8;
+        protected internal const double ZENITH_MINUS_3_POINT_05 = GEOMETRIC_ZENITH - 3.05;
+        protected internal const double ZENITH_1_POINT_583 = GEOMETRIC_ZENITH + 1.583;
+        protected internal const double ZENITH_7_POINT_65 = GEOMETRIC_ZENITH + 7.65;
+        protected internal const double ZENITH_9_POINT_5 = GEOMETRIC_ZENITH + 9.5;
+        protected internal const double ZENITH_6_DEGREES = GEOMETRIC_ZENITH + 6;
+        protected internal const double ZENITH_3_POINT_8 = GEOMETRIC_ZENITH + 3.8;
+        protected internal const double ZENITH_6_POINT_45 = GEOMETRIC_ZENITH + 6.45;
+        protected internal const double ZENITH_7_POINT_67 = GEOMETRIC_ZENITH + 7.67;
+        protected internal const double ZENITH_9_POINT_3 = GEOMETRIC_ZENITH + 9.3;
+        protected internal const double ZENITH_9_POINT_75 = GEOMETRIC_ZENITH + 9.75;
+
+        public virtual DateTime? GetAlos19Degrees()
+        {
+            return GetSunriseOffsetByDegrees(ZENITH_19_DEGREES);
+        }
+        public virtual DateTime? GetBainHasmashosYereim13Point5Minutes()
+        {
+            return GetTimeOffset(GetSunset(), -13.5 * MINUTE_MILLIS);
+        }
+        public virtual DateTime? GetBainHasmashosYereim16Point875Minutes()
+        {
+            return GetTimeOffset(GetSunset(), -16.875 * MINUTE_MILLIS);
+        }
+        public virtual DateTime? GetBainHasmashosYereim18Minutes()
+        {
+            return GetTimeOffset(GetSunset(), -18 * MINUTE_MILLIS);
+        }
+        public virtual DateTime? GetBainHasmashosYereim2Point1Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_MINUS_2_POINT_1);
+        }
+        public virtual DateTime? GetBainHasmashosYereim2Point8Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_MINUS_2_POINT_8);
+        }
+        public virtual DateTime? GetBainHasmashosYereim3Point05Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_MINUS_3_POINT_05);
+        }
+        public virtual DateTime? GetAlosBaalHatanya()
+        {
+            return GetSunriseOffsetByDegrees(ZENITH_16_POINT_9);
+        }
+        public virtual DateTime? GetSunriseBaalHatanya()
+        {
+            return GetSunriseOffsetByDegrees(ZENITH_1_POINT_583);
+        }
+        public virtual DateTime? GetSunsetBaalHatanya()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_1_POINT_583);
+        }
+        public virtual DateTime? GetMinchaGedolaBaalHatanya()
+        {
+            return GetMinchaGedola(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual DateTime? GetMinchaGedolaBaalHatanyaGreaterThan30()
+        {
+            var minchaGedola = GetMinchaGedolaBaalHatanya();
+            var minchaGedola30Minutes = GetMinchaGedola30Minutes();
+
+            if (minchaGedola30Minutes == null || minchaGedola == null)
+                return null;
+
+            return minchaGedola30Minutes.Value.CompareTo(minchaGedola.Value) > 0
+                       ? minchaGedola30Minutes
+                       : minchaGedola;
+        }
+        public virtual DateTime? GetMinchaKetanaBaalHatanya()
+        {
+            return GetMinchaKetana(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual DateTime? GetMisheyakir7Point65Degrees()
+        {
+            return GetSunriseOffsetByDegrees(ZENITH_7_POINT_65);
+        }
+        public virtual DateTime? GetMisheyakir9Point5Degrees()
+        {
+            return GetSunriseOffsetByDegrees(ZENITH_9_POINT_5);
+        }
+        public virtual DateTime? GetPlagHaminchaBaalHatanya()
+        {
+            return GetPlagHamincha(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual long GetShaahZmanisBaalHatanya()
+        {
+            return GetTemporalHour(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual DateTime? GetSofZmanBiurChametzBaalHatanya()
+        {
+            return GetTimeOffset(GetSunriseBaalHatanya(), GetShaahZmanisBaalHatanya() * 5);
+        }
+        public virtual DateTime? GetSofZmanAchilasChametzBaalHatanya()
+        {
+            return GetSofZmanTfilaBaalHatanya();
+        }
+        public virtual DateTime? GetSofZmanShmaBaalHatanya()
+        {
+            return GetSofZmanShma(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual DateTime? GetSofZmanTfilaBaalHatanya()
+        {
+            return GetSofZmanTfila(GetSunriseBaalHatanya(), GetSunsetBaalHatanya());
+        }
+        public virtual DateTime? GetTzaisBaalHatanya()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_6_DEGREES);
+        }
+        public virtual DateTime? GetTzaisGeonim3Point7Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_3_POINT_7);
+        }
+        public virtual DateTime? GetTzaisGeonim3Point8Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_3_POINT_8);
+        }
+        public virtual DateTime? GetTzaisGeonim6Point45Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_6_POINT_45);
+        }
+        public virtual DateTime? GetTzaisGeonim7Point67Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_7_POINT_67);
+        }
+        public virtual DateTime? GetTzaisGeonim9Point3Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_9_POINT_3);
+        }
+        public virtual DateTime? GetTzaisGeonim9Point75Degrees()
+        {
+            return GetSunsetOffsetByDegrees(ZENITH_9_POINT_75);
+        }
+
+
+        /// Methods still not ported
+        /// getMidnightLastNight
+        /// getMidnightTonight
+        /// getMoladBasedTime
+        /// getSofZmanKidushLevana15Days
+        /// getSofZmanKidushLevanaBetweenMoldos
+        /// getTchilasZmanKidushLevana3Days
+        /// getTchilasZmanKidushLevana7Days
+        /// getZmanMolad
+        /// getElevationAdjustedSunrise
+        /// getElevationAdjustedSunset
+
+
+    }
     }
 }
