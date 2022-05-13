@@ -448,7 +448,14 @@ namespace Zmanim.JewishCalendar
             }
             if (hebrewFormat)
             {
-                return FormatHebrewNumber(omer) + " " + hebrewOmerPrefix + "\u05E2\u05D5\u05DE\u05E8";
+                if (omer == 33) // if lag b'omer
+                {
+                    return FormatHebrewNumber(omer) + " " + "\u05D1\u05E2\u05D5\u05DE\u05E8"; 
+                }
+                else
+                {
+                    return FormatHebrewNumber(omer) + " " + hebrewOmerPrefix + "\u05E2\u05D5\u05DE\u05E8";
+                }
             }
             else
             {
