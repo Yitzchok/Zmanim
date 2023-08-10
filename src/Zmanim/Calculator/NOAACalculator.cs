@@ -192,7 +192,7 @@ namespace Zmanim.Calculator
         ///<returns> the Geometric Mean Longitude of the Sun in degrees </returns>
         private static double GetSunGeometricMeanLongitude(double julianCenturies)
         {
-            double longitude= 280.46646 + julianCenturies * (36000.76983 + 0.0003032 * julianCenturies);
+            double longitude = 280.46646 + julianCenturies * (36000.76983 + 0.0003032 * julianCenturies);
             while (longitude > 360.0)
             {
                 longitude -= 360.0;
@@ -244,7 +244,7 @@ namespace Zmanim.Calculator
             double sin3m = Math.Sin(mrad + mrad + mrad);
 
             return sinm * (1.914602 - julianCenturies
-                        * (0.004817 + 0.000014 * julianCenturies)) + sin2m 
+                        * (0.004817 + 0.000014 * julianCenturies)) + sin2m
                         * (0.019993 - 0.000101 * julianCenturies) + sin3m * 0.000289;// in degrees
         }
 
@@ -283,8 +283,8 @@ namespace Zmanim.Calculator
         ///<returns> the mean obliquity in degrees </returns>
         private static double GetMeanObliquityOfEcliptic(double julianCenturies)
         {
-            double seconds = 
-                21.448 - julianCenturies 
+            double seconds =
+                21.448 - julianCenturies
               * (46.8150 + julianCenturies * (0.00059 - julianCenturies * (0.001813)));
 
             return 23.0 + (26.0 + (seconds / 60.0)) / 60.0; // in degrees
@@ -341,8 +341,8 @@ namespace Zmanim.Calculator
             double sin4l0 = Math.Sin(4.0 * geomMeanLongSun.ToRadians());
             double sin2m = Math.Sin(2.0 * geomMeanAnomalySun.ToRadians());
 
-            double equationOfTime = 
-                y * sin2l0 - 2.0 * eccentricityEarthOrbit * sinm + 4.0 * eccentricityEarthOrbit * y 
+            double equationOfTime =
+                y * sin2l0 - 2.0 * eccentricityEarthOrbit * sinm + 4.0 * eccentricityEarthOrbit * y
               * sinm * cos2l0 - 0.5 * y * y * sin4l0 - 1.25 * eccentricityEarthOrbit * eccentricityEarthOrbit * sin2m;
             return equationOfTime.ToDegree() * 4.0; // in minutes of time
         }
@@ -446,6 +446,36 @@ namespace Zmanim.Calculator
             timeDiff = 4 * delta;
             timeUTC = 720 + timeDiff - eqTime; // in minutes
             return timeUTC;
+        }
+
+        /// <summary>
+        /// Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
+        /// of <a href="https://en.wikipedia.org/wiki/Noon#Solar_noon">solar noon</a> for the given day at the given location
+        /// on earth. This implementation returns true solar noon as opposed to the time halfway between sunrise and sunset.
+        /// Other calculators may return a more simplified calculation of halfway between sunrise and sunset. See <a href=
+        /// "https://kosherjava.com/2020/07/02/definition-of-chatzos/">The Definition of <em>Chatzos</em></a> for details on
+        /// solar noon calculations.
+        /// </summary>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
+        /// <returns>the time in minutes from zero UTC</returns>
+        public override double GetUtcNoon(IDateWithLocation dateWithLocation)
+        {
+            double julianDay = GetJulianDay(dateWithLocation.Date);
+            double julianCenturies = GetJulianCenturiesFromJulianDay(julianDay);
+
+            double noon = GetSolarNoonUTC(julianCenturies, dateWithLocation.Location.Longitude);
+            noon = noon / 60;
+
+            // ensure that the time is >= 0 and < 24
+            while (noon < 0.0)
+            {
+                noon += 24.0;
+            }
+            while (noon >= 24.0)
+            {
+                noon -= 24.0;
+            }
+            return noon;
         }
 
         ///<summary>

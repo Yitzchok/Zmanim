@@ -19,7 +19,9 @@
 // * along with Zmanim.NET API.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
 
 using System;
+using System.Globalization;
 using Zmanim.Extensions;
+using Zmanim.Utilities;
 
 namespace Zmanim.Calculator
 {
@@ -197,5 +199,17 @@ namespace Zmanim.Calculator
         /// <seealso cref="Double.NaN"/> will be returned.
         /// </returns>
         public abstract double GetUtcSunset(IDateWithLocation dateWithLocation, double zenith, bool adjustForElevation);
+
+
+        /// <summary>
+        /// Return <a href="https://en.wikipedia.org/wiki/Noon#Solar_noon">solar noon</a> (UTC) for the given day at the
+        /// given location on earth. The the {@link com.kosherjava.zmanim.util.NOAACalculator} implementation calculates
+        /// true solar noon, while the {@link com.kosherjava.zmanim.util.SunTimesCalculator} approximates it, calculating
+        /// the time as halfway between sunrise and sunset.
+        /// </summary>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
+        /// <returns>the time in minutes from zero UTC
+        /// </returns>
+        public abstract double GetUtcNoon(IDateWithLocation dateWithLocation);
     }
 }
