@@ -39,7 +39,7 @@ namespace Zmanim.Calculator
     {
 
         /// <summary>
-        ///   Gets the name of the calculator/.
+        ///   Gets the name of the calculator.
         /// </summary>
         /// <value></value>
         public override string CalculatorName => "US Naval Almanac Algorithm";
@@ -166,6 +166,32 @@ namespace Zmanim.Calculator
             while (utc >= 24) utc = utc - 24;
 
             return utc;
+        }
+
+        /// <summary>
+        /// Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
+        /// of <a href="https://en.wikipedia.org/wiki/Noon#Solar_noon">solar noon</a> for the given day at the given location
+        /// on earth. This implementation returns true solar noon as opposed to the time halfway between sunrise and sunset.
+        /// Other calculators may return a more simplified calculation of halfway between sunrise and sunset. See <a href=
+        /// "https://kosherjava.com/2020/07/02/definition-of-chatzos/">The Definition of <em>Chatzos</em></a> for details on
+        /// solar noon calculations.
+        /// </summary>
+        /// <param name="dateWithLocation">Used to calculate day of year.</param>
+        /// <returns>the time in minutes from zero UTC</returns>
+        public override double GetUtcNoon(IDateWithLocation dateWithLocation)
+        {
+            double sunrise = GetUtcSunrise(dateWithLocation, 90, false);
+            double sunset = GetUtcSunset(dateWithLocation, 90, false);
+            double noon = sunrise + ((sunset - sunrise) / 2);
+            if (noon < 0)
+            {
+                noon += 12;
+            }
+            if (noon < sunrise)
+            {
+                noon -= 12;
+            }
+            return noon;
         }
     }
 }
